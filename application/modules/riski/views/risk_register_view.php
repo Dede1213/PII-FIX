@@ -1,0 +1,233 @@
+<!-- BEGIN CONTENT -->
+<div class="page-content-wrapper">
+	<div class="page-content">
+		<!-- BEGIN PAGE HEADER-->
+		<h3 class="page-title">
+		Risk Form
+		</h3>
+		<div class="page-bar">
+			<ul class="page-breadcrumb">
+				<li>
+					<i class="fa fa-home"></i>
+					<a target="_self" href="<?=$site_url?>/main">Beranda</a>
+					<i class="fa fa-angle-right"></i>
+				</li>
+				<li>
+					<a target="_self" href="javascript:;">Lihat Risiko</a>
+				</li>
+			</ul>
+		</div>
+		<!-- END PAGE HEADER-->
+		<?php if ($valid_mode) { ?>
+		<div class="row">
+		<div class="col-md-12">
+			<div class="portlet box blue">
+				<div class="portlet-title">
+					<div class="caption">
+						Risk Information
+					</div>
+				</div>
+				
+				<div class="portlet-body form">
+					<form id="input-form" role="form" class="form-horizontal">
+						<div class="form-body">
+							<div class="row">
+							<div class="col-md-6">	
+								<div class="form-group">
+									<label class="col-md-3 control-label smaller cl-compact">Submitted By</label>
+									<div class="col-md-9">
+										<input type="text" id="risk_submitted_by" class="form-control input-sm input-readview" readonly="true" placeholder="" value="<?php if($risk['username']==""){echo $risk['risk_input_by_v'];}else{echo $risk['username'];}; ?>">											
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">	
+								<div class="form-group">
+									<label class="col-md-3 control-label smaller cl-compact">Division</label>
+									<div class="col-md-9">
+										<input type="text" id="risk_submitted_division" class="form-control input-sm input-readview" readonly="true" placeholder="" value="<?=$risk['risk_input_division_v']?>">
+									</div>
+								</div>
+							</div>
+							</div>
+							<div class="row">
+							<div class="col-md-6">	
+								<div class="form-group">
+									<label class="col-md-3 control-label smaller cl-compact">Kode Risiko</label>
+									<div class="col-md-9">
+										<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['risk_code']?>" name="risk_id" placeholder="">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label smaller cl-compact">Pemilik Risiko</label>
+									<div class="col-md-9">
+										<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['risk_owner_v']?>" name="risk_id" placeholder="">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label smaller cl-compact">Perisitiwa Risiko</label>
+									<div class="col-md-9">
+									<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['risk_event']?>" name="risk_event" placeholder="">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label smaller cl-compact">Deskripsi Peristiwa Risiko</label>
+									<div class="col-md-9">
+									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_description" placeholder=""><?=$risk['risk_description']?></textarea>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label smaller cl-compact" >Kategori Risiko</label>
+									<div class="col-md-9">
+										<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['risk_category_v']?>" name="risk_category" placeholder="">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label smaller cl-compact" >Sub Kategori Risiko</label>
+									<div class="col-md-9">
+										<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['risk_sub_category_v']?>" name="risk_sub_category" placeholder="">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label smaller cl-compact" >Sub Kategori Risiko Level 2</label>
+									<div class="col-md-9">
+										<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['risk_2nd_sub_category_v']?>" name="risk_2nd_sub_category" placeholder="">
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="col-md-3 control-label smaller cl-compact" >Penyebab</label>
+									<div class="col-md-9">
+									<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['risk_cause']?>" name="risk_cause" placeholder="">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label smaller cl-compact" >Dampak</label>
+									<div class="col-md-9">
+									<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['risk_impact']?>" name="risk_impact" placeholder="">
+									</div>
+								</div>
+								<!--<div class="form-group">
+									<label class="col-md-3 control-label smaller cl-compact">Existing Control ID</label>
+									<div class="col-md-9">
+										<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['existing_control_id']?>" name="existing_control_id" placeholder="">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label smaller cl-compact" >Existing Control</label>
+									<div class="col-md-9">
+									<textarea class="form-control input-sm input-readview" readonly="true" rows="3" name="risk_existing_control" placeholder=""><?=$risk['risk_existing_control']?></textarea>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label smaller cl-compact" >Evaluation on Existing Control</label>
+									<div class="col-md-9">
+									<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['risk_evaluation_control']?>" name="risk_evaluation_control" placeholder="">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label smaller cl-compact" >Control Owner</label>
+									<div class="col-md-9">
+									<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['risk_control_owner']?>" name="risk_control_owner" placeholder="">
+									</div>
+								</div>-->
+								<div class="form-group">
+									<label class="col-md-3 control-label smaller cl-compact" >Level Dampak</label>
+									<div class="col-md-9">
+									<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['impact_level_v']?>" name="risk_impact_level_value" placeholder="">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan Keterjadian</label>
+									<div class="col-md-9">
+										<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['likelihood_v']?>" name="risk_likelihood_value" placeholder="">
+									</div>
+								</div>
+								<div class="form-group">
+									<input type="hidden" name="risk_level_id" value=""/>
+									<label class="col-md-3 control-label smaller cl-compact" >Level Risiko</label>
+									<div class="col-md-9">
+									<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['risk_level_v']?>" name="risk_level" placeholder="">
+									</div>
+								</div>
+								<div class="form-group">
+									<input type="hidden" name="risk_level_id" value=""/>
+									<label class="col-md-3 control-label smaller cl-compact" >Usulan Penanganan Risiko</label>
+									<div class="col-md-9">
+									<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['treatment_v']?>" name="suggested_risk_treatment" placeholder="">
+									</div>
+								</div>
+							</div>
+							</div>
+							<div class="clearfix">
+							</div>
+							<hr/>
+							<h4>Control</h4>
+							<table id="action_plan_table" class="table table-condensed table-bordered table-hover">
+								<thead>
+								<tr role="row" class="heading">
+									<th>ID Kontrol Eksisting</th>
+									<th>Kontrol Eksisting</th>
+									<th>Evaluasi atas Eksisting Kontrol</th>
+									<th>Pemilik Control</th>
+								</tr>
+								</thead>
+								<tbody>
+									<?php foreach($risk['control_list'] as $k => $row) { ?>
+									<tr>
+										<td><?=$row['existing_control_id']?></td>
+										<td><?=$row['risk_existing_control']?></td>
+										<td><?=$row['risk_evaluation_control']?></td>
+										<td><?=$row['risk_control_owner']?></td>
+									</tr>
+									<?php } ?>
+								</tbody>
+							</table>
+							
+							<h4>Action Plan</h4>
+							<div class="table-scrollable">
+								<table id="action_plan_table" class="table table-condensed table-bordered table-hover">
+									<thead>
+									<tr role="row" class="heading">
+										<th>Usulan Action Plan</th>
+										<th>Batas Waktu</th>
+										<th>Pemilik Action Plan </th>
+									</tr>
+									</thead>
+									<tbody>
+										<?php foreach($risk['action_plan_list'] as $k => $row) { ?>
+										<tr>
+											<td><?=$row['action_plan']?></td>
+											<td><?=$row['due_date_v']?></td>
+											<td><?=$row['division_v']?></td>
+										</tr>
+										<?php } ?>
+									</tbody>
+								</table>
+							</div>
+							
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		</div>
+		<?php } else { ?>
+		<!-- ERROR RISK REGISTER MODE -->
+		<div class="row">
+		<div class="col-md-12">
+			<div class="note note-danger">
+				<h4 class="block">Error</h4>
+				<p>
+					 You are not allowed to view this Risk
+				</p>
+				<p>
+					<a class="btn red" target="_self" href="<?=$site_url?>/main">
+					Back to Home </a>
+				</p>
+			</div>
+		</div>
+		</div>
+		<?php } ?>
+	</div>
+</div>

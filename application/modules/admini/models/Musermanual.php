@@ -51,6 +51,48 @@ class Musermanual extends APP_Model {
 	
 	public function getAllPublished()
 	{
+		$role = $this->session->credential['role_id'];
+		if($role == 3){
+		$sql = "select 
+				a.*, b.display_name as created_by_v,
+				date_format(a.created_date, '%d-%m-%Y') as created_date_v,
+				case when status = 1 then 'Published'
+				else 'Unpublished'
+				end as status_v
+				from t_user_manual a left join
+				m_user b on a.created_by = b.username
+				where a.status = 1 and a.id_user = 3";
+		}else if($role == 4){
+		$sql = "select 
+				a.*, b.display_name as created_by_v,
+				date_format(a.created_date, '%d-%m-%Y') as created_date_v,
+				case when status = 1 then 'Published'
+				else 'Unpublished'
+				end as status_v
+				from t_user_manual a left join
+				m_user b on a.created_by = b.username
+				where a.status = 1 and a.id_user = 4";
+		}else if($role == 5){
+		$sql = "select 
+				a.*, b.display_name as created_by_v,
+				date_format(a.created_date, '%d-%m-%Y') as created_date_v,
+				case when status = 1 then 'Published'
+				else 'Unpublished'
+				end as status_v
+				from t_user_manual a left join
+				m_user b on a.created_by = b.username
+				where a.status = 1 and a.id_user = 5";
+		}else if($role == 2){
+		$sql = "select 
+				a.*, b.display_name as created_by_v,
+				date_format(a.created_date, '%d-%m-%Y') as created_date_v,
+				case when status = 1 then 'Published'
+				else 'Unpublished'
+				end as status_v
+				from t_user_manual a left join
+				m_user b on a.created_by = b.username
+				where a.status = 1 and a.id_user = 2";
+		}else if($role == 1){
 		$sql = "select 
 				a.*, b.display_name as created_by_v,
 				date_format(a.created_date, '%d-%m-%Y') as created_date_v,
@@ -60,6 +102,8 @@ class Musermanual extends APP_Model {
 				from t_user_manual a left join
 				m_user b on a.created_by = b.username
 				where a.status = 1";
+		}
+		
 		$query = $this->db->query($sql);
 		
 		$res = array();
@@ -89,8 +133,8 @@ class Musermanual extends APP_Model {
 	public function insertData($data)
 	{
 		$sql = "insert into t_user_manual
-				(title, filename, status, created_by, created_date)
-				values(?, ?, ?, ?, NOW())
+				(title, filename, status, created_by, created_date,content,id_user)
+				values(?, ?, ?, ?, NOW(), ?, ?)
 				";
 		$par = $data;
 		$res = $this->db->query($sql, $par);
@@ -102,7 +146,7 @@ class Musermanual extends APP_Model {
 		if (isset($data['filename'])) {
 			$sql = "update t_user_manual
 					set title = ?, filename = ?, status = ?, created_by = ?,
-						created_date = NOW()
+						created_date = NOW(), content = ?, id_user = ?
 					where id = ?
 					";
 			$par = $data;
@@ -111,7 +155,7 @@ class Musermanual extends APP_Model {
 		} else {
 			$sql = "update t_user_manual
 					set title = ?, status = ?, created_by = ?, 
-						created_date = NOW()
+						created_date = NOW(), content = ?, id_user = ?
 					where id = ?
 					";
 			$par = $data;

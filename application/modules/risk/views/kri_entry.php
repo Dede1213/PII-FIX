@@ -103,7 +103,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-2 control-label">Treshold</label>
+					<label class="col-md-2 control-label">Threshold</label>
 					<div class="col-md-6">
 					<input type="text" class="form-control input-sm" name="treshold" placeholder="">
 					</div>
@@ -225,9 +225,9 @@
 				<thead>
 				<tr role="row" class="heading">
 					<th width="30px">&nbsp;</th>
-					<th>Risk ID</th>
-					<th>Risk Event</th>
-					<th>Description</th>
+					<th>KRI Code</th>
+					<th>Key Risk Indicator</th>
+					<th>Threshold</th>
 				</tr>
 				</thead>
 				<tbody></tbody>

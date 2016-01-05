@@ -63,7 +63,7 @@ grid.init({
             "url": site_url+"/risk/kri/getRiskKri" // ajax source
         },
         "columns": [
-			{ "data": "risk_id", "orderable": false },
+			{ "data": "risk_code", "orderable": false },
 			{ "data": "risk_event" },
 			{ "data": "risk_level_v" }
        ],

@@ -3,7 +3,7 @@
 	<div class="page-content">
 		<!-- BEGIN PAGE HEADER-->
 		<h3 class="page-title">
-		Risk Register Exercise
+		Risk Register Exercise 
 		</h3>
 		<!-- END PAGE HEADER-->
 		<div class="page-bar">
@@ -30,6 +30,9 @@
 			<div class="portlet-title">
 				<div class="caption">
 					Roll Forward Risk
+				</div>
+				<div style="float:right;font-size:18px;padding:4px;">
+					<?=$filled_by_id?> 
 				</div>
 			</div>
 			

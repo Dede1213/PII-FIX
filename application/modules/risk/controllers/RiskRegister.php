@@ -41,6 +41,7 @@ class RiskRegister extends APP_Controller {
 			$data['periode'] = $this->mperiode->getCurrentPeriode();
 		}
 		
+		
 		$this->load->view('main/header', $data);
 		$this->load->view('risk_register_list', $data);
 		$this->load->view('main/footer', $data);

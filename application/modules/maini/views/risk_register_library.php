@@ -367,7 +367,7 @@
 						</div>
 						<div class="form-actions right">
 							<button id="risk-set-as-primary" type="button" class="btn blue"><i class="fa fa-arrows-h"></i> Set As Primary</button>
-							<button id="risk-button-verify" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Verify</button>
+							<!-- <button id="risk-button-verify" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Verify</button> -->
 							<button id="risk-button-draft" type="button" class="btn blue"><i class="fa fa-circle-o"></i> Save</button>
 							<button type="button" class="btn yellow" id="verify-risk-button-cancel"><i class="fa fa-times"></i> Cancel</button>
 						</div>

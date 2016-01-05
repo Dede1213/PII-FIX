@@ -404,7 +404,7 @@ var RiskInput = function() {
         			var xcid = $('#input-form-control input[name=existing_control_id]').val();
 	        		var xexis = $('#input-form-control textarea[name=risk_existing_control]').val();
 	        		var xeval = $('#input-form-control input[name=risk_evaluation_control]').val();
-	        		var xowner = $('#input-form-control input[name=risk_control_owner]').val();
+	        		var xowner = $('#input-form-control select[name=risk_control_owner]').val();
 	        		
 	        		var nnode = {
 	        			'existing_control_id' : xcid,

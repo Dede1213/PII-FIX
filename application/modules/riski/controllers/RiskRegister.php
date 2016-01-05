@@ -6,9 +6,9 @@ class RiskRegister extends APP_Controlleri {
     {
         parent::__construct();
         
-        $this->load->model('admin/mperiode');
-        $this->load->model('risk/risk');
-        $this->load->model('risk/mriskregister');
+        $this->load->model('admini/mperiode');
+        $this->load->model('riski/risk');
+        $this->load->model('riski/mriskregister');
     }
 	
 	public function index()

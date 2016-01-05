@@ -244,6 +244,10 @@
 						<h4>Legend</h4>
 						<ul class="list-group">
 							<li class="list-group-item">
+								<img src="<?=$base_url?>assets/images/legend/draft.png"/> &nbsp; 
+								 Draft
+							</li>
+							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/submit.png"/> &nbsp; 
 								 Menunggu Verifikasi RAC
 							</li>
@@ -291,6 +295,10 @@
 					<div class="col-md-6">
 						<h4>Legend</h4>
 						<ul class="list-group">
+							<li class="list-group-item">
+								<img src="<?=$base_url?>assets/images/legend/draft.png"/> &nbsp; 
+								 Draft
+							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/submit.png"/> &nbsp; 
 								 Menunggu Verifikasi RAC
@@ -385,6 +393,7 @@
 							<th>Batas Waktu</th>
 							<th>Pemilik Action Plan</th>
 							<th>Execution</th>
+							<th>Risk Code</th>
 						</tr>
 						</thead>
 						<tbody>
@@ -396,6 +405,10 @@
 					<div class="col-md-6">
 						<h4>Legend</h4>
 						<ul class="list-group">
+						<li class="list-group-item">
+								<img src="<?=$base_url?>assets/images/legend/draft.png"/> &nbsp; 
+								 Draft
+							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/submit.png"/> &nbsp; 
 								 Menunggu Verifikasi RAC
@@ -428,13 +441,13 @@
 			  <div class="modal-body">
 				<form id = "get_check_risklist">
 					<tr role="row" class="heading">
-						<th width="30px">Status <input type = "checkbox"  name = "risk_status" ></th>
-						<th>Risk ID <input type = "checkbox"  name = "risk_code"  > </th>
-						<th>Risk Event <input type = "checkbox"  name = "risk_event"  > </th>
-						<th>Impact Level <input type = "checkbox"  name = "risk_level_v" ></th>
-						<th>Likelihood <input type = "checkbox"  name = "impact_level_v" > </th>
-						<th>Risk Level <input type = "checkbox"  name = "likelihood_v"> </th>
-						<th>Risk Owner <input type = "checkbox"  name = "risk_owner_v" > </th> 
+						<th width="30px">Status <input type = "checkbox" checked="true"  name = "risk_status" ></th>
+						<th>Risk ID <input type = "checkbox" checked="true"  name = "risk_code"  > </th>
+						<th>Risk Event <input type = "checkbox" checked="true"  name = "risk_event"  > </th>
+						<th>Impact Level <input type = "checkbox" checked="true"  name = "risk_level_v" ></th>
+						<th>Likelihood <input type = "checkbox" checked="true"  name = "impact_level_v" > </th>
+						<th>Risk Level <input type = "checkbox" checked="true"  name = "likelihood_v"> </th>
+						<th>Risk Owner <input type = "checkbox" checked="true"  name = "risk_owner_v" > </th> 
 					</tr>
 				</form>							 
 			  </div>
@@ -458,9 +471,9 @@
 			  <div class="modal-body">
 				<form id = "get_check_riskregisterlist">
 					<tr role="row" class="heading">
-						<th width="30px">Status <input type = "checkbox"  name = "risk_status" ></th>
-						<th>User <input type = "checkbox"  name = "display_name"  > </th>
-						<th>Divisi<input type = "checkbox"  name = "division_name"  > </th> 
+						<th width="30px">Status <input type = "checkbox" checked="true"  name = "risk_status" ></th>
+						<th>User <input type = "checkbox" checked="true"  name = "display_name"  > </th>
+						<th>Divisi<input type = "checkbox" checked="true"  name = "division_name"  > </th> 
 					</tr>
 				</form>							 
 			  </div>
@@ -484,11 +497,11 @@
 			  <div class="modal-body">
 				<form id = "get_check_risktreatment">
 					<tr role="row" class="heading">
-						<th width="30px">Status <input type = "checkbox"  name = "risk_status" ></th>
-						<th>Risk ID <input type = "checkbox"  name = "risk_code"  > </th>
-						<th>Risk Event<input type = "checkbox"  name = "risk_event"  > </th> 
-						<th>Risk Owner<input type = "checkbox"  name = "risk_owner_v"  > </th> 
-						<th>Risk Treatment<input type = "checkbox"  name = "suggested_risk_treatment_v"  > </th>  
+						<th width="30px">Status <input type = "checkbox" checked="true"  name = "risk_status" ></th>
+						<th>Risk ID <input type = "checkbox" checked="true"  name = "risk_code"  > </th>
+						<th>Risk Event<input type = "checkbox" checked="true"  name = "risk_event"  > </th> 
+						<th>Risk Owner<input type = "checkbox" checked="true"  name = "risk_owner_v"  > </th> 
+						<th>Risk Treatment<input type = "checkbox" checked="true"  name = "suggested_risk_treatment_v"  > </th>  
 					</tr>
 				</form>							 
 			  </div>
@@ -513,12 +526,12 @@
 			  <div class="modal-body">
 				<form id = "get_check_actionplan">
 					<tr role="row" class="heading">
-						<th width="30px">Status <input type = "checkbox"  name = "action_plan_status" ></th>
-						<th>AP ID <input type = "checkbox"  name = "act_code"  > </th>
-						<th>Action Plan<input type = "checkbox"  name = "action_plan"  > </th> 
-						<th>Due Date<input type = "checkbox"  name = "due_date_v"  > </th> 
-						<th>Action Plan Owner<input type = "checkbox"  name = "division_name"  > </th>  
-						<th>Risk ID<input type = "checkbox"  name = "risk_code"  > </th> 
+						<th width="30px">Status <input type = "checkbox" checked="true"  name = "action_plan_status" ></th>
+						<th>AP ID <input type = "checkbox" checked="true"  name = "act_code"  > </th>
+						<th>Action Plan<input type = "checkbox" checked="true"  name = "action_plan"  > </th> 
+						<th>Due Date<input type = "checkbox" checked="true"  name = "due_date_v"  > </th> 
+						<th>Action Plan Owner<input type = "checkbox" checked="true"  name = "division_name"  > </th>  
+						<th>Risk ID<input type = "checkbox" checked="true"  name = "risk_code"  > </th> 
 					</tr>
 				</form>							 
 			  </div>
@@ -542,12 +555,12 @@
 			  <div class="modal-body">
 				<form id = "get_check_execution">
 					<tr role="row" class="heading">
-						<th width="30px">Status <input type = "checkbox"  name = "action_plan_status" ></th>
-						<th>AP ID <input type = "checkbox"  name = "act_code"  > </th>
-						<th>Action Plan<input type = "checkbox"  name = "action_plan"  > </th> 
-						<th>Due Date<input type = "checkbox"  name = "due_date_v"  > </th> 
-						<th>Action Plan Owner<input type = "checkbox"  name = "division_name"  > </th>  
-						<th>Execution<input type = "checkbox"  name = "execution_status"  > </th> 
+						<th width="30px">Status <input type = "checkbox" checked="true"  name = "action_plan_status" ></th>
+						<th>AP ID <input type = "checkbox" checked="true"  name = "act_code"  > </th>
+						<th>Action Plan<input type = "checkbox" checked="true"  name = "action_plan"  > </th> 
+						<th>Due Date<input type = "checkbox" checked="true"  name = "due_date_v"  > </th> 
+						<th>Action Plan Owner<input type = "checkbox" checked="true"  name = "division_name"  > </th>  
+						<th>Execution<input type = "checkbox" checked="true"  name = "execution_status"  > </th> 
 					</tr>
 				</form>							 
 			  </div>
@@ -571,13 +584,13 @@
 			  <div class="modal-body">
 				<form id = "get_check_kri">
 					<tr role="row" class="heading">
-						<th width="30px">Status <input type = "checkbox"  name = "kri_status" ></th>
-						<th>KRI ID <input type = "checkbox"  name = "kri_code"  > </th>
-						<th>KRI<input type = "checkbox"  name = "key_risk_indicator"  > </th> 
-						<th>KRI Owner<input type = "checkbox"  name = "treshold"  > </th> 
-						<th>Timing Pelaporan<input type = "checkbox"  name = "timing_pelaporan_v"  > </th>  
-						<th>Risk ID<input type = "checkbox"  name = "risk_code"  > </th> 
-						<th>KRI Warning<input type = "checkbox"  name = "kri_warning"  > </th> 
+						<th width="30px">Status <input type = "checkbox" checked="true"  name = "kri_status" ></th>
+						<th>KRI ID <input type = "checkbox" checked="true"  name = "kri_code"  > </th>
+						<th>KRI<input type = "checkbox" checked="true"  name = "key_risk_indicator"  > </th> 
+						<th>KRI Owner<input type = "checkbox" checked="true"  name = "treshold"  > </th> 
+						<th>Timing Pelaporan<input type = "checkbox" checked="true"  name = "timing_pelaporan_v"  > </th>  
+						<th>Risk ID<input type = "checkbox" checked="true"  name = "risk_code"  > </th> 
+						<th>KRI Warning<input type = "checkbox" checked="true"  name = "kri_warning"  > </th> 
 					</tr>
 				</form>							 
 			  </div>
@@ -601,11 +614,11 @@
 			  <div class="modal-body">
 				<form id = "get_check_changereq">
 					<tr role="row" class="heading">
-						<th width="30px">Status <input type = "checkbox"  name = "GenRowNum" ></th>
-						<th>ID CH<input type = "checkbox"  name = "cr_code"  > </th>
-						<th>Perubahan Dalam<input type = "checkbox"  name = "cr_type"  > </th> 
-						<th>Pemohon<input type = "checkbox"  name = "created_by_v"  > </th> 
-						<th>Status Permintaan Perubahan<input type = "checkbox"  name = "cr_status"  > </th>  						 
+						<th width="30px">Status <input type = "checkbox" checked="true"  name = "GenRowNum" ></th>
+						<th>ID CH<input type = "checkbox" checked="true"  name = "cr_code"  > </th>
+						<th>Perubahan Dalam<input type = "checkbox" checked="true"  name = "cr_type"  > </th> 
+						<th>Pemohon<input type = "checkbox" checked="true"  name = "created_by_v"  > </th> 
+						<th>Status Permintaan Perubahan<input type = "checkbox" checked="true"  name = "cr_status"  > </th>  						 
 					</tr>
 				</form>							 
 			  </div>

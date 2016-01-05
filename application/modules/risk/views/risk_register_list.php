@@ -36,6 +36,7 @@
 				<div class="caption">
 					Roll Forward Risk
 				</div>
+				
 			</div>
 			
 			<div class="portlet-body">
@@ -113,7 +114,7 @@
 			<div class="portlet box grey-silver">
 			<div class="portlet-title">
 				<div class="caption">
-					Risk Identified in This Periode ( <?=$periode['periode_name']?> )
+					Risk Identified in This Periode ( <?=$periode['periode_name']?> ) 
 				</div>
 				<div class="actions">
 					<a target="_self" href="<?=$site_url?>/risk/RiskRegister/RiskRegisterInput/periodic" class="btn default green">
@@ -189,6 +190,7 @@
 					</thead>
 					<tbody>
 					</tbody>
+					
 					</table>
 				</div>
 				<div class="row">

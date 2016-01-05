@@ -112,11 +112,28 @@ class Usermanual extends APP_Controller {
 
         if ( ! $this->upload->do_upload('filename'))
         {
+        		$data = array('upload_data' => $this->upload->data());
+				
+				$this->load->model('admin/musermanual');
+				$news = array(
+					'title' => $_POST['title'],
+					'filename' => $data['upload_data']['file_name'],
+					'status' => $_POST['status'],
+					'cb' => $session_data['username'],
+					'content' => $_POST['content'],
+            		'id_user' => $_POST['role_user']
+				);
+				$data = $this->musermanual->insertData($news);
+				
+				$this->session->set_flashdata('upload_success', true);
+                redirect('admin/usermanual');
+        	/*
                 $error = array('error' => $this->upload->display_errors());
 				$data['error'] = $error['error'];
 				$this->load->view('maini/header', $data);
 				$this->load->view('manual_input', $data);
 				$this->load->view('main/footer', $data);
+				*/
         }
         else
         {
@@ -127,7 +144,9 @@ class Usermanual extends APP_Controller {
 					'title' => $_POST['title'],
 					'filename' => $data['upload_data']['file_name'],
 					'status' => $_POST['status'],
-					'cb' => $session_data['username']
+					'cb' => $session_data['username'],
+					'content' => $_POST['content'],
+            		'id_user' => $_POST['role_user']
 				);
 				$data = $this->musermanual->insertData($news);
 				
@@ -241,14 +260,18 @@ class Usermanual extends APP_Controller {
             	$news = array(
             		'title' => $_POST['title'],
             		'status' => $_POST['status'],
-            		'cb' => $session_data['username']
+            		'cb' => $session_data['username'],
+            		'content' => $_POST['content'],
+            		'role_user' => $_POST['role_user']
             	);
             } else {
             	$news = array(
             		'title' => $_POST['title'],
             		'filename' => $data['upload_data']['file_name'],
             		'status' => $_POST['status'],
-            		'cb' => $session_data['username']
+            		'cb' => $session_data['username'],
+            		'content' => $_POST['content'],
+            		'role_user' => $_POST['role_user']
             	);
             }
 

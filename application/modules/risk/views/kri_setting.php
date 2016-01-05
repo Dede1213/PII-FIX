@@ -44,7 +44,7 @@
 				<table id="datatable_ajax" class="table table-condensed table-bordered table-hover">
 					<thead>
 					<tr role="row" class="heading">
-						<th><small>Risk ID</small></th>
+						<th><small>Risk Code</small></th>
 						<th><small>Risk Event</small></th>
 						<th><small>Risk Level</small></th>
 					</tr>

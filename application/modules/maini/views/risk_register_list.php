@@ -31,6 +31,9 @@
 				<div class="caption">
 					Resiko dari periode sebelumnya
 				</div>
+				<div style="float:right;font-size:18px;padding:4px;">
+					<?=$filled_by_id?> 
+				</div>
 			</div>
 			
 			<div class="portlet-body">

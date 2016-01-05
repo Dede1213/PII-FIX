@@ -463,7 +463,7 @@ class Risk extends APP_Model {
 					join m_periode on m_periode.periode_id = a.periode_id
 					where 
 					a.periode_id is not null
-					and a.risk_status > 4
+					and a.risk_status > 2
 					and (m_periode.periode_start <= '".$date."'
 					and m_periode.periode_end >= '".$date."')
 					";
@@ -633,7 +633,7 @@ class Risk extends APP_Model {
 					left join m_division d on a.division = d.division_id
 					join m_periode on m_periode.periode_id = b.periode_id
 					where 
-					a.action_plan_status > 2 
+					a.action_plan_status > 0 
 					and (m_periode.periode_start <= '".$date."'
 					and m_periode.periode_end >= '".$date."')
 					";
@@ -656,7 +656,7 @@ class Risk extends APP_Model {
 					left join m_division d on a.division = d.division_id
 					join m_periode on m_periode.periode_id = b.periode_id
 					where 
-					a.action_plan_status > 5
+					a.action_plan_status > 3
 					and (m_periode.periode_start <= '".$date."'
 					and m_periode.periode_end >= '".$date."')
 					";
@@ -811,9 +811,7 @@ class Risk extends APP_Model {
 					from t_kri a
 					left join t_risk b on a.risk_id = b.risk_id
 					left join m_division c on a.kri_owner = c.division_id
-					left join m_user d on a.kri_pic = d.username
-					where 
-					a.kri_status = 3
+					left join m_user d on a.kri_pic = d.username where kri_library_id is null
 					".$ext;
 		}
 		

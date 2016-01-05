@@ -87,8 +87,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label smaller cl-compact" >Risk Category<span class="required">* </span></label>
 									<div class="col-md-9">
-									<select class="form-control input-sm" name="risk_category" id="sel_risk_category">
-									</select>
+									<select class="form-control input-sm" name="risk_category" id="sel_risk_category"></select>
 									</div>
 								</div>
 								<div class="form-group">
@@ -365,20 +364,26 @@
 					<div class="form-group">
 						<label class="col-md-3 control-label smaller cl-compact" >Existing Control <span class="required">* </span></label>
 						<div class="col-md-9">
-						<textarea class="form-control input-sm" rows="3" name="risk_existing_control" placeholder=""></textarea>
+						<textarea class="form-control input-sm" rows="3" name="risk_existing_control" placeholder="">NONE</textarea>
 						<button id="button_clear_control" type="button" class="hide btn red btn-xs" style="margin-top: 5px;"><i class="fa fa-minus-circle font-white"></i> Clear Existing Control</button>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-md-3 control-label smaller cl-compact" >Evaluation on Existing Control <span class="required">* </span></label>
 						<div class="col-md-9">
-						<input type="text" class="form-control input-sm" name="risk_evaluation_control" placeholder="">
+						<input type="text" class="form-control input-sm" value="NONE" name="risk_evaluation_control" placeholder="">
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-md-3 control-label smaller cl-compact" >Control Owner <span class="required">* </span></label>
 						<div class="col-md-9">
-						<input type="text" class="form-control input-sm" name="risk_control_owner" placeholder="">
+						<select class="form-control input-sm" name="risk_control_owner">
+										<option value="NONE">NONE</option>
+										<?php foreach($division_list as $row) { ?>
+										<option value="<?=$row['ref_key']?>"><?=$row['ref_value']?></option>
+										<?php } ?>
+						</select>
+					<!-- <input type="text" class="form-control input-sm" name="risk_control_owner" placeholder=""> -->
 						</div>
 					</div>
 				</div>
@@ -567,8 +572,7 @@
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 		<h4 class="modal-title">Evaluation on Risk Impact</h4>
-		<span class="font-red">* Dapat diisi lebih dari satu(1) kategori, namun dalam Satu(1)
-		Kategori hanya boleh diisi satu(1) parameter</span>
+		<span class="font-red">* Choose one(1) or more from category, but one(1) category only have one(1) parameter</span>
 	</div>
 	<div class="modal-body" style="height: 400px; max-height: 400px; overflow: none; overflow-y: auto;">
 		<form id="form-impact">
@@ -613,7 +617,7 @@
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 		<h4 class="modal-title">Evaluation on Risk Likelihood</h4>
-		<span class="font-red">* Pilih Salah Satu</span>
+		<span class="font-red">* Choose One</span>
 	</div>
 	<div class="modal-body">
 		<form id="form-likelihood">
@@ -621,8 +625,8 @@
 			<thead>
 			<tr role="row" class="heading">
 				<th>&nbsp;</th>
-				<th width="250px">Kemungkinan terjadinya resiko</th>
-				<th>Deskripsi</th>
+				<th width="250px">Probability of risk could occur</th>
+				<th>Description</th>
 			</tr>
 			</thead>
 			<tbody>

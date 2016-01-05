@@ -29,6 +29,26 @@ class Qna extends APP_Controller {
 		$this->load->view('qna', $data);
 		$this->load->view('main/footer', $data);
 	}
+
+	public function qnaDeleteData() {
+		$session_data = $this->session->credential;
+		$this->load->model('admin/mqna');
+		$par = $this->mqna->getData($_POST['id']);
+		
+		
+			$res = $this->mqna->deleteData($_POST['id'], $session_data['username']);
+			if ($res) {
+				$data['success'] = true;
+				$data['msg'] = 'SUCCESS';
+			} else {
+				$data['success'] = false;
+				$data['msg'] = 'Error Deleting Data';
+			}
+		
+		
+		
+		echo json_encode($data);
+	}
 		
 	public function qnaGetData()
 	{

@@ -27,9 +27,10 @@ grid.init({
         "columns": [
            { "data": "GenRowNum", "orderable": false },
            { "data": "title" },
-           { "data": "filename" },
-           { "data": "created_date_v" },
-           { "data": "created_by_v" },
+           { "data": "id_user" },
+           //{ "data": "filename" },
+           //{ "data": "created_date_v" },
+           //{ "data": "created_by_v" },
            { "data": "status_v" },
            { 
            	"data": null,

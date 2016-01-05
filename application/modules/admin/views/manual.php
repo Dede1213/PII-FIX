@@ -50,12 +50,15 @@
 						<th width="5%">
 							 No
 						</th>
-						<th width="25%">Manual Title</th>
+						<th width="45%">Manual Title</th>
+						<th width="25%">Id User</th>
+						<!--
 						<th width="20%">File Name</th>
 						<th width="20%">Created Date</th>
 						<th width="20%">Created By</th>
+						-->
 						<th>Status</th>
-						<th width="20%">
+						<th width="15%">
 							 Action
 						</th>
 					</tr>

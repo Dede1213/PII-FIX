@@ -50,10 +50,14 @@
 						<th width="5%">
 							 No
 						</th>
-						<th width="25%">Judul Panduan </th>
+						
+						<th width="45%">Judul Panduan</th>
+						<th width="25%">Id User</th>
+						<!--
 						<th width="20%">File Name</th>
-						<th width="20%">Dibuat Tanggal</th>
-						<th width="20%">Dibuat Oleh</th>
+						<th width="20%">Created Date</th>
+						<th width="20%">Created By</th>
+						-->
 						<th>Status</th>
 						<th width="20%">
 							 Aksi

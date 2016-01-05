@@ -155,7 +155,9 @@ gridTreatment.init({
         		var img = '';
         		if (data == '5') {
         			img = 'submit.png';
-        		} else {
+        		}else if (data == '3') {
+                    img = 'draft.png';
+                } else {
         			img = 'verified.png';
         		}
         		return '<center><img src="'+base_url+'assets/images/legend/'+img+'"/></center>';
@@ -301,6 +303,12 @@ gridActionExec.init({
         	"render": function ( data, type, full, meta ) {
         		return '<a target="_self" href="'+site_url+'/maini/mainrac/actionPlanView/'+full.id+'">'+data+'</a>';
         	}
+        },{
+            "targets": 6,
+            "data": "risk_code",
+            "render": function ( data, type, full, meta ) {
+                return '<a target="_self" href="'+site_url+'/main/mainrac/viewRisk/'+full.risk_id+'">'+data+'</a>';
+            }
         }, {
         	"targets": 5,
         	"data": "execution_status",
@@ -314,7 +322,8 @@ gridActionExec.init({
 			{ "data": "action_plan" },
 			{ "data": "due_date_v" },
 			{ "data": "division_name" },
-			{ "data": "execution_status" }
+			{ "data": "execution_status" },
+            { "data": "risk_code" }
        ],
         "order": [
             [1, "asc"]

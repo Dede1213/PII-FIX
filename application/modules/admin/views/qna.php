@@ -35,6 +35,7 @@
 							<th>Date</th>
 							<th>Subject</th>
 							<th>Answer</th>
+							<th>Delete</th>
 						</tr>
 						</thead>
 						<tbody></tbody>

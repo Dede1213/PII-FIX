@@ -44,4 +44,19 @@ class Mqna extends APP_Model {
 		$res = $this->db->query($sql, $par);
 		return $res;
 	}
+
+	public function deleteData($data_id, $uid)
+	{
+		// if year month start is <= current month
+		
+		$this->_logHistory($data_id, $uid, 'D');
+		
+		$sql = "delete from t_qna
+				where id = ?
+				";
+		$par['data_id'] = $data_id;
+		
+		$res = $this->db->query($sql, $par);
+		return $res;
+	}
 }

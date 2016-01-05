@@ -90,26 +90,16 @@
 					<input type="text" class="form-control input-sm input-readview" readonly="true" name="key_risk_indicator" placeholder="" value="<?=$kri['key_risk_indicator']?>">
 					</div>
 				</div>
-				<div class="form-group">
-					<label class="col-md-2 control-label">Treshold</label>
-					<div class="col-md-6">
-					<input type="text" class="form-control input-sm input-readview" readonly="true" name="treshold" placeholder="" value="<?=$kri['treshold']?>">
-					</div>
-				</div>
+				
 				<div class="form-group">
 					<label class="col-md-2 control-label">Waktu Pelaporan</label>
 					<div class="col-md-6">
 					<input type="text" class="form-control input-sm input-readview" readonly="true" name="timing_pelaporan" placeholder="" value="<?=$kri['timing_pelaporan_v']?>">
 					</div>
 				</div>
+				
 				<div class="form-group">
-					<label class="col-md-2 control-label">Pemilik KRI</label>
-					<div class="col-md-6">
-					<input type="text" class="form-control input-sm input-readview" readonly="true" name="kri_owner" placeholder="" value="<?=$kri['kri_owner_v']?>">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-md-2 control-label">Laporan</label>
+					<label class="col-md-2 control-label">Input Data</label>
 					<div class="col-md-6">
 					<input type="text" class="form-control input-sm input-readview" readonly="true" name="report" placeholder="" value="<?=$kri['owner_report']?>">
 					</div>

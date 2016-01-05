@@ -29,7 +29,14 @@ grid.init({
            { "data": "created_by_v" },
            { "data": "created_date_v" },
            { "data": "subject" },
-           { "data": "qna_status" }
+           { "data": "qna_status" },
+            { 
+           	"data": null,
+           	"orderable": false,
+           	"defaultContent": '<div class="btn-group">'+
+           			'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-minus-circle font-red"></i></button>'+
+           		'</div>'
+           }
        ],
        "columnDefs": [{
        	"targets": 0,
@@ -155,6 +162,15 @@ var Qna = function() {
 	            	var data = grid.getDataTable().row(r).data();
 	            	me.showQuestion(data);
 	            });
+
+	            $("#datatable_ajax").on('click', 'button.button-grid-delete', function(e) {
+	            	e.preventDefault();
+	            	
+	            	var r = this.parentNode.parentNode.parentNode;
+	            	var data = grid.getDataTable().row(r).data();
+	            	
+	            	me.deleteData(data);
+	            });
 	            
 	            
 	            handleValidation();
@@ -164,6 +180,34 @@ var Qna = function() {
 	        	grid.setAjaxParam("filter_by", fby);
 	        	grid.setAjaxParam("filter_value", fval);
 	        	grid.getDataTable().ajax.reload();
+	        },
+	        deleteData: function(data) {
+	        	var mod = MainApp.viewGlobalModal('warning', 'Are You sure you want to delete this data?');
+	        	mod.find('button.btn-danger').one('click', function(){
+	        		mod.modal('hide');
+	        		
+	        		Metronic.blockUI({ boxed: true });
+	        		var url = site_url+'/admin/qna/qnaDeleteData';
+	        		$.post(
+	        			url,
+	        			{ 'id':  data.DT_RowId},
+	        			function( data ) {
+	        				Metronic.unblockUI();
+	        				if(data.success) {
+	        					grid.getDataTable().ajax.reload();
+	        					
+	        					MainApp.viewGlobalModal('success', 'Success Delete Data');
+	        				} else {
+	        					MainApp.viewGlobalModal('error', data.msg);
+	        				}
+	        				
+	        			},
+	        			"json"
+	        		).fail(function() {
+	        			Metronic.unblockUI();
+	        			MainApp.viewGlobalModal('error', 'Error Submitting Data');
+	        		 });
+	        	});
 	        },
 	        showQuestion: function(data) {
 	        	$('#input-form')[0].reset();

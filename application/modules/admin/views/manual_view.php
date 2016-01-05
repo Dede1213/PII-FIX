@@ -14,6 +14,8 @@
 			<h5>Created By : <?=$news['created_by_v']?></h5>
 			<h5>Status : <?=$news['status_v']?></h5>
 		</div>
+
+
 		<div class="col-md-6">
 			<a href="javascript: location.href='<?=$site_url?>/admin/usermanual/manualEdit/<?=$news['id']?>'" class="btn default green pull-right">
 			<i class="fa fa-pencil font-white"></i>
@@ -21,17 +23,40 @@
 			Edit User Manual </span>
 			</a>
 		</div>
+
 		</div>
+
+
+<hr>
+
+		<h4><?=$news['title']?></h4>
+		
 		<div class="row">
 			<div class="col-md-12">
 				<div class="news-item-page">
-					<iframe id="blockrandom" name="iframe" src="<?=$base_url?>/uploadedFile/usermanual/<?=$news['filename']?>" 
+				<fieldset>
+					<p><?=$news['content']?></p>
+				</fieldset>
+					
+				</div>
+			</div>
+		</div>
+
+<!--
+		<div class="row">
+				
+			<div class="col-md-12">
+				<div class="news-item-page">
+					<iframe id="blockrandom" name="iframe" src="<?//=$base_url?>/uploadedFile/usermanual/<?//=$news['filename']?>" 
 					width="100%" height="500" scrolling="auto" align="top" frameborder="0" class="wrapper">
                     This option will not work correctly. Unfortunately, your browser does not support
                     inline frames.</iframe>
 
 				</div>
 			</div>
-		</div>		
+
+		</div>	
+-->
+
 	</div>
 </div>

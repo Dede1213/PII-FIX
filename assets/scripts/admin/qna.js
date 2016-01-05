@@ -34,7 +34,7 @@ grid.init({
            	"data": null,
            	"orderable": false,
            	"defaultContent": '<div class="btn-group">'+
-           			'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-minus-circle font-red"></i></button>'+
+           			'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"></i></button>'+
            		'</div>'
            }
        ],
@@ -191,14 +191,14 @@ var Qna = function() {
 	        		$.post(
 	        			url,
 	        			{ 'id':  data.DT_RowId},
-	        			function( data ) {
+	        			function(data) {
 	        				Metronic.unblockUI();
 	        				if(data.success) {
 	        					grid.getDataTable().ajax.reload();
 	        					
 	        					MainApp.viewGlobalModal('success', 'Success Delete Data');
 	        				} else {
-	        					MainApp.viewGlobalModal('error', data.msg);
+	        					MainApp.viewGlobalModal('error123', data.msg);
 	        				}
 	        				
 	        			},

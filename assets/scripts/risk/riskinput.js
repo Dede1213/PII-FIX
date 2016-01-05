@@ -621,7 +621,7 @@ var RiskInput = function() {
         		'<td>'+nnode.risk_control_owner+'</td>'+
         		'<td>'+
         		'<div class="btn-group">'+
-        			'<button type="button" class="btn btn-default btn-xs" onclick="RiskInput.controlTableDelete(this, '+me.dataControlCounter+')"><i class="fa fa-minus-circle font-red"></i></button>'+
+        			'<button type="button" class="btn btn-default btn-xs" onclick="RiskInput.controlTableDelete(this, '+me.dataControlCounter+')"><i class="fa fa-trash-o font-red"></i></button>'+
         		'</div>'+
         		'</td>'+
         	'</tr>');
@@ -654,7 +654,7 @@ var RiskInput = function() {
         		'<td>'+nnode.division_v+'</td>'+
         		'<td>'+
         		'<div class="btn-group">'+
-        			'<button type="button" class="btn btn-default btn-xs" onclick="RiskInput.actionPlanTableDelete(this, '+me.dataActionPlanCounter+')"><i class="fa fa-minus-circle font-red"></i></button>'+
+        			'<button type="button" class="btn btn-default btn-xs" onclick="RiskInput.actionPlanTableDelete(this, '+me.dataActionPlanCounter+')"><i class="fa fa-trash-o font-red"></i></button>'+
         		'</div>'+
         		'</td>'+
         	'</tr>');

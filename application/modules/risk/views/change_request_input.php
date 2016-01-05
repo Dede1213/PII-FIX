@@ -313,7 +313,7 @@
 		<div class="row">
 		<div class="col-md-12">
 			<div class="note note-warning">
-			<h4 class="block">Error</h4>
+			<h4 class="block">Warning</h4>
 			<p>
 				 Cannot Input Change Request for this Risk, This Risk already have a Pending Change Request 
 			</p>

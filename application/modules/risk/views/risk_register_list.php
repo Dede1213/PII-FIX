@@ -241,12 +241,12 @@
 	</div>				
 	</div>
 	<?php } else { ?>
-	<!-- ERROR RISK REGISTER MODE -->
+	<!-- Warning RISK REGISTER MODE -->
 	<div class="row">
 	<div class="col-md-12">
-		<div class="note note-danger">
+		<div class="note note-warning">
 			<?php if (isset($submit_mode) && $submit_mode == 'adhoc') { ?>
-			<h4 class="block">Error</h4>
+			<h4 class="block">Warning</h4>
 			<p>
 				 Cannot Input Adhoc Risk Register Exercise because Risk Period is already set, please contact RAC team for further information
 				 <p>
@@ -255,7 +255,7 @@
 				</p>
 			</p>
 			<?php } else { ?>
-			<h4 class="block">Error</h4>
+			<h4 class="block">Warning</h4>
 			<p>
 				 Cannot Input Risk Register Exercise because Risk Period is not set, please contact RAC team for further information
 			</p>

@@ -33,7 +33,7 @@ class Qna extends APP_Controller {
 	public function qnaDeleteData() {
 		$session_data = $this->session->credential;
 		$this->load->model('admin/mqna');
-		$par = $this->mqna->getData($_POST['id']);
+		//$par = $this->mqna->getData($_POST['id']);
 		
 		
 			$res = $this->mqna->deleteData($_POST['id'], $session_data['username']);

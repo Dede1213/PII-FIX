@@ -269,7 +269,7 @@ var ChangeRequest = function() {
         	
         	var act_str = '<div class="btn-group">'+
         		'<button type="button" class="btn btn-default btn-xs button-grid-edit" data-id="'+xid+'"><i class="fa fa-pencil font-blue"></i></button>'+
-        		'<button type="button" class="btn btn-default btn-xs button-grid-delete" data-id="'+xid+'"><i class="fa fa-minus-circle font-red"></i></button>'+
+        		'<button type="button" class="btn btn-default btn-xs button-grid-delete" data-id="'+xid+'"><i class="fa fa-trash-o font-red"></i></button>'+
         	'</div>';
         	
         	$('#action_plan_table > tbody > tr[data-id='+xid+']').find("td").remove();

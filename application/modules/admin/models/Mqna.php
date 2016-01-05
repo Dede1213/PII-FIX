@@ -49,7 +49,7 @@ class Mqna extends APP_Model {
 	{
 		// if year month start is <= current month
 		
-		$this->_logHistory($data_id, $uid, 'D');
+		//$this->_logHistory($data_id, $uid, 'D');
 		
 		$sql = "delete from t_qna
 				where id = ?

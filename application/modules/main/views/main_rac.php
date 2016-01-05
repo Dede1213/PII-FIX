@@ -567,6 +567,7 @@
 							<th>Changes In</th>
 							<th>Requestor</th>
 							<th>Status Change Request</th>
+							<th>Action</th>
 						</tr>
 						</thead>
 						<tbody>

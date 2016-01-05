@@ -729,7 +729,7 @@ var ChangeRequest = function() {
         		'<td>'+nnode.risk_control_owner+'</td>'+
         		'<td>'+
         		'<div class="btn-group">'+
-        			'<button type="button" class="btn btn-default btn-xs" onclick="ChangeRequest.controlTableDelete(this, '+me.dataControlCounter+')"><i class="fa fa-minus-circle font-red"></i></button>'+
+        			'<button type="button" class="btn btn-default btn-xs" onclick="ChangeRequest.controlTableDelete(this, '+me.dataControlCounter+')"><i class="fa fa-trash-o font-red"></i></button>'+
         		'</div>'+
         		'</td>'+
         	'</tr>');
@@ -757,7 +757,7 @@ var ChangeRequest = function() {
 
 			me.dataActionPlanCounter++;
         	
-        	var del_btn = '<button type="button" class="btn btn-default btn-xs button-grid-delete" data-id="'+me.dataActionPlanCounter+'"><i class="fa fa-minus-circle font-red"></i></button>';
+        	var del_btn = '<button type="button" class="btn btn-default btn-xs button-grid-delete" data-id="'+me.dataActionPlanCounter+'"><i class="fa fa-trash-o font-red"></i></button>';
         	if (g_change_type == "Action Plan Form") {
         		del_btn = '';
         	}
@@ -789,7 +789,7 @@ var ChangeRequest = function() {
         	var me = this;
         	var xid = tdata.rowid;
         	
-        	var del_btn = '<button type="button" class="btn btn-default btn-xs button-grid-delete" data-id="'+xid+'"><i class="fa fa-minus-circle font-red"></i></button>';
+        	var del_btn = '<button type="button" class="btn btn-default btn-xs button-grid-delete" data-id="'+xid+'"><i class="fa fa-trash-o font-red"></i></button>';
         	if (g_change_type == "Action Plan Form") {
         		del_btn = '';
         	}

@@ -143,6 +143,320 @@
 			$query = $this->db->select('cat_name,cat_code')
 					 		  ->get_where('m_risk_category',$data);
 			return $query->result();
-		}						
+		}	
+
+		function listofrisk($data){
+			$querynya = "SELECT DISTINCT m_risk_category.`cat_name`, t_risk.`risk_code`, t_risk.`risk_event`, t_risk.`risk_description`, t_risk.`risk_owner`, t_risk.`risk_cause`, t_risk.`risk_impact`,
+			(SELECT GROUP_CONCAT(t_risk_control.`risk_existing_control` SEPARATOR '') FROM t_risk_control WHERE t_risk.risk_id = t_risk_control.risk_id) AS 'Existing Control', 
+			(SELECT GROUP_CONCAT(t_risk_control.`risk_evaluation_control` SEPARATOR '') FROM t_risk_control WHERE t_risk.risk_id = t_risk_control.risk_id) AS 'Control Evaluation', 
+			(SELECT GROUP_CONCAT(t_risk_control.`risk_control_owner` SEPARATOR '') FROM t_risk_control WHERE t_risk.risk_id = t_risk_control.risk_id) AS 'Control Owner', t_risk.`risk_impact_level`, t_risk.`risk_likelihood_key`,t_risk.`risk_level`, t_risk.`suggested_risk_treatment`,
+			(SELECT GROUP_CONCAT(t_risk_action_plan.`action_plan` SEPARATOR '') FROM t_risk_action_plan WHERE t_risk.risk_id = t_risk_action_plan.risk_id) AS 'Action Plan',
+			(SELECT GROUP_CONCAT(t_risk_action_plan.`division` SEPARATOR '') FROM t_risk_action_plan WHERE t_risk.risk_id = t_risk_action_plan.risk_id) AS 'Action Plan Owner',
+			(SELECT GROUP_CONCAT(t_risk_action_plan.`due_date` SEPARATOR '') FROM t_risk_action_plan WHERE t_risk.risk_id = t_risk_action_plan.risk_id) AS 'Due Date'
+			FROM t_risk JOIN m_risk_category ON t_risk.`risk_2nd_sub_category` = m_risk_category.`cat_id` JOIN t_report_risk ON t_report_risk.risk_id=t_risk.risk_id WHERE t_report_risk.`periode_id`='".$data['periode']."'";
+
+			$query = $this->db->query($querynya);
+			
+			if ($query->num_rows())
+			{
+				return $query->result_array();
+			}
+			else
+			{
+				return FALSE;
+			}		
+			
+		}	
+		
+		function listofrisketc($data){
+			$querynya = 
+			"SELECT DISTINCT m_risk_category.`cat_name`, t_risk.`risk_code`, t_risk.`risk_event`, t_risk.`risk_description`, t_risk.`risk_owner`, t_risk.`risk_cause`, t_risk.`risk_impact`,
+			(SELECT GROUP_CONCAT(t_risk_control.`risk_existing_control` SEPARATOR '') FROM t_risk_control WHERE t_risk.risk_id = t_risk_control.risk_id) AS 'Existing Control', 
+			(SELECT GROUP_CONCAT(t_risk_control.`risk_evaluation_control` SEPARATOR '') FROM t_risk_control WHERE t_risk.risk_id = t_risk_control.risk_id) AS 'Control Evaluation', 
+			(SELECT GROUP_CONCAT(t_risk_control.`risk_control_owner` SEPARATOR '') FROM t_risk_control WHERE t_risk.risk_id = t_risk_control.risk_id) AS 'Control Owner', t_risk.`risk_impact_level`, t_risk.`risk_likelihood_key`,t_risk.`risk_level`, t_risk.`suggested_risk_treatment`,
+			(SELECT GROUP_CONCAT(t_risk_action_plan.`action_plan` SEPARATOR '') FROM t_risk_action_plan WHERE t_risk.risk_id = t_risk_action_plan.risk_id) AS 'Action Plan',
+			(SELECT GROUP_CONCAT(t_risk_action_plan.`division` SEPARATOR '') FROM t_risk_action_plan WHERE t_risk.risk_id = t_risk_action_plan.risk_id) AS 'Action Plan Owner',
+			(SELECT GROUP_CONCAT(t_risk_action_plan.`due_date` SEPARATOR '') FROM t_risk_action_plan WHERE t_risk.risk_id = t_risk_action_plan.risk_id) AS 'Due Date'
+			FROM t_risk JOIN m_risk_category ON t_risk.`risk_2nd_sub_category` = m_risk_category.`cat_id` JOIN t_report_risk ON t_report_risk.risk_id=t_risk.risk_id  WHERE t_report_risk.`periode_id`='".$data['periode']."' AND t_risk.risk_library_id IS NULL
+			";
+ 
+			$query = $this->db->query($querynya);
+			
+			if ($query->num_rows())
+			{
+				return $query->result_array();
+			}
+			else
+			{
+				return FALSE;
+			}		
+			
+		}
+		
+		function risktreatmentreport($data=null){
+			$querynya = "
+			SELECT DISTINCT t_risk.risk_code, t_risk.risk_event, t_risk.risk_owner, t_risk.risk_impact_level, t_risk.`risk_likelihood_key`,t_risk.`risk_level`, t_risk.`suggested_risk_treatment`,
+			(SELECT GROUP_CONCAT(t_risk_action_plan.`action_plan`SEPARATOR '') FROM t_risk_action_plan WHERE t_risk.risk_id = t_risk_action_plan.risk_id) AS 'Action Plan',
+			(SELECT GROUP_CONCAT(t_risk_action_plan.`division`SEPARATOR '') FROM t_risk_action_plan WHERE t_risk.risk_id = t_risk_action_plan.risk_id) AS 'Action Plan Owner',
+			(SELECT GROUP_CONCAT(t_risk_action_plan.`due_date`SEPARATOR '') FROM t_risk_action_plan WHERE t_risk.risk_id = t_risk_action_plan.risk_id) AS 'Due Date'
+			FROM t_risk JOIN t_risk_action_plan ON t_risk.risk_id = t_risk_action_plan.risk_id JOIN t_report_risk ON t_risk.risk_id = t_report_risk.risk_id
+			WHERE t_report_risk.periode_id='".$data['periode']."'
+			";
+			 
+			$query = $this->db->query($querynya);
+			
+			if ($query->num_rows())
+			{
+				return $query->result_array();
+			}
+			else
+			{
+				return FALSE;
+			}		
+			
+		}
+		
+		function listofall($data=null){
+			$querynya = "
+			SELECT t_risk_action_plan.id,t_risk_action_plan.action_plan,t_risk_action_plan.division,t_risk_action_plan.due_date,
+					t_risk.risk_code, t_risk.risk_event, t_risk.risk_owner, t_risk.risk_level, t_risk_action_plan.execution_status
+					FROM t_risk_action_plan
+					JOIN t_risk ON t_risk_action_plan.risk_id=t_risk.risk_id JOIN t_report_risk ON t_risk_action_plan.risk_id = t_report_risk.risk_id
+					WHERE t_risk_action_plan.action_plan_status = 7 AND t_report_risk.periode_id='".$data['periode']."' AND t_risk_action_plan.execution_status = '".$data['status']."'
+			";
+			 
+			$query = $this->db->query($querynya);
+			
+			if ($query->num_rows())
+			{
+				return $query->result_array();
+			}
+			else
+			{
+				return FALSE;
+			}		
+			
+		}
+		
+		function listofall1($data=null){
+			$querynya = "
+			SELECT t_risk_action_plan.`id`,t_risk_action_plan.`action_plan`,t_risk_action_plan.`division`,t_risk_action_plan.`due_date`,
+					t_risk.`risk_code`, t_risk.`risk_event`, t_risk.`risk_owner`,
+					t_risk.`risk_level`, (SELECT IFNULL(t_risk_action_plan.`execution_status`, 'Have Not been Updated')) AS 'Execution Status'
+					FROM t_risk_action_plan
+					JOIN t_risk ON t_risk_action_plan.risk_id=t_risk.risk_id JOIN t_report_risk ON t_risk_action_plan.risk_id = t_report_risk.risk_id
+                    			WHERE t_report_risk.periode_id='".$data['periode']."'
+			";
+			 
+			$query = $this->db->query($querynya);
+			
+			if ($query->num_rows())
+			{
+				return $query->result_array();
+			}
+			else
+			{
+				return FALSE;
+			}		
+			
+		}
+		
+		function topten($data=null){
+			$querynya = "
+					SELECT 
+					risk_code,
+					risk_event,
+					risk_description,
+					risk_owner,
+					risk_impact_level,
+					risk_likelihood_key,
+					risk_level 
+					FROM
+					t_risk 
+					GROUP BY risk_event,
+					risk_level 
+					ORDER BY (
+					CASE
+					WHEN risk_level = 'High'
+					THEN 1 
+					WHEN risk_level = 'Moderate'
+					THEN 2 
+					WHEN risk_level = 'Low'
+					THEN 3 
+					END
+					),
+					COUNT(risk_event) DESC 
+					LIMIT 10 
+			";
+			 
+			$query = $this->db->query($querynya);
+			
+			if ($query->num_rows())
+			{
+				return $query->result_array();
+			}
+			else
+			{
+				return FALSE;
+			}		
+			
+		}
+		
+		function topten2($data=null){
+			$querynya ='			
+			SELECT cat_code, cat_name, impact_level, likelihood_level, risk_level
+			FROM t_report_2ndsub
+			GROUP BY cat_id, risk_level
+			ORDER BY 
+			(CASE 
+			WHEN risk_level = "High" THEN 1
+			WHEN risk_level = "Moderate" THEN 2
+			WHEN risk_level = "Low" THEN 3
+			END), count(cat_code) DESC
+			LIMIT 10';
+			 
+			$query = $this->db->query($querynya);
+			
+			if ($query->num_rows())
+			{
+				return $query->result_array();
+			}
+			else
+			{
+				return FALSE;
+			}		
+			
+		}
+		
+		function KRI_monitoring($data=null){
+			$querynya ="			
+			SELECT r1.risk_code, r1.risk_event, r1.risk_level, r1.suggested_risk_treatment, 
+					t1.kri_code, t1.key_risk_indicator, t1.kri_owner, t1.treshold,
+          (SELECT GROUP_CONCAT(t2.operator,' ', t2.value_1, ' = ', t2.result) FROM t_kri_treshold t2 WHERE t2.kri_id=t1.id) AS 'threshold value',
+          t1.timing_pelaporan, t1.owner_report, t1.kri_warning 
+					FROM t_kri  t1 JOIN t_risk r1 ON t1.risk_id=r1.risk_id JOIN t_report_risk r2 ON t1.risk_id = r2.risk_id
+          WHERE r2.periode_id='".$data['periode']."' ";
+			 
+			$query = $this->db->query($querynya);
+			
+			if ($query->num_rows())
+			{
+				return $query->result_array();
+			}
+			else
+			{
+				return FALSE;
+			}		
+			
+		}
+		
+		function comparison1($data=null){
+			$querynya ="			
+			
+			SELECT t1.risk_code, t1.risk_event, t1.risk_description, t1.risk_owner, t1.risk_impact_level AS 'current impact', t1.risk_likelihood_key AS 'current likelihood' , t1.risk_level AS 'current risk level',
+			(SELECT t2.risk_impact_level FROM t_risk t2 JOIN t_report_risk r1 ON t2.risk_id = r1.risk_id WHERE r1.periode_id = '".$data['periode_prev']."' AND IFNULL(t2.risk_library_id =  t1.risk_library_id,t2.risk_id = t1.risk_library_id)) AS 'previous impact',
+			(SELECT t2.risk_likelihood_key FROM t_risk t2 JOIN t_report_risk r1 ON t2.risk_id = r1.risk_id WHERE r1.periode_id = '".$data['periode_prev']."' AND IFNULL(t2.risk_library_id =  t1.risk_library_id,t2.risk_id = t1.risk_library_id)) AS 'previous likelihood',
+			(SELECT t2.risk_level FROM t_risk t2 JOIN t_report_risk r1 ON t2.risk_id = r1.risk_id WHERE r1.periode_id = '".$data['periode_prev']."' AND IFNULL(t2.risk_library_id =  t1.risk_library_id,t2.risk_id = t1.risk_library_id)) AS 'previous risk Level'
+			FROM t_risk t1 JOIN t_report_risk r1 ON t1.risk_id = r1.risk_id WHERE r1.periode_id = '".$data['periode_cur']."' AND t1.risk_library_id IS NOT NULL
+			";
+			 
+			$query = $this->db->query($querynya);
+			
+			if ($query->num_rows())
+			{
+				return $query->result_array();
+			}
+			else
+			{
+				return FALSE;
+			}		
+			
+		}
+		
+		function comparison2($data=null){
+			$querynya ="	 
+			SELECT t1.cat_code, t1.cat_name, t1.impact_level AS 'current impact', t1.likelihood_level AS 'current likelihood', t1.risk_level AS 'current risk level',
+			(SELECT t2.impact_level FROM t_report_2ndsub t2 WHERE t2.periode_id = '".$data['periode_prev']."' AND IFNULL(t2.cat_id =  t1.cat_id, 'There is no 2nd sub category in prevous period')) AS 'previous impact',
+			(SELECT t2.likelihood_level FROM t_report_2ndsub t2 WHERE t2.periode_id = '".$data['periode_prev']."' AND IFNULL(t2.cat_id =  t1.cat_id, 'There is no 2nd sub category in prevous period')) AS 'previous impact',
+			(SELECT t2.risk_level FROM t_report_2ndsub t2 WHERE t2.periode_id = '".$data['periode_prev']."' AND IFNULL(t2.cat_id =  t1.cat_id, 'There is no 2nd sub category in prevous period')) AS 'previous impact'
+			FROM t_report_2ndsub t1 WHERE periode_id = '".$data['periode_cur']."'";
+			 
+			$query = $this->db->query($querynya);
+			
+			if ($query->num_rows())
+			{
+				return $query->result_array();
+			}
+			else
+			{
+				return FALSE;
+			}		
+			
+		}
+		
+		function getcomparison1($data=null){
+			$querynya = "
+			SELECT DISTINCT risk_level,
+			(CASE
+			WHEN risk_level = 'LOW' THEN (SELECT COUNT(risk_id) FROM t_risk WHERE risk_level ='low' AND periode_id='".$data['periode_prev']."')
+			WHEN risk_level = 'MODERATE' THEN (SELECT COUNT(risk_id) FROM t_risk WHERE risk_level ='moderate' AND periode_id='".$data['periode_prev']."')
+			WHEN risk_level = 'HIGH' THEN (SELECT COUNT(risk_id) FROM t_risk WHERE risk_level ='high' AND periode_id='".$data['periode_prev']."')
+			END) AS 'jumlah risk periode 1',
+			(CASE
+			WHEN risk_level = 'LOW' THEN (SELECT COUNT(risk_id) FROM t_risk WHERE risk_level ='low' AND periode_id='".$data['periode_cur']."')
+			WHEN risk_level = 'MODERATE' THEN (SELECT COUNT(risk_id) FROM t_risk WHERE risk_level ='moderate' AND periode_id='".$data['periode_cur']."')
+			WHEN risk_level = 'HIGH' THEN (SELECT COUNT(risk_id) FROM t_risk WHERE risk_level ='high' AND periode_id='".$data['periode_cur']."')
+			END) AS 'jumlah risk periode 2'
+			FROM t_risk
+
+			";
+			 
+			$query = $this->db->query($querynya);
+			
+			if ($query->num_rows())
+			{
+				return $query->result_array();
+			}
+			else
+			{
+				return FALSE;
+			}		
+			
+		}
+		
+		function getcomparison2($data=null){
+			$querynya = "
+				SELECT DISTINCT m1.cat_code, t1.risk_level,
+				(CASE
+				WHEN t1.risk_level = 'LOW' THEN (SELECT COUNT(t2.risk_id) FROM t_risk t2 WHERE t2.risk_level ='low' AND t2.periode_id='".$data['periode_prev']."' AND m1.cat_id = t2.risk_2nd_sub_category)
+				WHEN t1.risk_level = 'MODERATE' THEN (SELECT COUNT(t2.risk_id) FROM t_risk t2 WHERE t2.risk_level ='moderate' AND t2.periode_id='".$data['periode_prev']."' AND m1.cat_id = t2.risk_2nd_sub_category)
+				WHEN t1.risk_level = 'HIGH' THEN (SELECT COUNT(t2.risk_id) FROM t_risk t2 WHERE t2.risk_level ='high' AND t2.periode_id='".$data['periode_prev']."' AND m1.cat_id = t2.risk_2nd_sub_category)
+				END) AS 'jumlah risk periode 1',
+				(CASE
+				WHEN t1.risk_level = 'LOW' THEN (SELECT COUNT(t3.risk_id) FROM t_risk t3 WHERE t3.risk_level ='low' AND t3.periode_id='".$data['periode_cur']."' AND m1.cat_id = t3.risk_2nd_sub_category)
+				WHEN t1.risk_level = 'MODERATE' THEN (SELECT COUNT(t3.risk_id) FROM t_risk t3 WHERE t3.risk_level ='moderate' AND t3.periode_id='".$data['periode_cur']."' AND m1.cat_id = t3.risk_2nd_sub_category)
+				WHEN t1.risk_level = 'HIGH' THEN (SELECT COUNT(t3.risk_id) FROM t_risk t3 WHERE t3.risk_level ='high' AND t3.periode_id='".$data['periode_cur']."' AND m1.cat_id = t3.risk_2nd_sub_category)
+				END) AS 'jumlah risk periode 2'
+				FROM t_risk t1 JOIN m_risk_category m1 ON t1.risk_2nd_sub_category = m1.cat_id 
+				ORDER BY m1.cat_code,
+				(CASE 
+				WHEN risk_level = 'High' THEN 1
+				WHEN risk_level = 'Moderate' THEN 2
+				WHEN risk_level = 'Low' THEN 3
+				END)
+			";
+			 
+			$query = $this->db->query($querynya);
+			
+			if ($query->num_rows())
+			{
+				return $query->result_array();
+			}
+			else
+			{
+				return FALSE;
+			}		
+			
+		}
 	}
 ?>

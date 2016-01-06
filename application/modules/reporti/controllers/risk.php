@@ -502,7 +502,842 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$this->dompdf->load_html($html);
 			$this->dompdf->render();
 			$this->dompdf->stream("kri_monitoring.pdf");
-		}										
+		}			
+		
+		
+		public function listofrisk(){
+			$this->load->model('report/risk_model','risk',true);
+
+			$data = $this->loadDefaultAppConfig();
+			$data['indonya'] = base_url('index.php/reporti/risk/gettreatment');
+			$data['engnya'] = base_url('index.php/report/risk/gettreatment');		
+			$data['sidebarMenu'] = $this->getSidebarMenuStructure('report/risk/listofrisk');
+			$data['periode'] = $this->risk->getAllPeriode();
+			$data['pageLevelStyles'] = '
+			<link rel="stylesheet" type="text/css" href="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
+			';
+			
+			$data['pageLevelScripts'] = '
+			<script src="assets/scripts/dashboard/getallrisk.js"></script>';
+			
+			$this->load->view('main/header', $data);
+			$this->load->view('report_listofrisk', $data);
+			$this->load->view('footer', $data);
+		}	
+		
+		function listofrisk_excel(){
+			
+			$this->load->model('report/risk_model','risk',true);
+			$this->load->library('parser');
+			  
+			$data['datanya'] = $this->risk->listofrisk($this->input->post());
+			
+			$data['total_data'] = count($data['datanya']);
+			 
+			$stringData = $this->parser->parse('listofrisk_table', $data, true);
+			 
+			header("Pragma: public");
+			header("Expires: 0");
+			header("Cache-Control: must-revalidate, post-check=0, pre-check=0");			
+			header('Content-type: application/ms-excel');
+			header("Expires: 0");
+			header('Content-Disposition: attachment; filename=listofrisk.xls');
+			header("Content-Description: File Transfer");
+	  
+			echo $stringData;
+			exit;
+			
+		}
+		
+			function listofrisk_pdf(){
+			
+			$this->load->model('report/risk_model','risk',true);
+			$this->load->library('parser');
+			$this->load->library('dompdf_gen');
+			
+			$orientation = "landscape";
+			$paper_size='a4';
+			 
+			$data['datanya'] = $this->risk->listofrisk($this->input->post());
+			
+			$data['total_data'] = count($data['datanya']);
+			 
+			$this->load->view('listofrisk_table',$data);
+			// Get output html
+			$html = $this->output->get_output();
+			  
+			// Convert to PDF
+			$this->dompdf->load_html($html);
+			$this->dompdf->set_paper($paper_size, $orientation);
+			$this->dompdf->render();			
+			$this->dompdf->stream("listofrisk.pdf");
+			
+		}
+		
+		public function listofrisketc(){
+			$this->load->model('report/risk_model','risk',true);
+
+			$data = $this->loadDefaultAppConfig();
+			$data['indonya'] = base_url('index.php/reporti/risk/gettreatment');
+			$data['engnya'] = base_url('index.php/report/risk/gettreatment');		
+			$data['sidebarMenu'] = $this->getSidebarMenuStructure('report/risk/listofrisketc');
+			$data['periode'] = $this->risk->getAllPeriode();
+			$data['pageLevelStyles'] = '
+			<link rel="stylesheet" type="text/css" href="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
+			';
+			
+			$data['pageLevelScripts'] = '
+			<script src="assets/scripts/dashboard/getallrisk.js"></script>';
+			
+			$this->load->view('main/header', $data);
+			$this->load->view('report_listofrisketc', $data);
+			$this->load->view('footer', $data);
+		}	
+		
+		function listofrisketc_excel(){
+			
+			$this->load->model('report/risk_model','risk',true);
+			$this->load->library('parser');
+			  
+			$data['datanya'] = $this->risk->listofrisketc($this->input->post());
+			
+			$data['total_data'] = count($data['datanya']);
+			 
+			$stringData = $this->parser->parse('listofrisk_table', $data, true);
+			 
+			header("Pragma: public");
+			header("Expires: 0");
+			header("Cache-Control: must-revalidate, post-check=0, pre-check=0");			
+			header('Content-type: application/ms-excel');
+			header("Expires: 0");
+			header('Content-Disposition: attachment; filename=listofrisketc.xls');
+			header("Content-Description: File Transfer");
+	  
+			echo $stringData;
+			exit;
+			
+		}
+		
+		function listofrisketc_pdf(){
+			
+			$this->load->model('report/risk_model','risk',true);
+			$this->load->library('parser');
+			$this->load->library('dompdf_gen');
+			
+			$orientation = "landscape";
+			$paper_size='a4';
+			 
+			$data['datanya'] = $this->risk->listofrisketc($this->input->post());
+			
+			$data['total_data'] = count($data['datanya']);
+			 
+			$this->load->view('listofrisketc_table',$data);
+			// Get output html
+			$html = $this->output->get_output();
+			  
+			// Convert to PDF
+			$this->dompdf->load_html($html);
+			$this->dompdf->set_paper($paper_size, $orientation);
+			$this->dompdf->render();			
+			$this->dompdf->stream("listofrisketc.pdf");
+			
+		}
+		
+		function risktreatmentreport(){
+			
+			$this->load->model('report/risk_model','risk',true);
+
+			$data = $this->loadDefaultAppConfig();
+			$data['indonya'] = base_url('index.php/reporti/risk/gettreatment');
+			$data['engnya'] = base_url('index.php/report/risk/gettreatment');		
+			$data['sidebarMenu'] = $this->getSidebarMenuStructure('report/risk/risktreatmentreport');
+			$data['periode'] = $this->risk->getAllPeriode();
+			$data['pageLevelStyles'] = '
+			<link rel="stylesheet" type="text/css" href="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
+			';
+			
+			$data['pageLevelScripts'] = '
+			<script src="assets/scripts/dashboard/getallrisk.js"></script>';
+			
+			$this->load->view('main/header', $data);
+			$this->load->view('report_risktreatmentreport', $data);
+			$this->load->view('footer', $data);
+			
+		}
+		
+		function risktreatmentreport_excel(){
+			
+			$this->load->model('report/risk_model','risk',true);
+			$this->load->library('parser');
+			  
+			$data['datanya'] = $this->risk->risktreatmentreport($this->input->post());
+			
+			$data['total_data'] = count($data['datanya']);
+			 
+			$stringData = $this->parser->parse('risktreatmentreport_table', $data, true);
+			 
+			header("Pragma: public");
+			header("Expires: 0");
+			header("Cache-Control: must-revalidate, post-check=0, pre-check=0");			
+			header('Content-type: application/ms-excel');
+			header("Expires: 0");
+			header('Content-Disposition: attachment; filename=risktreatmentreport.xls');
+			header("Content-Description: File Transfer");
+	  
+			echo $stringData;
+			exit;
+			
+		}
+		
+		function risktreatmentreport_pdf(){
+			
+			$this->load->model('report/risk_model','risk',true);
+			$this->load->library('parser');
+			$this->load->library('dompdf_gen');
+			
+			$orientation = "landscape";
+			$paper_size='a4';
+			 
+			$data['datanya'] = $this->risk->risktreatmentreport($this->input->post());
+			  
+			$data['total_data'] = count($data['datanya']);
+			 
+			$this->load->view('risktreatmentreport_table',$data);
+			// Get output html
+			$html = $this->output->get_output();
+			  
+			// Convert to PDF
+			$this->dompdf->load_html($html);
+			$this->dompdf->set_paper($paper_size, $orientation);
+			$this->dompdf->render();			
+			$this->dompdf->stream("risktreatmentreport.pdf");
+			
+		}
+		
+		public function listofall(){
+			$this->load->model('report/risk_model','risk',true);
+
+			$data = $this->loadDefaultAppConfig();
+			$data['indonya'] = base_url('index.php/reporti/risk/gettreatment');
+			$data['engnya'] = base_url('index.php/report/risk/gettreatment');		
+			$data['sidebarMenu'] = $this->getSidebarMenuStructure('report/risk/listofall');
+			$data['periode'] = $this->risk->getAllPeriode();
+			$data['pageLevelStyles'] = '
+			<link rel="stylesheet" type="text/css" href="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
+			';
+			
+			$data['pageLevelScripts'] = '
+			<script src="assets/scripts/dashboard/getallrisk.js"></script>';
+			
+			$this->load->view('main/header', $data);
+			$this->load->view('report_listofall', $data);
+			$this->load->view('footer', $data);
+		}	
+		
+		function listofall_excel(){
+			
+			$this->load->model('report/risk_model','risk',true);
+			$this->load->library('parser');
+			  
+			$data['datanya'] = $this->risk->listofall($this->input->post());
+			
+			$data['total_data'] = count($data['datanya']);
+			 
+			$stringData = $this->parser->parse('listofall_table', $data, true);
+			 
+			header("Pragma: public");
+			header("Expires: 0");
+			header("Cache-Control: must-revalidate, post-check=0, pre-check=0");			
+			header('Content-type: application/ms-excel');
+			header("Expires: 0");
+			header('Content-Disposition: attachment; filename=listofall.xls');
+			header("Content-Description: File Transfer");
+	  
+			echo $stringData;
+			exit;
+			
+		}
+		
+		function listofall_pdf(){
+			
+			$this->load->model('report/risk_model','risk',true);
+			$this->load->library('parser');
+			$this->load->library('dompdf_gen');
+			
+			$orientation = "landscape";
+			$paper_size='a4';
+			 
+			$data['datanya'] = $this->risk->listofall($this->input->post());
+			  
+			$data['total_data'] = count($data['datanya']);
+			 
+			$this->load->view('listofall_table',$data);
+			// Get output html
+			$html = $this->output->get_output();
+			  
+			// Convert to PDF
+			$this->dompdf->load_html($html);
+			$this->dompdf->set_paper($paper_size, $orientation);
+			$this->dompdf->render();			
+			$this->dompdf->stream("listofall.pdf");
+			
+		}
+		
+		public function listofall1(){
+			$this->load->model('report/risk_model','risk',true);
+
+			$data = $this->loadDefaultAppConfig();
+			$data['indonya'] = base_url('index.php/reporti/risk/gettreatment');
+			$data['engnya'] = base_url('index.php/report/risk/gettreatment');		
+			$data['sidebarMenu'] = $this->getSidebarMenuStructure('report/risk/listofall1');
+			$data['periode'] = $this->risk->getAllPeriode();
+			$data['pageLevelStyles'] = '
+			<link rel="stylesheet" type="text/css" href="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
+			';
+			
+			$data['pageLevelScripts'] = '
+			<script src="assets/scripts/dashboard/getallrisk.js"></script>';
+			
+			$this->load->view('main/header', $data);
+			$this->load->view('report_listofall1', $data);
+			$this->load->view('footer', $data);
+		}	
+		
+		function listofall1_excel(){
+			
+			$this->load->model('report/risk_model','risk',true);
+			$this->load->library('parser');
+			  
+			$data['datanya'] = $this->risk->listofall1($this->input->post());
+			
+			$data['total_data'] = count($data['datanya']);
+			 
+			$stringData = $this->parser->parse('listofall1_table', $data, true);
+			 
+			header("Pragma: public");
+			header("Expires: 0");
+			header("Cache-Control: must-revalidate, post-check=0, pre-check=0");			
+			header('Content-type: application/ms-excel');
+			header("Expires: 0");
+			header('Content-Disposition: attachment; filename=listofall1.xls');
+			header("Content-Description: File Transfer");
+	  
+			echo $stringData;
+			exit;
+			
+		}
+		
+		function listofall1_pdf(){
+			
+			$this->load->model('report/risk_model','risk',true);
+			$this->load->library('parser');
+			$this->load->library('dompdf_gen');
+			
+			$orientation = "landscape";
+			$paper_size='a4';
+			 
+			$data['datanya'] = $this->risk->listofall1($this->input->post());
+			  
+			$data['total_data'] = count($data['datanya']);
+			 
+			$this->load->view('listofall1_table',$data);
+			// Get output html
+			$html = $this->output->get_output();
+			  
+			// Convert to PDF
+			$this->dompdf->load_html($html);
+			$this->dompdf->set_paper($paper_size, $orientation);
+			$this->dompdf->render();			
+			$this->dompdf->stream("listofall1.pdf");
+			
+		}
+		
+		public function comparison1(){
+			$this->load->model('report/risk_model','risk',true);
+
+			$data = $this->loadDefaultAppConfig();
+			$data['indonya'] = base_url('index.php/reporti/risk/gettreatment');
+			$data['engnya'] = base_url('index.php/report/risk/gettreatment');		
+			$data['sidebarMenu'] = $this->getSidebarMenuStructure('report/risk/comparison1');
+			$data['periode'] = $this->risk->getAllPeriode();
+			$data['pageLevelStyles'] = '
+			<link rel="stylesheet" type="text/css" href="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
+			';
+			
+			$data['pageLevelScripts'] = '
+			<script src="assets/scripts/dashboard/getallrisk.js"></script>';
+			
+			$this->load->view('main/header', $data);
+			$this->load->view('report_comparison1', $data);
+			$this->load->view('footer', $data);
+		}	
+		
+		function comparison1_excel(){
+			
+			$this->load->model('report/risk_model','risk',true);
+			$this->load->library('parser');
+			  
+			$data['datanya'] = $this->risk->comparison1($this->input->post());
+			
+			$data['total_data'] = count($data['datanya']);
+			 
+			$stringData = $this->parser->parse('comparison1_table', $data, true);
+			 
+			header("Pragma: public");
+			header("Expires: 0");
+			header("Cache-Control: must-revalidate, post-check=0, pre-check=0");			
+			header('Content-type: application/ms-excel');
+			header("Expires: 0");
+			header('Content-Disposition: attachment; filename=comparison1.xls');
+			header("Content-Description: File Transfer");
+	  
+			echo $stringData;
+			exit;
+			
+		}
+		
+		function comparison1_pdf(){
+			
+			$this->load->model('report/risk_model','risk',true);
+			$this->load->library('parser');
+			$this->load->library('dompdf_gen');
+			
+			$orientation = "landscape";
+			$paper_size='a4';
+			 
+			$data['datanya'] = $this->risk->comparison1($this->input->post());
+			  
+			$data['total_data'] = count($data['datanya']);
+			 
+			$this->load->view('comparison1_table',$data);
+			// Get output html
+			$html = $this->output->get_output();
+			  
+			// Convert to PDF
+			$this->dompdf->load_html($html);
+			$this->dompdf->set_paper($paper_size, $orientation);
+			$this->dompdf->render();			
+			$this->dompdf->stream("comparison1.pdf");
+			
+		}
+		
+		public function comparison2(){
+			$this->load->model('report/risk_model','risk',true);
+
+			$data = $this->loadDefaultAppConfig();
+			$data['indonya'] = base_url('index.php/reporti/risk/comparison2');
+			$data['engnya'] = base_url('index.php/report/risk/comparison2');		
+			$data['sidebarMenu'] = $this->getSidebarMenuStructure('report/risk/comparison2');
+			$data['periode'] = $this->risk->getAllPeriode();
+			$data['pageLevelStyles'] = '
+			<link rel="stylesheet" type="text/css" href="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
+			';
+			
+			$data['pageLevelScripts'] = '
+			<script src="assets/scripts/dashboard/getallrisk.js"></script>';
+			
+			$this->load->view('main/header', $data);
+			$this->load->view('report_comparison2', $data);
+			$this->load->view('footer', $data);
+		}	
+		
+		function comparison2_excel(){
+			
+			$this->load->model('report/risk_model','risk',true);
+			$this->load->library('parser');
+			  
+			$data['datanya'] = $this->risk->comparison2($this->input->post());
+			
+			$data['total_data'] = count($data['datanya']);
+			 
+			$stringData = $this->parser->parse('comparison2_table', $data, true);
+			 
+			header("Pragma: public");
+			header("Expires: 0");
+			header("Cache-Control: must-revalidate, post-check=0, pre-check=0");			
+			header('Content-type: application/ms-excel');
+			header("Expires: 0");
+			header('Content-Disposition: attachment; filename=comparison2.xls');
+			header("Content-Description: File Transfer");
+	  
+			echo $stringData;
+			exit;
+			
+		}
+		
+		function comparison2_pdf(){
+			
+			$this->load->model('report/risk_model','risk',true);
+			$this->load->library('parser');
+			$this->load->library('dompdf_gen');
+			
+			$orientation = "landscape";
+			$paper_size='a4';
+			 
+			$data['datanya'] = $this->risk->comparison2($this->input->post());
+			  
+			$data['total_data'] = count($data['datanya']);
+			 
+			$this->load->view('comparison2_table',$data);
+			// Get output html
+			$html = $this->output->get_output();
+			  
+			// Convert to PDF
+			$this->dompdf->load_html($html);
+			$this->dompdf->set_paper($paper_size, $orientation);
+			$this->dompdf->render();			
+			$this->dompdf->stream("comparison2.pdf");
+			
+		}
+		
+		public function topten(){
+			$this->load->model('report/risk_model','risk',true);
+
+			$data = $this->loadDefaultAppConfig();
+			$data['indonya'] = base_url('index.php/reporti/risk/topten');
+			$data['engnya'] = base_url('index.php/report/risk/topten');		
+			$data['sidebarMenu'] = $this->getSidebarMenuStructure('report/risk/topten');
+			$data['periode'] = $this->risk->getAllPeriode();
+			$data['pageLevelStyles'] = '
+			<link rel="stylesheet" type="text/css" href="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
+			';
+			
+			$data['pageLevelScripts'] = '
+			<script src="assets/scripts/dashboard/getallrisk.js"></script>';
+			
+			$this->load->view('main/header', $data);
+			$this->load->view('report_topten', $data);
+			$this->load->view('footer', $data);
+		}	
+		
+		function topten_excel(){
+			
+			$this->load->model('report/risk_model','risk',true);
+			$this->load->library('parser');
+			  
+			$data['datanya'] = $this->risk->topten($this->input->post());
+			
+			$data['total_data'] = count($data['datanya']);
+			 
+			$stringData = $this->parser->parse('topten_table', $data, true);
+			 
+			header("Pragma: public");
+			header("Expires: 0");
+			header("Cache-Control: must-revalidate, post-check=0, pre-check=0");			
+			header('Content-type: application/ms-excel');
+			header("Expires: 0");
+			header('Content-Disposition: attachment; filename=topten.xls');
+			header("Content-Description: File Transfer");
+	  
+			echo $stringData;
+			exit;
+			
+		}
+		
+		function topten_pdf(){
+			
+			$this->load->model('report/risk_model','risk',true);
+			$this->load->library('parser');
+			$this->load->library('dompdf_gen');
+			
+			$orientation = "landscape";
+			$paper_size='a4';
+			 
+			$data['datanya'] = $this->risk->topten($this->input->post());
+			  
+			$data['total_data'] = count($data['datanya']);
+			 
+			$this->load->view('topten_table',$data);
+			// Get output html
+			$html = $this->output->get_output();
+			  
+			// Convert to PDF
+			$this->dompdf->load_html($html);
+			$this->dompdf->set_paper($paper_size, $orientation);
+			$this->dompdf->render();			
+			$this->dompdf->stream("topten.pdf");
+			
+		}
+		
+		public function topten2(){
+			$this->load->model('report/risk_model','risk',true);
+
+			$data = $this->loadDefaultAppConfig();
+			$data['indonya'] = base_url('index.php/reporti/risk/topten2');
+			$data['engnya'] = base_url('index.php/report/risk/topten2');		
+			$data['sidebarMenu'] = $this->getSidebarMenuStructure('report/risk/topten2');
+			$data['periode'] = $this->risk->getAllPeriode();
+			$data['pageLevelStyles'] = '
+			<link rel="stylesheet" type="text/css" href="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
+			';
+			
+			$data['pageLevelScripts'] = '
+			<script src="assets/scripts/dashboard/getallrisk.js"></script>';
+			
+			$this->load->view('main/header', $data);
+			$this->load->view('report_topten2', $data);
+			$this->load->view('footer', $data);
+		}	
+		
+		function topten2_excel(){
+			
+			$this->load->model('report/risk_model','risk',true);
+			$this->load->library('parser');
+			  
+			$data['datanya'] = $this->risk->topten2($this->input->post());
+			
+			$data['total_data'] = count($data['datanya']);
+			 
+			$stringData = $this->parser->parse('topten_table2', $data, true);
+			 
+			header("Pragma: public");
+			header("Expires: 0");
+			header("Cache-Control: must-revalidate, post-check=0, pre-check=0");			
+			header('Content-type: application/ms-excel');
+			header("Expires: 0");
+			header('Content-Disposition: attachment; filename=topten2.xls');
+			header("Content-Description: File Transfer");
+	  
+			echo $stringData;
+			exit;
+			
+		}
+		
+		function topten2_pdf(){
+			
+			$this->load->model('report/risk_model','risk',true);
+			$this->load->library('parser');
+			$this->load->library('dompdf_gen');
+			
+			$orientation = "landscape";
+			$paper_size='a4';
+			 
+			$data['datanya'] = $this->risk->topten2($this->input->post());
+			  
+			$data['total_data'] = count($data['datanya']);
+			 
+			$this->load->view('topten_table2',$data);
+			// Get output html
+			$html = $this->output->get_output();
+			  
+			// Convert to PDF
+			$this->dompdf->load_html($html);
+			$this->dompdf->set_paper($paper_size, $orientation);
+			$this->dompdf->render();			
+			$this->dompdf->stream("topten2.pdf");
+			
+		}
+		
+		public function KRI_monitoring(){
+			$this->load->model('report/risk_model','risk',true);
+
+			$data = $this->loadDefaultAppConfig();
+			$data['indonya'] = base_url('index.php/reporti/risk/KRI_monitoring');
+			$data['engnya'] = base_url('index.php/report/risk/KRI_monitoring');		
+			$data['sidebarMenu'] = $this->getSidebarMenuStructure('report/risk/KRI_monitoring');
+			$data['periode'] = $this->risk->getAllPeriode();
+			$data['pageLevelStyles'] = '
+			<link rel="stylesheet" type="text/css" href="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
+			';
+			
+			$data['pageLevelScripts'] = '
+			<script src="assets/scripts/dashboard/getallrisk.js"></script>';
+			
+			$this->load->view('main/header', $data);
+			$this->load->view('report_KRI_monitoring', $data);
+			$this->load->view('footer', $data);
+		}	
+		
+		function KRI_monitoring_excel(){
+			
+			$this->load->model('report/risk_model','risk',true);
+			$this->load->library('parser');
+			  
+			$data['datanya'] = $this->risk->KRI_monitoring($this->input->post());
+			
+			$data['total_data'] = count($data['datanya']);
+			 
+			$stringData = $this->parser->parse('KRI_monitoring_table', $data, true);
+			 
+			header("Pragma: public");
+			header("Expires: 0");
+			header("Cache-Control: must-revalidate, post-check=0, pre-check=0");			
+			header('Content-type: application/ms-excel');
+			header("Expires: 0");
+			header('Content-Disposition: attachment; filename=KRI_monitoring.xls');
+			header("Content-Description: File Transfer");
+	  
+			echo $stringData;
+			exit;
+			
+		}
+		
+		function KRI_monitoring_pdf(){
+			
+			$this->load->model('report/risk_model','risk',true);
+			$this->load->library('parser');
+			$this->load->library('dompdf_gen');
+			
+			$orientation = "landscape";
+			$paper_size='a4';
+			 
+			$data['datanya'] = $this->risk->KRI_monitoring($this->input->post());
+			  
+			$data['total_data'] = count($data['datanya']);
+			 
+			$this->load->view('KRI_monitoring_table',$data);
+			// Get output html
+			$html = $this->output->get_output();
+			  
+			// Convert to PDF
+			$this->dompdf->load_html($html);
+			$this->dompdf->set_paper($paper_size, $orientation);
+			$this->dompdf->render();			
+			$this->dompdf->stream("KRI_monitoring.pdf");
+			
+		}
+		
+		
+		public function getcomparison1(){
+			$this->load->model('report/risk_model','risk',true);
+
+			$data = $this->loadDefaultAppConfig();
+			$data['indonya'] = base_url('index.php/reporti/risk/getcomparison1');
+			$data['engnya'] = base_url('index.php/report/risk/getcomparison1');		
+			$data['sidebarMenu'] = $this->getSidebarMenuStructure('report/risk/getcomparison1');
+			$data['periode'] = $this->risk->getAllPeriode();
+			$data['pageLevelStyles'] = '
+			<link rel="stylesheet" type="text/css" href="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
+			';
+			
+			$data['pageLevelScripts'] = '
+			<script src="assets/scripts/dashboard/getallrisk.js"></script>';
+			
+			$this->load->view('main/header', $data);
+			$this->load->view('report_getcomparison1', $data);
+			$this->load->view('footer', $data);
+		}	
+		
+		function getcomparison1_excel(){
+			
+			$this->load->model('report/risk_model','risk',true);
+			$this->load->library('parser');
+			  
+			$data['datanya'] = $this->risk->getcomparison1($this->input->post());
+			
+			$data['total_data'] = count($data['datanya']);
+			 
+			$stringData = $this->parser->parse('getcomparison1_table', $data, true);
+			 
+			header("Pragma: public");
+			header("Expires: 0");
+			header("Cache-Control: must-revalidate, post-check=0, pre-check=0");			
+			header('Content-type: application/ms-excel');
+			header("Expires: 0");
+			header('Content-Disposition: attachment; filename=getcomparison1.xls');
+			header("Content-Description: File Transfer");
+	  
+			echo $stringData;
+			exit;
+			
+		}
+		
+		function getcomparison1_pdf(){
+			
+			$this->load->model('report/risk_model','risk',true);
+			$this->load->library('parser');
+			$this->load->library('dompdf_gen');
+			
+			$orientation = "landscape";
+			$paper_size='a4';
+			 
+			$data['datanya'] = $this->risk->getcomparison1($this->input->post());
+			  
+			$data['total_data'] = count($data['datanya']);
+			 
+			$this->load->view('getcomparison1_table',$data);
+			// Get output html
+			$html = $this->output->get_output();
+			  
+			// Convert to PDF
+			$this->dompdf->load_html($html);
+			$this->dompdf->set_paper($paper_size, $orientation);
+			$this->dompdf->render();			
+			$this->dompdf->stream("getcomparison1.pdf");
+			
+		}
+		
+		public function getcomparison2(){
+			$this->load->model('report/risk_model','risk',true);
+
+			$data = $this->loadDefaultAppConfig();
+			$data['indonya'] = base_url('index.php/reporti/risk/getcomparison2');
+			$data['engnya'] = base_url('index.php/report/risk/getcomparison2');		
+			$data['sidebarMenu'] = $this->getSidebarMenuStructure('report/risk/getcomparison2');
+			$data['periode'] = $this->risk->getAllPeriode();
+			$data['pageLevelStyles'] = '
+			<link rel="stylesheet" type="text/css" href="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
+			';
+			
+			$data['pageLevelScripts'] = '
+			<script src="assets/scripts/dashboard/getallrisk.js"></script>';
+			
+			$this->load->view('main/header', $data);
+			$this->load->view('report_getcomparison2', $data);
+			$this->load->view('footer', $data);
+		}	
+		
+		function getcomparison2_excel(){
+			
+			$this->load->model('report/risk_model','risk',true);
+			$this->load->library('parser');
+			  
+			$data['datanya'] = $this->risk->getcomparison2($this->input->post());
+			
+			$data['total_data'] = count($data['datanya']);
+			 
+			$stringData = $this->parser->parse('getcomparison2_table', $data, true);
+			 
+			header("Pragma: public");
+			header("Expires: 0");
+			header("Cache-Control: must-revalidate, post-check=0, pre-check=0");			
+			header('Content-type: application/ms-excel');
+			header("Expires: 0");
+			header('Content-Disposition: attachment; filename=getcomparison2.xls');
+			header("Content-Description: File Transfer");
+	  
+			echo $stringData;
+			exit;
+			
+		}
+		
+		function getcomparison2_pdf(){
+			
+			$this->load->model('report/risk_model','risk',true);
+			$this->load->library('parser');
+			$this->load->library('dompdf_gen');
+			
+			$orientation = "landscape";
+			$paper_size='a4';
+			 
+			$data['datanya'] = $this->risk->getcomparison2($this->input->post());
+			  
+			$data['total_data'] = count($data['datanya']);
+			 
+			$this->load->view('getcomparison2_table',$data);
+			// Get output html
+			$html = $this->output->get_output();
+			  
+			// Convert to PDF
+			$this->dompdf->load_html($html);
+			$this->dompdf->set_paper($paper_size, $orientation);
+			$this->dompdf->render();			
+			$this->dompdf->stream("getcomparison2.pdf");
+			
+		}
+
+
+			
 	}
 
 ?>

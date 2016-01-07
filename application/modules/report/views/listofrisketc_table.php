@@ -1,4 +1,8 @@
- 
+   <style>
+  @page { margin: 0px; size: 960pt 595pt;}
+            img {margin:0px;padding:0px}
+		 
+</style>
 			<div class="table-header">
 				<div class="table-caption">Total Data : <span class="label label-info"><?php echo $total_data;?></span></div>
 			</div>	 
@@ -35,7 +39,7 @@
 								<td> <?=$key['risk_owner'];?> </td> 
 								<td> <?=$key['risk_cause'];?> </td>
 								<td> <?=$key['risk_impact'];?> </td> 
-								<td> <?=$key['Exiting Control'];?> </td>
+								<td> <?=$key['Existing Control'];?> </td>
 								<td> <?=$key['Control Evaluation'];?> </td> 
 								<td> <?=$key['Control Owner'];?> </td>
 								<td> <?=$key['risk_impact_level'];?> </td> 

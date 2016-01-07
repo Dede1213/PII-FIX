@@ -1,4 +1,8 @@
- 
+   <style>
+  @page { margin: 0px; size: 960pt 595pt;}
+            img {margin:0px;padding:0px}
+		 
+</style>
 			<div class="table-header">
 				<div class="table-caption">Total Data : <span class="label label-info"><?php echo $total_data;?></span></div>
 			</div>	 

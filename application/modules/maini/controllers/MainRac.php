@@ -120,6 +120,36 @@ class MainRac extends APP_Controlleri {
 		
 		echo json_encode($resp);
 	}
+
+	public function getSummaryCount2($mode = null) {
+		// MODE : risk riskregister treatment actionplan kri change
+		$sess = $this->loadDefaultAppConfig();
+		
+		$this->load->model('risk/risk');
+		 
+		$defFilter = array(
+			'userid' => $sess['session']['username']
+		);
+		
+		if ($mode == 'riskregister') {
+			$data = $this->risk->getSummaryCount('riskregister', $defFilter);
+		}else {
+			exit;
+		}
+		
+		if ($data) {
+			foreach($data as $row) {
+				$tmp  = $row['numcount'];
+			}
+		}
+		/////////////////
+		$high = $tmp ;
+		$resp = array(
+			array('data' => array(array($high, "Total")))
+		);
+		
+		echo json_encode($resp);
+	}
 	
 	
 	public function getAllRisk() {

@@ -501,7 +501,7 @@ var Dashboard = function() {
         		me.filterDataGridRiskList();
         	});
         	
-             $("datatable_cr").on('click', 'button.button-grid-delete', function(e) {
+             $('#datatable_cr').on('click', 'button.button-grid-delete', function(e) {
                     e.preventDefault();
                     
                     var r = this.parentNode.parentNode.parentNode;
@@ -539,9 +539,9 @@ var Dashboard = function() {
             	$.plot("#chart_rac_to_verify", data, on_options);
             });
             
-            $.getJSON( site_url+"/main/mainrac/getSummaryCount/riskregister", function( data ) {
+            $.getJSON( site_url+"/main/mainrac/getSummaryCount2/riskregister", function( data ) {
             	var series = data;
-            	var tick = [ [0, "Tinggi"], [1, "Sedang"], [2, "Rendah"] ];
+            	var tick = [ [0, "User"], [1, ""], [2, ""] ];
             	
             	on_options["yaxis"]["ticks"] = tick;
             	
@@ -585,6 +585,34 @@ var Dashboard = function() {
             });
             
         },
+         deleteData: function(data) {
+                var mod = MainApp.viewGlobalModal('warning', 'Are You sure you want to delete this data?');
+                mod.find('button.btn-danger').one('click', function(){
+                    mod.modal('hide');
+                    
+                    Metronic.blockUI({ boxed: true });
+                    var url = site_url+'/admin/qna/qnaDeleteData';
+                    $.post(
+                        url,
+                        { 'id':  data.DT_RowId},
+                        function(data) {
+                            Metronic.unblockUI();
+                            if(data.success) {
+                                grid.getDataTable().ajax.reload();
+                                
+                                MainApp.viewGlobalModal('success', 'Success Delete Data');
+                            } else {
+                                MainApp.viewGlobalModal('error123', data.msg);
+                            }
+                            
+                        },
+                        "json"
+                    ).fail(function() {
+                        Metronic.unblockUI();
+                        MainApp.viewGlobalModal('error', 'Error Submitting Data');
+                     });
+                });
+            },
         filterDataGridRiskList: function() {
         	var fby = $('#tab_risk_list-filterBy').val();
         	var fval = $('#tab_risk_list-filterValue').val();
@@ -630,34 +658,7 @@ var Dashboard = function() {
         	gridActionExec.setAjaxParam("filter_value", fval);
         	gridActionExec.getDataTable().ajax.reload();
         },
-        deleteData: function(data) {
-                var mod = MainApp.viewGlobalModal('warning', 'Are You sure you want to delete this data?');
-                mod.find('button.btn-danger').one('click', function(){
-                    mod.modal('hide');
-                    
-                    Metronic.blockUI({ boxed: true });
-                    var url = site_url+'/admin/qna/qnaDeleteData';
-                    $.post(
-                        url,
-                        { 'id':  data.DT_RowId},
-                        function(data) {
-                            Metronic.unblockUI();
-                            if(data.success) {
-                                grid.getDataTable().ajax.reload();
-                                
-                                MainApp.viewGlobalModal('success', 'Success Delete Data');
-                            } else {
-                                MainApp.viewGlobalModal('error123', data.msg);
-                            }
-                            
-                        },
-                        "json"
-                    ).fail(function() {
-                        Metronic.unblockUI();
-                        MainApp.viewGlobalModal('error', 'Error Submitting Data');
-                     });
-                });
-            },
+       
 	};	
 }();
 

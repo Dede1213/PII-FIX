@@ -915,10 +915,16 @@ class Risk extends APP_Model {
 		}
 		
 		if ($mode == 'riskregister') {
-			$sql = "select count(1) as numcount, risk_level 
-					from t_risk
-					where risk_status = 2
-					group by risk_level";
+			$sql = "select count(1) as numcount
+				from m_user a 
+				join m_division b on a.division_id = b.division_id
+				join (
+					select min(risk_status) as risk_status, risk_input_by from t_risk
+					where
+					risk_status = 2
+					group by risk_input_by
+				) b on a.username = b.risk_input_by
+					";
 			$par = array();
 		}
 		
@@ -1003,21 +1009,45 @@ class Risk extends APP_Model {
 		
 	/* RISK ACTION FUNCTION */
 	public function riskSetConfirm($risk_id, $data, $uid, $update_point = 'U') {
-		$this->_logHistory($risk_id, $uid, $update_point);
+		//$this->_logHistory($risk_id, $uid, $update_point);
 		
-		$sql = "update t_risk set 
-				risk_status = 1,
-				periode_id = ?,
-				created_by = ?, 
-				created_date = NOW()
-				where risk_id = ?";
-		$par = array(
-			'pid' => $data['periode_id'],
-			'uid' => $uid,
-			'rid' => $risk_id
-		);
-		$res = $this->db->query($sql, $par);
+		$periode = $data['periode_id'];
+		$sql = "insert into t_risk(risk_code,risk_date,risk_status,periode_id,risk_input_by,risk_input_division,risk_owner,risk_division,risk_library_id,risk_event,risk_description,risk_category,risk_sub_category,risk_2nd_sub_category,risk_cause,risk_impact,existing_control_id,risk_existing_control,risk_evaluation_control,risk_control_owner,risk_level,risk_impact_level,risk_likelihood_key,suggested_risk_treatment,risk_treatment_owner,created_by,created_date,switch_flag)
+				select risk_code,NOW(),1,'$periode',risk_input_by,risk_input_division,risk_owner,risk_division,risk_id,risk_event,risk_description,risk_category,risk_sub_category,risk_2nd_sub_category,risk_cause,risk_impact,existing_control_id,risk_existing_control,risk_evaluation_control,risk_control_owner,risk_level,risk_impact_level,risk_likelihood_key,suggested_risk_treatment,risk_treatment_owner,created_by,created_date,switch_flag from t_risk where risk_id='$risk_id'";
+		
+		$sql2 = "insert into t_risk_control(risk_id,existing_control_id,risk_existing_control,risk_evaluation_control,risk_control_owner,switch_flag)
+				select a.risk_id,b.existing_control_id,b.risk_existing_control,b.risk_evaluation_control,b.risk_control_owner,b.switch_flag from t_risk a,t_risk_control b where a.risk_input_by='$uid' and a.periode_id='$periode' and a.risk_library_id='$risk_id' and b.risk_id='$risk_id' ";
+		
+		$sql3 = "insert into t_risk_action_plan(risk_id,action_plan_status,action_plan,due_date,division)
+				select a.risk_id,b.action_plan_status,b.action_plan,b.due_date,b.division from t_risk a,t_risk_action_plan b where a.risk_input_by='$uid' and a.periode_id='$periode' and a.risk_library_id='$risk_id' and b.risk_id='$risk_id' ";
+		
+		$sql4 = "insert into t_risk_impact(risk_id,impact_id,impact_level,switch_flag)
+				select a.risk_id,b.impact_id,b.impact_level,b.switch_flag from t_risk a,t_risk_impact b where a.risk_input_by='$uid' and a.periode_id='$periode' and a.risk_library_id='$risk_id' and b.risk_id='$risk_id' ";
+		
+		// LOG HISTORY
+		//$sql = "insert into t_risk (risk_status, periode_id, created_by, created_date) values(1, ?, ?, NOW() )";
+
+		//$sql = "update t_risk set 
+		//		risk_status = 1,
+		//		periode_id = ?,
+		//		created_by = ?, 
+		//		created_date = NOW()
+		//		where risk_id = ?";
+		//$par = array(
+		//	'pid' => $data['periode_id'],
+		//	'uid' => $uid,
+			//'rid' => $risk_id
+		//);
+		//$res = $this->db->query($sql, $par);
+
+		$res = $this->db->query($sql);
+		$res2 = $this->db->query($sql2);
+		$res3 = $this->db->query($sql3);
+		$res4 = $this->db->query($sql4);
 		return $res;
+		return $res2;
+		return $res3;
+		return $res4;
 	}
 	
 	public function riskSetDraft($risk_id, $data, $uid, $update_point = 'U') {
@@ -1055,7 +1085,7 @@ class Risk extends APP_Model {
 		$this->db->query($sql, $par);	
 		
 		$sql = "update t_risk set 
-				risk_status = 0,
+				risk_status = 1,
 				created_by = ?, 
 				created_date = NOW()
 				where
@@ -1072,6 +1102,8 @@ class Risk extends APP_Model {
 		$res = $this->db->query($sql, $par);
 		return $res;
 	}
+	
+	
 	
 	public function riskSetSubmitByPeriode($periode_id, $uid) {
 		// LOG HISTORY

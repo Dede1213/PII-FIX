@@ -3,7 +3,7 @@ class Mriskregister extends APP_Model {
 	public function getRiskCategory($parent = 0) {
 		$sql = 'select 
 					cat_id as ref_key, 
-					concat(cat_code, " - ", cat_name) as ref_value
+					concat(cat_code, " - Category ", cat_name) as ref_value
 				from m_risk_category a 
 				where cat_parent = ?';
 		$query = $this->db->query($sql, array('divid' => $parent));
@@ -197,10 +197,12 @@ class Mriskregister extends APP_Model {
 					left join m_division f on a.risk_owner = f.division_id
 					join m_periode on m_periode.periode_id = a.periode_id
 					where 
-					a.periode_id not in (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end)
+					a.periode_id NOT IN (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end)
+					and a.risk_id NOT IN(select t2.risk_library_id from t_risk t2 where t2.periode_id = (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end) and t2.risk_input_by = '".$defFilter['userid']."')
 					and a.risk_input_by = '".$defFilter['userid']."'
 					 
 					";
+					
 		}
 		
 		$sql = $sql.$ex_filter.$ex_or;

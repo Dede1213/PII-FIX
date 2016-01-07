@@ -353,10 +353,11 @@ var RiskList = function() {
 	        			function( data ) {
 	        				Metronic.unblockUI();
 	        				if(data.success) {
-	        					grid.getDataTable().ajax.reload();
-	        					grid2.getDataTable().ajax.reload();
-	        					
-	        					MainApp.viewGlobalModal('success', 'Success Update Risk Status');
+	        					//grid.getDataTable().ajax.reload();
+	        					//grid2.getDataTable().ajax.reload();
+	        					//MainApp.viewGlobalModal('success', 'Success Update Risk Status');
+	        					window.location.href = site_url+'/risk/RiskRegister';
+
 	        				} else {
 	        					MainApp.viewGlobalModal('error', data.msg);
 	        				}
@@ -377,7 +378,6 @@ var RiskList = function() {
 	        			'risk_id' : data.risk_id
 	        		};
 	        		var url = site_url+'/risk/RiskRegister/draftRisk';
-	        		
 	        		Metronic.blockUI({ boxed: true });
 	        		$.post(
 	        			url,
@@ -436,9 +436,7 @@ var RiskList = function() {
 	        },
 	        draftRiskPeriode: function() {
 	        	//g_p_name
-	        	var mod = MainApp.viewGlobalModal('confirm', 'Update Risk Status to <b>Draft</b> for All Risk in Periode : <b>'+g_p_name+'</b>');
-	        	mod.find('button.btn-ok-success').one('click', function(){
-	        		mod.modal('hide');
+	        	
 	        		var url = site_url+'/risk/RiskRegister/draftRiskByPeriode';
 	        		
 	        		Metronic.blockUI({ boxed: true });
@@ -462,7 +460,7 @@ var RiskList = function() {
 	        			Metronic.unblockUI();
 	        			MainApp.viewGlobalModal('error', 'Error Submitting Data');
 	        		 });
-	        	});
+	        	
 	        },
 			filterDataGridRiskList: function() {
         	var fby = $('#filterFormBy').val();

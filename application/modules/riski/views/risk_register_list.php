@@ -26,10 +26,31 @@
 				</li>
 			</ul>
 		</div>
+		<?php 
+		
+		error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
+		$status = $_GET['status'];
+		if ($status != 'false'){ ?>
+
+
 		<?php if ($valid_mode) { ?>
 		<script type="text/javascript">
 			var g_p_name = '<?=$periode['periode_name']?>';
 		</script>
+
+	<?php
+	
+	$username = $this->session->credential['username'];
+	$this->load->database();
+	$sql="select a.risk_id from t_risk a where  a.periode_id IN(select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end) and a.risk_input_by = '$username'
+					and a.risk_status = 1";
+	$query = $this->db->query($sql);
+ if ($query->num_rows() > 0){
+    $status_submit = "DRAFT";
+ }else{
+ 	$status_submit = "SUBMIT";
+ }
+		?>
 		<div class="col-md-12">
 			<div class="portlet box grey-silver">
 			<div class="portlet-title">
@@ -115,13 +136,27 @@
 				<div class="caption">
 					Risk Identified in This Periode ( <?=$periode['periode_name']?> )
 				</div>
-				<div class="actions">
-					<a target="_self" href="<?=$site_url?>/riski/RiskRegister/RiskRegisterInput/periodic" class="btn default green">
+
+				<?php if($status_submit == 'SUBMIT'){ ?>
+ 				<div class="actions">
+					<a target="_self" class="btn default gray">
 					<i class="fa fa-plus"></i>
 					<span class="hidden-480">
-					Tambah Risiko Baru </span>
+					Add New Risk </span>
 					</a>
 				</div>
+			 <?php }else{  ?>
+
+			   <div class="actions">
+					<a target="_self" href="<?=$site_url?>/risk/RiskRegister/RiskRegisterInput/periodic" class="btn default green">
+					<i class="fa fa-plus"></i>
+					<span class="hidden-480">
+					Tambah Risiko</span>
+					</a>
+				</div>
+
+			 	<?php } ?>
+
 			</div>
 			
 			<div class="portlet-body">
@@ -194,11 +229,42 @@
 				</div>
 				<div class="row">
 				<div class="col-md-12 clearfix">
-					<a href="javascript: ;" id="button-save-submit" class="btn default green pull-right" style="margin-right: 20px;">
+					<?php
+	
+	$sql="select a.risk_id from t_risk a where  a.periode_id NOT IN (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end) and a.risk_input_by = '$username'
+					and a.risk_id NOT IN(select t2.risk_library_id from t_risk t2 where t2.periode_id = (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end) and t2.risk_input_by = '$username')";
+	$query = $this->db->query($sql);
+ if ($query->num_rows() > 0){
+	
+
+		?>
+
+		<a href="<?=$site_url?>/risk/RiskRegister?status=false" id="" class="btn default red pull-right" style="margin-right: 20px;">
 					<i class="fa fa-check-circle-o"></i>
 					<span class="hidden-480">
 					Ajukan </span>
 					</a>
+		
+	<?php	
+	
+	}else{
+		?>
+		<a href="javascript: ;" id="button-save-submit" class="btn default green pull-right" style="margin-right: 20px;">
+					<i class="fa fa-check-circle-o"></i>
+					<span class="hidden-480">
+					Ajukan </span>
+					</a>
+	<?php
+	}	
+	?>
+
+	<?php if($status_submit == 'SUBMIT'){ ?>
+ 		<a href="javascript: ;" id="button-save-draft" class="btn default green pull-right" style="margin-right: 10px;">
+					<i class="fa  fa-circle-o"></i>
+					<span class="hidden-480">
+					Change Request </span>
+					</a>
+ <?php } ?>
 					
 					<a href="javascript: ;" id="button-save-draft" class="btn default pull-right" style="margin-right: 10px;">
 					<i class="fa  fa-circle-o"></i>
@@ -267,4 +333,27 @@
 	</div>
 	</div>
 	<?php } ?>
+	<?php }else{ ?>
+		/////////////////////////////////////////////////////////////////////////
+			<!-- Warning RISK REGISTER MODE -->
+	<div class="row">
+	<div class="col-md-12">
+		<div class="note note-warning">
+			
+			<h4 class="block">Warning</h4>
+			<p>
+				Ro
+				 <p>
+					<a class="btn red" target="_self" href="<?=$site_url?>/main">
+					Back to Home </a>
+				</p>
+			</p>
+			
+			
+		</div>
+	</div>
+	</div>
+
+	<?php } ?>
+	
 </div>

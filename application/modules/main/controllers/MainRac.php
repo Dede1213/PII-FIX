@@ -19,6 +19,7 @@ class MainRac extends APP_Controller {
 		<script src="assets/global/plugins/flot/jquery.flot.min.js"></script>
 		<script src="assets/global/plugins/flot/jquery.flot.categories.min.js" type="text/javascript"></script>
 		<script src="assets/scripts/dashboard/main_rac.js"></script>
+		
 		';
 		
 		$data['pageLevelScriptsInit'] = 'Dashboard.init();
@@ -121,7 +122,36 @@ class MainRac extends APP_Controller {
 		echo json_encode($resp);
 	}
 	
-	
+	public function getSummaryCount2($mode = null) {
+		// MODE : risk riskregister treatment actionplan kri change
+		$sess = $this->loadDefaultAppConfig();
+		
+		$this->load->model('risk/risk');
+		 
+		$defFilter = array(
+			'userid' => $sess['session']['username']
+		);
+		
+		if ($mode == 'riskregister') {
+			$data = $this->risk->getSummaryCount('riskregister', $defFilter);
+		}else {
+			exit;
+		}
+		
+		if ($data) {
+			foreach($data as $row) {
+				$tmp  = $row['numcount'];
+			}
+		}
+		/////////////////
+		$high = $tmp ;
+		$resp = array(
+			array('data' => array(array($high, "Total")))
+		);
+		
+		echo json_encode($resp);
+	}
+
 	public function getAllRisk() {
 		$sess = $this->loadDefaultAppConfig();
 		$order_by = $order = $filter_by = $filter_value = null;

@@ -74,20 +74,20 @@
 									<label class="col-md-3 control-label smaller cl-compact">Risk Event <span class="required">* </span>
 									</label>
 									<div class="col-md-9">
-									<textarea class="form-control" rows="3" name="risk_event" data-required="1" placeholder=""></textarea>
+									<textarea class="form-control"   rows="3" name="risk_event" data-required="1" placeholder="" ></textarea>
 									
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-md-3 control-label small cl-compact">Risk Event Description <span class="required">* </span></label>
 									<div class="col-md-9">
-									<textarea class="form-control" rows="3" name="risk_description" placeholder=""></textarea>
+									<textarea class="form-control input-sm popovers" data-container="body" data-placement="bottom" rows="3" name="risk_description" placeholder="" data-content="fill this field with decription of identified risk which explains nature of the risk"></textarea>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-md-3 control-label smaller cl-compact" >Risk Category<span class="required">* </span></label>
 									<div class="col-md-9">
-									<select class="form-control input-sm" name="risk_category" id="sel_risk_category"></select>
+									<select class="form-control input-sm" name="risk_category" id="sel_risk_category" ></select>
 									</div>
 								</div>
 								<div class="form-group">
@@ -120,7 +120,7 @@
 									<label class="col-md-3 control-label smaller cl-compact" >Cause <span class="required">* </span></label>
 									<div class="col-md-9">
 									<textarea rows="3" class="form-control input-sm popovers" 
-									data-container="body" data-trigger="focus" data-placement="bottom" data-content="Fill this field with the description of set of factors that may affects or lead to the occurrence of risk event"
+									data-container="body" data-trigger="focus" data-placement="bottom" data-content="fill this field with the description of set of factors that may affects or lead to the occurrence of risk event"
 									name="risk_cause" placeholder=""></textarea>
 									</div>
 								</div>
@@ -128,7 +128,7 @@
 									<label class="col-md-3 control-label smaller cl-compact" >Impact <span class="required">* </span></label>
 									<div class="col-md-9">
 									<textarea rows="3" class="form-control input-sm popovers" 
-									data-container="body" data-trigger="focus" data-placement="bottom" data-content="Fill this field with the description of set of factors that may affects or lead to the occurrence of risk event"
+									data-container="body" data-trigger="focus" data-placement="bottom" data-content="fill this field with the description of potential direct or indirect loss or cost to IIGF that could have been suffered from a risk event"
 									name="risk_impact" placeholder=""></textarea>
 									</div>
 								</div>
@@ -364,7 +364,7 @@
 					<div class="form-group">
 						<label class="col-md-3 control-label smaller cl-compact" >Existing Control <span class="required">* </span></label>
 						<div class="col-md-9">
-						<textarea class="form-control input-sm" rows="3" name="risk_existing_control" placeholder="">NONE</textarea>
+						<textarea class="form-control input-sm " rows="3" name="risk_existing_control" placeholder="">NONE</textarea>
 						<button id="button_clear_control" type="button" class="hide btn red btn-xs" style="margin-top: 5px;"><i class="fa fa-minus-circle font-white"></i> Clear Existing Control</button>
 						</div>
 					</div>

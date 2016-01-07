@@ -524,13 +524,13 @@ var Dashboard = function() {
             	$.plot("#chart_rac_to_verify", data, on_options);
             });
             
-            $.getJSON( site_url+"/main/mainrac/getSummaryCount/riskregister", function( data ) {
-            	var series = data;
-            	var tick = [ [0, "Tinggi"], [1, "Sedang"], [2, "Rendah"] ];
-            	
-            	on_options["yaxis"]["ticks"] = tick;
-            	
-            	$.plot("#chart_rr_to_verify", data, on_options);
+            $.getJSON( site_url+"/main/mainrac/getSummaryCount2/riskregister", function( data ) {
+                var series = data;
+                var tick = [ [0, "User"], [1, ""], [2, ""] ];
+                
+                on_options["yaxis"]["ticks"] = tick;
+                
+                $.plot("#chart_rr_to_verify", data, on_options);
             });
             
             $.getJSON( site_url+"/main/mainrac/getSummaryCount/treatment", function( data ) {

@@ -4,13 +4,15 @@
 		 
 </style>
 			<div class="table-header">
-				<div class="table-caption">Total Data : <span class="label label-info"><?php echo $total_data;?></span></div>
-			</div>	 
+				<div class="table-caption">IIGF Corporate Risk Register List Risk Identified during this periode Periode <?=$cekperiode[0]['periode_name'];?> (<?=date('d M Y',strtotime($cekperiode[0]['periode_start']));?>) s/d (<?=date('d M Y',strtotime($cekperiode[0]['periode_end']));?>)</div>
+			</div>	 	 
 			<table class="responsive table table-striped table-bordered table-hover"  border = "1">
 				<thead>
 					  <tr>
-							<th>  Category Name </th>  
-							<th>  Risk Code </th>   
+					  
+							<th>  No </th>  
+							<th>  2nd sub category e </th>  
+							<th>  Risk ID </th>   
 							<th>  Risk Event </th>
 							<th>  Risk Description</th>
 							<th>  Risk Owner </th>
@@ -20,9 +22,9 @@
 							<th>  Control Evaluation</th>
 							<th>  Control Owner</th>
 							<th>  Risk Impact Level </th>
-							<th>  Risk Likelihood Key </th>
+							<th>  Risk Likelihood level </th>
 							<th> Risk Level </th>
-							<th> Suggested Risk Treatment</th>
+							<th> Implementation</th>
 							<th> Action Plan </th>
 							<th> Action Plan Owner</th>
 							<th> Due Date</th>
@@ -30,8 +32,10 @@
 				</thead> 
 				<tbody>
 						<?php if($datanya):?>
+						<?php $i = 1;?>
 						 <?php foreach($datanya as $key):?>
 							<tr>												  
+								<td> <?=$i;?> </td> 		  
 								<td> <?=$key['cat_name'];?> </td> 
 								<td> <?=$key['risk_code'];?> </td>
 								<td> <?=$key['risk_event'];?> </td> 
@@ -50,6 +54,7 @@
 								<td> <?=$key['Action Plan Owner'];?> </td>			
 								<td> <?=$key['Due Date'];?> </td>								
 							</tr>
+							<?php $i++;?>
 					 <?php endforeach;?> 
 					<?php else:?>
 						<tr>
@@ -59,6 +64,9 @@
 				</tbody>
 				
 			</table>
+			<div class="table-footer">
+				<div class="table-caption">Total Data : <span class="label label-info"><?php echo $total_data;?></span></div>
+			</div>
 			 
 	 
 

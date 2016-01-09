@@ -1,17 +1,17 @@
  
 			<div class="table-header">
-				<div class="table-caption">Total Data : <span class="label label-info"><?php echo $total_data;?></span></div>
+				<div class="table-caption">Top Ten Risk </div>
 			</div>	 
 			<table class="responsive table table-striped table-bordered table-hover"  border = "1">
 				<thead>
 					  <tr>
 							 <th> No </th>
-							<th>  Risk Code </th>   
+							<th>  Risk ID </th>   
 							<th>  Risk Event </th>
 							<th>  Risk Description</th>
 							<th>  Risk Owner </th>  
 							<th>  Risk Impact Level </th>
-							<th>  Risk Likelihood Key </th>
+							<th>  Risk Likelihood Level </th>
 							<th> Risk Level </th>
 							 
 					  </tr>
@@ -41,6 +41,9 @@
 				</tbody>
 				
 			</table>
+			<div class="table-footer">
+				<div class="table-caption">Total Data : <span class="label label-info"><?php echo $total_data;?></span></div>
+			</div>	
 			 
 	 
 

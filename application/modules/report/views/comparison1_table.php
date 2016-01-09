@@ -1,20 +1,20 @@
  
 			<div class="table-header">
-				<div class="table-caption">Total Data : <span class="label label-info"><?php echo $total_data;?></span></div>
-			</div>	 
+				<div class="table-caption">Comparison Risk Between Periode  <?=$cekperiode1[0]['periode_name'];?>  s/d <?=$cekperiode2[0]['periode_name'];?></div>
+			</div>	
 			<table class="responsive table table-striped table-bordered table-hover"  border = "1">
 				<thead>
 					  <tr>
 							 <th> No </th>
-							<th>  Risk Code </th>   
+							<th>  Risk ID </th>   
 							<th>  Risk Event </th>
 							<th>  Risk Description</th>
 							<th>  Risk Owner </th>  
-							<th>  Current Impact  </th>
-							<th>  Current Likelihood </th>
+							<th>  Current Impact Level</th>
+							<th>  Current Likelihood Level</th>
 							<th> Current Risk Level </th>
-							 <th> Previous Impact</th>
-							  <th> Previous Likelihood</th>
+							 <th> Previous Impact Level</th>
+							  <th> Previous Likelihood Level</th>
 							   <th> Previous Risk Level</th>
 					  </tr>
 				</thead> 
@@ -46,6 +46,9 @@
 				</tbody>
 				
 			</table>
+			<div class="table-header">
+				<div class="table-caption">Total Data : <span class="label label-info"><?php echo $total_data;?></span></div>
+			</div>	
 			 
 	 
 

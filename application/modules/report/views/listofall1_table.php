@@ -1,7 +1,7 @@
  
-			<div class="table-header">
-				<div class="table-caption">Total Data : <span class="label label-info"><?php echo $total_data;?></span></div>
-			</div>	 
+				<div class="table-header">
+				<div class="table-caption">List of All Action Plan Execution Periode <?=$cekperiode[0]['periode_name'];?> (<?=date('d M Y',strtotime($cekperiode[0]['periode_start']));?>) s/d (<?=date('d M Y',strtotime($cekperiode[0]['periode_end']));?>)</div>
+			</div>
 			<table class="responsive table table-striped table-bordered table-hover"  border = "1">
 				<thead>
 					  <tr>
@@ -43,6 +43,9 @@
 				</tbody>
 				
 			</table>
+			<div class="table-footer">
+				<div class="table-caption">Total Data : <span class="label label-info"><?php echo $total_data;?></span></div>
+			</div>	
 			 
 	 
 

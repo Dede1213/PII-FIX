@@ -1,7 +1,7 @@
  
 			<div class="table-header">
-				<div class="table-caption">Total Data : <span class="label label-info"><?php echo $total_data;?></span></div>
-			</div>	 
+				<div class="table-caption">Top Ten 2nd Sub Category </div>
+			</div>
 			<table class="responsive table table-striped table-bordered table-hover"  border = "1">
 				<thead>
 					  <tr>
@@ -37,6 +37,9 @@
 				</tbody>
 				
 			</table>
+			<div class="table-footer">
+				<div class="table-caption">Total Data : <span class="label label-info"><?php echo $total_data;?></span></div>
+			</div>	
 			 
 	 
 

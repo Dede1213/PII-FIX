@@ -458,5 +458,23 @@
 			}		
 			
 		}
+		
+		function cekperiode($periode_ID){
+			 
+			$this->db->where("periode_ID",$periode_ID);
+			
+			$query = $this->db->get("m_periode");
+			
+			if ($query->num_rows())
+			{
+				return $query->result_array();
+			}
+			else
+			{
+				return FALSE;
+			}		
+			
+			
+		}
 	}
 ?>

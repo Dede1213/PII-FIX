@@ -940,7 +940,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$this->load->library('parser');
 			  
 			$data['datanya'] = $this->risk->listofrisk($this->input->post());
-			
+			 
+			$data['cekperiode'] = $this->risk->cekperiode($this->input->post('periode'));
+			 
 			$data['total_data'] = count($data['datanya']);
 			 
 			$stringData = $this->parser->parse('listofrisk_table', $data, true);
@@ -969,7 +971,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			 
 			$data['datanya'] = $this->risk->listofrisk($this->input->post());
 			
-			$data['total_data'] = count($data['datanya']);
+			$data['cekperiode'] = $this->risk->cekperiode($this->input->post('periode'));
+			 
+			$data['total_data'] = count($data['datanya']); 
 			 
 			$this->load->view('listofrisk_table',$data);
 			// Get output html
@@ -1010,9 +1014,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			  
 			$data['datanya'] = $this->risk->listofrisketc($this->input->post());
 			
+			$data['cekperiode'] = $this->risk->cekperiode($this->input->post('periode'));
+			
 			$data['total_data'] = count($data['datanya']);
 			 
-			$stringData = $this->parser->parse('listofrisk_table', $data, true);
+			$stringData = $this->parser->parse('listofrisketc_table', $data, true);
 			 
 			header("Pragma: public");
 			header("Expires: 0");
@@ -1037,6 +1043,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$paper_size='a4';
 			 
 			$data['datanya'] = $this->risk->listofrisketc($this->input->post());
+			
+			$data['cekperiode'] = $this->risk->cekperiode($this->input->post('periode'));
 			
 			$data['total_data'] = count($data['datanya']);
 			 
@@ -1081,6 +1089,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			  
 			$data['datanya'] = $this->risk->risktreatmentreport($this->input->post());
 			
+			$data['cekperiode'] = $this->risk->cekperiode($this->input->post('periode'));
+			
 			$data['total_data'] = count($data['datanya']);
 			 
 			$stringData = $this->parser->parse('risktreatmentreport_table', $data, true);
@@ -1108,6 +1118,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$paper_size='a4';
 			 
 			$data['datanya'] = $this->risk->risktreatmentreport($this->input->post());
+			
+			$data['cekperiode'] = $this->risk->cekperiode($this->input->post('periode'));
 			  
 			$data['total_data'] = count($data['datanya']);
 			 
@@ -1150,6 +1162,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			  
 			$data['datanya'] = $this->risk->listofall($this->input->post());
 			
+			$data['postnya']=$this->input->post();
+			
+			$data['cekperiode'] = $this->risk->cekperiode($this->input->post('periode'));
+			
 			$data['total_data'] = count($data['datanya']);
 			 
 			$stringData = $this->parser->parse('listofall_table', $data, true);
@@ -1177,6 +1193,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$paper_size='a4';
 			 
 			$data['datanya'] = $this->risk->listofall($this->input->post());
+			
+			$data['postnya']=$this->input->post();
+			
+			$data['cekperiode'] = $this->risk->cekperiode($this->input->post('periode'));
 			  
 			$data['total_data'] = count($data['datanya']);
 			 
@@ -1219,6 +1239,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			  
 			$data['datanya'] = $this->risk->listofall1($this->input->post());
 			
+			$data['cekperiode'] = $this->risk->cekperiode($this->input->post('periode'));
+			
 			$data['total_data'] = count($data['datanya']);
 			 
 			$stringData = $this->parser->parse('listofall1_table', $data, true);
@@ -1246,6 +1268,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$paper_size='a4';
 			 
 			$data['datanya'] = $this->risk->listofall1($this->input->post());
+			
+			$data['cekperiode'] = $this->risk->cekperiode($this->input->post('periode'));
 			  
 			$data['total_data'] = count($data['datanya']);
 			 
@@ -1288,6 +1312,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			  
 			$data['datanya'] = $this->risk->comparison1($this->input->post());
 			
+			$data['cekperiode1'] = $this->risk->cekperiode($this->input->post('periode_prev'));
+			
+			$data['cekperiode2'] = $this->risk->cekperiode($this->input->post('periode_cur'));
+			
 			$data['total_data'] = count($data['datanya']);
 			 
 			$stringData = $this->parser->parse('comparison1_table', $data, true);
@@ -1315,6 +1343,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$paper_size='a4';
 			 
 			$data['datanya'] = $this->risk->comparison1($this->input->post());
+			
+			$data['cekperiode1'] = $this->risk->cekperiode($this->input->post('periode_prev'));
+			
+			$data['cekperiode2'] = $this->risk->cekperiode($this->input->post('periode_cur'));
 			  
 			$data['total_data'] = count($data['datanya']);
 			 
@@ -1357,6 +1389,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			  
 			$data['datanya'] = $this->risk->comparison2($this->input->post());
 			
+			$data['cekperiode1'] = $this->risk->cekperiode($this->input->post('periode_prev'));
+			
+			$data['cekperiode2'] = $this->risk->cekperiode($this->input->post('periode_cur'));
+			
 			$data['total_data'] = count($data['datanya']);
 			 
 			$stringData = $this->parser->parse('comparison2_table', $data, true);
@@ -1384,6 +1420,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$paper_size='a4';
 			 
 			$data['datanya'] = $this->risk->comparison2($this->input->post());
+			
+			$data['cekperiode1'] = $this->risk->cekperiode($this->input->post('periode_prev'));
+			
+			$data['cekperiode2'] = $this->risk->cekperiode($this->input->post('periode_cur'));
 			  
 			$data['total_data'] = count($data['datanya']);
 			 
@@ -1564,6 +1604,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			  
 			$data['datanya'] = $this->risk->KRI_monitoring($this->input->post());
 			
+			$data['cekperiode'] = $this->risk->cekperiode($this->input->post('periode'));
+			
 			$data['total_data'] = count($data['datanya']);
 			 
 			$stringData = $this->parser->parse('KRI_monitoring_table', $data, true);
@@ -1591,6 +1633,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$paper_size='a4';
 			 
 			$data['datanya'] = $this->risk->KRI_monitoring($this->input->post());
+			
+			$data['cekperiode'] = $this->risk->cekperiode($this->input->post('periode'));
 			  
 			$data['total_data'] = count($data['datanya']);
 			 
@@ -1634,6 +1678,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			  
 			$data['datanya'] = $this->risk->getcomparison1($this->input->post());
 			
+			$data['cekperiode1'] = $this->risk->cekperiode($this->input->post('periode_prev'));
+			
+			$data['cekperiode2'] = $this->risk->cekperiode($this->input->post('periode_cur'));
+			
 			$data['total_data'] = count($data['datanya']);
 			 
 			$stringData = $this->parser->parse('getcomparison1_table', $data, true);
@@ -1661,6 +1709,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$paper_size='a4';
 			 
 			$data['datanya'] = $this->risk->getcomparison1($this->input->post());
+			
+			$data['cekperiode1'] = $this->risk->cekperiode($this->input->post('periode_prev'));
+			
+			$data['cekperiode2'] = $this->risk->cekperiode($this->input->post('periode_cur'));
 			  
 			$data['total_data'] = count($data['datanya']);
 			 
@@ -1703,6 +1755,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			  
 			$data['datanya'] = $this->risk->getcomparison2($this->input->post());
 			
+			$data['cekperiode1'] = $this->risk->cekperiode($this->input->post('periode_prev'));
+			
+			$data['cekperiode2'] = $this->risk->cekperiode($this->input->post('periode_cur'));
+			
 			$data['total_data'] = count($data['datanya']);
 			 
 			$stringData = $this->parser->parse('getcomparison2_table', $data, true);
@@ -1730,6 +1786,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$paper_size='a4';
 			 
 			$data['datanya'] = $this->risk->getcomparison2($this->input->post());
+			
+			$data['cekperiode1'] = $this->risk->cekperiode($this->input->post('periode_prev'));
+			
+			$data['cekperiode2'] = $this->risk->cekperiode($this->input->post('periode_cur'));
 			  
 			$data['total_data'] = count($data['datanya']);
 			 

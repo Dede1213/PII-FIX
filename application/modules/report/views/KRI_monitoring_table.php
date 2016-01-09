@@ -1,16 +1,16 @@
  
 			<div class="table-header">
-				<div class="table-caption">Total Data : <span class="label label-info"><?php echo $total_data;?></span></div>
+				<div class="table-caption">"KRI Monitoring" Periode <?=$cekperiode[0]['periode_name'];?> (<?=date('d M Y',strtotime($cekperiode[0]['periode_start']));?>) s/d (<?=date('d M Y',strtotime($cekperiode[0]['periode_end']));?>)</div>
 			</div>	 
 			<table class="responsive table table-striped table-bordered table-hover"  border = "1">
 				<thead>
 					  <tr>
 						<th> No </th>
-						<th>  Risk Code </th>   
+						<th>  Risk ID </th>   
 						<th>  Risk Event </th>
 						<th> Risk Level </th>
-						<th>  Suggested Risk Treatment</th>
-						<th>  KRI Code </th>  
+						<th>  Implementation</th>
+						<th>  KRI ID </th>  
 						<th>  Key Risk Indicator </th>
 						<th>  KRI  Owner </th>
 						<th> Treshold </th>
@@ -49,6 +49,9 @@
 				</tbody>
 				
 			</table>
+			<div class="table-footer">
+				<div class="table-caption">Total Data : <span class="label label-info"><?php echo $total_data;?></span></div>
+			</div>	 
 			 
 	 
 

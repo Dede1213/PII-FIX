@@ -1,6 +1,13 @@
- 
+  
 			<div class="table-header">
-				<div class="table-caption">Comparison 2nd Sub Category Between Periode  <?=$cekperiode1[0]['periode_name'];?>  s/d <?=$cekperiode2[0]['periode_name'];?></div>
+				<center>
+					<div class="table-caption">
+						<font = "3"><b>Comparison 2nd Sub Category Between     </b></font>
+					</div>
+					<div class="table-caption">
+						<font = "3"><b>   Periode <?=$cekperiode1[0]['periode_name'];?>  s/d <?=$cekperiode2[0]['periode_name'];?></b></font>
+					</div>
+					</center>  
 			</div>	
 			<table class="responsive table table-striped table-bordered table-hover"  border = "1">
 				<thead>

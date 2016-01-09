@@ -1,7 +1,15 @@
  
+		 
 			<div class="table-header">
-				<div class="table-caption">List of All Action Plan Execution with status <?=$postnya['status'];?>  Periode <?=$cekperiode[0]['periode_name'];?> (<?=date('d M Y',strtotime($cekperiode[0]['periode_start']));?>) s/d (<?=date('d M Y',strtotime($cekperiode[0]['periode_end']));?>)</div>
-			</div>	
+					<center>
+						<div class="table-caption">
+							<font = "3"><b>List of All Action Plan Execution with status <?=$postnya['status'];?> </b></font> 
+						</div>
+						<div class="table-caption">
+							<font = "3"><b> Periode <?=$cekperiode[0]['periode_name'];?> (<?=date('d M Y',strtotime($cekperiode[0]['periode_start']));?>) s/d (<?=date('d M Y',strtotime($cekperiode[0]['periode_end']));?>)  </b></font> 
+						</div>						 
+					</center>
+			 </div>
 			<table class="responsive table table-striped table-bordered table-hover"  border = "1">
 				<thead>
 					  <tr>

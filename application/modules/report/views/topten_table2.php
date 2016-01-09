@@ -1,7 +1,8 @@
  
+		 
 			<div class="table-header">
-				<div class="table-caption">Top Ten 2nd Sub Category </div>
-			</div>
+				<center><div class="table-caption"><font = "3"><b> Top Ten 2nd Sub Category </b></font></center> </div>
+			</div>	
 			<table class="responsive table table-striped table-bordered table-hover"  border = "1">
 				<thead>
 					  <tr>

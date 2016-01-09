@@ -3,13 +3,24 @@
             img {margin:0px;padding:0px}
 		 
 </style>
-			<div class="table-header">
-				<div class="table-caption">IIGF Corporate Risk Register List of All Risk Periode <?=$cekperiode[0]['periode_name'];?> (<?=date('d M Y',strtotime($cekperiode[0]['periode_start']));?>) s/d (<?=date('d M Y',strtotime($cekperiode[0]['periode_end']));?>)</div>
-			</div>	 
+				 <center> <div class="table-header">
+						<div class="table-caption">
+							<font = "3"><b>IIGF Corporate Risk Register <b></font> 
+						</div>
+						<div class="table-caption">
+							<font = "3"><b> List of All Risk  <b></font> 
+						</div>
+						<div class="table-caption">
+							<font = "3"><b>  Periode <?=$cekperiode[0]['periode_name'];?> (<?=date('d M Y',strtotime($cekperiode[0]['periode_start']));?>) s/d (<?=date('d M Y',strtotime($cekperiode[0]['periode_end']));?>)<b></font> 
+						</div>
+					 </div>
+				</center>
+				 
 			<table class="responsive table table-striped table-bordered table-hover"  border = "1">
+			
 				<thead>
 					  <tr>
-							<th>  No </th> 
+							<th >  No </th> 
 							<th>  Category Name </th>  
 							<th>  Risk ID </th>   
 							<th>  Risk Event </th>
@@ -63,7 +74,7 @@
 				</tbody>
 				
 			</table>
-			<div class="table-footer">
+			<div  style = "align:left">
 				<div class="table-caption">Total Data : <span class="label label-info"><?php echo $total_data;?></span></div>
 			</div>	 
 			 

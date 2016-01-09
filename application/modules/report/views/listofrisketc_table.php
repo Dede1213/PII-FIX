@@ -3,9 +3,19 @@
             img {margin:0px;padding:0px}
 		 
 </style>
-			<div class="table-header">
-				<div class="table-caption">IIGF Corporate Risk Register List Risk Identified during this periode Periode <?=$cekperiode[0]['periode_name'];?> (<?=date('d M Y',strtotime($cekperiode[0]['periode_start']));?>) s/d (<?=date('d M Y',strtotime($cekperiode[0]['periode_end']));?>)</div>
-			</div>	 	 
+			  	
+			 <center> <div class="table-header">
+						<div class="table-caption">
+							<font = "3"><b>IIGF Corporate Risk Register <b></font> 
+						</div>
+						<div class="table-caption">
+							<font = "3"><b> List of Risk Identified during this periode  <b></font> 
+						</div>
+						<div class="table-caption">
+							<font = "3"><b>  Periode <?=$cekperiode[0]['periode_name'];?> (<?=date('d M Y',strtotime($cekperiode[0]['periode_start']));?>) s/d (<?=date('d M Y',strtotime($cekperiode[0]['periode_end']));?>)<b></font> 
+						</div>
+					 </div>
+				</center>
 			<table class="responsive table table-striped table-bordered table-hover"  border = "1">
 				<thead>
 					  <tr>

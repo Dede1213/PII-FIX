@@ -3,25 +3,28 @@
             img {margin:0px;padding:0px}
 		 
 </style>
-				 <center> <div class="table-header">
+			 
+			<div class="table-header">
+					<center>
 						<div class="table-caption">
-							<font = "3"><b>IIGF Corporate Risk Register <b></font> 
+							<font = "3"><b>IIGF Corporate Risk Register </b></font> 
 						</div>
 						<div class="table-caption">
-							<font = "3"><b> List of All Risk  <b></font> 
+							<font = "3"><b>List of All Risk </b></font> 
 						</div>
 						<div class="table-caption">
-							<font = "3"><b>  Periode <?=$cekperiode[0]['periode_name'];?> (<?=date('d M Y',strtotime($cekperiode[0]['periode_start']));?>) s/d (<?=date('d M Y',strtotime($cekperiode[0]['periode_end']));?>)<b></font> 
+							<font = "3"><b>  Periode <?=$cekperiode[0]['periode_name'];?> (<?=date('d M Y',strtotime($cekperiode[0]['periode_start']));?>) s/d (<?=date('d M Y',strtotime($cekperiode[0]['periode_end']));?>)</b></font> 
 						</div>
-					 </div>
-				</center>
+					</center>
+			 </div>
+				
 				 
 			<table class="responsive table table-striped table-bordered table-hover"  border = "1">
 			
 				<thead>
 					  <tr>
 							<th >  No </th> 
-							<th>  Category Name </th>  
+							<th> 2nd Sub Category </th>  
 							<th>  Risk ID </th>   
 							<th>  Risk Event </th>
 							<th>  Risk Description</th>
@@ -74,9 +77,9 @@
 				</tbody>
 				
 			</table>
-			<div  style = "align:left">
+			<div class="table-footer">
 				<div class="table-caption">Total Data : <span class="label label-info"><?php echo $total_data;?></span></div>
-			</div>	 
+			</div>
 			 
 	 
 

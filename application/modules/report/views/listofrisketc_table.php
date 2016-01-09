@@ -23,7 +23,7 @@
 					  <tr>
 					  
 							<th>  No </th>  
-							<th>  2nd sub category </th>  
+							<th>  2nd Sub Category </th>  
 							<th>  Risk ID </th>   
 							<th>  Risk Event </th>
 							<th>  Risk Description</th>

@@ -219,11 +219,12 @@
 		function listofall($data=null){
 			$querynya = "
 			SELECT t_risk_action_plan.id,t_risk_action_plan.action_plan,t_risk_action_plan.division,t_risk_action_plan.due_date,
-					t_risk.risk_code, t_risk.risk_event, t_risk.risk_owner, t_risk.risk_level, t_risk_action_plan.execution_status
+					t_risk.risk_code, t_risk.risk_event, t_risk.risk_owner, t_risk.risk_level, t_risk_action_plan.execution_status,t_risk.risk_level_after_mitigation 
 					FROM t_risk_action_plan
 					JOIN t_risk ON t_risk_action_plan.risk_id=t_risk.risk_id JOIN t_report_risk ON t_risk_action_plan.risk_id = t_report_risk.risk_id
 					WHERE t_risk_action_plan.action_plan_status = 7 AND t_report_risk.periode_id='".$data['periode']."' AND t_risk_action_plan.execution_status = '".$data['status']."'
 			";
+			 
 			 
 			$query = $this->db->query($querynya);
 			
@@ -242,7 +243,7 @@
 			$querynya = "
 			SELECT t_risk_action_plan.`id`,t_risk_action_plan.`action_plan`,t_risk_action_plan.`division`,t_risk_action_plan.`due_date`,
 					t_risk.`risk_code`, t_risk.`risk_event`, t_risk.`risk_owner`,
-					t_risk.`risk_level`, (SELECT IFNULL(t_risk_action_plan.`execution_status`, 'Have Not been Updated')) AS 'Execution Status'
+					t_risk.`risk_level`, (select ifnull(t_risk_action_plan.`execution_status`, 'Have Not been Updated')) as 'Execution Status', t_risk.risk_level_after_mitigation
 					FROM t_risk_action_plan
 					JOIN t_risk ON t_risk_action_plan.risk_id=t_risk.risk_id JOIN t_report_risk ON t_risk_action_plan.risk_id = t_report_risk.risk_id
                     			WHERE t_report_risk.periode_id='".$data['periode']."'
@@ -330,12 +331,15 @@
 		
 		function KRI_monitoring($data=null){
 			$querynya ="			
+			
 			SELECT r1.risk_code, r1.risk_event, r1.risk_level, r1.suggested_risk_treatment, 
 					t1.kri_code, t1.key_risk_indicator, t1.kri_owner, t1.treshold,
           (SELECT GROUP_CONCAT(t2.operator,' ', t2.value_1, ' = ', t2.result) FROM t_kri_treshold t2 WHERE t2.kri_id=t1.id) AS 'threshold value',
-          t1.timing_pelaporan, t1.owner_report, t1.kri_warning 
+          t1.timing_pelaporan, t1.owner_report, t1.kri_warning, r1.risk_level_after_kri
 					FROM t_kri  t1 JOIN t_risk r1 ON t1.risk_id=r1.risk_id JOIN t_report_risk r2 ON t1.risk_id = r2.risk_id
-          WHERE r2.periode_id='".$data['periode']."' ";
+         WHERE r2.periode_id='".$data['periode']."' ";
+		  
+			 
 			 
 			$query = $this->db->query($querynya);
 			

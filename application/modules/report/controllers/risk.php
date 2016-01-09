@@ -1705,7 +1705,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$this->load->library('parser');
 			$this->load->library('dompdf_gen');
 			
-			$orientation = "landscape";
+			$orientation = "potrait";
 			$paper_size='a4';
 			 
 			$data['datanya'] = $this->risk->getcomparison1($this->input->post());
@@ -1782,7 +1782,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$this->load->library('parser');
 			$this->load->library('dompdf_gen');
 			
-			$orientation = "landscape";
+			$orientation = "potrait";
 			$paper_size='a4';
 			 
 			$data['datanya'] = $this->risk->getcomparison2($this->input->post());

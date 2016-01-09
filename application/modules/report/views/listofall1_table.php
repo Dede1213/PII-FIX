@@ -16,7 +16,7 @@
 							<th> No</th>  
 							<th> AP.ID</th>  
 							<th>  Action Plan </th>   
-							<th> Division </th>
+							<th> Action Plan Owner </th>
 							<th>  Due Date</th>
 							<th>  Risk Code </th>
 							<th>  Risk Event </th>

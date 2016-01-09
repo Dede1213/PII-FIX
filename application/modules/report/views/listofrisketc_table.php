@@ -4,24 +4,26 @@
 		 
 </style>
 			  	
-			 <center> <div class="table-header">
+			  <div class="table-header">
+					<center>
 						<div class="table-caption">
-							<font = "3"><b>IIGF Corporate Risk Register <b></font> 
+							<font = "3"><b>IIGF Corporate Risk Register </b></font> 
 						</div>
 						<div class="table-caption">
-							<font = "3"><b> List of Risk Identified during this periode  <b></font> 
+							<font = "3"><b> List of Risk Identified during this periode  </b></font> 
 						</div>
 						<div class="table-caption">
-							<font = "3"><b>  Periode <?=$cekperiode[0]['periode_name'];?> (<?=date('d M Y',strtotime($cekperiode[0]['periode_start']));?>) s/d (<?=date('d M Y',strtotime($cekperiode[0]['periode_end']));?>)<b></font> 
+							<font = "3"><b>  Periode <?=$cekperiode[0]['periode_name'];?> (<?=date('d M Y',strtotime($cekperiode[0]['periode_start']));?>) s/d (<?=date('d M Y',strtotime($cekperiode[0]['periode_end']));?>)</b></font> 
 						</div>
-					 </div>
-				</center>
+					</center>
+			 </div>
+				
 			<table class="responsive table table-striped table-bordered table-hover"  border = "1">
 				<thead>
 					  <tr>
 					  
 							<th>  No </th>  
-							<th>  2nd sub category e </th>  
+							<th>  2nd sub category </th>  
 							<th>  Risk ID </th>   
 							<th>  Risk Event </th>
 							<th>  Risk Description</th>

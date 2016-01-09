@@ -1,13 +1,14 @@
  
-		  
+		   
+			 	 
 			<div class="table-header">
 					<center>
 						<div class="table-caption">
-							<font = "3"><b>"Risk Treatment Report" <b></font> 
+							<font = "3"><b>Risk Treatment Report </b></font> 
 						</div>
-						 
+					 
 						<div class="table-caption">
-							<font = "3"><b>  Periode <?=$cekperiode[0]['periode_name'];?> (<?=date('d M Y',strtotime($cekperiode[0]['periode_start']));?>) s/d (<?=date('d M Y',strtotime($cekperiode[0]['periode_end']));?>)<b></font> 
+							<font = "3"><b>  Periode <?=$cekperiode[0]['periode_name'];?> (<?=date('d M Y',strtotime($cekperiode[0]['periode_start']));?>) s/d (<?=date('d M Y',strtotime($cekperiode[0]['periode_end']));?>)</b></font> 
 						</div>
 					</center>
 			 </div>

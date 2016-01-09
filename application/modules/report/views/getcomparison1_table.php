@@ -10,7 +10,7 @@
 						</div>
 						 
 					</center>
-			 </div>			
+			 </div>		
 			<table class="responsive table table-striped table-bordered table-hover"  border = "1">
 				<thead>
 					  <tr>
@@ -42,6 +42,7 @@
 				</tbody>
 				
 			</table>
+			 
 			 
 	 
 

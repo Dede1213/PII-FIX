@@ -1,7 +1,16 @@
  
+		 
 			<div class="table-header">
-				<div class="table-caption">"KRI Monitoring" Periode <?=$cekperiode[0]['periode_name'];?> (<?=date('d M Y',strtotime($cekperiode[0]['periode_start']));?>) s/d (<?=date('d M Y',strtotime($cekperiode[0]['periode_end']));?>)</div>
-			</div>	 
+					<center>
+						<div class="table-caption">
+							<font = "3"><b>KRI Monitoring </b></font> 
+						</div>
+						<div class="table-caption">
+							<font = "3"><b>  Periode <?=$cekperiode[0]['periode_name'];?> (<?=date('d M Y',strtotime($cekperiode[0]['periode_start']));?>) s/d (<?=date('d M Y',strtotime($cekperiode[0]['periode_end']));?>)</b></font> 
+						</div>
+						 
+					</center>
+			 </div>		
 			<table class="responsive table table-striped table-bordered table-hover"  border = "1">
 				<thead>
 					  <tr>
@@ -18,6 +27,7 @@
 						<th> Timing  Pelaporan</th>
 						<th> Owner Report </th>
 						<th> KRI Warning</th>
+						<th> Risk Level After KRI</th>
 					  </tr>
 				</thead> 
 				<tbody>
@@ -38,6 +48,7 @@
 								<td> <?=$key['timing_pelaporan'];?> </td>
 								<td> <?=$key['owner_report'];?> </td>
 								<td> <?=$key['kri_warning'];?> </td>
+								<td> <?=$key['risk_level_after_kri'];?> </td>
 							</tr>
 							 <?php $i++;?>
 					 <?php endforeach;?> 

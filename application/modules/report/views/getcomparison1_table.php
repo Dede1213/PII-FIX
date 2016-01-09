@@ -1,7 +1,16 @@
  
+		 
 			<div class="table-header">
-				<div class="table-caption">"Comparison of outcome by Risk" Periode <?=$cekperiode1[0]['periode_name'];?>  s/d  <?=$cekperiode2[0]['periode_name'];?></div>
-			</div>	  
+					<center>
+						<div class="table-caption">
+							<font = "3"><b>Comparison of outcome by Risk </b></font> 
+						</div>
+						<div class="table-caption">
+							<font = "3"><b> Periode <?=$cekperiode1[0]['periode_name'];?>  s/d  <?=$cekperiode2[0]['periode_name'];?></b></font> 
+						</div>
+						 
+					</center>
+			 </div>			
 			<table class="responsive table table-striped table-bordered table-hover"  border = "1">
 				<thead>
 					  <tr>

@@ -38,9 +38,7 @@
 				</tbody>
 				
 			</table>
-			<div class="table-footer">
-				<div class="table-caption">Total Data : <span class="label label-info"><?php echo $total_data;?></span></div>
-			</div>	
+			 
 			 
 	 
 

@@ -505,7 +505,10 @@ var Dashboard = function() {
                     e.preventDefault();
                     
                     var r = this.parentNode.parentNode.parentNode;
-                    var data = grid.getDataTable().row(r).data();
+                    //alert(r);exit;
+                    var data = gridRiskList.getDataTable().row(r).data();
+
+                    //alert(data);
                     
                     me.deleteData(data);
                 });
@@ -586,6 +589,7 @@ var Dashboard = function() {
             
         },
          deleteData: function(data) {
+            
                 var mod = MainApp.viewGlobalModal('warning', 'Are You sure you want to delete this data?');
                 mod.find('button.btn-danger').one('click', function(){
                     mod.modal('hide');
@@ -598,7 +602,7 @@ var Dashboard = function() {
                         function(data) {
                             Metronic.unblockUI();
                             if(data.success) {
-                                grid.getDataTable().ajax.reload();
+                                gridRiskList.getDataTable().ajax.reload();
                                 
                                 MainApp.viewGlobalModal('success', 'Success Delete Data');
                             } else {

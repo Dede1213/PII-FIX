@@ -42,13 +42,34 @@
 	
 	$username = $this->session->credential['username'];
 	$this->load->database();
+	$sql1="select a.risk_id from t_risk a where  a.periode_id NOT IN (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end) and a.risk_input_by = '$username'
+					and a.risk_id NOT IN(select t2.risk_library_id from t_risk t2 where t2.periode_id = (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end) and t2.risk_input_by = '$username')
+					and a.risk_status >= 0 ";
+	
 	$sql="select a.risk_id from t_risk a where  a.periode_id IN(select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end) and a.risk_input_by = '$username'
-					and a.risk_status = 1";
+					and a.risk_status = 2";
+
+	$sql2="select a.risk_id from t_risk a where  a.periode_id IN(select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end) and a.risk_input_by = '$username'
+					and a.risk_status >= 0 ";
+
+	$query1 = $this->db->query($sql1);
 	$query = $this->db->query($sql);
- if ($query->num_rows() > 0){
+	$query2 = $this->db->query($sql2);
+
+ if ($query1->num_rows() == 0 && $query2->num_rows() == 0 ){
     $status_submit = "DRAFT";
- }else{
+    $status_spesial = "DRAFSUB1";
+ }else if ($query1->num_rows() == 0 && $query->num_rows() >= 1 ){
  	$status_submit = "SUBMIT";
+ }else if ($query1->num_rows() >= 1 && $query2->num_rows() == 0 ){
+ 	$status_submit = "DRAFT"; 
+ 	$status_spesial = "DRAFSUB1";
+ }else if ($query1->num_rows() >= 1 && $query2->num_rows() >= 1 ){
+ 	$status_submit = "DRAFT"; 
+ 	$status_spesial = "DRAFSUB1";
+ }else if ($query1->num_rows() >= 0 && $query2->num_rows() >= 1 ){
+ 	$status_submit = "DRAFT"; 
+ 	$status_spesial = "DRAFSUB";
  }
 		?>
 		<div class="col-md-12">
@@ -56,6 +77,9 @@
 			<div class="portlet-title">
 				<div class="caption">
 					Risiko dari Periode Sebelumnya
+				</div>
+				<div style="float:right;font-size:18px;padding:5px;">
+					<?php echo $status_submit ; ?>
 				</div>
 			</div>
 			
@@ -148,7 +172,7 @@
 			 <?php }else{  ?>
 
 			   <div class="actions">
-					<a target="_self" href="<?=$site_url?>/risk/RiskRegister/RiskRegisterInput/periodic" class="btn default green">
+					<a target="_self" href="<?=$site_url?>/riski/RiskRegister/RiskRegisterInput/periodic" class="btn default green">
 					<i class="fa fa-plus"></i>
 					<span class="hidden-480">
 					Tambah Risiko</span>
@@ -229,50 +253,44 @@
 				</div>
 				<div class="row">
 				<div class="col-md-12 clearfix">
-					<?php
-	
-	$sql="select a.risk_id from t_risk a where  a.periode_id NOT IN (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end) and a.risk_input_by = '$username'
-					and a.risk_id NOT IN(select t2.risk_library_id from t_risk t2 where t2.periode_id = (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end) and t2.risk_input_by = '$username')";
-	$query = $this->db->query($sql);
- if ($query->num_rows() > 0){
-	
+					<?php if ($status_spesial == "DRAFSUB" ){ ?>
 
-		?>
+					<a href="javascript: ;" id="button-save-submit" class="btn default green pull-right" style="margin-right: 20px;">
+					<i class="fa fa-check-circle-o"></i>
+					<span class="hidden-480">
+					Ajukan </span>
+					</a>
 
+	<?php }else if ($status_spesial == "DRAFSUB1" ){ ?>
+					<a href="javascript: ;" id="button-save-submit" class="btn default red pull-right" style="margin-right: 20px;">
+					<i class="fa fa-check-circle-o"></i>
+					<span class="hidden-480">
+					Ajukan </span>
+					</a>
+
+					<?php }?>
+
+	<?php if ($status_submit == 'DRAFT'){ ?>
+		<a href="javascript: ;" id="button-save-draft" class="btn default green pull-right" style="margin-right: 10px;">
+					<i class="fa  fa-circle-o"></i>
+					<span class="hidden-480">
+					Simpan Sebagai Draft </span>
+					</a>
+		
+	<?php }else{ ?>
 		<a href="<?=$site_url?>/risk/RiskRegister?status=false" id="" class="btn default red pull-right" style="margin-right: 20px;">
 					<i class="fa fa-check-circle-o"></i>
 					<span class="hidden-480">
 					Ajukan </span>
 					</a>
-		
-	<?php	
-	
-	}else{
-		?>
-		<a href="javascript: ;" id="button-save-submit" class="btn default green pull-right" style="margin-right: 20px;">
-					<i class="fa fa-check-circle-o"></i>
+		<a href="javascript: ;" id="button-save-draft" class="btn default green pull-right" style="margin-right: 10px;">
+					<i class="fa  fa-circle-o"></i>
 					<span class="hidden-480">
-					Ajukan </span>
+					Permintaan Perubahan </span>
 					</a>
 	<?php
 	}	
 	?>
-
-	<?php if($status_submit == 'SUBMIT'){ ?>
- 		<a href="javascript: ;" id="button-save-draft" class="btn default green pull-right" style="margin-right: 10px;">
-					<i class="fa  fa-circle-o"></i>
-					<span class="hidden-480">
-					Change Request </span>
-					</a>
- <?php } ?>
-					
-					<a href="javascript: ;" id="button-save-draft" class="btn default pull-right" style="margin-right: 10px;">
-					<i class="fa  fa-circle-o"></i>
-					<span class="hidden-480">
-					Simpan Sebagai Draft </span>
-					</a>
-					
-					
 				</div>
 				</div>
 			</div>

@@ -199,6 +199,7 @@ class Mriskregister extends APP_Model {
 					where 
 					a.periode_id NOT IN (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end)
 					and a.risk_id NOT IN(select t2.risk_library_id from t_risk t2 where t2.periode_id = (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end) and t2.risk_input_by = '".$defFilter['userid']."')
+					and a.existing_control_id is null
 					and a.risk_input_by = '".$defFilter['userid']."'
 					 
 					";

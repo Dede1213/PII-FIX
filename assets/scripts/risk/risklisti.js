@@ -493,10 +493,10 @@ var RiskList = function() {
 	        			function( data ) {
 	        				Metronic.unblockUI();
 	        				if(data.success) {
-	        					grid.getDataTable().ajax.reload();
-	        					grid2.getDataTable().ajax.reload();
-	        					
-	        					MainApp.viewGlobalModal('success', 'Success Update Risk Status');
+	        					//grid.getDataTable().ajax.reload();
+	        					//grid2.getDataTable().ajax.reload();
+	        					//MainApp.viewGlobalModal('success', 'Success Update Risk Status');
+	        					window.location.href = site_url+'/risk/RiskRegister';
 	        				} else {
 	        					MainApp.viewGlobalModal('error', data.msg);
 	        				}

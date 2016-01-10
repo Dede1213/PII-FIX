@@ -1049,6 +1049,16 @@ class Risk extends APP_Model {
 		return $res3;
 		return $res4;
 	}
+
+	public function riskSetConfirm_recover($risk_id, $data, $uid, $update_point = 'U') {
+		//$this->_logHistory($risk_id, $uid, $update_point);
+		
+		$periode = $data['periode_id'];
+		$sql = "update t_risk set existing_control_id = null where risk_id='$risk_id'";
+		$res = $this->db->query($sql);
+		
+		return $res;
+	}
 	
 	public function riskSetDraft($risk_id, $data, $uid, $update_point = 'U') {
 		$this->_logHistory($risk_id, $uid, $update_point);
@@ -1149,6 +1159,19 @@ class Risk extends APP_Model {
 		
 		$par['risk_id'] = $risk_id;
 		
+		$sql = "update t_risk set existing_control_id = 1 where risk_id = ?";
+		$res = $this->db->query($sql, $par);
+
+		return $res;
+	}
+	/*
+	public function deleteRisk($risk_id, $uid, $update_point = 'D') {
+		// delete risk in child
+		// t_risk t_risk_change t_risk_action_plan t_risk_action_plan_change 
+		// t_risk_control t_risk_control_change t_risk_impact t_risk_impact_change
+		
+		$par['risk_id'] = $risk_id;
+		
 		$sql = "delete from t_risk_action_plan where risk_id = ?";
 		$res = $this->db->query($sql, $par);
 		
@@ -1177,7 +1200,7 @@ class Risk extends APP_Model {
 		
 		return $res;
 	}
-	
+	*/
 	public function updateRisk($risk_id, $code, $risk, $impact, $actplan, $control, $uid, $update_point = 'U') {
 		$this->_logHistory($risk_id, $uid, $update_point);
 		$par = array();

@@ -141,19 +141,25 @@ grid.init({
 		//"scrollX": true,
         "pageLength": 25, // default record count per page
         "ajax": {
-            "url": site_url+"/risk/RiskRegister/riskGetRollOver" // ajax source
+            "url": site_url+"/risk/RiskRegister/riskGetRollOver_recover" // ajax source
         },
         "columnDefs": [ {
         	"targets": 0,
-        	"data": "risk_status",
+        	"data": "risk_status_v",
         	"render": function ( data, type, full, meta ) {
         		var img = '';
-        		if (data == '0') {
+        		if (data == '0' || data == '1') {
         			img = 'draft.png';
-        		} else if (data == '1') {
-        			img = 'confirm.png';
-        		} else {
-        			img = 'draft.png';
+        		} else if (data == '2') {
+        			img = 'submit.png';
+        		} else if (data == '3' || data == '4') {
+        			img = 'verified.png';
+        		}else if (data == '5' || data == '6') {
+        			img = 'treatment.png';
+        		}else if (data == '10') {
+        			img = 'actplan.png';
+        		}else if (data == '20') {
+        			img = 'executed.png';
         		}
         		return '<center><img src="'+base_url+'assets/images/legend/'+img+'"/></center>';
         	}
@@ -169,35 +175,21 @@ grid.init({
         	"targets": 7,
         	"data": "risk_status",
         	"render": function ( data, type, full, meta ) {
-        		var val = '';
-        		if (data == '0') {
-        			val = 'Draft';
-        		} else if (data == '1') {
-        			val = 'Confirm';
-        		} else {
-        			val = 'Draft';
-        		}
-        		return val;
-        	}
-        }, {
-        	"targets": 8,
-        	"data": "risk_status",
-        	"render": function ( data, type, full, meta ) {
         		var img = '';
         		if (data == '0') {
         			img = '<div class="btn-group">'+
         					'<button type="button" class="btn btn-default btn-xs button-grid-confirm"><i class="fa fa-thumbs-up font-green"></i></button>'+
-        					'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"></i></button>'+
+        					
         				'</div>';
         		} else if (data == '1') {
         			img = '<div class="btn-group">'+
-        					'<button type="button" class="btn btn-default btn-xs button-grid-cancel"><i class="fa fa-times font-yellow"></i></button>'+
-        					'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"></i></button>'+
+        					'<button type="button" class="btn btn-default btn-xs button-grid-confirm"><i class="fa fa-thumbs-up font-green"></i></button>'+
+        					
         				'</div>';
-        		} else {
+        		} else{
         			img = '<div class="btn-group">'+
         					'<button type="button" class="btn btn-default btn-xs button-grid-confirm"><i class="fa fa-thumbs-up font-green"></i></button>'+
-        					'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"></i></button>'+
+        					
         				'</div>';
         		}
         		return img;
@@ -211,8 +203,7 @@ grid.init({
 			{ "data": "impact_level_v" },
 			{ "data": "likelihood_v" },
 			{ "data": "risk_owner_v" },
-			{ "data": "risk_status", "orderable": false },
-			{ "data": "risk_status", "orderable": false }
+			
        ],
         "order": [
             [1, "asc"]
@@ -220,67 +211,7 @@ grid.init({
     }
 });
 
-grid2.init({
-    src: $("#datatable_ajax2"),
-    onSuccess: function (grid) {
-        // execute some code after table records loaded
-    },
-    onError: function (grid) {
-        // execute some code on network or other general error  
-    },
-    onDataLoad: function(grid) {
-        // execute some code on ajax data load
-    },
-    loadingMessage: 'Loading...',
-    dataTable: { // here you can define a typical datatable settings from http://datatables.net/usage/options 
 
-        // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
-        // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/scripts/datatable.js). 
-        // So when dropdowns used the scrollable div should be removed. 
-        //"dom": "<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r>t<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'>>",
-        
-		//"scrollX": true,
-        "pageLength": 25, // default record count per page
-        "ajax": {
-            "url": site_url+"/risk/RiskRegister/riskGetDataUser" // ajax source
-        },    
-        "columnDefs": [ {
-        	"targets": 0,
-        	"data": "risk_status",
-        	"render": function ( data, type, full, meta ) {
-        		var img = '';
-        		if (data == '0') {
-        			img = 'draft.png';
-        		} else if (data == '1') {
-        			img = 'confirm.png';
-        		} else {
-        			img = 'submit.png';
-        		}
-        		return '<center><img src="'+base_url+'assets/images/legend/'+img+'"/></center>';
-        	}
-        }, {
-        	"targets": 1,
-        	"data": "risk_code",
-        	"render": function ( data, type, full, meta ) {
-        		var cls = 'font-green';
-        		if (full.risk_status == '0' || full.risk_status == '1') cls = '';
-        		return '<a target="_self" class="'+cls+'" href="'+site_url+'/main/viewRisk/'+full.risk_id+'">'+data+'</a>';
-        	}
-        } ],    
-        "columns": [
-           { "data": "risk_status" },
-           { "data": "risk_code" },
-           { "data": "risk_event" },
-           { "data": "risk_level_v" },
-           { "data": "impact_level_v" },
-           { "data": "likelihood_v" },
-           { "data": "risk_owner_v" }
-       ],
-        "order": [
-            [1, "asc"]
-        ]// set first column as a default sort by asc
-    }
-});
 
 var RiskList = function() {
 	return {
@@ -341,13 +272,13 @@ var RiskList = function() {
 	        	grid.getDataTable().ajax.reload();
 	        },
 	        confirmRisk: function(data) {
-	        	var mod = MainApp.viewGlobalModal('confirm', 'Update Risk Status to <b>Confirm</b> for risk : <b>'+data.risk_event+'</b> ? ');
+	        	var mod = MainApp.viewGlobalModal('confirm', 'recover Risk Status to <b>Confirm</b> for risk : <b>'+data.risk_event+'</b> ? ');
 	        	mod.find('button.btn-ok-success').one('click', function(){
 	        		mod.modal('hide');
 	        		var eparam = {
 	        			'risk_id' : data.risk_id
 	        		};
-	        		var url = site_url+'/risk/RiskRegister/confirmRisk';
+	        		var url = site_url+'/risk/RiskRegister/confirmRisk_recover';
 	        		
 	        		Metronic.blockUI({ boxed: true });
 	        		$.post(
@@ -359,7 +290,7 @@ var RiskList = function() {
 	        					//grid.getDataTable().ajax.reload();
 	        					//grid2.getDataTable().ajax.reload();
 	        					//MainApp.viewGlobalModal('success', 'Success Update Risk Status');
-	        					window.location.href = site_url+'/risk/RiskRegister';
+	        					window.location.href = site_url+'/risk/RiskRegister/recover';
 
 	        				} else {
 	        					MainApp.viewGlobalModal('error', data.msg);
@@ -495,11 +426,10 @@ var RiskList = function() {
 	        			function( data ) {
 	        				Metronic.unblockUI();
 	        				if(data.success) {
-	        					//grid.getDataTable().ajax.reload();
-	        					//grid2.getDataTable().ajax.reload();
+	        					grid.getDataTable().ajax.reload();
+	        					grid2.getDataTable().ajax.reload();
 	        					
-	        					//MainApp.viewGlobalModal('success', 'Success Update Risk Status');
-	        					window.location.href = site_url+'/risk/RiskRegister';
+	        					MainApp.viewGlobalModal('success', 'Success Update Risk Status');
 	        				} else {
 	        					MainApp.viewGlobalModal('error', data.msg);
 	        				}

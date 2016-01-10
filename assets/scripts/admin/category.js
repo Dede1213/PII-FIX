@@ -25,11 +25,18 @@ var Category = function() {
         	
         	// CATEGORY
         	$('#btn_cat_add').on('click', function() {
-        		var cid = $('#sel_risk_category').val();
+				
+				var cid = $('#sel_risk_category').val();
         		$('#modal-category').modal('show');
         		$('#modal-category-form')[0].reset();
         		$('#modal-category-form input[name=mode]').val('add');
         		$('#modal-category-form input[name=cat_id]').val('');
+				 
+				var alfabet = new Array("A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z");
+				   
+				var nextalfabet = eval($("#lastcat").val());
+				$('#modal-category-form input[name=cat_code]').val(alfabet[nextalfabet]);
+				 
         	});
         	
         	$('#btn_cat_edit').on('click', function() {
@@ -110,6 +117,23 @@ var Category = function() {
         		
         		$('#modal-sub-category-form input[name=cat_parent]').val(pid);
         		$('#modal-sub-category-form input[name=cat_parent_text]').val(ptext);
+				
+				var nextnya = "";
+				 
+				var nextsplitcat = $('#lastsel_risk_sub_category').val();
+				
+				if(nextsplitcat!=""){				
+					var rescat = nextsplitcat.split(" "); 					
+					var rescatdet = rescat[0].split("."); 					 
+					var nextnya = eval(rescatdet[1])+eval(1);				
+				}else{				
+					var rescat = ptext.split(" "); 					
+					var rescatdet = new Array(rescat[0]); 					 
+					var nextnya = "1";	
+				}
+				 
+				$('#modal-sub-category-form input[name=cat_code]').val(rescatdet[0]+"."+nextnya);
+				
         	});
         	
         	$('#btn_sub_cat_edit').on('click', function() {
@@ -214,11 +238,30 @@ var Category = function() {
         		$('#modal-sub_sub-category-form input[name=cat_parent]').val(spid);
         		$('#modal-sub_sub-category-form input[name=cat_parent_text]').val(ptext);
         		$('#modal-sub_sub-category-form input[name=cat_sub_parent_text]').val(sptext);
+				 
+				var nextsplitcat = $('#lastsel_risk_2nd_sub_category').val();
+				 
+				if(nextsplitcat!=""){				
+					var rescat = nextsplitcat.split(" "); 					
+					var rescatdet = rescat[0].split("."); 					 
+					var nextnya = eval(rescatdet[2])+eval(1);	
+					var codeawal = rescatdet[0]+"."+rescatdet[1];
+					
+				}else{				
+					var rescat = sptext.split(" "); 					
+					var rescatdet = new Array(rescat[0],rescat[1]); 		
+					var codeawal = rescatdet[0] ;					
+					var nextnya = "1";	
+				}
+				 
+				$('#modal-sub_sub-category-form input[name=cat_code]').val(codeawal+"."+nextnya);
+				
+				
         	});
         	
         	$('#btn_sub_sub_cat_edit').on('click', function() {
-        		var cur = $('#risk_2nd_sub_category').val();
-        		
+        		var cur = $('#sel_risk_2nd_sub_category').val(); 
+				 
         		if (cur != undefined && cur != '' && cur != null) {
 	        		var pid = $('#sel_risk_category').val();
 	        		var ptext = $('#sel_risk_category option:selected').text();
@@ -329,27 +372,32 @@ var Category = function() {
         						}
         						
         					    $('#sel_risk_sub_category').append($('<option>').text(val2.ref_value).attr('value', val2.ref_key));
-        						    
+        						
         					    cnt2++;
+								
         					});
         					
         				});
         			}
         			
         			$('#sel_risk_category').append($('<option>').text(val.ref_value).attr('value', val.ref_key));
-        			    
+        			 
         			cnt1++;
+					$('#lastcat').val(cnt1);
+					
         		});
         	});
         	
         },
         loadCategorySelect: function(sel_id, parent) {
+			$('#last'+sel_id).val('');
         	//console.log(sel_id, parent);
         	if (parent == undefined || parent == null) return false;
         	$('#'+sel_id)[0].options.length = 0;
         	$.getJSON( site_url+"/admin/Category/getCategoryByParentId/"+parent, function( data ) {
         		$.each( data, function( key, val ) {
         		    $('#'+sel_id).append($('<option>').text(val.ref_value).attr('value', val.ref_key));
+					$('#last'+sel_id).val(val.ref_value);
         		});
         		$('#'+sel_id).trigger('change');
         	});

@@ -14,6 +14,7 @@
 			<div class="form-group">
 				<div class="col-md-12">
 					<div class="input-group">
+					<input type = "hidden" id = "lastcat" value = "">					 
 					<select class="form-control input-sm" name="risk_category" id="sel_risk_category"></select>
 					<span class="input-group-btn" style="padding-left: 20px;">
 					<button class="btn btn-success btn-sm" id='btn_cat_add' type="button"><i class="fa fa-plus font-white"></i> Add </button>
@@ -34,6 +35,7 @@
 			<div class="form-group">
 				<div class="col-md-12">
 					<div class="input-group">
+					<input type = "hidden" id = "lastsel_risk_sub_category" value = "">
 					<select class="form-control input-sm" name="risk_sub_category" id="sel_risk_sub_category"></select>
 					<span class="input-group-btn" style="padding-left: 20px;">
 					<button class="btn btn-success btn-sm" id='btn_sub_cat_add' type="button"><i class="fa fa-plus font-white"></i> Add </button>
@@ -54,6 +56,7 @@
 			<div class="form-group">
 				<div class="col-md-12">
 					<div class="input-group">
+					<input type = "hidden" id = "lastsel_risk_2nd_sub_category" value = "">
 					<select class="form-control input-sm" name="risk_2nd_sub_category" id="sel_risk_2nd_sub_category"></select>
 					<span class="input-group-btn" style="padding-left: 20px;">
 					<button class="btn btn-success btn-sm" id='btn_sub_sub_cat_add' type="button"><i class="fa fa-plus font-white"></i> Add </button>
@@ -87,7 +90,7 @@
 					<div class="form-group">
 						<label class="col-md-3 control-label smaller cl-compact" >Code</label>
 						<div class="col-md-9">
-						<input type="text" class="form-control input-sm" name="cat_code" placeholder="">
+						<input type="text" class="form-control input-sm" name="cat_code" placeholder="" readonly = "readonly">
 						</div>
 					</div>
 					<div class="form-group">
@@ -135,7 +138,7 @@
 					<div class="form-group">
 						<label class="col-md-3 control-label smaller cl-compact" >Code</label>
 						<div class="col-md-9">
-						<input type="text" class="form-control input-sm" name="cat_code" placeholder="">
+						<input type="text" class="form-control input-sm" name="cat_code" placeholder="" readonly = "readonly">
 						</div>
 					</div>
 					<div class="form-group">
@@ -189,7 +192,7 @@
 					<div class="form-group">
 						<label class="col-md-3 control-label smaller cl-compact" >Code</label>
 						<div class="col-md-9">
-						<input type="text" class="form-control input-sm" name="cat_code" placeholder="">
+						<input type="text" class="form-control input-sm" name="cat_code" placeholder="" readonly = "readonly">
 						</div>
 					</div>
 					<div class="form-group">

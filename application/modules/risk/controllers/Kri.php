@@ -187,6 +187,10 @@ class Kri extends APP_Controller {
 				'kri_warning' => $kri_warning
 			);
 			
+			//--------update level
+			$this->risk->updateRisk_level($kri['risk_id'], $this->input->post());
+			//-------end
+			
 			$res = $this->risk->updateKri($rid, $par, $this->session->credential['username']);
 			$resp = array();
 			if ($res) {

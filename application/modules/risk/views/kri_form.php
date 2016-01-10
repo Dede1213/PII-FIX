@@ -194,3 +194,62 @@ var t_treshold_type = '<?=$kri['treshold_type']?>';
 var t_treshold_list = <?=json_encode($kri['treshold_list'])?>;
 </script>
 <?php } ?>
+
+<!-- CATEGORY -->
+<div id="modal-category" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+		<h4 class="modal-title">Risk Level </h4>
+	</div>
+	<div class="modal-body">
+			<form id="modal-category-form" role="form" class="form-horizontal">
+				<input type="hidden" name="mode" value="add" />
+				<input type="hidden" name="cat_id" value="" />
+				<input type="hidden" name="cat_parent" value="0" />
+				<div class="form-body">
+					 
+					<div class="form-group">
+						<label class="col-md-3 control-label smaller cl-compact" >Impact Level</label>
+						<div class="col-md-9">
+						<select name = "risk_impact_level_after_kri" id = "risk_impact_level_after_kri" class = "form-control">
+							<option value = "HIGH">High</option>
+							<option value = "MODERATE">Moderate</option>
+							<option value = "LOW">Low</option>
+						</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-3 control-label smaller cl-compact" >Likelihood Level</label>
+						<div class="col-md-9">
+						<select name = "risk_likelihood_key_after_kri" id = "risk_likelihood_key_after_kri" class = "form-control">
+							<option value = "HIGH">High</option>
+							<option value = "MODERATE">Moderate</option>
+							<option value = "LOW">Low</option>
+						</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-3 control-label smaller cl-compact" >Risk Level</label>
+						<div class="col-md-9">
+						<select name = "risk_level_after_kri"id = "risk_level_after_kri"  class = "form-control">
+							<option value = "HIGH">High</option>
+							<option value = "MODERATE">Moderate</option>
+							<option value = "LOW">Low</option>
+						</select>
+						</div>
+					</div>
+				</div>
+			</form>
+	</div>
+	<div class="modal-footer">
+		<button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+		<button id="modal-impactlevel-form-submit" type="button" 
+			class="btn blue ladda-button"
+			 data-style="expand-right"
+			>Save</button>
+	</div>
+</div>
+
+
+
+

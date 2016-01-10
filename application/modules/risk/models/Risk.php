@@ -3354,5 +3354,17 @@ class Risk extends APP_Model {
 			}	
 	}
 	
+	function updateRisk_level($risk_id,$data){
+		
+		unset($data['id']);
+		unset($data['owner_report']);
+		 
+		$this->db->where("risk_id" , $risk_id);
+		
+		$this->db->update("t_risk",$data);
+		
+		
+	}
+	
 	
 }

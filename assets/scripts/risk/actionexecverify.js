@@ -18,9 +18,13 @@ var ActionVerify = function() {
         			location.href=site_url+'/main/mainrac#tab_action_plan_exec';
         		});
         	});
-        	
-        	$('#exec-button-submit').on('click', function () {
-        		me.submitRiskData('verify')
+			
+			$('#exec-button-submit').on('click', function () {
+        		$('#modal-category').modal('show');	
+        	});
+        	 
+			$('#modal-impactlevel-form-submit').on('click', function() {
+        		me.submitRiskData('verify')			 
         	});
         	
         	$('#exec-select-status').change(function() {
@@ -55,7 +59,8 @@ var ActionVerify = function() {
             		Metronic.blockUI({ boxed: true });
             		$.post(
             			url,
-            			$( "#input-form" ).serialize(),
+            			$( "#input-form" ).serialize() + "&risk_impact_level_after_mitigation="+$('#risk_impact_level_after_mitigation').val()+"&risk_likelihood_key_after_mitigation="+$('#risk_likelihood_key_after_mitigation').val()+"&risk_level_after_mitigation="+$('#risk_level_after_mitigation').val(),
+						  
             			function( data ) {
             				Metronic.unblockUI();
             				if(data.success) {

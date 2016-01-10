@@ -9,8 +9,12 @@ var KriForm = function() {
         init: function() {
         	var me = this;
         	
-        	$('#kri-button-verify').on('click', function() {
-        		me.submitRiskData();
+        	$('#kri-button-verify').on('click', function() { 
+				$('#modal-category').modal('show');	 
+        	});
+			
+			$('#modal-impactlevel-form-submit').on('click', function() {
+        		me.submitRiskData();				 
         	});
         	
         	$('#kri-button-cancel').on('click', function() {
@@ -36,32 +40,41 @@ var KriForm = function() {
         	var fvalid = true;
         	if (fvalid) {
         		var me = this;
-        		
+				 
+				 //----------------- isi level dan submit
+				 
         		Metronic.blockUI({ boxed: true });
         		var url = site_url+'/risk/kri/verifyKri';
         		$.post(
         			url,
         			{
         				'id' : $('#kri-id').val(), 
-        				'owner_report' : $('#owner_report').val()
+        				'owner_report' : $('#owner_report').val(),
+						'risk_impact_level_after_kri' : $('#risk_impact_level_after_kri').val(),
+						'risk_likelihood_key_after_kri' : $('#risk_likelihood_key_after_kri').val(),
+						'risk_level_after_kri' : $('#risk_level_after_kri').val()
         			},
         			function( data ) {
+						 
         				Metronic.unblockUI();
         				if(data.success) {
         					var mod = MainApp.viewGlobalModal('success', 'Success Updating KRI');
         					mod.find('button.btn-ok-success').one('click', function(){
         						location.href=site_url+'/main/mainrac#tab_kri_list';
         					});
-        					
+							 
         				} else {
         					MainApp.viewGlobalModal('error', data.msg);
         				}
+
         			},
         			"json"
         		).fail(function() {
         			Metronic.unblockUI();
         			MainApp.viewGlobalModal('error', 'Error Submitting Data');
         		 });
+				 
+				 //--------------------end
         	}
         },
         recalculateWarning: function(nval) {

@@ -1347,6 +1347,12 @@ class MainRac extends APP_Controller {
 				$res = $this->risk->execExtend($_POST['id'], $risk, $data['session']['username']);
 			}
 			
+			// ----------- level update wawan
+			
+			$this->risk->updateKRI_Risk_level($_POST['risk_id'],$this->input->post());
+			
+			// ----------- end level update
+			
 			$resp = array();
 			if ($res) {
 				$resp['success'] = true;

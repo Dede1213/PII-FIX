@@ -3362,8 +3362,19 @@ class Risk extends APP_Model {
 		$this->db->where("risk_id" , $risk_id);
 		
 		$this->db->update("t_risk",$data);
+		 
+	}
+	
+	function updateKRI_Risk_level($risk_id,$data){
 		
+		$this->db->set("risk_impact_level_after_mitigation",$data['risk_impact_level_after_mitigation']);
+		$this->db->set("risk_likelihood_key_after_mitigation",$data['risk_likelihood_key_after_mitigation']);	
+		$this->db->set("risk_level_after_mitigation",$data['risk_level_after_mitigation']);			
+		 
+		$this->db->where("risk_id" , $risk_id);
 		
+		$this->db->update("t_risk");
+		 
 	}
 	
 	

@@ -345,6 +345,7 @@ grid_exec.init({
         		data_v = '';
         		if (data == 'EXTEND') data_v = 'Extend';
         		if (data == 'COMPLETE') data_v = 'Complete';
+				if (data == 'ONGOING') data_v = 'On Going';
         		
         		if (full.is_owner == 1) {
         			search = true;
@@ -656,9 +657,17 @@ var Dashboard = function() {
         			$('#fgroup-reason').show();
         			$('#fgroup-date').show();
         			$( "#exec-form" ).find('textarea[name=execution_reason]').prop('readonly', false);
-        		} else {
+        		} else if ($( this ).val() == 'COMPLETE') {
         			$('#fgroup-explain').show();
         			$('#fgroup-evidence').show();
+        			$('#fgroup-reason').hide();
+        			$('#fgroup-date').hide();
+        			$( "#exec-form" ).find('textarea[name=execution_explain]').prop('readonly', false);
+        			$( "#exec-form" ).find('textarea[name=execution_evidence]').prop('readonly', false);
+        		}
+				else  {
+        			$('#fgroup-explain').show();
+        			$('#fgroup-evidence').hide();
         			$('#fgroup-reason').hide();
         			$('#fgroup-date').hide();
         			$( "#exec-form" ).find('textarea[name=execution_explain]').prop('readonly', false);
@@ -725,6 +734,13 @@ var Dashboard = function() {
 					if (
 						$( "#exec-form" ).find('textarea[name=execution_reason]').val() != ''
 						&& $( "#exec-form" ).find('input[name=revised_date]').val() != ''
+					) valid = true
+				}
+				
+				if ($('#exec-select-status').val() == 'ONGOING') {
+					if (
+						$( "#exec-form" ).find('textarea[name=execution_explain]').val() != ''
+						 
 					) valid = true
 				}
 				

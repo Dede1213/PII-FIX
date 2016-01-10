@@ -686,6 +686,17 @@ class MainPic extends APP_Controller {
 				);
 			}
 			
+			if ($_POST['execution_status'] == 'ONGOING') {
+			 
+				$risk = array(
+					'execution_status' => $_POST['execution_status'],
+					'execution_explain' => $_POST['execution_explain'],
+					'execution_evidence' => null,
+					'execution_reason' => null,
+					'revised_date' => null
+				);
+			}
+			
 			// build data
 			$this->load->model('risk/risk');
 			$res = $this->risk->execSaveDraft($_POST['action_id'], $risk, $data['session']['username']);

@@ -417,6 +417,7 @@
 					<select class="form-control input-sm" name="execution_status" id="exec-select-status">
 						<option value="COMPLETE" selected>Complete</option>
 						<option value="EXTEND">Extend</option>
+						<option value="ONGOING">On Going</option>
 					</select>
 					</div>
 				</div>
@@ -431,7 +432,7 @@
 					<div class="col-md-9">
 					<textarea class="form-control" rows="3" name="execution_evidence" placeholder=""></textarea>
 					</div>
-				</div>
+				</div>				 
 				<div class="form-group" id="fgroup-reason">
 					<label class="col-md-3 control-label smaller cl-compact">Reason<span class="required">* </span></label>
 					<div class="col-md-9">

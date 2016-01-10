@@ -25,8 +25,8 @@
 		<h4 class="alert-heading">Warning!</h4>
 		<p class="alert_container"></p>
 		<p>
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-	        <button type="button" class="btn btn-danger">Delete</button>
+	        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+	        <button type="button" class="btn btn-danger">Yes</button>
 		</p>
 		</div>
 	</div>
@@ -36,8 +36,8 @@
 		<h4 class="alert-heading">Warning!</h4>
 		<p class="alert_container"></p>
 		<p>
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-	        <button type="button" class="btn btn-primary btn-ok-success">OK</button>
+	        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+	        <button type="button" class="btn btn-primary btn-ok-success">Yes</button>
 		</p>
 		</div>
 	</div>

@@ -1142,6 +1142,27 @@ class Risk extends APP_Model {
 		return $res;
 	}
 	
+	public function riskSetSubmitByPeriode2($periode_id, $uid) {
+		// LOG HISTORY
+		$sql2 = "select cr_code from t_cr_risk ORDER BY id DESC LIMIT 1  ";
+		$query = $this->db->query($sql2);
+		$row = $query->row();		
+		$hasil1 = $row->cr_code;
+		$hasil2 = substr($hasil1, 4);
+		$hasil3 = $hasil2 + 1 ;
+		$hasil4 = strlen($hasil3);
+		$hasil5 = 9 - $hasil4;
+		$hasil6 = substr($hasil1,0,$hasil5);
+		$hasil = $hasil6.$hasil3;
+		$cr_type = "Risk Register";
+
+		
+		$sql = "insert into t_cr_risk (cr_code,cr_type,cr_status,risk_id,created_by) values ('$hasil','$cr_type',0,'$periode_id','$uid')";
+		
+		$res = $this->db->query($sql);
+		return $res;
+	}
+
 	public function deleteRisk($risk_id, $uid, $update_point = 'D') {
 		// delete risk in child
 		// t_risk t_risk_change t_risk_action_plan t_risk_action_plan_change 

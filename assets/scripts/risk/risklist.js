@@ -333,6 +333,11 @@ var RiskList = function() {
 				$('#filterFormSubmit2').on('click', function() {
 					me.filterDataGridRiskList2(); 
 				});
+
+				$('#button-change-request').click(function(e) {
+    	        	e.preventDefault();
+    	        	me.submitRiskPeriode2();
+    	        });
 	        },
 	        filterDataGrid: function(fby, fval) {
 	        	grid.clearAjaxParams();

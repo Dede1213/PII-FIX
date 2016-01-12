@@ -204,10 +204,15 @@ var RiskVerify = function() {
         			location.href=site_url+'/main/mainrac';
         		});
         	});
+
         	
         	$('#primary-risk-button-submit').on('click', function () {
         		me.submitRiskData('verify')
         	});
+
+            $('#changes-risk-button-save-primary').on('click', function () {
+                me.submitRiskData('save2')
+            });
         	
         	
         	
@@ -549,7 +554,10 @@ var RiskVerify = function() {
             	} else if (submitMode == 'verifyChanges') {
             		var url = site_url+'/main/mainrac/treatmentVerifyChanges';
             		var text = 'Are You sure you want to Verify with Changes Data for this Risk ?';
-            	} else {
+            	}else if (submitMode == 'save2') {
+                    var url = site_url+'/main/mainrac/treatmentSaveprimary';
+                    var text = 'Are You sure you want to Save this Risk ?';
+                } else {
             		var url = site_url+'/main/mainrac/treatmentSave';
             		var text = 'Are You sure you want to Save this Risk ?';
             	}
@@ -572,7 +580,9 @@ var RiskVerify = function() {
             							location.href=site_url+'/main/mainrac/riskTreatmentForm/'+g_risk_id;
             						} else if (submitMode == 'verify' || submitMode == 'verifyChanges') {
             							location.href=site_url+'/main/mainrac';
-            						} else {
+            						}else if (submitMode == 'save2') {
+                                        location.href=site_url+'/main/mainrac';
+                                    } else {
             							location.href=site_url+'/main/mainrac/riskTreatmentForm/'+g_risk_id;
             						}
             					});

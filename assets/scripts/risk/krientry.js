@@ -352,7 +352,11 @@ var Kri = function() {
         		'<td>'+nnode.value_2+'</td>'+
         		'<td>'+nnode.value_type+'</td>'+
         		'<td>'+nnode.result_v+'</td>'+
-        		'</td>'+
+        		
+                '<td>'+'<div class="btn-group">'+
+                    '<button type="button" class="btn btn-default btn-xs" onclick="Kri.tresholdTableDelete(this, '+me.dataTresholdCounter+')"><i class="fa fa-trash-o font-red"></i></button>'+
+                '</div>'+
+                '</td>'+
         	'</tr>');
         	
         	me.tresholdAdd(nnode, me.dataTresholdCounter);

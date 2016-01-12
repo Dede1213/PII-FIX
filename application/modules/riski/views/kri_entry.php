@@ -129,6 +129,7 @@
 								<th>Nilai 2</th>
 								<th>Tipe Nilai</th>
 								<th>Hasil</th>
+								<th> &nbsp; </th>
 							</tr>
 							</thead>
 							<tbody>

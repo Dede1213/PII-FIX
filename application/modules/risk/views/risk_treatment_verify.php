@@ -23,6 +23,210 @@
 			var g_risk_id = <?=$risk['risk_id']?>;
 			var g_username = null;
 		</script>
+
+<?php
+	$id = $risk['risk_id'];
+	//$username = $this->session->credential['username'];
+	$this->load->database();
+	$sql="select
+(CASE WHEN 
+t_risk.risk_cause = t_risk_change.risk_cause 
+or t_risk.risk_impact = t_risk_change.risk_impact
+or t_risk.risk_impact_level = t_risk_change.risk_impact_level 
+or t_risk.risk_likelihood_key = t_risk_change.risk_likelihood_key
+or t_risk.risk_level = t_risk.risk_level
+or t_risk.suggested_risk_treatment = t_risk_change.suggested_risk_treatment
+or count(t_risk_control.risk_id) = count(t_risk_control_change.risk_id)
+or t_risk_control.risk_id = t_risk_control_change.risk_id
+or t_risk_control.risk_existing_control = t_risk_control_change.risk_existing_control
+or t_risk_control.risk_evaluation_control = t_risk_control_change.risk_evaluation_control
+or t_risk_control.risk_control_owner = t_risk_control_change.risk_control_owner
+or count(t_risk_action_plan.risk_id) = count(t_risk_action_plan_change.risk_id)
+or t_risk_action_plan.action_plan = t_risk_action_plan_change.action_plan
+or t_risk_action_plan.due_date = t_risk_action_plan_change.due_date
+or t_risk_action_plan.division = t_risk_action_plan_change.division
+THEN 1
+ELSE 0 
+END) as 'status'
+from t_risk
+join t_risk_change on t_risk.risk_id = t_risk_change.risk_id
+join t_risk_control on t_risk.risk_id = t_risk_control.risk_id
+join t_risk_control_change on t_risk.risk_id = t_risk_control_change.risk_id
+join t_risk_action_plan on t_risk.risk_id = t_risk_action_plan.risk_id
+join t_risk_action_plan_change on t_risk.risk_id = t_risk_action_plan.risk_id
+WHERE t_risk.risk_id = '$id'";
+
+	$query = $this->db->query($sql);
+	$row = $query->row(); 
+	$hasil = $row->status;
+	if ($hasil == 1){
+?>
+
+<!--     Start risk owner form -->
+		<div class="row">
+		<div class="col-md-12">
+			<div class="portlet box blue">
+				<div class="portlet-title">
+					<div class="caption">
+						PRIMARY 
+					</div>
+				</div>
+				
+				<div class="portlet-body form">
+					<form role="form" id="input-form" class="form-horizontal">
+						<div class="form-body">
+							<div class="form-group">
+								<input type="hidden" name="risk_id" value="">
+								<label class="col-md-1 control-label smaller cl-compact">Risk ID</label>
+								<div class="col-md-6">
+									<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_code" placeholder="">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-1 control-label smaller cl-compact">Risk Event</label>
+								<div class="col-md-6">
+								<input type="text" class="form-control input-sm input-readview" name="risk_event" placeholder="">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-1 control-label smaller cl-compact">Risk Event Description</label>
+								<div class="col-md-6">
+								<textarea class="form-control input-readview" rows="3" name="risk_description" placeholder=""></textarea>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-1 control-label smaller cl-compact" >Impact Level </label>
+								<div class="col-md-6">
+									<div class="input-group">
+										<input type="hidden" name="risk_impact_level_id" value=""/>
+										<input type="text" class="form-control input-sm" readonly="true" name="risk_impact_level_value" placeholder="">
+										<span class="input-group-btn">
+										<button class="btn btn-primary btn-sm" type="button" id="btn_impact_list"><i class="fa fa-search fa-fw"/></i></button>
+										</span>
+										
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-1 control-label smaller cl-compact" >Likelihood  </label>
+								<div class="col-md-6">
+									<div class="input-group">
+										<input type="hidden" name="risk_likelihood_id" value=""/>
+										<input type="text" class="form-control input-sm" readonly="true" name="risk_likelihood_value" placeholder="">
+										<span class="input-group-btn">
+										<button class="btn btn-primary btn-sm" type="button" data-toggle="modal" href="#modal-likelihood"><i class="fa fa-search fa-fw"/></i></button>
+										</span>
+										
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<input type="hidden" name="risk_level_id" value=""/>
+								<label class="col-md-1 control-label smaller cl-compact" >Risk Level </label>
+								<div class="col-md-6">
+								<input type="text" class="form-control input-sm" readonly="true" name="risk_level" placeholder="">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-1 control-label smaller cl-compact" >Risk Owner</label>
+								<div class="col-md-6">
+								<select class="form-control input-sm" name="risk_division">
+									<?php foreach($division_list as $row) { ?>
+									<option value="<?=$row['ref_key']?>"><?=$row['ref_value']?></option>
+									<?php } ?>
+								</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-1 control-label small cl-compact" >Risk Treatment</label>
+								<div class="col-md-6">
+									<select class="form-control input-sm" name="suggested_risk_treatment">
+										<?php foreach($treatment_list as $row) { ?>
+										<option value="<?=$row['ref_key']?>"><?=$row['ref_value']?></option>
+										<?php } ?>
+									</select>
+								</div>
+							</div>
+							<hr/>
+							<div class="row">
+								<div class="col-md-6">
+									<h4>Control</h4>
+								</div>
+								<div class="col-md-6 clearfix">
+									<a href="#form-control" id="button-form-control-open" data-toggle="modal" class="btn default green pull-right btn-sm">
+									<i class="fa fa-plus"></i>
+									<span class="hidden-480">
+									Add Control </span>
+									</a>
+								</div>
+							</div>
+							
+							<div class="table-scrollable">
+								<table id="control_table" class="table table-condensed table-bordered table-hover">
+									<thead>
+									<tr role="row" class="heading">
+										<th><small>Existing Control ID</small></th>
+										<th><small>Existing Control</small></th>
+										<th><small>Evaluation on Existing Control</small></th>
+										<th><small>Control Owner</small></th>
+										<th width="30px">&nbsp;</th>
+									</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+							</div>
+							
+							<hr/>
+							<div class="row">
+								<div class="col-md-6">
+									<h4>Suggested Action Plan</h4>
+								</div>
+								<div class="col-md-6 clearfix">
+									<a href="#form-data" data-toggle="modal" class="btn default green pull-right btn-sm">
+									<i class="fa fa-plus"></i>
+									<span class="hidden-480">
+									Add Plan Action Suggestion </span>
+									</a>
+								</div>
+							</div>
+							
+							<div class="table-scrollable">
+								<table id="action_plan_table" class="table table-condensed table-bordered table-hover">
+									<thead>
+									<tr role="row" class="heading">
+										<th><small>Suggested Action Plan</small></th>
+										<th><small>Due Date</small></th>
+										<th><small>Action Plan Owner</small></th>
+										<th width="30px">&nbsp;</th>
+									</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="form-actions right">
+							<button id="changes-risk-button-submit-primary" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Verify</button>
+							<button id="changes-risk-button-save-primary" type="button" class="btn blue"><i class="fa fa-circle-o"></i> Save</button>
+							<button type="button" class="btn yellow" id="changes-risk-button-cancel"><i class="fa fa-times"></i> Cancel</button>
+						</div>
+					</form>
+				</div>	
+			</div>
+		</div>
+
+		</div>
+
+		<!--     end risk owner form -->
+
+
+
+		
+
+<?php }else{ ?>
+
+		<!--     Start risk owner form -->
 		<div class="row">
 		<div class="col-md-6">
 			<div class="portlet box blue">
@@ -296,6 +500,11 @@
 		</div>
 		
 		</div>
+
+		<!--     end risk owner form -->
+
+		<?php } ?>
+
 		<?php } else { ?>
 		<!-- ERROR RISK REGISTER MODE -->
 		<div class="row">

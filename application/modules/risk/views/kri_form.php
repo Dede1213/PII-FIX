@@ -156,12 +156,43 @@
 						</div>
 					</div>
 				<?php } else { ?> 
+
+				<div class="form-group">
+						<label class="col-md-2 control-label">Input Data</label>
+						<div class="col-md-6">
+						<select class="form-control input-sm" id="owner_report" name="owner_report">
+							<?php foreach ($kri['treshold_list'] as $key => $value) { 
+
+							if ($value['value_2'] != null){
+								$strip = "-" ;
+								}else{
+									$strip = "" ;
+									}
+							if ($value['value_type'] == 'PERCENTAGE'){
+								$persen = "%" ;
+								}else{
+									$persen = "" ;
+									}
+							if ($value['value_2'] != null && $value['value_type'] == 'PERCENTAGE') {
+								$persen2 = "%" ;
+								}else{
+									$persen2 = "" ;
+									}
+							 ?>
+									PERCENTAGE
+							<option value="<?=$value['value_1']?>"><?=$value['operator']?> <?=$value['value_1']?> <?php echo $persen2 ;?> <?php echo $strip ;?> <?=$value['value_2']?> <?php echo $persen ;?> </option>
+							<?php } ?>
+						</select>
+						</div>
+					</div>
+					<!--
 					<div class="form-group">
 						<label class="col-md-2 control-label">Input Data</label>
 						<div class="col-md-6">
-							<input type="number" class="form-control input-sm" id="owner_report" name="owner_report" placeholder="" value="<?=$kri['owner_report'] == '' ? '0' : $kri['owner_report'] ?>">
+							<input type="number" class="form-control input-sm" id="owner_report" name="owner_report" placeholder="" value="<?//=$kri['owner_report'] == '' ? '0' : $kri['owner_report'] ?>">
 						</div>
 					</div>
+					-->
 				<?php } ?> 
 				
 				<?php if (isset($verifyRac) && $verifyRac) { ?>

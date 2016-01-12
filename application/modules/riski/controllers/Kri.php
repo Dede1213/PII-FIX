@@ -95,22 +95,9 @@ class Kri extends APP_Controlleri {
 					}
 				}
 			} else {
-				$tt = 'NUMERIC';
-				if ($report <= 100) $tt = 'PERCENTAGE';
 				
 				foreach ($kri['treshold_list'] as $key => $value) {
-					if ($value['value_type'] == $tt && $value['operator'] == 'BELOW'
-						&& $report < $value['value_1'] ) {
-						$kri_warning = $value['result'];
-					}
-					
-					if ($value['value_type'] == $tt && $value['operator'] == 'BETWEEN' 
-						&& ($report >= $value['value_1'] && $report <= $value['value_2']) ) {
-						$kri_warning = $value['result'];
-					}
-					
-					if ($value['value_type'] == $tt && $value['operator'] == 'ABOVE'
-						&& $report > $value['value_1'] ) {
+					if ($value['value_1'] == $_POST['owner_report']) {
 						$kri_warning = $value['result'];
 					}
 				}

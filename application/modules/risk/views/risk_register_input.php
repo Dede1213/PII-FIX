@@ -74,6 +74,7 @@
 									<label class="col-md-3 control-label smaller cl-compact">Risk Event <span class="required">* </span>
 									</label>
 									<div class="col-md-9">
+									
 									<textarea class="form-control"   rows="3" name="risk_event" data-required="1" placeholder="" ></textarea>
 									
 									</div>

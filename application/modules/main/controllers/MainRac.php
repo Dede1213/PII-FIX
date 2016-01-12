@@ -914,6 +914,8 @@ class MainRac extends APP_Controller {
 			echo json_encode($resp);
 		}
 	}
+
+
 	
 	public function treatmentVerifyChanges()
 	{
@@ -1016,6 +1018,61 @@ class MainRac extends APP_Controller {
 				}
 
 				$res = $this->risk->riskChangeUpdate($_POST['risk_id'], $risk_update, $impact_level, $actplan, $control, $data['session']['username']);
+				
+				$resp = array();
+				if ($res) {
+					$resp['success'] = true;
+					$resp['msg'] = 'SUCCESS';
+				} else {
+					$resp['success'] = false;
+					$resp['msg'] = $this->db->error();
+				}
+			} else {
+				$resp['msg'] = 'You Are Not Allowed to Modify this Risk';
+			}
+			echo json_encode($resp);
+		}
+	}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+	public function treatmentSaveprimary()
+	{
+		$resp['success'] = false;
+		$resp['msg'] = '';
+		
+		$data = $this->loadDefaultAppConfig();
+		$cred = $this->session->credential;
+		
+		if (isset($_POST['risk_id']) && is_numeric($_POST['risk_id'])) {
+			$this->load->model('risk/risk');
+			$risk = $this->risk->getRiskValidate('viewRiskByRac', $_POST['risk_id'], $cred);
+			if ($risk) {
+				// build data
+				$risk_update = array(
+					'risk_event' => $_POST['risk_event'],
+					'risk_description' => $_POST['risk_description'],
+					'risk_level' => $_POST['risk_level_id'],
+					'risk_impact_level' => $_POST['risk_impact_level_id'],
+					'risk_likelihood_key' => $_POST['risk_likelihood_id'],
+					'suggested_risk_treatment' => $_POST['suggested_risk_treatment']
+				);
+				
+				$impact_level = array();
+				foreach($_POST['impact'] as $v) {
+					$impact_level[] = $v;
+				}
+				
+				$actplan = array();
+				foreach($_POST['actplan'] as $v) {
+					$actplan[] = $v;
+				}
+				
+				$control = array();
+				foreach($_POST['control'] as $v) {
+					$control[] = $v;
+				}
+
+				$res = $this->risk->riskChangeUpdateprimary($_POST['risk_id'], $risk_update, $impact_level, $actplan, $control, $data['session']['username']);
 				
 				$resp = array();
 				if ($res) {

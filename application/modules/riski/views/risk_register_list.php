@@ -262,7 +262,7 @@
 					</a>
 
 	<?php }else if ($status_spesial == "DRAFSUB1" ){ ?>
-					<a href="javascript: ;" id="button-save-submit" class="btn default red pull-right" style="margin-right: 20px;">
+					<a href="javascript: ;" id="" class="btn default red pull-right" style="margin-right: 20px;">
 					<i class="fa fa-check-circle-o"></i>
 					<span class="hidden-480">
 					Ajukan </span>

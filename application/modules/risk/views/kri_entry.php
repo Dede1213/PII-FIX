@@ -129,6 +129,7 @@
 								<th>Value 2</th>
 								<th>Type Value</th>
 								<th>Result</th>
+								<th> &nbsp; </th>
 							</tr>
 							</thead>
 							<tbody>

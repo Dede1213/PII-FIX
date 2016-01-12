@@ -276,9 +276,8 @@ class Risk extends APP_Model {
 				join m_periode on m_periode.periode_id = a.periode_id
 				"
 				
-				.$ex_filter. 
-				"and (m_periode.periode_start <= '".$date."'
-					and m_periode.periode_end >= '".$date."')"
+				.$ex_filter
+				
 				.$ex_or;
 		$res = $this->getPagingData($sql, $par, $page, $row, 'risk_id', true);
 		return $res;
@@ -391,8 +390,7 @@ class Risk extends APP_Model {
 					join m_periode on m_periode.periode_id = a.periode_id
 					where 	
 					a.risk_input_by = ?
-					and (m_periode.periode_start <= '".$date."'
-					and m_periode.periode_end >= '".$date."')
+					
 					";
 			$rpar = array('user_id' => $defFilter['userid']);
 			if (isset($defFilter['risk_cat'])) {
@@ -464,8 +462,7 @@ class Risk extends APP_Model {
 					where 
 					a.periode_id is not null
 					and a.risk_status > 2
-					and (m_periode.periode_start <= '".$date."'
-					and m_periode.periode_end >= '".$date."')
+					
 					";
 		}
 		
@@ -504,8 +501,7 @@ class Risk extends APP_Model {
 						a.periode_id is not null
 						and a.risk_status > 2
 						and a.risk_division = ?
-						and (m_periode.periode_start <= '".$date."'
-						and m_periode.periode_end >= '".$date."')
+						
 						".$ext;
 				if ($par) {
 					$rpar['p1'] = $par['p1'];
@@ -544,8 +540,7 @@ class Risk extends APP_Model {
 						where 
 						a.action_plan_status > 0
 						and a.division = ?
-						and (m_periode.periode_start <= '".$date."'
-						and m_periode.periode_end >= '".$date."')
+						
 						".$ext;
 				if ($par) {
 					$rpar['p1'] = $par['p1'];
@@ -634,8 +629,7 @@ class Risk extends APP_Model {
 					join m_periode on m_periode.periode_id = b.periode_id
 					where 
 					a.action_plan_status > 0 
-					and (m_periode.periode_start <= '".$date."'
-					and m_periode.periode_end >= '".$date."')
+					
 					";
 		}
 		
@@ -658,7 +652,7 @@ class Risk extends APP_Model {
 					where 
 					a.action_plan_status > 3
 					and (m_periode.periode_start <= '".$date."'
-					and m_periode.periode_end >= '".$date."')
+						and m_periode.periode_end >= '".$date."')
 					";
 		}
 		
@@ -688,8 +682,7 @@ class Risk extends APP_Model {
 						join m_periode on m_periode.periode_id = b.periode_id
 						where 
 						a.kri_owner = ?
-						and (m_periode.periode_start <= '".$date."'
-						and m_periode.periode_end >= '".$date."')
+						
 						".$ext;
 				if ($par) {
 					$rpar['p1'] = $par['p1'];
@@ -717,8 +710,7 @@ class Risk extends APP_Model {
 					join m_periode on m_periode.periode_id = b.periode_id
 					where 
 					a.kri_status >= 0
-					and (m_periode.periode_start <= '".$date."'
-						and m_periode.periode_end >= '".$date."')
+					
 					";
 					
 		}
@@ -826,8 +818,7 @@ class Risk extends APP_Model {
 					join m_periode on m_periode.periode_id = b.periode_id
 					where 
 					a.created_by = ?
-					and (m_periode.periode_start <= '".$date."'
-					and m_periode.periode_end >= '".$date."')
+					
 					";
 			$rpar = array('user_id' => $defFilter['userid']);
 
@@ -849,8 +840,7 @@ class Risk extends APP_Model {
 					t_cr_risk a join t_risk b on a.risk_id = b.risk_id
 					left join m_user c on a.created_by = c.username
 					join m_periode on m_periode.periode_id = b.periode_id
-					where (m_periode.periode_start <= '".$date."'
-					and m_periode.periode_end >= '".$date."')
+					
 					
 					";
 		}
@@ -1519,6 +1509,86 @@ class Risk extends APP_Model {
 			
 			// insert action plan
 			$sql = "insert into t_risk_control_change(
+						risk_id, existing_control_id, risk_existing_control, 
+						risk_evaluation_control, risk_control_owner) 
+					values(?, ?, ?, ?, ?)";
+			foreach ($control as $key => $value) {
+				$value['existing_control_id'] = $value['existing_control_id'] == '' || $value['existing_control_id'] == '0' ? null : $value['existing_control_id'];
+				$par = array(
+					'rid' => $risk_id,
+					'ap' => $value['existing_control_id'],
+					'dd' => $value['risk_existing_control'],
+					'da' => $value['risk_evaluation_control'],
+					'div' => $value['risk_control_owner']
+				);
+				$res5 = $this->db->query($sql, $par);
+			}
+			
+			return true;
+		} else {
+			return false;
+		}
+		
+		return $res;
+	}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public function riskChangeUpdateprimary($risk_id, $risk, $impact, $actplan, $control, $uid)
+	{
+		$sql = "delete from t_risk_impact where risk_id = ?";
+		$res = $this->db->query($sql, array('rid'=>$risk_id));
+		
+		$sql = "delete from t_risk_action_plan where risk_id = ?";
+		$res = $this->db->query($sql, array('rid'=>$risk_id));
+		
+		$sql = "delete from t_risk_control where risk_id = ?";
+		$res = $this->db->query($sql, array('rid'=>$risk_id));
+		
+		//$risk['risk_id'] = $risk_id;
+		
+		$par = array();
+		$keyupdate = '';
+		foreach($risk as $k=>$v) {
+			$keyupdate .= $k.' = ?, ';
+			$par[$k] = $v;
+		}
+		$par['risk_id'] = $risk_id;
+
+		$par['risk_id'] = $risk_id;
+		$sql = "update t_risk set ".$keyupdate
+			  ."created_date = now()
+			  	where risk_id = ?";
+		$res = $this->db->query($sql, $par);
+		
+		if ($res) {
+			// insert impact
+			$sql = "insert into t_risk_impact(risk_id, impact_id, impact_level) values(?, ?, ?)";
+			foreach ($impact as $key => $value) {
+				$par = array(
+					'rid' => $risk_id,
+					'iid' => $value['impact_id'],
+					'il' => $value['impact_level']
+				);
+				$res3 = $this->db->query($sql, $par);
+			}
+			
+			// insert action plan
+			$sql = "insert into t_risk_action_plan(risk_id, action_plan_status, action_plan, due_date, division) 
+					values(?, 0, ?, ?, ?)";
+			foreach ($actplan as $key => $value) {
+				$dd = implode('-', array_reverse( explode('-', $value['due_date']) ));
+				$par = array(
+					'rid' => $risk_id,
+					'ap' => $value['action_plan'],
+					'dd' => $dd,
+					'div' => $value['division']
+				);
+				$res4 = $this->db->query($sql, $par);
+			}
+			
+			// insert action plan
+			$sql = "insert into t_risk_control(
 						risk_id, existing_control_id, risk_existing_control, 
 						risk_evaluation_control, risk_control_owner) 
 					values(?, ?, ?, ?, ?)";

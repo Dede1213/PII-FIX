@@ -95,6 +95,14 @@ class Kri extends APP_Controller {
 					}
 				}
 			} else {
+
+				
+				foreach ($kri['treshold_list'] as $key => $value) {
+					if ($value['value_1'] == $_POST['owner_report']) {
+						$kri_warning = $value['result'];
+					}
+				}
+				/*
 				$tt = 'NUMERIC';
 				if ($report <= 100) $tt = 'PERCENTAGE';
 				
@@ -114,6 +122,7 @@ class Kri extends APP_Controller {
 						$kri_warning = $value['result'];
 					}
 				}
+				*/
 			}
 			
 			// if is div head then submit for verification, if pic for div head verify

@@ -276,9 +276,7 @@ class Risk extends APP_Model {
 				join m_periode on m_periode.periode_id = a.periode_id
 				"
 				
-				.$ex_filter. 
-				"and (m_periode.periode_start <= '".$date."'
-					and m_periode.periode_end >= '".$date."')"
+				.$ex_filter
 				.$ex_or;
 		$res = $this->getPagingData($sql, $par, $page, $row, 'risk_id', true);
 		return $res;
@@ -391,8 +389,7 @@ class Risk extends APP_Model {
 					join m_periode on m_periode.periode_id = a.periode_id
 					where 	
 					a.risk_input_by = ?
-					and (m_periode.periode_start <= '".$date."'
-					and m_periode.periode_end >= '".$date."')
+					
 					";
 			$rpar = array('user_id' => $defFilter['userid']);
 			if (isset($defFilter['risk_cat'])) {
@@ -464,8 +461,7 @@ class Risk extends APP_Model {
 					where 
 					a.periode_id is not null
 					and a.risk_status > 2
-					and (m_periode.periode_start <= '".$date."'
-					and m_periode.periode_end >= '".$date."')
+					
 					";
 		}
 		
@@ -504,8 +500,7 @@ class Risk extends APP_Model {
 						a.periode_id is not null
 						and a.risk_status > 2
 						and a.risk_division = ?
-						and (m_periode.periode_start <= '".$date."'
-						and m_periode.periode_end >= '".$date."')
+						
 						".$ext;
 				if ($par) {
 					$rpar['p1'] = $par['p1'];
@@ -544,8 +539,7 @@ class Risk extends APP_Model {
 						where 
 						a.action_plan_status > 0
 						and a.division = ?
-						and (m_periode.periode_start <= '".$date."'
-						and m_periode.periode_end >= '".$date."')
+						
 						".$ext;
 				if ($par) {
 					$rpar['p1'] = $par['p1'];
@@ -634,8 +628,7 @@ class Risk extends APP_Model {
 					join m_periode on m_periode.periode_id = b.periode_id
 					where 
 					a.action_plan_status > 0 
-					and (m_periode.periode_start <= '".$date."'
-					and m_periode.periode_end >= '".$date."')
+					
 					";
 		}
 		
@@ -688,8 +681,7 @@ class Risk extends APP_Model {
 						join m_periode on m_periode.periode_id = b.periode_id
 						where 
 						a.kri_owner = ?
-						and (m_periode.periode_start <= '".$date."'
-						and m_periode.periode_end >= '".$date."')
+						
 						".$ext;
 				if ($par) {
 					$rpar['p1'] = $par['p1'];
@@ -717,8 +709,7 @@ class Risk extends APP_Model {
 					join m_periode on m_periode.periode_id = b.periode_id
 					where 
 					a.kri_status >= 0
-					and (m_periode.periode_start <= '".$date."'
-						and m_periode.periode_end >= '".$date."')
+					
 					";
 					
 		}
@@ -826,8 +817,6 @@ class Risk extends APP_Model {
 					join m_periode on m_periode.periode_id = b.periode_id
 					where 
 					a.created_by = ?
-					and (m_periode.periode_start <= '".$date."'
-					and m_periode.periode_end >= '".$date."')
 					";
 			$rpar = array('user_id' => $defFilter['userid']);
 
@@ -849,8 +838,7 @@ class Risk extends APP_Model {
 					t_cr_risk a join t_risk b on a.risk_id = b.risk_id
 					left join m_user c on a.created_by = c.username
 					join m_periode on m_periode.periode_id = b.periode_id
-					where (m_periode.periode_start <= '".$date."'
-					and m_periode.periode_end >= '".$date."')
+					
 					
 					";
 		}

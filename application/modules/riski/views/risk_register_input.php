@@ -89,7 +89,10 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label small cl-compact">Deskripsi Peristiwa Risiko <span class="required">* </span></label>
 									<div class="col-md-9">
-									<textarea class="form-control" rows="3" name="risk_description" placeholder=""></textarea>
+									<textarea rows="3" class="form-control input-sm popovers" 
+									data-container="body" data-trigger="focus" data-placement="bottom" data-content="isilah kolom ini dengan deskripsi risiko yang telah di-identifikasi yang menjelaskan sifat risiko"
+									name="risk_description" placeholder=""></textarea>
+
 									</div>
 								</div>
 								<div class="form-group">
@@ -118,13 +121,19 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label smaller cl-compact" >Penyebab <span class="required">* </span></label>
 									<div class="col-md-9">
-									<input type="text" class="form-control input-sm" name="risk_cause" placeholder="">
-									</div>
+									<textarea rows="3" class="form-control input-sm popovers" 
+									data-container="body" data-trigger="focus" data-placement="bottom" data-content="isilah kolom ini dengan deskripsi dari kumpulan faktor yang dapat mempengaruhi atau mengakibatkan terjadinya peristiwa risiko"
+									name="risk_cause"  placeholder=""></textarea>
+									
+								</div>
 								</div>
 								<div class="form-group">
 									<label class="col-md-3 control-label smaller cl-compact" >Dampak <span class="required">* </span></label>
 									<div class="col-md-9">
-									<input type="text" class="form-control input-sm" name="risk_impact" placeholder="">
+									
+									<textarea rows="3" class="form-control input-sm popovers" 
+									data-container="body" data-trigger="focus" data-placement="bottom" data-content="isilah kolom ini dengan deskripsi dari kemungkinan kehilangan atau kerugian biaya langsung atau tidak langsung yang ditanggung IIGF dari peristiwa risiko"
+									name="risk_impact"  placeholder=""></textarea>
 									</div>
 								</div>
 								<!--

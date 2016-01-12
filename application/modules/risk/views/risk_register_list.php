@@ -268,7 +268,7 @@
 					</a>
 
 	<?php }else if ($status_spesial == "DRAFSUB1" ){ ?>
-					<a href="javascript: ;" id="button-save-submit" class="btn default red pull-right" style="margin-right: 20px;">
+					<a href="javascript: ;" id="" class="btn default red pull-right" style="margin-right: 20px;">
 					<i class="fa fa-check-circle-o"></i>
 					<span class="hidden-480">
 					Submit </span>
@@ -289,7 +289,7 @@
 					<span class="hidden-480">
 					Submit </span>
 					</a>
-		<a href="javascript: ;" id="button-save-draft" class="btn default green pull-right" style="margin-right: 10px;">
+		<a href="javascript: ;" id="button-change-request" class="btn default green pull-right" style="margin-right: 10px;">
 					<i class="fa  fa-circle-o"></i>
 					<span class="hidden-480">
 					Change Request </span>

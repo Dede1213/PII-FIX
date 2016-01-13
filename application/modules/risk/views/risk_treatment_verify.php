@@ -31,20 +31,20 @@
 	$sql="select
 (CASE WHEN 
 t_risk.risk_cause = t_risk_change.risk_cause 
-or t_risk.risk_impact = t_risk_change.risk_impact
-or t_risk.risk_impact_level = t_risk_change.risk_impact_level 
-or t_risk.risk_likelihood_key = t_risk_change.risk_likelihood_key
-or t_risk.risk_level = t_risk.risk_level
-or t_risk.suggested_risk_treatment = t_risk_change.suggested_risk_treatment
-or count(t_risk_control.risk_id) = count(t_risk_control_change.risk_id)
-or t_risk_control.risk_id = t_risk_control_change.risk_id
-or t_risk_control.risk_existing_control = t_risk_control_change.risk_existing_control
-or t_risk_control.risk_evaluation_control = t_risk_control_change.risk_evaluation_control
-or t_risk_control.risk_control_owner = t_risk_control_change.risk_control_owner
-or count(t_risk_action_plan.risk_id) = count(t_risk_action_plan_change.risk_id)
-or t_risk_action_plan.action_plan = t_risk_action_plan_change.action_plan
-or t_risk_action_plan.due_date = t_risk_action_plan_change.due_date
-or t_risk_action_plan.division = t_risk_action_plan_change.division
+and t_risk.risk_impact = t_risk_change.risk_impact
+and t_risk.risk_impact_level = t_risk_change.risk_impact_level 
+and t_risk.risk_likelihood_key = t_risk_change.risk_likelihood_key
+and t_risk.risk_level = t_risk.risk_level
+and t_risk.suggested_risk_treatment = t_risk_change.suggested_risk_treatment
+and count(t_risk_control.risk_id) = count(t_risk_control_change.risk_id)
+and t_risk_control.risk_id = t_risk_control_change.risk_id
+and t_risk_control.risk_existing_control = t_risk_control_change.risk_existing_control
+and t_risk_control.risk_evaluation_control = t_risk_control_change.risk_evaluation_control
+and t_risk_control.risk_control_owner = t_risk_control_change.risk_control_owner
+and count(t_risk_action_plan.risk_id) = count(t_risk_action_plan_change.risk_id)
+and t_risk_action_plan.action_plan = t_risk_action_plan_change.action_plan
+and t_risk_action_plan.due_date = t_risk_action_plan_change.due_date
+and t_risk_action_plan.division = t_risk_action_plan_change.division
 THEN 1
 ELSE 0 
 END) as 'status'

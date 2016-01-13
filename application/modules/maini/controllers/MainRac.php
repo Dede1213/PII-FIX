@@ -71,6 +71,48 @@ class MainRac extends APP_Controlleri {
 		}
 
 	}
+
+	public function riskRegister2($rid)
+	{
+		$data = $this->loadDefaultAppConfig();
+		$data['indonya'] = base_url('index.php/maini/mainrac');
+		$data['engnya'] = base_url('index.php/main/mainrac');			
+		$data['sidebarMenu'] = $this->getSidebarMenuStructure('main/mainrac');
+		$data['pageLevelStyles'] = '
+		<link rel="stylesheet" type="text/css" href="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
+		<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css"/>
+		<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
+		';
+		
+		$data['pageLevelScripts'] = '
+		<script type="text/javascript" src="assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+		<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
+		<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
+		<script src="assets/scripts/dashboard/main_rac_risk.js"></script>
+		';
+		
+		$data['pageLevelScriptsInit'] = 'RiskList.init();';
+		
+		$data['valid_mode'] = true;
+		$data['periode'] = null;
+		if ($data['valid_mode']) {
+			$this->load->model('admin/mperiode');
+			$data['periode'] = $this->mperiode->getCurrentPeriode();
+		}
+		
+		$this->load->model('user/usermodel');
+		$userdata = $this->usermodel->getDataById($rid);
+		if ($userdata) {
+			$data['filled_by'] = $userdata['display_name'];
+			$data['filled_by_id'] = $rid;
+			
+			$this->load->view('main/header', $data);
+			$this->load->view('risk_register_list', $data);
+			$this->load->view('main/footer', $data);
+		}
+
+	}
 	
 	public function getSummaryCount($mode = null) {
 		// MODE : risk riskregister treatment actionplan kri change

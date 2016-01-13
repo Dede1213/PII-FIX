@@ -283,7 +283,7 @@
 					<span class="hidden-480">
 					Ajukan </span>
 					</a>
-		<a href="javascript: ;" id="button-save-draft" class="btn default green pull-right" style="margin-right: 10px;">
+		<a href="javascript: ;" id="button-change-request" class="btn default green pull-right" style="margin-right: 10px;">
 					<i class="fa  fa-circle-o"></i>
 					<span class="hidden-480">
 					Permintaan Perubahan </span>

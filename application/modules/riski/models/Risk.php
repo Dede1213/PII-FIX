@@ -808,16 +808,14 @@ class Risk extends APP_Model {
 		
 		if ($mode == 'allChangeByOwner') {
 			$date = date("Y-m-d");
-			$sql = "select 
-					a.*,
-					b.risk_code,
-					b.risk_event
-					from 
-					t_cr_risk a join t_risk b on a.risk_id = b.risk_id
-					join m_periode on m_periode.periode_id = b.periode_id
-					where 
-					a.created_by = ?
-					";
+			$sql = "select a.*,
+				b.risk_code,
+				b.risk_event
+				from 
+				t_cr_risk a LEFT OUTER JOIN t_risk b on a.risk_id = b.risk_id
+				LEFT OUTER JOIN m_periode on m_periode.periode_id = b.periode_id
+				where 
+				a.created_by = ? ";
 			$rpar = array('user_id' => $defFilter['userid']);
 
 			if ($par)	{ 
@@ -1125,6 +1123,45 @@ class Risk extends APP_Model {
 			'uid2' =>$uid
 		);
 		$res = $this->db->query($sql, $par);
+		return $res;
+	}
+
+	public function riskSetSubmitByPeriode2($periode_id, $uid) {
+		// LOG HISTORY
+		$sql2 = "select cr_code from t_cr_risk ORDER BY id DESC LIMIT 1  ";
+		$query = $this->db->query($sql2);
+		$row = $query->row();		
+		$hasil1 = $row->cr_code;
+		$hasil2 = substr($hasil1, 4);
+		$hasil3 = $hasil2 + 1 ;
+		$hasil4 = strlen($hasil3);
+		$hasil5 = 9 - $hasil4;
+		$hasil6 = substr($hasil1,0,$hasil5);
+		$hasil = $hasil6.$hasil3;
+		$cr_type = "Risk Register";
+
+		
+		$sql = "insert into t_cr_risk (cr_code,cr_type,cr_status,risk_id,created_by) values ('$hasil','$cr_type',0,'$periode_id','$uid')";
+		
+		$res = $this->db->query($sql);
+		return $res;
+	}
+
+	public function riskSetSubmitByPeriode2_change($periode_id, $uid) {
+		
+		$sql = "update t_cr_risk set cr_status = 1 where created_by = '$uid' and cr_type= 'Risk Register' " ;
+		
+		$sql2 = "update t_risk set risk_status = 0 where periode_id=$periode_id and risk_input_by='$uid' ";
+		
+		$res = $this->db->query($sql);
+		$res2 = $this->db->query($sql2);
+		return $res2;
+		return $res;
+	}
+	public function riskSetSubmitByPeriode2_ignore($periode_id, $uid) {
+		
+		$sql = "update t_cr_risk set cr_status = 1 where created_by = '$uid' and cr_type= 'Risk Register' " ;
+		$res = $this->db->query($sql);
 		return $res;
 	}
 	

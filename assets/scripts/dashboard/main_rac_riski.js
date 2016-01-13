@@ -167,8 +167,80 @@ var RiskList = function() {
 	        //main function to initiate the module
 	        init: function() {
 	        	var me = this;
+
+                $('#button-change-verify').click(function(e) {
+                    e.preventDefault();
+                    me.submitRiskPeriode22();
+                });
+                $('#button-change-ignore').click(function(e) {
+                    e.preventDefault();
+                    me.submitRiskPeriode222();
+                });
 	        	
 	        },
+
+            submitRiskPeriode22: function() {
+                var mod = MainApp.viewGlobalModal('confirm', 'change request to RAC All Risk in Periode : <b>'+g_p_name+'</b>');
+                mod.find('button.btn-ok-success').one('click', function(){
+                    mod.modal('hide');
+                    var url = site_url+'/risk/RiskRegister/submitRiskByPeriode2_change';
+                    
+                    Metronic.blockUI({ boxed: true });
+                    $.post(
+                        url,
+                        {},
+                        function( data ) {
+                            Metronic.unblockUI();
+                            if(data.success) {
+                                //grid.getDataTable().ajax.reload();
+                                //grid2.getDataTable().ajax.reload();
+                                
+                                MainApp.viewGlobalModal('success', 'Success verify change Request');
+                                window.location.href = site_url+'/main/mainrac#tab_change_request_list';
+                            } else {
+                                MainApp.viewGlobalModal('error', data.msg);
+                            }
+                            
+                        },
+                        "json"
+                    ).fail(function() {
+                        Metronic.unblockUI();
+                        MainApp.viewGlobalModal('error', 'Error Submitting Data');
+                     });
+                });
+            },
+
+            submitRiskPeriode222: function() {
+                var mod = MainApp.viewGlobalModal('confirm', 'Ignore change request in Periode : <b>'+g_p_name+'</b>');
+                mod.find('button.btn-ok-success').one('click', function(){
+                    mod.modal('hide');
+                    var url = site_url+'/risk/RiskRegister/submitRiskByPeriode2_ignore';
+                    
+                    Metronic.blockUI({ boxed: true });
+                    $.post(
+                        url,
+                        {},
+                        function( data ) {
+                            Metronic.unblockUI();
+                            if(data.success) {
+                                //grid.getDataTable().ajax.reload();
+                                //grid2.getDataTable().ajax.reload();
+                                
+                                MainApp.viewGlobalModal('success', 'Success Ignore change Request');
+                                window.location.href = site_url+'/main/mainrac#tab_change_request_list';
+                            } else {
+                                MainApp.viewGlobalModal('error', data.msg);
+                            }
+                            
+                        },
+                        "json"
+                    ).fail(function() {
+                        Metronic.unblockUI();
+                        MainApp.viewGlobalModal('error', 'Error Submitting Data');
+                     });
+                });
+            },
+
 	        filterDataGrid: function(fby, fval) {
 	        	grid.clearAjaxParams();
 	        	grid.setAjaxParam("filter_by", fby);

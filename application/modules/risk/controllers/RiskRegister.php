@@ -796,6 +796,48 @@ class RiskRegister extends APP_Controller {
 
 		echo json_encode($resp);
 	}
+
+	public function submitRiskByPeriode2_change() {
+		$session_data = $this->session->credential;
+		$resp = array('success' => false, 'msg' => 'Error');
+		
+		$periode = $this->mperiode->getCurrentPeriode();
+		$periode_id = null;
+		if ($periode) {
+			$periode_id = $periode['periode_id'];
+			
+			$data = array();
+			
+			$res = $this->risk->riskSetSubmitByPeriode2_change($periode_id, $session_data['username']);
+			if ($res) {
+				$resp['success'] = true;
+				$resp['msg'] = 'SUCCESS';
+			}
+		}
+
+		echo json_encode($resp);
+	}
+
+	public function submitRiskByPeriode2_ignore() {
+		$session_data = $this->session->credential;
+		$resp = array('success' => false, 'msg' => 'Error');
+		
+		$periode = $this->mperiode->getCurrentPeriode();
+		$periode_id = null;
+		if ($periode) {
+			$periode_id = $periode['periode_id'];
+			
+			$data = array();
+			
+			$res = $this->risk->riskSetSubmitByPeriode2_ignore($periode_id, $session_data['username']);
+			if ($res) {
+				$resp['success'] = true;
+				$resp['msg'] = 'SUCCESS';
+			}
+		}
+
+		echo json_encode($resp);
+	}
 	
 	public function deleteRisk() {
 		$session_data = $this->session->credential;

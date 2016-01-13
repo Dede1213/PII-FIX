@@ -448,12 +448,15 @@ grid_cr.init({
          	"data": "cr_code",
          	"render": function ( data, type, full, meta ) {
          		var cls = 'font-green-jungle';
-         		if (full.cr_status == '1') {
-         			var vm = 'maini/mainrac/ChangeRequestView';
-         		} else {
-         			var vm = 'maini/mainrac/ChangeRequestVerify';
-         		}
-         		return '<a target="_self" class="'+cls+'" href="'+site_url+'/'+vm+'/'+full.id+'">'+data+'</a>';
+         		if (full.cr_type == 'Risk Register') {
+                    var vm = 'main/mainrac/riskRegister2';
+                    return '<a target="_self" class="'+cls+'" href="'+site_url+'/'+vm+'/'+full.created_by+'?status=change">'+data+'</a>';
+                }else if (full.cr_status == '1') {
+                    var vm = 'main/mainrac/ChangeRequestView';
+                } else {
+                    var vm = 'main/mainrac/ChangeRequestVerify';
+                }
+                return '<a target="_self" class="'+cls+'" href="'+site_url+'/'+vm+'/'+full.id+'">'+data+'</a>';
          	}
          }, {
          	"targets": 4,

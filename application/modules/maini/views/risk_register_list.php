@@ -109,6 +109,35 @@
 					</tbody>
 					</table>
 				</div>
+
+				<div class="row">
+				<div class="col-md-12 clearfix">
+
+		<?php
+			error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
+			$status = $_GET['status'];
+			if ($status=='change'){
+				?>
+			
+	
+		
+
+		<a href="javascript: ;" id="button-change-ignore" class="btn default red pull-right" style="margin-right: 10px;">
+					<i class="fa  fa-circle-o"></i>
+					<span class="hidden-480">
+					Ignore </span>
+					</a>
+		<a href="javascript: ;" id="button-change-verify" class="btn default green pull-right" style="margin-right: 10px;">
+					<i class="fa  fa-circle-o"></i>
+					<span class="hidden-480">
+					Verify </span>
+					</a>
+
+					<?php } ?>
+	
+				</div>
+				</div>
+				
 			</div>
 		</div>
 		</div>

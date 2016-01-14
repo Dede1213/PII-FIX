@@ -182,8 +182,7 @@
 											<input type="text" class="form-control input-sm" readonly="true" name="risk_likelihood_value" placeholder="">
 											<span class="input-group-btn">
 											<button class="btn btn-primary btn-sm" type="button" data-toggle="modal" href="#modal-likelihood"><i class="fa fa-search fa-fw"/></i></button>
-											</span>
-											
+											</span>											
 										</div>
 									</div>
 								</div>

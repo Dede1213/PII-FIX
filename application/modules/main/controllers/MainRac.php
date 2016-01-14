@@ -1393,10 +1393,13 @@ class MainRac extends APP_Controller {
 			<script src="assets/scripts/risk/actionexecverify.js"></script>
 			';
 			
+			$this->load->model('risk/mriskregister');
 			$data['pageLevelScriptsInit'] = "ActionVerify.init();";
 			$data['indonya'] = base_url('index.php/maini/mainrac');
 			$data['engnya'] = base_url('index.php/main/mainrac');				
 			$data['sidebarMenu'] = $this->getSidebarMenuStructure('main');
+			$data['likelihood'] = $this->mriskregister->getRiskLikelihood();
+			$data['impact_list'] = $this->mriskregister->getRiskImpactForList();
 			
 			$data['valid_mode'] = false;
 			
@@ -1430,14 +1433,23 @@ class MainRac extends APP_Controller {
 		if (isset($_POST['id']) && is_numeric($_POST['id'])) {
 			$this->load->model('risk/risk');
 			
-			if ($_POST['execution_status'] == 'COMPLETE') {
+			if ($_POST['execution_status'] == 'COMPLETE' ) {
 				$risk = array(
 					'execution_explain' => $_POST['execution_explain'],
 					'execution_evidence' => $_POST['execution_evidence']
 				);
 				$res = $this->risk->execComplete($_POST['id'], $risk, $data['session']['username']);
 				$res = $this->risk->execUpdateRiskStatus($_POST['risk_id'], $data['session']['username']);
-			} else {
+			} 
+			else if ($_POST['execution_status'] == "ONGOING") {
+				$risk = array(
+					'execution_explain' => $_POST['execution_explain'],
+					'execution_evidence' => $_POST['execution_evidence']
+				);
+				$res = $this->risk->execOngoing($_POST['id'], $risk, $data['session']['username']);
+				$res = $this->risk->execUpdateRiskStatus($_POST['risk_id'], $data['session']['username']);
+			} 
+			else {
 				$dd = implode('-', array_reverse( explode('-', $_POST['revised_date']) ));
 				$risk = array(
 					'execution_reason' => $_POST['execution_reason'],
@@ -1501,6 +1513,7 @@ class MainRac extends APP_Controller {
 		if ($rid && is_numeric($rid)) {
 			// check mode
 			$data = $this->loadDefaultAppConfig();
+			$this->load->model('risk/mriskregister');
 			$data['sidebarMenu'] = $this->getSidebarMenuStructure('main');
 			$data['pageLevelStyles'] = '';
 			$data['pageLevelScripts'] = '';
@@ -1508,11 +1521,15 @@ class MainRac extends APP_Controller {
 			$data['indonya'] = base_url('index.php/maini/mainrac');
 			$data['engnya'] = base_url('index.php/main/mainrac');			
 			$data['valid_mode'] = false;
+			$data['likelihood'] = $this->mriskregister->getRiskLikelihood();
+			$data['impact_list'] = $this->mriskregister->getRiskImpactForList();
 			
 			$this->load->model('risk/risk');
 			$cred = $this->session->credential;
 			
 			$kri = $this->risk->getKriById($rid);
+			
+			
 
 			if ($kri) {
 				$data['kri'] = $kri;

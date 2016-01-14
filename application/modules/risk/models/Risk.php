@@ -2076,6 +2076,27 @@ class Risk extends APP_Model {
 		return true;
 	}
 	
+	public function execOngoing($action_id, $risk, $uid) 
+	{
+		$par = array(
+			'stat' => 7,
+			'es' => 'ONGOING',
+			'eexplain' => $risk['execution_explain'],
+			'eevi' => $risk['execution_evidence'],
+			'id' => $action_id
+		);
+		
+		$sql = "update t_risk_action_plan 
+				set 
+				action_plan_status = ?,
+				execution_status = ?,
+				execution_explain = ?,
+				execution_evidence = ?
+				where id = ?";
+		$query = $this->db->query($sql, $par);
+		return true;
+	}
+	
 	public function execExtend($action_id, $risk, $uid) 
 	{
 		$par = array(

@@ -24,6 +24,110 @@
 			var g_username = null;
 		</script>
 		<div class="row">
+		<?php
+	error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
+	$id = $action_plan['id'];
+	//$username = $this->session->credential['username'];
+	$this->load->database();
+	$sql="select
+(CASE WHEN 
+t_risk_action_plan.action_plan = t_risk_action_plan_change.action_plan
+and t_risk_action_plan.due_date = t_risk_action_plan_change.due_date
+and t_risk_action_plan.division = t_risk_action_plan_change.division
+THEN 1
+ELSE 0 
+END) as 'status'
+from t_risk_action_plan JOIN t_risk_action_plan_change on t_risk_action_plan.id = t_risk_action_plan_change.id
+WHERE t_risk_action_plan.id = '$id' ";
+
+	$query = $this->db->query($sql);
+	$row = $query->row(); 
+	$hasil = $row->status;
+
+	if ($hasil == 1){
+?>
+<div class="col-md-12">
+			<div class="portlet box blue">
+				<div class="portlet-title">
+					<div class="caption">
+						PRIMARY
+					</div>
+				</div>
+				
+				<div class="portlet-body form">
+					<form role="form" id="input-form" class="form-horizontal">
+					<input type="hidden" id="action-plan-id" value="<?=$action_plan['id']?>" name="id" placeholder="">
+					<input type="hidden" value="<?=$action_plan['risk_id']?>" name="risk_id" placeholder="">
+						<div class="form-body">
+							<div class="form-group">
+								<label class="col-md-3 control-label smaller cl-compact">Kode Risiko</label>
+								<div class="col-md-9">
+									<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$action_plan['risk_data']['risk_code']?>" name="risk_code" placeholder="">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-3 control-label smaller cl-compact">Pemilik Risiko</label>
+								<div class="col-md-9">
+									<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$action_plan['risk_data']['risk_owner_v']?>" name="risk_owner" placeholder="">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-3 control-label smaller cl-compact">Peristiwa Risiko</label>
+								<div class="col-md-9">
+								<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$action_plan['risk_data']['risk_event']?>" name="risk_event" placeholder="">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-3 control-label smaller cl-compact">Level Risiko</label>
+								<div class="col-md-9">
+								<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$action_plan['risk_data']['risk_level_v']?>" name="risk_level" placeholder="">
+								</div>
+							</div>
+							<hr/>
+							<div class="form-group">
+								<label class="col-md-3 control-label smaller cl-compact">AP ID</label>
+								<div class="col-md-9">
+								<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$action_plan['act_code']?>" name="act_code" placeholder="">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-3 control-label smaller cl-compact">Action Plan</label>
+								<div class="col-md-9">
+									<input type="text" class="form-control input-sm input-readview" value="<?=$action_plan['change_data']['action_plan']?>" name="action_plan" placeholder="">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-3 control-label smaller cl-compact">Batas Waktu</label>
+								<div class="col-md-9">
+								<div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
+									<input type="text" class="form-control input-sm" name="due_date" readonly value="<?=$action_plan['change_data']['due_date_v']?>">
+									<span class="input-group-btn">
+									<button class="btn default btn-sm" type="button"><i class="fa fa-calendar"></i></button>
+									</span>
+								</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-3 control-label smaller cl-compact">Pemilik Action Plan</label>
+								<div class="col-md-9">
+								<select class="form-control input-sm" name="division">
+									<?php foreach($division_list as $row) { ?>
+									<option value="<?=$row['ref_key']?>" <?=$row['ref_key'] == $action_plan['change_data']['division'] ? 'SELECTED' : '' ?>><?=$row['ref_value']?></option>
+									<?php } ?>
+								</select>
+								</div>
+							</div>
+						</div>
+						<div class="form-actions right">
+							<button id="primary-risk-button-submit" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Verifikasi</button>
+							<button id="changes-risk-button-save-primary" type="button" class="btn blue"><i class="fa fa-circle-o"></i> Simpan</button>
+							<button type="button" class="btn yellow" id="changes-risk-button-cancel"><i class="fa fa-times"></i> Batalkan</button>
+						</div>
+					</form>
+				</div>	
+			</div>
+		</div>
+		<?php }else{ ?>
 		<div class="col-md-6">
 			<div class="portlet box blue">
 				<div class="portlet-title">
@@ -174,6 +278,8 @@
 				</div>	
 			</div>
 		</div>
+
+		<?php } ?>
 		
 		</div>
 		<?php } else { ?>

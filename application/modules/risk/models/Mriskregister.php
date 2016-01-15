@@ -395,7 +395,14 @@ class Mriskregister extends APP_Model {
 					NULL as risk_treatment_owner,
 					'".$new_risk['created_by']."' as created_by,
 					NOW() as created_date,
-					NULL as switch_flag
+					NULL as switch_flag,
+					NULL as risk_level_after_mitigation,
+					NULL as risk_impact_level_after_mitigation,
+					NULL as risk_likelihood_key_after_mitigation,
+					NULL as risk_level_after_kri,
+					NULL as risk_impact_level_after_kri,
+					NULL as risk_likelihood_key_after_kri
+
 					from t_risk where risk_id = ?";
 			$res = $this->db->query($sql, $lib_par);
 			

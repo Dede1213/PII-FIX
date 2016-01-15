@@ -205,13 +205,16 @@ var RiskVerify = function() {
         		});
         	});
 
+            $('#primary-risk-button-submit2').on('click', function () {
+                me.submitRiskData2('verify')
+            });
         	
         	$('#primary-risk-button-submit').on('click', function () {
         		me.submitRiskData('verify')
         	});
 
             $('#changes-risk-button-save-primary').on('click', function () {
-                me.submitRiskData('save2')
+                me.submitRiskData('save-primary')
             });
         	
         	
@@ -495,6 +498,111 @@ var RiskVerify = function() {
         		me.populateRisk($('#input-form-control'), data_risk);
         	});
         },
+        submitRiskData2: function(submitMode) {
+            var form1 = $('#input-form').validate();
+            var fvalid = form1.form();
+            if (fvalid) {
+                var me = this;
+                var param = $('#input-form').serializeArray();
+                
+                // prepare impact data
+                var impact_param = {};
+                var cnt = 0;
+                $.each(me.dataRiskImpact, function(key, value) { 
+                    var ar = key.split('_', 2);
+                    impact_param['impact['+cnt+'][impact_id]'] = ar[1];
+                    impact_param['impact['+cnt+'][impact_level]'] = value;
+                    cnt++;
+                });
+                //console.log(impact_param);
+                
+                // prepare control data
+                var control_param = {};
+                var cnt = 0;
+                $.each(me.dataControl, function(key, value) { 
+                    control_param['control['+cnt+'][existing_control_id]'] = value.existing_control_id;
+                    control_param['control['+cnt+'][risk_existing_control]'] = value.risk_existing_control;
+                    control_param['control['+cnt+'][risk_evaluation_control]'] = value.risk_evaluation_control;
+                    control_param['control['+cnt+'][risk_control_owner]'] = value.risk_control_owner;
+                    cnt++;
+                });
+                
+                if (cnt < 1) {
+                    MainApp.viewGlobalModal('error', 'Please Input at least One Control for this Risk');
+                    return false;
+                }
+                
+                // prepare action plan data
+                var actplan_param = {};
+                var cnt = 0;
+                $.each(me.dataActionPlan, function(key, value) { 
+                    actplan_param['actplan['+cnt+'][action_plan]'] = value.action_plan;
+                    actplan_param['actplan['+cnt+'][due_date]'] = value.due_date;
+                    actplan_param['actplan['+cnt+'][division]'] = value.division;
+                    cnt++;
+                });
+                //console.log(impact_param);
+                
+                if (cnt < 1) {
+                    MainApp.viewGlobalModal('error', 'Please Input at least One Action Plan for this Risk');
+                    return false;
+                }
+                
+                if (submitMode == 'setAsPrimary') {
+                    var url = site_url+'/main/mainrac/treatmentSetAsPrimary';
+                    var text = 'Are You sure you want to Save and Set As Primary this Risk ?';
+                } else if (submitMode == 'verify') {
+                    var url = site_url+'/main/mainrac/treatmentVerify2';
+                    var text = 'Are You sure you want to Verify with Primary Data for this Risk ?';
+                } else if (submitMode == 'verifyChanges') {
+                    var url = site_url+'/main/mainrac/treatmentVerifyChanges';
+                    var text = 'Are You sure you want to Verify with Changes Data for this Risk ?';
+                }else if (submitMode == 'save2') {
+                    var url = site_url+'/main/mainrac/treatmentSaveprimary';
+                    var text = 'Are You sure you want to Save this Risk ?';
+                } else {
+                    var url = site_url+'/main/mainrac/treatmentSave';
+                    var text = 'Are You sure you want to Save this Risk ?';
+                }
+                
+                var mod = MainApp.viewGlobalModal('confirm', text);
+                mod.find('button.btn-primary').off('click');
+                mod.find('button.btn-primary').one('click', function(){
+                    mod.modal('hide');
+                    Metronic.blockUI({ boxed: true });
+                    $.post(
+                        url,
+                        $( "#input-form" ).serialize()+ '&' + $.param(impact_param)+ '&' + $.param(actplan_param)+ '&' + $.param(control_param),
+                        function( data ) {
+                            Metronic.unblockUI();
+                            if(data.success) {
+                                var mod = MainApp.viewGlobalModal('success', 'Success Updating your Risk');
+                                mod.find('button.btn-ok-success').one('click', function(){
+                                    //location.href=site_url+'/risk/RiskRegister/modifyRisk/'+g_risk_id;
+                                    if (submitMode == 'setAsPrimary') {
+                                        location.href=site_url+'/main/mainrac/riskTreatmentForm/'+g_risk_id;
+                                    } else if (submitMode == 'verify' || submitMode == 'verifyChanges') {
+                                        location.href=site_url+'/main/mainrac';
+                                    }else if (submitMode == 'save2') {
+                                        location.href=site_url+'/main/mainrac';
+                                    } else {
+                                        location.href=site_url+'/main/mainrac/riskTreatmentForm/'+g_risk_id;
+                                    }
+                                });
+                                
+                            } else {
+                                MainApp.viewGlobalModal('error', data.msg);
+                            }
+                            
+                        },
+                        "json"
+                    ).fail(function() {
+                        Metronic.unblockUI();
+                        MainApp.viewGlobalModal('error', 'Error Submitting Data');
+                     });
+                });
+            }
+        },
         submitRiskData: function(submitMode) {
         	var form1 = $('#input-form').validate();
         	var fvalid = form1.form();
@@ -554,7 +662,7 @@ var RiskVerify = function() {
             	} else if (submitMode == 'verifyChanges') {
             		var url = site_url+'/main/mainrac/treatmentVerifyChanges';
             		var text = 'Are You sure you want to Verify with Changes Data for this Risk ?';
-            	}else if (submitMode == 'save2') {
+            	}else if (submitMode == 'save-primary') {
                     var url = site_url+'/main/mainrac/treatmentSaveprimary';
                     var text = 'Are You sure you want to Save this Risk ?';
                 } else {
@@ -580,8 +688,8 @@ var RiskVerify = function() {
             							location.href=site_url+'/main/mainrac/riskTreatmentForm/'+g_risk_id;
             						} else if (submitMode == 'verify' || submitMode == 'verifyChanges') {
             							location.href=site_url+'/main/mainrac';
-            						}else if (submitMode == 'save2') {
-                                        location.href=site_url+'/main/mainrac';
+            						}else if (submitMode == 'save-primary') {
+                                        location.href=site_url+'/main/mainrac/riskTreatmentForm/'+g_risk_id;
                                     } else {
             							location.href=site_url+'/main/mainrac/riskTreatmentForm/'+g_risk_id;
             						}

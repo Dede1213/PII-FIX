@@ -19,6 +19,10 @@ var ActionVerify = function() {
         	$('#changes-risk-button-save').on('click', function () {
         		me.submitRiskData('save')
         	});
+
+            $('#changes-risk-button-save-primary').on('click', function () {
+                me.submitRiskData('save-primary')
+            });
         	
         	$('#changes-risk-button-cancel').on('click', function () {
         		var mod = MainApp.viewGlobalModal('confirm', 'Are You sure you want to cancel your Risk Treatment ? You will loose your unsaved data.');
@@ -45,7 +49,10 @@ var ActionVerify = function() {
             	} else if (submitMode == 'verify') {
             		var url = site_url+'/main/mainrac/actionVerify';
             		var text = 'Are You sure you want to Verify this Action Plan ?';
-            	} else {
+            	}else if (submitMode == 'save-primary') {
+                    var url = site_url+'/main/mainrac/actionSaveprimary';
+                    var text = 'Are You sure you want to save this Action Plan ?';
+                } else {
             		var url = site_url+'/main/mainrac/actionSave';
             		var text = 'Are You sure you want to Save this Action Plan ?';
             	}

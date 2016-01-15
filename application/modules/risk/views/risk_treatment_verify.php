@@ -28,23 +28,25 @@
 	$id = $risk['risk_id'];
 	//$username = $this->session->credential['username'];
 	$this->load->database();
-	$sql="select
+	$sql="SELECT
 (CASE WHEN 
 t_risk.risk_cause = t_risk_change.risk_cause 
 and t_risk.risk_impact = t_risk_change.risk_impact
 and t_risk.risk_impact_level = t_risk_change.risk_impact_level 
 and t_risk.risk_likelihood_key = t_risk_change.risk_likelihood_key
-and t_risk.risk_level = t_risk.risk_level
+and t_risk.risk_level = t_risk_change.risk_level
 and t_risk.suggested_risk_treatment = t_risk_change.suggested_risk_treatment
-and count(t_risk_control.risk_id) = count(t_risk_control_change.risk_id)
-and t_risk_control.risk_id = t_risk_control_change.risk_id
+and 
+(CASE WHEN count(t_risk_control.risk_id) = count(t_risk_control_change.risk_id) and count(t_risk_action_plan.risk_id) = count(t_risk_action_plan_change.risk_id) 
+THEN
+t_risk_control.risk_id = t_risk_control_change.risk_id
 and t_risk_control.risk_existing_control = t_risk_control_change.risk_existing_control
 and t_risk_control.risk_evaluation_control = t_risk_control_change.risk_evaluation_control
 and t_risk_control.risk_control_owner = t_risk_control_change.risk_control_owner
-and count(t_risk_action_plan.risk_id) = count(t_risk_action_plan_change.risk_id)
 and t_risk_action_plan.action_plan = t_risk_action_plan_change.action_plan
 and t_risk_action_plan.due_date = t_risk_action_plan_change.due_date
 and t_risk_action_plan.division = t_risk_action_plan_change.division
+END)
 THEN 1
 ELSE 0 
 END) as 'status'
@@ -53,8 +55,8 @@ join t_risk_change on t_risk.risk_id = t_risk_change.risk_id
 join t_risk_control on t_risk.risk_id = t_risk_control.risk_id
 join t_risk_control_change on t_risk.risk_id = t_risk_control_change.risk_id
 join t_risk_action_plan on t_risk.risk_id = t_risk_action_plan.risk_id
-join t_risk_action_plan_change on t_risk.risk_id = t_risk_action_plan.risk_id
-WHERE t_risk.risk_id = '$id'";
+join t_risk_action_plan_change on t_risk.risk_id = t_risk_action_plan_change.risk_id
+WHERE t_risk.risk_id ='$id'";
 
 	$query = $this->db->query($sql);
 	$row = $query->row(); 
@@ -77,26 +79,40 @@ WHERE t_risk.risk_id = '$id'";
 						<div class="form-body">
 							<div class="form-group">
 								<input type="hidden" name="risk_id" value="">
-								<label class="col-md-1 control-label smaller cl-compact">Risk ID</label>
-								<div class="col-md-6">
+								<label class="col-md-3 control-label smaller cl-compact">Risk ID</label>
+								<div class="col-md-9">
 									<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_code" placeholder="">
 								</div>
 							</div>
+							
 							<div class="form-group">
-								<label class="col-md-1 control-label smaller cl-compact">Risk Event</label>
-								<div class="col-md-6">
-								<input type="text" class="form-control input-sm input-readview" name="risk_event" placeholder="">
+								<label class="col-md-3 control-label smaller cl-compact">Risk Event</label>
+								<div class="col-md-9">
+								<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_event" placeholder=""></textarea>
 								</div>
 							</div>
+
 							<div class="form-group">
-								<label class="col-md-1 control-label smaller cl-compact">Risk Event Description</label>
-								<div class="col-md-6">
+								<label class="col-md-3 control-label smaller cl-compact">Risk Event Description</label>
+								<div class="col-md-9">
 								<textarea class="form-control input-readview" rows="3" name="risk_description" placeholder=""></textarea>
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-1 control-label smaller cl-compact" >Impact Level </label>
-								<div class="col-md-6">
+								<label class="col-md-3 control-label smaller cl-compact">Risk cause</label>
+								<div class="col-md-9">
+								<textarea class="form-control input-readview" rows="3" name="risk_cause" placeholder=""></textarea>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-3 control-label smaller cl-compact">Risk impact</label>
+								<div class="col-md-9">
+								<textarea class="form-control input-readview" rows="3" name="risk_impact" placeholder=""></textarea>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-3 control-label smaller cl-compact" >Impact Level </label>
+								<div class="col-md-9">
 									<div class="input-group">
 										<input type="hidden" name="risk_impact_level_id" value=""/>
 										<input type="text" class="form-control input-sm" readonly="true" name="risk_impact_level_value" placeholder="">
@@ -108,8 +124,8 @@ WHERE t_risk.risk_id = '$id'";
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-1 control-label smaller cl-compact" >Likelihood  </label>
-								<div class="col-md-6">
+								<label class="col-md-3 control-label smaller cl-compact" >Likelihood </label>
+								<div class="col-md-9">
 									<div class="input-group">
 										<input type="hidden" name="risk_likelihood_id" value=""/>
 										<input type="text" class="form-control input-sm" readonly="true" name="risk_likelihood_value" placeholder="">
@@ -122,14 +138,14 @@ WHERE t_risk.risk_id = '$id'";
 							</div>
 							<div class="form-group">
 								<input type="hidden" name="risk_level_id" value=""/>
-								<label class="col-md-1 control-label smaller cl-compact" >Risk Level </label>
-								<div class="col-md-6">
+								<label class="col-md-3 control-label smaller cl-compact" >Risk Level </label>
+								<div class="col-md-9">
 								<input type="text" class="form-control input-sm" readonly="true" name="risk_level" placeholder="">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-1 control-label smaller cl-compact" >Risk Owner</label>
-								<div class="col-md-6">
+								<label class="col-md-3 control-label smaller cl-compact" >Risk Owner</label>
+								<div class="col-md-9">
 								<select class="form-control input-sm" name="risk_division">
 									<?php foreach($division_list as $row) { ?>
 									<option value="<?=$row['ref_key']?>"><?=$row['ref_value']?></option>
@@ -138,7 +154,7 @@ WHERE t_risk.risk_id = '$id'";
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-1 control-label small cl-compact" >Risk Treatment</label>
+								<label class="col-md-3 control-label small cl-compact" >Risk Treatment</label>
 								<div class="col-md-6">
 									<select class="form-control input-sm" name="suggested_risk_treatment">
 										<?php foreach($treatment_list as $row) { ?>
@@ -207,9 +223,11 @@ WHERE t_risk.risk_id = '$id'";
 							</div>
 						</div>
 						<div class="form-actions right">
-							<button id="changes-risk-button-submit-primary" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Verify</button>
+							<button id="primary-risk-button-submit2" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Verify</button>
 							<button id="changes-risk-button-save-primary" type="button" class="btn blue"><i class="fa fa-circle-o"></i> Save</button>
 							<button type="button" class="btn yellow" id="changes-risk-button-cancel"><i class="fa fa-times"></i> Cancel</button>
+							
+					
 						</div>
 					</form>
 				</div>	
@@ -245,10 +263,11 @@ WHERE t_risk.risk_id = '$id'";
 									<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['risk_code']?>" name="risk_id" placeholder="">
 								</div>
 							</div>
+							
 							<div class="form-group">
 								<label class="col-md-3 control-label smaller cl-compact">Risk Event</label>
 								<div class="col-md-9">
-								<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['risk_event']?>" name="risk_event" placeholder="">
+								<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_event" placeholder=""><?=$risk['risk_event']?></textarea>
 								</div>
 							</div>
 							<div class="form-group">
@@ -260,13 +279,13 @@ WHERE t_risk.risk_id = '$id'";
 							<div class="form-group">
 								<label class="col-md-3 control-label smaller cl-compact">Risk Cause</label>
 								<div class="col-md-9">
-								<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_cause" placeholder=""><?=$risk['risk_cause']?></textarea>
+								<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_cause2" placeholder=""><?=$risk['risk_cause']?></textarea>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-md-3 control-label smaller cl-compact">Risk Impact</label>
 								<div class="col-md-9">
-								<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_impact" placeholder=""><?=$risk['risk_impact']?></textarea>
+								<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_impact2" placeholder=""><?=$risk['risk_impact']?></textarea>
 								</div>
 							</div>
 							<div class="form-group">
@@ -376,10 +395,11 @@ WHERE t_risk.risk_id = '$id'";
 									<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_code" placeholder="">
 								</div>
 							</div>
+							
 							<div class="form-group">
 								<label class="col-md-3 control-label smaller cl-compact">Risk Event</label>
 								<div class="col-md-9">
-								<input type="text" class="form-control input-sm input-readview" name="risk_event" placeholder="">
+								<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_event" placeholder=""></textarea>
 								</div>
 							</div>
 							<div class="form-group">
@@ -389,13 +409,13 @@ WHERE t_risk.risk_id = '$id'";
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact">Risk Cause</label>
+								<label class="col-md-3 control-label smaller cl-compact">Risk cause</label>
 								<div class="col-md-9">
 								<textarea class="form-control input-readview" rows="3" name="risk_cause" placeholder=""></textarea>
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact">Risk Impact</label>
+								<label class="col-md-3 control-label smaller cl-compact">Risk impact</label>
 								<div class="col-md-9">
 								<textarea class="form-control input-readview" rows="3" name="risk_impact" placeholder=""></textarea>
 								</div>

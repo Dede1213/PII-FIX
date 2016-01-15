@@ -589,12 +589,13 @@ class Risk extends APP_Model {
 						left join t_risk b on a.risk_id = b.risk_id
 						left join m_user c on a.assigned_to = c.username
 						left join m_division d on a.division = d.division_id
-						join m_periode on m_periode.periode_id = b.periode_id
+						left join m_periode on m_periode.periode_id = b.periode_id
 						where 
 						a.action_plan_status > 3
 						and a.division = ?
 						and (m_periode.periode_start <= '".$date."'
 						and m_periode.periode_end >= '".$date."')
+						AND m_periode.periode_id = null
 
 						".$ext;
 				if ($par) {
@@ -648,11 +649,12 @@ class Risk extends APP_Model {
 					left join t_risk b on a.risk_id = b.risk_id
 					left join m_user c on a.assigned_to = c.username
 					left join m_division d on a.division = d.division_id
-					join m_periode on m_periode.periode_id = b.periode_id
+					left join m_periode on m_periode.periode_id = b.periode_id
 					where 
 					a.action_plan_status > 3
 					and (m_periode.periode_start <= '".$date."'
 						and m_periode.periode_end >= '".$date."')
+						AND m_periode.periode_id = null
 					";
 		}
 		

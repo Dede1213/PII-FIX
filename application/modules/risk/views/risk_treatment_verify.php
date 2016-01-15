@@ -36,6 +36,9 @@ and t_risk.risk_impact_level = t_risk_change.risk_impact_level
 and t_risk.risk_likelihood_key = t_risk_change.risk_likelihood_key
 and t_risk.risk_level = t_risk_change.risk_level
 and t_risk.suggested_risk_treatment = t_risk_change.suggested_risk_treatment
+and t_risk.risk_owner = t_risk_change.risk_owner
+and t_risk.risk_division = t_risk_change.risk_division
+
 and 
 (CASE WHEN count(t_risk_control.risk_id) = count(t_risk_control_change.risk_id) and count(t_risk_action_plan.risk_id) = count(t_risk_action_plan_change.risk_id) 
 THEN

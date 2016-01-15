@@ -279,7 +279,7 @@ gridActionExec.init({
 		//"scrollX": true,
         "pageLength": 25, // default record count per page
         "ajax": {
-            "url": site_url+"/main/mainrac/getActionPlanExec" // ajax source
+            "url": site_url+"/main/mainrac/getActionPlanExec_adt" // ajax source
         },
         "columnDefs": [ {
         	"targets": 0,
@@ -647,6 +647,88 @@ var Dashboard = function() {
         	gridTreatment.setAjaxParam("filter_value", fval);
         	gridTreatment.getDataTable().ajax.reload();
         },
+		 filterDataGridActionplan: function() {
+        	var fby = $('#tab_action_plan_list-filterBy').val();
+        	var fval = $('#tab_action_plan_list-filterValue').val();
+        	
+        	gridActionPlan.clearAjaxParams();
+        	gridActionPlan.setAjaxParam("filter_by", fby);
+        	gridActionPlan.setAjaxParam("filter_value", fval);
+        	gridActionPlan.getDataTable().ajax.reload();
+        },
+		 filterDataGridActionplanexec: function() {
+        	var fby = $('#tab_action_plan_exec-filterBy').val();
+        	var fval = $('#tab_action_plan_exec-filterValue').val();
+        	
+        	gridActionExec.clearAjaxParams();
+        	gridActionExec.setAjaxParam("filter_by", fby);
+        	gridActionExec.setAjaxParam("filter_value", fval);
+        	gridActionExec.getDataTable().ajax.reload();
+        },
+       
+	};	
+}();
+
+
+var Actionplan_adt = function() {
+    return {
+        init: function() {
+        	var me = this;
+        	
+        	// TAB CONTROL FOR BREADCRUMB
+        	$('ul.nav-tabs a[data-toggle=tab]').on('click', function() {
+        		var hrefa = $(this).attr('href');
+        		var ulid = hrefa.replace('#', '');
+        		var title = $(this).html().trim();
+        		$('#bread_tab_title').html(title);
+        	});
+        	 
+             $('#datatable_cr').on('click', 'button.button-grid-delete', function(e) {
+                    e.preventDefault();
+                    
+                    var r = this.parentNode.parentNode.parentNode;
+                    //alert(r);exit;
+                    var data = gridRiskList.getDataTable().row(r).data();
+ 
+                    me.deleteData(data);
+                });
+ 
+        	$('#tab_action_plan_exec-filterButton').on('click', function() {
+        		me.filterDataGridActionplanexec();
+        	});
+
+        },
+       
+         deleteData: function(data) {
+            
+                var mod = MainApp.viewGlobalModal('warning', 'Are You sure you want to delete this data?');
+                mod.find('button.btn-danger').one('click', function(){
+                    mod.modal('hide');
+                    
+                    Metronic.blockUI({ boxed: true });
+                    var url = site_url+'/admin/qna/qnaDeleteData';
+                    $.post(
+                        url,
+                        { 'id':  data.DT_RowId},
+                        function(data) {
+                            Metronic.unblockUI();
+                            if(data.success) {
+                                gridRiskList.getDataTable().ajax.reload();
+                                
+                                MainApp.viewGlobalModal('success', 'Success Delete Data');
+                            } else {
+                                MainApp.viewGlobalModal('error123', data.msg);
+                            }
+                            
+                        },
+                        "json"
+                    ).fail(function() {
+                        Metronic.unblockUI();
+                        MainApp.viewGlobalModal('error', 'Error Submitting Data');
+                     });
+                });
+            },
+        
 		 filterDataGridActionplan: function() {
         	var fby = $('#tab_action_plan_list-filterBy').val();
         	var fval = $('#tab_action_plan_list-filterValue').val();

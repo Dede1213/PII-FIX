@@ -611,6 +611,62 @@ class Risk extends APP_Model {
 			}
 		}
 		
+		if ($mode == 'ownedActionPlanExec_adt') {
+			if (isset($defFilter['role_id']) && ($defFilter['role_id'] == '4' || $defFilter['role_id'] == '5')) {
+				$ext = '';
+				$rpar = array('division_id' => $defFilter['division_id']);
+				
+				if ($defFilter['role_id'] == '4') { // division_head
+				} else {  // pic
+					$ext = ' and a.assigned_to = ? ';
+					$rpar['uid'] = $defFilter['userid'];
+				}
+				
+				$date = date("Y-m-d");
+				
+				$sql = "select 
+						a.*,
+						concat('AP.', LPAD(a.id, 6, '0')) as act_code,
+						b.risk_code,
+						c.display_name as assigned_to_v,
+						d.division_name as division_name,
+						date_format(a.due_date, '%d-%m-%Y') as due_date_v,
+						case 
+							when a.assigned_to = '".$defFilter['userid']."' then 1
+							else 0
+						end as is_owner,
+						case 
+							when '4' = '".$defFilter['role_id']."' then 1
+							else 0
+						end as is_head,
+						date_format(a.revised_date, '%d-%m-%Y') as revised_date_v
+						from 
+						t_risk_action_plan a
+						left join t_risk b on a.risk_id = b.risk_id
+						left join m_user c on a.assigned_to = c.username
+						left join m_division d on a.division = d.division_id
+						  join m_periode on m_periode.periode_id = b.periode_id
+						where 
+						a.action_plan_status > 3
+						and a.division = ?
+						and (m_periode.periode_start <= '".$date."'
+						and m_periode.periode_end >= '".$date."')
+					 
+
+						".$ext;
+				if ($par) {
+					$rpar['p1'] = $par['p1'];
+				}
+				$par = $rpar;
+				
+				$sql = $sql.$ex_filter.$ex_or;
+				$res = $this->getPagingData($sql, $par, $page, $row, 'id', true);
+				return $res;
+			} else {
+				return false;
+			}
+		}
+		
 		if ($mode == 'racActionPlan') {
 			
 			$date = date("Y-m-d");
@@ -655,6 +711,30 @@ class Risk extends APP_Model {
 					and (m_periode.periode_start <= '".$date."'
 						and m_periode.periode_end >= '".$date."')
 						AND m_periode.periode_id = null
+					";
+		}
+		
+			if ($mode == 'racActionPlanExec_adt') {
+			
+			$date = date("Y-m-d");
+			$sql = "select 
+					a.*,
+					concat('AP.', LPAD(a.id, 6, '0')) as act_code,
+					b.risk_code,
+					c.display_name as assigned_to_v,
+					d.division_name as division_name,
+					date_format(a.due_date, '%d-%m-%Y') as due_date_v
+					from 
+					t_risk_action_plan a
+					left join t_risk b on a.risk_id = b.risk_id
+					left join m_user c on a.assigned_to = c.username
+					left join m_division d on a.division = d.division_id
+					join m_periode on m_periode.periode_id = b.periode_id
+					where 
+					a.action_plan_status > 3
+					and (m_periode.periode_start <= '".$date."'
+						and m_periode.periode_end >= '".$date."')
+						 
 					";
 		}
 		

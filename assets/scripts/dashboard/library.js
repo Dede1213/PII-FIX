@@ -103,6 +103,53 @@ gridRiskList_ap.init({
 });
 
 
+var gridRiskList_kri = new Datatable();
+gridRiskList_kri.init({
+    src: $("#datatablekri_ajax"),
+    onSuccess: function (grid) {
+        // execute some code after table records loaded
+    },
+    onError: function (grid) {
+        // execute some code on network or other general error  
+    },
+    onDataLoad: function(grid) {
+        // execute some code on ajax data load
+    },
+    loadingMessage: 'Loading...',
+    dataTable: { // here you can define a typical datatable settings from http://datatables.net/usage/options 
+
+        // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
+        // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/scripts/datatable.js). 
+        // So when dropdowns used the scrollable div should be removed. 
+        //"dom": "<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r>t<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'>>",
+        
+		//"scrollX": true,
+        "pageLength": 25, // default record count per page
+        "ajax": {
+            "url": site_url+"/library/getAllRisk_kri" // ajax source
+        },
+        "columns": [
+			{ "data": "kri_code" },
+			{ "data": "key_risk_indicator" },
+			{ "data": "treshold" }, 
+			{ "data": "threshold value" }, 
+			{ 
+            "data": null,
+            "orderable": false,
+            "defaultContent": '<div class="btn-group">'+
+                    '<button type="button" class="btn blue btn-xs button-grid-edit" > <i class="fa fa-pencil"></i></button>'+
+					 
+					'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"></i></button>'+
+                '</div>'
+               
+           }
+       ],
+        "order": [
+            [1, "asc"]
+        ]// set first column as a default sort by asc
+    }
+});
+
 var gridRiskList_ec = new Datatable();
 gridRiskList_ec.init({
     src: $("#datatableec_ajax"),
@@ -261,6 +308,15 @@ var Dashboard = function() {
 					
             });
 			
+			$('#datatablekri_ajax').on('click', 'button.button-grid-delete', function(e) {
+			  
+                    e.preventDefault();                    
+                    var r = this.parentNode.parentNode.parentNode; 
+                    var data = gridRiskList_kri.getDataTable().row(r).data(); 
+                    me.deleteData_kri(data);
+					
+            });
+			
 			$('#datatabletax_ajax').on('click', 'button.button-grid-delete', function(e) {
 			  
                     e.preventDefault();                    
@@ -289,6 +345,16 @@ var Dashboard = function() {
 					var r = this.parentNode.parentNode.parentNode; 
                     var data = gridRiskList_ap.getDataTable().row(r).data(); 
                     me.showriskform_ap(data);
+				
+			});
+			
+			$('#datatablekri_ajax').on('click', 'button.button-grid-edit', function(e) {
+		    
+				e.preventDefault();
+	            	
+					var r = this.parentNode.parentNode.parentNode; 
+                    var data = gridRiskList_kri.getDataTable().row(r).data(); 
+                    me.showriskform_kri(data);
 				
 			});
 			
@@ -468,10 +534,70 @@ var Dashboard = function() {
 	            	 
 	            });
  
-
+				$('#library-modal-listriskkri-update').click(function(e) {
+	            	  
+	            		e.preventDefault();
+	            		var l = Ladda.create(this);
+	            		l.start();
+	            		
+	            		 
+	            			var url = site_url+'/library/listriskkri_update';
+	            			var tx = 'Insert';
+	            		 
+	            		$.post(
+	            			url,
+	            			$( "#modal-listrisk-form" ).serialize(),
+	            			function( data ) {
+	            				l.stop();
+	            				if(data.success) {
+	            					gridRiskList_kri.getDataTable().ajax.reload();
+	            					
+	            					$('#modal_listrisk').modal('hide');
+	            					
+	            					MainApp.viewGlobalModal('success', 'Success '+tx+' Data');
+	            				} else {
+	            					MainApp.viewGlobalModal('error', data.msg);
+	            				}
+	            				
+	            			},
+	            			"json"
+	            		).fail(function() {
+	            			l.stop();
+	            			MainApp.viewGlobalModal('error', 'Error Submitting Data');
+	            		 });
+	            	 
+	            });
         },
 		
-		
+		deleteData_kri: function(data) {
+            
+                var mod = MainApp.viewGlobalModal('warning', 'Are You sure you want to delete this data?');
+                mod.find('button.btn-danger').one('click', function(){
+                    mod.modal('hide');
+                    
+                    Metronic.blockUI({ boxed: true });
+                    var url = site_url+'/library/libraryriskDeleteData_kri';
+                    $.post(
+                        url,
+                        { 'id':  data.DT_RowId},
+                        function(data) {
+                            Metronic.unblockUI();
+                            if(data.success) {
+                                gridRiskList_kri.getDataTable().ajax.reload();
+                                
+                                MainApp.viewGlobalModal('success', 'Success Delete Data');
+                            } else {
+                                MainApp.viewGlobalModal('error123', data.msg);
+                            }
+                            
+                        },
+                        "json"
+                    ).fail(function() {
+                        Metronic.unblockUI();
+                        MainApp.viewGlobalModal('error', 'Error Submitting Data');
+                     });
+                });
+        },
 		 
 		deleteData_ec: function(data) {
             
@@ -664,6 +790,45 @@ var Dashboard = function() {
 	        	$('#modal-listrisk-form').find('input[name=id]').attr('readonly', true).val("AP."+data.id);
 	        	$('#modal-listrisk-form').find('input[name=action_plan]').attr('readonly', false).val(data.action_plan);
 				$('#modal-listrisk-form').find('input[name=due_date]').attr('readonly', false).val(data.due_date);
+				  
+				$('#modal_listrisk').modal('show');
+	        	this.dataMode = 'view';
+	        },
+			
+			showriskform_kri: function(data) {
+			
+				var htmlopt = "";
+				
+				 var url = site_url+'/library/get_treshold_type';
+                    $.post(
+                        url,
+                        { 'id':  ""},
+                        function(datax) {
+						 	
+							for (var i = '0'; i < datax.length; i++) {
+								var datanya = datax[i];
+								  
+								if(data.treshold_type == datanya){
+								var select = "selected = selected";
+							 
+								}else{
+								var select = "";
+								 
+								}
+								htmlopt += "<option value = '"+datanya+"' "+select+">"+datanya+"</option>";
+								 
+							}	
+							$("#treshold_type").html(htmlopt);
+			
+                        },
+                        "json"
+                    ).fail(function() {                         
+                        MainApp.viewGlobalModal('error', 'Error Submitting Data');
+                     });
+				 
+	        	$('#modal-listrisk-form').find('input[name=kri_code]').attr('readonly', true).val(data.kri_code);
+	        	$('#modal-listrisk-form').find('input[name=key_risk_indicator]').attr('readonly', false).val(data.key_risk_indicator);
+				$('#modal-listrisk-form').find('input[name=treshold]').attr('readonly', false).val(data.treshold);
 				  
 				$('#modal_listrisk').modal('show');
 	        	this.dataMode = 'view';

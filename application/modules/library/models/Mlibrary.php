@@ -80,6 +80,32 @@ class Mlibrary extends APP_Model {
 		return $res;
 	}
 	
+	public function getAllRisk_kri($page, $row, $order_by = null, $order = null, $filter_by = null, $filter_value = null)
+	{
+		$ex_or = $ex_filter = '';
+		$par = false;
+		
+		if ($order_by != null) {
+			$order_by = $order_by;
+			$ex_or = ' order by '.$order_by.' '.$order;
+		}
+		
+		if ($filter_by != null && $filter_value != null) {
+			$ex_filter = ' where '.$filter_by.' like ? ';
+			$par['p1'] = '%'.$filter_value.'%';
+		}
+		$date = date("Y-m-d");
+		$sql = "select t1.id, t1.kri_code, t1.key_risk_indicator, t1.treshold, (select GROUP_CONCAT(t2.operator,' ', t2.value_1, ' = ', t2.result) from t_kri_treshold t2 where t2.kri_id=t1.id) as 'threshold value' 
+from t_kri t1 where kri_library_id is null
+				"
+				
+				.$ex_filter
+				
+				.$ex_or;
+		$res = $this->getPagingData($sql, $par, $page, $row, 'id', true);
+		return $res;
+	}
+	
 	public function getAllRisk_tax($page, $row, $order_by = null, $order = null, $filter_by = null, $filter_value = null)
 	{
 		$ex_or = $ex_filter = '';
@@ -178,6 +204,20 @@ from m_risk_category
 		return $res;
 	}
 	
+	public function deleteRisk_kri($risk_id, $uid, $update_point = 'D') {
+		// delete risk in child
+		  
+		$par['risk_id'] = $risk_id;
+		
+		$sql1 = "delete from t_kri where id=?";
+		$sql2 = "delete from t_kri_treshold where id=?"; 
+		
+		$res = $this->db->query($sql1, $par);
+		$res = $this->db->query($sql2, $par); 
+
+		return $res;
+	}
+	
 	public function deleteRisk_ec($risk_id, $uid, $update_point = 'D') {
 		// delete risk in child
 		  
@@ -236,6 +276,20 @@ from m_risk_category
 			";
 		}
 	  
+		$res = $this->db->query($sql);
+		return $res;
+	
+	}
+	
+	function listriskkri_update($data){
+	 
+			$sql = " 
+			UPDATE t_kri
+			SET key_risk_indicator='".$data['kri_code']."', treshold='".$data['treshold']."', treshold_type='".$data['treshold_type']."'
+			WHERE kri_code= '".$data['kri_code']."'	
+			 
+			";
+		 
 		$res = $this->db->query($sql);
 		return $res;
 	
@@ -304,4 +358,6 @@ from m_risk_category
 		
 		return $res;
 	}
+	
+	 
 }

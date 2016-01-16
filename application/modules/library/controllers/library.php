@@ -102,6 +102,25 @@ class Library extends APP_Controller {
 		}
 	}
 	
+	public function libraryriskDeleteData_kri()
+	{
+	
+		if (isset($_POST['id']) && is_numeric($_POST['id'])) {
+			$risk_id = $_POST['id'];
+			$this->load->model('Mlibrary');
+			$res = $this->Mlibrary->deleteRisk_kri($risk_id, $this->session->credential['username'], 'RISK_REGISTER_RAC-DELETE');
+			
+			if ($res) {
+				$data['success'] = true;
+				$data['msg'] = 'SUCCESS';
+			} else {
+				$data['success'] = false;
+				$data['msg'] = 'Error Deleting Data';
+			}
+			echo json_encode($data);
+		}
+	}
+	
 	public function libraryriskDeleteData_ec()
 	{
 	
@@ -212,6 +231,16 @@ class Library extends APP_Controller {
 	
 	}
 	
+	function get_treshold_type(){
+	 
+		$this->load->model('Mlibrary'); 
+		 
+		$data = array("SELECTION","VALUE");
+		 
+		echo json_encode($data);
+	
+	}
+	
 	public function getAllRisk_ap() {
 		$sess = $this->loadDefaultAppConfig();
 		$order_by = $order = $filter_by = $filter_value = null;
@@ -251,10 +280,57 @@ class Library extends APP_Controller {
 		echo json_encode($data);
 	}
 	
+	public function getAllRisk_kri() {
+		$sess = $this->loadDefaultAppConfig();
+		$order_by = $order = $filter_by = $filter_value = null;
+						
+		if (isset($_POST['order'][0]['column'])) {
+			$order_idx = $_POST['order'][0]['column'];
+			$order_by = $_POST['columns'][$order_idx]['data'];
+			$order = $_POST['order'][0]['dir'];
+		}
+		
+		if (isset($_POST['filter_by']) && isset($_POST['filter_value']) && $_POST['filter_value'] != '' ) {
+			$filter_by = $_POST['filter_by'];
+			$filter_value = $_POST['filter_value'];
+		}
+		
+		$page = ceil($_POST['start'] / $_POST['length'])+1;
+
+		$row = $_POST['length'];
+		$this->load->model('Mlibrary');
+		
+		$defFilter = array(
+			'userid' => $sess['session']['username']
+		);
+		$data = $this->Mlibrary->getAllRisk_kri($page, $row, $order_by, $order, $filter_by, $filter_value);
+		 
+		 
+		$data['draw'] = $_POST['draw']*1;
+		$data['page'] = $page;
+		echo json_encode($data);
+	}
+	
 	public function listriskap_update(){
 	
 		$this->load->model('Mlibrary');
 		$res = $this->Mlibrary->listriskap_update($this->input->post());
+		 
+			if ($res) {
+				$data['success'] = true;
+				$data['msg'] = 'SUCCESS';
+			} else {
+				$data['success'] = false;
+				$data['msg'] = 'Error saving Data';
+			}
+			echo json_encode($data);
+	
+	}
+	
+		public function listriskkri_update(){
+	
+		$this->load->model('Mlibrary');
+		$res = $this->Mlibrary->listriskkri_update($this->input->post());
 		 
 			if ($res) {
 				$data['success'] = true;
@@ -422,6 +498,38 @@ class Library extends APP_Controller {
 		echo json_encode($data);
 	}
 	
- 
+	public function kri()
+	{
+		$data = $this->loadDefaultAppConfig();
+		$data['indonya'] = base_url('index.php/library/kri');
+		$data['engnya'] = base_url('index.php/library/kri');			
+		$data['sidebarMenu'] = $this->getSidebarMenuStructure('library/kri');
+		$data['pageLevelStyles'] = '
+		<link rel="stylesheet" type="text/css" href="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
+		<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css"/>
+		<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
+		<link rel="stylesheet" type="text/css" href="assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css"/>
+		';
+		
+		$data['pageLevelScripts'] = '
+		<script type="text/javascript" src="assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+		<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
+		<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
+		<script type="text/javascript" src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+		<script src="assets/scripts/dashboard/library.js"></script>
+		';
+		
+		$data['pageLevelScriptsInit'] = 'Dashboard.init();
+		 
+		';
+		$this->load->model('risk/mriskregister');
+		$data['category'] = $this->mriskregister->getRiskCategory();
+		 
+		$this->load->view('main/header', $data);
+		$this->load->view('kri', $data);
+		$this->load->view('main/footer', $data);
+		 
+	}
 	 
 }

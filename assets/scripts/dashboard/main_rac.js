@@ -392,8 +392,14 @@ gridActionExec_adt.init({
         }, {
         	"targets": 5,
         	"data": "execution_status",
+			 
         	"render": function ( data, type, full, meta ) {
-        		return '<a target="_self" href="'+site_url+'/main/mainrac/actionPlanExecForm/'+full.id+'">'+data+'</a>';
+        	 
+				if(data == null){
+					return '';
+				}else{					 
+					return '<a target="_self" href="'+site_url+'/main/mainrac/actionPlanExecForm/'+full.id+'">'+data+'</a>';
+				}
         	}
         } ],
         "columns": [

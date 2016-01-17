@@ -755,7 +755,12 @@ var Dashboard = function() {
 	        						
 	        						MainApp.viewGlobalModal('success', 'Success Updating Action Plan Execution');
 	        					} else {
-	        						MainApp.viewGlobalModal('error', data.msg);
+	        						 
+                            //ubah
+                            var mod = MainApp.viewGlobalModal('warning-maintenance', 'This Risk Is Under Maintenance by RAC you cannot modify this risk until the process done');
+                            mod.find('button.btn-ok-success').one('click', function(){
+                                location.href=site_url+'/main/mainpic';
+                            });
 	        					}
 	        				},
 	        				"json"

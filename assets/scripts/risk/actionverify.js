@@ -23,6 +23,10 @@ var ActionVerify = function() {
             $('#changes-risk-button-save-primary').on('click', function () {
                 me.submitRiskData('save-primary')
             });
+
+              $('#changes-risk-button-save-primary2').on('click', function () {
+                me.submitRiskData('save-primary2')
+            });
         	
         	$('#changes-risk-button-cancel').on('click', function () {
         		var mod = MainApp.viewGlobalModal('confirm', 'Are You sure you want to cancel your Risk Treatment ? You will loose your unsaved data.');
@@ -52,6 +56,9 @@ var ActionVerify = function() {
             	}else if (submitMode == 'save-primary') {
                     var url = site_url+'/main/mainrac/actionSaveprimary';
                     var text = 'Are You sure you want to save this Action Plan ?';
+                }else if (submitMode == 'save-primary2') {
+                    var url = site_url+'/main/mainrac/actionSaveprimary2';
+                    var text = 'Are You sure you want to save this Action Plan ?';
                 } else {
             		var url = site_url+'/main/mainrac/actionSave';
             		var text = 'Are You sure you want to Save this Action Plan ?';
@@ -75,7 +82,9 @@ var ActionVerify = function() {
             							location.href=site_url+'/main/mainrac/actionPlanForm/'+g_risk_id;
             						} else if (submitMode == 'verify') {
             							location.href=site_url+'/main/mainrac#tab_action_plan_list';
-            						} else {
+            						}else if (submitMode == 'save-primary2') {
+                                        location.href=site_url+'/risk/RiskRegister/undermaintenance';
+                                    } else {
             							location.href=site_url+'/main/mainrac/actionPlanForm/'+g_risk_id;
             						}
             					});

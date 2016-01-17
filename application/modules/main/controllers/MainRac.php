@@ -411,6 +411,68 @@ class MainRac extends APP_Controller {
 			$this->load->view('main/footer', $data);
 		}
 	}
+
+	public function riskRegisterFormunder($risk_id = null)
+	{
+		$data = $this->loadDefaultAppConfig();
+		$this->load->model('risk/mriskregister');
+		$this->load->model('risk/risk');
+		
+		$menu = '';
+		
+		$data['risk_id'] = $risk_id;
+		
+		$mode = 'periodic';
+		$data['submit_mode'] = 'periodic';
+		$menu = 'main/mainrac';
+		$data['valid_mode'] = true;
+		
+		$res = $this->risk->getRiskByIdNoRef($risk_id);
+		if ($res) {
+			
+				$verifyJs = '<script src="assets/scripts/risk/riskinput.js"></script>
+				<script src="assets/scripts/risk/riskverify.js"></script>';
+				
+				$data['pageLevelScriptsInit'] = "RiskInput.init('".$data['submit_mode']."');
+				RiskVerify.init();";
+				
+				$page_view = 'risk_register_verify';
+			
+			
+			$data['pageLevelStyles'] = '
+			<link rel="stylesheet" type="text/css" href="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
+			<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css"/>
+			<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
+			<link rel="stylesheet" type="text/css" href="assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css"/>
+			';
+			
+			$data['pageLevelScripts'] = '
+			<script type="text/javascript" src="assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+			<script type="text/javascript" src="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+			<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
+			<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
+			<script type="text/javascript" src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+			<script type="text/javascript" src="assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
+			'.$verifyJs.'
+			';
+			
+			$data['sidebarMenu'] = $this->getSidebarMenuStructure($menu);
+			
+			$data['modifyRisk'] = true;
+			$data['risk_id'] = $risk_id;
+			$data['indonya'] = base_url('index.php/maini/mainrac');
+			$data['engnya'] = base_url('index.php/main/mainrac');			
+			$data['category'] = $this->mriskregister->getRiskCategory();
+			$data['likelihood'] = $this->mriskregister->getRiskLikelihood();
+			$data['impact_list'] = $this->mriskregister->getRiskImpactForList();
+			$data['treatment_list'] = $this->mriskregister->getReference('treatment.status');
+			$data['division_list'] = $this->mriskregister->getDivisionList();
+			
+			$this->load->view('main/header', $data);
+			$this->load->view($page_view, $data);
+			$this->load->view('main/footer', $data);
+		}
+	}
 	
 	public function riskGetData($risk_id)
 	{
@@ -1445,6 +1507,38 @@ class MainRac extends APP_Controller {
 			echo json_encode($resp);
 		}
 	}
+//ubah mainten
+	public function actionSaveprimary2()
+	{
+		$resp['success'] = false;
+		$resp['msg'] = '';
+		
+		$data = $this->loadDefaultAppConfig();
+		$cred = $this->session->credential;
+		
+		if (isset($_POST['id']) && is_numeric($_POST['id'])) {
+			$dd = implode('-', array_reverse( explode('-', $_POST['due_date']) ));
+			$risk = array(
+				'action_plan' => $_POST['action_plan'],
+				'due_date' => $dd,
+				'division' => $_POST['division'],
+				'created_by' => $data['session']['username']
+			);
+			
+			$this->load->model('risk/risk');
+			$res = $this->risk->actionPlanSaveDraftprimary2($_POST['id'], $_POST['risk_id'], $risk, $data['session']['username']);
+			
+			$resp = array();
+			if ($res) {
+				$resp['success'] = true;
+				$resp['msg'] = 'SUCCESS';
+			} else {
+				$resp['success'] = false;
+				$resp['msg'] = $this->db->error();
+			}
+			echo json_encode($resp);
+		}
+	}
 	
 	public function getActionPlanExec() {
 		$sess = $this->loadDefaultAppConfig();
@@ -1589,6 +1683,60 @@ class MainRac extends APP_Controller {
 				);
 				$res = $this->risk->execOngoing($_POST['id'], $risk, $data['session']['username']);
 				$res = $this->risk->execUpdateRiskStatus($_POST['risk_id'], $data['session']['username']);
+			} 
+			else {
+				$dd = implode('-', array_reverse( explode('-', $_POST['revised_date']) ));
+				$risk = array(
+					'execution_reason' => $_POST['execution_reason'],
+					'revised_date' => $dd
+				);
+				$res = $this->risk->execExtend($_POST['id'], $risk, $data['session']['username']);
+			}
+			
+			// ----------- level update wawan
+			
+			$this->risk->updateKRI_Risk_level($_POST['risk_id'],$this->input->post());
+			
+			// ----------- end level update
+			
+			$resp = array();
+			if ($res) {
+				$resp['success'] = true;
+				$resp['msg'] = 'SUCCESS';
+			} else {
+				$resp['success'] = false;
+				$resp['msg'] = $this->db->error();
+			}
+			echo json_encode($resp);
+		}
+	}
+//ubah under
+	public function actionExecVerifyunder()
+	{
+		$resp['success'] = false;
+		$resp['msg'] = '';
+		
+		$data = $this->loadDefaultAppConfig();
+		$cred = $this->session->credential;
+		
+		if (isset($_POST['id']) && is_numeric($_POST['id'])) {
+			$this->load->model('risk/risk');
+			
+			if ($_POST['execution_status'] == 'COMPLETE' ) {
+				$risk = array(
+					'execution_explain' => $_POST['execution_explain'],
+					'execution_evidence' => $_POST['execution_evidence']
+				);
+				$res = $this->risk->execComplete($_POST['id'], $risk, $data['session']['username']);
+				//$res = $this->risk->execUpdateRiskStatus($_POST['risk_id'], $data['session']['username']);
+			} 
+			else if ($_POST['execution_status'] == "ONGOING") {
+				$risk = array(
+					'execution_explain' => $_POST['execution_explain'],
+					'execution_evidence' => $_POST['execution_evidence']
+				);
+				$res = $this->risk->execOngoing($_POST['id'], $risk, $data['session']['username']);
+				//$res = $this->risk->execUpdateRiskStatus($_POST['risk_id'], $data['session']['username']);
 			} 
 			else {
 				$dd = implode('-', array_reverse( explode('-', $_POST['revised_date']) ));

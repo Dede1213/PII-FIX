@@ -846,9 +846,9 @@ class Risk extends APP_Model {
 					b.risk_event,
 					c.display_name as created_by_v
 					from 
-					t_cr_risk a join t_risk b on a.risk_id = b.risk_id
-					left join m_user c on a.created_by = c.username
-					join m_periode on m_periode.periode_id = b.periode_id
+					t_cr_risk a LEFT OUTER JOIN t_risk b on a.risk_id = b.risk_id
+					LEFT OUTER JOIN m_user c on a.created_by = c.username
+					LEFT OUTER JOIN m_periode on m_periode.periode_id = b.periode_id
 					
 					
 					";
@@ -1508,6 +1508,15 @@ class Risk extends APP_Model {
 	
 	public function treatmentSaveDraft($risk_id, $risk, $impact, $actplan, $control, $uid)
 	{
+		//ubah2
+		$risk_id_cek = $risk_id;
+		$sql="select risk_existing_control from t_risk where risk_id = '$risk_id_cek' ";
+		$query = $this->db->query($sql);
+		$row = $query->row(); 
+		$hasil = $row->risk_existing_control;
+		if($hasil != 'under'){
+
+
 		$sql = "delete from t_risk_change where risk_id = ?";
 		$res = $this->db->query($sql, array('rid'=>$risk_id));
 		
@@ -1586,6 +1595,7 @@ class Risk extends APP_Model {
 		}
 		
 		return $res;
+	}
 	}
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public function riskChangeUpdate1ajah($risk_id, $risk, $impact, $actplan, $control, $uid)
@@ -1831,6 +1841,14 @@ class Risk extends APP_Model {
 	
 	public function treatmentSubmit($risk_id, $risk, $uid)
 	{
+		//ubah2
+		$risk_id_cek = $risk_id;
+		$sql="select risk_existing_control from t_risk where risk_id = '$risk_id_cek' ";
+		$query = $this->db->query($sql);
+		$row = $query->row(); 
+		$hasil = $row->risk_existing_control;
+		if($hasil != 'under'){
+
 		$this->_logHistory($risk_id, $uid, 'U');
 		
 		$sql = "update t_risk set
@@ -1843,6 +1861,7 @@ class Risk extends APP_Model {
 		$res = $this->db->query($sql, $risk);
 		
 		return $res;
+		}
 	}
 	
 	public function riskSwitchPrimary($risk_id)
@@ -2065,8 +2084,17 @@ class Risk extends APP_Model {
 		return $data;
 	}
 	
+	//ubah2
 	public function actionPlanSaveDraft($action_id, $risk_id, $risk, $uid) 
 	{
+		//ubah
+		$risk_id_cek = $risk_id;
+		$sql="select risk_existing_control from t_risk where risk_id = '$risk_id_cek' ";
+		$query = $this->db->query($sql);
+		$row = $query->row(); 
+		$hasil = $row->risk_existing_control;
+		if($hasil != 'under'){
+
 		$sql = "delete from t_risk_action_plan_change where id = ? and risk_id = ?";
 		$query = $this->db->query($sql, array('id' => $action_id, 'risk_id' => $risk_id));
 		
@@ -2084,6 +2112,7 @@ class Risk extends APP_Model {
 		);
 		$query = $this->db->query($sql, $par);
 		return true;
+		}
 	}
 //ubah
 	public function actionPlanSaveDraft2($action_id, $risk_id, $risk, $uid) 
@@ -2131,6 +2160,14 @@ class Risk extends APP_Model {
 	
 	public function actionPlanSubmit($action_id, $risk_id, $risk, $uid) 
 	{
+		//ubah2
+		$risk_id_cek = $risk_id;
+		$sql="select risk_existing_control from t_risk where risk_id = '$risk_id_cek' ";
+		$query = $this->db->query($sql);
+		$row = $query->row(); 
+		$hasil = $row->risk_existing_control;
+		if($hasil != 'under'){
+
 		$this->actionPlanSaveDraft($action_id, $risk_id, $risk, $uid);
 		$par = array(
 			'ap' => $risk['action_plan_status'],
@@ -2148,6 +2185,7 @@ class Risk extends APP_Model {
 		$query = $this->db->query($sql, $par);
 		return true;
 	}
+}
 	//ubah
 	public function actionSwitchPrimary($id)
 	{
@@ -2228,6 +2266,14 @@ class Risk extends APP_Model {
 	
 	public function actionUpdateRiskStatus($risk_id, $uid) 
 	{
+		//ubah2
+		$risk_id_cek = $risk_id;
+		$sql="select risk_existing_control from t_risk where risk_id = '$risk_id_cek' ";
+		$query = $this->db->query($sql);
+		$row = $query->row(); 
+		$hasil = $row->risk_existing_control;
+		if($hasil != 'under'){
+
 		$sql = "select count(1) numcount from t_risk_action_plan 
 				where risk_id = ? and action_plan_status < 3";
 		$par = array('uid' => $risk_id);
@@ -2243,9 +2289,18 @@ class Risk extends APP_Model {
 		
 		return true;
 	}
+	}
 	
 	public function execSaveDraft($id, $risk, $uid) 
 	{
+		//ubah2
+		//$risk_id_cek = $risk_id;
+		$sql="select t1.risk_existing_control from t_risk t1 join t_risk_action_plan t2 on t1.risk_id = t2.risk_id where t1.risk_id = (select t3.risk_id from t_risk_action_plan t3 where t3.id =  '$id') ";
+		$query = $this->db->query($sql);
+		$row = $query->row(); 
+		$hasil = $row->risk_existing_control;
+		if($hasil != 'under'){
+
 		$sql = "update t_risk_action_plan 
 				set 
 				execution_status = ?,
@@ -2267,6 +2322,7 @@ class Risk extends APP_Model {
 		$query = $this->db->query($sql, $par);
 		return true;
 	}
+}
 	
 	public function execSubmit($id, $status, $uid) 
 	{
@@ -2289,6 +2345,27 @@ class Risk extends APP_Model {
 		$par = array(
 			'stat' => 7,
 			'es' => 'COMPLETE',
+			'eexplain' => $risk['execution_explain'],
+			'eevi' => $risk['execution_evidence'],
+			'id' => $action_id
+		);
+		
+		$sql = "update t_risk_action_plan 
+				set 
+				action_plan_status = ?,
+				execution_status = ?,
+				execution_explain = ?,
+				execution_evidence = ?
+				where id = ?";
+		$query = $this->db->query($sql, $par);
+		return true;
+	}
+	
+	public function execOngoing($action_id, $risk, $uid) 
+	{
+		$par = array(
+			'stat' => 7,
+			'es' => 'ONGOING',
 			'eexplain' => $risk['execution_explain'],
 			'eevi' => $risk['execution_evidence'],
 			'id' => $action_id
@@ -2664,6 +2741,15 @@ class Risk extends APP_Model {
 	
 	public function insertChangeRequest($risk, $impact, $actplan, $control)
 	{
+		//ubah
+		$risk_id_cek = $_POST['risk_id'];
+		$sql="select risk_existing_control from t_risk where risk_id = '$risk_id_cek' ";
+		$query = $this->db->query($sql);
+		$row = $query->row(); 
+		$hasil = $row->risk_existing_control;
+		if($hasil != 'under'){
+
+
 		$this->db->trans_start();
 		$retval = false;
 		
@@ -2850,6 +2936,7 @@ class Risk extends APP_Model {
 		}
 		$this->db->trans_complete();
 		return $retval;
+		}
 	}
 	
 	

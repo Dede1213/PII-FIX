@@ -3,7 +3,7 @@
 	<div class="page-content">
 		<!-- BEGIN PAGE HEADER-->
 		<h3 class="page-title">
-		Risk Form
+		Risk Form 
 		</h3>
 		<div class="page-bar">
 			<ul class="page-breadcrumb">
@@ -283,11 +283,22 @@
 
 						</div>
 						<div class="form-actions right">
+						<?php
+	error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
+	$status = $_GET['status'];
+	if ($status == 'under'){
+		?>
+
+			<button id="risk-button-draft" type="button" class="btn blue"><i class="fa fa-circle-o"></i> Save</button>
+	<?php
+	}else{
+	?>
 							<input type="hidden" name="submit_mode" value="verifyRisk" />
 							<button id="risk-button-draft" type="button" class="btn blue"><i class="fa fa-circle-o"></i> Save</button>
 							<button id="risk-button-verify" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Verify</button>
 							<button id="risk-button-delete" type="button" class="btn red"><i class="fa  fa-trash-o"></i> Delete</button>
 							<button type="button" class="btn yellow" id="risk-button-cancel"><i class="fa fa-times"></i> Cancel</button>
+	<?php } ?>
 						</div>
 
 					</form>

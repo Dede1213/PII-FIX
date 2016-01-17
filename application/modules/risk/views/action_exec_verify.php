@@ -110,7 +110,15 @@
 					</div>	
 				</div>
 				<div class="form-actions right">
+				<?php
+	error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
+	$status = $_GET['status'];
+	if ($status == 'under'){
+	?>
+					<button id="exec-button-submit-under" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Save</button>
+					<?php }else{ ?>
 					<button id="exec-button-submit" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Verify</button>
+<?php } ?>
 					<button type="button" class="btn yellow" id="exec-button-cancel"><i class="fa fa-times"></i> Cancel</button>
 				</div>
 			</form>

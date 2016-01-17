@@ -83,6 +83,15 @@ var ActionVerify = function() {
 				}
         		
         	});
+
+            $('#exec-button-submit-under').on('click', function () {
+                if($('#exec-select-status').val() == "COMPLETE"){                   
+                    $('#modal-category').modal('show'); 
+                }else{
+                    me.submitRiskData2('verify')
+                }
+                
+            });
 			
 			$('#btn_impact_list').on('click', function() {
         		me.showImpactList();
@@ -156,6 +165,46 @@ var ActionVerify = function() {
             			MainApp.viewGlobalModal('error', 'Error Submitting Data');
             		 });
             	});
+            }
+        },
+        submitRiskData2: function(submitMode) {
+            var form1 = $('#input-form').validate();
+            var fvalid = form1.form();
+            if (fvalid) {
+                var me = this;
+                var param = $('#input-form').serializeArray();
+                
+                var url = site_url+'/main/mainrac/actionExecVerifyunder';
+                
+                var mod = MainApp.viewGlobalModal('confirm', 'Are You sure you want to Verify this Action Plan ?');
+                mod.find('button.btn-primary').off('click');
+                mod.find('button.btn-primary').one('click', function(){
+                    mod.modal('hide');
+                    var g_risk_id = $('#action-plan-id').val();
+                    Metronic.blockUI({ boxed: true });
+                    $.post(
+                        url,
+                        $( "#input-form" ).serialize() + "&risk_impact_level_after_mitigation="+$('#risk_impact_level_after_mitigation').val()+"&risk_likelihood_key_after_mitigation="+$('#risk_likelihood_key_after_mitigation').val()+"&risk_level_after_mitigation="+$('#risk_level_after_mitigation').val(),
+                          
+                        function( data ) {
+                            Metronic.unblockUI();
+                            if(data.success) {
+                                var mod = MainApp.viewGlobalModal('success', 'Success Updating your Action Plan');
+                                mod.find('button.btn-ok-success').one('click', function(){
+                                    location.href=site_url+'/risk/RiskRegister/undermaintenance';
+                                });
+                                
+                            } else {
+                                MainApp.viewGlobalModal('error', data.msg);
+                            }
+                            
+                        },
+                        "json"
+                    ).fail(function() {
+                        Metronic.unblockUI();
+                        MainApp.viewGlobalModal('error', 'Error Submitting Data');
+                     });
+                });
             }
         },
 		 showImpactList: function() {

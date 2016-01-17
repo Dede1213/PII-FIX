@@ -12,6 +12,10 @@ var MainApp = function() {
 	    		$('#global-app-modal-warning .alert_container').html(msg);
 	    		$('#global-app-modal-warning').modal('show');
 	    		return $('#global-app-modal-warning');
+	    	}else if (mode == 'warning-maintenance') {
+	    		$('#global-app-modal-warning-maintenance .alert_container').html(msg);
+	    		$('#global-app-modal-warning-maintenance').modal('show');
+	    		return $('#global-app-modal-warning-maintenance');
 	    	} else if (mode == 'confirm') {
 	    		$('#global-app-modal-confirmation .alert_container').html(msg);
 	    		$('#global-app-modal-confirmation').modal('show');

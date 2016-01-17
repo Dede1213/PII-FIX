@@ -46,6 +46,184 @@ class RiskRegister extends APP_Controller {
 		$this->load->view('risk_register_list', $data);
 		$this->load->view('main/footer', $data);
 	}
+	//ubah
+	public function undermaintenance()
+	{
+		$data = $this->loadDefaultAppConfig();
+		$data['sidebarMenu'] = $this->getSidebarMenuStructure('risk/RiskRegister');
+		$data['indonya'] = base_url('index.php/risk/RiskRegister/undermaintenance');
+		$data['engnya'] = base_url('index.php/risk/RiskRegister/undermaintenance');
+		$data['pageLevelStyles'] = '
+		<link rel="stylesheet" type="text/css" href="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
+		<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css"/>
+		<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
+		';
+		
+		$data['pageLevelScripts'] = '
+		<script type="text/javascript" src="assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+		<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
+		<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
+		
+		<script src="assets/scripts/risk/risklist_under.js"></script>
+		';
+		
+		$data['pageLevelScriptsInit'] = 'RiskList.init();';
+		
+		$data['valid_mode'] = $this->validatePeriodeMode('periodic');
+		
+		$data['periode'] = null;
+		if ($data['valid_mode']) {
+			$data['periode'] = $this->mperiode->getCurrentPeriode();
+		}
+		
+		
+		$this->load->view('main/header', $data);
+		$this->load->view('risk_register_list_under', $data);
+		$this->load->view('main/footer', $data);
+	}
+//ubah 
+	public function riskGetRollOver_under()
+	{
+		$sess = $this->loadDefaultAppConfig();
+		$order_by = $order = $filter_by = $filter_value = null;
+				
+		if (isset($_POST['order'][0]['column'])) {
+			$order_idx = $_POST['order'][0]['column'];
+			$order_by = $_POST['columns'][$order_idx]['data'];
+			$order = $_POST['order'][0]['dir'];
+		}
+		
+		if (isset($_POST['filter_by']) && isset($_POST['filter_value']) && $_POST['filter_value'] != '' ) {
+			$filter_by = $_POST['filter_by'];
+			$filter_value = $_POST['filter_value'];
+		}
+		
+		$page = ceil($_POST['start'] / $_POST['length'])+1;
+
+		$row = $_POST['length'];
+		
+		$periode = $this->mperiode->getCurrentPeriode();
+		$periode_id = null;
+		if ($periode) {
+			$periode_id = $periode['periode_id'];
+		} 
+		
+		
+		$defFilter = array(
+			'userid' => $sess['session']['username'],
+			'periodid' => $periode_id
+		);
+		$data = $this->mriskregister->getDataMode('userRollover_under', $defFilter, $page, $row, $order_by, $order, $filter_by, $filter_value);
+		
+		$data['draw'] = $_POST['draw']*1;
+		$data['page'] = $page;
+		echo json_encode($data);
+	}
+	//ubah 
+	public function riskGetRollOver_under2()
+	{
+		$sess = $this->loadDefaultAppConfig();
+		$order_by = $order = $filter_by = $filter_value = null;
+				
+		if (isset($_POST['order'][0]['column'])) {
+			$order_idx = $_POST['order'][0]['column'];
+			$order_by = $_POST['columns'][$order_idx]['data'];
+			$order = $_POST['order'][0]['dir'];
+		}
+		
+		if (isset($_POST['filter_by']) && isset($_POST['filter_value']) && $_POST['filter_value'] != '' ) {
+			$filter_by = $_POST['filter_by'];
+			$filter_value = $_POST['filter_value'];
+		}
+		
+		$page = ceil($_POST['start'] / $_POST['length'])+1;
+
+		$row = $_POST['length'];
+		
+		$periode = $this->mperiode->getCurrentPeriode();
+		$periode_id = null;
+		if ($periode) {
+			$periode_id = $periode['periode_id'];
+		} 
+		
+		
+		$defFilter = array(
+			'userid' => $sess['session']['username'],
+			'periodid' => $periode_id
+		);
+		$data = $this->mriskregister->getDataMode('userRollover_under2', $defFilter, $page, $row, $order_by, $order, $filter_by, $filter_value);
+		
+		$data['draw'] = $_POST['draw']*1;
+		$data['page'] = $page;
+		echo json_encode($data);
+	}
+
+	//ubah 
+	public function riskGetRollOver_under3()
+	{
+		$sess = $this->loadDefaultAppConfig();
+		$order_by = $order = $filter_by = $filter_value = null;
+				
+		if (isset($_POST['order'][0]['column'])) {
+			$order_idx = $_POST['order'][0]['column'];
+			$order_by = $_POST['columns'][$order_idx]['data'];
+			$order = $_POST['order'][0]['dir'];
+		}
+		
+		if (isset($_POST['filter_by']) && isset($_POST['filter_value']) && $_POST['filter_value'] != '' ) {
+			$filter_by = $_POST['filter_by'];
+			$filter_value = $_POST['filter_value'];
+		}
+		
+		$page = ceil($_POST['start'] / $_POST['length'])+1;
+
+		$row = $_POST['length'];
+		
+		$periode = $this->mperiode->getCurrentPeriode();
+		$periode_id = null;
+		if ($periode) {
+			$periode_id = $periode['periode_id'];
+		} 
+		
+		
+		$defFilter = array(
+			'userid' => $sess['session']['username'],
+			'periodid' => $periode_id
+		);
+		$data = $this->mriskregister->getDataMode('userRollover_under3', $defFilter, $page, $row, $order_by, $order, $filter_by, $filter_value);
+		
+		$data['draw'] = $_POST['draw']*1;
+		$data['page'] = $page;
+		echo json_encode($data);
+	}
+
+	//ubah
+
+	public function confirmRisk_under() {
+		$session_data = $this->session->credential;
+		
+		$resp = array('success' => false, 'msg' => 'Error');
+
+		if (isset($_POST['risk_id']) && is_numeric($_POST['risk_id'])) {
+			
+			$periode = $this->mperiode->getCurrentPeriode();
+			$periode_id = null;
+			if ($periode) {
+				$periode_id = $periode['periode_id'];
+			}
+			
+			$data['periode_id'] = $periode_id;
+			
+			$res = $this->risk->riskSetConfirm_under($_POST['risk_id'], $data, $session_data['username'], 'RISK_REGISTER-CONFIRM');
+			if ($res) {
+				$resp['success'] = true;
+				$resp['msg'] = 'SUCCESS';
+			}
+		}
+		
+		echo json_encode($resp);
+	}
 
 	public function recover()
 	{
@@ -861,6 +1039,27 @@ class RiskRegister extends APP_Controller {
 		
 		echo json_encode($resp);
 	}
+	//ubah under
+	public function deleteRisk_under() {
+		$session_data = $this->session->credential;
+		
+		$resp = array('success' => false, 'msg' => 'Error');
+
+		if (isset($_POST['risk_id']) && is_numeric($_POST['risk_id'])) {
+			$data = array();
+			
+			//$res = $this->risk->getRiskValidate('viewMyRisk', $_POST['risk_id'], $session_data);
+			
+			
+				$res = $this->risk->deleteRisk_under($_POST['risk_id'], $session_data['username'], 'RISK_EXERCISE-DELETE');
+				
+				$resp['success'] = true;
+				$resp['msg'] = 'SUCCESS';
+			
+		}
+		
+		echo json_encode($resp);
+	}
 	
 	public function modifyRiskData()
 	{
@@ -1196,6 +1395,7 @@ class RiskRegister extends APP_Controller {
 	
 	public function ChangeRequestAction($act_id)
 	{
+		
 		$session_data = $this->session->credential;
 		$action = $this->risk->getActionPlanById($act_id);
 		

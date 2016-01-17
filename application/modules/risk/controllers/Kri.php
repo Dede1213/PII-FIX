@@ -49,11 +49,15 @@ class Kri extends APP_Controller {
 		if ($_POST['kri_library_id'] == '') $_POST['kri_library_id'] = null;
 		
 		$dd = implode('-', array_reverse( explode('-', $_POST['timing_pelaporan']) ));
+		
+		$kri_pic = $this->risk->kri_pic($_POST['kri_owner']);
+		
 		$kri = array(
 			'risk_id' => $_POST['risk_id'],
 			'kri_library_id' => $_POST['kri_library_id'],
 			'key_risk_indicator' => $_POST['key_risk_indicator'],
 			'kri_status' => 0,
+			'kri_pic' => $kri_pic[0]['username'],
 			'treshold' => $_POST['treshold'],
 			'treshold_type' => $_POST['treshold_type'],
 			'timing_pelaporan' => $dd,

@@ -2567,10 +2567,10 @@ class Risk extends APP_Model {
 	public function insertNewKri($kri, $treshold) {
 		$sql = "insert into t_kri (
 			risk_id, kri_library_id, key_risk_indicator,
-			kri_status, treshold, treshold_type,
+			kri_status, kri_pic,treshold, treshold_type,
 			timing_pelaporan, kri_owner, created_by
 		) values (
-			?, ?, ?,
+			?, ?, ?,?,
 			?, ?, ?,
 			?, ?, ?
 		)";
@@ -3924,6 +3924,23 @@ class Risk extends APP_Model {
 		
 		$this->db->update("t_risk");
 		 
+	}
+	
+	function kri_pic($div){
+	
+	$sql = "select username from m_user where division_id = '".$div."' and role_id = 4";
+	
+	$query = $this->db->query($sql);	 
+			
+			if ($query->num_rows())
+			{
+				return $query->result_array();
+			}
+			else
+			{
+				return FALSE;
+			}	
+	
 	}
 	
 	

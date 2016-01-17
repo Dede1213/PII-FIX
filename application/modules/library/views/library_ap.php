@@ -88,6 +88,7 @@
 						<label class="col-md-3 control-label smaller cl-compact">Action Plan :</label>
 							<div class="col-md-9">
 							<input type = "text" name = "action_plan" id = "action_plan" class = "form-control">  
+							<input type = "hidden" name = "action_plan_ex" id = "action_plan_ex" class = "form-control"> 
 							</div>
 						</div>
 						
@@ -99,7 +100,7 @@
 										<span class="input-group-addon">
 										 <i class = "fa fa-calendar"></i></span>
 									</div>
-									
+									<input type="hidden" class="form-control" name="due_date_ex" id = "due_date_ex"> 
 									 
 								</div>
 							</div>
@@ -109,7 +110,8 @@
 						<label class="col-md-3 control-label smaller cl-compact">Action Plan Owner :</label>
 							<div class="col-md-9">
 							<select name="division"  class="form-control" id = "division"> 
-							</select>							 
+							</select>		
+							<input type="hidden" class="form-control" name="division_ex" id = "division_ex"> 
 							</div>
 						</div>
 					

@@ -42,7 +42,7 @@ gridRiskList.init({
            }
        ],
         "order": [
-            [1, "asc"]
+            [0, "asc"]
         ]// set first column as a default sort by asc
     }
 });
@@ -97,7 +97,7 @@ gridRiskList_ap.init({
            }
        ],
         "order": [
-            [1, "asc"]
+            [0, "asc"]
         ]// set first column as a default sort by asc
     }
 });
@@ -145,7 +145,7 @@ gridRiskList_kri.init({
            }
        ],
         "order": [
-            [1, "asc"]
+            [0, "asc"]
         ]// set first column as a default sort by asc
     }
 });
@@ -200,7 +200,7 @@ gridRiskList_ec.init({
            }
        ],
         "order": [
-            [1, "asc"]
+            [0, "asc"]
         ]// set first column as a default sort by asc
     }
 });
@@ -790,6 +790,10 @@ var Dashboard = function() {
 	        	$('#modal-listrisk-form').find('input[name=id]').attr('readonly', true).val("AP."+data.id);
 	        	$('#modal-listrisk-form').find('input[name=action_plan]').attr('readonly', false).val(data.action_plan);
 				$('#modal-listrisk-form').find('input[name=due_date]').attr('readonly', false).val(data.due_date);
+				
+				$('#modal-listrisk-form').find('input[name=action_plan_ex]').attr('readonly', false).val(data.action_plan);
+				$('#modal-listrisk-form').find('input[name=due_date_ex]').attr('readonly', false).val(data.due_date);
+				$('#modal-listrisk-form').find('input[name=division_ex]').attr('readonly', false).val(data.division);
 				  
 				$('#modal_listrisk').modal('show');
 	        	this.dataMode = 'view';

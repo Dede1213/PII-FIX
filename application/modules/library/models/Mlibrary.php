@@ -70,7 +70,8 @@ class Mlibrary extends APP_Model {
 		}
 		$date = date("Y-m-d");
 		$sql = "select t_risk_action_plan.id, t_risk_action_plan.action_plan, t_risk_action_plan.due_date, t_risk_action_plan.division
-				from t_risk_action_plan group by t_risk_action_plan.action_plan
+					from t_risk_action_plan
+					group by t_risk_action_plan.due_date, t_risk_action_plan.division, t_risk_action_plan.action_plan
 				"
 				
 				.$ex_filter
@@ -261,13 +262,15 @@ from m_risk_category
 	
 		$newdate = date("Y-m-d",strtotime($data['due_date'])); 
 		
+		$newdate_ex = date("Y-m-d",strtotime($data['due_date_ex'])); 
+		
 		$idnya = explode("AP.",$data['id']);
 		
 		if($data['id'] !=""){
 			$sql = " 
 			update `t_risk_action_plan`
 			SET  `action_plan`='".$data['action_plan']."'	,`due_date`='".$newdate."', `division`='".$data['division']."'
-			WHERE `id`='".$idnya[1]."'	
+			WHERE `action_plan`='".$data['action_plan_ex']."'	AND `due_date`='".$newdate_ex."' AND  `division`='".$data['division_ex']."'			 
 			";
 		}
 		else{

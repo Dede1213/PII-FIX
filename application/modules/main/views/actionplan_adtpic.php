@@ -23,6 +23,25 @@
 			</ul>
 		</div>
 		<!-- END PAGE HEADER-->
+		
+		<?php if($periodenya == 0):?>
+		<div class="row">
+		<div class="col-md-12">
+			<div class="note note-warning">
+				 
+				<h4 class="block">Warning</h4>
+				<p>
+					 Cannot Input Risk Register Exercise because Risk Period is not set, please contact RAC team for further information
+				</p>
+				<p>
+					<a class="btn red" target="_self" href="<?=$site_url?>/main">
+					Back to Home </a>
+				</p>
+				 
+			</div>
+		</div>
+		</div>
+		<?php else:?>
 		<div class="row">
 		<div class="col-md-12">
 			<div ><!--class="table-scrollable"-->
@@ -68,6 +87,7 @@
 					</div>
 		</div>
 		</div>
+		<?php endif;?>
 	</div>
 </div>
 

@@ -2731,6 +2731,24 @@ class MainRac extends APP_Controller {
 	 
 	}
 	
+	private function validatePeriodeMode($mode) 
+	{
+		
+		$periode = $this->mperiode->getCurrentPeriode();
+		
+		if ($mode == 'adhoc') {
+			if ($periode) return false;
+			else return true;
+		} else if ($mode == 'periodic') {
+			if ($periode) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+		return false;
+	}
+	
 	public function actionplan_adt() {
 		$data = $this->loadDefaultAppConfig();
 		$data['indonya'] = base_url('index.php/riski/kri/krisetting');
@@ -2758,6 +2776,19 @@ class MainRac extends APP_Controller {
 		$data['pageLevelScriptsInit'] = 'Actionplan_adt.init();
 		 
 		';
+		
+		$this->load->model('admin/mperiode');
+		$data['valid_mode'] = $this->validatePeriodeMode('periodic');
+		
+		$data['periode'] = null;
+		if ($data['valid_mode']) {
+			$data['periode'] = $this->mperiode->getCurrentPeriode();
+			$data['periodenya'] = 1;
+		}else{
+			$data['periodenya'] = 0;
+		}
+		 
+		
 		
 		$this->load->view('main/header', $data);
 		$this->load->view('actionplan_adt', $data);

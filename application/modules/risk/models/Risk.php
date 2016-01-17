@@ -568,7 +568,7 @@ class Risk extends APP_Model {
 				
 				$date = date("Y-m-d");
 				
-				$sql = "select 
+				$sql = "select
 						a.*,
 						concat('AP.', LPAD(a.id, 6, '0')) as act_code,
 						b.risk_code,
@@ -588,15 +588,12 @@ class Risk extends APP_Model {
 						t_risk_action_plan a
 						left join t_risk b on a.risk_id = b.risk_id
 						left join m_user c on a.assigned_to = c.username
-						left join m_division d on a.division = d.division_id
-						left join m_periode on m_periode.periode_id = b.periode_id
+						left join m_division d on a.division = d.division_id						 
 						where 
 						a.action_plan_status > 3
 						and a.division = ?
-						and (m_periode.periode_start <= '".$date."'
-						and m_periode.periode_end >= '".$date."')
-						AND m_periode.periode_id = null
-
+						AND b.periode_id is null
+						  
 						".$ext;
 				if ($par) {
 					$rpar['p1'] = $par['p1'];
@@ -645,14 +642,12 @@ class Risk extends APP_Model {
 						left join t_risk b on a.risk_id = b.risk_id
 						left join m_user c on a.assigned_to = c.username
 						left join m_division d on a.division = d.division_id
-						  join m_periode on m_periode.periode_id = b.periode_id
+						 
 						where 
 						a.action_plan_status > 3
 						and a.division = ?
-						and (m_periode.periode_start <= '".$date."'
-						and m_periode.periode_end >= '".$date."')
-					 
-
+						AND b.periode_id is not null
+					  
 						".$ext;
 				if ($par) {
 					$rpar['p1'] = $par['p1'];
@@ -693,7 +688,7 @@ class Risk extends APP_Model {
 		if ($mode == 'racActionPlanExec') {
 			
 			$date = date("Y-m-d");
-			$sql = "select 
+			$sql = "select
 					a.*,
 					concat('AP.', LPAD(a.id, 6, '0')) as act_code,
 					b.risk_code,
@@ -704,13 +699,10 @@ class Risk extends APP_Model {
 					t_risk_action_plan a
 					left join t_risk b on a.risk_id = b.risk_id
 					left join m_user c on a.assigned_to = c.username
-					left join m_division d on a.division = d.division_id
-					left join m_periode on m_periode.periode_id = b.periode_id
+					left join m_division d on a.division = d.division_id					
 					where 
 					a.action_plan_status > 3
-					and (m_periode.periode_start <= '".$date."'
-						and m_periode.periode_end >= '".$date."')
-						AND m_periode.periode_id = null
+						AND b.periode_id is null
 					";
 		}
 		
@@ -729,11 +721,10 @@ class Risk extends APP_Model {
 					left join t_risk b on a.risk_id = b.risk_id
 					left join m_user c on a.assigned_to = c.username
 					left join m_division d on a.division = d.division_id
-					join m_periode on m_periode.periode_id = b.periode_id
+				 
 					where 
 					a.action_plan_status > 3
-					and (m_periode.periode_start <= '".$date."'
-						and m_periode.periode_end >= '".$date."')
+					 AND b.periode_id is not null
 						 
 					";
 		}

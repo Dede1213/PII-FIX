@@ -39,7 +39,7 @@
 					</form>
 						
 					<div ><!--class="table-scrollable"-->
-						<table class="table table-condensed table-bordered table-hover " id="datatable_action_plan_exec">
+						<table class="table table-condensed table-bordered table-hover " id="datatable_action_plan_exec_adt">
 						<thead>
 						<tr role="row" class="heading">
 							<th width="30px">Status</th>

@@ -71,59 +71,61 @@
 	</div>
 </div>
 
-<!-- LIBRARY -->
-<div id="modal-library" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
+<!-- Execution Form -->
+<div id="modal-exec" class="modal fade" tabindex="-1" data-width="760" data-keyboard="false" role="dialog" aria-hidden="true">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Risk Library</h4>
-		<div class="inputs">
-			<div class="portlet-input input-inline">
-				<div class="col-md-6 input-group">
-					<select class="form-control input-sm" name="filter_search">
-						<option value="HIGH">Tinggi</option>
-						<option value="MODERATE">Sedang</option>
-						<option value="LOW">Rendah</option>
+		<h4 class="modal-title">Action Plan Execution</h4>
+	</div>
+	<div class="modal-body form">
+		<form id="exec-form" role="form" class="form-horizontal">
+		<input type="hidden" id="form-action-id" name="action_id" value="" />
+			<div class="form-body">
+				<div class="form-group">
+					<label class="col-md-3 smaller control-label">Status </label>
+					<div class="col-md-9">
+					<select class="form-control input-sm" name="execution_status" id="exec-select-status">
+						<option value="COMPLETE" selected>Complete</option>
+						<option value="EXTEND">Extend</option>
+						<option value="ONGOING">On Going</option>
 					</select>
-					<span class="input-group-btn">
-					<button class="btn btn-default btn-sm" type="button" id="modal-library-filter-submit">Search</button>
-					</span>
+					</div>
 				</div>
-				<!--
-				<div class="checkbox-list">
-					<label class="checkbox-inline">
-					<input type="checkbox" id="checkbox_high" class="checkbox_selectClass" value="HIGH"> Tinggi </label>
-					<label class="checkbox-inline">
-					<input type="checkbox" id="checkbox_moderate" class="checkbox_selectClass" value="MODERATE"> Sedang </label>
-					<label class="checkbox-inline">
-					<input type="checkbox" id="checkbox_low" class="checkbox_selectClass" value="LOW"> Rendah </label>
+				<div class="form-group" id="fgroup-explain">
+					<label class="col-md-3 control-label smaller cl-compact">Explanation<span class="required">* </span></label>
+					<div class="col-md-9">
+					<textarea class="form-control" rows="3" name="execution_explain" placeholder=""></textarea>
+					</div>
 				</div>
-				-->
+				<div class="form-group" id="fgroup-evidence">
+					<label class="col-md-3 control-label smaller cl-compact">Evidence</label>
+					<div class="col-md-9">
+					<textarea class="form-control" rows="3" name="execution_evidence" placeholder=""></textarea>
+					</div>
+				</div>				 
+				<div class="form-group" id="fgroup-reason">
+					<label class="col-md-3 control-label smaller cl-compact">Reason<span class="required">* </span></label>
+					<div class="col-md-9">
+					<textarea class="form-control" rows="3" name="execution_reason" placeholder=""></textarea>
+					</div>
+				</div>
+				<div class="form-group" id="fgroup-date">
+					<label class="col-md-3 smaller control-label">Revised Date<span class="required">* </span></label>
+					<div class="col-md-9">
+					<div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
+						<input type="text" class="form-control input-sm" name="revised_date" readonly value="<?=date('d-m-Y')?>">
+						<span class="input-group-btn">
+						<button class="btn default btn-sm" type="button"><i class="fa fa-calendar"></i></button>
+						</span>
+					</div>
+					</div>
+				</div>
 			</div>
-		</div>
-	</div>
-	<div class="modal-body">
-		<div>
-			<table id="library_table" class="table table-condensed table-bordered table-hover">
-				<thead>
-				<tr role="row" class="heading">
-					<th width="2%">
-						<input type="checkbox" class="group-checkable">
-					</th>
-					<th>No</th>
-					<th>Risk ID</th>
-					<th>Risk Event</th>
-					<th>Risk Level</th>
-				</tr>
-				</thead>
-				<tbody></tbody>
-			</table>
-		</div>
-	</div>
-	<div class="modal-footer">
-		<button id="library-modal-add" type="button" 
-			class="btn blue ladda-button"
-			 data-style="expand-right"
-			>Add</button>
-		<button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+			
+			<div class="form-actions right">
+				<button id="exec-button-save" type="button" class="btn blue"><i class="fa fa-circle-o"></i> Save </button>
+				<button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+			</div>
+		</form>
 	</div>
 </div>

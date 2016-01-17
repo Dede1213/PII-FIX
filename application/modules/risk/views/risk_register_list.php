@@ -47,7 +47,7 @@
 					and a.risk_status >= 0 and existing_control_id != 1 ";
 	
 	$sql="select a.risk_id from t_risk a where  a.periode_id IN(select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end) and a.risk_input_by = '$username'
-					and a.risk_status = 2";
+					and a.risk_status >= 2";
 
 	$sql2="select a.risk_id from t_risk a where  a.periode_id IN(select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end) and a.risk_input_by = '$username'
 					and a.risk_status >= 0 ";

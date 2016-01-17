@@ -24,8 +24,7 @@
 					<ul class="dropdown-menu pull-right" role="menu">
 						<li>
 							<a id = "risk_list_export">Export</a>
-						</li>
-					 
+						</li>					 
 					</ul>
 				</div>
 			</div>

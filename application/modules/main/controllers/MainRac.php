@@ -11,6 +11,8 @@ class MainRac extends APP_Controller {
 		
 		$data['pageLevelStyles'] = '
 		<link rel="stylesheet" type="text/css" href="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
+		<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css"/>
+		<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
 		';
 		
 		$data['pageLevelScripts'] = '
@@ -19,7 +21,9 @@ class MainRac extends APP_Controller {
 		<script src="assets/global/plugins/flot/jquery.flot.min.js"></script>
 		<script src="assets/global/plugins/flot/jquery.flot.categories.min.js" type="text/javascript"></script>
 		<script src="assets/scripts/dashboard/main_rac.js"></script>
-		
+		<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
+		<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
+		 
 		';
 		
 		$data['pageLevelScriptsInit'] = 'Dashboard.init();
@@ -2758,5 +2762,24 @@ class MainRac extends APP_Controller {
 		$this->load->view('main/header', $data);
 		$this->load->view('actionplan_adt', $data);
 		$this->load->view('main/footer', $data);
+	}
+	
+	public function crDeleteData()
+	{
+	
+		if (isset($_POST['id']) && is_numeric($_POST['id'])) {
+			$risk_id = $_POST['id'];
+			$this->load->model('Mqna');
+			$res = $this->Mqna->deletecrRisk($risk_id, $this->session->credential['username'], 'RISK_REGISTER_RAC-DELETE');
+			
+			if ($res) {
+				$data['success'] = true;
+				$data['msg'] = 'SUCCESS';
+			} else {
+				$data['success'] = false;
+				$data['msg'] = 'Error Deleting Data';
+			}
+			echo json_encode($data);
+		}
 	}
 }

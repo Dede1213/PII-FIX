@@ -55,4 +55,24 @@ class Mqna extends APP_Model {
 		$res = $this->db->query($sql, $par);
 		return $res;
 	}
+	
+	public function deletecrRisk($risk_id, $uid, $update_point = 'D') {
+		// delete risk in child
+		  
+		$par['risk_id'] = $risk_id;
+		
+		$sql1 = "delete from t_cr_risk where t_cr_risk.id = ?";
+		$sql2 = "delete  from t_cr_impact where change_id = ?";
+		$sql3 = "delete  from t_cr_control where change_id = ?";
+		$sql4 = "delete  from  t_cr_action_plan where change_id = ?";
+		 
+		
+		$res = $this->db->query($sql1, $par);
+		$res = $this->db->query($sql2, $par);
+		$res = $this->db->query($sql3, $par);
+		$res = $this->db->query($sql4, $par);
+	 
+
+		return $res;
+	}
 }

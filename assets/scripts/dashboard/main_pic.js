@@ -396,128 +396,7 @@ grid_exec.init({
         ]// set first column as a default sort by asc
     }
 });
-
-
-var grid_exec_adt = new Datatable();
-grid_exec_adt.init({
-    src: $("#datatable_action_exec_adt"),
-    onSuccess: function (grid) {
-        // execute some code after table records loaded
-    },
-    onError: function (grid) {
-        // execute some code on network or other general error  
-    },
-    onDataLoad: function(grid) {
-        // execute some code on ajax data load
-    },
-    loadingMessage: 'Loading...',
-    dataTable: { // here you can define a typical datatable settings from http://datatables.net/usage/options 
-
-        // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
-        // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/scripts/datatable.js). 
-        // So when dropdowns used the scrollable div should be removed. 
-        //"dom": "<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r>t<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'>>",
-        
-		//"scrollX": true,
-        "pageLength": 25, // default record count per page
-        "ajax": {
-            "url": site_url+"/main/mainpic/getOwnedActionPlanExec_adt" // ajax source
-        },
-        "columnDefs": [ {
-        	"targets": 0,
-        	"data": "action_plan_status",
-        	"render": function ( data, type, full, meta ) {
-        		var img = 'default.png';
-        		if (data == 4) {
-        			img = 'draft.png';
-        		} else if (data == 5) {
-        			img = 'verified_head.png';
-        		} else if (data == 6) {
-        			img = 'submit.png';
-        		}else if (data > 6) {
-        			img = 'verified.png';
-        		}
-        		return '<center><img src="'+base_url+'assets/images/legend/'+img+'"/></center>';
-        	}
-        }, {
-        	"targets": 1,
-        	"data": "act_code",
-        	"render": function ( data, type, full, meta ) {
-        		var ret = full.assigned_to_v;
-        		var dat = '';
-        		if (ret == '' || ret == null) {
-        			return '<a target="_self" href="'+site_url+'/main/mainpic/viewOwnedActionPlan/'+full.id+'">'+data+'</a>';
-        		} else {
-        			return '<a target="_self" href="'+site_url+'/main/mainpic/viewOwnedActionPlan/'+full.id+'">'+data+'</a>';
-        		}
-        		return dat;
-        	}
-        }, {
-        	"targets": 5,
-        	"data": "execution_status",
-        	"render": function ( data, type, full, meta ) {
-        		var ext = '';
-        		var search = false;
-        		var submit = false;
-        		
-        		var search_text = '<button type="button" class="btn blue btn-xs button-grid-search"><i class="fa fa-search"></i></button>';
-        		var submit_text = '<button type="button" class="btn blue btn-xs button-grid-submit"><i class="fa fa-check-circle"></i> Submit</button>';
-        		
-        		data_v = '';
-        		if (data == 'EXTEND') data_v = 'Extend';
-        		if (data == 'COMPLETE') data_v = 'Complete';
-				if (data == 'ONGOING') data_v = 'On Going';
-        		
-        		if (full.is_owner == 1) {
-        			search = true;
-        			if (data_v != '' && full.action_plan_status == 4) submit = true;
-        			if (data_v != '' && full.action_plan_status == 5 && full.is_head == 1) submit = true;
-        		} else {
-        			if (data_v != '') search = true;
-        			if (data_v != '' && full.action_plan_status == 5) submit = true;
-        		}
-        		 
-        		
-        		if (!search) search_text = '';
-        		if (!submit) submit_text = '';
-        		
-        		var ret = data_v+' &nbsp; <div class="btn-group">'+
-        				search_text+
-        				submit_text+
-        			'</div>'
-        		return ret;
-        		
-        	}
-        }
-        /*, {
-        	"targets": 6,
-        	"data": "action_plan_status",
-        	"render": function ( data, type, full, meta ) {
-        		var tt = '';
-        		if (data >= 3) {
-        			tt = '<div class="btn-group">'+
-        					'<button type="button" class="btn blue btn-xs button-grid-edit" onclick="location.href=\''+site_url+'/risk/RiskRegister/ChangeRequestAction/'+full.id+'\'"><i class="fa fa-pencil"></i></button>'+
-        				'</div>';
-        		}
-        		return tt;
-        	}
-        } */
-         ],
-        "columns": [
-			{ "data": "action_plan_status" },
-			{ "data": "act_code" },
-			{ "data": "action_plan" },
-			{ "data": "due_date_v" },
-			{ "data": "assigned_to_v" },
-			{ "data": "execution_status" }
-			//,{ "data": "action_plan_status" }
-       ],
-        "order": [
-            [1, "asc"]
-        ]// set first column as a default sort by asc
-    }
-});
-
+ 
 var grid_kri = new Datatable();
 grid_kri.init({
     src: $("#datatable_kri"),
@@ -1125,7 +1004,128 @@ var Dashboard = function() {
 	};	
 }();
 
-//----------------------------------------------
+
+var grid_exec_adt = new Datatable();
+grid_exec_adt.init({
+    src: $("#datatable_action_exec_adt"),
+    onSuccess: function (grid) {
+        // execute some code after table records loaded
+    },
+    onError: function (grid) {
+        // execute some code on network or other general error  
+    },
+    onDataLoad: function(grid) {
+        // execute some code on ajax data load
+    },
+    loadingMessage: 'Loading...',
+    dataTable: { // here you can define a typical datatable settings from http://datatables.net/usage/options 
+
+        // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
+        // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/scripts/datatable.js). 
+        // So when dropdowns used the scrollable div should be removed. 
+        //"dom": "<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r>t<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'>>",
+        
+		//"scrollX": true,
+        "pageLength": 25, // default record count per page
+        "ajax": {
+            "url": site_url+"/main/mainpic/getOwnedActionPlanExec_adt" // ajax source
+        },
+        "columnDefs": [ {
+        	"targets": 0,
+        	"data": "action_plan_status",
+        	"render": function ( data, type, full, meta ) {
+        		var img = 'default.png';
+        		if (data == 4) {
+        			img = 'draft.png';
+        		} else if (data == 5) {
+        			img = 'verified_head.png';
+        		} else if (data == 6) {
+        			img = 'submit.png';
+        		}else if (data > 6) {
+        			img = 'verified.png';
+        		}
+        		return '<center><img src="'+base_url+'assets/images/legend/'+img+'"/></center>';
+        	}
+        }, {
+        	"targets": 1,
+        	"data": "act_code",
+        	"render": function ( data, type, full, meta ) {
+        		var ret = full.assigned_to_v;
+        		var dat = '';
+        		if (ret == '' || ret == null) {
+        			return '<a target="_self" href="'+site_url+'/main/mainpic/viewOwnedActionPlan/'+full.id+'">'+data+'</a>';
+        		} else {
+        			return '<a target="_self" href="'+site_url+'/main/mainpic/viewOwnedActionPlan/'+full.id+'">'+data+'</a>';
+        		}
+        		return dat;
+        	}
+        }, {
+        	"targets": 5,
+        	"data": "execution_status",
+        	"render": function ( data, type, full, meta ) {
+        		var ext = '';
+        		var search = false;
+        		var submit = false;
+        		
+        		var search_text = '<button type="button" class="btn blue btn-xs button-grid-search"><i class="fa fa-search"></i></button>';
+        		var submit_text = '<button type="button" class="btn blue btn-xs button-grid-submit"><i class="fa fa-check-circle"></i> Submit</button>';
+        		
+        		data_v = '';
+        		if (data == 'EXTEND') data_v = 'Extend';
+        		if (data == 'COMPLETE') data_v = 'Complete';
+				if (data == 'ONGOING') data_v = 'On Going';
+        		
+        		if (full.is_owner == 1) {
+        			search = true;
+        			if (data_v != '' && full.action_plan_status == 4) submit = true;
+        			if (data_v != '' && full.action_plan_status == 5 && full.is_head == 1) submit = true;
+        		} else {
+        			if (data_v != '') search = true;
+        			if (data_v != '' && full.action_plan_status == 5) submit = true;
+        		}
+        		 
+        		
+        		if (!search) search_text = '';
+        		if (!submit) submit_text = '';
+        		
+        		var ret = data_v+' &nbsp; <div class="btn-group">'+
+        				search_text+
+        				submit_text+
+        			'</div>'
+        		return ret;
+        		
+        	}
+        }
+        /*, {
+        	"targets": 6,
+        	"data": "action_plan_status",
+        	"render": function ( data, type, full, meta ) {
+        		var tt = '';
+        		if (data >= 3) {
+        			tt = '<div class="btn-group">'+
+        					'<button type="button" class="btn blue btn-xs button-grid-edit" onclick="location.href=\''+site_url+'/risk/RiskRegister/ChangeRequestAction/'+full.id+'\'"><i class="fa fa-pencil"></i></button>'+
+        				'</div>';
+        		}
+        		return tt;
+        	}
+        } */
+         ],
+        "columns": [
+			{ "data": "action_plan_status" },
+			{ "data": "act_code" },
+			{ "data": "action_plan" },
+			{ "data": "due_date_v" },
+			{ "data": "assigned_to_v" },
+			{ "data": "execution_status" }
+			//,{ "data": "action_plan_status" }
+       ],
+        "order": [
+            [1, "asc"]
+        ]// set first column as a default sort by asc
+    }
+});
+
+//---------------------------------fake-------------
 
 var Actionplan_adt = function() {
     return {
@@ -1141,88 +1141,7 @@ var Actionplan_adt = function() {
         	    });
         	    //$('body').removeClass("modal-open"); // fix bug when inline picker is used in modal
         	};
-        	
-        	// TAB CONTROL FOR BREADCRUMB
-        	$('ul.nav-tabs a[data-toggle=tab]').on('click', function() {
-        		var hrefa = $(this).attr('href');
-        		var ulid = hrefa.replace('#', '');
-        		var title = $(this).html().trim();
-        		$('#bread_tab_title').html(title);
-        	});
-        	
-        	var cnt1 = cnt2 = cnt3 = 0; 
-        	$.getJSON( site_url+"/risk/RiskRegister/getCategory/0", function( data ) {
-        		$.each( data, function( key, val ) {
-        			// GET INIT SUB CATEGORY
-        			if (cnt1 == 0) {
-        				$.getJSON( site_url+"/risk/RiskRegister/getCategory/"+val.ref_key, function( data1 ) {
-        					$.each( data1, function( key2, val2 ) {
-        						if (cnt2 == 0) {
-        							// GET INIT 2ND SUB CATEGORY
-        							$.getJSON( site_url+"/risk/RiskRegister/getCategory/"+val2.ref_key, function( data2 ) {
-        								$.each( data2, function( key3, val3 ) {
-        								    $('#sel_risk_2nd_sub_category').append($('<option>').text(val3.ref_value).attr('value', val3.ref_key));
-        								});
-        							});
-        						}
-        						
-        					    $('#sel_risk_sub_category').append($('<option>').text(val2.ref_value).attr('value', val2.ref_key));
-        						    
-        					    cnt2++;
-        					});
-        				});
-        			}
-        			
-        			$('#sel_risk_category').append($('<option>').text(val.ref_value).attr('value', val.ref_key));
-        			    
-        			cnt1++;
-        		});
-        	});
-        	
-        	$('#sel_risk_category').change(function() {
-        		var val = $(this).val();
-        		me.loadCategorySelect('sel_risk_sub_category', val);
-        	});
-        	
-        	$('#sel_risk_sub_category').change(function() {
-        		var val = $(this).val();
-        		me.loadCategorySelect('sel_risk_2nd_sub_category', val);
-        	});
-        	
-        	// FILTER BUTTON
-        	$('#button-filter-category').on('click', function() {
-        		var cat = $("#sel_risk_2nd_sub_category").val();
-        		me.filterMyRisk('risk_2nd_sub_category', cat);
-        	});
-        	
-        	$('#button-filter-clear').on('click', function() {
-        		me.filterMyRisk('risk_2nd_sub_category', false);
-        	});
-        	
-        	$('#pic_list_table button.button-assign-pic').on('click', function() {
-        		var xx = $(this).attr("value");
-        		var idx = $(this).attr("value_idx");
-        		var mode = me.tmpRiskMode;
-        		
-        		var vv = $('#modal-pic-tr-'+idx+' > td.col_display_name').html();
-        		
-        		var text = 'Are You sure you want to Assign <b>'+vv+'</b> for this risk ?';
-        		if (mode == 'actionplan') {
-        			var text = 'Are You sure you want to Assign <b>'+vv+'</b> for this Action Plan ?';
-        		}
-        		
-        		if (mode == 'kri') {
-        			var text = 'Are You sure you want to Assign <b>'+vv+'</b> for this KRI ?';
-        		}
-        		
-        		var mod = MainApp.viewGlobalModal('confirm', text);
-        		mod.find('button.btn-primary').one('click', function(){
-        			mod.modal('hide');
-        			$('#modal-pic').modal('hide');
-        			me.ownedAssignPic(me.tmpRiskId, xx, mode);
-        		});
-        	});
-        	
+        	 
         	$('#exec-select-status').change(function() {
         		if ($( this ).val() == 'EXTEND') {
         			$('#fgroup-explain').hide();
@@ -1250,10 +1169,10 @@ var Actionplan_adt = function() {
         	
         	$("#datatable_action_exec_adt").on('click', 'button.button-grid-search', function(e) {
         		e.preventDefault();
-        		
+				 
         		var r = this.parentNode.parentNode.parentNode;
-        		var data = grid_exec.getDataTable().row(r).data();
-        		me.viewExecutionForm(data);
+        		var data = grid_exec_adt.getDataTable().row(r).data();
+        		me.viewExecutionForm_adt(data);
         	});
         	
         	$("#datatable_action_exec_adt").on('click', 'button.button-grid-submit', function(e) {
@@ -1358,116 +1277,11 @@ var Actionplan_adt = function() {
         		opacity: 0.80
         	}).appendTo("body");
         },
-        initUserChart: function() {
-            $.getJSON( site_url+"/main/mainpic/getSummaryCount/myrisk", function( data ) {
-            	var series = data;
-            	var tick = [ [0, "Tinggi"], [1, "Sedang"], [2, "Rendah"] ];
-            	
-            	on_options["yaxis"]["ticks"] = tick;
-            	
-            	$.plot("#chart_user", data, on_options);
-            	/*
-	        	$("#chart_user").bind("plothover", function (event, pos, item) {
-					if (item) {
-						var x = item.datapoint[0].toFixed(0)
-	
-						$("#tooltip").html(x)
-							.css({top: item.pageY+5, left: item.pageX+5})
-							.fadeIn(200);
-					} else {
-						$("#tooltip").hide();
-					}
-				});
-				*/
-            });
-            
-            $.getJSON( site_url+"/main/mainpic/getSummaryCount/myriskowned", function( data ) {
-            	var series = data;
-            	var tick = [ [0, "Tinggi"], [1, "Sedang"], [2, "Rendah"] ];
-            	
-            	on_options["yaxis"]["ticks"] = tick;
-            	
-            	$.plot("#chart_owned", data, on_options);
-            	
-            });
-            
-            $.getJSON( site_url+"/main/mainpic/getSummaryCount/myactionplan", function( data ) {
-            	var series = data;
-            	var tick = [ [0, "Tinggi"], [1, "Sedang"], [2, "Rendah"] ];
-            	
-            	on_options["yaxis"]["ticks"] = tick;
-            	
-            	$.plot("#chart_action_plan", data, on_options);
-            });
-            
-            $.getJSON( site_url+"/main/mainpic/getSummaryCount/kri", function( data ) {
-            	var series = data;
-            	var tick = [ [0, "Tinggi"], [1, "Sedang"], [2, "Rendah"] ];
-            	
-            	on_options["yaxis"]["ticks"] = tick;
-            	
-            	$.plot("#chart_kri", data, on_options);
-            });
-            
-        },
-        loadCategorySelect: function(sel_id, parent) {
-        	$('#'+sel_id)[0].options.length = 0;
-        	$.getJSON( site_url+"/risk/RiskRegister/getCategory/"+parent, function( data ) {
-        		$.each( data, function( key, val ) {
-        		    $('#'+sel_id).append($('<option>').text(val.ref_value).attr('value', val.ref_key));
-        		});
-        		$('#'+sel_id).trigger('change');
-        	});
-        },
-        filterMyRisk: function(fby, fval) {
-        	grid.clearAjaxParams();
-        	if (fval) {
-        		grid.setAjaxParam("risk_cat", fval);
-        	}
-        	grid.getDataTable().ajax.reload();
-        },
-        viewOwnedAssignForm: function(risk_id, mode) {
-        	var me = this;
-        	me.tmpRiskId = risk_id;
-        	me.tmpRiskMode = mode;
-        	
-        	$('#modal-pic').modal('show');
-        },
-        ownedAssignPic: function(risk_id, pic, mode) {
-        	Metronic.blockUI({ boxed: true });
-        	var url = site_url+'/main/mainpic/assignPic';
-        	$.post(
-        		url,
-        		{ 'risk_id':  risk_id, 'pic':  pic, 'mode': mode },
-        		function( data ) {
-        			Metronic.unblockUI();
-        			if(data.success) {
-        				if (mode == 'treatment') {
-        					grid_owned.getDataTable().ajax.reload();
-        				} else if (mode == 'kri') {
-        					grid_kri.getDataTable().ajax.reload();
-        				} else {
-        					grid_action.getDataTable().ajax.reload();
-        				}
-        				MainApp.viewGlobalModal('success', 'Success Assign PIC');
-        			} else {
-        				MainApp.viewGlobalModal('error', data.msg);
-        			}
-        			
-        		},
-        		"json"
-        	).fail(function() {
-        		Metronic.unblockUI();
-        		MainApp.viewGlobalModal('error', 'Error Submitting Data');
-        	 });
-        	
-        },
-        viewExecutionForm: function(data) {
+         
+        viewExecutionForm_adt: function(data) {
         	var me = this;
         	var act_id = data.id;
-        	
-        	$('#exec-form')[0].reset();
-        	
+			  
         	$('#form-action-id').val(act_id);
 			
 			$('#fgroup-explain').hide();
@@ -1543,19 +1357,16 @@ var Actionplan_adt = function() {
 					}
 				}
 			} else {
-				$( '#exec-select-status' ).val('COMPLETE');
+				$( '#exec-select-status' ).val('ONGOING');
 				$('#fgroup-explain').show();
-				$('#fgroup-evidence').show();
+				$('#fgroup-evidence').hide();
 				$( '#exec-select-status' ).prop('disabled', false);
 				$( "#exec-form" ).find('textarea[name=execution_explain]').prop('readonly', false);
 				$( "#exec-form" ).find('textarea[name=execution_evidence]').prop('readonly', false);
+				$( "#exec-form" ).find('textarea[name=execution_explain]').val(data.execution_explain);
 				$('#exec-button-save').show();
 			}
-        	
-        	//
-        	//if (data.is_owner == 1 && (data.action_plan_status == 4 || data.action_plan_status == 5)) {
-        	//	$('#exec-button-save').show();
-        	//}
+         
         	
         	$('#modal-exec').modal('show');
         	

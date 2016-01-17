@@ -279,6 +279,86 @@ gridActionExec.init({
 		//"scrollX": true,
         "pageLength": 25, // default record count per page
         "ajax": {
+            "url": site_url+"/main/mainrac/getActionPlanExec" // ajax source
+        },
+        "columnDefs": [ {
+        	"targets": 0,
+        	"data": "action_plan_status",
+        	"render": function ( data, type, full, meta ) {
+        		var img = 'default.png';
+        		if (data == 4) {
+        			img = 'draft.png';
+        		} else if (data == 5) {
+        			img = 'verified_head.png';
+        		} else if (data == 6) {
+        			img = 'submit.png';
+        		}else if (data > 6) {
+        			img = 'verified.png';
+        		}
+        		return '<center><img src="'+base_url+'assets/images/legend/'+img+'"/></center>';
+        	}
+        }, {
+        	"targets": 1,
+        	"data": "act_code",
+        	"render": function ( data, type, full, meta ) {
+        		return '<a target="_self" href="'+site_url+'/main/mainrac/actionPlanView/'+full.id+'">'+data+'</a>';
+        	}
+        }, {
+            "targets": 6,
+            "data": "act_code",
+            "render": function ( data, type, full, meta ) {
+                return '<a target="_self" href="'+site_url+'/main/mainrac/viewRisk/'+full.risk_id+'">'+data+'</a>';
+            }
+        }, {
+        	"targets": 5,
+        	"data": "execution_status",
+        	"render": function ( data, type, full, meta ) {
+				if(data == null){
+					return '';
+				}else{					 
+					return '<a target="_self" href="'+site_url+'/main/mainrac/actionPlanExecForm/'+full.id+'">'+data+'</a>';
+				}
+        		
+        	}
+        } ],
+        "columns": [
+			{ "data": "action_plan_status" },
+			{ "data": "act_code" },
+			{ "data": "action_plan" },
+			{ "data": "due_date_v" },
+			{ "data": "division_name" },
+			{ "data": "execution_status" },
+            { "data": "risk_code" }
+       ],
+        "order": [
+            [1, "asc"]
+        ]// set first column as a default sort by asc
+    }
+});
+
+var gridActionExec_adt = new Datatable();
+gridActionExec_adt.init({
+    src: $("#datatable_action_plan_exec_adt"),
+    onSuccess: function (grid) {
+        // execute some code after table records loaded
+    },
+    onError: function (grid) {
+        // execute some code on network or other general error  
+    },
+    onDataLoad: function(grid) {
+        // execute some code on ajax data load
+    },
+    loadingMessage: 'Loading...',
+    dataTable: { // here you can define a typical datatable settings from http://datatables.net/usage/options 
+
+        // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
+        // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/scripts/datatable.js). 
+        // So when dropdowns used the scrollable div should be removed. 
+        //"dom": "<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r>t<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'>>",
+        
+		//"scrollX": true,
+        "pageLength": 25, // default record count per page
+        "ajax": {
             "url": site_url+"/main/mainrac/getActionPlanExec_adt" // ajax source
         },
         "columnDefs": [ {
@@ -506,13 +586,11 @@ var Dashboard = function() {
         	
              $('#datatable_cr').on('click', 'button.button-grid-delete', function(e) {
                     e.preventDefault();
-                    
+				    
                     var r = this.parentNode.parentNode.parentNode;
-                    //alert(r);exit;
-                    var data = gridRiskList.getDataTable().row(r).data();
-
-                    //alert(data);
-                    
+                     
+                    var data = grid_cr.getDataTable().row(r).data();
+ 
                     me.deleteData(data);
                 });
 
@@ -591,6 +669,8 @@ var Dashboard = function() {
             });
             
         },
+		  
+		//fake
          deleteData: function(data) {
             
                 var mod = MainApp.viewGlobalModal('warning', 'Are You sure you want to delete this data?');
@@ -598,14 +678,14 @@ var Dashboard = function() {
                     mod.modal('hide');
                     
                     Metronic.blockUI({ boxed: true });
-                    var url = site_url+'/admin/qna/qnaDeleteData';
+                    var url = site_url+'/main/mainrac/crDeleteData';
                     $.post(
                         url,
-                        { 'id':  data.DT_RowId},
+                        { 'id':  data.id},
                         function(data) {
                             Metronic.unblockUI();
                             if(data.success) {
-                                gridRiskList.getDataTable().ajax.reload();
+                                grid_cr.getDataTable().ajax.reload();
                                 
                                 MainApp.viewGlobalModal('success', 'Success Delete Data');
                             } else {

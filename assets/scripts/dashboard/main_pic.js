@@ -146,7 +146,11 @@ grid_owned.init({
         		if (data == '' || data == null) {
         			ret = '<span>Unasigned</span> &nbsp; '+
         				  '<button onclick="javascript: Dashboard.viewOwnedAssignForm('+full.risk_id+', \'treatment\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"></i></button>';
-        		}
+        		}else{
+					ret = '<span>'+full.risk_treatment_owner_v+'</span> &nbsp; '+
+        				  '<button onclick="javascript: Dashboard.viewOwnedAssignForm('+full.risk_id+', \'treatment\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"></i></button>';
+					
+				}
         		return ret;
         	}
         }, {
@@ -239,7 +243,10 @@ grid_action.init({
         		if (data == '' || data == null) {
         			ret = '<span>Unasigned</span> &nbsp; '+
         				  '<button onclick="javascript: Dashboard.viewOwnedAssignForm('+full.id+', \'actionplan\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"></i></button>';
-        		}
+        		}else{
+					ret = '<span>'+data+'</span> &nbsp; '+
+        				  '<button onclick="javascript: Dashboard.viewOwnedAssignForm('+full.id+', \'actionplan\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"></i></button>';
+				}
         		return ret;
         	}
         }, {
@@ -456,10 +463,16 @@ grid_kri.init({
         	"data": "kri_pic_v",
         	"render": function ( data, type, full, meta ) {
         		var ret = full.kri_pic_v;
+				
         		if (data == '' || data == null) {
         			ret = '<span>Unasigned</span> &nbsp; '+
         				  '<button onclick="javascript: Dashboard.viewOwnedAssignForm('+full.id+', \'kri\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"></i></button>';
-        		}
+        		}else{
+					ret = '<span>'+data+'</span> &nbsp; '+
+        				  '<button onclick="javascript: Dashboard.viewOwnedAssignForm('+full.id+', \'kri\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"></i></button>';
+				}
+				
+				
         		return ret;
         	}
         }, {

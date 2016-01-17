@@ -362,5 +362,128 @@ from m_risk_category
 		return $res;
 	}
 	
+	function get_tresholddetail($data){
+	
+	$sql = 'SELECT kri_id FROM t_kri_treshold WHERE id = "'.$data['id'].'" ';
+		$query = $this->db->query($sql);
+		
+		if ($query->num_rows())
+			{
+				return $query->result_array();
+			}
+			else
+			{
+				return FALSE;
+			}	
+	 
+	}
+	
+	function delete_tresholddetail($data,$kri_id){
+	
+	$this->db->where('id',$data['id']);
+	$this->db->delete('t_kri_treshold');
+	 
+	$sql = 'SELECT * FROM t_kri_treshold WHERE kri_id =  "'.$kri_id.'"';
+		$query = $this->db->query($sql);
+		
+		if ($query->num_rows())
+			{
+				return $query->result_array();
+			}
+			else
+			{
+				return FALSE;
+			}		
+	
+	}
+	
+	function add_treshold($data){
+	
+		$this->db->insert("t_kri_treshold",$data);
+		 $res = "true";
+		return $res;
+	
+	}
+	
+	function add_treshold2($data){
+	
+	
+		//set value below
+		$this->db->set("kri_id",$data['kri_id']);
+		$this->db->set("operator","BELOW");
+		$this->db->set("value_1",$data['value-below-1']);
+		$this->db->set("value_2",$data['value-below-2']);
+		$this->db->set("value_type",$data['value-below-value_type']);
+		$this->db->set("result",$data['value-below-result']);
+		$this->db->insert("t_kri_treshold");
+		
+		//set value between
+		$this->db->set("kri_id",$data['kri_id']);
+		$this->db->set("operator","BETWEEN");
+		$this->db->set("value_1",$data['value-between-1']);
+		$this->db->set("value_2",$data['value-between-2']);
+		$this->db->set("value_type",$data['value-between-value_type']);
+		$this->db->set("result",$data['value-between-result']);
+		$this->db->insert("t_kri_treshold");
+		
+		//set value above
+		$this->db->set("kri_id",$data['kri_id']);
+		$this->db->set("operator","ABOVE");
+		$this->db->set("value_1",$data['value-above-1']);
+		$this->db->set("value_2",$data['value-above-2']);
+		$this->db->set("value_type",$data['value-above-value_type']);
+		$this->db->set("result",$data['value-above-result']);
+		$this->db->insert("t_kri_treshold");
+		
+		if(isset($data['is_percentage_treshold'])){
+		//perc value below
+		$this->db->set("kri_id",$data['kri_id']);
+		$this->db->set("operator","BELOW");
+		$this->db->set("value_1",$data['perc-below-1']);
+		$this->db->set("value_2",$data['perc-below-2']);
+		$this->db->set("value_type",$data['perc-below-value_type']);
+		$this->db->set("result",$data['perc-below-result']);
+		$this->db->insert("t_kri_treshold");
+		
+		//perc value between
+		$this->db->set("kri_id",$data['kri_id']);
+		$this->db->set("operator","BETWEEN");
+		$this->db->set("value_1",$data['perc-between-1']);
+		$this->db->set("value_2",$data['perc-between-2']);
+		$this->db->set("value_type",$data['perc-between-value_type']);
+		$this->db->set("result",$data['perc-between-result']);
+		$this->db->insert("t_kri_treshold");
+		
+		//perc value above
+		$this->db->set("kri_id",$data['kri_id']);
+		$this->db->set("operator","ABOVE");
+		$this->db->set("value_1",$data['perc-above-1']);
+		$this->db->set("value_2",$data['perc-above-2']);
+		$this->db->set("value_type",$data['perc-above-value_type']);
+		$this->db->set("result",$data['perc-above-result']);
+		$this->db->insert("t_kri_treshold");
+		}
+		
+		$res = "true";
+		return $res;
+	
+	}
+	
+	function yap_tresholddetail($kri_id){
+	 
+	$sql = 'SELECT * FROM t_kri_treshold WHERE kri_id =  "'.$kri_id.'"';
+		$query = $this->db->query($sql);
+		
+		if ($query->num_rows())
+			{
+				return $query->result_array();
+			}
+			else
+			{
+				return FALSE;
+			}		
+	
+	}
+	
 	 
 }

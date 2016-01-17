@@ -234,10 +234,15 @@ class Library extends APP_Controller {
 	function get_treshold_type(){
 	 
 		$this->load->model('Mlibrary'); 
+		  
+		$this->load->model('risk/risk');
+		if ($this->input->post('id') && is_numeric($this->input->post('id'))) {
+			$kri = $this->risk->getKriById($this->input->post('id'));
+			 
+			echo json_encode($kri);
+		}
 		 
-		$data = array("SELECTION","VALUE");
-		 
-		echo json_encode($data);
+		//echo json_encode($data);
 	
 	}
 	
@@ -530,6 +535,89 @@ class Library extends APP_Controller {
 		$this->load->view('kri', $data);
 		$this->load->view('main/footer', $data);
 		 
+	}
+	
+	public function getKri($rid) {
+		$this->load->model('risk/risk');
+		if ($rid && is_numeric($rid)) {
+			$kri = $this->risk->getKriById($rid);
+			echo json_encode($kri);
+		}
+	}
+	
+	function delete_treshold(){
+	
+		$this->load->model('Mlibrary');
+		$kri_idnya = $this->Mlibrary->get_tresholddetail($this->input->post());
+		$res = $this->Mlibrary->delete_tresholddetail($this->input->post(),$kri_idnya[0]['kri_id']);
+		 
+		$res['totaldata'] = count($res); 
+		 
+			if ($res) {
+				$res['success'] = true;
+				$res['msg'] = 'SUCCESS';
+			} else {
+				$res['success'] = false;
+				$res['msg'] = 'Error Deleting Data';
+			}
+			
+			echo json_encode($res);
+	
+	}
+	
+	function add_treshold(){
+	
+		$this->load->model('Mlibrary');
+		$res = $this->Mlibrary->add_treshold($this->input->post());
+		 
+		if ($res) {			 
+				$data['success'] = true;
+				$data['msg'] = 'SUCCESS';
+				$data['kri_id'] = $this->input->post('kri_id');
+			} else {
+				$data['success'] = false;
+				$data['msg'] = 'Error Adding Data';
+				$data['kri_id'] = "";
+			}
+			  
+			echo json_encode($data);
+	}
+	
+	function add_treshold_2(){
+	 
+		$this->load->model('Mlibrary');
+		$res = $this->Mlibrary->add_treshold2($this->input->post());
+		 
+		if ($res) {			 
+				$data['success'] = true;
+				$data['msg'] = 'SUCCESS';
+				$data['kri_id'] = $this->input->post('kri_id');
+			} else {
+				$data['success'] = false;
+				$data['msg'] = 'Error Adding Data';
+				$data['kri_id'] = "";
+			}
+			  
+			echo json_encode($data);
+	}
+	
+	function load_tresholddet(){
+	
+		$this->load->model('Mlibrary');		 
+		$res = $this->Mlibrary->yap_tresholddetail($this->input->post('id'));
+		 
+		$res['totaldata'] = count($res); 
+		 
+			if ($res) {
+				$res['success'] = true;
+				$res['msg'] = 'SUCCESS';
+			} else {
+				$res['success'] = false;
+				$res['msg'] = 'Error Deleting Data';
+			}
+			
+			echo json_encode($res);
+	
 	}
 	 
 }

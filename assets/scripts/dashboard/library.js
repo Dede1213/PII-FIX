@@ -333,7 +333,7 @@ var Dashboard = function() {
 	            	
 					var r = this.parentNode.parentNode.parentNode; 
                     var data = gridRiskList.getDataTable().row(r).data(); 
-                    me.showriskform_ap(data);
+                    me.showriskform(data);
 				
 			});
 			

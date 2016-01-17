@@ -290,6 +290,18 @@ var Dashboard = function() {
 					
             });
 			
+			$('#button-kri-open-treshold').on('click', function() {
+			 
+        		var type = $('#select-treshold-type').val();
+        		if (type == 'SELECTION') {
+        			$('#modal-treshold-selection').modal('show');
+        			//me.initAddTresholdSelection();
+        		} else {
+        			$('#modal-treshold-value').modal('show');
+        			//me.initAddTresholdValue();
+        		}
+        	});
+			 
 			$('#datatableap_ajax').on('click', 'button.button-grid-delete', function(e) {
 			  
                     e.preventDefault();                    
@@ -397,6 +409,38 @@ var Dashboard = function() {
 
 				
 			});
+			
+			$('#button-treshold-selection-add').click(function(e) {
+			 
+	            		e.preventDefault();
+						
+						var l = Ladda.create(this);
+	            		l.start();
+	            		 
+	            		var url = site_url+'/library/add_treshold';
+	            		 
+	            		$.post(
+	            			url,
+	            			$( "#kri-form-selection" ).serialize(),
+	            			function( data ) {
+	            				 l.stop();
+	            				if(data.success) {
+									load_tresholddet(data.kri_id);
+	            					MainApp.viewGlobalModal('success', 'Success add Data');
+									$('#modal-treshold-selection').modal('hide');
+									
+	            				} else {
+	            					MainApp.viewGlobalModal('error', data.msg);
+	            				}
+	            				
+	            			},
+	            			"json"
+	            		).fail(function() {
+							l.stop();
+	            			MainApp.viewGlobalModal('error', 'Error Submitting Data');
+	            		 });
+	            	 
+	            });
 			
 			$('#library-modal-listrisk-update').click(function(e) {
 	            	  
@@ -533,6 +577,46 @@ var Dashboard = function() {
 	            		 });
 	            	 
 	            });
+				
+				$('#is_percentage_treshold').on('click', function() {
+					$('#t-col-right-treshold').find('input[type=number]').prop('disabled', true);
+					$('#t-col-right-treshold').find('select').prop('disabled', true);
+					
+					if($(this).prop( "checked" )) {
+						$('#t-col-right-treshold').find('input[type=number]').prop('disabled', false);
+						$('#t-col-right-treshold').find('select').prop('disabled', false);
+						 
+					} 
+				});
+				
+				$('#button-treshold-value-add').on('click', function() {
+				 
+	            		var l = Ladda.create(this);
+	            		l.start();
+        	  
+					var url = site_url+'/library/add_treshold_2';
+	            			var tx = 'Insert';
+	            		 
+	            		$.post(
+	            			url,
+	            			$( "#kri-form-value" ).serialize(),
+	            			function( data ) {
+	            				l.stop();
+	            				if(data.success) {
+	            					load_tresholddet(data.kri_id);
+	            					MainApp.viewGlobalModal('success', 'Success save Data');
+	            				} else {
+	            					MainApp.viewGlobalModal('error', data.msg);
+	            				}
+	            				
+	            			},
+	            			"json"
+	            		).fail(function() {
+	            			l.stop();
+	            			MainApp.viewGlobalModal('error', 'Error Submitting Data');
+	            		 });
+					$('#modal-treshold-value').modal('hide');
+				})
  
 				$('#library-modal-listriskkri-update').click(function(e) {
 	            	  
@@ -802,34 +886,56 @@ var Dashboard = function() {
 			showriskform_kri: function(data) {
 			
 				var htmlopt = "";
+				var htmloptselect = "";
+				
+				$("#treshold_listnya").html("");
 				
 				 var url = site_url+'/library/get_treshold_type';
                     $.post(
                         url,
-                        { 'id':  ""},
+                         { 'id':  data.DT_RowId},
                         function(datax) {
-						 	
-							for (var i = '0'; i < datax.length; i++) {
-								var datanya = datax[i];
+						
+							var datanya = datax['treshold_list'];						 	
+							for (var i = '0'; i < datanya.length; i++) {
+								var datanya_x = datanya[i];
 								  
-								if(data.treshold_type == datanya){
-								var select = "selected = selected";
-							 
-								}else{
-								var select = "";
-								 
-								}
-								htmlopt += "<option value = '"+datanya+"' "+select+">"+datanya+"</option>";
+								htmlopt += "<tr role='row'  >";
+								htmlopt += "						<td>"+datanya_x.operator+"</td>";
+								htmlopt += "						<td>"+datanya_x.value_1+"</td>";
+								htmlopt += "						<td>"+datanya_x.value_2+"</td>";
+								htmlopt += "						<td>"+datanya_x.value_type+"</td>";
+								htmlopt += "						<td>"+datanya_x.result+"</td>";
+								htmlopt += "	<td> <button class='btn btn-default btn-xs' onclick='delete_treshold("+datanya_x.id+")'  type='button'><i class='fa fa-trash-o font-red'></i></button></td>";
+								htmlopt += "					</tr>";
 								 
 							}	
-							$("#treshold_type").html(htmlopt);
+							$("#treshold_listnya").append(htmlopt);
+							 
+							var cars = ["SELECTION", "VALUE"]; 
+							for(var y = 0 ; y < 2; y++) {
+							 
+								if(cars[y] == datax.treshold_type){
+									var select = "selected = 'selected'";
+								}else{
+									var select = "";
+								}
+							
+								htmloptselect += "<option "+select+" >"+cars[y]+"</option>";
+								
+							}
+							
+							$("#select-treshold-type").html(htmloptselect);
 			
                         },
                         "json"
                     ).fail(function() {                         
                         MainApp.viewGlobalModal('error', 'Error Submitting Data');
                      });
-				 
+					 
+				
+				$('#kri-form-selection').find('input[name=kri_id]').attr('readonly', true).val(data.DT_RowId); 
+				$('#kri-form-value').find('input[name=kri_id]').attr('readonly', true).val(data.DT_RowId); 
 	        	$('#modal-listrisk-form').find('input[name=kri_code]').attr('readonly', true).val(data.kri_code);
 	        	$('#modal-listrisk-form').find('input[name=key_risk_indicator]').attr('readonly', false).val(data.key_risk_indicator);
 				$('#modal-listrisk-form').find('input[name=treshold]').attr('readonly', false).val(data.treshold);
@@ -962,5 +1068,98 @@ var Dashboard = function() {
        
 	};	
 }();
+
+function delete_treshold(a){
+
+			var mod = MainApp.viewGlobalModal('warning', 'Are You sure you want to delete this data?');
+                mod.find('button.btn-danger').one('click', function(){
+                    mod.modal('hide');
+                    
+                    Metronic.blockUI({ boxed: true });
+                    var url = site_url+'/library/delete_treshold';
+                    $.post(
+                        url,
+                        { 'id':  a},
+                        function(data) {
+                            Metronic.unblockUI();
+                            if(data.success) {
+								var htmloptdet = "";
+								$("#treshold_listnya").html("");
+								 
+								for (var i = '0'; i < data.totaldata; i++) {
+									var datanya_x = data[i];
+									  
+									htmloptdet += "<tr role='row'  >";
+									htmloptdet += "						<td>"+datanya_x.operator+"</td>";
+									htmloptdet += "						<td>"+datanya_x.value_1+"</td>";
+									htmloptdet += "						<td>"+datanya_x.value_2+"</td>";
+									htmloptdet += "						<td>"+datanya_x.value_type+"</td>";
+									htmloptdet += "						<td>"+datanya_x.result+"</td>";
+									htmloptdet += "	<td><button class='btn btn-default btn-xs' onclick='delete_treshold("+datanya_x.id+")'  type='button'><i class='fa fa-trash-o font-red'></i></button></td>";
+									htmloptdet += "	</tr>";
+									  
+									
+								}
+								$("#treshold_listnya").html(htmloptdet);
+								
+								  
+                                MainApp.viewGlobalModal('success', 'Success Delete Data');								
+								 
+                            } else {
+                                MainApp.viewGlobalModal('error123', data.msg);
+                            }
+                            
+                        },
+                        "json"
+                    ).fail(function() {
+                        Metronic.unblockUI();
+                        MainApp.viewGlobalModal('error', 'Error Submitting Data');
+                     });
+                });
+}
+
+
+function load_tresholddet(a){
+ 
+                    var url = site_url+'/library/load_tresholddet';
+                    $.post(
+                        url,
+                        { 'id':  a},
+                        function(data) {
+                            Metronic.unblockUI();
+                            if(data.success) {
+								var htmloptdet = "";
+								$("#treshold_listnya").html("");
+								 
+								for (var i = '0'; i < data.totaldata; i++) {
+									var datanya_x = data[i];
+									  
+									htmloptdet += "<tr role='row'  >";
+									htmloptdet += "						<td>"+datanya_x.operator+"</td>";
+									htmloptdet += "						<td>"+datanya_x.value_1+"</td>";
+									htmloptdet += "						<td>"+datanya_x.value_2+"</td>";
+									htmloptdet += "						<td>"+datanya_x.value_type+"</td>";
+									htmloptdet += "						<td>"+datanya_x.result+"</td>";
+									htmloptdet += "	<td><button class='btn btn-default btn-xs' onclick='delete_treshold("+datanya_x.id+")'  type='button'><i class='fa fa-trash-o font-red'></i></button></td>";
+									htmloptdet += "	</tr>";
+									  
+									
+								}
+								$("#treshold_listnya").html(htmloptdet);
+								
+								  
+                                MainApp.viewGlobalModal('success', 'Success Delete Data');								
+								 
+                            } else {
+                                MainApp.viewGlobalModal('error123', data.msg);
+                            }
+                            
+                        },
+                        "json"
+                    ).fail(function() {                        
+                        MainApp.viewGlobalModal('error', 'Error Submitting Data');
+                     });
+             
+}
   
  

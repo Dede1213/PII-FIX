@@ -1,3 +1,35 @@
+<script type="text/javascript" src="assets/js/tinymce/tinymce.min.js"></script>
+<script type="text/javascript">
+tinymce.init({
+        selector: "textarea",
+        plugins: [
+                "advlist autolink autosave link image lists charmap print preview hr anchor pagebreak spellchecker",
+                "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+                "table contextmenu directionality emoticons template textcolor paste fullpage textcolor colorpicker textpattern"
+        ],
+
+        toolbar1: "bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect fontselect fontsizeselect",
+        toolbar2: "cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink anchor image media| insertdatetime | forecolor",
+        
+        
+        menubar: false,
+        toolbar_items_size: 'small',
+
+        style_formats: [
+                {title: 'Bold text', inline: 'b'},
+                {title: 'Red text', inline: 'span', styles: {color: '#ff0000'}},
+                {title: 'Red header', block: 'h1', styles: {color: '#ff0000'}},
+                {title: 'Example 1', inline: 'span', classes: 'example1'},
+                {title: 'Example 2', inline: 'span', classes: 'example2'},
+                {title: 'Table styles'},
+                {title: 'Table row 1', selector: 'tr', classes: 'tablerow1'}
+        ],
+
+        templates: [
+                {title: 'Test template 1', content: 'Test 1'},
+                {title: 'Test template 2', content: 'Test 2'}
+        ]
+});</script>
 <!-- BEGIN CONTENT -->
 <div class="page-content-wrapper">
 	<div class="page-content">
@@ -30,7 +62,7 @@
 					<input type="hidden" name="id" value="<?=$news['id']?>">
 					<div class="form-body">
 						<div class="form-group">
-							<label class="col-md-3 control-label">User Manual Title</label>
+							<label class="col-md-2 control-label">User Manual Title</label>
 							<div class="col-md-6">
 								<input type="text" class="form-control" placeholder="News Title" name="title" id="news-title" value="<?=$news['title']?>">
 							</div>
@@ -40,14 +72,14 @@
 						$var = 0;
 						if ($var != 0){?>
 						<div class="form-group">
-							<label class="col-md-3 control-label">Uploaded Filename</label>
+							<label class="col-md-2 control-label">Uploaded Filename</label>
 							<div class="col-md-6">
 								<input type="text" class="form-control" readonly value="<?=$news['filename']?>">
 							</div>
 						</div>
 						
 						<div class="form-group">
-							<label class="col-md-3 control-label">Update Content</label>
+							<label class="col-md-2 control-label">Update Content</label>
 							<div class="col-md-6">
 								<input type="file" class="form-control" placeholder="Filename" name="filename" id="news-file">
 								<span class="help-block">Don't fill this field if you dont want to update the news file</span>
@@ -55,7 +87,7 @@
 						</div>
 						<?php } ?>
 						<div class="form-group">
-							<label class="col-md-3 control-label">Status</label>
+							<label class="col-md-2 control-label">Status</label>
 							<div class="col-md-6">
 								<select class="form-control input-sm" name="status">
 									<option value="1" <?=$news['status'] == 1 ? 'SELECTED': ''?>>Published</option>
@@ -64,7 +96,7 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-md-3 control-label">Role USer</label>
+							<label class="col-md-2 control-label">Role USer</label>
 							<div class="col-md-6">
 								<select class="form-control input-sm" name="role_user">
 									<option value="3" >USER</option>
@@ -76,9 +108,9 @@
 						</div>
 						
 						<div class="form-group">
-							<label class="col-md-3 control-label">Content</label>
+							<label class="col-md-2 control-label">Content</label>
 							<div class="col-md-9">
-								<textarea class="form-control" rows="3" name="content" data-required="1" placeholder=""> <?=$news['content']?> </textarea>
+								<textarea class="" rows="3" name="content" data-required="1" placeholder=""> <?=$news['content']?> </textarea>
 							</div>
 						</div>
 						

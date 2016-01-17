@@ -40,12 +40,12 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact">Peristiwa Risiko
-								</label>
-								<div class="col-md-9">
-									<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_event" placeholder="">
+									<label class="col-md-3 control-label smaller cl-compact">Peristiwa Risiko</label>
+									<div class="col-md-9">
+									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_event" placeholder=""></textarea>
+									</div>
 								</div>
-							</div>
+							
 							<div class="form-group">
 								<label class="col-md-3 control-label small cl-compact">Deskripsi Peristiwa Risiko</label>
 								<div class="col-md-9">
@@ -54,17 +54,17 @@
 							</div>
 							<?php if ($change_type == 'Risk Form') { ?>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Penyebab</label>
-								<div class="col-md-9">
-									<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_cause" placeholder="">
+									<label class="col-md-3 control-label smaller cl-compact">Penyebab <span class="required">* </span></label>
+									<div class="col-md-9">
+									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_cause" placeholder=""></textarea>
+									</div>
 								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Dampak</label>
-								<div class="col-md-9">
-									<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_impact" placeholder="">
+								<div class="form-group">
+									<label class="col-md-3 control-label smaller cl-compact">Dampak <span class="required">* </span></label>
+									<div class="col-md-9">
+									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_impact" placeholder=""></textarea>
+									</div>
 								</div>
-							</div>
 							<?php } ?>
 							<div class="form-group">
 								<label class="col-md-3 control-label smaller cl-compact" >Level Dampak</label>
@@ -149,12 +149,11 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact">Peristiwa Risiko
-								</label>
-								<div class="col-md-9">
-								<input type="text" class="form-control input-sm" readonly="true" name="risk_event" data-required="1" placeholder="">
+									<label class="col-md-3 control-label smaller cl-compact">Peristiwa Risiko</label>
+									<div class="col-md-9">
+									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_event" placeholder=""></textarea>
+									</div>
 								</div>
-							</div>
 							<div class="form-group">
 								<label class="col-md-3 control-label small cl-compact">Deskripsi Peristiwa Risiko</label>
 								<div class="col-md-9">
@@ -163,17 +162,17 @@
 							</div>
 							<?php if ($change_type == 'Risk Form') { ?>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Penyebab <span class="required">* </span></label>
-								<div class="col-md-9">
-								<input type="text" class="form-control input-sm" name="risk_cause" placeholder="">
+									<label class="col-md-3 control-label smaller cl-compact">Penyebab <span class="required">* </span></label>
+									<div class="col-md-9">
+									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_cause" placeholder=""></textarea>
+									</div>
 								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Dampak <span class="required">* </span></label>
-								<div class="col-md-9">
-								<input type="text" class="form-control input-sm" name="risk_impact" placeholder="">
+								<div class="form-group">
+									<label class="col-md-3 control-label smaller cl-compact">Dampak <span class="required">* </span></label>
+									<div class="col-md-9">
+									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_impact" placeholder=""></textarea>
+									</div>
 								</div>
-							</div>
 							<?php } ?>
 							<?php if ($change_type == 'Risk Form' || $change_type == 'Risk Owner Form') { ?>
 							<div class="form-group">
@@ -373,11 +372,18 @@ Tidak bisa melakukan perubahan permintaan karena risiko ini masih mempunyai perm
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Pemilik Kontrol <span class="required">* </span></label>
-						<div class="col-md-9">
-						<input type="text" class="form-control input-sm" name="risk_control_owner" placeholder="">
-						</div>
-					</div>
+									<label class="col-md-3 control-label smaller cl-compact">Pemilik Kontrol <span class="required">* </span></label>
+									<div class="col-md-9">
+									
+									<select class="form-control input-sm" name="risk_control_owner">
+										<option value="NONE">NONE</option>
+										<?php foreach($division_list as $row) { ?>
+										<option value="<?=$row['ref_key']?>"><?=$row['ref_value']?></option>
+										<?php } ?>
+									</select>
+									</div>
+								</div>
+					
 				</div>
 			</form>
 	</div>
@@ -400,10 +406,15 @@ Tidak bisa melakukan perubahan permintaan karena risiko ini masih mempunyai perm
 		
 			<form id="input-form-action-plan" role="form" class="form-horizontal">
 				<div class="form-body">
-					<div class="form-group">
-						<label class="col-md-3 control-label">Usulan Action Plan <span class="required">* </span></label>
+				<div class="form-group">
+						<label class="col-md-3 control-label smaller cl-compact">Usulan Action Plan<span class="required">* </span></label>
 						<div class="col-md-9">
-						<input type="text" class="form-control input-sm" name="action_plan" placeholder="">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" name="action_plan" placeholder=""> 
+								<span class="input-group-btn">
+								<button class="btn btn-primary btn-sm" type="button" data-toggle="modal" href="#modal-libraryaction"><i class="fa fa-search fa-fw"/></i></button>
+								</span> 
+							</div>
 						</div>
 					</div>
 					<div class="form-group">

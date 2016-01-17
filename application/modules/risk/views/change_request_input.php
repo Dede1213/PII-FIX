@@ -40,12 +40,12 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact">Risk Event
-								</label>
-								<div class="col-md-9">
-									<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_event" placeholder="">
+									<label class="col-md-3 control-label smaller cl-compact">Risk Event</label>
+									<div class="col-md-9">
+									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_event" placeholder=""></textarea>
+									</div>
 								</div>
-							</div>
+							
 							<div class="form-group">
 								<label class="col-md-3 control-label small cl-compact">Risk Event Description</label>
 								<div class="col-md-9">
@@ -53,18 +53,19 @@
 								</div>
 							</div>
 							<?php if ($change_type == 'Risk Form') { ?>
+							
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Cause</label>
-								<div class="col-md-9">
-									<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_cause" placeholder="">
+									<label class="col-md-3 control-label smaller cl-compact">Cause <span class="required">* </span></label>
+									<div class="col-md-9">
+									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_cause" placeholder=""></textarea>
+									</div>
 								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Impact</label>
-								<div class="col-md-9">
-									<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_impact" placeholder="">
+								<div class="form-group">
+									<label class="col-md-3 control-label smaller cl-compact">Impact <span class="required">* </span></label>
+									<div class="col-md-9">
+									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_impact" placeholder=""></textarea>
+									</div>
 								</div>
-							</div>
 							<?php } ?>
 							<div class="form-group">
 								<label class="col-md-3 control-label smaller cl-compact" >Impact Level</label>
@@ -149,12 +150,11 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact">Risk Event
-								</label>
-								<div class="col-md-9">
-								<input type="text" class="form-control input-sm" readonly="true" name="risk_event" data-required="1" placeholder="">
+									<label class="col-md-3 control-label smaller cl-compact">Risk Event</label>
+									<div class="col-md-9">
+									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_event" placeholder=""></textarea>
+									</div>
 								</div>
-							</div>
 							<div class="form-group">
 								<label class="col-md-3 control-label small cl-compact">Risk Event Description</label>
 								<div class="col-md-9">
@@ -163,17 +163,18 @@
 							</div>
 							<?php if ($change_type == 'Risk Form') { ?>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Cause <span class="required">* </span></label>
-								<div class="col-md-9">
-								<input type="text" class="form-control input-sm" name="risk_cause" placeholder="">
+									<label class="col-md-3 control-label smaller cl-compact">Cause <span class="required">* </span></label>
+									<div class="col-md-9">
+									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_cause" placeholder=""></textarea>
+									</div>
 								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Impact <span class="required">* </span></label>
-								<div class="col-md-9">
-								<input type="text" class="form-control input-sm" name="risk_impact" placeholder="">
+								<div class="form-group">
+									<label class="col-md-3 control-label smaller cl-compact">Impact <span class="required">* </span></label>
+									<div class="col-md-9">
+									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_impact" placeholder=""></textarea>
+									</div>
 								</div>
-							</div>
+
 							<?php } ?>
 							<?php if ($change_type == 'Risk Form' || $change_type == 'Risk Owner Form') { ?>
 							<div class="form-group">
@@ -362,22 +363,29 @@
 					<div class="form-group">
 						<label class="col-md-3 control-label smaller cl-compact" >Existing Control <span class="required">* </span></label>
 						<div class="col-md-9">
-						<textarea class="form-control input-sm" rows="3" name="risk_existing_control" placeholder=""></textarea>
+						<textarea class="form-control input-sm" rows="3" name="risk_existing_control" placeholder="">NONE</textarea>
 						<button id="button_clear_control" type="button" class="hide btn red btn-xs" style="margin-top: 5px;"><i class="fa fa-minus-circle font-white"></i> Clear Existing Control</button>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-md-3 control-label smaller cl-compact" >Evaluation on Existing Control <span class="required">* </span></label>
 						<div class="col-md-9">
-						<input type="text" class="form-control input-sm" name="risk_evaluation_control" placeholder="">
+						<input type="text" class="form-control input-sm" name="risk_evaluation_control" placeholder="" value="NONE">
 						</div>
 					</div>
+					
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Control Owner <span class="required">* </span></label>
-						<div class="col-md-9">
-						<input type="text" class="form-control input-sm" name="risk_control_owner" placeholder="">
-						</div>
-					</div>
+									<label class="col-md-3 control-label smaller cl-compact">Control Owner <span class="required">* </span></label>
+									<div class="col-md-9">
+									
+									<select class="form-control input-sm" name="risk_control_owner">
+										<option value="NONE">NONE</option>
+										<?php foreach($division_list as $row) { ?>
+										<option value="<?=$row['ref_key']?>"><?=$row['ref_value']?></option>
+										<?php } ?>
+									</select>
+									</div>
+								</div>
 				</div>
 			</form>
 	</div>
@@ -400,10 +408,16 @@
 		
 			<form id="input-form-action-plan" role="form" class="form-horizontal">
 				<div class="form-body">
+					
 					<div class="form-group">
-						<label class="col-md-3 control-label">Suggested Action Plan <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact">Suggested Action Plan<span class="required">* </span></label>
 						<div class="col-md-9">
-						<input type="text" class="form-control input-sm" name="action_plan" placeholder="">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" name="action_plan" placeholder=""> 
+								<span class="input-group-btn">
+								<button class="btn btn-primary btn-sm" type="button" data-toggle="modal" href="#modal-libraryaction"><i class="fa fa-search fa-fw"/></i></button>
+								</span> 
+							</div>
 						</div>
 					</div>
 					<div class="form-group">
@@ -438,7 +452,36 @@
 			>Save</button>
 	</div>
 </div>
-
+<!-- LIBRARY ACTION-->
+<div id="modal-libraryaction" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+		<h4 class="modal-title">Suggested Action Plan Library</h4>
+		<div class="inputs">
+			<div class="portlet-input input-inline">
+				<div class="input-group">
+					<input type="text" class="form-control" name="filter_search" placeholder="search...">
+					<span class="input-group-btn">
+					<button class="btn btn-default" type="button" id="modal-libraryaction-filter-submit">Search</button>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-body">
+		<div>
+			<table id="library_tableaction" class="table table-condensed table-bordered table-hover">
+				<thead>
+				<tr role="row" class="heading">
+					<th width="30px">&nbsp;</th>
+					<th>Action Plan</th> 
+				</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+	</div>
+</div>
 <!-- CONTROL -->
 <div id="modal-control" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
 	<div class="modal-header">

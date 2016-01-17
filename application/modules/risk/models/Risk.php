@@ -423,6 +423,7 @@ class Risk extends APP_Model {
 					and a.risk_status > 1
 					and a.periode_id = ".$defFilter['periodid']."
 					and a.risk_input_by = '".$defFilter['userid']."'
+					and a.existing_control_id is null
 					";
 		}
 		
@@ -444,6 +445,7 @@ class Risk extends APP_Model {
 					a.periode_id is not null
 					and a.risk_status > 1
 					and a.risk_input_by = '".$defFilter['userid']."'
+					and a.existing_control_id is null
 					";
 		}
 		

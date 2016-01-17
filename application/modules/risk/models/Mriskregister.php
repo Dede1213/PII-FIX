@@ -463,6 +463,8 @@ class Mriskregister extends APP_Model {
 		
 		return $res;
 	}
+
+	
 	
 	
 	public function insertRiskRegisterLibrary($risk, $code, $impact, $actplan, $control)

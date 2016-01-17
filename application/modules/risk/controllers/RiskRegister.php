@@ -836,6 +836,33 @@ class RiskRegister extends APP_Controller {
 			'suggested_risk_treatment' => $_POST['suggested_risk_treatment'],
 			'created_by' => $data['session']['username']
 		);
+
+		$risk2 = array(
+			'risk_code' => $_POST['risk_library_code'],
+			'risk_status' => $rstatus,
+			'periode_id' => $periode_id,
+			'risk_input_by' => $data['session']['username'],
+			'risk_input_division' => $data['session']['division_id'],
+			'risk_owner' => $_POST['risk_division'],
+			'risk_division' => $_POST['risk_division'],
+			'risk_library_id' => $_POST['risk_library_id'],
+			'risk_event' => $_POST['risk_event'],
+			'risk_description' => $_POST['risk_description'],
+			'risk_category' => $_POST['risk_category'],
+			'risk_sub_category' => $_POST['risk_sub_category'],
+			'risk_2nd_sub_category' => $_POST['risk_2nd_sub_category'],
+			'risk_cause' => $_POST['risk_cause'],
+			'risk_impact' => $_POST['risk_impact'],
+			//'existing_control_id' => $_POST['existing_control_id'],
+			//'risk_existing_control' => $_POST['risk_existing_control'],
+			//'risk_evaluation_control' => $_POST['risk_evaluation_control'],
+			//'risk_control_owner' => $_POST['risk_control_owner'],
+			'risk_level' => $_POST['risk_level_id'],
+			'risk_impact_level' => $_POST['risk_impact_level_id'],
+			'risk_likelihood_key' => $_POST['risk_likelihood_id'],
+			'suggested_risk_treatment' => $_POST['suggested_risk_treatment'],
+			'created_by' => $data['session']['username']
+		);
 		
 		$impact_level = array();
 		foreach($_POST['impact'] as $v) {
@@ -853,7 +880,7 @@ class RiskRegister extends APP_Controller {
 		}
 		
 		if ($_POST['risk_library_id'] != null) {
-			$res = $this->mriskregister->insertRiskRegisterLibrary($risk, $code, $impact_level, $actplan, $control);
+			$res = $this->mriskregister->insertRiskRegisterLibrary($risk2, $code, $impact_level, $actplan, $control);
 		} else {
 			$res = $this->mriskregister->insertRiskRegister($risk, $code, $impact_level, $actplan, $control);
 		}

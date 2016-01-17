@@ -155,7 +155,51 @@ gridControl.init({
         ]// set first column as a default sort by asc
     }
 });
+var gridLibraryaction = new Datatable();
+gridLibraryaction.init({
+    src: $("#library_tableaction"),
+    onSuccess: function (grid) {
+        // execute some code after table records loaded
+    },
+    onError: function (grid) {
+        // execute some code on network or other general error  
+    },
+    onDataLoad: function(grid) {
+        // execute some code on ajax data load
+    },
+    loadingMessage: 'Loading...',
+    dataTable: { // here you can define a typical datatable settings from http://datatables.net/usage/options 
 
+        // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
+        // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/scripts/datatable.js). 
+        // So when dropdowns used the scrollable div should be removed. 
+        //"dom": "<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r>t<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'>>",
+        
+        //"scrollX": true,
+        "pageLength": 10, // default record count per page
+        "lengthMenu": [[10], [10]],
+        "ajax": {
+            "url": site_url+"/risk/RiskRegister/getActionLibrary" // ajax source
+        },
+        "columnDefs": [ {
+            "targets": 0,
+            "data": "action_plan",
+            "render": function ( data, type, full, meta ) {
+                var ret = '<div class="btn-group">'+
+                '<button type="button" class="btn btn-default btn-xs" onclick="javascript: RiskOwned.selectLibraryaction('+full.id+')"><i class="fa fa-check-circle font-blue"></i></button>'+
+                '</div>';
+                return ret;
+            }
+        } ],
+        "columns": [
+            { "data": "action_plan", "orderable": false },
+            { "data": "action_plan", "orderable": false } 
+       ],
+        "order": [
+            [1, "asc"]
+        ]// set first column as a default sort by asc
+    }
+});
 var RiskOwned = function() {
 	return {
 		dataMode: null,
@@ -202,7 +246,7 @@ var RiskOwned = function() {
 	    			var xcid = $('#input-form-control input[name=existing_control_id]').val();
 	        		var xexis = $('#input-form-control textarea[name=risk_existing_control]').val();
 	        		var xeval = $('#input-form-control input[name=risk_evaluation_control]').val();
-	        		var xowner = $('#input-form-control input[name=risk_control_owner]').val();
+	        		var xowner = $('#input-form-control select[name=risk_control_owner]').val();
 	        		
 	        		var nnode = {
 	        			'existing_control_id' : xcid,
@@ -378,6 +422,20 @@ var RiskOwned = function() {
         		
         		Metronic.unblockUI();
         	});
+        },
+        selectLibraryaction: function(rid) {
+            var me = this;
+              
+            $('#modal-libraryaction').modal('hide');
+            Metronic.blockUI({ boxed: true });
+            $.getJSON( site_url+"/risk/RiskRegister/loadactionLibrary/"+rid, function( data_risk ) {
+                Metronic.unblockUI();
+                
+                data_risk['action_plan'] = data_risk['action_plan'];
+                
+                me.populateRisk($('#input-form-action-plan'), data_risk);
+            });
+         
         },
         selectControlLibrary: function(rid) {
         	var me = this;

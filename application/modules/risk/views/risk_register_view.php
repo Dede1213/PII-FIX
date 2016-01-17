@@ -3,7 +3,7 @@
 	<div class="page-content">
 		<!-- BEGIN PAGE HEADER-->
 		<h3 class="page-title">
-		Risk Form
+		Risk Form 
 		</h3>
 		<div class="page-bar">
 			<ul class="page-breadcrumb">
@@ -57,16 +57,12 @@
 										<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['risk_code']?>" name="risk_id" placeholder="">
 									</div>
 								</div>
-								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact">Risk Owner</label>
-									<div class="col-md-9">
-										<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['risk_owner_v']?>" name="risk_id" placeholder="">
-									</div>
-								</div>
+								
+								
 								<div class="form-group">
 									<label class="col-md-3 control-label smaller cl-compact">Risk Event</label>
 									<div class="col-md-9">
-									<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['risk_event']?>" name="risk_event" placeholder="">
+									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_event" placeholder=""><?=$risk['risk_event']?></textarea>
 									</div>
 								</div>
 								<div class="form-group">
@@ -93,20 +89,29 @@
 										<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['risk_2nd_sub_category_v']?>" name="risk_2nd_sub_category" placeholder="">
 									</div>
 								</div>
+
+								<div class="form-group">
+									<label class="col-md-3 control-label smaller cl-compact">Risk Owner</label>
+									<div class="col-md-9">
+										<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['risk_owner_v']?>" name="risk_id" placeholder="">
+									</div>
+								</div>
 							</div>
 							<div class="col-md-6">
+								
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact" >Cause</label>
+									<label class="col-md-3 control-label smaller cl-compact">Cause</label>
 									<div class="col-md-9">
-									<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['risk_cause']?>" name="risk_cause" placeholder="">
+									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_cause" placeholder=""><?=$risk['risk_cause']?></textarea>
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact" >Impact</label>
+									<label class="col-md-3 control-label smaller cl-compact">Impact</label>
 									<div class="col-md-9">
-									<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['risk_impact']?>" name="risk_impact" placeholder="">
+									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_impact" placeholder=""><?=$risk['risk_impact']?></textarea>
 									</div>
 								</div>
+								
 								<!--<div class="form-group">
 									<label class="col-md-3 control-label smaller cl-compact">Existing Control ID</label>
 									<div class="col-md-9">

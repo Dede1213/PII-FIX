@@ -31,7 +31,7 @@
 				 
 				<h4 class="block">Warning</h4>
 				<p>
-					 Cannot Input Risk Register Exercise because Risk Period is not set, please contact RAC team for further information
+					 Cannot Input Action Plan Execution because Risk Period is not set, please contact RAC team for further information
 				</p>
 				<p>
 					<a class="btn red" target="_self" href="<?=$site_url?>/main">

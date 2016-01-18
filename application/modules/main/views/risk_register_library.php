@@ -420,6 +420,64 @@
 			<form id="input-form-control" role="form" class="form-horizontal">
 				<div class="form-body">
 					<div class="form-group">
+					<input type = "hidden" id = "form-control-revid">
+						<label class="col-md-3 control-label smaller cl-compact">Existing Control ID</label>
+						<div class="col-md-9">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" readonly="true" name="existing_control_id" id = "existing_control_id" placeholder="">
+								<span class="input-group-btn">
+								<button class="btn btn-primary btn-sm" type="button" data-toggle="modal" href="#modal-control"><i class="fa fa-search fa-fw"/></i></button>
+								</span>
+								
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-3 control-label smaller cl-compact" >Existing Control <span class="required">* </span></label>
+						<div class="col-md-9">
+						<textarea class="form-control input-sm " rows="3" name="risk_existing_control" id = "risk_existing_control" placeholder="">NONE</textarea>
+						<button id="button_clear_control" type="button" class="hide btn red btn-xs" style="margin-top: 5px;"><i class="fa fa-minus-circle font-white"></i> Clear Existing Control</button>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-3 control-label smaller cl-compact" >Evaluation on Existing Control <span class="required">* </span></label>
+						<div class="col-md-9">
+						<input type="text" class="form-control input-sm" value="NONE" name="risk_evaluation_control" id = "risk_evaluation_control" placeholder="">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-3 control-label smaller cl-compact" >Control Owner <span class="required">* </span></label>
+						<div class="col-md-9">
+						<select class="form-control input-sm" name="risk_control_owner" id = "risk_control_owner">
+										<option value="NONE">NONE</option>
+										<?php foreach($division_list as $row) { ?>
+										<option value="<?=$row['ref_key']?>"><?=$row['ref_value']?></option>
+										<?php } ?>
+						</select>
+					<!-- <input type="text" class="form-control input-sm" name="risk_control_owner" placeholder=""> -->
+						</div>
+					</div>
+				</div>
+			</form>
+	</div>
+	<div class="modal-footer">
+		<button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+		<button id="input-control-add" type="button" 
+			class="btn blue ladda-button"
+			 data-style="expand-right"
+			>Add</button>
+	</div>
+</div>
+<!--<div id="form-control" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+		<h4 class="modal-title">Add Control</h4>
+	</div>
+	<div class="modal-body">
+		
+			<form id="input-form-control" role="form" class="form-horizontal">
+				<div class="form-body">
+					<div class="form-group">
 						<label class="col-md-3 control-label smaller cl-compact">Existing Control ID</label>
 						<div class="col-md-9">
 							<div class="input-group">
@@ -460,9 +518,11 @@
 			 data-style="expand-right"
 			>Add</button>
 	</div>
-</div>
+</div>-->
 
 <!-- ACTION PLAN -->
+
+<!--
 <div id="form-data" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
@@ -509,7 +569,101 @@
 			 data-style="expand-right"
 			>Add</button>
 	</div>
+</div>-->
+
+
+<!-- ACTION PLAN -->
+<div id="form-data" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+		<h4 class="modal-title">Add Suggested Action Plan</h4>
+	</div>
+	<div class="modal-body">
+			<input type="hidden"   id = "form-data-revid"  > 
+			<form id="input-form-action-plan" role="form" class="form-horizontal">
+				<div class="form-body">
+					<!--<div class="form-group">
+						<label class="col-md-3 control-label">Suggested Action Plan <span class="required">* </span></label>
+						<div class="col-md-9">
+						<input type="text" class="form-control input-sm" name="action_plan" placeholder="">
+						</div>
+					</div>-->
+					<div class="form-group">
+						<label class="col-md-3 control-label smaller cl-compact">Suggested Action Plan</label>
+						<div class="col-md-9">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" name="action_plan" id = "action_plan"placeholder=""> 
+								<span class="input-group-btn">
+								<button class="btn btn-primary btn-sm" type="button" data-toggle="modal" href="#modal-libraryaction"><i class="fa fa-search fa-fw"/></i></button>
+								</span> 
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-3 control-label">Due Date <span class="required">* </span></label>
+						<div class="col-md-9">
+						<div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
+							<input type="text" class="form-control input-sm" name="due_date" id = "due_date" readonly>
+							<span class="input-group-btn">
+							<button class="btn default btn-sm" type="button"><i class="fa fa-calendar"></i></button>
+							</span>
+						</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-3 control-label">Action Plan Owner <span class="required">* </span></label>
+						<div class="col-md-9">
+						<select class="form-control input-sm" name="division" id = "division">
+							<?php foreach($division_list as $row) { ?>
+							<option value="<?=$row['ref_key']?>"><?=$row['ref_value']?></option>
+							<?php } ?>
+						</select>
+						</div>
+					</div>
+				</div>
+			</form>
+	</div>
+	<div class="modal-footer">
+		<button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+		<button id="input-actionplan-add" type="button" 
+			class="btn blue ladda-button"
+			 data-style="expand-right"
+			>Add</button>
+	</div>
 </div>
+
+
+<!-- LIBRARY ACTION-->
+<div id="modal-libraryaction" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+		<h4 class="modal-title">Suggested Action Plan Library</h4>
+		<div class="inputs">
+			<div class="portlet-input input-inline">
+				<div class="input-group">
+					<input type="text" class="form-control" name="filter_search" placeholder="search...">
+					<span class="input-group-btn">
+					<button class="btn btn-default" type="button" id="modal-libraryaction-filter-submit">Search</button>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-body">
+		<div>
+			<table id="library_tableaction" class="table table-condensed table-bordered table-hover">
+				<thead>
+				<tr role="row" class="heading">
+					<th width="30px">&nbsp;</th>
+					<th>Action Plan</th> 
+				</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
 
 <!-- LIBRARY -->
 <div id="modal-library" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">

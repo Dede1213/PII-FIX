@@ -25,7 +25,7 @@ grid.init({
             "url": site_url+"/admin/news/newsGetData" // ajax source
         },
         "columns": [
-           { "data": "GenRowNum", "orderable": false },
+           { "data": "GenRowNum" },
            { "data": "title" },
            { "data": "filename" },
            { "data": "created_date_v" },
@@ -50,7 +50,7 @@ grid.init({
        	}
        } ],
         "order": [
-            [1, "asc"]
+            [3, "desc"]
         ]// set first column as a default sort by asc
     }
 });

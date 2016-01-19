@@ -40,12 +40,12 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact">Risk Event
-								</label>
-								<div class="col-md-9">
-									<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_event" placeholder="">
+									<label class="col-md-3 control-label smaller cl-compact">Risk Event</label>
+									<div class="col-md-9">
+									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_event" placeholder=""></textarea>
+									</div>
 								</div>
-							</div>
+							
 							<div class="form-group">
 								<label class="col-md-3 control-label small cl-compact">Risk Event Description</label>
 								<div class="col-md-9">
@@ -54,17 +54,18 @@
 							</div>
 							<?php if ($change_type == 'Risk Form') { ?>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Cause</label>
-								<div class="col-md-9">
-									<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_cause" placeholder="">
+									<label class="col-md-3 control-label smaller cl-compact">Cause <span class="required">* </span></label>
+									<div class="col-md-9">
+									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_cause" placeholder=""></textarea>
+									</div>
 								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Impact</label>
-								<div class="col-md-9">
-									<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_impact" placeholder="">
+								<div class="form-group">
+									<label class="col-md-3 control-label smaller cl-compact">Impact <span class="required">* </span></label>
+									<div class="col-md-9">
+									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_impact" placeholder=""></textarea>
+									</div>
 								</div>
-							</div>
+							
 							<?php } ?>
 							<div class="form-group">
 								<label class="col-md-3 control-label smaller cl-compact" >Impact Level</label>
@@ -152,12 +153,12 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact">Risk Event
-								</label>
-								<div class="col-md-9">
-								<input type="text" class="form-control input-sm" readonly="true" name="risk_event" data-required="1" placeholder="">
+									<label class="col-md-3 control-label smaller cl-compact">Risk Event</label>
+									<div class="col-md-9">
+									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_event" placeholder=""></textarea>
+									</div>
 								</div>
-							</div>
+					
 							<div class="form-group">
 								<label class="col-md-3 control-label small cl-compact">Risk Event Description</label>
 								<div class="col-md-9">
@@ -166,17 +167,19 @@
 							</div>
 							<?php if ($change_type == 'Risk Form') { ?>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Cause <span class="required">* </span></label>
-								<div class="col-md-9">
-								<input type="text" class="form-control input-sm" name="risk_cause" placeholder="">
+									<label class="col-md-3 control-label smaller cl-compact">Cause <span class="required">* </span></label>
+									<div class="col-md-9">
+									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_cause" placeholder=""></textarea>
+									</div>
 								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Impact <span class="required">* </span></label>
-								<div class="col-md-9">
-								<input type="text" class="form-control input-sm" name="risk_impact" placeholder="">
+								<div class="form-group">
+									<label class="col-md-3 control-label smaller cl-compact">Impact <span class="required">* </span></label>
+									<div class="col-md-9">
+									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_impact" placeholder=""></textarea>
+									</div>
 								</div>
-							</div>
+
+							
 							<?php } ?>
 							<?php if ($change_type == 'Risk Form' || $change_type == 'Risk Owner Form') { ?>
 							<div class="form-group">

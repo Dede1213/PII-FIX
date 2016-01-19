@@ -284,4 +284,121 @@ class Mperiode extends APP_Model {
 		$row = $query->row_array();
 		return $row;
 	}
+
+	//report
+
+	public function validatePeriodeReport($periode_start, $periode_end) {
+		/* TODO : Validation for insert and update */
+		$resp_arr = array('status' => true, 'msg' => null);
+		$dints = str_replace('-', '', $periode_start) * 1;
+		$dinte = str_replace('-', '', $periode_end) * 1;
+		
+		if ($dints > $dinte) {
+			$resp_arr['status'] = false;
+			$resp_arr['msg'] = 'End Date must be after Start Date';
+		}
+		return $resp_arr;
+	}
+
+	public function insertDataReport($data)
+	{
+		// if year month start is >= next month
+		// if year month periode is overlapping with existing data
+		
+		$sql = "insert into m_periode_report
+				(periode_name, periode_start, periode_end)
+				values(?, ?, ?)
+				";
+		$par = $data;
+		$res = $this->db->query($sql, $par);
+
+		
+$query2 = $this->db->query("select periode_id from m_periode_report where periode_name = '".$data['periode_name']."' ");
+$row2 = $query2->row(); 
+
+$query = $this->db->query("select risk_id from t_risk where created_date between '".$data['periode_start']."' and '".$data['periode_end']."' ");
+if ($query->num_rows() > 0)
+{
+   foreach ($query->result() as $row)
+   {
+   	$sql = "insert into t_report_risk(periode_id, risk_id)
+			values('".$row2->periode_id."' ,'".$row->risk_id."' )
+				";
+		$res = $this->db->query($sql);
+   }
+} 
+		
+
+		return $res;
+	}
+
+	// ACTION PLAN PERIODE
+	public function getDataReport($page, $row, $order_by = null, $order = null, $filter_by = null, $filter_value = null)
+	{
+		$ex_or = $ex_filter = '';
+		$par = false;
+		
+		if ($order_by != null) {
+			$order_by = $order_by;
+			$ex_or = ' order by '.$order_by.' '.$order;
+		}
+		
+		if ($filter_by != null && $filter_value != null) {
+			$ex_filter = ' where '.$filter_by.' like ? ';
+			$par['p1'] = '%'.$filter_value.'%';
+		}
+		
+		$sql = "select 
+				a.*,
+				date_format(a.periode_start, '%d-%m-%Y') as periode_start_v,
+				date_format(a.periode_end, '%d-%m-%Y') as periode_end_v
+				from m_periode_report a "
+				.$ex_filter
+				.$ex_or;
+		$res = $this->getPagingData($sql, $par, $page, $row, 'periode_id', true);
+		return $res;
+	}
+
+	public function updateDataReport($data_id, $data, $uid)
+	{
+		// if year month start is >= next month
+		// if year month periode is overlapping with existing data
+		
+		$this->_logHistoryPlan($data_id, $uid, 'U');
+		
+		$sql = "update m_periode_report
+				set periode_name = ?, periode_start = ?, periode_end = ?
+					
+				where periode_id = ?
+				";
+		$par = $data;
+		
+		$par['data_id'] = $data_id;
+		
+		$res = $this->db->query($sql, $par);
+		return $res;
+	}
+
+	public function validatePeriodeDeleteReport($periode_start, $periode_end) {
+		/* TODO : Validation for delete */
+		$resp_arr = array('status' => true, 'msg' => null);
+		return $resp_arr;
+	}
+
+	public function deleteDataReport($data_id, $uid)
+	{
+		// if year month start is <= current month
+		
+		$this->_logHistoryPlan($data_id, $uid, 'D');
+		
+		$sql = "delete from m_periode_report
+				where periode_id = ?
+				";
+		$par['data_id'] = $data_id;
+		
+		$res = $this->db->query($sql, $par);
+		return $res;
+	}
+
+
 }

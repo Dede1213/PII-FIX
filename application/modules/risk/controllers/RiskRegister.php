@@ -617,11 +617,12 @@ class RiskRegister extends APP_Controller {
 		}
 	}
 	
-	public function loadRiskLibraryChange($rid) 
+	public function loadRiskLibraryChange($rid,$risk_input_by) 
 	{
 		if (!empty($rid) && is_numeric($rid)) {
+			
 			$this->load->model('risk/risk');
-			$data = $this->risk->getRiskChangeById($rid);
+			$data = $this->risk->getRiskChangeById($rid,$risk_input_by);
 			echo json_encode($data);
 		}
 	}
@@ -836,7 +837,7 @@ class RiskRegister extends APP_Controller {
 			'suggested_risk_treatment' => $_POST['suggested_risk_treatment'],
 			'created_by' => $data['session']['username']
 		);
-
+		// array untuk dari library nih ubah
 		$risk2 = array(
 			'risk_code' => $_POST['risk_library_code'],
 			'risk_status' => $rstatus,

@@ -48,7 +48,8 @@ grid.init({
         	"data": "risk_code",
         	"render": function ( data, type, full, meta ) {
         		if (full.risk_status == 2) {
-        			return '<a target="_self" href="'+site_url+'/main/mainrac/riskRegisterForm/'+full.risk_id+'">'+data+'</a>';
+                    //ubah
+        			return '<a target="_self" href="'+site_url+'/main/mainrac/riskRegisterForm/'+full.risk_id+'/'+full.risk_input_by+'">'+data+'</a>';
         		}
         		return '<a target="_self" href="'+site_url+'/main/mainrac/viewRisk/'+full.risk_id+'">'+data+'</a>';
         	}

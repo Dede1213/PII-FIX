@@ -5,6 +5,8 @@
 		<h3 class="page-title">
 		Risk Form
 		</h3>
+
+
 		<div class="page-bar">
 			<ul class="page-breadcrumb">
 				<li>
@@ -231,7 +233,7 @@
 								<label class="col-md-3 control-label smaller cl-compact">Risk Event <span class="required">* </span>
 								</label>
 								<div class="col-md-9">
-								<input type="text" class="form-control input-sm" name="risk_event" data-required="1" placeholder="">
+								<input type="text" class="form-control input-sm" name="risk_event" data-required="1" placeholder="" value="">
 								</div>
 							</div>
 							<div class="form-group">
@@ -856,8 +858,8 @@
 </div>
 <?php if(isset($modifyRisk)) { ?>
 <script type="text/javascript">
-	var g_risk_id = <?=$risk_id?>;
-	var g_username = null;
+	var g_risk_id = <?=$risk_id?>; 
+	var risk_input_by = <?php echo "'".$risk_input_by."'"?> ;
 </script>
 <?php } ?>
 

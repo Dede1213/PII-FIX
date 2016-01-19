@@ -49,7 +49,7 @@ class Risk extends APP_Model {
 				left join t_risk n on a.risk_library_id = n.risk_id
 				left join t_risk_add_user on a.risk_id = t_risk_add_user.risk_id
 				
-				where a.risk_id = ? ";
+				where a.risk_id = ?";
 		$query = $this->db->query($sql, array('divid' => $risk_id));
 		$row = $query->row_array();
 		
@@ -124,7 +124,7 @@ class Risk extends APP_Model {
 	{
 		$sql = "select a.*
 				from t_risk_control a
-				where a.risk_id = ?";
+				where a.risk_id = ? ";
 		$par = array('uid' => $risk_id);
 		
 		$query = $this->db->query($sql, $par);
@@ -150,6 +150,8 @@ class Risk extends APP_Model {
 	
 	public function getRiskChangeById($risk_id) 
 	{
+		
+		//$user =$_GET['tes'];
 		$sql = "select 
 				a.*,
 				b.ref_value as risk_status_v,
@@ -181,8 +183,8 @@ class Risk extends APP_Model {
 				left join m_division m on a.risk_input_division = m.division_id
 				left join t_risk n on a.risk_library_id = n.risk_id
 				left join t_risk_add_user on a.risk_id = t_risk_add_user.risk_id
-				
 				where a.risk_id = ? ";
+
 		$query = $this->db->query($sql, array('divid' => $risk_id));
 		$row = $query->row_array();
 
@@ -412,18 +414,16 @@ class Risk extends APP_Model {
 					d.ref_value as impact_level_v,
 					e.l_title as likelihood_v,
 					f.division_name as risk_owner_v
-					from t_risk a
+					from t_risk_change a
 					left join m_reference b on a.risk_status = b.ref_key and b.ref_context = 'risk.status.user'
 					left join m_reference c on a.risk_level = c.ref_key and c.ref_context = 'risklevel.display'
 					left join m_reference d on a.risk_impact_level = d.ref_key and d.ref_context = 'impact.display'
 					left join m_likelihood e on a.risk_likelihood_key = e.l_key
 					left join m_division f on a.risk_owner = f.division_id
 					where 
-					a.periode_id is not null
-					and a.risk_status > 1
-					and a.periode_id = ".$defFilter['periodid']."
+					a.periode_id = '".$defFilter['periodid']."'
 					and a.risk_input_by = '".$defFilter['userid']."'
-					and a.existing_control_id is null
+					and a.risk_id = (select r.risk_id from t_risk r where a.risk_id = r.risk_id and r.periode_id = '".$defFilter['periodid']."' and r.risk_status > 1)
 					";
 		}
 		
@@ -570,6 +570,59 @@ class Risk extends APP_Model {
 				
 				$date = date("Y-m-d");
 				
+				$sql = "select
+						a.*,
+						concat('AP.', LPAD(a.id, 6, '0')) as act_code,
+						b.risk_code,
+						c.display_name as assigned_to_v,
+						d.division_name as division_name,
+						date_format(a.due_date, '%d-%m-%Y') as due_date_v,
+						case 
+							when a.assigned_to = '".$defFilter['userid']."' then 1
+							else 0
+						end as is_owner,
+						case 
+							when '4' = '".$defFilter['role_id']."' then 1
+							else 0
+						end as is_head,
+						date_format(a.revised_date, '%d-%m-%Y') as revised_date_v
+						from 
+						t_risk_action_plan a
+						left join t_risk b on a.risk_id = b.risk_id
+						left join m_user c on a.assigned_to = c.username
+						left join m_division d on a.division = d.division_id						 
+						where 
+						a.action_plan_status > 3
+						and a.division = ?
+						AND b.periode_id is null
+						  
+						".$ext;
+				if ($par) {
+					$rpar['p1'] = $par['p1'];
+				}
+				$par = $rpar;
+				
+				$sql = $sql.$ex_filter.$ex_or;
+				$res = $this->getPagingData($sql, $par, $page, $row, 'id', true);
+				return $res;
+			} else {
+				return false;
+			}
+		}
+		
+		if ($mode == 'ownedActionPlanExec_adt') {
+			if (isset($defFilter['role_id']) && ($defFilter['role_id'] == '4' || $defFilter['role_id'] == '5')) {
+				$ext = '';
+				$rpar = array('division_id' => $defFilter['division_id']);
+				
+				if ($defFilter['role_id'] == '4') { // division_head
+				} else {  // pic
+					$ext = ' and a.assigned_to = ? ';
+					$rpar['uid'] = $defFilter['userid'];
+				}
+				
+				$date = date("Y-m-d");
+				
 				$sql = "select 
 						a.*,
 						concat('AP.', LPAD(a.id, 6, '0')) as act_code,
@@ -591,13 +644,12 @@ class Risk extends APP_Model {
 						left join t_risk b on a.risk_id = b.risk_id
 						left join m_user c on a.assigned_to = c.username
 						left join m_division d on a.division = d.division_id
-						join m_periode on m_periode.periode_id = b.periode_id
+						 
 						where 
 						a.action_plan_status > 3
 						and a.division = ?
-						and (m_periode.periode_start <= '".$date."'
-						and m_periode.periode_end >= '".$date."')
-
+						AND b.periode_id is not null
+					  
 						".$ext;
 				if ($par) {
 					$rpar['p1'] = $par['p1'];
@@ -638,6 +690,27 @@ class Risk extends APP_Model {
 		if ($mode == 'racActionPlanExec') {
 			
 			$date = date("Y-m-d");
+			$sql = "select
+					a.*,
+					concat('AP.', LPAD(a.id, 6, '0')) as act_code,
+					b.risk_code,
+					c.display_name as assigned_to_v,
+					d.division_name as division_name,
+					date_format(a.due_date, '%d-%m-%Y') as due_date_v
+					from 
+					t_risk_action_plan a
+					left join t_risk b on a.risk_id = b.risk_id
+					left join m_user c on a.assigned_to = c.username
+					left join m_division d on a.division = d.division_id					
+					where 
+					a.action_plan_status > 3
+						AND b.periode_id is null
+					";
+		}
+		
+			if ($mode == 'racActionPlanExec_adt') {
+			
+			$date = date("Y-m-d");
 			$sql = "select 
 					a.*,
 					concat('AP.', LPAD(a.id, 6, '0')) as act_code,
@@ -650,11 +723,11 @@ class Risk extends APP_Model {
 					left join t_risk b on a.risk_id = b.risk_id
 					left join m_user c on a.assigned_to = c.username
 					left join m_division d on a.division = d.division_id
-					join m_periode on m_periode.periode_id = b.periode_id
+				 
 					where 
 					a.action_plan_status > 3
-					and (m_periode.periode_start <= '".$date."'
-						and m_periode.periode_end >= '".$date."')
+					 AND b.periode_id is not null
+						 
 					";
 		}
 		
@@ -1060,6 +1133,17 @@ class Risk extends APP_Model {
 		
 		return $res;
 	}
+
+//ubah maintenance
+	public function riskSetConfirm_under($risk_id, $data, $uid, $update_point = 'U') {
+		//$this->_logHistory($risk_id, $uid, $update_point);
+		
+		//$periode = $data['periode_id'];
+		$sql = "update t_risk set risk_existing_control = 'under' where risk_id='$risk_id'";
+		$res = $this->db->query($sql);
+		
+		return $res;
+	}
 	
 	public function riskSetDraft($risk_id, $data, $uid, $update_point = 'U') {
 		$this->_logHistory($risk_id, $uid, $update_point);
@@ -1150,6 +1234,24 @@ class Risk extends APP_Model {
 			'uid2' =>$uid
 		);
 		$res = $this->db->query($sql, $par);
+
+		$sql = "update t_risk_change set 
+				risk_status = 2,
+				created_by = ?, 
+				created_date = NOW()
+				where
+				periode_id is not null
+				and periode_id = ?
+				and risk_status in ('0', '1')
+				and risk_input_by = ?
+				";
+		$par = array(
+			'uid' => $uid,
+			'pid' =>$periode_id,
+			'uid2' =>$uid
+		);
+		$res = $this->db->query($sql, $par);
+
 		return $res;
 	}
 	
@@ -1200,6 +1302,19 @@ class Risk extends APP_Model {
 		$par['risk_id'] = $risk_id;
 		
 		$sql = "update t_risk set existing_control_id = 1 where risk_id = ?";
+		$res = $this->db->query($sql, $par);
+
+		return $res;
+	}
+//ubah under
+	public function deleteRisk_under($risk_id, $uid, $update_point = 'D') {
+		// delete risk in child
+		// t_risk t_risk_change t_risk_action_plan t_risk_action_plan_change 
+		// t_risk_control t_risk_control_change t_risk_impact t_risk_impact_change
+		
+		$par['risk_id'] = $risk_id;
+		
+		$sql = "update t_risk set risk_existing_control = null where risk_id = ?";
 		$res = $this->db->query($sql, $par);
 
 		return $res;
@@ -1256,15 +1371,96 @@ class Risk extends APP_Model {
 		}
 
 		$par['risk_id'] = $risk_id;
-		$sql = "update t_risk set ".$keyupdate
+		$sql = "update t_risk_change set ".$keyupdate
 			  ."created_date = now()
-			  	where risk_id = ?";
+			  	where risk_id = ?  and risk_input_by = '$uid'";
 		$res = $this->db->query($sql, $par);
 		
 		if ($res) {
 			// insert impact
 			if ($impact !== false) {
-				$sql = "delete from t_risk_impact where risk_id = ?";
+				$sql = "delete from t_risk_impact_change where risk_id = ? and switch_flag = '$uid'";
+				$this->db->query($sql, array('rid' => $risk_id));
+				
+				$sql = "insert into t_risk_impact_change(risk_id, impact_id, impact_level, switch_flag) values(?, ?, ?, '$uid')";
+				foreach ($impact as $key => $value) {
+					$par = array(
+						'rid' => $risk_id,
+						'iid' => $value['impact_id'],
+						'il' => $value['impact_level']
+					);
+					$res3 = $this->db->query($sql, $par);
+				}
+			}
+			
+			// insert action plan
+			if ($actplan !== false) {
+				$sql = "delete from t_risk_action_plan_change where risk_id = ? and switch_flag = '$uid'";
+				$this->db->query($sql, array('rid' => $risk_id));
+				
+				$sql = "insert into t_risk_action_plan_change(risk_id, action_plan, due_date, division, switch_flag) 
+						values(?, ?, ?, ?, '$uid')";
+				foreach ($actplan as $key => $value) {
+					$dd = implode('-', array_reverse( explode('-', $value['due_date']) ));
+					$par = array(
+						'rid' => $risk_id,
+						'ap' => $value['action_plan'],
+						'dd' => $dd,
+						'div' => $value['division']
+					);
+					$res4 = $this->db->query($sql, $par);
+				}
+			}
+			
+			// insert control
+			if ($control !== false) {
+				$sql = "delete from t_risk_control_change where risk_id = ? and switch_flag = '$uid'";
+				$this->db->query($sql, array('rid' => $risk_id));
+				
+				$sql = "insert into t_risk_control_change(
+							risk_id, existing_control_id, risk_existing_control, 
+							risk_evaluation_control, risk_control_owner, switch_flag) 
+						values(?, ?, ?, ?, ?, '$uid')";
+				foreach ($control as $key => $value) {
+					$value['existing_control_id'] = $value['existing_control_id'] == '' || $value['existing_control_id'] == '0' ? null : $value['existing_control_id'];
+					
+					$par = array(
+						'rid' => $risk_id,
+						'ap' => $value['existing_control_id'],
+						'dd' => $value['risk_existing_control'],
+						'da' => $value['risk_evaluation_control'],
+						'div' => $value['risk_control_owner']
+					);
+					$res5 = $this->db->query($sql, $par);
+				}
+			}
+			
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+
+	public function updateRisk1($risk_id, $code, $risk, $impact, $actplan, $control, $uid, $update_point = 'U') {
+		$this->_logHistory($risk_id, $uid, $update_point);
+		$par = array();
+		$keyupdate = '';
+		foreach($risk as $k=>$v) {
+			$keyupdate .= $k.' = ?, ';
+			$par[$k] = $v;
+		}
+
+		$par['risk_id'] = $risk_id;
+		$sql = "update t_risk set ".$keyupdate
+			  ."created_date = now()
+			  	where risk_id = ?  ";
+		$res = $this->db->query($sql, $par);
+		
+		if ($res) {
+			// insert impact
+			if ($impact !== false) {
+				$sql = "delete from t_risk_impact where risk_id = ? ";
 				$this->db->query($sql, array('rid' => $risk_id));
 				
 				$sql = "insert into t_risk_impact(risk_id, impact_id, impact_level) values(?, ?, ?)";
@@ -1280,7 +1476,7 @@ class Risk extends APP_Model {
 			
 			// insert action plan
 			if ($actplan !== false) {
-				$sql = "delete from t_risk_action_plan where risk_id = ?";
+				$sql = "delete from t_risk_action_plan where risk_id = ? ";
 				$this->db->query($sql, array('rid' => $risk_id));
 				
 				$sql = "insert into t_risk_action_plan(risk_id, action_plan, due_date, division) 
@@ -1299,7 +1495,88 @@ class Risk extends APP_Model {
 			
 			// insert control
 			if ($control !== false) {
-				$sql = "delete from t_risk_control where risk_id = ?";
+				$sql = "delete from t_risk_control where risk_id = ? ";
+				$this->db->query($sql, array('rid' => $risk_id));
+				
+				$sql = "insert into t_risk_control(
+							risk_id, existing_control_id, risk_existing_control, 
+							risk_evaluation_control, risk_control_owner) 
+						values(?, ?, ?, ?, ?)";
+				foreach ($control as $key => $value) {
+					$value['existing_control_id'] = $value['existing_control_id'] == '' || $value['existing_control_id'] == '0' ? null : $value['existing_control_id'];
+					
+					$par = array(
+						'rid' => $risk_id,
+						'ap' => $value['existing_control_id'],
+						'dd' => $value['risk_existing_control'],
+						'da' => $value['risk_evaluation_control'],
+						'div' => $value['risk_control_owner']
+					);
+					$res5 = $this->db->query($sql, $par);
+				}
+			}
+			
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+
+	public function updateRisk2($risk_id, $code, $risk, $impact, $actplan, $control, $uid, $update_point = 'U') {
+		$this->_logHistory($risk_id, $uid, $update_point);
+		$par = array();
+		$keyupdate = '';
+		foreach($risk as $k=>$v) {
+			$keyupdate .= $k.' = ?, ';
+			$par[$k] = $v;
+		}
+
+		$par['risk_id'] = $risk_id;
+		$sql = "update t_risk set ".$keyupdate
+			  ."created_date = now()
+			  	where risk_id = ?  ";
+		$res = $this->db->query($sql, $par);
+		
+		if ($res) {
+			// insert impact
+			if ($impact !== false) {
+				$sql = "delete from t_risk_impact where risk_id = ? ";
+				$this->db->query($sql, array('rid' => $risk_id));
+				
+				$sql = "insert into t_risk_impact(risk_id, impact_id, impact_level) values(?, ?, ?)";
+				foreach ($impact as $key => $value) {
+					$par = array(
+						'rid' => $risk_id,
+						'iid' => $value['impact_id'],
+						'il' => $value['impact_level']
+					);
+					$res3 = $this->db->query($sql, $par);
+				}
+			}
+			
+			// insert action plan
+			if ($actplan !== false) {
+				$sql = "delete from t_risk_action_plan where risk_id = ? ";
+				$this->db->query($sql, array('rid' => $risk_id));
+				
+				$sql = "insert into t_risk_action_plan(risk_id, action_plan, due_date, division) 
+						values(?, ?, ?, ?)";
+				foreach ($actplan as $key => $value) {
+					$dd = implode('-', array_reverse( explode('-', $value['due_date']) ));
+					$par = array(
+						'rid' => $risk_id,
+						'ap' => $value['action_plan'],
+						'dd' => $dd,
+						'div' => $value['division']
+					);
+					$res4 = $this->db->query($sql, $par);
+				}
+			}
+			
+			// insert control
+			if ($control !== false) {
+				$sql = "delete from t_risk_control where risk_id = ? ";
 				$this->db->query($sql, array('rid' => $risk_id));
 				
 				$sql = "insert into t_risk_control(
@@ -2000,19 +2277,19 @@ class Risk extends APP_Model {
 		return $res;
 	}
 	
-	public function riskDeleteChange($risk_id)
+	public function riskDeleteChange($risk_id,$user)
 	{
 		$par['risk_id'] = $risk_id;
-		$sql = "delete from t_risk_change where risk_id = ?";
+		$sql = "delete from t_risk_change where risk_id = ? and risk_input_by = '$user'";
 		$res = $this->db->query($sql, $par);
 		
-		$sql = "delete from t_risk_action_plan_change where risk_id = ?";
+		$sql = "delete from t_risk_action_plan_change where risk_id = ? and switch_flag = '$user'";
 		$res = $this->db->query($sql, $par);
 		
-		$sql = "delete from t_risk_control_change where risk_id = ?";
+		$sql = "delete from t_risk_control_change where risk_id = ? and switch_flag ='$user'";
 		$res = $this->db->query($sql, $par);
 		
-		$sql = "delete from t_risk_impact_change where risk_id = ?";
+		$sql = "delete from t_risk_impact_change where risk_id = ? and switch_flag='$user'";
 		$res = $this->db->query($sql, $par);
 		
 		return true;
@@ -2149,6 +2426,20 @@ class Risk extends APP_Model {
 		);
 		$query = $this->db->query($sql, $par);
 
+		$sql = "update t_risk_action_plan 
+				set action_plan = ?, due_date = ?, division = ?
+				where id = ? and risk_id = ?";
+		$par = array(
+			'ap' => $risk['action_plan'], 'dd' => $risk['due_date'], 'division' => $risk['division'],
+			'id' => $action_id, 'risk_id' => $risk_id
+		);
+		$query = $this->db->query($sql, $par);
+		return true;
+	}
+
+	public function actionPlanSaveDraftprimary2($action_id, $risk_id, $risk, $uid) 
+	{
+		
 		$sql = "update t_risk_action_plan 
 				set action_plan = ?, due_date = ?, division = ?
 				where id = ? and risk_id = ?";
@@ -2438,6 +2729,8 @@ class Risk extends APP_Model {
 		
 		return true;
 	}
+
+	
 	
 	private function _logHistory($data_id, $uid, $mode) {
 		$sql = "insert into t_risk_hist

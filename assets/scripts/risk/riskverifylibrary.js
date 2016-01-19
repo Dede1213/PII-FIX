@@ -8,7 +8,7 @@ var RiskVerify = function() {
 		init: function() {
         	var me = this;
         	
-        	me.loadRisk(g_risk_id);
+        	me.loadRisk(g_risk_id,risk_input_by);
         	me.loadRiskPrimary(g_risk_id);
         	
         	// CHANGES BUTTON
@@ -107,7 +107,8 @@ var RiskVerify = function() {
         	var me = this;
         	
         	Metronic.blockUI({ boxed: true });
-        	$.getJSON( site_url+"/risk/RiskRegister/loadRiskLibraryChange/"+rid, function( data_risk ) {
+            $.getJSON( site_url+"/risk/RiskRegister/loadRiskLibrary/"+rid, function( data_risk ) {
+        	
         		Metronic.unblockUI();
         		g_username = data_risk['risk_input_by'];
         		data_risk['risk_library_id'] = data_risk['risk_library_id'];
@@ -218,13 +219,16 @@ var RiskVerify = function() {
         	
         	me.actionPlanAdd(nnode, me.dataActionPlanCounter);
         },
-        loadRisk: function(rid) {
+        loadRisk: function(rid,risk_input_by) {
         	var me = RiskInput;
         	
         	$('#modal-library').modal('hide');
         	Metronic.blockUI({ boxed: true });
-        	$.getJSON( site_url+"/risk/RiskRegister/loadRiskLibrary/"+rid, function( data_risk ) {
-        		Metronic.unblockUI();
+
+
+            Metronic.unblockUI();
+            $.getJSON( site_url+"/risk/RiskRegister/loadRiskLibraryChange/"+rid+"/"+risk_input_by, function( data_risk ) {
+         
         		g_username = data_risk['risk_input_by'];
         		data_risk['risk_library_id'] = data_risk['risk_library_id'];
         		data_risk['risk_level_id'] = data_risk['risk_level'];
@@ -234,6 +238,8 @@ var RiskVerify = function() {
         		data_risk['risk_impact_level_value'] = data_risk['impact_level_v'];
         		data_risk['risk_likelihood_id'] = data_risk['risk_likelihood_key'];
         		data_risk['risk_likelihood_value'] = data_risk['likelihood_v'];
+
+                
         		
         		me.populateRisk($('#input-form'), data_risk);
 				

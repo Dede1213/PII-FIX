@@ -343,7 +343,7 @@ class MainRac extends APP_Controller {
 		echo json_encode($data);
 	}
 	
-	public function riskRegisterForm($risk_id = null)
+	public function riskRegisterForm($risk_id = null,$user_by=null)
 	{
 		$data = $this->loadDefaultAppConfig();
 		$this->load->model('risk/mriskregister');
@@ -402,6 +402,7 @@ class MainRac extends APP_Controller {
 			
 			$data['modifyRisk'] = true;
 			$data['risk_id'] = $risk_id;
+			$data['risk_input_by'] = $user_by;
 			$data['indonya'] = base_url('index.php/maini/mainrac');
 			$data['engnya'] = base_url('index.php/main/mainrac');			
 			$data['category'] = $this->mriskregister->getRiskCategory();
@@ -553,8 +554,8 @@ class MainRac extends APP_Controller {
 					$control[] = $v;
 				}
 				
-				$res = $this->risk->updateRisk($_POST['risk_id'], $code, $risk, $impact_level, $actplan, $control, $data['session']['username']);
-				$res = $this->risk->riskDeleteChange($_POST['risk_id']);
+				$res = $this->risk->updateRisk1($_POST['risk_id'], $code, $risk, $impact_level, $actplan, $control, $data['session']['username']);
+				$res = $this->risk->riskDeleteChange($_POST['risk_id'],$data['session']['username']);
 				
 				if (isset($_POST['add_user_flag']) && $_POST['add_user_flag'] == 'yes') {
 					$dd = implode('-', array_reverse( explode('-', $_POST['add_user_date_changed']) ));
@@ -790,8 +791,8 @@ class MainRac extends APP_Controller {
 					$control[] = $v;
 				}
 				
-				$res = $this->risk->updateRisk($_POST['risk_id'], $code, $risk, $impact_level, $actplan, $control, $data['session']['username']);
-				$res = $this->risk->riskSwitchPrimary($_POST['risk_id']);
+				$res = $this->risk->updateRisk2($_POST['risk_id'], $code, $risk, $impact_level, $actplan, $control, $data['session']['username']);
+				//$res = $this->risk->riskSwitchPrimary($_POST['risk_id']);
 				
 				$resp = array();
 				if ($res) {
@@ -2808,7 +2809,7 @@ class MainRac extends APP_Controller {
 				$data['msg'] = 'SUCCESS';
 			} else {
 				$data['success'] = false;
-				$data['msg'] = 'Error Deleting Data';
+				$data['msg'] = 'Change Request Not Complete';
 			}
 			echo json_encode($data);
 		}

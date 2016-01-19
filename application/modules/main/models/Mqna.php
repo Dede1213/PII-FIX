@@ -59,8 +59,15 @@ class Mqna extends APP_Model {
 	public function deletecrRisk($risk_id, $uid, $update_point = 'D') {
 		// delete risk in child
 		  
+		//ubah2
+		$risk_id_cek = $risk_id;
+		$sql="select cr_status from t_cr_risk where id = '$risk_id_cek' ";
+		$query = $this->db->query($sql);
+		$row = $query->row(); 
+		$hasil = $row->cr_status;
+		if($hasil != '0' ){
+
 		$par['risk_id'] = $risk_id;
-		
 		$sql1 = "delete from t_cr_risk where t_cr_risk.id = ?";
 		$sql2 = "delete  from t_cr_impact where change_id = ?";
 		$sql3 = "delete  from t_cr_control where change_id = ?";
@@ -74,5 +81,6 @@ class Mqna extends APP_Model {
 	 
 
 		return $res;
+		}
 	}
 }

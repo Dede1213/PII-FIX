@@ -148,7 +148,7 @@ class Risk extends APP_Model {
 		return $row;
 	}
 	
-	public function getRiskChangeById($risk_id) 
+	public function getRiskChangeById($risk_id,$risk_input_by) 
 	{
 		
 		//$user =$_GET['tes'];
@@ -183,24 +183,24 @@ class Risk extends APP_Model {
 				left join m_division m on a.risk_input_division = m.division_id
 				left join t_risk n on a.risk_library_id = n.risk_id
 				left join t_risk_add_user on a.risk_id = t_risk_add_user.risk_id
-				where a.risk_id = ? ";
-
-		$query = $this->db->query($sql, array('divid' => $risk_id));
+				where a.risk_id = '".$risk_id."' and a.risk_input_by = '".$risk_input_by."' ";
+//ubah
+		$query = $this->db->query($sql);
 		$row = $query->row_array();
 
 		if ($row) {
-			$row['impact_list'] = $this->getRiskImpactChange($risk_id);
-			$row['action_plan_list'] = $this->getActionPlanChange($risk_id);
-			$row['control_list'] = $this->getControlListChange($risk_id);
+			$row['impact_list'] = $this->getRiskImpactChange($risk_id,$risk_input_by);
+			$row['action_plan_list'] = $this->getActionPlanChange($risk_id,$risk_input_by);
+			$row['control_list'] = $this->getControlListChange($risk_id,$risk_input_by);
 		}
 		
 		return $row;
 	}
 	
-	public function getRiskImpactChange($risk_id) 
+	public function getRiskImpactChange($risk_id,$risk_input_by) 
 	{
 		$sql = "select * from t_risk_impact_change
-				where risk_id = ?";
+				where risk_id = ? and switch_flag = '".$risk_input_by."' ";
 		$par = array('uid' => $risk_id);
 		
 		$query = $this->db->query($sql, $par);
@@ -212,14 +212,14 @@ class Risk extends APP_Model {
 		return $res;
 	}
 	
-	public function getActionPlanChange($risk_id) 
+	public function getActionPlanChange($risk_id,$risk_input_by) 
 	{
 		$sql = "select a.*,
 				date_format(a.due_date, '%d-%m-%Y') as due_date_v,
 				b.division_name as division_v
 				from t_risk_action_plan_change a
 				left join m_division b on a.division = b.division_id 
-				where a.risk_id = ?";
+				where a.risk_id = ? and switch_flag = '".$risk_input_by."' ";
 		$par = array('uid' => $risk_id);
 		
 		$query = $this->db->query($sql, $par);
@@ -231,11 +231,11 @@ class Risk extends APP_Model {
 		return $res;
 	}
 	
-	public function getControlListChange($risk_id) 
+	public function getControlListChange($risk_id,$risk_input_by) 
 	{
 		$sql = "select a.*
 				from t_risk_control_change a
-				where a.risk_id = ?";
+				where a.risk_id = ? and switch_flag = '".$risk_input_by."' ";
 		$par = array('uid' => $risk_id);
 		
 		$query = $this->db->query($sql, $par);
@@ -423,7 +423,7 @@ class Risk extends APP_Model {
 					where 
 					a.periode_id = '".$defFilter['periodid']."'
 					and a.risk_input_by = '".$defFilter['userid']."'
-					and a.risk_id = (select r.risk_id from t_risk r where a.risk_id = r.risk_id and r.periode_id = '".$defFilter['periodid']."' and r.risk_status > 1)
+					and a.risk_id NOT IN (select r.risk_id from t_risk r where a.risk_id = r.risk_id and r.periode_id = '".$defFilter['periodid']."' and r.risk_input_by = '".$defFilter['userid']."' and r.risk_status > 1)
 					";
 		}
 		
@@ -2747,10 +2747,10 @@ class Risk extends APP_Model {
 	public function insertNewKri($kri, $treshold) {
 		$sql = "insert into t_kri (
 			risk_id, kri_library_id, key_risk_indicator,
-			kri_status, treshold, treshold_type,
+			kri_status, kri_pic,treshold, treshold_type,
 			timing_pelaporan, kri_owner, created_by
 		) values (
-			?, ?, ?,
+			?, ?, ?,?,
 			?, ?, ?,
 			?, ?, ?
 		)";
@@ -4104,6 +4104,23 @@ class Risk extends APP_Model {
 		
 		$this->db->update("t_risk");
 		 
+	}
+	
+	function kri_pic($div){
+	
+	$sql = "select username from m_user where division_id = '".$div."' and role_id = 4";
+	
+	$query = $this->db->query($sql);	 
+			
+			if ($query->num_rows())
+			{
+				return $query->result_array();
+			}
+			else
+			{
+				return FALSE;
+			}	
+	
 	}
 	
 	

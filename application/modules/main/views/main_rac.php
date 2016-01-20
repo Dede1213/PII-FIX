@@ -598,7 +598,7 @@
 							<th>Due Date</th>
 							<th>Action Plan Owner</th>
 							<th>Execution</th>
-							<th>Risk Code</th>
+							<th>Risk ID</th>
 						</tr>
 						</thead>
 						<tbody>

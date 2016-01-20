@@ -165,7 +165,7 @@ class Mriskregister extends APP_Model {
 					where 
 					a.periode_id = '".$defFilter['periodid']."'
 					and a.risk_input_by = '".$defFilter['userid']."'
-					and a.risk_id = (select r.risk_id from t_risk r where a.risk_id = r.risk_id and r.periode_id = '".$defFilter['periodid']."' and r.risk_status > 1)
+					and a.risk_id NOT IN (select r.risk_id from t_risk r where r.risk_id = a.risk_id and r.periode_id = '".$defFilter['periodid']."' and r.risk_input_by = '".$defFilter['userid']."' and r.risk_status > 1)
 					";
 		}
 		

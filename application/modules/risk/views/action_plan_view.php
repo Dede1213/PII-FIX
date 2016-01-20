@@ -45,10 +45,19 @@
 										<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['risk_owner_v']?>" name="risk_id" placeholder="">
 									</div>
 								</div>
+								
+								<!--
 								<div class="form-group">
 									<label class="col-md-3 control-label smaller cl-compact">Risk Event</label>
 									<div class="col-md-9">
-									<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['risk_event']?>" name="risk_event" placeholder="">
+									<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?//=$risk['risk_event']?>" name="risk_event" placeholder="">
+									</div>
+								</div>
+								-->
+								<div class="form-group">
+									<label class="col-md-3 control-label smaller cl-compact">Risk Event</label>
+									<div class="col-md-9">
+									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_event" placeholder=""><?=$risk['risk_event']?></textarea>
 									</div>
 								</div>
 								<div class="form-group">

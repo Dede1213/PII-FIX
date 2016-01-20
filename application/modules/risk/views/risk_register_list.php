@@ -46,15 +46,34 @@
 					and a.risk_id NOT IN(select t2.risk_library_id from t_risk t2 where t2.periode_id = (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end) and t2.risk_input_by = '$username')
 					and a.risk_status >= 0 and existing_control_id != 1 ";
 	
-	$sql="select a.risk_id from t_risk a where  a.periode_id IN(select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end) and a.risk_input_by = '$username'
-					and a.risk_status >= 2";
+	$sql="select a.risk_id from t_risk a 
+	where  a.periode_id IN(select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end) 
+	and a.risk_input_by = '$username'
+	and a.risk_status >= 2
+	UNION
+	select b.risk_id from t_risk_change b
+	where b.periode_id IN(select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end) 
+	and b.risk_input_by = '$username'
+	and b.risk_status >= 2 
+	and b.risk_id NOT IN (select z.risk_id from t_risk z where z.risk_id = b.risk_id and z.risk_input_by = '$username' and z.risk_status >= 2)";
 
-	$sql2="select a.risk_id from t_risk a where  a.periode_id IN(select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end) and a.risk_input_by = '$username'
-					and a.risk_status >= 0 ";
+	$sql2="select a.risk_id from t_risk a 
+	where  a.periode_id IN(select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end) 
+	and a.risk_input_by = '$username'
+	and a.risk_status >= 0
+	UNION
+	select b.risk_id from t_risk_change b
+	where b.periode_id IN(select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end) 
+	and b.risk_input_by = '$username'
+	and b.risk_status >= 0 
+	and b.risk_id NOT IN (select z.risk_id from t_risk z where z.risk_id = b.risk_id and z.risk_input_by = '$username' and z.risk_status >= 0)";
+
+	
 
 	$query1 = $this->db->query($sql1);
 	$query = $this->db->query($sql);
 	$query2 = $this->db->query($sql2);
+	
 
  if ($query1->num_rows() == 0 && $query2->num_rows() == 0 ){
     $status_submit = "DRAFT";

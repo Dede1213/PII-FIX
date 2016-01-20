@@ -393,7 +393,7 @@
 							<th>Batas Waktu</th>
 							<th>Pemilik Action Plan</th>
 							<th>Execution</th>
-							<th>Risk Code</th>
+							<th>ID Risiko</th>
 						</tr>
 						</thead>
 						<tbody>

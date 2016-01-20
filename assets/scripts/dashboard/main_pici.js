@@ -331,7 +331,13 @@ grid_exec.init({
         		}
         		return dat;
         	}
-        }, {
+        },  {
+            "targets": 6,
+            "data": "act_code",
+            "render": function ( data, type, full, meta ) {
+                return '<a target="_self" href="'+site_url+'/main/mainpic/viewRisk/'+full.risk_id+'">'+data+'</a>';
+            }
+        },{
         	"targets": 5,
         	"data": "execution_status",
         	"render": function ( data, type, full, meta ) {
@@ -387,7 +393,8 @@ grid_exec.init({
 			{ "data": "action_plan" },
 			{ "data": "due_date_v" },
 			{ "data": "assigned_to_v" },
-			{ "data": "execution_status" }
+			{ "data": "execution_status" },
+            { "data": "risk_code" }
 			//,{ "data": "action_plan_status" }
        ],
         "order": [

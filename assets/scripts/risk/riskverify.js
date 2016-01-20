@@ -28,7 +28,7 @@ var RiskVerify = function() {
         			mod.modal('hide');
         			
         			Metronic.blockUI({ boxed: true });
-        			var url = site_url+'/main/mainrac/deleteRisk';
+        			var url = site_url+'/main/mainrac/deleteRiskrac';
         			$.post(
         				url,
         				{ 'risk_id':  g_risk_id},
@@ -201,9 +201,9 @@ var RiskVerify = function() {
             	
             	Metronic.blockUI({ boxed: true });
             	if (submitMode == 'verify') {
-            		var url = site_url+'/main/mainrac/verifyRiskData';
+            		var url = site_url+'/main/mainrac/verifyRiskDatarac';
             	} else {
-            		var url = site_url+'/main/mainrac/saveRiskData';
+            		var url = site_url+'/main/mainrac/saveRiskDatarac';
             	}
             	
             	$.post(

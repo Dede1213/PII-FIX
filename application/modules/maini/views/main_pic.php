@@ -268,7 +268,7 @@
 							<th>Batas Waktu</th>
 							<th>Ditugaskan Kepada</th>
 							<th>Execution</th>
-							<th width="50px">Permintaan Perubahan</th>
+							<th>ID Risiko</th>
 						</tr>
 						</thead>
 						<tbody>

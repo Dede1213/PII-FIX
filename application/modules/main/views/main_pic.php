@@ -267,6 +267,7 @@
 							<th>Due Date</th>
 							<th>Assigned To</th>
 							<th>Execution</th>
+							<th>Risk ID</th>
 							<!--<th width="50px">Change Request</th>-->
 						</tr>
 						</thead>

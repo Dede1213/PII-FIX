@@ -3,7 +3,7 @@
 	<div class="page-content">
 		<!-- BEGIN PAGE HEADER-->
 		<h3 class="page-title">
-		Risk Form 
+		Risk Form
 		</h3>
 		<div class="page-bar">
 			<ul class="page-breadcrumb">
@@ -37,14 +37,6 @@
 									<label class="col-md-3 control-label smaller cl-compact">Submitted By</label>
 									<div class="col-md-9">
 										<input type="text" id="risk_submitted_by" class="form-control input-sm input-readview" readonly="true" placeholder="" value="<?php if($risk['username']==""){echo $risk['risk_input_by_v'];}else{echo $risk['username'];}; ?>">											
-									</div>
-								</div>
-							</div>
-							<div class="col-md-6">	
-								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact">Division</label>
-									<div class="col-md-9">
-										<input type="text" id="risk_submitted_division" class="form-control input-sm input-readview" readonly="true" placeholder="" value="<?=$risk['risk_input_division_v']?>">
 									</div>
 								</div>
 							</div>

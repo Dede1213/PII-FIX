@@ -72,11 +72,12 @@ WHERE t_risk_action_plan.id = '$id' ";
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact">Peristiwa Risiko</label>
-								<div class="col-md-9">
-								<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$action_plan['risk_data']['risk_event']?>" name="risk_event" placeholder="">
+									<label class="col-md-3 control-label smaller cl-compact">Perisitiwa Risiko</label>
+									<div class="col-md-9">
+									<textarea class="form-control input-readview" readonly="true" rows="3" placeholder=""><?=$action_plan['risk_data']['risk_event']?></textarea>
+									</div>
 								</div>
-							</div>
+							
 							<div class="form-group">
 								<label class="col-md-3 control-label smaller cl-compact">Level Risiko</label>
 								<div class="col-md-9">
@@ -152,11 +153,11 @@ WHERE t_risk_action_plan.id = '$id' ";
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact">Perisitiwa Risiko</label>
-								<div class="col-md-9">
-								<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$action_plan['risk_data']['risk_event']?>" placeholder="">
+									<label class="col-md-3 control-label smaller cl-compact">Perisitiwa Risiko</label>
+									<div class="col-md-9">
+									<textarea class="form-control input-readview" readonly="true" rows="3" placeholder=""><?=$action_plan['risk_data']['risk_event']?></textarea>
+									</div>
 								</div>
-							</div>
 							<div class="form-group">
 								<label class="col-md-3 control-label smaller cl-compact">Level Risiko</label>
 								<div class="col-md-9">
@@ -223,11 +224,11 @@ WHERE t_risk_action_plan.id = '$id' ";
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact">Peristiwa Risiko</label>
-								<div class="col-md-9">
-								<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$action_plan['risk_data']['risk_event']?>" name="risk_event" placeholder="">
+									<label class="col-md-3 control-label smaller cl-compact">Perisitiwa Risiko</label>
+									<div class="col-md-9">
+									<textarea class="form-control input-readview" readonly="true" rows="3" placeholder=""><?=$action_plan['risk_data']['risk_event']?></textarea>
+									</div>
 								</div>
-							</div>
 							<div class="form-group">
 								<label class="col-md-3 control-label smaller cl-compact">Level Risiko</label>
 								<div class="col-md-9">

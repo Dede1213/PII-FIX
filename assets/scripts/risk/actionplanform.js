@@ -20,6 +20,13 @@ var apForm = function() {
         	$('#risk-button-verify').on('click', function() {
         		me.submitRiskData('submit');
         	});
+
+            $('#risk-button-cancel').on('click', function () {
+                var mod = MainApp.viewGlobalModal('confirm', 'Are You sure you want to cancel  ? You will loose your unsaved data.');
+                mod.find('button.btn-primary').one('click', function(){
+                    location.href=site_url+'/main/mainpic';
+                });
+            });
         	
         },
         submitRiskData: function(submitMode) {

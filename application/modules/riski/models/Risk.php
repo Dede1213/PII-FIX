@@ -441,12 +441,13 @@ class Risk extends APP_Model {
 					left join m_reference d on a.risk_impact_level = d.ref_key and d.ref_context = 'impact.display'
 					left join m_likelihood e on a.risk_likelihood_key = e.l_key
 					left join m_division f on a.risk_owner = f.division_id
+					join m_periode on m_periode.periode_id = a.periode_id
 					where 
 					a.periode_id is not null
 					and a.risk_status > 1
 					and a.risk_input_by = '".$defFilter['userid']."'
 					and a.existing_control_id is null
-					and a.periode_id NOT IN (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end)
+					and a.periode_id = (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end)
 					";
 		}
 		

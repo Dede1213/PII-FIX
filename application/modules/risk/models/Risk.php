@@ -446,6 +446,7 @@ class Risk extends APP_Model {
 					and a.risk_status > 1
 					and a.risk_input_by = '".$defFilter['userid']."'
 					and a.existing_control_id is null
+					and a.periode_id NOT IN (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end)
 					";
 		}
 		

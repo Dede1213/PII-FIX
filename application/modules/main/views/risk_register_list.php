@@ -29,7 +29,7 @@
 			<div class="portlet box grey-silver">
 			<div class="portlet-title">
 				<div class="caption">
-					Roll Forward Risk
+					Risk List
 				</div>
 				<div style="float:right;font-size:18px;padding:4px;">
 					<?=$filled_by_id?> 
@@ -74,7 +74,7 @@
 			<div class="portlet box grey-silver">
 			<div class="portlet-title">
 				<div class="caption">
-					Risk Identified in This Periode ( <?=$periode['periode_name']?> )
+					Risk List From Library 
 				</div>
 			</div>
 			

@@ -1486,6 +1486,12 @@ class Risk extends APP_Model {
 			  ."created_date = now()
 			  	where risk_id = ? ";
 		$res = $this->db->query($sql, $par);
+
+		//update assign to suggested risk treatment
+		$sql = "update t_risk 
+				set risk_treatment_owner = (select username from m_user where division_id = '".$risk['risk_division']."'  and role_id = 4) 
+			  	where risk_id = '".$risk_id."' ";
+		$res = $this->db->query($sql);
 		
 		if ($res) {
 			// insert impact

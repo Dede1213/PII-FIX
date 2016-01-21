@@ -320,7 +320,8 @@ class MainPic extends APP_Controlleri {
 		if ($rid && is_numeric($rid)) {
 			$this->load->model('risk/risk');
 
-			$data = $this->risk->getRiskChangeById($rid);
+			//$data = $this->risk->getRiskChangeById($rid);
+			$data = $this->risk->getRiskById($rid);
 			if (!$data) {
 				$data = $this->risk->getRiskById($rid);
 			}

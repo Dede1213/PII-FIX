@@ -118,7 +118,6 @@ class MainPic extends APP_Controller {
 						<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
 						<script type="text/javascript" src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 						<script type="text/javascript" src="assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
-						
 						<script src="assets/scripts/risk/riskowned.js"></script>
 						';
 						
@@ -131,7 +130,7 @@ class MainPic extends APP_Controller {
 						$data['division_list'] = $this->mriskregister->getDivisionList();
 						
 						$view = 'risk/risk_owner_form';
-					} else if ($risk['risk_status']*1 == 4 && $cred['role_id'] == 4) { // on approval and is div head
+					} else if  ($risk['risk_status']*1 == 4 && $cred['role_id'] == 4) { // on approval and is div head
 						$data['approval'] = true;
 						
 						$data['pageLevelStyles'] = '
@@ -149,7 +148,6 @@ class MainPic extends APP_Controller {
 						<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
 						<script type="text/javascript" src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 						<script type="text/javascript" src="assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
-						
 						<script src="assets/scripts/risk/riskowned.js"></script>
 						';
 						
@@ -320,7 +318,10 @@ class MainPic extends APP_Controller {
 		if ($rid && is_numeric($rid)) {
 			$this->load->model('risk/risk');
 
-			$data = $this->risk->getRiskChangeById($rid);
+			// di ganti karena loading lama risk owner form
+			//$data = $this->risk->getRiskChangeById($rid);
+
+			$data = $this->risk->getRiskById($rid);
 			if (!$data) {
 				$data = $this->risk->getRiskById($rid);
 			}

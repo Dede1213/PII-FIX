@@ -480,5 +480,62 @@
 			
 			
 		}
+		
+		function riskmap($data=null){
+			
+			if($data==null){
+				$data['periode'] = 1;				
+			}
+			
+			$sql = '
+			select distinct t1.risk_impact_level as MAPPING,
+			(SELECT GROUP_CONCAT(t2.risk_code, " ", t2.risk_event SEPARATOR "\n") 
+				from t_risk t2 JOIN t_report_risk t3 on t2.risk_id = t3.risk_id 
+				where t2.risk_impact_level = t1.risk_impact_level 
+				and t2.risk_likelihood_key = "Very Low" 
+				and t3.periode_id = "'.$data['periode'].'") as "Very Low",
+			(SELECT GROUP_CONCAT(t2.risk_code, " ", t2.risk_event SEPARATOR "\n") from t_risk t2 JOIN t_report_risk t3 on t2.risk_id = t3.risk_id where t2.risk_impact_level = t1.risk_impact_level and t2.risk_likelihood_key = "Low" and t3.periode_id = "'.$data['periode'].'") as "Low",
+			(SELECT GROUP_CONCAT(t2.risk_code, " ", t2.risk_event SEPARATOR "\n") from t_risk t2 JOIN t_report_risk t3 on t2.risk_id = t3.risk_id where t2.risk_impact_level = t1.risk_impact_level and t2.risk_likelihood_key = "Medium" and t3.periode_id = "'.$data['periode'].'") as "Medium",
+			(SELECT GROUP_CONCAT(t2.risk_code, " ", t2.risk_event SEPARATOR "\n") from t_risk t2 JOIN t_report_risk t3 on t2.risk_id = t3.risk_id where t2.risk_impact_level = t1.risk_impact_level and t2.risk_likelihood_key = "High" and t3.periode_id = "'.$data['periode'].'") as "High",
+			(SELECT GROUP_CONCAT(t2.risk_code, " ", t2.risk_event SEPARATOR "\n") from t_risk t2 JOIN t_report_risk t3 on t2.risk_id = t3.risk_id where t2.risk_impact_level = t1.risk_impact_level and t2.risk_likelihood_key = "Very High" and t3.periode_id = "'.$data['periode'].'") as "Very High"
+			from t_risk t1 JOIN t_report_risk t3 on t1.risk_id = t3.risk_id
+			where t3.periode_id = "'.$data['periode'].'"
+			ORDER BY
+			(CASE 
+			WHEN t1.risk_impact_level = "INSIGNIFICANT" THEN 1
+			WHEN t1.risk_impact_level = "MINOR" THEN 2
+			WHEN t1.risk_impact_level = "MODERATE" THEN 3
+			WHEN t1.risk_impact_level = "MAJOR" THEN 4
+			WHEN t1.risk_impact_level = "CATASTROPHIC" THEN 5 END) ASC
+			';
+			 
+			$query = $this->db->query($sql);
+			
+			if ($query->num_rows())
+			{
+				return $query->result_array();
+			}
+			else
+			{
+				return FALSE;
+			}
+		}
+		
+		function get_periode(){
+			
+			 
+			$query = $this->db->get("m_periode");
+			
+			if ($query->num_rows())
+			{
+				return $query->result_array();
+			}
+			else
+			{
+				return FALSE;
+			}
+			
+			
+		}
 	}
 ?>

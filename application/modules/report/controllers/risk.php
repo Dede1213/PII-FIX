@@ -1804,6 +1804,63 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$this->dompdf->stream("getcomparison2.pdf");
 			
 		}
+		 
+		public function riskmap(){
+			 
+			$data = $this->loadDefaultAppConfig();
+			$data['indonya'] = base_url('index.php/reporti/risk/riskmap');
+			$data['engnya'] = base_url('index.php/report/risk/riskmap');		
+			$data['sidebarMenu'] = $this->getSidebarMenuStructure('report/risk/riskmap');
+			
+			$data['pageLevelStyles'] = '
+			<link rel="stylesheet" type="text/css" href="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
+			';
+			
+			$data['pageLevelScripts'] = '
+			<script src="assets/scripts/dashboard/getallrisk.js"></script>
+			';
+			
+			$this->load->model('report/risk_model','risk',true);
+			$data['periodenya'] = $this->risk->get_periode();			
+			
+			$this->load->view('main/header', $data); 
+			$this->load->view('riskmap', $data);
+			$this->load->view('footer', $data);
+		}
+		
+		public function riskmap_data(){
+			 
+			$this->load->model('report/risk_model','risk',true);
+			$data['datanya'] = $this->risk->riskmap();
+			
+			$this->load->view('riskmap_data', $data);
+		}
+		
+		function riskmap_data_excel(){
+			
+			$this->load->model('report/risk_model','risk',true);
+			$this->load->library('parser');
+			 
+			$data['datanya'] = $this->risk->riskmap($this->input->post());
+
+			$data['periodenya'] = $this->risk->cekperiode($this->input->post('periode'));	 		
+ 
+			$data['total_data'] = count($data['datanya']);
+			 
+			$stringData = $this->parser->parse('riskmap_data', $data, true);
+			 
+			header("Pragma: public");
+			header("Expires: 0");
+			header("Cache-Control: must-revalidate, post-check=0, pre-check=0");			
+			header('Content-type: application/ms-excel');
+			header("Expires: 0");
+			header('Content-Disposition: attachment; filename=Periode_risk_map.xls');
+			header("Content-Description: File Transfer");
+		 
+			echo $stringData;
+			exit;
+			
+		}
 
 		
 	}

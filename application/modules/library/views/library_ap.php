@@ -42,7 +42,7 @@
 							 
 							<th>AP ID</th>
 							<th>Action Plan</th>
-							<th>Due Date</th>
+							 
 							<th>Action Plan Owner</th> 
 							<th> Action</th>
 						</tr>
@@ -92,7 +92,7 @@
 							</div>
 						</div>
 						
-						<div class="form-group">
+						<!--<div class="form-group">
 								<label class="col-md-3 control-label">Tanggal</label>
 								<div class="col-md-3">
 									<div class="input-group   date-picker input-daterange" data-date="<?=date('d-m-Y')?>" data-date-format="dd-mm-yyyy">
@@ -103,7 +103,7 @@
 									<input type="hidden" class="form-control" name="due_date_ex" id = "due_date_ex"> 
 									 
 								</div>
-							</div>
+							</div>-->
 						
 						<div class="form-group">
 						 

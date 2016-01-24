@@ -29,7 +29,11 @@ gridRiskList.init({
 			{ "data": "risk_code" },
 			{ "data": "risk_event" },
 			{ "data": "risk_description" },
-			{ "data": "cat_name" }, 
+			{ "data": "risk_cause" },
+			{ "data": "risk_impact" },
+			{ "data": "cat_name1" },
+			{ "data": "cat_name2" },
+			{ "data": "cat_name3" }, 
 			{ 
             "data": null,
             "orderable": false,
@@ -82,8 +86,7 @@ gridRiskList_ap.init({
         
         "columns": [
 			{ "data": "id" },
-			{ "data": "action_plan" },
-			{ "data": "due_date" },
+			{ "data": "action_plan" }, 
 			{ "data": "division" }, 
 			{ 
             "data": null,
@@ -319,6 +322,17 @@ var Dashboard = function() {
                     me.deleteData_ec(data);
 					
             });
+			// error
+			$('#sel_risk_category').change(function() {
+        		var val = $(this).val();
+        		me.loadCategorySelect('sel_risk_sub_category', val);
+        	});
+			
+			
+			$('#sel_risk_sub_category').change(function() {
+        		var val = $(this).val();
+        		me.loadCategorySelect('sel_risk_2nd_sub_category', val);
+        	});
 			
 			$('#datatablekri_ajax').on('click', 'button.button-grid-delete', function(e) {
 			  
@@ -339,8 +353,7 @@ var Dashboard = function() {
             });
 				
 			$('#datatable_ajax').on('click', 'button.button-grid-edit', function(e) {
-		   
-		   
+		    
 				e.preventDefault();
 	            	
 					var r = this.parentNode.parentNode.parentNode; 
@@ -682,6 +695,16 @@ var Dashboard = function() {
                      });
                 });
         },
+		
+		loadCategorySelect: function(sel_id, parent) {
+        	$('#'+sel_id)[0].options.length = 0;
+        	$.getJSON( site_url+"/risk/RiskRegister/getCategory/"+parent, function( data ) {
+        		$.each( data, function( key, val ) {
+        		    $('#'+sel_id).append($('<option>').text(val.ref_value).attr('value', val.ref_key));
+        		});
+        		$('#'+sel_id).trigger('change');
+        	});
+        },
 		 
 		deleteData_ec: function(data) {
             
@@ -805,7 +828,7 @@ var Dashboard = function() {
 				 var url = site_url+'/library/getRiskCategory';
                     $.post(
                         url,
-                        { 'id':  data.cat_name},
+                        { 'id':  data.cat_name2},
                         function(datax) {
 						 	
 							for (var i = '0'; i < datax.length; i++) {
@@ -834,8 +857,38 @@ var Dashboard = function() {
 	         
 	        	$('#modal-listrisk-form').find('input[name=risk_id]').attr('readonly', true).val(data.risk_code);
 	        	$('#modal-listrisk-form').find('textarea[name=risk_event]').attr('readonly', false).val(data.risk_event);
+				$('#modal-listrisk-form').find('textarea[name=risk_cause]').attr('readonly', false).val(data.risk_cause);
+				$('#modal-listrisk-form').find('textarea[name=risk_impact]').attr('readonly', false).val(data.risk_impact);
+				$('#modal-listrisk-form').find('select[name=cat_name]').attr('readonly', false).val(data.cat_name2);
 				$('#modal-listrisk-form').find('textarea[name=risk_description]').attr('readonly', false).val(data.risk_description);
-				 
+				
+				//console.log(data_risk);
+        		$('#sel_risk_category').find('option').remove();
+        		$('#sel_risk_sub_category').find('option').remove();
+        		$('#sel_risk_2nd_sub_category').find('option').remove();
+        		
+        		$.getJSON( site_url+"/risk/RiskRegister/getCategory/0", function( datax ) {
+					
+        			$.each( datax, function( key, val ) {
+        				$('#sel_risk_category').append($('<option>').text(val.ref_value).attr('value', val.ref_key));
+        			});
+        			$('#sel_risk_category').val(data.cat_id1);
+					
+        			$.getJSON( site_url+"/risk/RiskRegister/getCategory/"+data.cat_id1, function( data1 ) {
+        				$.each( data1, function( key2, val2 ) {
+        					$('#sel_risk_sub_category').append($('<option>').text(val2.ref_value).attr('value', val2.ref_key));
+        				});
+        				$('#sel_risk_sub_category').val(data.cat_id2);        				
+        					
+        				$.getJSON( site_url+"/risk/RiskRegister/getCategory/"+data.cat_id2, function( data2 ) {
+        					$.each( data2, function( key3, val3 ) {								
+        					    $('#sel_risk_2nd_sub_category').append($('<option>').text(val3.ref_value).attr('value', val3.ref_key));
+        					    $('#sel_risk_2nd_sub_category').val(data.cat_id3);
+        					    Metronic.unblockUI();
+        					});
+        				});
+        			});
+        		});
 				  
 				$('#modal_listrisk').modal('show');
 	        	this.dataMode = 'view';

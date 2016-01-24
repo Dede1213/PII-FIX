@@ -43,8 +43,30 @@ class Mlibrary extends APP_Model {
 			$par['p1'] = '%'.$filter_value.'%';
 		}
 		$date = date("Y-m-d");
-		$sql = "select t_risk.risk_id,t_risk.risk_code, t_risk.risk_event, t_risk.risk_description, m_risk_category.cat_name, m_risk_category.cat_parent
-				from t_risk join m_risk_category ON t_risk.risk_2nd_sub_category = m_risk_category.cat_id where t_risk.risk_library_id is null
+		$sql = "
+		SELECT
+		  t_risk.risk_id,
+		  t_risk.risk_code,
+		  t_risk.risk_event,
+		  t_risk.risk_description,
+		  t_risk.risk_cause,
+		  t_risk.risk_impact,
+		  m3.cat_name AS cat_name1,
+		  m2.cat_name AS cat_name2,
+		  m1.cat_name AS cat_name3,
+		  m3.cat_id AS cat_id1,
+		  m2.cat_id AS cat_id2,
+		  m1.cat_id AS cat_id3
+		  
+		FROM
+		  t_risk 
+		  JOIN m_risk_category m1 
+			ON t_risk.risk_2nd_sub_category = m1.cat_id 
+		  JOIN m_risk_category m2 
+			ON t_risk.risk_sub_category = m2.cat_id 
+		  JOIN m_risk_category m3 
+			ON t_risk.risk_category = m3.cat_id 
+		WHERE t_risk.risk_library_id IS NULL 
 				"
 				
 				.$ex_filter

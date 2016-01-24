@@ -85,6 +85,10 @@
 							<th>Risk ID</th>
 							<th>Risk Event</th>
 							<th>Risk Description</th>
+							<th>Cause</th> 
+							<th>Impact</th>
+							<th>Risk Category</th>
+							<th>Risk Sub Category</th>
 							<th>Risk 2nd sub Category</th> 
 							<th> Action</th>
 						</tr>
@@ -132,7 +136,7 @@
 							<textarea name="risk_event" class = "form-control"></textarea> 
 							</div>
 						</div>
-						
+						 
 						<div class="form-group">
 						 
 						<label class="col-md-3 control-label smaller cl-compact">Risk Description :</label>
@@ -141,12 +145,72 @@
 							</div>
 						</div>
 						
+						
 						<div class="form-group">
 						 
-						<label class="col-md-3 control-label smaller cl-compact">2nd Sub category :</label>
+						<label class="col-md-3 control-label smaller cl-compact">Cause :</label>
+							<div class="col-md-9">
+							<textarea name="risk_cause" class = "form-control"></textarea> 
+							</div>
+						</div>
+						
+						<div class="form-group">
+						 
+						<label class="col-md-3 control-label smaller cl-compact">Impact :</label>
+							<div class="col-md-9">
+							<textarea name="risk_impact" class = "form-control"></textarea> 
+							</div>
+						</div>
+						
+						<!--<div class="form-group">
+						 
+						<label class="col-md-3 control-label smaller cl-compact">Risk category :</label>
 							<div class="col-md-9">
 							<select name="cat_name"  class="form-control" id = "cat_name"> 
 							</select>							 
+							</div>
+						</div>
+						
+						<div class="form-group">
+						 
+						<label class="col-md-3 control-label smaller cl-compact">Risk Sub category :</label>
+							<div class="col-md-9">
+							<select name="cat_name"  class="form-control" id = "cat_name"> 
+							</select>							 
+							</div>
+						</div>
+						
+						<div class="form-group">
+						 
+						<label class="col-md-3 control-label smaller cl-compact">Risk 2nd Sub category :</label>
+							<div class="col-md-9">
+							<select name="cat_name"  class="form-control" id = "cat_name"> 
+							</select>							 
+							</div>
+						</div>-->
+						
+						<div class="form-group">
+							<label class="col-md-3 control-label smaller cl-compact" >Risk Category<span class="required">* </span></label>
+							<div class="col-md-9">
+							<select class="form-control input-sm"  id="sel_risk_category" > 
+							 
+							</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label smaller cl-compact" >Risk Sub Category<span class="required">* </span></label>
+							<div class="col-md-9">
+							<select class="form-control input-sm"  id="sel_risk_sub_category">
+							 
+							</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label small cl-compact" >Risk 2nd Sub Category<span class="required">* </span></label>
+							<div class="col-md-9">
+							<select class="form-control input-sm" name="cat_name" id="sel_risk_2nd_sub_category">
+							 
+							</select>
 							</div>
 						</div>
 					

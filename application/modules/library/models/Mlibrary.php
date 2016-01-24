@@ -272,7 +272,14 @@ from m_risk_category
 	function listrisk_update($data){
 	
 	$sql = "update `t_risk`
-		SET `risk_code`='".$data['risk_id']."', `risk_event`='".$data['risk_event']."', `risk_description`='".$data['risk_description']."',`risk_2nd_sub_category`='".$data['cat_name']."'
+		SET `risk_code`='".$data['risk_id']."',
+		`risk_impact`='".$data['risk_impact']."',
+		`risk_cause`='".$data['risk_cause']."',
+		`risk_event`='".$data['risk_event']."',
+		`risk_description`='".$data['risk_description']."',
+		`risk_category`='".$data['risk_category']."',
+		`risk_sub_category`='".$data['risk_sub_category']."',
+		`risk_2nd_sub_category`='".$data['cat_name']."'
 		WHERE `risk_code`= '".$data['risk_id']."'";
   
 	$res = $this->db->query($sql);

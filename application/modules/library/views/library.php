@@ -192,7 +192,7 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label smaller cl-compact" >Risk Category<span class="required">* </span></label>
 							<div class="col-md-9">
-							<select class="form-control input-sm"  id="sel_risk_category" > 
+							<select class="form-control input-sm"  id="sel_risk_category" name = "risk_category" > 
 							 
 							</select>
 							</div>
@@ -200,7 +200,7 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label smaller cl-compact" >Risk Sub Category<span class="required">* </span></label>
 							<div class="col-md-9">
-							<select class="form-control input-sm"  id="sel_risk_sub_category">
+							<select class="form-control input-sm"  id="sel_risk_sub_category" name = "risk_sub_category">
 							 
 							</select>
 							</div>

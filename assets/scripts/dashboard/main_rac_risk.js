@@ -187,7 +187,7 @@ var RiskList = function() {
                 var mod = MainApp.viewGlobalModal('confirm', 'change request to RAC All Risk in Periode : <b>'+g_p_name+'</b>');
                 mod.find('button.btn-ok-success').one('click', function(){
                     mod.modal('hide');
-                    var url = site_url+'/risk/RiskRegister/submitRiskByPeriode2_change';
+                    var url = site_url+'/risk/RiskRegister/submitRiskByPeriode2_change/'+g_status_user_id;
                     
                     Metronic.blockUI({ boxed: true });
                     $.post(
@@ -218,7 +218,7 @@ var RiskList = function() {
                 var mod = MainApp.viewGlobalModal('confirm', 'Ignore change request in Periode : <b>'+g_p_name+'</b>');
                 mod.find('button.btn-ok-success').one('click', function(){
                     mod.modal('hide');
-                    var url = site_url+'/risk/RiskRegister/submitRiskByPeriode2_ignore';
+                    var url = site_url+'/risk/RiskRegister/submitRiskByPeriode2_ignore/'+g_status_user_id;
                     
                     Metronic.blockUI({ boxed: true });
                     $.post(

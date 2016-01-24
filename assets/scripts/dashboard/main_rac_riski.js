@@ -20,7 +20,7 @@ grid.init({
         // So when dropdowns used the scrollable div should be removed. 
         //"dom": "<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r>t<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'>>",
         
-		//"scrollX": true,
+        //"scrollX": true,
         "pageLength": 25, // default record count per page
         "ajax": {
             "url": site_url+"/main/mainrac/riskGetRollOver", // ajax source
@@ -29,59 +29,60 @@ grid.init({
             }
         },
         "columnDefs": [ {
-        	"targets": 0,
-        	"data": "risk_status",
-        	"render": function ( data, type, full, meta ) {
-        		var img = 'default.png';
-        		if (data > 1) {
-        			if (data == '2') {
-        				img = 'submit.png';
-        			} else {
-        				img = 'verified.png';
-        			} 
-        		} 
-        		
-        		return '<center><img src="'+base_url+'assets/images/legend/'+img+'"/></center>';
-        	}
+            "targets": 0,
+            "data": "risk_status",
+            "render": function ( data, type, full, meta ) {
+                var img = 'default.png';
+                if (data > 1) {
+                    if (data == '2') {
+                        img = 'submit.png';
+                    } else {
+                        img = 'verified.png';
+                    } 
+                } 
+                
+                return '<center><img src="'+base_url+'assets/images/legend/'+img+'"/></center>';
+            }
         }, {
-        	"targets": 1,
-        	"data": "risk_code",
-        	"render": function ( data, type, full, meta ) {
-        		if (full.risk_status == 2) {
-        			return '<a target="_self" href="'+site_url+'/maini/mainrac/riskRegisterForm/'+full.risk_id+'">'+data+'</a>';
-        		}
-        		return '<a target="_self" href="'+site_url+'/maini/mainrac/viewRisk/'+full.risk_id+'">'+data+'</a>';
-        	}
+            "targets": 1,
+            "data": "risk_code",
+            "render": function ( data, type, full, meta ) {
+                if (full.risk_status == 2) {
+                    //ubah
+                    return '<a target="_self" href="'+site_url+'/main/mainrac/riskRegisterForm/'+full.risk_id+'/'+full.risk_input_by+'">'+data+'</a>';
+                }
+                return '<a target="_self" href="'+site_url+'/main/mainrac/viewRisk/'+full.risk_id+'">'+data+'</a>';
+            }
         }, {
-        	"targets": 7,
-        	"data": "risk_status",
-        	"render": function ( data, type, full, meta ) {
-        		var val = 'undefined';
-        		if (data > 1) {
-        			if (data == '2') {
-        				val = 'Submited To RAC';
-        			} else {
-        				val = ' Verified by RAC';
-        			} 
-        		} 
-        		
-        		return val;
-        	}
+            "targets": 7,
+            "data": "risk_status",
+            "render": function ( data, type, full, meta ) {
+                var val = 'undefined';
+                if (data > 1) {
+                    if (data == '2') {
+                        val = 'Submited To RAC';
+                    } else {
+                        val = ' Verified by RAC';
+                    } 
+                } 
+                
+                return val;
+            }
         }],
         "columns": [
-			{ "data": "risk_status", "orderable": false },
-			{ "data": "risk_code" },
-			{ "data": "risk_event" },
-			{ "data": "risk_level_v" },
-			{ "data": "impact_level_v" },
-			{ "data": "likelihood_v" },
-			{ "data": "risk_owner_v" },
-			{ "data": "risk_status", "orderable": false  }
+            { "data": "risk_status", "orderable": false },
+            { "data": "risk_code" },
+            { "data": "risk_event" },
+            { "data": "risk_level_v" },
+            { "data": "impact_level_v" },
+            { "data": "likelihood_v" },
+            { "data": "risk_owner_v" },
+            { "data": "risk_status", "orderable": false  }
        ],
        "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
-       		if (aData.risk_library_id != null) {
-       			$('td', nRow).css('background-color', '#e5f2ff');
-       		}
+            if (aData.risk_library_id != null) {
+                $('td', nRow).css('background-color', '#e5f2ff');
+            }
         },
         "order": [
             [1, "asc"]
@@ -108,7 +109,7 @@ grid2.init({
         // So when dropdowns used the scrollable div should be removed. 
         //"dom": "<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r>t<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'>>",
         
-		//"scrollX": true,
+        //"scrollX": true,
         "pageLength": 25, // default record count per page
         "ajax": {
             "url": site_url+"/main/mainrac/riskGetDataUser", // ajax source
@@ -117,29 +118,29 @@ grid2.init({
             }
         },    
         "columnDefs": [ {
-        	"targets": 0,
-        	"data": "risk_status",
-        	"render": function ( data, type, full, meta ) {
-        		var img = 'default.png';
-        		if (data > 1) {
-        			if (data == '2') {
-        				img = 'submit.png';
-        			} else {
-        				img = 'verified.png';
-        			} 
-        		} 
-        		
-        		return '<center><img src="'+base_url+'assets/images/legend/'+img+'"/></center>';
-        	}
+            "targets": 0,
+            "data": "risk_status",
+            "render": function ( data, type, full, meta ) {
+                var img = 'default.png';
+                if (data > 1) {
+                    if (data == '2') {
+                        img = 'submit.png';
+                    } else {
+                        img = 'verified.png';
+                    } 
+                } 
+                
+                return '<center><img src="'+base_url+'assets/images/legend/'+img+'"/></center>';
+            }
         }, {
-        	"targets": 1,
-        	"data": "risk_code",
-        	"render": function ( data, type, full, meta ) {
-        		if (full.risk_status == 2) {
-        			return '<a target="_self" href="'+site_url+'/main/mainrac/riskRegisterForm/'+full.risk_id+'">'+data+'</a>';
-        		}
-        		return '<a target="_self" href="'+site_url+'/main/mainrac/viewRisk/'+full.risk_id+'">'+data+'</a>';
-        	}
+            "targets": 1,
+            "data": "risk_code",
+            "render": function ( data, type, full, meta ) {
+                if (full.risk_status == 2) {
+                    return '<a target="_self" href="'+site_url+'/main/mainrac/riskRegisterForm/'+full.risk_id+'/'+full.risk_input_by+'">'+data+'</a>';
+                }
+                return '<a target="_self" href="'+site_url+'/main/mainrac/viewRisk/'+full.risk_id+'">'+data+'</a>';
+            }
         } ],    
         "columns": [
            { "data": "risk_status" },
@@ -151,9 +152,9 @@ grid2.init({
            { "data": "risk_owner_v" }
        ],
        "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
-       		if (aData.risk_library_id != null) {
-       			$('td', nRow).css('background-color', '#e5f2ff');
-       		}
+            if (aData.risk_library_id != null) {
+                $('td', nRow).css('background-color', '#e5f2ff');
+            }
         },
         "order": [
             [1, "asc"]
@@ -162,12 +163,12 @@ grid2.init({
 });
 
 var RiskList = function() {
-	return {
-			dataMode: null,
-	        //main function to initiate the module
-	        init: function() {
-	        	var me = this;
-
+    return {
+            dataMode: null,
+            //main function to initiate the module
+            init: function() {
+                var me = this;
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 $('#button-change-verify').click(function(e) {
                     e.preventDefault();
                     me.submitRiskPeriode22();
@@ -176,14 +177,17 @@ var RiskList = function() {
                     e.preventDefault();
                     me.submitRiskPeriode222();
                 });
-	        	
-	        },
-
+                
+            },
+            
+                
+           
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             submitRiskPeriode22: function() {
                 var mod = MainApp.viewGlobalModal('confirm', 'change request to RAC All Risk in Periode : <b>'+g_p_name+'</b>');
                 mod.find('button.btn-ok-success').one('click', function(){
                     mod.modal('hide');
-                    var url = site_url+'/risk/RiskRegister/submitRiskByPeriode2_change';
+                    var url = site_url+'/risk/RiskRegister/submitRiskByPeriode2_change/'+g_status_user_id;
                     
                     Metronic.blockUI({ boxed: true });
                     $.post(
@@ -214,7 +218,7 @@ var RiskList = function() {
                 var mod = MainApp.viewGlobalModal('confirm', 'Ignore change request in Periode : <b>'+g_p_name+'</b>');
                 mod.find('button.btn-ok-success').one('click', function(){
                     mod.modal('hide');
-                    var url = site_url+'/risk/RiskRegister/submitRiskByPeriode2_ignore';
+                    var url = site_url+'/risk/RiskRegister/submitRiskByPeriode2_ignore/'+g_status_user_id;
                     
                     Metronic.blockUI({ boxed: true });
                     $.post(
@@ -241,11 +245,11 @@ var RiskList = function() {
                 });
             },
 
-	        filterDataGrid: function(fby, fval) {
-	        	grid.clearAjaxParams();
-	        	grid.setAjaxParam("filter_by", fby);
-	        	grid.setAjaxParam("filter_value", fval);
-	        	grid.getDataTable().ajax.reload();
-	        }
-	 }
+            filterDataGrid: function(fby, fval) {
+                grid.clearAjaxParams();
+                grid.setAjaxParam("filter_by", fby);
+                grid.setAjaxParam("filter_value", fval);
+                grid.getDataTable().ajax.reload();
+            }
+     }
 }();

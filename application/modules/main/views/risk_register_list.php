@@ -18,6 +18,7 @@
 				</li>
 			</ul>
 		</div>
+		
 		<?php if ($valid_mode) { ?>
 		<script type="text/javascript">
 			var g_p_name = '<?=$periode['periode_name']?>';

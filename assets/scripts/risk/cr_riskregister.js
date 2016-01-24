@@ -841,7 +841,7 @@ var ChangeRequest = function() {
         	
         	$('#modal-library').modal('hide');
         	Metronic.blockUI({ boxed: true });
-        	$.getJSON( site_url+"/risk/RiskRegister/loadRiskForChange/"+xfar, function( data_risk ) {
+        	$.getJSON( site_url+"/risk/RiskRegister/loadRiskForChange2/"+xfar, function( data_risk ) {
         		Metronic.unblockUI();
         		g_username = data_risk['risk_input_by'];
         		data_risk['risk_library_id'] = data_risk['risk_library_id'];

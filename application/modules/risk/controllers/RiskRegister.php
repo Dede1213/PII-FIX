@@ -662,6 +662,42 @@ class RiskRegister extends APP_Controller {
 			echo json_encode($data);
 		}
 	}
+
+	public function loadRiskForChange2($rid, $aid = false) 
+	{
+		if (!empty($rid) && is_numeric($rid)) {
+			$this->load->model('risk/risk');
+			$data = $this->risk->getRiskByIdchanges($rid);
+			
+			$ap_list = $data['action_plan_list'];
+			$data['action_plan_list'] = false;
+			
+			foreach($ap_list as $k=>$vdata) {
+				if ($aid && $aid != $vdata['id']) {
+					continue;
+				} else {
+					if ($aid) {
+						$vdata['change_flag'] = 'CHANGE';						
+						$vdata['data_flag'] = NULL;
+						$data['action_plan_list'][$k] = $vdata;
+					} else {
+						$vdata['change_flag'] = 'CHANGE';
+						
+						$vdata['data_flag'] = NULL;
+						$stat = $vdata['action_plan_status'];
+						$ass = $vdata['assigned_to'];
+						if ( $stat > 0 && ($ass != '' && $ass != null )  ) {
+							$vdata['data_flag'] = 'LOCKED';
+						}
+						
+						$data['action_plan_list'][$k] = $vdata;
+					}
+				}
+			}
+			
+			echo json_encode($data);
+		}
+	}
 	
 	public function getControlLibrary() 
 	{
@@ -1003,18 +1039,18 @@ class RiskRegister extends APP_Controller {
 		echo json_encode($resp);
 	}
 
-	public function submitRiskByPeriode2_change() {
+	public function submitRiskByPeriode2_change($user) {
 		$session_data = $this->session->credential;
 		$resp = array('success' => false, 'msg' => 'Error');
 		
 		$periode = $this->mperiode->getCurrentPeriode();
-		$periode_id = null;
+		//$periode_id = null;
 		if ($periode) {
 			$periode_id = $periode['periode_id'];
 			
 			$data = array();
 			
-			$res = $this->risk->riskSetSubmitByPeriode2_change($periode_id, $session_data['username']);
+			$res = $this->risk->riskSetSubmitByPeriode2_change($periode_id, $user);
 			if ($res) {
 				$resp['success'] = true;
 				$resp['msg'] = 'SUCCESS';
@@ -1024,18 +1060,18 @@ class RiskRegister extends APP_Controller {
 		echo json_encode($resp);
 	}
 
-	public function submitRiskByPeriode2_ignore() {
+	public function submitRiskByPeriode2_ignore($user) {
 		$session_data = $this->session->credential;
 		$resp = array('success' => false, 'msg' => 'Error');
 		
 		$periode = $this->mperiode->getCurrentPeriode();
-		$periode_id = null;
+		//$periode_id = null;
 		if ($periode) {
 			$periode_id = $periode['periode_id'];
 			
 			$data = array();
 			
-			$res = $this->risk->riskSetSubmitByPeriode2_ignore($periode_id, $session_data['username']);
+			$res = $this->risk->riskSetSubmitByPeriode2_ignore($periode_id, $user);
 			if ($res) {
 				$resp['success'] = true;
 				$resp['msg'] = 'SUCCESS';

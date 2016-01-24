@@ -362,7 +362,7 @@ var RiskOwned = function() {
         	var me = this;
         	Metronic.blockUI({ boxed: true });
         	var cnt1 = cnt2 = cnt3 = 0; 
-        	$.getJSON( site_url+"/main/mainpic/riskOwnerGetData/"+g_risk_id, function( data_risk ) {
+        	$.getJSON( site_url+"/main/mainpic/riskOwnerGetData2/"+g_risk_id, function( data_risk ) {
         		g_username = data_risk['risk_input_by'];
         		data_risk['risk_level_id'] = data_risk['risk_level'];
         		data_risk['risk_level'] = data_risk['risk_level_v'];

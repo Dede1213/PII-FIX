@@ -328,6 +328,21 @@ class MainPic extends APP_Controller {
 			echo json_encode($data);
 		}
 	}
+//get changes
+	public function riskOwnerGetData2($rid = false) {
+		if ($rid && is_numeric($rid)) {
+			$this->load->model('risk/risk');
+
+			// di ganti karena loading lama risk owner form
+			//$data = $this->risk->getRiskChangeById($rid);
+
+			$data = $this->risk->getRiskByIdowner($rid);
+			if (!$data) {
+				$data = $this->risk->getRiskByIdowner($rid);
+			}
+			echo json_encode($data);
+		}
+	}
 	
 	public function treatmentSubmit()
 	{
@@ -369,14 +384,22 @@ class MainPic extends APP_Controller {
 			}
 			
 			$this->load->model('risk/risk');
+			// save dulu ke dalam t_risk_change
 			$res = $this->risk->treatmentSaveDraft($_POST['risk_id'], $risk, $impact_level, $actplan, $control, $data['session']['username']);
 			
-			$riskUpdate = array(
-				'risk_status' => $stat,
-				'created_by' => $data['session']['username']
-			);
-			$res = $this->risk->treatmentSubmit($_POST['risk_id'], $riskUpdate, $data['session']['username']);
+			//apus t_risk utama insert t_risk_chage yang di atas
+			$res = $this->risk->treatmentSaveDraft2($_POST['risk_id'], $risk, $impact_level, $actplan, $control, $data['session']['username']);
+			
+
+			//$riskUpdate = array(
+			//	'risk_status' => $stat,
+			//	'created_by' => $data['session']['username']
+			//);
+			// ga perllu pake status udah berubah 
+			//$res = $this->risk->treatmentSubmit($_POST['risk_id'], $riskUpdate, $data['session']['username']); 
+			//ga ngerti buat apaan!
 			//$res = $this->risk->actionPlanSetToDraft($_POST['risk_id']);
+			
 			$resp = array();
 			if ($res) {
 				$resp['success'] = true;

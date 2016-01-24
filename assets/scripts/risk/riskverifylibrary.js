@@ -396,11 +396,11 @@ var RiskVerify = function() {
             	if (submitMode == 'setAsPrimary') {
             		var url = site_url+'/main/mainrac/verifySetAsPrimary';
             	} else if (submitMode == 'verifyPrimary') {
-            		var url = site_url+'/main/mainrac/verifyPrimaryRiskData';
+            		var url = site_url+'/main/mainrac/verifyPrimaryRiskData/'+risk_input_by;
             	} else if (submitMode == 'verify') {
             		var url = site_url+'/main/mainrac/verifyRiskData';
             	} else {
-            		var url = site_url+'/main/mainrac/saveRiskData';
+            		var url = site_url+'/main/mainrac/saveRiskDatachanges/'+risk_input_by;
             	}
             	/*
             	if (submitMode == 'verify') {
@@ -419,9 +419,9 @@ var RiskVerify = function() {
             				mod.find('button.btn-ok-success').one('click', function(){
             					//location.href=site_url+'/risk/RiskRegister/modifyRisk/'+g_risk_id;
             					if (submitMode == 'verify' || submitMode == 'verifyPrimary') {
-            						location.href=site_url+'/main/mainrac/riskRegister/'+g_username;
+            						location.href=site_url+'/main/mainrac/riskRegister/'+risk_input_by;
             					} else {
-            						location.href=site_url+'/main/mainrac/riskRegisterForm/'+g_risk_id;
+            						location.href=site_url+'/main/mainrac/riskRegisterForm/'+g_risk_id+'/'+risk_input_by;
             					}
             				});
             				

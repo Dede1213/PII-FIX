@@ -114,7 +114,14 @@ grid_change.init({
         	"data": "cr_code",
         	"render": function ( data, type, full, meta ) {
         		var cls = 'font-green-jungle';
-        		var vm = 'risk/riskregister/ChangeRequestView';
+                if (full.cr_type == 'Risk Register') {
+                    var vm = 'risk/RiskRegister';
+                    return '<a target="_self" class="'+cls+'" href="'+site_url+'/'+vm+'">'+data+'</a>';
+                }else if (full.cr_status == '1') {
+                    var vm = 'risk/riskregister/ChangeRequestView';
+                } else {
+                   var vm = 'risk/riskregister/ChangeRequestView';
+                }
         		return '<a target="_self" class="'+cls+'" href="'+site_url+'/'+vm+'/'+full.id+'">'+data+'</a>';
         	}
         }, {

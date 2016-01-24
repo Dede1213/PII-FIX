@@ -465,6 +465,14 @@ var ChangeRequest = function() {
         			me.submitRiskData('saveDraft');
         		});
         	});
+
+        	$('#changes-risk-button-save-changes').on('click', function() {
+        		var mod = MainApp.viewGlobalModal('confirm', 'Are You sure you want to Save your Change Request Changes ?');
+        		mod.find('button.btn-primary').off('click');
+        		mod.find('button.btn-primary').one('click', function(){
+        			me.submitRiskData('saveDraft-changes');
+        		});
+        	});
         	
         	$('#changes-risk-button-cancel').on('click', function() {
         		var mod = MainApp.viewGlobalModal('confirm', 'Are You sure you want to cancel your Change Request Verification ? You will loose your unsaved data.');
@@ -574,7 +582,8 @@ var ChangeRequest = function() {
         	var me = this;
         	
         	Metronic.blockUI({ boxed: true });
-        	$.getJSON( site_url+"/risk/RiskRegister/loadChangeRequest/changes/"+rid, function( data_risk ) {
+        	$.getJSON( site_url+"/risk/RiskRegister/loadChangeRequest/primary/"+rid, function( data_risk ) {
+        	//$.getJSON( site_url+"/risk/RiskRegister/loadChangeRequest/changes/"+rid, function( data_risk ) {
         		Metronic.unblockUI();
         		g_username = data_risk['risk_input_by'];
         		data_risk['risk_library_id'] = data_risk['risk_library_id'];
@@ -830,7 +839,8 @@ var ChangeRequest = function() {
         	
         	$('#modal-library').modal('hide');
         	Metronic.blockUI({ boxed: true });
-        	$.getJSON( site_url+"/risk/RiskRegister/loadChangeRequest/primary/"+rid, function( data_risk ) {
+        	$.getJSON( site_url+"/risk/RiskRegister/loadChangeRequest/changes/"+rid, function( data_risk ) {
+        	//$.getJSON( site_url+"/risk/RiskRegister/loadChangeRequest/primary/"+rid, function( data_risk ) {
         		Metronic.unblockUI();
         		g_username = data_risk['risk_input_by'];
         		data_risk['risk_library_id'] = data_risk['risk_library_id'];
@@ -962,6 +972,8 @@ var ChangeRequest = function() {
             		var url = site_url+'/main/mainRac/changeRequestVerifyChanges';
             	} else if (mode == 'saveDraft') {
             		var url = site_url+'/main/mainRac/changeRequestSaveDraft';
+            	}else if (mode == 'saveDraft-changes') {
+            		var url = site_url+'/main/mainRac/changeRequestSaveDraftchanges';
             	} else {
             		return false;
             	}

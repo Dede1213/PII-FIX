@@ -548,12 +548,12 @@ grid_change.init({
         	"render": function ( data, type, full, meta ) {
         		var cls = 'font-green-jungle';
                 if (full.cr_type == 'Risk Register') {
-                    var vm = 'main/mainrac/riskRegister2';
-                    return '<a target="_self" class="'+cls+'" href="'+site_url+'/'+vm+'/'+full.created_by+'">'+data+'</a>';
+                    var vm = 'risk/RiskRegister';
+                    return '<a target="_self" class="'+cls+'" href="'+site_url+'/'+vm+'">'+data+'</a>';
                 }else if (full.cr_status == '1') {
-                    var vm = 'main/mainrac/ChangeRequestView';
+                    var vm = 'risk/riskregister/ChangeRequestView';
                 } else {
-                    var vm = 'main/mainrac/ChangeRequestView';
+                    var vm = 'risk/riskregister/ChangeRequestView';
                 }
                 return '<a target="_self" class="'+cls+'" href="'+site_url+'/'+vm+'/'+full.id+'">'+data+'</a>';
         		//var vm = 'risk/riskregister/ChangeRequestView';

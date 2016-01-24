@@ -535,7 +535,7 @@ var RiskList = function() {
 	        					//grid2.getDataTable().ajax.reload();
 	        					
 	        					//MainApp.viewGlobalModal('success', 'Success Change Request');
-	        					window.location.href = site_url+'/main/mainpic#tab_change_request_list';
+	        					window.location.href = site_url+'/main/#tab_change_request_list';
 	        				} else {
 	        					MainApp.viewGlobalModal('error', data.msg);
 	        				}

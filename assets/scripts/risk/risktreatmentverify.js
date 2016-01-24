@@ -103,7 +103,7 @@ var RiskVerify = function() {
 		init: function() {
         	var me = this;
         	
-        	me.loadRisk(g_risk_id);
+        	me.loadRisk(g_risk_id,risk_input_by);
         	me.loadRiskLevelList();
         	me.loadRiskLevelReference();
         	me.loadImpactLevelReference();
@@ -319,11 +319,11 @@ var RiskVerify = function() {
         	});
         	*/
         },
-        loadRisk: function(rid) {
+        loadRisk: function(rid,risk_input_by) {
         	var me = this;
         	
         	Metronic.blockUI({ boxed: true });
-        	$.getJSON( site_url+"/main/mainrac/loadTreatmentChange/"+rid, function( data_risk ) {
+        	$.getJSON( site_url+'/main/mainrac/loadTreatmentChange2/'+rid+'/'+risk_input_by, function( data_risk ) {
         		Metronic.unblockUI();
         		g_username = data_risk['risk_input_by'];
         		data_risk['risk_library_id'] = data_risk['risk_library_id'];
@@ -715,7 +715,7 @@ var RiskVerify = function() {
             		var url = site_url+'/main/mainrac/treatmentSetAsPrimary';
             		var text = 'Are You sure you want to Save and Set As Primary this Risk ?';
             	} else if (submitMode == 'verify') {
-            		var url = site_url+'/main/mainrac/treatmentVerify';
+            		var url = site_url+'/main/mainrac/treatmentVerify2';
             		var text = 'Are You sure you want to Verify with Primary Data for this Risk ?';
             	} else if (submitMode == 'verifyChanges') {
             		var url = site_url+'/main/mainrac/treatmentVerifyChanges';
@@ -724,7 +724,7 @@ var RiskVerify = function() {
                     var url = site_url+'/main/mainrac/treatmentSaveprimary';
                     var text = 'Are You sure you want to Save this Risk ?';
                 } else {
-            		var url = site_url+'/main/mainrac/treatmentSave';
+            		var url = site_url+'/main/mainrac/treatmentSave/'+risk_input_by;
             		var text = 'Are You sure you want to Save this Risk ?';
             	}
             	
@@ -743,13 +743,13 @@ var RiskVerify = function() {
             					mod.find('button.btn-ok-success').one('click', function(){
             						//location.href=site_url+'/risk/RiskRegister/modifyRisk/'+g_risk_id;
             						if (submitMode == 'setAsPrimary') {
-            							location.href=site_url+'/main/mainrac/riskTreatmentForm/'+g_risk_id;
+            							location.href=site_url+'/main/mainrac/riskTreatmentForm/'+g_risk_id+'/'+risk_input_by;
             						} else if (submitMode == 'verify' || submitMode == 'verifyChanges') {
             							location.href=site_url+'/main/mainrac';
             						}else if (submitMode == 'save-primary') {
-                                        location.href=site_url+'/main/mainrac/riskTreatmentForm/'+g_risk_id;
+                                        location.href=site_url+'/main/mainrac/riskTreatmentForm/'+g_risk_id+'/'+risk_input_by;
                                     } else {
-            							location.href=site_url+'/main/mainrac/riskTreatmentForm/'+g_risk_id;
+            							location.href=site_url+'/main/mainrac/riskTreatmentForm/'+g_risk_id+'/'+risk_input_by;
             						}
             					});
             					

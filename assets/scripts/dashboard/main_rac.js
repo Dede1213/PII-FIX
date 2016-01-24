@@ -167,7 +167,7 @@ gridTreatment.init({
         	"data": "risk_id",
         	"render": function ( data, type, full, meta ) {
         		if (full.risk_status == 5) {
-        			return '<a target="_self" href="'+site_url+'/main/mainrac/riskTreatmentForm/'+full.risk_id+'">'+data+'</a>';
+        			return '<a target="_self" href="'+site_url+'/main/mainrac/riskTreatmentForm/'+full.risk_id+'/'+full.risk_input_by+'">'+data+'</a>';
         		}
         		return '<a target="_self" href="'+site_url+'/main/mainrac/viewRisk/'+full.risk_id+'">'+data+'</a>';
         	}
@@ -544,14 +544,29 @@ grid_cr.init({
          		}
          		return '<a target="_self" class="'+cls+'" href="'+site_url+'/'+vm+'/'+full.id+'">'+data+'</a>';
          	}
-         }, {
+         },{
+            "targets": 5,
+            "data": null,
+            "render": function ( data, type, full, meta ) {
+                
+                if (full.cr_status == '1') {
+                    return '<div class="btn-group">'+
+                    '<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"></i></button>'+
+                '</div>';
+                }else if (full.cr_status == '0') {
+                    return '---';
+                } else {
+                    return '---';
+                }
+            }
+         },{
          	"targets": 4,
          	"data": "cr_status",
          	"render": function ( data, type, full, meta ) {
          		if (data == '1') return 'Complete';
          		if (data == '0') return 'Pending';
          		return 'Undefined';
-         	}
+         	},
          }],
          "columns": [
         		{ "data": "GenRowNum" },
@@ -561,10 +576,11 @@ grid_cr.init({
         		{ "data": "cr_status" },
                 { 
             "data": null,
-            "orderable": false,
-            "defaultContent": '<div class="btn-group">'+
-                    '<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"></i></button>'+
-                '</div>'
+           // "orderable": false,
+           // "defaultContent": '<div class="btn-group">'+
+           // '<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"></i></button>'+
+           // '</div>'
+           
            }
         ],
         "order": [

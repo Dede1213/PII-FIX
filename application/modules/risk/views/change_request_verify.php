@@ -155,27 +155,27 @@
 							<div class="form-group">
 									<label class="col-md-3 control-label smaller cl-compact">Risk Event</label>
 									<div class="col-md-9">
-									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_event" placeholder=""></textarea>
+									<textarea class="form-control input-readview"  rows="3" name="risk_event" placeholder=""></textarea>
 									</div>
 								</div>
 					
 							<div class="form-group">
 								<label class="col-md-3 control-label small cl-compact">Risk Event Description</label>
 								<div class="col-md-9">
-								<textarea class="form-control" rows="3" readonly="true" name="risk_description" placeholder=""></textarea>
+								<textarea class="form-control" rows="3"  name="risk_description" placeholder=""></textarea>
 								</div>
 							</div>
 							<?php if ($change_type == 'Risk Form') { ?>
 							<div class="form-group">
 									<label class="col-md-3 control-label smaller cl-compact">Cause <span class="required">* </span></label>
 									<div class="col-md-9">
-									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_cause" placeholder=""></textarea>
+									<textarea class="form-control input-readview"  rows="3" name="risk_cause" placeholder=""></textarea>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-md-3 control-label smaller cl-compact">Impact <span class="required">* </span></label>
 									<div class="col-md-9">
-									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_impact" placeholder=""></textarea>
+									<textarea class="form-control input-readview"  rows="3" name="risk_impact" placeholder=""></textarea>
 									</div>
 								</div>
 
@@ -306,9 +306,11 @@
 							</div>
 						</div>
 						<div class="form-actions right">
-							<button id="changes-risk-set-as-primary" type="button" class="btn blue"><i class="fa fa-arrows-h"></i> Set As Primary</button>
+							
+						<!--	<button id="changes-risk-set-as-primary" type="button" class="btn blue"><i class="fa fa-arrows-h"></i> Set As Primary</button> -->
 						<!--	<button id="changes-risk-button-submit" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Verify</button> -->
-							<button id="changes-risk-button-save" type="button" class="btn blue"><i class="fa fa-circle-o"></i> Save</button>
+							<button id="changes-risk-button-save" type="button" class="btn blue"><i class="fa fa-arrows-h"></i> Set As Primary</button>
+							<button id="changes-risk-button-save-changes" type="button" class="btn blue"><i class="fa fa-circle-o"></i> Save</button>
 							<button type="button" class="btn yellow" id="changes-risk-button-cancel"><i class="fa fa-times"></i> Cancel</button>
 						</div>
 

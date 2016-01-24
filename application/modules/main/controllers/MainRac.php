@@ -358,7 +358,13 @@ class MainRac extends APP_Controller {
 		$menu = 'main/mainrac';
 		$data['valid_mode'] = true;
 		
+		$sql = "select risk_id from t_risk_change where risk_id='".$risk_id."' and risk_input_by ='".$user_by."' " ;
+		$query = $this->db->query($sql);
+	if ($query->num_rows() > 0){
+		$res = $this->risk->getRiskByIdNoRefChanges($risk_id,$user_by);
+	}else{
 		$res = $this->risk->getRiskByIdNoRef($risk_id);
+	}
 		if ($res) {
 			if ($res['risk_library_id'] == '' && $res['risk_library_id'] == null) { // NO LIBRARY
 				$verifyJs = '<script src="assets/scripts/risk/riskinput.js"></script>
@@ -521,7 +527,7 @@ class MainRac extends APP_Controller {
 			echo json_encode($data);
 		}
 	}
-	
+	/*
 	public function verifyPrimaryRiskData()
 	{
 		$resp['success'] = false;
@@ -574,6 +580,93 @@ class MainRac extends APP_Controller {
 				
 				$res = $this->risk->updateRisk1($_POST['risk_id'], $code, $risk, $impact_level, $actplan, $control, $data['session']['username']);
 				$res = $this->risk->riskDeleteChange($_POST['risk_id'],$data['session']['username']);
+				
+				if (isset($_POST['add_user_flag']) && $_POST['add_user_flag'] == 'yes') {
+					$dd = implode('-', array_reverse( explode('-', $_POST['add_user_date_changed']) ));
+					$res = $this->risk->riskAddUser($_POST['risk_id'], $_POST['add_user_username'], $dd);
+				}
+				
+				$resp = array();
+				if ($res) {
+					$resp['success'] = true;
+					$resp['msg'] = 'SUCCESS';
+				} else {
+					$resp['success'] = false;
+					$resp['msg'] = $this->db->error();
+				}
+			} else {
+				$resp['msg'] = 'You Are Not Allowed to Modify this Risk';
+			}
+			echo json_encode($resp);
+		}
+	}
+	*/
+	public function verifyPrimaryRiskData($user)
+	{
+		$resp['success'] = false;
+		$resp['msg'] = '';
+		
+		$data = $this->loadDefaultAppConfig();
+		$cred = $this->session->credential;
+		
+		if (isset($_POST['risk_id']) && is_numeric($_POST['risk_id'])) {
+			$this->load->model('risk/risk');
+			$risk = $this->risk->getRiskValidate('viewRiskByRac', $_POST['risk_id'], $cred);
+			if ($risk) {
+				// category
+				if ($risk['risk_2nd_sub_category'] != $_POST['risk_2nd_sub_category']) {
+					$this->load->model('admin/mcategory');
+					$cats = $this->mcategory->getDataById($_POST['risk_2nd_sub_category']);
+					$seq_id = $this->mcategory->getSequence($_POST['risk_2nd_sub_category']);
+					$code = $cats['cat_code'].'-'.$seq_id;
+				} else {
+					$code = $_POST['risk_code'];
+				}
+				
+				if ($_POST['risk_library_id'] == '') $_POST['risk_library_id'] = null;
+				
+				// build data
+				$risk = array(
+					'risk_status' => 3
+					/*
+					,
+					'risk_code' => $code,
+					'risk_owner' => $_POST['risk_division'],
+					'risk_division' => $_POST['risk_division'],
+					'risk_library_id' => $_POST['risk_library_id'],
+					'risk_event' => $_POST['risk_event'],
+					'risk_description' => $_POST['risk_description'],
+					'risk_category' => $_POST['risk_category'],
+					'risk_sub_category' => $_POST['risk_sub_category'],
+					'risk_2nd_sub_category' => $_POST['risk_2nd_sub_category'],
+					'risk_cause' => $_POST['risk_cause'],
+					'risk_impact' => $_POST['risk_impact'],
+					'risk_level' => $_POST['risk_level_id'],
+					'risk_impact_level' => $_POST['risk_impact_level_id'],
+					'risk_likelihood_key' => $_POST['risk_likelihood_id'],
+					'suggested_risk_treatment' => $_POST['suggested_risk_treatment']
+					*/
+				);
+				
+				$impact_level = array();
+				foreach($_POST['impact'] as $v) {
+					$impact_level[] = $v;
+				}
+				
+				$actplan = array();
+				foreach($_POST['actplan'] as $v) {
+					$actplan[] = $v;
+				}
+				
+				$control = array();
+				foreach($_POST['control'] as $v) {
+					$control[] = $v;
+				}
+				
+				$res = $this->risk->updateRisk1($_POST['risk_id'], $code, $risk, $impact_level, $actplan, $control, $data['session']['username'], $user);
+
+				//$res = $this->risk->updateRisk1change($_POST['risk_id'], $code, $risk, $impact_level, $actplan, $control, $data['session']['username']);
+				//$res = $this->risk->riskDeleteChange($_POST['risk_id']);
 				
 				if (isset($_POST['add_user_flag']) && $_POST['add_user_flag'] == 'yes') {
 					$dd = implode('-', array_reverse( explode('-', $_POST['add_user_date_changed']) ));
@@ -908,6 +1001,81 @@ class MainRac extends APP_Controller {
 			echo json_encode($resp);
 		}
 	}
+
+	public function saveRiskDatachanges($user)
+	{
+		$resp['success'] = false;
+		$resp['msg'] = '';
+		
+		$data = $this->loadDefaultAppConfig();
+		$cred = $this->session->credential;
+		
+		if (isset($_POST['risk_id']) && is_numeric($_POST['risk_id'])) {
+			$this->load->model('risk/risk');
+			$risk = $this->risk->getRiskValidate('viewRiskByRac', $_POST['risk_id'], $cred);
+			if ($risk) {
+				// category
+				if ($risk['risk_2nd_sub_category'] != $_POST['risk_2nd_sub_category']) {
+					$this->load->model('admin/mcategory');
+					$cats = $this->mcategory->getDataById($_POST['risk_2nd_sub_category']);
+					$seq_id = $this->mcategory->getSequence($_POST['risk_2nd_sub_category']);
+					$code = $cats['cat_code'].'-'.$seq_id;
+				} else {
+					$code = $_POST['risk_code'];
+				}
+				
+				if ($_POST['risk_library_id'] == '') $_POST['risk_library_id'] = null;
+				
+				// build data
+				$risk = array(
+					'risk_code' => $code,
+					'risk_owner' => $_POST['risk_division'],
+					'risk_division' => $_POST['risk_division'],
+					'risk_library_id' => $_POST['risk_library_id'],
+					'risk_event' => $_POST['risk_event'],
+					'risk_description' => $_POST['risk_description'],
+					'risk_category' => $_POST['risk_category'],
+					'risk_sub_category' => $_POST['risk_sub_category'],
+					'risk_2nd_sub_category' => $_POST['risk_2nd_sub_category'],
+					'risk_cause' => $_POST['risk_cause'],
+					'risk_impact' => $_POST['risk_impact'],
+					'risk_level' => $_POST['risk_level_id'],
+					'risk_impact_level' => $_POST['risk_impact_level_id'],
+					'risk_likelihood_key' => $_POST['risk_likelihood_id'],
+					'suggested_risk_treatment' => $_POST['suggested_risk_treatment']
+				);
+				
+				$impact_level = array();
+				foreach($_POST['impact'] as $v) {
+					$impact_level[] = $v;
+				}
+				
+				$actplan = array();
+				foreach($_POST['actplan'] as $v) {
+					$actplan[] = $v;
+				}
+				
+				$control = array();
+				foreach($_POST['control'] as $v) {
+					$control[] = $v;
+				}
+				
+				$res = $this->risk->updateRisksave($_POST['risk_id'], $code, $risk, $impact_level, $actplan, $control, $data['session']['username'],$user);
+				
+				$resp = array();
+				if ($res) {
+					$resp['success'] = true;
+					$resp['msg'] = 'SUCCESS';
+				} else {
+					$resp['success'] = false;
+					$resp['msg'] = $this->db->error();
+				}
+			} else {
+				$resp['msg'] = 'You Are Not Allowed to Modify this Risk';
+			}
+			echo json_encode($resp);
+		}
+	}
 	
 	public function verifySetAsPrimary() {
 		$resp['success'] = false;
@@ -1045,7 +1213,7 @@ class MainRac extends APP_Controller {
 		echo json_encode($data);
 	}
 	
-	public function riskTreatmentForm($rid=false) 
+	public function riskTreatmentForm($rid=false,$user) 
 	{
 		if ($rid && is_numeric($rid)) {
 			$data = $this->loadDefaultAppConfig();
@@ -1081,7 +1249,9 @@ class MainRac extends APP_Controller {
 			if ($risk) {
 				$data['valid_mode'] = true;
 				$data['risk'] = $risk;				
+				$data['user'] = $user;
 			}
+
 			
 			$this->load->model('risk/mriskregister');
 			$data['category'] = $this->mriskregister->getRiskCategory();
@@ -1096,14 +1266,28 @@ class MainRac extends APP_Controller {
 		}
 	}
 	
-	public function loadTreatmentChange($rid) 
+	public function loadTreatmentChange($rid,$user) 
 	{
 		if ($rid && is_numeric($rid)) {
 			$this->load->model('risk/risk');
 
-			$data = $this->risk->getRiskChangeById($rid);
+			$data = $this->risk->getRiskChangeById($rid,$user);
 			if (!$data) {
 				$data = $this->risk->getRiskById($rid);
+			}
+			echo json_encode($data);
+		}
+	}
+
+//ini untuk verify risk owner ngambil triskchange
+	public function loadTreatmentChange2($rid,$user) 
+	{
+		if ($rid && is_numeric($rid)) {
+			$this->load->model('risk/risk');
+
+			$data = $this->risk->getRiskChangeById2($rid,$user);
+			if (!$data) {
+				$data = $this->risk->getRiskChangeById2($rid,$user);
 			}
 			echo json_encode($data);
 		}
@@ -1199,8 +1383,9 @@ class MainRac extends APP_Controller {
 				);
 				
 				$res = $this->risk->updateRisk($_POST['risk_id'], false, $risk_update, false, false, false, $data['session']['username']);
-				$res = $this->risk->riskDeleteChange($_POST['risk_id']);
-				$res = $this->risk->actionPlanSetToDraft($_POST['risk_id']);
+				
+				//$res = $this->risk->riskDeleteChange($_POST['risk_id']);
+				//$res = $this->risk->actionPlanSetToDraft($_POST['risk_id']);
 				$resp = array();
 				if ($res) {
 					$resp['success'] = true;
@@ -1231,21 +1416,21 @@ class MainRac extends APP_Controller {
 				// build data
 				$risk_update = array(
 					'risk_status' => 6,
-					'risk_event' => $_POST['risk_event'],
-					'risk_description' => $_POST['risk_description'],
-					'risk_level' => $_POST['risk_level_id'],
-					'risk_impact_level' => $_POST['risk_impact_level_id'],
-					'risk_likelihood_key' => $_POST['risk_likelihood_id'],
-					'suggested_risk_treatment' => $_POST['suggested_risk_treatment'],
+					//'risk_event' => $_POST['risk_event'],
+					//'risk_description' => $_POST['risk_description'],
+					//'risk_level' => $_POST['risk_level_id'],
+					//'risk_impact_level' => $_POST['risk_impact_level_id'],
+					//'risk_likelihood_key' => $_POST['risk_likelihood_id'],
+					//'suggested_risk_treatment' => $_POST['suggested_risk_treatment'],
 					'risk_owner' => $_POST['risk_division'],
-					'risk_cause' => $_POST['risk_cause'],
-					'risk_impact' => $_POST['risk_impact']
+					//'risk_cause' => $_POST['risk_cause'],
+					//'risk_impact' => $_POST['risk_impact']
 					
 				);
 				
-				$res = $this->risk->updateRisk($_POST['risk_id'], false, $risk_update, false, false, false, $data['session']['username']);
-				$res = $this->risk->riskDeleteChange($_POST['risk_id']);
-				$res = $this->risk->actionPlanSetToDraft($_POST['risk_id']);
+				$res = $this->risk->updateRiskverify($_POST['risk_id'], false, $risk_update, false, false, false, $data['session']['username']);
+				//$res = $this->risk->riskDeleteChange($_POST['risk_id']);
+				//$res = $this->risk->actionPlanSetToDraft($_POST['risk_id']);
 				$resp = array();
 				if ($res) {
 					$resp['success'] = true;
@@ -1326,7 +1511,7 @@ class MainRac extends APP_Controller {
 		}
 	}
 	
-	public function treatmentSave()
+	public function treatmentSave($username)
 	{
 		$resp['success'] = false;
 		$resp['msg'] = '';
@@ -1367,7 +1552,7 @@ class MainRac extends APP_Controller {
 					$control[] = $v;
 				}
 
-				$res = $this->risk->riskChangeUpdate1ajah($_POST['risk_id'], $risk_update, $impact_level, $actplan, $control, $data['session']['username']);
+				$res = $this->risk->riskChangeUpdate1ajah($_POST['risk_id'], $risk_update, $impact_level, $actplan, $control, $username);
 				
 				$resp = array();
 				if ($res) {
@@ -2486,6 +2671,74 @@ class MainRac extends APP_Controller {
 			}
 
 			$res = $this->risk->changeRequestSaveDraft($_POST['id'], $_POST['risk_id'], $risk_update, $impact_level, $actplan, $control, $data['session']['username']);
+			
+			$resp = array();
+			if ($res) {
+				$resp['success'] = true;
+				$resp['msg'] = 'SUCCESS';
+			} else {
+				$resp['success'] = false;
+				$resp['msg'] = $this->db->error();
+			}
+			
+			echo json_encode($resp);
+		}
+	}
+
+	public function changeRequestSaveDraftchanges()
+	{
+		$resp['success'] = false;
+		$resp['msg'] = '';
+		
+		$data = $this->loadDefaultAppConfig();
+		$cred = $this->session->credential;
+		
+		if (isset($_POST['id']) && is_numeric($_POST['id'])) {
+			$this->load->model('risk/risk');
+
+			$changes = $this->risk->getChangeByIdNoRef($_POST['id']);
+			
+			// build data
+			if ($changes['cr_type'] == 'Risk Form') {
+				$risk_update = array(
+					'risk_cause' => $_POST['risk_cause'],
+					'risk_impact' => $_POST['risk_impact'],
+					'risk_level' => $_POST['risk_level_id'],
+					'risk_impact_level' => $_POST['risk_impact_level_id'],
+					'risk_likelihood_key' => $_POST['risk_likelihood_id'],
+					'suggested_risk_treatment' => $_POST['suggested_risk_treatment']
+				);
+			}
+			
+			if ($changes['cr_type'] == 'Risk Owner Form') {
+				$risk_update = array(
+					'risk_level' => $_POST['risk_level_id'],
+					'risk_impact_level' => $_POST['risk_impact_level_id'],
+					'risk_likelihood_key' => $_POST['risk_likelihood_id'],
+					'suggested_risk_treatment' => $_POST['suggested_risk_treatment']
+				);
+			}
+			
+			if ($changes['cr_type'] == 'Action Plan Form') {
+				$risk_update = false;
+			}
+			
+			$impact_level = array();
+			foreach($_POST['impact'] as $v) {
+				$impact_level[] = $v;
+			}
+			
+			$actplan = array();
+			foreach($_POST['actplan'] as $v) {
+				$actplan[] = $v;
+			}
+			
+			$control = array();
+			foreach($_POST['control'] as $v) {
+				$control[] = $v;
+			}
+
+			$res = $this->risk->changeRequestSaveDraftchanges($_POST['id'], $_POST['risk_id'], $risk_update, $impact_level, $actplan, $control, $data['session']['username']);
 			
 			$resp = array();
 			if ($res) {

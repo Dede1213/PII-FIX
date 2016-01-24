@@ -22,6 +22,7 @@
 		<script type="text/javascript">
 			var g_risk_id = <?=$risk['risk_id']?>;
 			var g_username = null;
+
 		</script>
 		<div class="row">
 		<div class="col-md-12">

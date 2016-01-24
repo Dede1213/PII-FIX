@@ -22,7 +22,9 @@
 		<script type="text/javascript">
 			var g_risk_id = <?=$risk['risk_id']?>;
 			var g_username = null;
+			var risk_input_by = '<?php echo $user; ?>';
 		</script>
+
 
 <?php
 	$id = $risk['risk_id'];
@@ -64,7 +66,7 @@ WHERE t_risk.risk_id ='$id'";
 	$query = $this->db->query($sql);
 	$row = $query->row(); 
 	$hasil = $row->status;
-	if ($hasil == 0){
+	if ($hasil == 1){
 ?>
 
 <!--     Start risk owner form -->
@@ -78,6 +80,7 @@ WHERE t_risk.risk_id ='$id'";
 				</div>
 				
 				<div class="portlet-body form">
+				
 					<form role="form" id="input-form" class="form-horizontal">
 						<div class="form-body">
 							<div class="form-group">
@@ -402,7 +405,7 @@ WHERE t_risk.risk_id ='$id'";
 							<div class="form-group">
 								<label class="col-md-3 control-label smaller cl-compact">Risk Event</label>
 								<div class="col-md-9">
-								<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_event" placeholder=""></textarea>
+								<textarea class="form-control input-readview"  rows="3" name="risk_event" placeholder=""></textarea>
 								</div>
 							</div>
 							<div class="form-group">

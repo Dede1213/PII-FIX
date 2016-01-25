@@ -288,23 +288,19 @@ from m_risk_category
 	}
 	 
 	function listriskap_update($data){
-	
-		$newdate = date("Y-m-d",strtotime($data['due_date'])); 
-		
-		$newdate_ex = date("Y-m-d",strtotime($data['due_date_ex'])); 
-		
+	 
 		$idnya = explode("AP.",$data['id']);
 		
 		if($data['id'] !=""){
 			$sql = " 
 			update `t_risk_action_plan`
-			SET  `action_plan`='".$data['action_plan']."'	,`due_date`='".$newdate."', `division`='".$data['division']."'
-			WHERE `action_plan`='".$data['action_plan_ex']."'	AND `due_date`='".$newdate_ex."' AND  `division`='".$data['division_ex']."'			 
+			SET  `action_plan`='".$data['action_plan']."'	 , `division`='".$data['division']."'
+			WHERE `action_plan`='".$data['action_plan_ex']."'	  AND  `division`='".$data['division_ex']."'			 
 			";
 		}
 		else{
 			$sql = " 
-			INSERT INTO `t_risk_action_plan`( `action_plan`,`due_date`,`division` ) VALUES ('".$data['action_plan']."','".$newdate."','".$data['division']."')
+			INSERT INTO `t_risk_action_plan`( `action_plan` ,`division` ) VALUES ('".$data['action_plan']."' ,'".$data['division']."')
 			";
 		}
 	  

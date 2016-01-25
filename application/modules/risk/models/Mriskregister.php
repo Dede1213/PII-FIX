@@ -596,6 +596,13 @@ class Mriskregister extends APP_Model {
 	if ($query_cek->num_rows() == 0){
 		$rid2 = 1;
 		if ($rid2 == 1) {
+
+		//cek risk_input_by
+		$sql_user = "select risk_input_by from t_risk where risk_id = '".$risk['risk_library_id']."' ";
+		$query_user = $this->db->query($sql_user);
+		$row_user = $query_user->row();
+		$hasil_user = $row_user->risk_input_by;
+
 			//$par = array('rid'=>$rid);
 			
 			//$sql = "select * from t_risk where risk_id = ? ";
@@ -616,7 +623,7 @@ class Mriskregister extends APP_Model {
 					NOW() as risk_date,
 					'".$risk['risk_status']."' as risk_status,
 					'".$risk['periode_id']."' as periode_id,
-					'".$risk['risk_input_by']."' as risk_input_by,
+					'".$hasil_user."' as risk_input_by,
 					'".$risk['risk_input_division']."' as risk_input_division,
 					risk_owner,
 					risk_division,
@@ -640,7 +647,7 @@ class Mriskregister extends APP_Model {
 
 		//cek risk_id terakhir
 		$input = $risk['risk_input_by'];
-		$sql2 = "select risk_id from t_risk where risk_input_by = '$input' order by risk_id DESC LIMIT 1";
+		$sql2 = "select risk_id from t_risk where risk_input_by = '".$hasil_user."' order by risk_id DESC LIMIT 1";
 		$query2 = $this->db->query($sql2);
 		$row = $query2->row();
 		$hasil = $row->risk_id;

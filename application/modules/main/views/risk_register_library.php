@@ -349,12 +349,13 @@ WHERE t_risk.risk_id ='$id'";
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact">Risk Event
+								<label class="col-md-3 control-label smaller cl-compact">Risk Event <span class="required">* </span>
 								</label>
 								<div class="col-md-9">
-									<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_event" placeholder="">
+								<textarea class="form-control" rows="3" name="risk_event" placeholder=""></textarea>
 								</div>
 							</div>
+							
 							<div class="form-group">
 								<label class="col-md-3 control-label small cl-compact">Risk Event Description</label>
 								<div class="col-md-9">
@@ -380,17 +381,18 @@ WHERE t_risk.risk_id ='$id'";
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Cause</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Cause <span class="required">* </span></label>
 								<div class="col-md-9">
-									<textarea class="form-control" rows="3" name="risk_cause" placeholder="" readonly="true" ></textarea>
+								<textarea class="form-control" rows="3" name="risk_cause" placeholder=""></textarea>
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Impact</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Impact <span class="required">* </span></label>
 								<div class="col-md-9">
-									<textarea class="form-control" rows="3" name="risk_impact" placeholder="" readonly="true"></textarea>
+								<textarea class="form-control" rows="3" name="risk_impact" placeholder=""></textarea>
 								</div>
 							</div>
+							
 							<div class="form-group">
 								<label class="col-md-3 control-label smaller cl-compact" >Impact Level</label>
 								<div class="col-md-9">
@@ -510,7 +512,7 @@ WHERE t_risk.risk_id ='$id'";
 								<label class="col-md-3 control-label smaller cl-compact">Risk Event <span class="required">* </span>
 								</label>
 								<div class="col-md-9">
-								<input type="text" class="form-control input-sm" name="risk_event" data-required="1" placeholder="" value="">
+								<textarea class="form-control" rows="3" name="risk_event" placeholder=""></textarea>
 								</div>
 							</div>
 							<div class="form-group">

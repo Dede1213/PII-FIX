@@ -126,7 +126,7 @@
 
 		public function getallPeriode(){
 			$query = $this->db->select('periode_id,periode_name,periode_start,periode_end')
-					 		  ->get('m_periode');
+					 		  ->get('m_periode_report');
 			return $query->result();
 		}
 

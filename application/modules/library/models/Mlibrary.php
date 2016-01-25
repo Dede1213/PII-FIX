@@ -93,7 +93,7 @@ class Mlibrary extends APP_Model {
 		$date = date("Y-m-d");
 		$sql = "select t_risk_action_plan.id, t_risk_action_plan.action_plan, t_risk_action_plan.due_date, t_risk_action_plan.division
 					from t_risk_action_plan
-					group by t_risk_action_plan.due_date, t_risk_action_plan.division, t_risk_action_plan.action_plan
+					group by t_risk_action_plan.division, t_risk_action_plan.action_plan
 				"
 				
 				.$ex_filter

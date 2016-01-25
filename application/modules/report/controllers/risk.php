@@ -1821,7 +1821,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			';
 			
 			$this->load->model('report/risk_model','risk',true);
-			$data['periodenya'] = $this->risk->get_periode();			
+			$data['periode'] = $this->risk->getAllPeriode();			
 			
 			$this->load->view('main/header', $data); 
 			$this->load->view('riskmap', $data);
@@ -1861,7 +1861,35 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			exit;
 			
 		}
-
+		
+		
+		function riskmap_data_pdf(){
+			
+			$this->load->model('report/risk_model','risk',true);
+			$this->load->library('parser');
+			$this->load->library('dompdf_gen');
+			
+			$orientation = "potrait";
+			$paper_size='a4';
+			 
+			$data['datanya'] = $this->risk->riskmap($this->input->post());
+			
+			$data['periodenya'] = $this->risk->cekperiode($this->input->post('periode'));	 		
+ 
+			$data['total_data'] = count($data['datanya']);
+			 
+			$this->load->view('riskmap_data',$data);
+			// Get output html
+			$html = $this->output->get_output();
+			  
+			// Convert to PDF
+			$this->dompdf->load_html($html);
+			$this->dompdf->set_paper($paper_size, $orientation);
+			$this->dompdf->render();			
+			$this->dompdf->stream("Periode_risk_map.pdf");
+			
+		}
+		 
 		
 	}
 

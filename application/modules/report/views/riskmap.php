@@ -21,7 +21,7 @@
 		<!-- BEGIN CONTENT-->
 		<div class="row">
 		<div class="col-md-12">
-			<div class="form">
+			<!--<div class="form">
 				<form class="form-horizontal" action = "<?php echo base_url('index.php/report/risk/riskmap_data_excel');?>" method = "post">		
 					<div class="form-group">
 						<label class="col-md-3 control-label">Periode</label>
@@ -40,7 +40,83 @@
 							>Submit</button>
 					</div>
 				</form>
+			</div>-->
+			
+			<div class="form">
+				<form class="form-horizontal">		
+					<div class="form-group">
+						<label class="col-md-3 control-label">Report type</label>
+							<div class="col-md-6">
+								<select class="form-control input-sm" id="typereport">
+									<option value="-">Choose</option>
+									<option value="excel">MS. Excel</option>
+									<option value="pdf">PDF</option>
+		<!-- 							<option value="word">MS. Word</option> -->
+								</select>
+							</div>
+					</div>
+				</form>
 			</div>
+				<div class="row">
+					<div class="col-md-12">			
+						<div class="form" id="forexcel">
+							<form   action="<?php echo base_url('index.php/report/risk/riskmap_data_excel');?>" method="post" id="input-form" role="form" class="form-horizontal">
+								<div class="form-body">
+									<div class="form-group">
+										<label class="col-md-3 control-label">Periode</label>
+											<div class="col-md-6">
+												<select class="form-control input-sm" name="periode">
+													<?php 
+														foreach ($periode as $key) {
+															echo "<option value='".$key->periode_id."'>".$key->periode_name."</option>";
+														}
+													?>
+												</select>
+											</div>
+									</div>
+								 
+
+									<div class="form-actions right">
+										<button id="input-form-submit-button" type="submit" 
+											class="btn blue ladda-button"
+											 data-style="expand-right"
+											>Submit</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">			
+						<div class="form" id="forpdf">
+							<form target="_self" action="<?php echo base_url('index.php/report/risk/riskmap_data_pdf');?>" method="post" id="input-form" role="form" class="form-horizontal">
+								<div class="form-body">
+									<div class="form-group">
+										<label class="col-md-3 control-label">Periode</label>
+											<div class="col-md-6">
+												<select class="form-control input-sm" name="periode">
+													<?php 
+														foreach ($periode as $key) {
+															echo "<option value='".$key->periode_id."'>".$key->periode_name."</option>";
+														}
+													?>
+												</select>
+											</div>
+									</div>
+								 
+
+									<div class="form-actions right">
+										<button id="input-form-submit-button" type="submit" 
+											class="btn blue ladda-button"
+											 data-style="expand-right"
+											>Submit</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
 			 					
 		</div>	
 		

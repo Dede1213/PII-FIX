@@ -177,7 +177,7 @@ from m_risk_category
 			  t_risk_control.risk_control_owner
 			FROM t_risk_control
 			WHERE existing_control_id IS NULL
-			 
+			 AND risk_existing_control <> 'NONE'
 				"
 				
 				.$ex_filter

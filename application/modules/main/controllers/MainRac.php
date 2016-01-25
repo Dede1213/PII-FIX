@@ -1381,6 +1381,7 @@ class MainRac extends APP_Controller {
 					'risk_impact' => $_POST['risk_impact'] 
 					*/
 				);
+
 				
 				$res = $this->risk->updateRisk($_POST['risk_id'], false, $risk_update, false, false, false, $data['session']['username']);
 				
@@ -1428,7 +1429,12 @@ class MainRac extends APP_Controller {
 					
 				);
 				
-				$res = $this->risk->updateRiskverify($_POST['risk_id'], false, $risk_update, false, false, false, $data['session']['username']);
+				$actplan = array();
+				foreach($_POST['actplan'] as $v) {
+					$actplan[] = $v;
+				}
+
+				$res = $this->risk->updateRiskverify($_POST['risk_id'], false, $risk_update, false, $actplan, false, $data['session']['username']);
 				//$res = $this->risk->riskDeleteChange($_POST['risk_id']);
 				//$res = $this->risk->actionPlanSetToDraft($_POST['risk_id']);
 				$resp = array();

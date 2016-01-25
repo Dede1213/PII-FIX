@@ -1764,9 +1764,16 @@ class Risk extends APP_Model {
 		$res = $this->db->query($sql, $par);
 
 		//update assgin to action plan nih
-		$sql = "update t_risk_action_plan set assigned_to = '".$risk['risk_owner']."' 
+		$sql = "update t_risk_action_plan set assigned_to = (select username from m_user where division_id = '".$risk['risk_owner']."' and role_id = 4)
 			  	where risk_id = '".$risk_id."' ";
 		$res = $this->db->query($sql, $par);
+
+		//$sql = "update t_risk 
+		//		set risk_treatment_owner = (select username from m_user where division_id = '".$risk['risk_division']."'  and role_id = 4) 
+		//	  	where risk_id = '".$risk_id."' ";
+		//$res = $this->db->query($sql);
+
+
 
 		$par['risk_id'] = $risk_id;
 		$sql = "update t_risk_action_plan set action_plan_status = 1 where risk_id = '".$risk_id."' ";
@@ -2657,7 +2664,21 @@ class Risk extends APP_Model {
 		$hasil = $row->risk_existing_control;
 		if($hasil != 'under'){
 
+		$r_status = $risk['risk_status'];
+		//update T-risk risk status sama switch_flag
+		$sql = "update t_risk set risk_status = '".$r_status."', switch_flag='P'  where risk_id = '".$risk_id."'  ";
+		$res = $this->db->query($sql);
 
+		$sql = "update t_risk_impact set switch_flag='P' where risk_id = '".$risk_id."'  ";
+		$res = $this->db->query($sql);
+
+		$sql = "update t_risk_action_plan set switch_flag='P' where risk_id = '".$risk_id."'  ";
+		$res = $this->db->query($sql);
+
+		$sql = "update t_risk_control set switch_flag='P' where risk_id = '".$risk_id."'  ";
+		$res = $this->db->query($sql);
+
+/*
 		$sql = "delete from t_risk where risk_id = ? and switch_flag='P' ";
 		$res = $this->db->query($sql, array('rid'=>$risk_id));
 		
@@ -2721,9 +2742,11 @@ class Risk extends APP_Model {
 		} else {
 			return false;
 		}
+		*/
 		
 		return $res;
 	}
+
 	}
 
 	

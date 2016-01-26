@@ -217,7 +217,7 @@ class Mriskregister extends APP_Model {
 					join m_periode on m_periode.periode_id = a.periode_id
 					where 
 					a.periode_id NOT IN (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end)
-					and a.risk_id NOT IN(select t2.risk_library_id from t_risk t2 where t2.periode_id = (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end) and t2.risk_input_by = '".$defFilter['userid']."')
+					and a.risk_id NOT IN(select t2.risk_library_id from t_risk t2 where t2.periode_id = (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end) and t2.risk_input_by = '".$defFilter['userid']."' and t2.risk_library_id is not null)
 					and a.existing_control_id is null
 					and a.risk_input_by = '".$defFilter['userid']."'
 					 
@@ -598,10 +598,12 @@ class Mriskregister extends APP_Model {
 		if ($rid2 == 1) {
 
 		//cek risk_input_by
-		$sql_user = "select risk_input_by from t_risk where risk_id = '".$risk['risk_library_id']."' ";
+		$sql_user = "select risk_input_by,risk_input_division from t_risk where risk_id = '".$risk['risk_library_id']."' ";
 		$query_user = $this->db->query($sql_user);
 		$row_user = $query_user->row();
 		$hasil_user = $row_user->risk_input_by;
+		$hasil_divisi = $row_user->risk_input_division;
+
 
 			//$par = array('rid'=>$rid);
 			
@@ -624,7 +626,7 @@ class Mriskregister extends APP_Model {
 					'".$risk['risk_status']."' as risk_status,
 					'".$risk['periode_id']."' as periode_id,
 					'".$hasil_user."' as risk_input_by,
-					'".$risk['risk_input_division']."' as risk_input_division,
+					'".$hasil_divisi."' as risk_input_division,
 					risk_owner,
 					risk_division,
 					".$risk['risk_library_id']." as risk_library_id,

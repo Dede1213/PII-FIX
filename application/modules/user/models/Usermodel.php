@@ -28,9 +28,10 @@ class Usermodel extends APP_Model {
 				from m_user a 
 				left join m_role b on a.role_id = b.role_id
 				left join m_division c on a.division_id = c.division_id
+				where a.role_id <> 1
 				) mtable "
 				.$ex_filter
-				.$ex_or;
+				.$ex_or ;
 		$res = $this->getPagingData($sql, $par, $page, $row, 'username', true);
 		return $res;
 	}

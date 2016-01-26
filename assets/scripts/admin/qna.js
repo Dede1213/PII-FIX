@@ -25,6 +25,7 @@ grid.init({
             "url": site_url+"/admin/qna/qnaGetData" // ajax source
         },
         "columns": [
+
            { "data": "qna_code" },
            { "data": "created_by_v" },
            { "data": "created_date_v" },
@@ -32,10 +33,10 @@ grid.init({
            { "data": "qna_status" },
             { 
            	"data": null,
-           	"orderable": false,
-           	"defaultContent": '<div class="btn-group">'+
-           			'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"></i></button>'+
-           		'</div>'
+           	//"orderable": false,
+           	//"defaultContent": '<div class="btn-group">'+
+           	//		'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"></i></button>'+
+           	//	'</div>'
            }
        ],
        "columnDefs": [{
@@ -45,7 +46,22 @@ grid.init({
        		var cls = 'font-green btn-open-question';
        		return '<a class="'+cls+'" href="javascript:;">'+data+'</a>';
        	}
-       } ],
+       },{
+            "targets": 5,
+            "data": null,
+            "render": function ( data, type, full, meta ) {
+                
+                if (full.status == '1') {
+                    return '<div class="btn-group">'+
+                    '<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"></i></button>'+
+                '</div>';
+                }else if (full.status == '0') {
+                    return '---';
+                } else {
+                    return '---';
+                }
+            }
+         } ],
         "order": [
             [1, "asc"]
         ]// set first column as a default sort by asc

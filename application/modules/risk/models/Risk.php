@@ -41,9 +41,9 @@ class Risk extends APP_Model {
 				f.division_name as risk_owner_v,
 				g.division_name as division_v,
 				t_risk_add_user.username,
-				concat(h.cat_code, '-', h.cat_name) as risk_category_v,
-				concat(i.cat_code, '-', i.cat_name) as risk_sub_category_v,
-				concat(j.cat_code, '-', j.cat_name) as risk_2nd_sub_category_v,
+				concat(h.cat_code, '- Category ', h.cat_name) as risk_category_v,
+				concat(i.cat_code, '- Category ', i.cat_name) as risk_sub_category_v,
+				concat(j.cat_code, '- Category ', j.cat_name) as risk_2nd_sub_category_v,
 				k.ref_value as treatment_v,
 				l.display_name as risk_input_by_v,
 				m.division_name as risk_input_division_v,
@@ -88,9 +88,9 @@ class Risk extends APP_Model {
 				f.division_name as risk_owner_v,
 				g.division_name as division_v,
 				t_risk_add_user.username,
-				concat(h.cat_code, '-', h.cat_name) as risk_category_v,
-				concat(i.cat_code, '-', i.cat_name) as risk_sub_category_v,
-				concat(j.cat_code, '-', j.cat_name) as risk_2nd_sub_category_v,
+				concat(h.cat_code, '- Category ', h.cat_name) as risk_category_v,
+				concat(i.cat_code, '- Category ', i.cat_name) as risk_sub_category_v,
+				concat(j.cat_code, '- Category ', j.cat_name) as risk_2nd_sub_category_v,
 				k.ref_value as treatment_v,
 				l.display_name as risk_input_by_v,
 				m.division_name as risk_input_division_v,
@@ -138,9 +138,9 @@ class Risk extends APP_Model {
 				f.division_name as risk_owner_v,
 				g.division_name as division_v,
 				t_risk_add_user.username,
-				concat(h.cat_code, '-', h.cat_name) as risk_category_v,
-				concat(i.cat_code, '-', i.cat_name) as risk_sub_category_v,
-				concat(j.cat_code, '-', j.cat_name) as risk_2nd_sub_category_v,
+				concat(h.cat_code, '- Category ', h.cat_name) as risk_category_v,
+				concat(i.cat_code, '- Category ', i.cat_name) as risk_sub_category_v,
+				concat(j.cat_code, '- Category ', j.cat_name) as risk_2nd_sub_category_v,
 				k.ref_value as treatment_v,
 				l.display_name as risk_input_by_v,
 				m.division_name as risk_input_division_v,
@@ -324,9 +324,9 @@ class Risk extends APP_Model {
 				f.division_name as risk_owner_v,
 				g.division_name as division_v,
 				t_risk_add_user.username,
-				concat(h.cat_code, '-', h.cat_name) as risk_category_v,
-				concat(i.cat_code, '-', i.cat_name) as risk_sub_category_v,
-				concat(j.cat_code, '-', j.cat_name) as risk_2nd_sub_category_v,
+				concat(h.cat_code, '- Category ', h.cat_name) as risk_category_v,
+				concat(i.cat_code, '- Category ', i.cat_name) as risk_sub_category_v,
+				concat(j.cat_code, '- Category ', j.cat_name) as risk_2nd_sub_category_v,
 				k.ref_value as treatment_v,
 				l.display_name as risk_input_by_v,
 				m.division_name as risk_input_division_v,
@@ -426,9 +426,9 @@ class Risk extends APP_Model {
 				f.division_name as risk_owner_v,
 				g.division_name as division_v,
 				t_risk_add_user.username,
-				concat(h.cat_code, '-', h.cat_name) as risk_category_v,
-				concat(i.cat_code, '-', i.cat_name) as risk_sub_category_v,
-				concat(j.cat_code, '-', j.cat_name) as risk_2nd_sub_category_v,
+				concat(h.cat_code, '- Category ', h.cat_name) as risk_category_v,
+				concat(i.cat_code, '- Category ', i.cat_name) as risk_sub_category_v,
+				concat(j.cat_code, '- Category ', j.cat_name) as risk_2nd_sub_category_v,
 				k.ref_value as treatment_v,
 				l.display_name as risk_input_by_v,
 				m.division_name as risk_input_division_v,
@@ -1373,13 +1373,13 @@ class Risk extends APP_Model {
 		
 		$periode = $data['periode_id'];
 		$sql = "insert into t_risk(risk_code,risk_date,risk_status,periode_id,risk_input_by,risk_input_division,risk_owner,risk_division,risk_library_id,risk_event,risk_description,risk_category,risk_sub_category,risk_2nd_sub_category,risk_cause,risk_impact,existing_control_id,risk_existing_control,risk_evaluation_control,risk_control_owner,risk_level,risk_impact_level,risk_likelihood_key,suggested_risk_treatment,risk_treatment_owner,created_by,created_date,switch_flag)
-				select risk_code,NOW(),1,'$periode',risk_input_by,risk_input_division,risk_owner,risk_division,risk_id,risk_event,risk_description,risk_category,risk_sub_category,risk_2nd_sub_category,risk_cause,risk_impact,existing_control_id,risk_existing_control,risk_evaluation_control,risk_control_owner,risk_level,risk_impact_level,risk_likelihood_key,suggested_risk_treatment,risk_treatment_owner,created_by,created_date,switch_flag from t_risk where risk_id='$risk_id'";
+				select risk_code,NOW(),1,'$periode',risk_input_by,risk_input_division,risk_owner,risk_division,risk_id,risk_event,risk_description,risk_category,risk_sub_category,risk_2nd_sub_category,risk_cause,risk_impact,existing_control_id,risk_existing_control,risk_evaluation_control,risk_control_owner,risk_level,risk_impact_level,risk_likelihood_key,suggested_risk_treatment,risk_treatment_owner,created_by,created_date,'$uid' from t_risk where risk_id='$risk_id'";
 		
 		$sql2 = "insert into t_risk_control(risk_id,existing_control_id,risk_existing_control,risk_evaluation_control,risk_control_owner,switch_flag)
-				select a.risk_id,b.existing_control_id,b.risk_existing_control,b.risk_evaluation_control,b.risk_control_owner,b.switch_flag from t_risk a,t_risk_control b where a.risk_input_by='$uid' and a.periode_id='$periode' and a.risk_library_id='$risk_id' and b.risk_id='$risk_id' ";
+				select a.risk_id,b.existing_control_id,b.risk_existing_control,b.risk_evaluation_control,b.risk_control_owner,'$uid' from t_risk a,t_risk_control b where a.risk_input_by='$uid' and a.periode_id='$periode' and a.risk_library_id='$risk_id' and b.risk_id='$risk_id' ";
 		
-		$sql3 = "insert into t_risk_action_plan(risk_id,action_plan_status,action_plan,due_date,division)
-				select a.risk_id,b.action_plan_status,b.action_plan,b.due_date,b.division from t_risk a,t_risk_action_plan b where a.risk_input_by='$uid' and a.periode_id='$periode' and a.risk_library_id='$risk_id' and b.risk_id='$risk_id' ";
+		$sql3 = "insert into t_risk_action_plan(risk_id,action_plan_status,action_plan,due_date,division,switch_flag)
+				select a.risk_id,b.action_plan_status,b.action_plan,b.due_date,b.division,'$uid' from t_risk a,t_risk_action_plan b where a.risk_input_by='$uid' and a.periode_id='$periode' and a.risk_library_id='$risk_id' and b.risk_id='$risk_id' ";
 		
 		$sql4 = "insert into t_risk_impact(risk_id,impact_id,impact_level,switch_flag)
 				select a.risk_id,b.impact_id,b.impact_level,b.switch_flag from t_risk a,t_risk_impact b where a.risk_input_by='$uid' and a.periode_id='$periode' and a.risk_library_id='$risk_id' and b.risk_id='$risk_id' ";
@@ -1390,13 +1390,13 @@ class Risk extends APP_Model {
 				select risk_id,risk_code,NOW(),1,'$periode',risk_input_by,risk_input_division,risk_owner,risk_division,risk_id,risk_event,risk_description,risk_category,risk_sub_category,risk_2nd_sub_category,risk_cause,risk_impact,existing_control_id,risk_existing_control,risk_evaluation_control,risk_control_owner,risk_level,risk_impact_level,risk_likelihood_key,suggested_risk_treatment,risk_treatment_owner,created_by,created_date,switch_flag from t_risk where risk_input_by='$uid' and periode_id='$periode' ";
 		
 		$sql6 = "insert into t_risk_control_change(risk_id,existing_control_id,risk_existing_control,risk_evaluation_control,risk_control_owner,switch_flag)
-				select a.risk_id,b.existing_control_id,b.risk_existing_control,b.risk_evaluation_control,b.risk_control_owner,b.switch_flag from t_risk a,t_risk_control b where a.risk_input_by='$uid' and a.periode_id='$periode' and a.risk_library_id='$risk_id' and b.risk_id='$risk_id' ";
+				select a.risk_id,b.existing_control_id,b.risk_existing_control,b.risk_evaluation_control,b.risk_control_owner,'$uid' from t_risk a,t_risk_control b where a.risk_input_by='$uid' and a.periode_id='$periode' and a.risk_library_id='$risk_id' and b.risk_id='$risk_id' ";
 		
-		$sql7 = "insert into t_risk_action_plan_change(id,risk_id,action_plan_status,action_plan,due_date,division)
-				select b.id,a.risk_id,b.action_plan_status,b.action_plan,b.due_date,b.division from t_risk a,t_risk_action_plan b where a.risk_input_by='$uid' and a.periode_id='$periode' and a.risk_library_id='$risk_id' and b.risk_id='$risk_id' ";
+		$sql7 = "insert into t_risk_action_plan_change(id,risk_id,action_plan_status,action_plan,due_date,division,switch_flag)
+				select b.id,a.risk_id,b.action_plan_status,b.action_plan,b.due_date,b.division,'$uid' from t_risk a,t_risk_action_plan b where a.risk_input_by='$uid' and a.periode_id='$periode' and a.risk_library_id='$risk_id' and b.risk_id='$risk_id' ";
 		
 		$sql8 = "insert into t_risk_impact_change(risk_id,impact_id,impact_level,switch_flag)
-				select a.risk_id,b.impact_id,b.impact_level,b.switch_flag from t_risk a,t_risk_impact b where a.risk_input_by='$uid' and a.periode_id='$periode' and a.risk_library_id='$risk_id' and b.risk_id='$risk_id' ";
+				select a.risk_id,b.impact_id,b.impact_level,'$uid' from t_risk a,t_risk_impact b where a.risk_input_by='$uid' and a.periode_id='$periode' and a.risk_library_id='$risk_id' and b.risk_id='$risk_id' ";
 	
 		// LOG HISTORY
 		//$sql = "insert into t_risk (risk_status, periode_id, created_by, created_date) values(1, ?, ?, NOW() )";

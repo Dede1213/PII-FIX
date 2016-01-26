@@ -117,25 +117,30 @@
 		<?php
 			error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
 			$status = $_GET['status'];
+			$this->load->database();
+			$sql = "select cr_status from t_cr_risk where created_by = '$filled_by_id' ";
+			$query = $this->db->query($sql);
+			$hasil = $query->row();
+			$user = $hasil->cr_status;
 			if ($status=='change'){
-				?>
-			
-	
-		
+				
+		if ($user != 1){
+		?>
 
 		<a href="javascript: ;" id="button-change-ignore" class="btn default red pull-right" style="margin-right: 10px;">
 					<i class="fa  fa-circle-o"></i>
 					<span class="hidden-480">
 					Ignore </span>
 					</a>
+
 		<a href="javascript: ;" id="button-change-verify" class="btn default green pull-right" style="margin-right: 10px;">
 					<i class="fa  fa-circle-o"></i>
 					<span class="hidden-480">
 					Verify </span>
 					</a>
-
-					<?php } ?>
-	
+		<?php }
+				}
+			?>
 				</div>
 				</div>
 

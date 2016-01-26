@@ -636,8 +636,8 @@ class Risk extends APP_Model {
 			}
 			
 			$sql = "select a.* from t_risk_control a
-					join t_risk b on a.risk_id = b.risk_id and b.risk_status > 2 
-					".$ext;
+					join t_risk b on a.risk_id = b.risk_id and b.risk_status >= 0  
+					".$ext." GROUP BY a.risk_existing_control";
 		}
 		
 		if ($mode == 'allRiskByOwner') {
@@ -1611,11 +1611,11 @@ class Risk extends APP_Model {
 		
 		$sql2 = "update t_risk set risk_status = 0 where periode_id='$periode_id' and risk_input_by='$uid' ";
 
-		//$sql3 = "update t_risk_change set risk_status = 0 where periode_id='$periode_id' and risk_input_by='$uid' ";
+		$sql3 = "update t_risk_change set risk_status = 0 where periode_id='$periode_id' and risk_input_by='$uid' ";
 		
 		$res = $this->db->query($sql);
 		$res2 = $this->db->query($sql2);
-		//$res3 = $this->db->query($sql3);
+		$res3 = $this->db->query($sql3);
 		
 		//return $res3;
 		return $res2;

@@ -3,7 +3,7 @@
 	<div class="page-content">
 		<!-- BEGIN PAGE HEADER-->
 		<h3 class="page-title">
-		Risk Form
+		Risk FormF
 		</h3>
 
 
@@ -1109,7 +1109,7 @@ WHERE t_risk.risk_id ='$id'";
 				<div class="form-group">
 					<label class="col-md-3 control-label">Submitted By</label>
 					<div class="col-md-9">
-					<input type = "text" name = "username" value = "<?=$library_risk['risk_input_by']?>" id = "username" class = "form-control" >
+					<input type = "text" name = "username" value = "<?=$user?>" id = "username" class = "form-control" >
 					<!--<select class="form-control input-sm" name="username">
 						<option value="<?=$library_risk['risk_input_by']?>"><?=$library_risk['risk_input_by_v']?></option>
 					</select>-->

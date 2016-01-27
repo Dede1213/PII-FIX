@@ -36,7 +36,8 @@
 								<input type="hidden" name="risk_id" value=""/>
 								<label class="col-md-3 control-label smaller cl-compact" >Risk Code</label>
 								<div class="col-md-9">
-								<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_code" placeholder="">
+								<input type="text" class="form-control input-sm" readonly="true" name="risk_code" readonly="true" placeholder="">
+							
 								</div>
 							</div>
 							<div class="form-group">
@@ -68,21 +69,22 @@
 								</div>
 							<?php } ?>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Impact Level</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Impact Level <span class="required">* </span></label>
 								<div class="col-md-9">
-									<input type="text" class="form-control input-sm input-readview" readonly="true" name="impact_level_v" placeholder="">
+									<input type="text" class="form-control input-sm" readonly="true" readonly="true" name="impact_level_v" placeholder="">
+									
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Likelihood</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Likelihood <span class="required">* </span></label>
 								<div class="col-md-9">
-									<input type="text" class="form-control input-sm input-readview" readonly="true" name="likelihood_v" placeholder="">
+								<input type="text" class="form-control input-sm" readonly="true" name="likelihood_v"  placeholder="">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Risk Level</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Risk Level <span class="required">* </span></label>
 								<div class="col-md-9">
-									<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_level_v" placeholder="">
+									<input type="text" class="form-control input-sm" readonly="true" name="risk_level_v" placeholder="">
 								</div>
 							</div>
 							<div class="form-group">
@@ -146,6 +148,7 @@
 								<input type="hidden" name="risk_id" value=""/>
 								<label class="col-md-3 control-label smaller cl-compact" >Risk Code</label>
 								<div class="col-md-9">
+
 								<input type="text" class="form-control input-sm" readonly="true" name="risk_code" placeholder="">
 								</div>
 							</div>

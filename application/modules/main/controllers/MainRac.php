@@ -1977,7 +1977,7 @@ class MainRac extends APP_Controller {
 		echo json_encode($data);
 	}
 	
-	public function actionPlanExecForm($rid=false) 
+	public function actionPlanExecForm($rid=false,$view=null) 
 	{
 		if ($rid && is_numeric($rid)) {
 			$data = $this->loadDefaultAppConfig();
@@ -2019,7 +2019,8 @@ class MainRac extends APP_Controller {
 					$risk['revised_date_v'] = implode('-', array_reverse( explode('-', $risk['revised_date']) ));
 				}
 				$data['valid_mode'] = true;
-				$data['action_plan'] = $risk;				
+				$data['action_plan'] = $risk;
+				$data['view'] = $view;				
 			}
 						
 			$this->load->view('main/header', $data);

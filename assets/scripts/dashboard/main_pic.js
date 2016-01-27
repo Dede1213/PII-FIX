@@ -720,7 +720,7 @@ var Dashboard = function() {
         		
         		var url = site_url+'/main/mainpic/execSubmit';
         		
-        		var mod = MainApp.viewGlobalModal('confirm', 'Are You sure you want to Submit this Action Plan Execution ?');
+        		var mod = MainApp.viewGlobalModal('confirm', 'Are You sure you want to Submit this Action Plan Execution?');
         		mod.find('button.btn-primary').off('click');
         		mod.find('button.btn-primary').one('click', function(){
         			mod.modal('hide');
@@ -1199,7 +1199,7 @@ var Actionplan_adt = function() {
         		e.preventDefault();
         		
         		var r = this.parentNode.parentNode.parentNode;
-        		var data = grid_exec.getDataTable().row(r).data();
+        		var data = grid_exec_adt.getDataTable().row(r).data();
         		
         		var url = site_url+'/main/mainpic/execSubmit';
         		
@@ -1215,7 +1215,7 @@ var Actionplan_adt = function() {
         				function( data ) {
         					Metronic.unblockUI();
         					if(data.success) {
-        						grid_exec.getDataTable().ajax.reload();
+        						grid_exec_adt.getDataTable().ajax.reload();
         						
         						MainApp.viewGlobalModal('success', 'Success Updating Action Plan Execution');
         					} else {
@@ -1272,7 +1272,8 @@ var Actionplan_adt = function() {
 	        					if(data.success) {
 	        						grid_exec.getDataTable().ajax.reload();
 	        						
-	        						MainApp.viewGlobalModal('success', 'Success Updating Action Plan Execution');
+	        						//MainApp.viewGlobalModal('success', 'Success Updating Action Plan Execution');
+                                    location.href=site_url+'/main/mainpic/actionplan_adt';
 	        					} else {
 	        						MainApp.viewGlobalModal('error', data.msg);
 	        					}

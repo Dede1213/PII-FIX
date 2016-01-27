@@ -23,6 +23,8 @@
 			var g_risk_id = <?=$risk['id']?>;
 			var g_username = null;
 		</script>
+
+
 		<div class="row">
 		<!-- CHANGES FORM -->
 		<div class="col-md-12 form">
@@ -109,6 +111,10 @@
 						</div>
 					</div>	
 				</div>
+
+			
+	<?php if($view != 'view'){?>
+
 				<div class="form-actions right">
 				<?php
 	error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
@@ -121,6 +127,7 @@
 <?php } ?>
 					<button type="button" class="btn yellow" id="exec-button-cancel"><i class="fa fa-times"></i> Cancel</button>
 				</div>
+	<?php } ?>
 			</form>
 		</div>
 		

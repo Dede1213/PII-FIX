@@ -28,7 +28,7 @@ class Role extends APP_Model {
 	{
 		$sql = "select 
 				*
-				from m_role order by role_name ";
+				from m_role where role_id !=1 order by role_name ";
 		$query = $this->db->query($sql);
 		
 		$res = array();

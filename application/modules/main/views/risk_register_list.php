@@ -118,7 +118,7 @@
 			error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
 			$status = $_GET['status'];
 			$this->load->database();
-			$sql = "select cr_status from t_cr_risk where created_by = '$filled_by_id' ";
+			$sql = "select cr_status from t_cr_risk where created_by = '$filled_by_id' order by id desc limit 1 ";
 			$query = $this->db->query($sql);
 			$hasil = $query->row();
 			$user = $hasil->cr_status;

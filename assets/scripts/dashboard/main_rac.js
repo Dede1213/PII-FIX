@@ -397,8 +397,10 @@ gridActionExec_adt.init({
         	 
 				if(data == null){
 					return '';
-				}else{					 
-					return '<a target="_self" href="'+site_url+'/main/mainrac/actionPlanExecForm/'+full.id+'">'+data+'</a>';
+				}else if(full.action_plan_status == 6 ){                   
+                   return '<a target="_self" href="'+site_url+'/main/mainrac/actionPlanExecForm/'+full.id+'">'+data+'</a>';
+                }else{					 
+					return '<a target="_self" href="'+site_url+'/main/mainrac/actionPlanExecForm/'+full.id+'/view">'+data+'</a>';
 				}
         	}
         } ],

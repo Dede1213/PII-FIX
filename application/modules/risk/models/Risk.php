@@ -3604,7 +3604,7 @@ class Risk extends APP_Model {
 	public function execOngoing($action_id, $risk, $uid) 
 	{
 		$par = array(
-			'stat' => 7,
+			'stat' => 4,
 			'es' => 'ONGOING',
 			'eexplain' => $risk['execution_explain'],
 			'eevi' => $risk['execution_evidence'],

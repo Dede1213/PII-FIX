@@ -140,6 +140,54 @@ gridControl.init({
     }
 });
 
+var gridControlExisting = new Datatable();
+gridControlExisting.init({
+    src: $("#library_control_table_existing"),
+    onSuccess: function (grid) {
+        // execute some code after table records loaded
+    },
+    onError: function (grid) {
+        // execute some code on network or other general error  
+    },
+    onDataLoad: function(grid) {
+        // execute some code on ajax data load
+    },
+    loadingMessage: 'Loading...',
+    dataTable: { // here you can define a typical datatable settings from http://datatables.net/usage/options 
+
+        // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
+        // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/scripts/datatable.js). 
+        // So when dropdowns used the scrollable div should be removed. 
+        //"dom": "<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r>t<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'>>",
+        
+        //"scrollX": true,
+        "pageLength": 10, // default record count per page
+        "lengthMenu": [[10], [10]],
+        "ajax": {
+            "url": site_url+"/risk/RiskRegister/getControlLibraryexisting" // ajax source
+        },
+        "columnDefs": [ {
+            "targets": 0,
+            "data": "id",
+            "render": function ( data, type, full, meta ) {
+                var ret = '<div class="btn-group">'+
+                '<button type="button" class="btn btn-default btn-xs" onclick="javascript: RiskInput.selectControlLibraryexisting('+full.id +')"><i class="fa fa-check-circle font-blue"></i></button>'+
+                '</div>';
+                return ret;
+            }
+        } ],
+        "columns": [
+            { "data": "id", "orderable": false },
+            { "data": "existing_control"},
+            { "data": "description" }
+          
+       ],
+        "order": [
+            [2, "asc"]
+        ]// set first column as a default sort by asc
+    }
+});
+
 var handleValidation = function() {
 	// for more info visit the official plugin documentation: 
 	// http://docs.jquery.com/Plugins/Validation
@@ -402,7 +450,7 @@ var RiskInput = function() {
 				 
         		if (fvalid) {
         			var xcid = $('#input-form-control input[name=existing_control_id]').val();
-	        		var xexis = $('#input-form-control textarea[name=risk_existing_control]').val();
+	        		var xexis = $('#input-form-control input[name=risk_existing_control]').val();
 	        		var xeval = $('#input-form-control input[name=risk_evaluation_control]').val();
 	        		var xowner = $('#input-form-control select[name=risk_control_owner]').val();
 					
@@ -806,6 +854,20 @@ var RiskInput = function() {
         		
         		me.populateRisk($('#input-form-control'), data_risk);
         	});
+        },
+        selectControlLibraryexisting: function(rid) {
+            var me = this;
+            $('#input-form-control input[name=risk_existing_control]').attr('readonly', true);
+            
+            $('#modal-control-existing').modal('hide');
+            Metronic.blockUI({ boxed: true });
+            $.getJSON( site_url+"/risk/RiskRegister/loadControlLibraryexisting/"+rid, function( data_risk ) {
+                Metronic.unblockUI();
+                
+                data_risk['risk_existing_control'] = data_risk['existing_control'];
+                
+                me.populateRisk($('#input-form-control'), data_risk);
+            });
         },
 		 selectLibraryaction: function(rid) {
         	var me = this;

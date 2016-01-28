@@ -729,12 +729,52 @@ class RiskRegister extends APP_Controller {
 		$data['page'] = $page;
 		echo json_encode($data);
 	}
+
+	public function getControlLibraryexisting() 
+	{
+		$order_by = $order = $filter_by = $filter_value = null;
+				
+		if (isset($_POST['order'][0]['column'])) {
+			$order_idx = $_POST['order'][0]['column'];
+			$order_by = $_POST['columns'][$order_idx]['data'];
+			$order = $_POST['order'][0]['dir'];
+		}
+		
+		if (isset($_POST['filter_by']) && isset($_POST['filter_value']) && $_POST['filter_value'] != '' ) {
+			$filter_by = $_POST['filter_by'];
+			$filter_value = $_POST['filter_value'];
+		}
+		
+		$page = ceil($_POST['start'] / $_POST['length'])+1;
+
+		$row = $_POST['length'];
+		$this->load->model('risk/risk');
+		$defFilter = array();
+		if (isset($_POST['filter_library']) && trim($_POST['filter_library']) != '') {
+			$defFilter['filter_library'] = trim($_POST['filter_library']);
+		}
+		
+		$data = $this->risk->getDataMode('allControlLibraryExisting', $defFilter, $page, $row, $order_by, $order, $filter_by, $filter_value);
+		
+		$data['draw'] = $_POST['draw']*1;
+		$data['page'] = $page;
+		echo json_encode($data);
+	}
 	
 	public function loadControlLibrary($rid) 
 	{
 		if (!empty($rid) && is_numeric($rid)) {
 			$this->load->model('risk/risk');
 			$data = $this->risk->getControlById($rid);
+			echo json_encode($data);
+		}
+	}
+
+	public function loadControlLibraryexisting($rid) 
+	{
+		if (!empty($rid) && is_numeric($rid)) {
+			$this->load->model('risk/risk');
+			$data = $this->risk->getControlById2($rid);
 			echo json_encode($data);
 		}
 	}

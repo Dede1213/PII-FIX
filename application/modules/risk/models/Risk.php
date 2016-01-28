@@ -185,6 +185,18 @@ class Risk extends APP_Model {
 		
 		return $row;
 	}
+
+	public function getControlById2($risk_id) 
+	{
+		$sql = "select 
+				a.existing_control
+				from m_risk_existing_control a
+				where a.risk_id = ? ";
+		$query = $this->db->query($sql, array('divid' => $risk_id));
+		$row = $query->row_array();
+		
+		return $row;
+	}
 	
 	public function getActionById($risk_id) 
 	{
@@ -639,6 +651,26 @@ class Risk extends APP_Model {
 					join t_risk b on a.risk_id = b.risk_id and b.risk_status >= 0  
 					".$ext." GROUP BY a.risk_existing_control";
 		}
+
+		if ($mode == 'allControlLibraryExisting') {
+			$ext = '';
+			if (isset($defFilter['filter_library'])) {
+				$ext = ' where (UPPER(a.existing_control) like ? or UPPER(a.description) like ? ) ';
+				$rpar = array(
+					'x1' => '%'.strtoupper($defFilter['filter_library']).'%',
+					'x2' => '%'.strtoupper($defFilter['filter_library']).'%',
+				);
+		
+				if ($par)	{ 
+					$rpar['p1'] = $par['p1'];
+				}
+				$par = $rpar;
+			}
+			
+			$sql = "select a.* from m_risk_existing_control a
+					".$ext." GROUP BY a.existing_control";
+		}
+
 		
 		if ($mode == 'allRiskByOwner') {
 			

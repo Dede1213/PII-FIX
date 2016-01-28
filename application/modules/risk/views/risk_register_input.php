@@ -3,7 +3,7 @@
 	<div class="page-content">
 		<!-- BEGIN PAGE HEADER-->
 		<h3 class="page-title">
-		Risk Form 
+		Risk Form
 		</h3>
 	
 		<div class="page-bar">
@@ -214,6 +214,35 @@
 							</div>
 							<div class="clearfix">
 							</div>
+							<!--   OBJECTIVE -->
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h3 class="panel-title">Objective</h3>
+								</div>
+								<div class="panel-body">
+									 <div class="clearfix">
+									 	<a href="#form-control" id="button-form-control-open" data-toggle="modal" class="btn default green pull-right btn-sm">
+									 	<i class="fa fa-plus"></i>
+									 	<span class="hidden-480">
+									 	Add Control </span>
+									 	</a>
+									 </div>
+									 
+									 <div class="table-scrollable">
+									 	<table id="objective_table" class="table table-condensed table-bordered table-hover">
+									 		<thead>
+									 		<tr role="row" class="heading">
+									 			<th width="15%">Obj.ID</th>
+									 			<th>Objective</th>
+									 			<th width="30px">&nbsp;</th>
+									 		</tr>
+									 		</thead>
+									 		<tbody>
+									 		</tbody>
+									 	</table>
+									 </div>
+								</div>
+							</div>
 							
 							<div class="panel panel-default">
 								<div class="panel-heading">
@@ -364,13 +393,29 @@
 							</div>
 						</div>
 					</div>
+					<!--
 					<div class="form-group">
 						<label class="col-md-3 control-label smaller cl-compact" >Existing Control <span class="required">* </span></label>
 						<div class="col-md-9">
-						<textarea class="form-control input-sm " rows="3" name="risk_existing_control" id = "risk_existing_control" placeholder="">NONE</textarea>
+						<textarea class="form-control input-sm " rows="3" readonly="true" name="risk_existing_control" id = "risk_existing_control" placeholder=""></textarea>
 						<button id="button_clear_control" type="button" class="hide btn red btn-xs" style="margin-top: 5px;"><i class="fa fa-minus-circle font-white"></i> Clear Existing Control</button>
 						</div>
 					</div>
+					-->
+					<div class="form-group">
+					<input type = "hidden" id = "form-control-revid">
+						<label class="col-md-3 control-label smaller cl-compact">Existing Control <span class="required">* </span></label>
+						<div class="col-md-9">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" readonly="true" name="risk_existing_control" id = "risk_existing_control" placeholder="" value="NONE">
+								<span class="input-group-btn">
+								<button class="btn btn-primary btn-sm" type="button" data-toggle="modal" href="#modal-control-existing"><i class="fa fa-search fa-fw"/></i></button>
+								</span>
+								
+							</div>
+						</div>
+					</div>
+
 					<div class="form-group">
 						<label class="col-md-3 control-label smaller cl-compact" >Evaluation on Existing Control <span class="required">* </span></label>
 						<div class="col-md-9">
@@ -526,6 +571,41 @@
 	</div>
 </div>
 
+
+
+
+<!-- Existing CONTROL -->
+<div id="modal-control-existing" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+		<h4 class="modal-title">Existing Control</h4>
+		<p style="color:red;">*Choose One</p>
+		<div class="inputs">
+			<div class="portlet-input input-inline">
+				<div class="input-group">
+					<input type="text" class="form-control" name="filter_search" placeholder="search...">
+					<span class="input-group-btn">
+					<button class="btn btn-default" type="button" id="modal-control-filter-submit">Search</button>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-body">
+		<div>
+			<table id="library_control_table_existing" class="table table-condensed table-bordered table-hover">
+				<thead>
+				<tr role="row" class="heading">
+					<th width="30px">&nbsp;</th>
+					<th>Existing Control</th>
+					<th>Description</th>
+				</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+	</div>
+</div>
 <!-- CONTROL -->
 <div id="modal-control" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
 	<div class="modal-header">

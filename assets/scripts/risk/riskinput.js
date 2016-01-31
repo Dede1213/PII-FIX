@@ -535,13 +535,19 @@ var RiskInput = function() {
         		}
         	});
         	
-        	$('#button-form-control-open').on('click', function () {
-        		$('#input-form-control')[0].reset();
+        	$('#button-form-control-open-control').on('click', function () {
+        		//$('#input-form-control')[0].reset();
+				 
+				document.getElementById("input-form-control").reset();
+				 
         		$('#input-form-control textarea[name=risk_existing_control]').attr('readonly', false);
         	});
         	
         	$('#button-form-data-open').on('click', function () {
-        		$('#input-form-action-plan')[0].reset();
+				
+        		//$('#input-form-action-plan').reset();
+				document.getElementById("input-form-action-plan").reset();
+				$('#form-data-revid').val('');
         	});
         	
         	$('#risk-button-submit').on('click', function() {
@@ -715,11 +721,11 @@ var RiskInput = function() {
 			var lastidrand = $('#form-data-revid').val();
 			
 			var tr_id2 = $('#tr_idnya2').val();
-					
+			 
 			//$("#tr_z"+tr_id2).html("");
-			$("#tr_z"+tr_id2).remove();
+			$("#tr_z"+tr_id2).remove(); 
 			
-			$('#'+lastidrand).html('');
+			$('#tr_z'+lastidrand).html('');
 			
 			var idrand = Math.floor((Math.random() * 1000000) + 1); 
         	
@@ -1013,14 +1019,19 @@ $('#form-control').modal('show');
 }
 
 function modal_ap_edit(a){
-$('#tr_idnya2').val(a);
+	
+//$('#form-data-revid').val(a);
 $('#action_plan').val($('#action_plan'+a).val());
 $('#due_date').val($('#due_date'+a).val());
 $('#form-data-revid').val(a);
 
-var a = $('#division_v'+a).val();
+var b = $('#division_v'+a).val();
+ 
+if(b == "Information Technology & Network Support"){
+	var b = "IT";
+}
 
-$('#division').val(a);
+$('#division').val(b);
 
 
 $('#form-data').modal('show'); 

@@ -356,12 +356,13 @@
 	<div class="modal-body">
 		
 			<form id="input-form-control" role="form" class="form-horizontal">
+			<input type = "hidden" id = "tr_idnya">
 				<div class="form-body">
 					<div class="form-group">
 						<label class="col-md-3 control-label smaller cl-compact">Existing Control ID</label>
 						<div class="col-md-9">
 							<div class="input-group">
-								<input type="text" class="form-control input-sm" readonly="true" name="existing_control_id" placeholder="">
+								<input type="text" class="form-control input-sm" readonly="true" name="existing_control_id" id = "existing_control_id" placeholder="">
 								<span class="input-group-btn">
 								<button class="btn btn-primary btn-sm" type="button" data-toggle="modal" href="#modal-control"><i class="fa fa-search fa-fw"/></i></button>
 								</span>
@@ -394,13 +395,13 @@
 					<div class="form-group">
 						<label class="col-md-3 control-label smaller cl-compact" >Evaluation on Existing Control <span class="required">* </span></label>
 						<div class="col-md-9">
-						<input type="text" class="form-control input-sm" name="risk_evaluation_control" placeholder="" value="NONE">
+						<input type="text" class="form-control input-sm" name="risk_evaluation_control" id = "risk_evaluation_control" placeholder="" value="NONE">
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-md-3 control-label smaller cl-compact" >Control Owner <span class="required">* </span></label>
 						<div class="col-md-9">
-						<input type="text" class="form-control input-sm" name="risk_control_owner" placeholder="" value="NONE">
+						<input type="text" class="form-control input-sm" name="risk_control_owner" id = "risk_control_owner" placeholder="" value="NONE">
 						</div>
 					</div>
 				</div>

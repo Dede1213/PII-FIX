@@ -457,8 +457,7 @@ var RiskInput = function() {
 					var tr_id = $('#tr_idnya').val();
 					
 					$("#"+tr_id).html("");
-					$('#3').remove();
-	        		
+					 
 	        		var nnode = {
 						'tr_id' : tr_id,
 	        			'existing_control_id' : xcid,

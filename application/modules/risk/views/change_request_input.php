@@ -350,9 +350,10 @@
 	<div class="modal-body">
 		
 			<form id="input-form-control" role="form" class="form-horizontal">
+			<input type = "hidden" id = "tr_idnya" >
 				<div class="form-body">
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact">Existing Control ID</label>
+						<label class="col-md-3 control-label smaller cl-compact">Existings Control ID</label>
 						<div class="col-md-9">
 							<div class="input-group">
 								<input type="text" class="form-control input-sm" readonly="true" name="existing_control_id" placeholder="">
@@ -504,7 +505,7 @@
 <div id="modal-control-existing" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Existing Control</h4>
+		<h4 class="modal-title">Existing Controls</h4>
 		<p style="color:red;">*Choose One</p>
 		<div class="inputs">
 			<div class="portlet-input input-inline">

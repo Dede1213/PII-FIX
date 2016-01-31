@@ -379,7 +379,11 @@ var ChangeRequest = function() {
 	        		var xexis = $('#input-form-control input[name=risk_existing_control]').val();
 	        		var xeval = $('#input-form-control input[name=risk_evaluation_control]').val();
 	        		var xowner = $('#input-form-control select[name=risk_control_owner]').val();
-	        		
+					
+					var tr_id = $('#tr_idnya').val();
+					
+					$("#"+tr_id).html("");
+					 
 	        		var nnode = {
 	        			'existing_control_id' : xcid,
 	        			'risk_existing_control' : xexis,
@@ -796,18 +800,21 @@ var ChangeRequest = function() {
 			if (g_change_type == "Risk Form") {
 				control_str = '<td>'+
 				'<div class="btn-group">'+
+					'<button type="button" class="btn btn-default btn-xs" onclick = "modal_control_edit('+me.dataControlCounter+')" ><i class="fa fa-pencil font-blue"></i></button>'+
 					'<button type="button" class="btn btn-default btn-xs" onclick="ChangeRequest.controlTableDelete(this, '+me.dataControlCounter+')"><i class="fa fa-trash-o font-red"></i></button>'+
-				'</div>'+
+				 '</div>'+
 				'</td>';
 			}
 			
-        	$('#control_table > tbody:last-child').append('<tr>'+
-        		'<td>'+nnode.existing_control_id+'</td>'+
-        		'<td>'+nnode.risk_existing_control+'</td>'+
-        		'<td>'+nnode.risk_evaluation_control+'</td>'+
-        		'<td>'+nnode.risk_control_owner+'</td>'+
+        	$('#control_table > tbody:last-child').append('<tr id = '+me.dataControlCounter+'>'+
+        		'<td><input type = "hidden" id = "existing_control_id'+me.dataControlCounter+'" value = "'+nnode.existing_control_id+'">'+nnode.existing_control_id+'</td>'+
+        		'<td><input type = "hidden" id = "risk_existing_control'+me.dataControlCounter+'" value = "'+nnode.risk_existing_control+'">'+nnode.risk_existing_control+'</td>'+
+        		'<td><input type = "hidden" id = "risk_evaluation_control'+me.dataControlCounter+'" value = "'+nnode.risk_evaluation_control+'">'+nnode.risk_evaluation_control+'</td>'+
+        		'<td><input type = "hidden" id = "risk_control_owner'+me.dataControlCounter+'" value = "'+nnode.risk_control_owner+'">'+nnode.risk_control_owner+'</td>'+
         		control_str+
         	'</tr>');
+			
+			
         	me.controlAdd(nnode, me.dataControlCounter);
         },
         actionPlanTableDelete: function(xrow, dataId) {
@@ -1055,3 +1062,15 @@ var ChangeRequest = function() {
         }
 	 }
 }();
+
+function modal_control_edit(a){
+	 
+$('#tr_idnya').val(a); 
+$('#existing_control_id').val($('#existing_control_id'+a).val());
+$('#risk_existing_control').val($('#risk_existing_control'+a).val());
+$('#risk_evaluation_control').val($('#risk_evaluation_control'+a).val());
+$('#risk_control_owner').select($('#risk_control_owner'+a).val());
+$('#form-control-revid').val(a);
+
+$('#form-control').modal('show'); 
+}

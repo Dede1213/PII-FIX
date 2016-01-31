@@ -194,6 +194,10 @@ var RiskVerify = function() {
 	        		var xeval = $('#input-form-control input[name=risk_evaluation_control]').val();
 	        		var xowner = $('#input-form-control select[name=risk_control_owner]').val();
 	        		
+					var tr_id = $('#tr_idnya').val();
+					
+					$("#"+tr_id).html("");
+					
 	        		var nnode = {
 	        			'existing_control_id' : xcid,
 	        			'risk_existing_control' : xexis,
@@ -210,12 +214,17 @@ var RiskVerify = function() {
 	    	$('#input-actionplan-add').on('click', function() {
 	    		var form1 = $('#input-form-action-plan').validate();
 	    		var fvalid = form1.form();
-	    		
+				 
 	    		if (fvalid) {
 	    			var xplan = $('#input-form-action-plan input[name=action_plan]').val();
 	    			var xdate = $('#input-form-action-plan input[name=due_date]').val();
 	    			var xdiv_view = $('#input-form-action-plan select[name=division] option:selected').text();
 	    			var xdiv_id = $('#input-form-action-plan select[name=division] option:selected').val();
+					
+					var tr_zid = $('#tr_idnya_ap').val();
+					 
+					$("#tr_z"+tr_zid).html("");
+					
 	    			var nnode = {
 	    				'action_plan' : xplan,
 	    				'due_date' : xdate,
@@ -268,7 +277,9 @@ var RiskVerify = function() {
 	    	});
 	    	
 	    	$('#button-form-control-open').on('click', function () {
-	    		$('#input-form-control')[0].reset();
+	    		//$('#input-form-control')[0].reset();
+				document.getElementById("input-form-control").reset();
+				
 	    		$('#input-form-control textarea[name=risk_existing_control]').attr('readonly', false);
 	    	});
 	    	
@@ -513,13 +524,14 @@ var RiskVerify = function() {
         	
         	me.dataControlCounter++;
 
-        	$('#control_table > tbody:last-child').append('<tr>'+
-        		'<td>'+nnode.existing_control_id+'</td>'+
-        		'<td>'+nnode.risk_existing_control+'</td>'+
-        		'<td>'+nnode.risk_evaluation_control+'</td>'+
-        		'<td>'+nnode.risk_control_owner+'</td>'+
+        	$('#control_table > tbody:last-child').append('<tr id = '+me.dataControlCounter+'>'+
+        		'<td><input type = "hidden" id = "existing_control_id'+me.dataControlCounter+'" value = "'+nnode.existing_control_id+'">'+nnode.existing_control_id+'</td>'+
+        		'<td><input type = "hidden" id = "risk_existing_control'+me.dataControlCounter+'" value = "'+nnode.risk_existing_control+'">'+nnode.risk_existing_control+'</td>'+
+        		'<td><input type = "hidden" id = "risk_evaluation_control'+me.dataControlCounter+'" value = "'+nnode.risk_evaluation_control+'">'+nnode.risk_evaluation_control+'</td>'+
+        		'<td><input type = "hidden" id = "risk_control_owner'+me.dataControlCounter+'" value = "'+nnode.risk_control_owner+'">'+nnode.risk_control_owner+'</td>'+
         		'<td>'+
         		'<div class="btn-group">'+
+					'<button type="button" class="btn btn-default btn-xs" onclick = "modal_control_edit('+me.dataControlCounter+')" ><i class="fa fa-pencil font-blue"></i></button>'+
         			'<button type="button" class="btn btn-default btn-xs" onclick="RiskVerify.controlTableDelete(this, '+me.dataControlCounter+')"><i class="fa fa-trash-o font-red"></i></button>'+
         		'</div>'+
         		'</td>'+
@@ -547,13 +559,14 @@ var RiskVerify = function() {
         	
         	me.dataActionPlanCounter++;
         	
-        	$('#action_plan_table > tbody:last-child').append('<tr>'+
-        		'<td>'+nnode.action_plan+'</td>'+
-        		'<td>'+nnode.due_date+'</td>'+
-        		'<td>'+nnode.division_v+'</td>'+
+        	$('#action_plan_table > tbody:last-child').append('<tr id = "tr_z'+me.dataActionPlanCounter+'">'+
+        		'<td><input type = "hidden" value = "'+nnode.action_plan+'" id = "action_plan'+me.dataActionPlanCounter+'">'+nnode.action_plan+'</td>'+
+        		'<td><input type = "hidden" value = "'+nnode.due_date+'" id = "due_date'+me.dataActionPlanCounter+'">'+nnode.due_date+'</td>'+
+        		'<td><input type = "hidden" value = "'+nnode.division_v+'" id = "division_v'+me.dataActionPlanCounter+'">'+nnode.division_v+'</td>'+
         		'<td>'+
         		'<div class="btn-group">'+
-        			'<button type="button" class="btn btn-default btn-xs" onclick="RiskVerify.actionPlanTableDelete(this, '+me.dataActionPlanCounter+')"><i class="fa fa-trash-o font-red"></i></button>'+
+					'<button type="button" class="btn btn-default btn-xs" onclick = "modal_ap_edit('+me.dataActionPlanCounter+')" ><i class="fa fa-pencil font-blue"></i></button>'+
+        			 '<button type="button" class="btn btn-default btn-xs" onclick="RiskVerify.actionPlanTableDelete(this, '+me.dataActionPlanCounter+')"><i class="fa fa-trash-o font-red"></i></button>'+
         		'</div>'+
         		'</td>'+
         	'</tr>');
@@ -829,3 +842,36 @@ var RiskVerify = function() {
         }
 	 }
 }();
+
+
+function modal_control_edit(a){
+	 
+$('#tr_idnya').val(a); 
+$('#existing_control_id').val($('#existing_control_id'+a).val());
+$('#risk_existing_control').val($('#risk_existing_control'+a).val());
+$('#risk_evaluation_control').val($('#risk_evaluation_control'+a).val());
+$('#risk_control_owner').val($('#risk_control_owner'+a).val());
+$('#form-control-revid').val(a);
+
+
+
+$('#form-control').modal('show'); 
+}
+
+function modal_ap_edit(a){
+	 
+$('#tr_idnya_ap').val(a); 	
+//$('#form-data-revid').val(a);
+$('#action_plan').val($('#action_plan'+a).val());
+$('#due_date').val($('#due_date'+a).val());
+ 
+var b = $('#division_v'+a).val();
+ 
+if(b == "Information Technology & Network Support"){
+	var b = "IT";
+}
+
+$('#division').val(b);
+ 
+$('#form-data').modal('show'); 
+}

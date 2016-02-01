@@ -600,7 +600,8 @@ class Risk extends APP_Model {
 		}
 		
 		if ($filter_by != null && $filter_value != null) {
-			$ex_filter = ' where '.$filter_by.' like ? ';
+			//tadinya WHERE cuman bentrok
+			$ex_filter = ' and '.$filter_by.' like ? ';
 			$par['p1'] = '%'.$filter_value.'%';
 		}
 		$date = date("Y-m-d");
@@ -1328,25 +1329,11 @@ class Risk extends APP_Model {
 		}
 		
 		if ($filter_by != null && $filter_value != null) {
-			$ex_filter = ' where '.$filter_by.' like ? ';
+			$ex_filter = ' and '.$filter_by.' like ? ';
 			$par['p1'] = '%'.$filter_value.'%';
 		}
 		
-		$sql = "select 
-				b.risk_status,
-				a.username,
-				a.display_name,
-				a.division_id, 
-				b.division_name 
-				from m_user a 
-				join m_division b on a.division_id = b.division_id
-				join (
-					select min(risk_status) as risk_status, risk_input_by from t_risk
-					where
-					risk_status > 1
-					group by risk_input_by
-				) b on a.username = b.risk_input_by
-				UNION
+		$sql = "
 				select 
 				b.risk_status,
 				a.username,
@@ -1361,7 +1348,22 @@ class Risk extends APP_Model {
 					risk_status > 1
 					group by risk_input_by
 				) b on a.username = b.risk_input_by
-				WHERE a.username NOT IN (select username from m_user join t_risk on m_user.username = t_risk.risk_input_by)"
+				WHERE a.username NOT IN (select username from m_user join t_risk on m_user.username = t_risk.risk_input_by)
+				UNION
+				select 
+				b.risk_status,
+				a.username,
+				a.display_name,
+				a.division_id, 
+				b.division_name 
+				from m_user a 
+				join m_division b on a.division_id = b.division_id
+				join (
+					select min(risk_status) as risk_status, risk_input_by from t_risk
+					where
+					risk_status > 1
+					group by risk_input_by
+				) b on a.username = b.risk_input_by where a.username is not null"
 				.$ex_filter
 				.$ex_or;
 		$res = $this->getPagingData($sql, $par, $page, $row, 'username', true);

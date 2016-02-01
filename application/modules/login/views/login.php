@@ -38,16 +38,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <body class="login">
     <!-- BEGIN LOGIN -->
     <div class="container">
-    	<div class="account-info">
+    <div style="background-color: #FFF; padding: 5px; width: 103.2%;">    
+              <div style="margin:-5px;"><img src="assets/images/header.png" width="100%" height="35px"></div>
+        </div>
+   
+    	<div class="account-info" >
+            <center><img src="assets/images/bg_iigf.png" width="240px"></center>
+            <center><img src="assets/images/lines.png" width="200px" height="20px"></center>
+           
+            <!--
     		<center><img src="assets/images/login_logo2.png"></center>
     		<h3 style="color: #008cb9;">CORPORATE</h3>
     		<h3 style="color: #008cb9;">RISK MANAGEMENT</h3>
     		<h3 style="color: #008cb9;">SYSTEM</h3>
+            -->
     		<!--<h5>-</h5>-->
     	</div>
+
     	<!-- BEGIN LOGIN FORM -->
     	<div class="account-form">
-    		<div class="logo-mobile"><img src="assets/images/login_logo2.png"></div>
+    		<!-- <div class="logo-mobile"><img src="assets/images/login_logo2.png"></div> -->
 
             <!-- FORM UNTUK AJAX LOADING LOGIN
     		<form class="login-form" action="index.html" method="post" id="auth-form">
@@ -75,6 +85,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
            <!--  this form for no AJAX  -->
+                <center><img src="assets/images/headlines.png" width="300px"></center>
+                </br> </br>
                 <form target="_self" action="<?=$site_url?>/login/authenticate" method="post" id="input-form" role="form" class="login-form">
                    
                    <?php 
@@ -98,20 +110,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <input class="form-control form-control-solid placeholder-no-fix" type="password" autocomplete="off" placeholder="Password" name="password"/>
                 </div>     
                     
-                     <div class="form-actions">
+                <div class="form-actions">
                     <button type="submit" id="" class="btn btn-submit uppercase ladda-button" data-style="expand-right">
                     <span class="ladda-label">Login</span>
                     </button>
                 </div>
-                   
                 </form>
             <!-- end form -->
-
-
-
     	</div>
-    	<div style="background-color: #FFF; padding: 20px; width: 670px;">
-    		 <center><img height="70px" src="assets/images/logoiigf.jpg"></center>
+    	<div style="background-color: #FFF; padding: 15px; width: 103.2%;">
+    		 <div style="float:left;"><img height="30px" src="assets/images/footer_iigf.png" width="275px"></div>
+             <div style="clear:both;"></div>
+             <div style="float:right;margin-top:-20px;margin-right:10px;"> Copyright © 2015 </div>
     	</div>
     	<!-- END LOGIN FORM
     	<div class="copyright">

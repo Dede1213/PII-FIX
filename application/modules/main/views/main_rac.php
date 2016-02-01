@@ -64,9 +64,9 @@
 		<input type = "hidden" id = "tabactive" name ="tabactive" value = "0">
 		
 		<!-- Modal -->
-		<div class="modal fade" data-width="760"  id="modal-export" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		  <div class="modal-dialog" role="document">
-			<div class="modal-content">
+		<div class="modal fade" data-width="650" id="modal-export" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="#modal-dialog" role="document" >
+			<div class="modal-content" >
 			  <div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				<h4 class="modal-title" id="myModalLabel">Risk List Export - choose field to export</h4>
@@ -94,8 +94,8 @@
 		</div>
 		
 		<!-- Modal -->
-		<div class="modal fade" data-width="760" id="modal-export-register" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		  <div class="modal-dialog" role="document">
+		<div class="modal fade" data-width="650" id="modal-export-register" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="#modal-dialog" role="document">
 			<div class="modal-content">
 			  <div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -120,8 +120,8 @@
 		</div>
 		
 		<!-- Modal -->
-		<div class="modal fade" data-width="760" id="modal-export-treatment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		  <div class="modal-dialog" role="document">
+		<div class="modal fade" data-width="650" id="modal-export-treatment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="#modal-dialog" role="document">
 			<div class="modal-content">
 			  <div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -149,8 +149,8 @@
 		
 		
 		<!-- Modal -->
-		<div class="modal fade" data-width="760" id="modal-actionplanlist" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		  <div class="modal-dialog" role="document">
+		<div class="modal fade" data-width="650" id="modal-actionplanlist" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="#modal-dialog" role="document">
 			<div class="modal-content">
 			  <div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -178,8 +178,8 @@
 		</div>
 		
 		<!-- Modal -->
-		<div class="modal fade" data-width="760" id="modal-executionlist" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		  <div class="modal-dialog" role="document">
+		<div class="modal fade" data-width="650" id="modal-executionlist" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="#modal-dialog" role="document">
 			<div class="modal-content">
 			  <div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -207,8 +207,8 @@
 		</div>
 		
 		<!-- Modal -->
-		<div class="modal fade" data-width="760" id="modal-kri" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		  <div class="modal-dialog" role="document">
+		<div class="modal fade" data-width="650" id="modal-kri" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="#modal-dialog" role="document">
 			<div class="modal-content">
 			  <div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -237,8 +237,8 @@
 		</div>
 		
  	<!-- Modal -->
-		<div class="modal fade" data-width="760" id="modal-changereq" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		  <div class="modal-dialog" role="document">
+		<div class="modal fade" data-width="650" id="modal-changereq" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="#modal-dialog" role="document">
 			<div class="modal-content">
 			  <div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -304,6 +304,9 @@
 							<select class="form-control input-medium input-sm" id="tab_risk_list-filterBy">
 								<option value="risk_event">Risk Event</option>
 								<option value="risk_level">Risk Level</option>
+								<option value="risk_impact_level">Impact Level</option>
+								<option value="risk_likelihood_key">Likelihood</option>
+								<option value="risk_owner">Risk Owner</option>
 							</select>
 						</div>
 						<div class="form-group">
@@ -419,6 +422,8 @@
 							<label for="filterFormBy" class="smaller">Filter By : </label>
 							<select class="form-control input-medium input-sm" id="tab_treatment_list-filterBy">
 								<option value="risk_event">Risk Event</option>
+								<option value="risk_owner">Risk Owner</option>
+								<option value="suggested_risk_treatment">Risk Treatment</option>
 							</select>
 						</div>
 						<div class="form-group">
@@ -470,6 +475,8 @@
 							<label for="filterFormBy" class="smaller">Filter By : </label>
 							<select class="form-control input-medium input-sm" id="tab_action_plan_list-filterBy">
 								<option value="action_plan">Action Plan</option>
+								<option value="due_date">Due Date</option>
+								<option value="division_name">Action Plan Owner</option>
 							</select>
 						</div>
 						<div class="form-group">
@@ -580,6 +587,9 @@
 							<label for="filterFormBy" class="smaller">Filter By : </label>
 							<select class="form-control input-medium input-sm" id="tab_action_plan_exec-filterBy">
 								<option value="action_plan">Action Plan</option>
+								<option value="due_date">Due Date</option>
+								<option value="division_name">Action Plan Owner</option>
+								<option value="execution_status">Execution</option>
 							</select>
 						</div>
 						<div class="form-group">

@@ -662,8 +662,13 @@ class MainRac extends APP_Controller {
 				foreach($_POST['control'] as $v) {
 					$control[] = $v;
 				}
+
+				$objective = array();
+				foreach($_POST['objective'] as $v) {
+					$objective[] = $v;
+				}
 				
-				$res = $this->risk->updateRisk1($_POST['risk_id'], $code, $risk, $impact_level, $actplan, $control, $data['session']['username'], $user);
+				$res = $this->risk->updateRisk1($_POST['risk_id'], $code, $risk, $impact_level, $actplan, $control, $objective, $data['session']['username'], $user);
 
 				//$res = $this->risk->updateRisk1change($_POST['risk_id'], $code, $risk, $impact_level, $actplan, $control, $data['session']['username']);
 				//$res = $this->risk->riskDeleteChange($_POST['risk_id']);
@@ -828,8 +833,13 @@ class MainRac extends APP_Controller {
 				foreach($_POST['control'] as $v) {
 					$control[] = $v;
 				}
+
+				$objective = array();
+				foreach($_POST['objective'] as $v) {
+					$objective[] = $v;
+				}
 				
-				$res = $this->risk->updateRiskrac($_POST['risk_id'], $code, $risk, $impact_level, $actplan, $control, $data['session']['username']);
+				$res = $this->risk->updateRiskrac($_POST['risk_id'], $code, $risk, $impact_level, $actplan, $control, $objective, $data['session']['username']);
 				//$res = $this->risk->riskDeleteChange($_POST['risk_id']);
 				
 				if (isset($_POST['add_user_flag']) && $_POST['add_user_flag'] == 'yes') {
@@ -984,8 +994,13 @@ class MainRac extends APP_Controller {
 				foreach($_POST['control'] as $v) {
 					$control[] = $v;
 				}
+
+				$objective = array();
+				foreach($_POST['objective'] as $v) {
+					$objective[] = $v;
+				}
 				
-				$res = $this->risk->updateRiskrac($_POST['risk_id'], $code, $risk, $impact_level, $actplan, $control, $data['session']['username']);
+				$res = $this->risk->updateRiskracsave($_POST['risk_id'], $code, $risk, $impact_level, $actplan, $control, $objective, $data['session']['username']);
 				
 				$resp = array();
 				if ($res) {
@@ -1059,8 +1074,13 @@ class MainRac extends APP_Controller {
 				foreach($_POST['control'] as $v) {
 					$control[] = $v;
 				}
+
+				$objective = array();
+				foreach($_POST['objective'] as $v) {
+					$objective[] = $v;
+				}
 				
-				$res = $this->risk->updateRisksave($_POST['risk_id'], $code, $risk, $impact_level, $actplan, $control, $data['session']['username'],$user);
+				$res = $this->risk->updateRisksave($_POST['risk_id'], $code, $risk, $impact_level, $actplan, $control, $objective, $data['session']['username'],$user);
 				
 				$resp = array();
 				if ($res) {
@@ -1133,8 +1153,13 @@ class MainRac extends APP_Controller {
 				foreach($_POST['control'] as $v) {
 					$control[] = $v;
 				}
+
+				$objective = array();
+				foreach($_POST['objective'] as $v) {
+					$objective[] = $v;
+				}
 				
-				$res = $this->risk->updateRisk2($_POST['risk_id'], $code, $risk, $impact_level, $actplan, $control, $data['session']['username']);
+				$res = $this->risk->updateRisk2($_POST['risk_id'], $code, $risk, $impact_level, $actplan, $control, $objective, $data['session']['username']);
 				//$res = $this->risk->riskSwitchPrimary($_POST['risk_id']);
 				
 				$resp = array();
@@ -2455,15 +2480,15 @@ class MainRac extends APP_Controller {
 			$res = $this->risk->changeRequestSwitchPrimary($_POST['id']);
 			$changes = $this->risk->getChangeByIdNoRef($_POST['id']);
 			
-			$v_risk = true; $v_control = true; $v_action = true;
+			$v_risk = true; $v_control = true; $v_action = true; $v_objective = true;
 			if ($changes['cr_type'] == 'Risk Owner Form') {
-				$v_risk = true; $v_control = false; $v_action = true;
+				$v_risk = true; $v_control = false; $v_action = true; 
 			}
 			if ($changes['cr_type'] == 'Action Plan Form') {
 				$v_risk = false; $v_control = false; $v_action = true;
 			}
 			
-			$res = $this->risk->changeRequestApplyVerify($_POST['id'], $data['session']['username'], $v_risk, $v_control, $v_action);
+			$res = $this->risk->changeRequestApplyVerify($_POST['id'], $data['session']['username'], $v_risk, $v_control, $v_action, $v_objective);
 			
 			if ($res) {
 				$resp['success'] = true;
@@ -2677,7 +2702,12 @@ class MainRac extends APP_Controller {
 				$control[] = $v;
 			}
 
-			$res = $this->risk->changeRequestSaveDraft($_POST['id'], $_POST['risk_id'], $risk_update, $impact_level, $actplan, $control, $data['session']['username']);
+			$objective = array();
+			foreach($_POST['objective'] as $v) {
+				$objective[] = $v;
+			}
+
+			$res = $this->risk->changeRequestSaveDraft($_POST['id'], $_POST['risk_id'], $risk_update, $impact_level, $actplan, $control, $objective, $data['session']['username']);
 			
 			$resp = array();
 			if ($res) {
@@ -2745,7 +2775,12 @@ class MainRac extends APP_Controller {
 				$control[] = $v;
 			}
 
-			$res = $this->risk->changeRequestSaveDraftchanges($_POST['id'], $_POST['risk_id'], $risk_update, $impact_level, $actplan, $control, $data['session']['username']);
+			$objective = array();
+			foreach($_POST['objective'] as $v) {
+				$objective[] = $v;
+			}
+
+			$res = $this->risk->changeRequestSaveDraftchanges($_POST['id'], $_POST['risk_id'], $risk_update, $impact_level, $actplan, $control, $objective, $data['session']['username']);
 			
 			$resp = array();
 			if ($res) {

@@ -404,7 +404,7 @@ class Mriskregister extends APP_Model {
 		return $row;
 	}
 	
-	public function insertRiskRegister($risk, $code, $impact, $actplan, $control)
+	public function insertRiskRegister($risk, $code, $impact, $actplan, $control, $objective)
 	{
 		$sql = "INSERT INTO `t_risk` (
 				`risk_code`, `risk_date`, 
@@ -475,6 +475,20 @@ class Mriskregister extends APP_Model {
 				);
 				$res5 = $this->db->query($sql, $par);
 			}
+
+			//insert objective
+			$sql = "insert into t_risk_objective(
+						risk_id,objective) 
+					values(?, ?)";
+			foreach ($objective as $key => $value) {
+				if ($value['objective_id'] == '') $ecid = null;
+				$par = array(
+					'rid' => $rid,
+					'div2' => $value['objective']
+				);
+				$res6 = $this->db->query($sql, $par);
+			}
+
 			return $rid;
 		} else {
 			return false;
@@ -483,7 +497,7 @@ class Mriskregister extends APP_Model {
 		return $res;
 	}
 
-	public function insertRiskRegister2($risk, $code, $impact, $actplan, $control)
+	public function insertRiskRegister2($risk, $code, $impact, $actplan, $control, $objective)
 	{
 	/*
 	$sql_cek = "select risk_code,periode_id from t_risk where risk_code='".$risk['risk_code']."' and periode_id ='".$risk['periode_id']."' ";
@@ -579,6 +593,18 @@ class Mriskregister extends APP_Model {
 				);
 				$res5 = $this->db->query($sql, $par);
 			}
+
+			// insert Object change
+			$sql = "insert into t_risk_objective_change(risk_id, objective, switch_flag) 
+					values((select risk_id from t_risk where risk_code ='".$risk['risk_code']."' and periode_id ='".$risk['periode_id']."'), ?, ?)";
+			foreach ($objective as $key => $value) {
+				$par = array(
+					//'rid' => $rid,
+					'ap' => $value['objective'],
+					'rib' => $risk['risk_input_by']
+				);
+				$res6 = $this->db->query($sql, $par);
+			}
 			//return $rid;
 		} else {
 			return false;
@@ -588,7 +614,7 @@ class Mriskregister extends APP_Model {
 	}
 	
 	
-	public function insertRiskRegisterLibrary($risk, $code, $impact, $actplan, $control)
+	public function insertRiskRegisterLibrary($risk, $code, $impact, $actplan, $control, $objective)
 	{
 
 	$sql_cek = "select risk_code,periode_id from t_risk where risk_code='".$risk['risk_code']."' and periode_id ='".$risk['periode_id']."' ";
@@ -645,7 +671,7 @@ class Mriskregister extends APP_Model {
 					NOW() as created_date
 					from t_risk where risk_id = ? ";
 			$res = $this->db->query($sql, $lib_par);
-		$rid = $this->insertRiskRegister2($risk, $code, $impact, $actplan, $control);
+		$rid = $this->insertRiskRegister2($risk, $code, $impact, $actplan, $control, $objective);
 
 		//cek risk_id terakhir
 		$input = $risk['risk_input_by'];
@@ -683,6 +709,15 @@ class Mriskregister extends APP_Model {
 					from t_risk_control
 					where risk_id = ?";
 			$res = $this->db->query($sql, $lib_par);
+
+			// insert action objective
+			$sql = "insert into t_risk_objective(risk_id,objective) 
+					select 
+					".$hasil." as risk_id, objective
+					from t_risk_objective
+					where risk_id = ?";
+			$res = $this->db->query($sql, $lib_par);
+
 			return true;
 		} else {
 			return false;
@@ -690,7 +725,7 @@ class Mriskregister extends APP_Model {
 		return false;
 		}else{
 
-		$rid = $this->insertRiskRegister2($risk, $code, $impact, $actplan, $control);
+		$rid = $this->insertRiskRegister2($risk, $code, $impact, $actplan, $control, $objective);
 		return true;
 		}
 	}

@@ -147,6 +147,19 @@ var RiskVerify = function() {
         			
         			me.controlAddRow(nnode);
         		});
+
+                me.controlResetobjective();
+                $.each( data_risk['objective_list'], function( key, val ) {
+                    var ecid = '';
+                    if (val.objective_id == null) ecid = '';
+                    var nnode = {
+                        'objective_id' : ecid,
+                        'objective' : val.objective
+                    };
+                    
+                    me.controlAddRowobjective(nnode);
+                });
+
         	});
         },
         submitRiskData: function(submitMode) {
@@ -182,6 +195,20 @@ var RiskVerify = function() {
             		MainApp.viewGlobalModal('error', 'Please Input at least One Control for this Risk');
             		return false;
             	}
+
+                // prepare OBJECTIVE data
+                var objective_param = {};
+                var cnt = 0;
+                $.each(me.dataControlobjective, function(key, value) { 
+                    objective_param['objective['+cnt+'][objective_id]'] = value.objective_id;
+                    objective_param['objective['+cnt+'][objective]'] = value.objective;
+                    cnt++;
+                });
+                
+                if (cnt < 1) {
+                    MainApp.viewGlobalModal('error', 'Please Input at least One objective for this Risk');
+                    return false;
+                }
             	
             	// prepare action plan data
             	var actplan_param = {};
@@ -208,7 +235,7 @@ var RiskVerify = function() {
             	
             	$.post(
             		url,
-            		$( "#input-form" ).serialize()+ '&' + $.param(impact_param)+ '&' + $.param(actplan_param)+ '&' + $.param(control_param),
+            		$( "#input-form" ).serialize()+ '&' + $.param(impact_param)+ '&' + $.param(actplan_param)+ '&' + $.param(control_param)+ '&' + $.param(objective_param),
             		function( data ) {
             			Metronic.unblockUI();
             			if(data.success) {

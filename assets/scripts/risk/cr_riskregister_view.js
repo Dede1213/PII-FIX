@@ -61,6 +61,19 @@ var ChangeRequest = function() {
         			
         			me.primarycontrolAddRow(nnode);
         		});
+
+                me.controlResetobjectiveprimary();
+                $.each( data_risk['objective_list'], function( key, val ) {
+                    var ecid = '';
+                    if (val.objective_id == null) ecid = '';
+                    var nnode = {
+                        'objective_id' : ecid,
+                        'objective' : val.objective
+                    };
+                    
+                    me.controlAddRowobjectiveprimary(nnode);
+                });
+
         	});
         },
         loadRisk: function(rid) {
@@ -104,6 +117,17 @@ var ChangeRequest = function() {
         			
         			me.controlAddRow(nnode);
         		});
+                me.controlResetobjective();
+                $.each( data_risk['objective_list'], function( key, val ) {
+                    var ecid = '';
+                    if (val.objective_id == null) ecid = '';
+                    var nnode = {
+                        'objective_id' : ecid,
+                        'objective' : val.objective
+                    };
+                    
+                    me.controlAddRowobjective(nnode);
+                });
         	});
         },
         populateRisk: function(frm, data) {   
@@ -221,6 +245,60 @@ var ChangeRequest = function() {
         		'<td>'+nnode.risk_control_owner+'</td>'+
         	'</tr>');
         	me.controlAdd(nnode, me.dataControlCounter);
+        },
+        controlResetobjective: function() {
+            this.dataControlobjective = {};
+            this.dataControlCounter = 0;
+            $("#objective_table > tbody").html("");
+        },
+        controlAddobjective: function(data, dcounter) {
+            this.dataControlobjective[dcounter] = data;
+        },
+        controlAddRowobjective: function(nnode) {
+            var me = this;
+            
+            me.dataControlCounter++;
+            
+            var control_str = '';
+            if (g_change_type == "Risk Form") {
+                control_str = '<td>'+
+                '<div class="btn-group">'+
+                    '<button type="button" class="btn btn-default btn-xs" onclick="ChangeRequest.controlTableDeleteobjective(this, '+me.dataControlCounter+')"><i class="fa fa-trash-o font-red"></i></button>'+
+                '</div>'+
+                '</td>';
+            }
+            
+            $('#objective_table > tbody:last-child').append('<tr>'+
+                '<td>'+nnode.objective_id+'</td>'+
+                '<td>'+nnode.objective+'</td>'+
+                
+            '</tr>');
+            me.controlAddobjective(nnode, me.dataControlCounter);
+        },
+        controlResetobjectiveprimary: function() {
+            this.dataControlobjectiveprimary = {};
+            this.dataControlCounter = 0;
+            $("#primary_objective_table > tbody").html("");
+        },
+        controlAddobjectiveprimary: function(data, dcounter) {
+            this.dataControlobjectiveprimary[dcounter] = data;
+        },
+        controlAddRowobjectiveprimary: function(nnode) {
+            var me = this;
+            
+            me.dataControlCounter++;
+            
+            var control_str = '';
+            if (g_change_type == "Risk Form") {
+                control_str = '<td></td>';
+            }
+            
+            $('#primary_objective_table > tbody:last-child').append('<tr>'+
+                '<td>'+nnode.objective_id+'</td>'+
+                '<td>'+nnode.objective+'</td>'+
+                
+            '</tr>');
+            me.controlAddobjectiveprimary(nnode, me.dataControlCounter);
         },
         actionPlanTableDelete: function(xrow, dataId) {
         	var i=xrow.parentNode.parentNode.parentNode.rowIndex;

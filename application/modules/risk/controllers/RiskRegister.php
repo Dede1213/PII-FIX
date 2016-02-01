@@ -730,6 +730,37 @@ class RiskRegister extends APP_Controller {
 		echo json_encode($data);
 	}
 
+	public function getControlLibraryobjective() 
+	{
+		$order_by = $order = $filter_by = $filter_value = null;
+				
+		if (isset($_POST['order'][0]['column'])) {
+			$order_idx = $_POST['order'][0]['column'];
+			$order_by = $_POST['columns'][$order_idx]['data'];
+			$order = $_POST['order'][0]['dir'];
+		}
+		
+		if (isset($_POST['filter_by']) && isset($_POST['filter_value']) && $_POST['filter_value'] != '' ) {
+			$filter_by = $_POST['filter_by'];
+			$filter_value = $_POST['filter_value'];
+		}
+		
+		$page = ceil($_POST['start'] / $_POST['length'])+1;
+
+		$row = $_POST['length'];
+		$this->load->model('risk/risk');
+		$defFilter = array();
+		if (isset($_POST['filter_library']) && trim($_POST['filter_library']) != '') {
+			$defFilter['filter_library'] = trim($_POST['filter_library']);
+		}
+		
+		$data = $this->risk->getDataMode('allControlLibraryobjective', $defFilter, $page, $row, $order_by, $order, $filter_by, $filter_value);
+		
+		$data['draw'] = $_POST['draw']*1;
+		$data['page'] = $page;
+		echo json_encode($data);
+	}
+
 	public function getControlLibraryexisting() 
 	{
 		$order_by = $order = $filter_by = $filter_value = null;
@@ -766,6 +797,15 @@ class RiskRegister extends APP_Controller {
 		if (!empty($rid) && is_numeric($rid)) {
 			$this->load->model('risk/risk');
 			$data = $this->risk->getControlById($rid);
+			echo json_encode($data);
+		}
+	}
+
+	public function loadControlLibraryobjective($rid) 
+	{
+		if (!empty($rid) && is_numeric($rid)) {
+			$this->load->model('risk/risk');
+			$data = $this->risk->getControlById3($rid);
 			echo json_encode($data);
 		}
 	}
@@ -955,11 +995,16 @@ class RiskRegister extends APP_Controller {
 		foreach($_POST['control'] as $v) {
 			$control[] = $v;
 		}
+
+		$objective = array();
+		foreach($_POST['objective'] as $v) {
+			$objective[] = $v;
+		}
 		
 		if ($_POST['risk_library_id'] != null) {
-			$res = $this->mriskregister->insertRiskRegisterLibrary($risk2, $code, $impact_level, $actplan, $control);
+			$res = $this->mriskregister->insertRiskRegisterLibrary($risk2, $code, $impact_level, $actplan, $control, $objective);
 		} else {
-			$res = $this->mriskregister->insertRiskRegister($risk, $code, $impact_level, $actplan, $control);
+			$res = $this->mriskregister->insertRiskRegister($risk, $code, $impact_level, $actplan, $control, $objective);
 		}
 		
 		$resp = array();
@@ -1365,7 +1410,12 @@ class RiskRegister extends APP_Controller {
 				$control[] = $v;
 			}
 			
-			$res = $this->risk->insertChangeRequest($risk, $impact_level, $actplan, $control);
+			$objective = array();
+			foreach($_POST['objective'] as $v) {
+				$objective[] = $v;
+			}
+
+			$res = $this->risk->insertChangeRequest($risk, $impact_level, $actplan, $control, $objective);
 			
 			$resp = array();
 			if ($res) {

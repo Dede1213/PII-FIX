@@ -167,6 +167,52 @@ gridControlExisting.init({
         ]// set first column as a default sort by asc
     }
 });
+var gridControlobjective = new Datatable();
+gridControlobjective.init({
+    src: $("#library_objective_table"),
+    onSuccess: function (grid) {
+        // execute some code after table records loaded
+    },
+    onError: function (grid) {
+        // execute some code on network or other general error  
+    },
+    onDataLoad: function(grid) {
+        // execute some code on ajax data load
+    },
+    loadingMessage: 'Loading...',
+    dataTable: { // here you can define a typical datatable settings from http://datatables.net/usage/options 
+
+        // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
+        // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/scripts/datatable.js). 
+        // So when dropdowns used the scrollable div should be removed. 
+        //"dom": "<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r>t<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'>>",
+        
+        //"scrollX": true,
+        "pageLength": 10, // default record count per page
+        "lengthMenu": [[10], [10]],
+        "ajax": {
+            "url": site_url+"/risk/RiskRegister/getControlLibraryobjective" // ajax source
+        },
+        "columnDefs": [ {
+            "targets": 0,
+            "data": "id",
+            "render": function ( data, type, full, meta ) {
+                var ret = '<div class="btn-group">'+
+                '<button type="button" class="btn btn-default btn-xs" onclick="javascript: ChangeRequest.selectControlLibraryobjective('+full.id+')"><i class="fa fa-check-circle font-blue"></i></button>'+
+                '</div>';
+                return ret;
+            }
+        } ],
+        "columns": [
+            { "data": "id", "orderable": false },
+            { "data": "objective"}
+       ],
+        "order": [
+            [0, "asc"]
+        ]// set first column as a default sort by asc
+    }
+});
+
 var handleValidationControl = function() {
 	var form1 = $('#input-form-control');
 	
@@ -277,6 +323,7 @@ var handleValidationAction = function() {
 	});
 }
 
+
 var ChangeRequest = function() {
 	return {
 		primarydataControl: {},
@@ -322,7 +369,38 @@ var ChangeRequest = function() {
 	    		$('#modal-likelihood').modal('hide');
 	    		me.setRiskLevel();
 	    	});
-	    	
+
+	    	$('#input-control-add-objective').on('click', function() {
+                var form1 = $('#input-form-control-objective').validate();
+                var fvalid = form1.form();
+                 
+                if (fvalid) {
+                    var xcid = $('#input-form-control-objective input[name=objective_id]').val();
+                    var xexis = $('#input-form-control-objective textarea[name=objective]').val();
+                  
+                    
+                    var tr_id = $('#tr_idnya').val();
+                    
+                    $("#"+tr_id).html("");
+                    $('#3').remove();
+                    
+                    var nnode = {
+                        'tr_id' : tr_id,
+                        'objective_id' : xcid,
+                        'objective' : xexis,
+                        
+                    };
+                    
+                    me.controlAddRowobjective(nnode);
+                    
+                    $('#form-control-objective').modal('hide');
+                }
+            });
+			
+			$('#modal-control-filter-submit-objective').on('click', function() {
+                me.filterControlobjective();
+            });
+
 	    	$('#input-control-add').on('click', function() {
 	    		var form1 = $('#input-form-control').validate();
 	    		var fvalid = form1.form();
@@ -621,6 +699,20 @@ var ChangeRequest = function() {
         		me.populateRisk($('#input-form-control'), data_risk);
         	});
         },
+        selectControlLibraryobjective: function(rid) {
+            var me = this;
+            $('#input-form-control-objective textarea[name=objective]').attr('readonly', false);
+            
+            $('#modal-objective').modal('hide');
+            Metronic.blockUI({ boxed: true });
+            $.getJSON( site_url+"/risk/RiskRegister/loadControlLibraryobjective/"+rid, function( data_risk ) {
+                Metronic.unblockUI();
+                
+                data_risk['objective_id'] = data_risk['id'];
+                
+                me.populateRisk($('#input-form-control-objective'), data_risk);
+            });
+        },
          selectControlLibraryexisting: function(rid) {
             var me = this;
             $('#input-form-control input[name=risk_existing_control]').attr('readonly', true);
@@ -640,6 +732,12 @@ var ChangeRequest = function() {
         	gridControl.clearAjaxParams();
         	gridControl.setAjaxParam("filter_library", fval);
         	gridControl.getDataTable().ajax.reload();	
+        },
+        filterControlobjective: function() {
+            var fval = $('#modal-objective div.inputs input[name=filter_search]')[0].value;
+            gridControlobjective.clearAjaxParams();
+            gridControlobjective.setAjaxParam("filter_library", fval);
+            gridControlobjective.getDataTable().ajax.reload();   
         },
         loadRiskPrimary: function(rid) {
         	var me = this;
@@ -688,6 +786,20 @@ var ChangeRequest = function() {
         			
         			me.primarycontrolAddRow(nnode);
         		});
+
+        		me.controlResetobjectiveprimary();
+        		$.each( data_risk['objective_list'], function( key, val ) {
+        			var ecid = '';
+        			if (val.objective_id == null) ecid = '';
+        			var nnode = {
+        				'objective_id' : ecid,
+        				'objective' : val.objective
+        			};
+        			
+        			me.controlAddRowobjectiveprimary(nnode);
+        		});
+
+
         	});
         },
         populateRisk: function(frm, data) {   
@@ -807,6 +919,70 @@ var ChangeRequest = function() {
         		'</td>'+
         	'</tr>');
         	me.controlAdd(nnode, me.dataControlCounter);
+        },
+        controlTableDeleteobjective: function(xrow, dataId) {
+        	//console.log(dataId);
+        	var i=xrow.parentNode.parentNode.parentNode.rowIndex;
+        	document.getElementById('objective_table').deleteRow(i);
+        	this.controlDeleteobjective(dataId);
+        },
+        controlDeleteobjective: function(id) {
+        	delete this.dataControlobjective[id];
+        },
+        controlResetobjective: function() {
+        	this.dataControlobjective = {};
+        	this.dataControlCounter = 0;
+        	$("#objective_table > tbody").html("");
+        },
+        controlAddobjective: function(data, dcounter) {
+        	this.dataControlobjective[dcounter] = data;
+        },
+        controlAddRowobjective: function(nnode) {
+        	var me = this;
+        	
+        	me.dataControlCounter++;
+        	
+			var control_str = '';
+			if (g_change_type == "Risk Form") {
+				control_str = '<td>'+
+				'<div class="btn-group">'+
+					'<button type="button" class="btn btn-default btn-xs" onclick="ChangeRequest.controlTableDeleteobjective(this, '+me.dataControlCounter+')"><i class="fa fa-trash-o font-red"></i></button>'+
+				'</div>'+
+				'</td>';
+			}
+			
+        	$('#objective_table > tbody:last-child').append('<tr>'+
+        		'<td>'+nnode.objective_id+'</td>'+
+        		'<td>'+nnode.objective+'</td>'+
+        		control_str+
+        	'</tr>');
+        	me.controlAddobjective(nnode, me.dataControlCounter);
+        },
+
+         controlResetobjectiveprimary: function() {
+        	this.dataControlobjectiveprimary = {};
+        	this.dataControlCounter = 0;
+        	$("#primary_objective_table > tbody").html("");
+        },
+        controlAddobjectiveprimary: function(data, dcounter) {
+        	this.dataControlobjectiveprimary[dcounter] = data;
+        },
+        controlAddRowobjectiveprimary: function(nnode) {
+        	var me = this;
+        	
+        	me.dataControlCounter++;
+        	
+			var control_str = '';
+			if (g_change_type == "Risk Form") {
+				control_str = '<td></td>';
+			}
+			
+        	$('#primary_objective_table > tbody:last-child').append('<tr>'+
+        		'<td>'+nnode.objective_id+'</td>'+
+        		'<td>'+nnode.objective+'</td>'+
+        		
+        	'</tr>');
+        	me.controlAddobjectiveprimary(nnode, me.dataControlCounter);
         },
         actionPlanTableDelete: function(xrow, dataId) {
         	var i=xrow.parentNode.parentNode.parentNode.rowIndex;
@@ -969,6 +1145,19 @@ var ChangeRequest = function() {
         			
         			me.controlAddRow(nnode);
         		});
+
+        		me.controlResetobjective();
+        		$.each( data_risk['objective_list'], function( key, val ) {
+        			var ecid = '';
+        			if (val.objective_id == null) ecid = '';
+        			var nnode = {
+        				'objective_id' : ecid,
+        				'objective' : val.objective
+        			};
+        			
+        			me.controlAddRowobjective(nnode);
+        		});
+
         	});
         },
         submitRiskData: function(mode) {
@@ -1002,6 +1191,20 @@ var ChangeRequest = function() {
             	
             	if (cnt < 1) {
             		MainApp.viewGlobalModal('error', 'Please Input at least One Control for this Risk');
+            		return false;
+            	}
+
+            	// prepare objective data
+            	var objective_param = {};
+            	var cnt = 0;
+            	$.each(me.dataControlobjective, function(key, value) { 
+            		objective_param['objective['+cnt+'][objective_id]'] = value.objective_id;
+            		objective_param['objective['+cnt+'][objective]'] = value.objective;
+            		cnt++;
+            	});
+            	
+            	if (cnt < 1) {
+            		MainApp.viewGlobalModal('error', 'Please Input at least One objective for this Risk');
             		return false;
             	}
             	
@@ -1044,7 +1247,7 @@ var ChangeRequest = function() {
             	
             	$.post(
             		url,
-            		$( "#input-form" ).serialize()+ '&' + $.param(impact_param)+ '&' + $.param(actplan_param)+ '&' + $.param(control_param),
+            		$( "#input-form" ).serialize()+ '&' + $.param(impact_param)+ '&' + $.param(actplan_param)+ '&' + $.param(control_param)+ '&' + $.param(objective_param),
             		function( data ) {
             			Metronic.unblockUI();
             			if(data.success) {

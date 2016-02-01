@@ -64,7 +64,7 @@
 		<input type = "hidden" id = "tabactive" name ="tabactive" value = "0">
 		
 		<!-- Modal -->
-		<div class="modal fade" data-width="760" id="modal-export" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal fade" data-width="760"  id="modal-export" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		  <div class="modal-dialog" role="document">
 			<div class="modal-content">
 			  <div class="modal-header">

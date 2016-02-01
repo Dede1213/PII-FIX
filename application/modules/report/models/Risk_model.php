@@ -147,6 +147,7 @@
 
 		function listofrisk($data){
 			$querynya = "SELECT DISTINCT m_risk_category.`cat_name`, t_risk.`risk_code`, t_risk.`risk_event`, t_risk.`risk_description`, t_risk.`risk_owner`, t_risk.`risk_cause`, t_risk.`risk_impact`,
+			(SELECT GROUP_CONCAT(t_risk_objective.`objective` SEPARATOR '') FROM t_risk_objective WHERE t_risk.risk_id = t_risk_objective.risk_id) AS 'Objective', 
 			(SELECT GROUP_CONCAT(t_risk_control.`risk_existing_control` SEPARATOR '') FROM t_risk_control WHERE t_risk.risk_id = t_risk_control.risk_id) AS 'Existing Control', 
 			(SELECT GROUP_CONCAT(t_risk_control.`risk_evaluation_control` SEPARATOR '') FROM t_risk_control WHERE t_risk.risk_id = t_risk_control.risk_id) AS 'Control Evaluation', 
 			(SELECT GROUP_CONCAT(t_risk_control.`risk_control_owner` SEPARATOR '') FROM t_risk_control WHERE t_risk.risk_id = t_risk_control.risk_id) AS 'Control Owner', t_risk.`risk_impact_level`, t_risk.`risk_likelihood_key`,t_risk.`risk_level`, t_risk.`suggested_risk_treatment`,
@@ -171,6 +172,7 @@
 		function listofrisketc($data){
 			$querynya = 
 			"SELECT DISTINCT m_risk_category.`cat_name`, t_risk.`risk_code`, t_risk.`risk_event`, t_risk.`risk_description`, t_risk.`risk_owner`, t_risk.`risk_cause`, t_risk.`risk_impact`,
+			(SELECT GROUP_CONCAT(t_risk_objective.`objective` SEPARATOR '') FROM t_risk_objective WHERE t_risk.risk_id = t_risk_objective.risk_id) AS 'Objective', 
 			(SELECT GROUP_CONCAT(t_risk_control.`risk_existing_control` SEPARATOR '') FROM t_risk_control WHERE t_risk.risk_id = t_risk_control.risk_id) AS 'Existing Control', 
 			(SELECT GROUP_CONCAT(t_risk_control.`risk_evaluation_control` SEPARATOR '') FROM t_risk_control WHERE t_risk.risk_id = t_risk_control.risk_id) AS 'Control Evaluation', 
 			(SELECT GROUP_CONCAT(t_risk_control.`risk_control_owner` SEPARATOR '') FROM t_risk_control WHERE t_risk.risk_id = t_risk_control.risk_id) AS 'Control Owner', t_risk.`risk_impact_level`, t_risk.`risk_likelihood_key`,t_risk.`risk_level`, t_risk.`suggested_risk_treatment`,

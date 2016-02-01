@@ -159,6 +159,24 @@
 							<div class="clearfix">
 							</div>
 							<hr/>
+							<h4>Objective</h4>
+							<table id="objective_table" class="table table-condensed table-bordered table-hover">
+								<thead>
+								<tr role="row" class="heading">
+									<th width="15%">Obj. ID</th>
+									<th>Objective</th>
+								</tr>
+								</thead>
+								<tbody>
+									<?php foreach($risk['objective_list'] as $k => $row) { ?>
+									<tr>
+										<td></td>
+										<td><?=$row['objective']?></td>
+									</tr>
+									<?php } ?>
+								</tbody>
+							</table>
+							<hr/>
 							<h4>Control</h4>
 							<table id="action_plan_table" class="table table-condensed table-bordered table-hover">
 								<thead>

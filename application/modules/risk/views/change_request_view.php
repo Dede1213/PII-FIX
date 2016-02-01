@@ -91,6 +91,21 @@
 							</div>
 							<hr/>
 							<?php if ($change_type == 'Risk Form') { ?>
+							<h4>Objective</h4>
+							<div class="table-scrollable">
+								<table id="primary_objective_table" class="table table-condensed table-bordered table-hover">
+									<thead>
+									<tr role="row" class="heading">
+										<th width="15%"><span class="small">Obj.ID</span></th>
+										<th><span class="small">Objective</span></th>
+										
+									</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+							</div>
+							<hr/>
 							<h4>Control</h4>
 							<div class="table-scrollable">
 								<table id="primary_control_table" class="table table-condensed table-bordered table-hover">
@@ -198,6 +213,28 @@
 							</div>
 							<hr/>
 							<?php if ($change_type == 'Risk Form') { ?>
+							<div class="clearfix">
+								<a href="#form-control-objective" id="button-form-control-open" data-toggle="modal" class="btn default green pull-right btn-sm">
+								<i class="fa fa-plus"></i>
+								<span class="hidden-480">
+								Add Objective </span>
+								</a>
+								<h4>Objective</h4>
+							</div>
+							<div class="table-scrollable">
+								<table id="objective_table" class="table table-condensed table-bordered table-hover">
+									<thead>
+									<tr role="row" class="heading">
+										<th width="15%"><span class="small">Obj.ID</span></th>
+										<th><span class="small">Objective</span></th>
+										
+									</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+							</div>
+							<hr/>
 							<h4>Control</h4>
 							<div class="table-scrollable">
 								<table id="control_table" class="table table-condensed table-bordered table-hover">

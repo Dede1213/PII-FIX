@@ -140,6 +140,52 @@ gridControl.init({
     }
 });
 
+var gridControlobjective = new Datatable();
+gridControlobjective.init({
+    src: $("#library_objective_table"),
+    onSuccess: function (grid) {
+        // execute some code after table records loaded
+    },
+    onError: function (grid) {
+        // execute some code on network or other general error  
+    },
+    onDataLoad: function(grid) {
+        // execute some code on ajax data load
+    },
+    loadingMessage: 'Loading...',
+    dataTable: { // here you can define a typical datatable settings from http://datatables.net/usage/options 
+
+        // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
+        // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/scripts/datatable.js). 
+        // So when dropdowns used the scrollable div should be removed. 
+        //"dom": "<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r>t<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'>>",
+        
+        //"scrollX": true,
+        "pageLength": 10, // default record count per page
+        "lengthMenu": [[10], [10]],
+        "ajax": {
+            "url": site_url+"/risk/RiskRegister/getControlLibraryobjective" // ajax source
+        },
+        "columnDefs": [ {
+            "targets": 0,
+            "data": "id",
+            "render": function ( data, type, full, meta ) {
+                var ret = '<div class="btn-group">'+
+                '<button type="button" class="btn btn-default btn-xs" onclick="javascript: RiskInput.selectControlLibraryobjective('+full.id+')"><i class="fa fa-check-circle font-blue"></i></button>'+
+                '</div>';
+                return ret;
+            }
+        } ],
+        "columns": [
+            { "data": "id", "orderable": false },
+            { "data": "objective"}
+       ],
+        "order": [
+            [0, "asc"]
+        ]// set first column as a default sort by asc
+    }
+});
+
 var gridControlExisting = new Datatable();
 gridControlExisting.init({
     src: $("#library_control_table_existing"),
@@ -385,10 +431,12 @@ var RiskInput = function() {
 	return {
 		dataMode: null,
         //main function to initiate the module
+        dataControlobjective: {},
         dataControl: {},
         dataActionPlan: {},
         dataRiskImpact: {},
         dataControlCounter: 0,
+        dataControlCounterobjective: 0,
         dataActionPlanCounter: 0,
         riskLevelList: null,
         riskLevelReference: null,
@@ -428,6 +476,10 @@ var RiskInput = function() {
         	$('#modal-control-filter-submit').on('click', function() {
         		me.filterControl();
         	});
+
+            $('#modal-control-filter-submit-objective').on('click', function() {
+                me.filterControlobjective();
+            });
         	
         	$('#btn_impact_list').on('click', function() {
         		me.showImpactList();
@@ -471,6 +523,33 @@ var RiskInput = function() {
 	        		$('#form-control').modal('hide');
         		}
         	});
+
+            $('#input-control-add-objective').on('click', function() {
+                var form1 = $('#input-form-control-objective').validate();
+                var fvalid = form1.form();
+                 
+                if (fvalid) {
+                    var xcid = $('#input-form-control-objective input[name=objective_id]').val();
+                    var xexis = $('#input-form-control-objective textarea[name=objective]').val();
+                  
+                    
+                    var tr_idob = $('#tr_idnyaob').val();
+                    
+                    $("#"+tr_idob).html("");
+                    $('#4').remove();
+                    
+                    var nnode = {
+                        'tr_id' : tr_idob,
+                        'objective_id' : xcid,
+                        'objective' : xexis,
+                        
+                    };
+                    
+                    me.controlAddRowobjective(nnode);
+                    
+                    $('#form-control-objective').modal('hide');
+                }
+            });
         	
         	$('#input-actionplan-add').on('click', function() {
         		var form1 = $('#input-form-action-plan').validate();
@@ -541,6 +620,11 @@ var RiskInput = function() {
 				 
         		$('#input-form-control textarea[name=risk_existing_control]').attr('readonly', false);
         	});
+
+            $('#button-form-control-open-objective').on('click', function () {
+                $('#input-form-control-objective')[0].reset();
+                $('#input-form-control-objective textarea[name=objective]').attr('readonly', false);
+            });
         	
         	$('#button-form-data-open').on('click', function () {
 				
@@ -659,16 +743,33 @@ var RiskInput = function() {
         	document.getElementById('control_table').deleteRow(i);
         	this.controlDelete(dataId);
         },
+        controlTableDeleteobjective: function(xrow, dataId) {
+            //console.log(dataId);
+            var i=xrow.parentNode.parentNode.parentNode.rowIndex;
+            document.getElementById('objective_table').deleteRow(i);
+            this.controlDeleteobjective(dataId);
+        },
         controlReset: function() {
         	this.dataControl = {};
         	this.dataControlCounter = 0;
         	$("#control_table > tbody").html("");
         },
+        controlResetobjective: function() {
+            this.dataControlobjective = {};
+            this.dataControlCounterobjective = 0;
+            $("#objective_table > tbody").html("");
+        },
         controlAdd: function(data, dcounter) {
         	this.dataControl[dcounter] = data;
         },
+        controlAddobjective: function(data, dcounter) {
+            this.dataControlobjective[dcounter] = data;
+        },
         controlDelete: function(id) {
         	delete this.dataControl[id];
+        },
+        controlDeleteobjective: function(id) {
+            delete this.dataControlobjective[id];
         },
         controlAddRow: function(nnode) {
         	var me = this;
@@ -695,6 +796,30 @@ var RiskInput = function() {
         	'</tr>');
 			this.controlDelete(nnode.tr_id); 
         	me.controlAdd(nnode, me.dataControlCounter);
+        },
+        controlAddRowobjective: function(nnode) {
+            var me = this;
+            
+            var lastidrand = $('#form-control-revid-objective').val();
+            
+            $('#'+lastidrand).html('');
+            
+            me.dataControlCounterobjective++; 
+            
+            var idrand = Math.floor((Math.random() * 1000000) + 1); 
+
+            $('#objective_table > tbody:last-child').append('<tr id = '+me.dataControlCounterobjective+'>'+
+                '<td><input type = "hidden" id = "objective_id'+idrand+'" value = '+nnode.objective_id+'>'+nnode.objective_id+'</td>'+
+                '<td><textarea style="display:none;"  id = "objective'+idrand+'" > '+nnode.objective+'</textarea>'+nnode.objective+'</td>'+
+                '<td>'+
+                '<div class="btn-group">'+
+                    '<button type="button" class="btn btn-default btn-xs" onclick = "modal_control_edit_objective('+me.dataControlCounterobjective+')" ><i class="fa fa-pencil font-blue"></i></button>'+
+                    '<button type="button" class="btn btn-default btn-xs" onclick="RiskInput.controlTableDeleteobjective(this, '+me.dataControlCounterobjective+')"><i class="fa fa-trash-o font-red"></i></button>'+
+                '</div>'+
+                '</td>'+
+            '</tr>');
+            this.controlDeleteobjective(nnode.tr_idob); 
+            me.controlAddobjective(nnode, me.dataControlCounterobjective);
         },
         actionPlanTableDelete: function(xrow, dataId) {
         	var i=xrow.parentNode.parentNode.parentNode.rowIndex;
@@ -844,6 +969,20 @@ var RiskInput = function() {
         			
         			me.controlAddRow(nnode);
         		});
+
+                //objective
+                me.controlResetobjective();
+                $.each( data_risk['objective_list'], function( key, val ) {
+                    var ecid = val.objective_id;
+                    if (val.objective_id == null || val.objective_id == '0') ecid = '';
+                    var nnode = {
+                        'objective_id' : ecid,
+                        'objective' : val.objective
+                    };
+                    
+                    me.controlAddRowobjective(nnode);
+                });
+
         	});
         },
         selectControlLibrary: function(rid) {
@@ -859,6 +998,20 @@ var RiskInput = function() {
         		
         		me.populateRisk($('#input-form-control'), data_risk);
         	});
+        },
+        selectControlLibraryobjective: function(rid) {
+            var me = this;
+            $('#input-form-control-objective textarea[name=objective]').attr('readonly', false);
+            
+            $('#modal-objective').modal('hide');
+            Metronic.blockUI({ boxed: true });
+            $.getJSON( site_url+"/risk/RiskRegister/loadControlLibraryobjective/"+rid, function( data_risk ) {
+                Metronic.unblockUI();
+                
+                data_risk['objective_id'] = data_risk['id'];
+                
+                me.populateRisk($('#input-form-control-objective'), data_risk);
+            });
         },
         selectControlLibraryexisting: function(rid) {
             var me = this;
@@ -927,6 +1080,12 @@ var RiskInput = function() {
         	gridControl.setAjaxParam("filter_library", fval);
         	gridControl.getDataTable().ajax.reload();	
         },
+        filterControlobjective: function() {
+            var fval = $('#modal-objective div.inputs input[name=filter_search]')[0].value;
+            gridControlobjective.clearAjaxParams();
+            gridControlobjective.setAjaxParam("filter_library", fval);
+            gridControlobjective.getDataTable().ajax.reload();   
+        },
         submitRiskData: function() {
         	var form1 = $('#input-form').validate();
         	var fvalid = form1.form();
@@ -960,6 +1119,20 @@ var RiskInput = function() {
 	        		MainApp.viewGlobalModal('error', 'Please Input at least One Control for this Risk');
 	        		return false;
 	        	}
+
+                // prepare Objective data
+                var objective_param = {};
+                var cnt = 0;
+                $.each(me.dataControlobjective, function(key, value) { 
+                    objective_param['objective['+cnt+'][objective_id]'] = value.objective_id;
+                    objective_param['objective['+cnt+'][objective]'] = value.objective;
+                    cnt++;
+                });
+                
+                if (cnt < 1) {
+                    MainApp.viewGlobalModal('error', 'Please Input at least One Objective for this Risk');
+                    return false;
+                }
 	        	
 	        	// prepare action plan data
 	        	var actplan_param = {};
@@ -981,7 +1154,7 @@ var RiskInput = function() {
 	        	var url = site_url+'/risk/RiskRegister/insertRiskData';
 	        	$.post(
 	        		url,
-	        		$( "#input-form" ).serialize()+ '&' + $.param(impact_param)+ '&' + $.param(actplan_param)+ '&' + $.param(control_param),
+	        		$( "#input-form" ).serialize()+ '&' + $.param(impact_param)+ '&' + $.param(actplan_param)+ '&' + $.param(control_param)+ '&' + $.param(objective_param),
 	        		function( data ) {
 	        			Metronic.unblockUI();
 	        			if(data.success) {
@@ -1008,13 +1181,22 @@ var RiskInput = function() {
 function modal_control_edit(a){
 	 
 $('#tr_idnya').val(a); 
-$('#existing_control_id').val($('#existing_control_id'+a).val());
-$('#risk_existing_control').val($('#risk_existing_control'+a).val());
-$('#risk_evaluation_control').val($('#risk_evaluation_control'+a).val());
-$('#risk_control_owner').select($('#risk_control_owner'+a).val());
+$('#form-control-revid').val($('#existing_control_id'+a).val());
+$('#form-control-revid').val($('#risk_existing_control'+a).val());
+$('#form-control-revid').val($('#risk_evaluation_control'+a).val());
+$('#form-control-revid').select($('#risk_control_owner'+a).val());
 $('#form-control-revid').val(a);
 
 $('#form-control').modal('show'); 
+}
+
+function modal_control_edit_objective(a){
+$('#tr_idnyaob').val(a); 
+$('#form-control-revid-objective').val($('#objective_id'+a).val());
+$('#form-control-revid-objective').val($('#objective'+a).val());
+$('#form-control-revid-objective').val(a);
+
+$('#form-control-objective').modal('show'); 
 }
 
 function modal_ap_edit(a){

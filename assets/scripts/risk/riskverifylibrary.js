@@ -1,6 +1,7 @@
 var RiskVerify = function() {
 	return {
 		dataControl: {},
+        dataControlobjective: {},
 		dataActionPlan: {},
 		dataControlCounter: 0,
 		dataActionPlanCounter: 0,
@@ -158,6 +159,19 @@ var RiskVerify = function() {
         			
         			me.controlAddRow(nnode);
         		});
+
+                me.controlResetobjective();
+                $.each( data_risk['objective_list'], function( key, val ) {
+                    var ecid = '';
+                    if (val.objective_id == null) ecid = '';
+                    var nnode = {
+                        'objective_id' : ecid,
+                        'objective' : val.objective
+                    };
+                    
+                    me.controlAddRowobjective(nnode);
+                });
+
         	});
         },
         controlTableDelete: function(xrow, dataId) {
@@ -171,8 +185,16 @@ var RiskVerify = function() {
         	this.dataControlCounter = 0;
         	$("#primary_control_table > tbody").html("");
         },
+        controlResetobjective: function() {
+            this.dataControlobjective = {};
+            this.dataControlCounter = 0;
+            $("#primary_objective_table > tbody").html("");
+        },
         controlAdd: function(data, dcounter) {
         	this.dataControl[dcounter] = data;
+        },
+        controlAddobjective: function(data, dcounter) {
+            this.dataControlobjective[dcounter] = data;
         },
         controlDelete: function(id) {
         	delete this.dataControl[id];
@@ -189,6 +211,17 @@ var RiskVerify = function() {
         		'<td>'+nnode.risk_control_owner+'</td>'+
         	'</tr>');
         	me.controlAdd(nnode, me.dataControlCounter);
+        },
+        controlAddRowobjective: function(nnode) {
+            var me = this;
+            
+            me.dataControlCounter++;
+
+            $('#primary_objective_table > tbody:last-child').append('<tr>'+
+                '<td>'+nnode.objective_id+'</td>'+
+                '<td>'+nnode.objective+'</td>'+
+            '</tr>');
+            me.controlAddobjective(nnode, me.dataControlCounter);
         },
         actionPlanTableDelete: function(xrow, dataId) {
         	var i=xrow.parentNode.parentNode.parentNode.rowIndex;
@@ -323,6 +356,19 @@ var RiskVerify = function() {
         			
         			me.controlAddRow(nnode);
         		});
+
+                 me.controlResetobjective();
+                $.each( data_risk['objective_list'], function( key, val ) {
+                    var ecid = '';
+                    if (val.objective_id == null) ecid = '';
+                    var nnode = {
+                        'objective_id' : ecid,
+                        'objective' : val.objective
+                    };
+                    
+                    me.controlAddRowobjective(nnode);
+                });
+
         	});
         },
         confirmAddUser: function(mode) {
@@ -375,7 +421,22 @@ var RiskVerify = function() {
             		MainApp.viewGlobalModal('error', 'Please Input at least One Control for this Risk');
             		return false;
             	}
+
+                // prepare objective data
+                var objective_param = {};
+                var cnt = 0;
+                $.each(me.dataControlobjective, function(key, value) { 
+                    objective_param['objective['+cnt+'][objective_id]'] = value.objective_id;
+                    objective_param['objective['+cnt+'][objective]'] = value.objective;
+                    cnt++;
+                });
+                
+                if (cnt < 1) {
+                    MainApp.viewGlobalModal('error', 'Please Input at least One objective for this Risk');
+                    return false;
+                }
             	
+                
             	// prepare action plan data
             	var actplan_param = {};
             	var cnt = 0;
@@ -411,7 +472,7 @@ var RiskVerify = function() {
             	*/
             	$.post(
             		url,
-            		$( "#input-form" ).serialize()+ '&' + $.param(impact_param)+ '&' + $.param(actplan_param)+ '&' + $.param(control_param),
+            		$( "#input-form" ).serialize()+ '&' + $.param(impact_param)+ '&' + $.param(actplan_param)+ '&' + $.param(control_param)+ '&' + $.param(objective_param),
             		function( data ) {
             			Metronic.unblockUI();
             			if(data.success) {

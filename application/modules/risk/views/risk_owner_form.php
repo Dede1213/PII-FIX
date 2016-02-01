@@ -97,6 +97,24 @@
 										<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['treatment_v']?>" name="risk_likelihood_value" placeholder="">
 									</div>
 								</div>
+
+								<h4>Objective</h4>
+								<table class="table table-condensed table-bordered table-hover">
+									<thead>
+									<tr role="row" class="heading">
+										<th><small>Obj. ID</small></th>
+										<th><small>Objective</small></th>
+									</tr>
+									</thead>
+									<tbody>
+										<?php foreach($risk['objective_list'] as $k => $row) { ?>
+										<tr>
+											<td width="15%"> </td>
+											<td><?=$row['objective']?></td>
+										</tr>
+										<?php } ?>
+									</tbody>
+								</table>
 								
 								<h4>Control</h4>
 								<table class="table table-condensed table-bordered table-hover">

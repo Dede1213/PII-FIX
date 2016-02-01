@@ -31,6 +31,7 @@
 							<th>  Risk Owner </th>
 							<th>  Risk Cause </th>
 							<th>  Risk Impact </th>
+							<th>  Objective </th>
 							<th>  Existing Control </th>
 							<th>  Control Evaluation</th>
 							<th>  Control Owner</th>
@@ -56,6 +57,7 @@
 								<td> <?=$key['risk_owner'];?> </td> 
 								<td> <?=$key['risk_cause'];?> </td>
 								<td> <?=$key['risk_impact'];?> </td> 
+								<td> <?=$key['Objective'];?> </td> 
 								<td> <?=$key['Existing Control'];?> </td>
 								<td> <?=$key['Control Evaluation'];?> </td> 
 								<td> <?=$key['Control Owner'];?> </td>

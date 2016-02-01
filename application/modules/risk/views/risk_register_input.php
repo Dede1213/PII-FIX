@@ -221,10 +221,10 @@
 								</div>
 								<div class="panel-body">
 									 <div class="clearfix">
-									 	<a href="#form-control" id="button-form-control-open" data-toggle="modal" class="btn default green pull-right btn-sm">
+									 	<a href="#form-control-objective" id="button-form-control-open-objective" data-toggle="modal" class="btn default green pull-right btn-sm">
 									 	<i class="fa fa-plus"></i>
 									 	<span class="hidden-480">
-									 	Add Control </span>
+									 	Add Objective </span>
 									 	</a>
 									 </div>
 									 
@@ -370,6 +370,51 @@
 </div>
 
 <?php if ($valid_mode) { ?>
+<!-- OBJECTIVE -->
+<div id="form-control-objective" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+		<h4 class="modal-title">Add Objective</h4>
+	</div>
+	<div class="modal-body">
+		
+			<form id="input-form-control-objective" role="form" class="form-horizontal">
+				<div class="form-body">
+					<div class="form-group">
+					<input type = "hidden" id = "form-control-revid-objective">
+						<label class="col-md-3 control-label smaller cl-compact">Obj. ID</label>
+						<div class="col-md-9">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" readonly="true" name="objective_id" id = "objective_id" placeholder="">
+								<span class="input-group-btn">
+								<button class="btn btn-primary btn-sm" type="button" data-toggle="modal" href="#modal-objective"><i class="fa fa-search fa-fw"/></i></button>
+								</span>
+								
+							</div>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-md-3 control-label smaller cl-compact" >Objective <span class="required">* </span></label>
+						<div class="col-md-9">
+						<textarea class="form-control input-sm " rows="3"  name="objective" id = "objective" placeholder="">NONE</textarea>
+						<button id="button_clear_control" type="button" class="hide btn red btn-xs" style="margin-top: 5px;"><i class="fa fa-minus-circle font-white"></i> Clear Existing Control</button>
+						</div>
+					</div>
+					
+				</div>
+			</form>
+	</div>
+	<div class="modal-footer">
+		<button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+		<button id="input-control-add-objective" type="button" 
+			class="btn blue ladda-button"
+			 data-style="expand-right"
+			>Add</button>
+	</div>
+</div>
+
+
 <!-- CONTROL -->
 <div id="form-control" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
 	<div class="modal-header">
@@ -631,6 +676,37 @@
 					<th>Existing Control</th>
 					<th>Evaluation on Existing Control</th>
 					<th>Control Owner</th>
+				</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<!-- OBJECTIVE search Library -->
+<div id="modal-objective" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+		<h4 class="modal-title">Modal Objective</h4>
+		<div class="inputs">
+			<div class="portlet-input input-inline">
+				<div class="input-group">
+					<input type="text" class="form-control" name="filter_search" placeholder="search...">
+					<span class="input-group-btn">
+					<button class="btn btn-default" type="button" id="modal-control-filter-submit-objective">Search</button>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-body">
+		<div>
+			<table id="library_objective_table" class="table table-condensed table-bordered table-hover">
+				<thead>
+				<tr role="row" class="heading">
+					<th width="30px">&nbsp;</th>
+					<th>Objective</th>
 				</tr>
 				</thead>
 				<tbody></tbody>

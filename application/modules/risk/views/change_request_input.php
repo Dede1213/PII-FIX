@@ -554,7 +554,7 @@
 <div id="modal-objective" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Modal Objective</h4>
+		<h4 class="modal-title">Objective</h4>
 		<div class="inputs">
 			<div class="portlet-input input-inline">
 				<div class="input-group">

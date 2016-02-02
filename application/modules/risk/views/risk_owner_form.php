@@ -203,14 +203,14 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label smaller cl-compact" >Cause</label>
 									<div class="col-md-9">
-									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_cause" placeholder=""></textarea>
+									<textarea class="form-control input-readview"  rows="3" name="risk_cause" placeholder=""></textarea>
 									
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-md-3 control-label smaller cl-compact" >Impact</label>
 									<div class="col-md-9">
-									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_impact" placeholder=""></textarea>
+									<textarea class="form-control input-readview"  rows="3" name="risk_impact" placeholder=""></textarea>
 									
 									</div>
 								</div>
@@ -404,7 +404,7 @@
 		
 			<form id="input-form-action-plan" role="form" class="form-horizontal">
 				<div class="form-body">
-					<input type = "text" id = "tr_idnya_ap">
+					<input type = "hidden" id = "tr_idnya_ap">
 					<div class="form-group">
 						<label class="col-md-3 control-label smaller cl-compact">Suggested Action Plan<span class="required">* </span></label>
 						<div class="col-md-9">

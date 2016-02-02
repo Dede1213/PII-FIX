@@ -229,7 +229,7 @@ gridControlExisting.init({
           
        ],
         "order": [
-            [2, "asc"]
+            [0, "asc"]
         ]// set first column as a default sort by asc
     }
 });

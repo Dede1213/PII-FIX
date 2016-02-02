@@ -33,10 +33,12 @@ grid.init({
         	"data": "risk_status",
         	"render": function ( data, type, full, meta ) {
         		var img = 'default.png';
-        		if (data > 1) {
+        		if (data >= 0) {
         			if (data == '2') {
         				img = 'submit.png';
-        			} else {
+        			}else if (data == '0') {
+                        img = 'draft.png';
+                    } else {
         				img = 'verified.png';
         			} 
         		} 
@@ -122,10 +124,12 @@ grid2.init({
         	"data": "risk_status",
         	"render": function ( data, type, full, meta ) {
         		var img = 'default.png';
-        		if (data > 1) {
+        		if (data >= 0) {
         			if (data == '2') {
         				img = 'submit.png';
-        			} else {
+        			}else if (data == '0') {
+                        img = 'draft.png';
+                    } else {
         				img = 'verified.png';
         			} 
         		} 

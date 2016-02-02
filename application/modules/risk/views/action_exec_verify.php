@@ -79,6 +79,7 @@
 						}
 						else {
 							$g1 = 'style="display: none"';
+							$g3 = 'style="display: none"';
 						}
 					?>
 					<div class="form-group" id="fgroup-explain" <?=$g1?>>
@@ -87,8 +88,9 @@
 						<textarea class="form-control" rows="3" name="execution_explain" placeholder=""><?=$action_plan['execution_explain']?></textarea>
 						</div>
 					</div>
+
 					<div class="form-group" id="fgroup-evidence" <?=$g3?>>
-						<label class="col-md-3 control-label smaller cl-compact"><?=$g1?>Evidence</label>
+						<label class="col-md-3 control-label smaller cl-compact">Evidence</label>
 						<div class="col-md-9">
 						<textarea class="form-control" rows="3" name="execution_evidence" placeholder=""><?=$action_plan['execution_evidence']?></textarea>
 						</div>

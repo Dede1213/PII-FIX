@@ -303,12 +303,14 @@ WHERE t_risk.risk_id ='$id'";
 			$user = $hasil->risk_input_by;
 			
 		}
+		/*
 		//submited changes
 		$sql_changes = "select risk_input_by from t_risk_change
 					where risk_id = '".$risk_id."' ";
 		$query_changes = $this->db->query($sql_changes);
 		$hasil_changes = $query_changes->row();
 		$user_changes = $hasil_changes->risk_input_by;
+		*/
 		?>
 		<div class="row">
 		<div class="col-md-6">
@@ -491,7 +493,7 @@ WHERE t_risk.risk_id ='$id'";
 							<div class="form-group">
 								<label class="col-md-3 control-label smaller cl-compact" >Submitted By</label>
 								<div class="col-md-9">
-								<input type="text" class="form-control input-sm" readonly="true" value="<?php echo $user_changes; ?>" id="--risk_submitted_by--" placeholder="">
+								<input type="text" class="form-control input-sm" readonly="true" value="<?php echo $risk_input_by ?>" id="--risk_submitted_by--" placeholder="">
 								</div>
 							</div>
 							<div class="form-group">

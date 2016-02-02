@@ -3793,13 +3793,14 @@ class Risk extends APP_Model {
 		if($hasil != 'under'){
 
 		$this->actionPlanSaveDraft($action_id, $risk_id, $risk, $uid);
+		$division = $risk['division'];
 		$par = array(
 			'ap' => $risk['action_plan_status'],
 			'id' => $action_id, 'risk_id' => $risk_id
 		);
 		
 		$sql = "update t_risk_action_plan_change 
-				set action_plan_status = ?
+				set action_plan_status = ?, assigned_to = (select username from m_user where division_id = '$division' and role_id = 4)
 				where id = ? and risk_id = ?";
 		$query = $this->db->query($sql, $par);
 		
@@ -3807,6 +3808,12 @@ class Risk extends APP_Model {
 				set action_plan_status = ?
 				where id = ? and risk_id = ?";
 		$query = $this->db->query($sql, $par);
+
+		//$sql = "update t_risk_action_plan set assigned_to = (select username from m_user where division_id = ? and role_id = 4)
+		//	  	where risk_id = ? and division = ? ";
+		//$query = $this->db->query($sql, $par);
+
+
 		return true;
 	}
 }
@@ -3862,7 +3869,8 @@ class Risk extends APP_Model {
 	}
 	//ubah
 	public function actionPlanVerify($action_id, $risk_id, $risk, $uid) 
-	{
+	{	
+		$division = $risk['division'];
 		$par = array(
 			'ap' => $risk['action_plan_status'],
 			'action_plan' => $risk['action_plan'],
@@ -3873,7 +3881,7 @@ class Risk extends APP_Model {
 		);
 		
 		$sql = "update t_risk_action_plan 
-				set action_plan_status = ?,action_plan = ?,due_date = ?,division = ?
+				set action_plan_status = ?,action_plan = ?,due_date = ?,division = ?,assigned_to = (select username from m_user where division_id = '$division' and role_id = 4)
 				where id = ? and risk_id = ?";
 		$query = $this->db->query($sql, $par);
 		

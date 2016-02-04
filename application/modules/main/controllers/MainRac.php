@@ -2670,7 +2670,9 @@ class MainRac extends APP_Controller {
 					'risk_level' => $_POST['risk_level_id'],
 					'risk_impact_level' => $_POST['risk_impact_level_id'],
 					'risk_likelihood_key' => $_POST['risk_likelihood_id'],
-					'suggested_risk_treatment' => $_POST['suggested_risk_treatment']
+					'suggested_risk_treatment' => $_POST['suggested_risk_treatment'],
+					'risk_event' => $_POST['risk_event'],
+					'risk_description' => $_POST['risk_description']
 				);
 			}
 			
@@ -2743,7 +2745,9 @@ class MainRac extends APP_Controller {
 					'risk_level' => $_POST['risk_level_id'],
 					'risk_impact_level' => $_POST['risk_impact_level_id'],
 					'risk_likelihood_key' => $_POST['risk_likelihood_id'],
-					'suggested_risk_treatment' => $_POST['suggested_risk_treatment']
+					'suggested_risk_treatment' => $_POST['suggested_risk_treatment'],
+					'risk_event' => $_POST['risk_event'],
+					'risk_description' => $_POST['risk_description']
 				);
 			}
 			
@@ -2752,7 +2756,9 @@ class MainRac extends APP_Controller {
 					'risk_level' => $_POST['risk_level_id'],
 					'risk_impact_level' => $_POST['risk_impact_level_id'],
 					'risk_likelihood_key' => $_POST['risk_likelihood_id'],
-					'suggested_risk_treatment' => $_POST['suggested_risk_treatment']
+					'suggested_risk_treatment' => $_POST['suggested_risk_treatment'],
+					'risk_event' => $_POST['risk_event'],
+					'risk_description' => $_POST['risk_description']
 				);
 			}
 			

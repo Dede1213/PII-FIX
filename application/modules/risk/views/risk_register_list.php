@@ -43,6 +43,55 @@
 	$username = $this->session->credential['username'];
 	$this->load->database();
 
+	$sql_baru="select 
+					a.created_by,
+					a.created_date,
+					a.existing_control_id,
+					a.periode_id,
+					a.risk_2nd_sub_category,
+					a.risk_category,
+					a.risk_cause,
+					a.risk_code,
+					a.risk_control_owner,
+					a.risk_date,
+					a.risk_description,
+					a.risk_division,
+					a.risk_evaluation_control,
+					a.risk_event,
+					a.risk_existing_control,
+					a.risk_id,
+					a.risk_impact,
+					a.risk_impact_level,
+					a.risk_input_by,
+					a.risk_input_division,
+					a.risk_level,
+					a.risk_library_id,
+					a.risk_likelihood_key,
+					a.risk_owner,
+					a.risk_sub_category,
+					a.risk_treatment_owner,
+					a.suggested_risk_treatment,
+					a.switch_flag,
+					b.ref_value as risk_status_v,
+					c.ref_value as risk_level_v,
+					d.ref_value as impact_level_v,
+					e.l_title as likelihood_v,
+					m_periode.periode_end,
+					f.division_name as risk_owner_v,
+					IF(m_periode.periode_end <= '".$date."', '0', a.risk_status) AS risk_status 
+					from t_risk a
+					left join m_reference b on a.risk_status = b.ref_key and b.ref_context = 'risk.status.user'
+					left join m_reference c on a.risk_level = c.ref_key and c.ref_context = 'risklevel.display'
+					left join m_reference d on a.risk_impact_level = d.ref_key and d.ref_context = 'impact.display'
+					left join m_likelihood e on a.risk_likelihood_key = e.l_key
+					left join m_division f on a.risk_owner = f.division_id
+					join m_periode on m_periode.periode_id = a.periode_id
+					where 
+					a.periode_id NOT IN (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end)
+					and a.risk_id NOT IN(select t2.risk_library_id from t_risk t2 where t2.periode_id = (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end) and t2.risk_input_by = '$username' and t2.risk_library_id is not null)
+					and a.existing_control_id is null
+					and a.risk_input_by = '$username' ";
+
 	$sql1="select a.risk_id from t_risk a where  a.periode_id NOT IN (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end) and a.risk_input_by = '$username'
 					and a.risk_id NOT IN(select t2.risk_library_id from t_risk t2 where t2.periode_id = (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end) and t2.risk_input_by = '$username')
 					and a.risk_status >= 0 and existing_control_id != 1 ";
@@ -75,9 +124,15 @@
 	$query1 = $this->db->query($sql1);
 	$query2 = $this->db->query($sql2);
 
+	$query_baru = $this->db->query($sql_baru);
+	
+
  if ($query1->num_rows() == 0 && $query2->num_rows() == 0 ){
     $status_submit = "DRAFT";
     $status_spesial = "DRAFSUB1";
+ }else if ($query_baru->num_rows() == 1){
+ 	$status_submit = "DRAFT"; 
+ 	$status_spesial = "DRAFSUB1";
  }else if ($query1->num_rows() == 0 && $query->num_rows() >= 1 ){
  	$status_submit = "SUBMIT";
  }else if ($query1->num_rows() >= 1 && $query2->num_rows() == 0 ){
@@ -90,7 +145,7 @@
  	$status_submit = "DRAFT"; 
  	$status_spesial = "DRAFSUB";
  }
-	
+	echo "$status";
 		?>
 
 		<div class="col-md-12">
@@ -332,7 +387,7 @@
 				</li>
 				<li class="list-group-item">
 					<img src="<?=$base_url?>assets/images/legend/confirm.png"/> &nbsp; 
-					 Confirm
+					 Confirmed
 				</li>
 				<li class="list-group-item">
 					<img src="<?=$base_url?>assets/images/legend/submit.png"/> &nbsp; 

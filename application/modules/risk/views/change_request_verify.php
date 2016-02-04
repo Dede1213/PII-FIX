@@ -167,6 +167,7 @@
 								<input type="text" class="form-control input-sm" readonly="true" name="risk_code" placeholder="">
 								</div>
 							</div>
+							<?php if ($change_type == 'Risk Form' || $change_type == 'Risk Owner Form') { ?>
 							<div class="form-group">
 									<label class="col-md-3 control-label smaller cl-compact">Risk Event</label>
 									<div class="col-md-9">
@@ -180,6 +181,21 @@
 								<textarea class="form-control" rows="3"  name="risk_description" placeholder=""></textarea>
 								</div>
 							</div>
+							<?php }else{ ?>
+							<div class="form-group">
+									<label class="col-md-3 control-label smaller cl-compact">Risk Event</label>
+									<div class="col-md-9">
+									<textarea class="form-control input-readview"  readonly="true" rows="3" name="risk_event" placeholder=""></textarea>
+									</div>
+								</div>
+					
+							<div class="form-group">
+								<label class="col-md-3 control-label small cl-compact">Risk Event Description</label>
+								<div class="col-md-9">
+								<textarea class="form-control input-readview" readonly="true" rows="3"  name="risk_description" placeholder=""></textarea>
+								</div>
+							</div>
+							<?php } ?>
 							<?php if ($change_type == 'Risk Form') { ?>
 							<div class="form-group">
 									<label class="col-md-3 control-label smaller cl-compact">Cause <span class="required">* </span></label>

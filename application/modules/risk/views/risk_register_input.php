@@ -40,7 +40,7 @@
 			<div class="portlet box blue">
 				<div class="portlet-title">
 					<div class="caption" id="div-portlet-page-caption">
-						Risk Information
+						Risk Form
 					</div>
 				</div>
 				

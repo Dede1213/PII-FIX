@@ -1361,7 +1361,9 @@ class RiskRegister extends APP_Controller {
 					'risk_impact_level' => $_POST['risk_impact_level_id'],
 					'risk_likelihood_key' => $_POST['risk_likelihood_id'],
 					'suggested_risk_treatment' => $_POST['suggested_risk_treatment'],
-					'created_by' => $session_data['username']
+					'created_by' => $session_data['username'],
+					'risk_event' => $_POST['risk_event'],
+					'risk_description' => $_POST['risk_description']
 				);
 			}
 			
@@ -1376,7 +1378,9 @@ class RiskRegister extends APP_Controller {
 					'risk_impact_level' => $_POST['risk_impact_level_id'],
 					'risk_likelihood_key' => $_POST['risk_likelihood_id'],
 					'suggested_risk_treatment' => $_POST['suggested_risk_treatment'],
-					'created_by' => $session_data['username']
+					'created_by' => $session_data['username'],
+					'risk_event' => $_POST['risk_event'],
+					'risk_description' => $_POST['risk_description']
 				);
 			}
 			
@@ -1391,7 +1395,9 @@ class RiskRegister extends APP_Controller {
 					'risk_impact_level' => $drisk['risk_impact_level'],
 					'risk_likelihood_key' => $drisk['risk_likelihood_key'],
 					'suggested_risk_treatment' => $drisk['suggested_risk_treatment'],
-					'created_by' => $session_data['username']
+					'created_by' => $session_data['username'],
+					'risk_event' => $_POST['risk_event'],
+					'risk_description' => $_POST['risk_description']
 				);
 			}
 			
@@ -1560,7 +1566,6 @@ class RiskRegister extends APP_Controller {
 
 			if ($res) {
 				$data = $this->loadDefaultAppConfig();
-				
 				$res_valid = $this->risk->getRiskValidate('valEntryActionChange', $act_id, $session_data);				
 				$data['valid_entry'] = false;
 

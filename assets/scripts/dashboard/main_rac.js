@@ -47,8 +47,13 @@ gridRiskList.init({
         	"targets": 1,
         	"data": "risk_code",
         	"render": function ( data, type, full, meta ) {
-        		return '<a target="_self" href="'+site_url+'/main/mainrac/viewRisk/'+full.risk_id+'">'+data+'</a>';
-        	}
+                if (full.risk_status >= 3) {
+                    return '<a target="_self" href="'+site_url+'/main/mainrac/viewRisk/'+full.risk_id+'">'+data+'</a>';
+                } else {
+                    return '<a target="_self" href="'+site_url+'/main/mainrac/riskRegisterForm/'+full.risk_id+'/'+full.risk_input_by+'">'+data+'</a>';
+                } 
+        		
+           	}
         } ],
         "columns": [
 			{ "data": "risk_status" },

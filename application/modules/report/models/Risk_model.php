@@ -147,13 +147,13 @@
 
 		function listofrisk($data){
 			$querynya = "SELECT DISTINCT m_risk_category.`cat_name`, t_risk.`risk_code`, t_risk.`risk_event`, t_risk.`risk_description`, t_risk.`risk_owner`, t_risk.`risk_cause`, t_risk.`risk_impact`,
-			(SELECT GROUP_CONCAT(t_risk_objective.`objective` SEPARATOR '') FROM t_risk_objective WHERE t_risk.risk_id = t_risk_objective.risk_id) AS 'Objective', 
-			(SELECT GROUP_CONCAT(t_risk_control.`risk_existing_control` SEPARATOR '') FROM t_risk_control WHERE t_risk.risk_id = t_risk_control.risk_id) AS 'Existing Control', 
-			(SELECT GROUP_CONCAT(t_risk_control.`risk_evaluation_control` SEPARATOR '') FROM t_risk_control WHERE t_risk.risk_id = t_risk_control.risk_id) AS 'Control Evaluation', 
-			(SELECT GROUP_CONCAT(t_risk_control.`risk_control_owner` SEPARATOR '') FROM t_risk_control WHERE t_risk.risk_id = t_risk_control.risk_id) AS 'Control Owner', t_risk.`risk_impact_level`, t_risk.`risk_likelihood_key`,t_risk.`risk_level`, t_risk.`suggested_risk_treatment`,
-			(SELECT GROUP_CONCAT(t_risk_action_plan.`action_plan` SEPARATOR '') FROM t_risk_action_plan WHERE t_risk.risk_id = t_risk_action_plan.risk_id) AS 'Action Plan',
-			(SELECT GROUP_CONCAT(t_risk_action_plan.`division` SEPARATOR '') FROM t_risk_action_plan WHERE t_risk.risk_id = t_risk_action_plan.risk_id) AS 'Action Plan Owner',
-			(SELECT GROUP_CONCAT(t_risk_action_plan.`due_date` SEPARATOR '') FROM t_risk_action_plan WHERE t_risk.risk_id = t_risk_action_plan.risk_id) AS 'Due Date'
+			(SELECT GROUP_CONCAT(t_risk_objective.`objective` SEPARATOR '\n') FROM t_risk_objective WHERE t_risk.risk_id = t_risk_objective.risk_id) AS 'Objective', 
+			(SELECT GROUP_CONCAT(t_risk_control.`risk_existing_control` SEPARATOR '\n') FROM t_risk_control WHERE t_risk.risk_id = t_risk_control.risk_id) AS 'Existing Control', 
+			(SELECT GROUP_CONCAT(t_risk_control.`risk_evaluation_control` SEPARATOR '\n') FROM t_risk_control WHERE t_risk.risk_id = t_risk_control.risk_id) AS 'Control Evaluation', 
+			(SELECT GROUP_CONCAT(t_risk_control.`risk_control_owner` SEPARATOR '\n') FROM t_risk_control WHERE t_risk.risk_id = t_risk_control.risk_id) AS 'Control Owner', t_risk.`risk_impact_level`, t_risk.`risk_likelihood_key`,t_risk.`risk_level`, t_risk.`suggested_risk_treatment`,
+			(SELECT GROUP_CONCAT(t_risk_action_plan.`action_plan` SEPARATOR '\n') FROM t_risk_action_plan WHERE t_risk.risk_id = t_risk_action_plan.risk_id) AS 'Action Plan',
+			(SELECT GROUP_CONCAT(t_risk_action_plan.`division` SEPARATOR '\n') FROM t_risk_action_plan WHERE t_risk.risk_id = t_risk_action_plan.risk_id) AS 'Action Plan Owner',
+			(SELECT GROUP_CONCAT(t_risk_action_plan.`due_date` SEPARATOR '\n') FROM t_risk_action_plan WHERE t_risk.risk_id = t_risk_action_plan.risk_id) AS 'Due Date'
 			FROM t_risk JOIN m_risk_category ON t_risk.`risk_2nd_sub_category` = m_risk_category.`cat_id` JOIN t_report_risk ON t_report_risk.risk_id=t_risk.risk_id WHERE t_report_risk.`periode_id`='".$data['periode']."'";
 
 			$query = $this->db->query($querynya);
@@ -172,13 +172,13 @@
 		function listofrisketc($data){
 			$querynya = 
 			"SELECT DISTINCT m_risk_category.`cat_name`, t_risk.`risk_code`, t_risk.`risk_event`, t_risk.`risk_description`, t_risk.`risk_owner`, t_risk.`risk_cause`, t_risk.`risk_impact`,
-			(SELECT GROUP_CONCAT(t_risk_objective.`objective` SEPARATOR '') FROM t_risk_objective WHERE t_risk.risk_id = t_risk_objective.risk_id) AS 'Objective', 
-			(SELECT GROUP_CONCAT(t_risk_control.`risk_existing_control` SEPARATOR '') FROM t_risk_control WHERE t_risk.risk_id = t_risk_control.risk_id) AS 'Existing Control', 
-			(SELECT GROUP_CONCAT(t_risk_control.`risk_evaluation_control` SEPARATOR '') FROM t_risk_control WHERE t_risk.risk_id = t_risk_control.risk_id) AS 'Control Evaluation', 
-			(SELECT GROUP_CONCAT(t_risk_control.`risk_control_owner` SEPARATOR '') FROM t_risk_control WHERE t_risk.risk_id = t_risk_control.risk_id) AS 'Control Owner', t_risk.`risk_impact_level`, t_risk.`risk_likelihood_key`,t_risk.`risk_level`, t_risk.`suggested_risk_treatment`,
-			(SELECT GROUP_CONCAT(t_risk_action_plan.`action_plan` SEPARATOR '') FROM t_risk_action_plan WHERE t_risk.risk_id = t_risk_action_plan.risk_id) AS 'Action Plan',
-			(SELECT GROUP_CONCAT(t_risk_action_plan.`division` SEPARATOR '') FROM t_risk_action_plan WHERE t_risk.risk_id = t_risk_action_plan.risk_id) AS 'Action Plan Owner',
-			(SELECT GROUP_CONCAT(t_risk_action_plan.`due_date` SEPARATOR '') FROM t_risk_action_plan WHERE t_risk.risk_id = t_risk_action_plan.risk_id) AS 'Due Date'
+			(SELECT GROUP_CONCAT(t_risk_objective.`objective` SEPARATOR '\n') FROM t_risk_objective WHERE t_risk.risk_id = t_risk_objective.risk_id) AS 'Objective', 
+			(SELECT GROUP_CONCAT(t_risk_control.`risk_existing_control` SEPARATOR '\n') FROM t_risk_control WHERE t_risk.risk_id = t_risk_control.risk_id) AS 'Existing Control', 
+			(SELECT GROUP_CONCAT(t_risk_control.`risk_evaluation_control` SEPARATOR '\n') FROM t_risk_control WHERE t_risk.risk_id = t_risk_control.risk_id) AS 'Control Evaluation', 
+			(SELECT GROUP_CONCAT(t_risk_control.`risk_control_owner` SEPARATOR '\n') FROM t_risk_control WHERE t_risk.risk_id = t_risk_control.risk_id) AS 'Control Owner', t_risk.`risk_impact_level`, t_risk.`risk_likelihood_key`,t_risk.`risk_level`, t_risk.`suggested_risk_treatment`,
+			(SELECT GROUP_CONCAT(t_risk_action_plan.`action_plan` SEPARATOR '\n') FROM t_risk_action_plan WHERE t_risk.risk_id = t_risk_action_plan.risk_id) AS 'Action Plan',
+			(SELECT GROUP_CONCAT(t_risk_action_plan.`division` SEPARATOR '\n') FROM t_risk_action_plan WHERE t_risk.risk_id = t_risk_action_plan.risk_id) AS 'Action Plan Owner',
+			(SELECT GROUP_CONCAT(t_risk_action_plan.`due_date` SEPARATOR '\n') FROM t_risk_action_plan WHERE t_risk.risk_id = t_risk_action_plan.risk_id) AS 'Due Date'
 			FROM t_risk JOIN m_risk_category ON t_risk.`risk_2nd_sub_category` = m_risk_category.`cat_id` JOIN t_report_risk ON t_report_risk.risk_id=t_risk.risk_id  WHERE t_report_risk.`periode_id`='".$data['periode']."' AND t_risk.risk_library_id IS NULL
 			";
  
@@ -198,9 +198,9 @@
 		function risktreatmentreport($data=null){
 			$querynya = "
 			SELECT DISTINCT t_risk.risk_code, t_risk.risk_event, t_risk.risk_owner, t_risk.risk_impact_level, t_risk.`risk_likelihood_key`,t_risk.`risk_level`, t_risk.`suggested_risk_treatment`,
-			(SELECT GROUP_CONCAT(t_risk_action_plan.`action_plan`SEPARATOR '') FROM t_risk_action_plan WHERE t_risk.risk_id = t_risk_action_plan.risk_id) AS 'Action Plan',
-			(SELECT GROUP_CONCAT(t_risk_action_plan.`division`SEPARATOR '') FROM t_risk_action_plan WHERE t_risk.risk_id = t_risk_action_plan.risk_id) AS 'Action Plan Owner',
-			(SELECT GROUP_CONCAT(t_risk_action_plan.`due_date`SEPARATOR '') FROM t_risk_action_plan WHERE t_risk.risk_id = t_risk_action_plan.risk_id) AS 'Due Date'
+			(SELECT GROUP_CONCAT(t_risk_action_plan.`action_plan`SEPARATOR '\n') FROM t_risk_action_plan WHERE t_risk.risk_id = t_risk_action_plan.risk_id) AS 'Action Plan',
+			(SELECT GROUP_CONCAT(t_risk_action_plan.`division`SEPARATOR '\n') FROM t_risk_action_plan WHERE t_risk.risk_id = t_risk_action_plan.risk_id) AS 'Action Plan Owner',
+			(SELECT GROUP_CONCAT(t_risk_action_plan.`due_date`SEPARATOR '\n') FROM t_risk_action_plan WHERE t_risk.risk_id = t_risk_action_plan.risk_id) AS 'Due Date'
 			FROM t_risk JOIN t_risk_action_plan ON t_risk.risk_id = t_risk_action_plan.risk_id JOIN t_report_risk ON t_risk.risk_id = t_report_risk.risk_id
 			WHERE t_report_risk.periode_id='".$data['periode']."'
 			";
@@ -224,7 +224,7 @@
 					t_risk.risk_code, t_risk.risk_event, t_risk.risk_owner, t_risk.risk_level, t_risk_action_plan.execution_status,t_risk.risk_level_after_mitigation 
 					FROM t_risk_action_plan
 					JOIN t_risk ON t_risk_action_plan.risk_id=t_risk.risk_id JOIN t_report_risk ON t_risk_action_plan.risk_id = t_report_risk.risk_id
-					WHERE t_risk_action_plan.action_plan_status = 7 AND t_report_risk.periode_id='".$data['periode']."' AND t_risk_action_plan.execution_status = '".$data['status']."'
+					WHERE t_report_risk.periode_id='".$data['periode']."' AND t_risk_action_plan.execution_status = '".$data['status']."'
 			";
 			 
 			 

@@ -145,7 +145,8 @@
  	$status_submit = "DRAFT"; 
  	$status_spesial = "DRAFSUB";
  }
-	echo "$status";
+	
+
 		?>
 
 		<div class="col-md-12">
@@ -330,9 +331,15 @@
 
 				</div>
 				<div class="row">
+	<?php
+	$sql="select id from t_cr_risk where created_by='$username' and cr_type='Risk Register' and cr_status = 0 ";
+	$sql_cek = $this->db->query($sql);
+	if ($sql_cek->num_rows() > 0 ){
+
+	}else{
+	?>
+	 
 				<div class="col-md-12 clearfix">
-
-
 	<?php if ($status_spesial == "DRAFSUB" ){ ?>
 
 					<a href="javascript: ;" id="button-save-submit" class="btn default green pull-right" style="margin-right: 20px;">
@@ -371,7 +378,10 @@
 	<?php
 	}	
 	?>
-				</div>
+	</div>
+	<?php
+	}	
+	?>
 				</div>
 			</div>
 		</div>

@@ -826,7 +826,7 @@ class Risk extends APP_Model {
 					join m_periode on m_periode.periode_id = a.periode_id
 					where 
 					a.periode_id is not null
-					and a.risk_status > 1
+					and a.risk_status >= 0
 					and a.risk_input_by = '".$defFilter['userid']."'
 					and a.existing_control_id is null
 					and a.periode_id = (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end)

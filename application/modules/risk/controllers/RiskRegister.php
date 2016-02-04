@@ -910,12 +910,12 @@ class RiskRegister extends APP_Controller {
 
 		// periode
 		$periode = $this->mperiode->getCurrentPeriode();
-		$periode_id = null;
+		$periode_id = 0;
 		if ($periode) {
 			$periode_id = $periode['periode_id'];
 			$rstatus = 0;
 		} else {
-			$rstatus = 1;
+			$rstatus = 2;
 		}
 		
 		// category

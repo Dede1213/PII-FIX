@@ -92,7 +92,6 @@ class MainPic extends APP_Controller {
 			
 			$this->load->model('risk/risk');
 			$cred = $this->session->credential;
-			
 			$risk = $this->risk->getRiskValidate('viewRiskByDivision', $rid, $cred);
 			$view = 'risk/risk_register_view';
 			if ($risk) {

@@ -2932,7 +2932,7 @@ class Risk extends APP_Model {
 
 			if ($res) {
 				// check if id is same
-				if ($res['risk_input_division'] == $credential['division_id']) {
+				if ($res['risk_division'] == $credential['division_id']) {
 					$risk = $res;
 					return $risk;
 				} else {
@@ -5284,7 +5284,6 @@ class Risk extends APP_Model {
 		if ($change) {
 			// Risk Change
 			$par = array(
-				'risk_status' => 0,
 				'risk_cause' => $change['risk_cause'],
 				'risk_impact' => $change['risk_impact'],
 				'risk_level' => $change['risk_level'],

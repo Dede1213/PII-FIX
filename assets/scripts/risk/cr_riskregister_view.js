@@ -24,7 +24,7 @@ var ChangeRequest = function() {
         	
         	Metronic.blockUI({ boxed: true });
         	
-        	var gurl = site_url+"/risk/RiskRegister/loadChangeRequest/changes/"+rid;
+        	var gurl = site_url+"/risk/RiskRegister/loadChangeRequest/primary/"+rid;
         	if (g_status == '1') {
         		gurl = site_url+"/risk/RiskRegister/loadChangeRequest/primary/"+rid;
         	}
@@ -82,7 +82,7 @@ var ChangeRequest = function() {
         	$('#modal-library').modal('hide');
         	Metronic.blockUI({ boxed: true });
         	
-        	var gurl = site_url+"/risk/RiskRegister/loadChangeRequest/primary/"+rid;
+        	var gurl = site_url+"/risk/RiskRegister/loadChangeRequest/changes/"+rid;
         	if (g_status == '1') {
         		gurl = site_url+"/risk/RiskRegister/loadChangeRequest/changes/"+rid;
         	}

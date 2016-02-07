@@ -217,6 +217,37 @@
 							<div class="clearfix">
 							</div>
 							
+
+							<!--   OBJECTIVE -->
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h3 class="panel-title">Objective</h3>
+								</div>
+								<div class="panel-body">
+									 <div class="clearfix">
+									 	<a href="#form-control-objective" id="button-form-control-open-objective" data-toggle="modal" class="btn default green pull-right btn-sm">
+									 	<i class="fa fa-plus"></i>
+									 	<span class="hidden-480">
+									 	Tambah Objective </span>
+									 	</a>
+									 </div>
+									 
+									 <div class="table-scrollable">
+									 	<table id="objective_table" class="table table-condensed table-bordered table-hover">
+									 		<thead>
+									 		<tr role="row" class="heading">
+									 			<th width="15%">Obj.ID</th>
+									 			<th>Objective</th>
+									 			<th width="30px">&nbsp;</th>
+									 		</tr>
+									 		</thead>
+									 		<tbody>
+									 		</tbody>
+									 	</table>
+									 </div>
+								</div>
+							</div>
+
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<h3 class="panel-title">Kontrol</h3>
@@ -343,21 +374,66 @@
 </div>
 
 <?php if ($valid_mode) { ?>
+<!-- OBJECTIVE -->
+<div id="form-control-objective" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+		<h4 class="modal-title">Tambah Objective</h4>
+	</div>
+	<div class="modal-body">
+		
+			<form id="input-form-control-objective" role="form" class="form-horizontal">
+				<div class="form-body">
+					<div class="form-group">
+					<input type = "hidden" id = "form-control-revid-objective">
+						<label class="col-md-3 control-label smaller cl-compact">Obj. ID</label>
+						<div class="col-md-9">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" readonly="true" name="objective_id" id = "objective_id" placeholder="">
+								<span class="input-group-btn">
+								<button class="btn btn-primary btn-sm" type="button" data-toggle="modal" href="#modal-objective"><i class="fa fa-search fa-fw"/></i></button>
+								</span>
+								
+							</div>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-md-3 control-label smaller cl-compact" >Objective <span class="required">* </span></label>
+						<div class="col-md-9">
+						<textarea class="form-control input-sm " rows="3"  name="objective" id = "objective" placeholder="">NONE</textarea>
+						<button id="button_clear_control" type="button" class="hide btn red btn-xs" style="margin-top: 5px;"><i class="fa fa-minus-circle font-white"></i> Clear Existing Control</button>
+						</div>
+					</div>
+					
+				</div>
+			</form>
+	</div>
+	<div class="modal-footer">
+		<button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+		<button id="input-control-add-objective" type="button" 
+			class="btn blue ladda-button"
+			 data-style="expand-right"
+			>Add</button>
+	</div>
+</div>
+
 <!-- CONTROL -->
 <div id="form-control" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Tambah Kontrol</h4>
+		<h4 class="modal-title">Tambah Control</h4>
 	</div>
 	<div class="modal-body">
 		
 			<form id="input-form-control" role="form" class="form-horizontal">
 				<div class="form-body">
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact">ID Kontrol Eksisting</label>
+					<input type = "hidden" id = "form-control-revid">
+						<label class="col-md-3 control-label smaller cl-compact">Existing Control ID</label>
 						<div class="col-md-9">
 							<div class="input-group">
-								<input type="text" class="form-control input-sm" readonly="true" name="existing_control_id" placeholder="">
+								<input type="text" class="form-control input-sm" readonly="true" name="existing_control_id" id = "existing_control_id" placeholder="">
 								<span class="input-group-btn">
 								<button class="btn btn-primary btn-sm" type="button" data-toggle="modal" href="#modal-control"><i class="fa fa-search fa-fw"/></i></button>
 								</span>
@@ -365,40 +441,56 @@
 							</div>
 						</div>
 					</div>
+					<!--
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Kontrol Eksisting <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact" >Existing Control <span class="required">* </span></label>
 						<div class="col-md-9">
-						<textarea class="form-control input-sm" rows="3" name="risk_existing_control" placeholder=""></textarea>
+						<textarea class="form-control input-sm " rows="3" readonly="true" name="risk_existing_control" id = "risk_existing_control" placeholder=""></textarea>
 						<button id="button_clear_control" type="button" class="hide btn red btn-xs" style="margin-top: 5px;"><i class="fa fa-minus-circle font-white"></i> Clear Existing Control</button>
 						</div>
 					</div>
+					-->
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Evaluation atas Eksisting kontrol <span class="required">* </span></label>
+					<input type = "hidden" id = "form-control-revid">
+						<label class="col-md-3 control-label smaller cl-compact">Existing Control <span class="required">* </span></label>
 						<div class="col-md-9">
-						<input type="text" class="form-control input-sm" name="risk_evaluation_control" placeholder="">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" readonly="true" name="risk_existing_control" id = "risk_existing_control" placeholder="" value="NONE">
+								<span class="input-group-btn">
+								<button class="btn btn-primary btn-sm" type="button" data-toggle="modal" href="#modal-control-existing"><i class="fa fa-search fa-fw"/></i></button>
+								</span>
+								
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-md-3 control-label smaller cl-compact" >Evaluation on Existing Control <span class="required">* </span></label>
+						<div class="col-md-9">
+						<input type="text" class="form-control input-sm" value="NONE" name="risk_evaluation_control" id = "risk_evaluation_control" placeholder="">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Pemilik Kontrol <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact" >Control Owner <span class="required">* </span></label>
 						<div class="col-md-9">
-						<select class="form-control input-sm" name="risk_control_owner">
+						<select class="form-control input-sm" name="risk_control_owner" id = "risk_control_owner">
 										<option value="NONE">NONE</option>
 										<?php foreach($division_list as $row) { ?>
 										<option value="<?=$row['ref_key']?>"><?=$row['ref_value']?></option>
 										<?php } ?>
 						</select>
-						<!-- <input type="text" class="form-control input-sm" name="risk_control_owner" placeholder=""> -->
+					<!-- <input type="text" class="form-control input-sm" name="risk_control_owner" placeholder=""> -->
 						</div>
 					</div>
 				</div>
 			</form>
 	</div>
 	<div class="modal-footer">
-		<button type="button" data-dismiss="modal" class="btn btn-default">Tutup</button>
+		<button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
 		<button id="input-control-add" type="button" 
 			class="btn blue ladda-button"
 			 data-style="expand-right"
-			>Tambah</button>
+			>Add</button>
 	</div>
 </div>
 
@@ -528,6 +620,39 @@
 	</div>
 </div>
 
+<!-- Existing CONTROL -->
+<div id="modal-control-existing" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+		<h4 class="modal-title">Existing Control</h4>
+		<p style="color:red;">*Choose One</p>
+		<div class="inputs">
+			<div class="portlet-input input-inline">
+				<div class="input-group">
+					<input type="text" class="form-control" name="filter_search" placeholder="search...">
+					<span class="input-group-btn">
+					<button class="btn btn-default" type="button" id="modal-control-filter-submit">Search</button>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-body">
+		<div>
+			<table id="library_control_table_existing" class="table table-condensed table-bordered table-hover">
+				<thead>
+				<tr role="row" class="heading">
+					<th width="30px">&nbsp;</th>
+					<th>Existing Control</th>
+					<th>Description</th>
+				</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
 <!-- CONTROL -->
 <div id="modal-control" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
 	<div class="modal-header">
@@ -560,6 +685,38 @@
 		</div>
 	</div>
 </div>
+
+<!-- OBJECTIVE search Library -->
+<div id="modal-objective" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+		<h4 class="modal-title">Objective</h4>
+		<div class="inputs">
+			<div class="portlet-input input-inline">
+				<div class="input-group">
+					<input type="text" class="form-control" name="filter_search" placeholder="search...">
+					<span class="input-group-btn">
+					<button class="btn btn-default" type="button" id="modal-control-filter-submit-objective">Search</button>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-body">
+		<div>
+			<table id="library_objective_table" class="table table-condensed table-bordered table-hover">
+				<thead>
+				<tr role="row" class="heading">
+					<th width="30px">&nbsp;</th>
+					<th>Objective</th>
+				</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
 <!--
 <tr>
 	<td>

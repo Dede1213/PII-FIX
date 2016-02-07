@@ -542,7 +542,7 @@ grid_cr.init({
          	"render": function ( data, type, full, meta ) {
          		var cls = 'font-green-jungle';
          		if (full.cr_type == 'Risk Register') {
-         			var vm = 'main/mainrac/riskRegister2';
+         			var vm = 'risk/RiskRegister/ChangeRequestRac';
                     return '<a target="_self" class="'+cls+'" href="'+site_url+'/'+vm+'/'+full.created_by+'?status=change">'+data+'</a>';
          		}else if (full.cr_status == '1') {
                     var vm = 'main/mainrac/ChangeRequestView';

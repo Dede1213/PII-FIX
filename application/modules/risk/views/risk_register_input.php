@@ -3,7 +3,7 @@
 	<div class="page-content">
 		<!-- BEGIN PAGE HEADER-->
 		<h3 class="page-title">
-		Risk Form
+		Risk Information
 		</h3>
 	
 		<div class="page-bar">
@@ -40,7 +40,7 @@
 			<div class="portlet box blue">
 				<div class="portlet-title">
 					<div class="caption" id="div-portlet-page-caption">
-						Risk Form
+						Risk Information
 					</div>
 				</div>
 				

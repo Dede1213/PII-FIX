@@ -214,7 +214,7 @@ gridControlExisting.init({
         },
         "columnDefs": [ {
             "targets": 0,
-            "data": "id",
+            "data": "risk_id",
             "render": function ( data, type, full, meta ) {
                 var ret = '<div class="btn-group">'+
                 '<button type="button" class="btn btn-default btn-xs" onclick="javascript: RiskInput.selectControlLibraryexisting('+full.id +')"><i class="fa fa-check-circle font-blue"></i></button>'+
@@ -223,7 +223,7 @@ gridControlExisting.init({
             }
         } ],
         "columns": [
-            { "data": "id", "orderable": false },
+            { "data": "risk_id", "orderable": false },
             { "data": "existing_control"},
             { "data": "description" }
           

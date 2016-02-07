@@ -750,7 +750,7 @@ class Risk extends APP_Model {
 			}
 			
 			$sql = "select a.* from m_risk_existing_control a
-					".$ext." GROUP BY a.existing_control";
+					".$ext." ";
 		}
 
 		
@@ -771,7 +771,7 @@ class Risk extends APP_Model {
 					left join m_reference d on a.risk_impact_level = d.ref_key and d.ref_context = 'impact.display'
 					left join m_likelihood e on a.risk_likelihood_key = e.l_key
 					left join m_division f on a.risk_owner = f.division_id
-					join m_periode on m_periode.periode_id = a.periode_id
+					
 					where 	
 					a.risk_input_by = ?
 					
@@ -1535,7 +1535,7 @@ class Risk extends APP_Model {
 		$res = $this->db->query($sql);
 
 		$sql = "insert into t_risk_objective_change(risk_id,objective,switch_flag)
-				select a.risk_id,b.objective,b.switch_flag from t_risk a,t_risk_objective b where a.risk_input_by='$uid' and a.periode_id='$periode' and a.risk_library_id='$risk_id' and b.risk_id='$risk_id' ";
+				select a.risk_id,b.objective,'$uid' from t_risk a,t_risk_objective b where a.risk_input_by='$uid' and a.periode_id='$periode' and a.risk_library_id='$risk_id' and b.risk_id='$risk_id' ";
 		$res = $this->db->query($sql);
 
 

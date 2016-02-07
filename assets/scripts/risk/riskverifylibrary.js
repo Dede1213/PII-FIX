@@ -332,6 +332,18 @@ var RiskVerify = function() {
         			});
         		});
         		
+                me.controlResetobjective();
+                $.each( data_risk['objective_list'], function( key, val ) {
+                    var ecid = '';
+                    if (val.objective_id == null) ecid = '';
+                    var nnode = {
+                        'objective_id' : ecid,
+                        'objective' : val.objective
+                    };
+                    
+                    me.controlAddRowobjective(nnode);
+                });
+                
         		me.actionPlanReset();
         		$.each( data_risk['action_plan_list'], function( key, val ) {
         			var nnode = {
@@ -357,17 +369,8 @@ var RiskVerify = function() {
         			me.controlAddRow(nnode);
         		});
 
-                 me.controlResetobjective();
-                $.each( data_risk['objective_list'], function( key, val ) {
-                    var ecid = '';
-                    if (val.objective_id == null) ecid = '';
-                    var nnode = {
-                        'objective_id' : ecid,
-                        'objective' : val.objective
-                    };
-                    
-                    me.controlAddRowobjective(nnode);
-                });
+
+                 
 
         	});
         },

@@ -99,6 +99,20 @@ var RiskModify = function() {
         			
         			me.controlAddRow(nnode);
         		});
+
+                //objective
+                me.controlResetobjective();
+                $.each( data_risk['objective_list'], function( key, val ) {
+                    var ecid = val.objective_id;
+                    if (val.objective_id == null || val.objective_id == '0') ecid = '';
+                    var nnode = {
+                        'objective_id' : ecid,
+                        'objective' : val.objective
+                    };
+                    
+                    me.controlAddRowobjective(nnode);
+                });
+
         	});
         },
         submitRiskData: function() {

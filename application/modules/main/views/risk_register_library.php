@@ -614,6 +614,7 @@ WHERE t_risk.risk_id ='$id'";
 								</select>
 								</div>
 							</div>
+								<hr/>
 								<div class="panel-heading">
 									<h3 class="panel-title">Objective</h3>
 								</div>

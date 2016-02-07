@@ -1559,6 +1559,7 @@ class RiskRegister extends APP_Controller {
 			
 			$res = $this->risk->getRiskValidate('viewMyChange', $risk_id, $session_data);
 			if ($res) {
+				
 				$data = $this->loadDefaultAppConfig();
 				$data['sidebarMenu'] = $this->getSidebarMenuStructure('main');
 				$data['indonya'] = base_url('index.php/maini');

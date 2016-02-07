@@ -2976,7 +2976,7 @@ class Risk extends APP_Model {
 		if ($mode == 'viewMyChange') {
 			$res = $this->getChangeById($risk_id);
 			
-			if ($res['created_by'] == $credential['username']) {
+			if ($res['created_by'] == $credential['username'] ) {
 				$risk = $res;
 				return $risk;
 			} else {
@@ -4267,7 +4267,7 @@ class Risk extends APP_Model {
 				e.l_title as likelihood_v,
 				k.ref_value as treatment_v
 				from ".$tab." a 
-				join t_risk_change b on a.risk_id = b.risk_id
+				left join t_risk_change b on a.risk_id = b.risk_id
 				left join m_reference c on a.risk_level = c.ref_key and c.ref_context = 'risklevel.display'
 				left join m_reference d on a.risk_impact_level = d.ref_key and d.ref_context = 'impact.display'
 				left join m_likelihood e on a.risk_likelihood_key = e.l_key
@@ -5284,6 +5284,7 @@ class Risk extends APP_Model {
 		if ($change) {
 			// Risk Change
 			$par = array(
+				'risk_status' => 0,
 				'risk_cause' => $change['risk_cause'],
 				'risk_impact' => $change['risk_impact'],
 				'risk_level' => $change['risk_level'],

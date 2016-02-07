@@ -229,7 +229,7 @@ gridControlExisting.init({
           
        ],
         "order": [
-           // [1, "desc"]
+            [0, "asc"]
         ]// set first column as a default sort by asc
     }
 });
@@ -536,10 +536,9 @@ var RiskInput = function() {
                     var tr_idob = $('#tr_idnyaob').val();
                     
                     $("#"+tr_idob).html("");
-                    $('#4').remove();
                     
                     var nnode = {
-                        'tr_id' : tr_idob,
+                        'tr_idob' : tr_idob,
                         'objective_id' : xcid,
                         'objective' : xexis,
                         
@@ -809,8 +808,8 @@ var RiskInput = function() {
             var idrand = Math.floor((Math.random() * 1000000) + 1); 
 
             $('#objective_table > tbody:last-child').append('<tr id = '+me.dataControlCounterobjective+'>'+
-                '<td><input type = "hidden" id = "objective_id'+idrand+'" value = '+nnode.objective_id+'>'+nnode.objective_id+'</td>'+
-                '<td><textarea style="display:none;"  id = "objective'+idrand+'" > '+nnode.objective+'</textarea>'+nnode.objective+'</td>'+
+                '<td><input type = "hidden" id = "objective_id'+me.dataControlCounterobjective+' " value = '+nnode.objective_id+'>'+nnode.objective_id+'</td>'+
+                '<td><textarea style="display:none;" id = "objective'+me.dataControlCounterobjective+'"> '+nnode.objective+'</textarea>'+nnode.objective+'</td>'+
                 '<td>'+
                 '<div class="btn-group">'+
                     '<button type="button" class="btn btn-default btn-xs" onclick = "modal_control_edit_objective('+me.dataControlCounterobjective+')" ><i class="fa fa-pencil font-blue"></i></button>'+
@@ -1181,10 +1180,10 @@ var RiskInput = function() {
 function modal_control_edit(a){
 	 
 $('#tr_idnya').val(a); 
-$('#form-control-revid').val($('#existing_control_id'+a).val());
-$('#form-control-revid').val($('#risk_existing_control'+a).val());
-$('#form-control-revid').val($('#risk_evaluation_control'+a).val());
-$('#form-control-revid').select($('#risk_control_owner'+a).val());
+$('#existing_control_id').val($('#existing_control_id'+a).val());
+$('#risk_existing_control').val($('#risk_existing_control'+a).val());
+$('#risk_evaluation_control').val($('#risk_evaluation_control'+a).val());
+$('#risk_control_owner').select($('#risk_control_owner'+a).val());
 $('#form-control-revid').val(a);
 
 $('#form-control').modal('show'); 
@@ -1192,8 +1191,8 @@ $('#form-control').modal('show');
 
 function modal_control_edit_objective(a){
 $('#tr_idnyaob').val(a); 
-$('#form-control-revid-objective').val($('#objective_id'+a).val());
-$('#form-control-revid-objective').val($('#objective'+a).val());
+$('#objective_id').val($('#objective_id'+a).val());
+$('#objective').val($('#objective'+a).val());
 $('#form-control-revid-objective').val(a);
 
 $('#form-control-objective').modal('show'); 

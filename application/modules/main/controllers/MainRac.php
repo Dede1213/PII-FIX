@@ -3231,8 +3231,8 @@ class MainRac extends APP_Controller {
 	
 	public function actionplan_adt() {
 		$data = $this->loadDefaultAppConfig();
-		$data['indonya'] = base_url('index.php/riski/kri/krisetting');
-		$data['engnya'] = base_url('index.php/risk/kri/krisetting');		
+		$data['indonya'] = base_url('index.php/maini/mainrac/actionplan_adt');
+		$data['engnya'] = base_url('index.php/main/mainrac/actionplan_adt');		
 		$data['sidebarMenu'] = $this->getSidebarMenuStructure('risk/kri/krisetting');
 		$data['pageLevelStyles'] = '
 		<link rel="stylesheet" type="text/css" href="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>

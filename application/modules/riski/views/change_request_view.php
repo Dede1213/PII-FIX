@@ -9,11 +9,11 @@
 			<ul class="page-breadcrumb">
 				<li>
 					<i class="fa fa-home"></i>
-					<a target="_self" href="<?=$site_url?>/main">Beranda</a>
+					<a target="_self" href="<?=$site_url?>/main">Home</a>
 					<i class="fa fa-angle-right"></i>
 				</li>
 				<li>
-					<a target="_self" href="javascript:;">Lihat Permintaan Perubahan</a>
+					<a target="_self" href="javascript:;">Change Request View</a>
 				</li>
 			</ul>
 		</div>
@@ -53,7 +53,7 @@
 							</div>
 							<?php if ($change_type == 'Risk Form') { ?>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Penyebab</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Sebab</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_cause" placeholder="">
 								</div>
@@ -72,13 +72,13 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan Keterjadiaan</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm input-readview" readonly="true" name="likelihood_v" placeholder="">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Level Risiko</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Risiko Level</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_level_v" placeholder="">
 								</div>
@@ -91,14 +91,29 @@
 							</div>
 							<hr/>
 							<?php if ($change_type == 'Risk Form') { ?>
-							<h4>Control</h4>
+							<h4>Objective</h4>
+							<div class="table-scrollable">
+								<table id="primary_objective_table" class="table table-condensed table-bordered table-hover">
+									<thead>
+									<tr role="row" class="heading">
+										<th width="15%"><span class="small">Obj.ID</span></th>
+										<th><span class="small">Objective</span></th>
+										
+									</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+							</div>
+							<hr/>
+							<h4>Kontrol</h4>
 							<div class="table-scrollable">
 								<table id="primary_control_table" class="table table-condensed table-bordered table-hover">
 									<thead>
 									<tr role="row" class="heading">
-										<th><span class="small">ID Kontrol Eksisting</span></th>
-										<th><span class="small">Eksisting Kontrol</span></th>
-										<th><span class="small">Evaluasi Atas Kontrol Eksisting</span></th>
+										<th><span class="small">ID Kontrol yang ada saat ini</span></th>
+										<th><span class="small">Kontrol yang ada saat ini</span></th>
+										<th><span class="small">Evaluasi dari Kontrol yang ada saat ini</span></th>
 										<th><span class="small">Pemilik Kontrol</span></th>
 									</tr>
 									</thead>
@@ -114,7 +129,7 @@
 									<thead>
 									<tr role="row" class="heading">
 										<th><span class="small">Usulan Action Plan</span></th>
-										<th><span class="small">Batas Waktu</span></th>
+										<th><span class="small">Batas Tanggal</span></th>
 										<th><span class="small">Pemilik Action Plan</span></th>
 									</tr>
 									</thead>
@@ -131,7 +146,7 @@
 			<div class="portlet box blue">
 				<div class="portlet-title">
 					<div class="caption" id="div-portlet-page-caption">
-						Perubahan
+						Changes
 					</div>
 				</div>
 				
@@ -160,7 +175,7 @@
 							</div>
 							<?php if ($change_type == 'Risk Form') { ?>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Penyebab</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Sebab</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_cause" placeholder="">
 								</div>
@@ -173,19 +188,19 @@
 							</div>
 							<?php } ?>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Level Dampak</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Dampak Level</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm input-readview" readonly="true" name="impact_level_v" placeholder="">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan Keterjadiaan</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm input-readview" readonly="true" name="likelihood_v" placeholder="">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Level Risiko</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Risiko Level</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_level_v" placeholder="">
 								</div>
@@ -198,14 +213,36 @@
 							</div>
 							<hr/>
 							<?php if ($change_type == 'Risk Form') { ?>
-							<h4>Control</h4>
+							<div class="clearfix">
+								<a href="#form-control-objective" id="button-form-control-open" data-toggle="modal" class="btn default green pull-right btn-sm">
+								<i class="fa fa-plus"></i>
+								<span class="hidden-480">
+								Add Objective </span>
+								</a>
+								<h4>Objective</h4>
+							</div>
+							<div class="table-scrollable">
+								<table id="objective_table" class="table table-condensed table-bordered table-hover">
+									<thead>
+									<tr role="row" class="heading">
+										<th width="15%"><span class="small">Obj.ID</span></th>
+										<th><span class="small">Objective</span></th>
+										
+									</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+							</div>
+							<hr/>
+							<h4>Kontrol</h4>
 							<div class="table-scrollable">
 								<table id="control_table" class="table table-condensed table-bordered table-hover">
 									<thead>
 									<tr role="row" class="heading">
-										<th><span class="small">ID Kontrol Eksisting</span></th>
-										<th><span class="small">Kontrol Eksisting</span></th>
-										<th><span class="small">Evaluasi Atas Eksisting Kontrol</span></th>
+										<th><span class="small">ID Kontrol yang ada saat ini</span></th>
+										<th><span class="small">Kontrol yang ada saat ini</span></th>
+										<th><span class="small">Evaluasi dari Kontrol yang ada saat ini</span></th>
 										<th><span class="small">Pemilik Kontrol</span></th>
 									</tr>
 									</thead>
@@ -221,8 +258,8 @@
 									<thead>
 									<tr role="row" class="heading">
 										<th><span class="small">Usulan Action Plan</span></th>
-										<th><span class="small">Batas Waktu</span></th>
-										<th><span class="small">Pemilik Action Plan </span></th>
+										<th><span class="small">Batas Tanggal</span></th>
+										<th><span class="small">Pemilik Action Plan</span></th>
 										<th><span class="small">&nbsp;</span></th>
 									</tr>
 									</thead>
@@ -232,7 +269,7 @@
 							</div>
 						</div>
 						<div class="form-actions right">
-							<button type="button" class="btn yellow" id="verify-risk-button-cancel"><i class="fa fa-times"></i> Kembali</button>
+							<button type="button" class="btn yellow" id="verify-risk-button-cancel"><i class="fa fa-times"></i> Back</button>
 						</div>
 
 					</form>

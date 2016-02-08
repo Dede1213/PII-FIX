@@ -51,7 +51,7 @@ grid.init({
                 var vm = 'main/viewRisk';
                 if (full.risk_status == '0' || full.risk_status == '1') {
                     cls = '';
-                    vm = 'risk/RiskRegister/modifyRisk';
+                    vm = 'riski/RiskRegister/modifyRisk';
                 } 
                 return '<a target="_self" class="'+cls+'" href="'+site_url+'/'+vm+'/'+full.risk_id+'">'+data+'</a>';
             }
@@ -62,7 +62,7 @@ grid.init({
                 var tt = '';
                 if (data >= 2) {
                     tt = '<div class="btn-group">'+
-                            '<button type="button" class="btn blue btn-xs button-grid-edit" onclick="location.href=\''+site_url+'/risk/RiskRegister/ChangeRequestInput/'+full.risk_id+'\'"><i class="fa fa-pencil"></i></button>'+
+                            '<button type="button" class="btn blue btn-xs button-grid-edit" onclick="location.href=\''+site_url+'/riski/RiskRegister/ChangeRequestInput/'+full.risk_id+'\'"><i class="fa fa-pencil"></i></button>'+
                         '</div>';
                 }
                 return tt;
@@ -115,12 +115,12 @@ grid_change.init({
             "render": function ( data, type, full, meta ) {
                 var cls = 'font-green-jungle';
                 if (full.cr_type == 'Risk Register') {
-                    var vm = 'risk/RiskRegister';
+                    var vm = 'riski/RiskRegister';
                     return '<a target="_self" class="'+cls+'" href="'+site_url+'/'+vm+'">'+data+'</a>';
                 }else if (full.cr_status == '1') {
-                    var vm = 'risk/riskregister/ChangeRequestView';
+                    var vm = 'riski/riskregister/ChangeRequestView';
                 } else {
-                   var vm = 'risk/riskregister/ChangeRequestView';
+                   var vm = 'riski/riskregister/ChangeRequestView';
                 }
                 return '<a target="_self" class="'+cls+'" href="'+site_url+'/'+vm+'/'+full.id+'">'+data+'</a>';
             }

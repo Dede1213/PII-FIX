@@ -153,7 +153,7 @@ grid.init({
         		} else if (data == '1') {
         			img = 'confirm.png';
         		} else {
-        			img = 'submit.png';
+        			img = 'draft.png';
         		}
         		return '<center><img src="'+base_url+'assets/images/legend/'+img+'"/></center>';
         	}
@@ -175,7 +175,7 @@ grid.init({
         		} else if (data == '1') {
         			val = 'Confirm';
         		} else {
-        			val = 'Submitted to RAC';
+        			val = 'Draft';
         		}
         		return val;
         	}
@@ -195,7 +195,10 @@ grid.init({
         					'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"></i></button>'+
         				'</div>';
         		} else {
-        			img = '&nbsp;';
+        			img = '<div class="btn-group">'+
+        					'<button type="button" class="btn btn-default btn-xs button-grid-confirm"><i class="fa fa-thumbs-up font-green"></i></button>'+
+        					'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"></i></button>'+
+        				'</div>';
         		}
         		return img;
         	}
@@ -335,7 +338,6 @@ var RiskList = function() {
     	        	e.preventDefault();
     	        	me.submitRiskPeriode2();
     	        });
-
 	        },
 	        filterDataGrid: function(fby, fval) {
 	        	grid.clearAjaxParams();
@@ -350,7 +352,7 @@ var RiskList = function() {
 	        		var eparam = {
 	        			'risk_id' : data.risk_id
 	        		};
-	        		var url = site_url+'/risk/RiskRegister/confirmRisk';
+	        		var url = site_url+'/riski/RiskRegister/confirmRisk';
 	        		
 	        		Metronic.blockUI({ boxed: true });
 	        		$.post(
@@ -362,7 +364,7 @@ var RiskList = function() {
 	        					//grid.getDataTable().ajax.reload();
 	        					//grid2.getDataTable().ajax.reload();
 	        					//MainApp.viewGlobalModal('success', 'Success Update Risk Status');
-	        					window.location.href = site_url+'/risk/RiskRegister';
+	        					window.location.href = site_url+'/riski/RiskRegister';
 
 	        				} else {
 	        					MainApp.viewGlobalModal('error', data.msg);
@@ -383,7 +385,7 @@ var RiskList = function() {
 	        		var eparam = {
 	        			'risk_id' : data.risk_id
 	        		};
-	        		var url = site_url+'/risk/RiskRegister/draftRisk';
+	        		var url = site_url+'/riski/RiskRegister/draftRisk';
 	        		Metronic.blockUI({ boxed: true });
 	        		$.post(
 	        			url,
@@ -415,7 +417,7 @@ var RiskList = function() {
 	        		var eparam = {
 	        			'risk_id' : data.risk_id
 	        		};
-	        		var url = site_url+'/risk/RiskRegister/deleteRisk';
+	        		var url = site_url+'/riski/RiskRegister/deleteRisk';
 	        		
 	        		Metronic.blockUI({ boxed: true });
 	        		$.post(
@@ -442,8 +444,7 @@ var RiskList = function() {
 	        },
 	        draftRiskPeriode: function() {
 	        	//g_p_name
-	        	
-	        		var url = site_url+'/risk/RiskRegister/draftRiskByPeriode';
+	        		var url = site_url+'/riski/RiskRegister/draftRiskByPeriode';
 	        		
 	        		Metronic.blockUI({ boxed: true });
 	        		$.post(
@@ -490,7 +491,7 @@ var RiskList = function() {
 	        	var mod = MainApp.viewGlobalModal('confirm', 'Submit to RAC All Risk in Periode : <b>'+g_p_name+'</b>');
 	        	mod.find('button.btn-ok-success').one('click', function(){
 	        		mod.modal('hide');
-	        		var url = site_url+'/risk/RiskRegister/submitRiskByPeriode';
+	        		var url = site_url+'/riski/RiskRegister/submitRiskByPeriode';
 	        		
 	        		Metronic.blockUI({ boxed: true });
 	        		$.post(
@@ -501,8 +502,40 @@ var RiskList = function() {
 	        				if(data.success) {
 	        					//grid.getDataTable().ajax.reload();
 	        					//grid2.getDataTable().ajax.reload();
+	        					
 	        					//MainApp.viewGlobalModal('success', 'Success Update Risk Status');
-	        					window.location.href = site_url+'/risk/RiskRegister';
+	        					window.location.href = site_url+'/riski/RiskRegister';
+	        				} else {
+	        					MainApp.viewGlobalModal('error', data.msg);
+	        				}
+	        				
+	        			},
+	        			"json"
+	        		).fail(function() {
+	        			Metronic.unblockUI();
+	        			MainApp.viewGlobalModal('error', 'Error Submitting Data');
+	        		 });
+	        	});
+	        },
+	        
+	        submitRiskPeriode2: function() {
+	        	var mod = MainApp.viewGlobalModal('confirm', 'change request to RAC All Risk in Periode : <b>'+g_p_name+'</b>');
+	        	mod.find('button.btn-ok-success').one('click', function(){
+	        		mod.modal('hide');
+	        		var url = site_url+'/riski/RiskRegister/submitRiskByPeriode2';
+	        		
+	        		Metronic.blockUI({ boxed: true });
+	        		$.post(
+	        			url,
+	        			{},
+	        			function( data ) {
+	        				Metronic.unblockUI();
+	        				if(data.success) {
+	        					//grid.getDataTable().ajax.reload();
+	        					//grid2.getDataTable().ajax.reload();
+	        					
+	        					//MainApp.viewGlobalModal('success', 'Success Change Request');
+	        					window.location.href = site_url+'/maini/#tab_change_request_list';
 	        				} else {
 	        					MainApp.viewGlobalModal('error', data.msg);
 	        				}
@@ -516,36 +549,7 @@ var RiskList = function() {
 	        	});
 	        }
 
-	        submitRiskPeriode2: function() {
-	        	var mod = MainApp.viewGlobalModal('confirm', 'change request to RAC All Risk in Periode : <b>'+g_p_name+'</b>');
-	        	mod.find('button.btn-ok-success').one('click', function(){
-	        		mod.modal('hide');
-	        		var url = site_url+'/risk/RiskRegister/submitRiskByPeriode2';
-	        		
-	        		Metronic.blockUI({ boxed: true });
-	        		$.post(
-	        			url,
-	        			{},
-	        			function( data ) {
-	        				Metronic.unblockUI();
-	        				if(data.success) {
-	        					grid.getDataTable().ajax.reload();
-	        					grid2.getDataTable().ajax.reload();
-	        					
-	        					MainApp.viewGlobalModal('success', 'Success Change Request');
-	        					//window.location.href = site_url+'/risk/RiskRegister';
-	        				} else {
-	        					MainApp.viewGlobalModal('error', data.msg);
-	        				}
-	        				
-	        			},
-	        			"json"
-	        		).fail(function() {
-	        			Metronic.unblockUI();
-	        			MainApp.viewGlobalModal('error', 'Error Submitting Data');
-	        		 });
-	        	});
-	        }
-	        
+
+
 	 }
 }();

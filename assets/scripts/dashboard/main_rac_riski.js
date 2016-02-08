@@ -49,9 +49,9 @@ grid.init({
             "render": function ( data, type, full, meta ) {
                 if (full.risk_status == 2) {
                     //ubah
-                    return '<a target="_self" href="'+site_url+'/main/mainrac/riskRegisterForm/'+full.risk_id+'/'+full.risk_input_by+'">'+data+'</a>';
+                    return '<a target="_self" href="'+site_url+'/maini/mainrac/riskRegisterForm/'+full.risk_id+'/'+full.risk_input_by+'">'+data+'</a>';
                 }
-                return '<a target="_self" href="'+site_url+'/main/mainrac/viewRisk/'+full.risk_id+'">'+data+'</a>';
+                return '<a target="_self" href="'+site_url+'/maini/mainrac/viewRisk/'+full.risk_id+'">'+data+'</a>';
             }
         }, {
             "targets": 7,
@@ -137,9 +137,9 @@ grid2.init({
             "data": "risk_code",
             "render": function ( data, type, full, meta ) {
                 if (full.risk_status == 2) {
-                    return '<a target="_self" href="'+site_url+'/main/mainrac/riskRegisterForm/'+full.risk_id+'/'+full.risk_input_by+'">'+data+'</a>';
+                    return '<a target="_self" href="'+site_url+'/maini/mainrac/riskRegisterForm/'+full.risk_id+'/'+full.risk_input_by+'">'+data+'</a>';
                 }
-                return '<a target="_self" href="'+site_url+'/main/mainrac/viewRisk/'+full.risk_id+'">'+data+'</a>';
+                return '<a target="_self" href="'+site_url+'/maini/mainrac/viewRisk/'+full.risk_id+'">'+data+'</a>';
             }
         } ],    
         "columns": [
@@ -200,7 +200,7 @@ var RiskList = function() {
                                 //grid2.getDataTable().ajax.reload();
                                 
                                 MainApp.viewGlobalModal('success', 'Success verify change Request');
-                                window.location.href = site_url+'/main/mainrac#tab_change_request_list';
+                                window.location.href = site_url+'/maini/mainrac#tab_change_request_list';
                             } else {
                                 MainApp.viewGlobalModal('error', data.msg);
                             }
@@ -231,7 +231,7 @@ var RiskList = function() {
                                 //grid2.getDataTable().ajax.reload();
                                 
                                 MainApp.viewGlobalModal('success', 'Success Ignore change Request');
-                                window.location.href = site_url+'/main/mainrac#tab_change_request_list';
+                                window.location.href = site_url+'/maini/mainrac#tab_change_request_list';
                             } else {
                                 MainApp.viewGlobalModal('error', data.msg);
                             }

@@ -79,11 +79,14 @@
 									</select>
 									</div>
 								</div>
+								
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact">Peristiwa Risiko <span class="required">* </span>
-									</label>
+									<label class="col-md-3 control-label small cl-compact">Peristiwa Risiko <span class="required">* </span></label>
 									<div class="col-md-9">
-									<input type="text" class="form-control input-sm" name="risk_event" data-required="1" placeholder="">
+									<textarea rows="3" class="form-control input-sm popovers" 
+									data-container="body" data-trigger="focus" data-placement="bottom" data-content=""
+									name="risk_event" placeholder=""></textarea>
+
 									</div>
 								</div>
 								<div class="form-group">

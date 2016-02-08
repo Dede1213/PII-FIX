@@ -761,6 +761,85 @@ class MainPic extends APP_Controlleri {
 		$data['page'] = $page;
 		echo json_encode($data);
 	}
+
+	private function validatePeriodeMode($mode) 
+	{
+		
+		$periode = $this->mperiode->getCurrentPeriode();
+		
+		if ($mode == 'adhoc') {
+			if ($periode) return false;
+			else return true;
+		} else if ($mode == 'periodic') {
+			if ($periode) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+		return false;
+	}
+
+	public function actionplan_adt() {
+	 
+		$data = $this->loadDefaultAppConfig();
+		$data['sidebarMenu'] = $this->getSidebarMenuStructure('main/mainpic/actionplan_adt');
+		$data['indonya'] = base_url('index.php/maini/mainpic/actionplan_adt');
+		$data['engnya'] = base_url('index.php/main/mainpic/actionplan_adt');		
+		$data['pageLevelStyles'] = '
+		<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css"/>
+		<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
+		<link rel="stylesheet" type="text/css" href="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
+		<link rel="stylesheet" type="text/css" href="assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css"/>
+		';
+		
+		$data['pageLevelScripts'] = '
+		<script type="text/javascript" src="assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+		
+		<script src="assets/global/plugins/flot/jquery.flot.min.js"></script>
+		<script src="assets/global/plugins/flot/jquery.flot.categories.min.js" type="text/javascript"></script>
+		<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
+		<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
+		<script type="text/javascript" src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+		<script src="assets/scripts/dashboard/main_pic.js"></script>
+		';
+		
+		$data['pageLevelScriptsInit'] = 'Actionplan_adt.init();
+		
+		
+		 
+		';
+		
+		$this->load->model('admin/mperiode');
+		$data['valid_mode'] = $this->validatePeriodeMode('periodic');
+		
+		$data['periode'] = null;
+		if ($data['valid_mode']) {
+			$data['periode'] = $this->mperiode->getCurrentPeriode();
+			$data['periodenya'] = 1;
+		}else{
+			$data['periodenya'] = 0;
+		}
+		
+		$this->load->model('user/usermodel');
+		if ($this->session->credential['main_role_id'] == 2) {
+			$data['pic_list'] = $this->usermodel->getUserRACByDivision($this->session->credential['division_id']);
+		} else {
+			$data['pic_list'] = $this->usermodel->getUserPicByDivision($this->session->credential['division_id']);
+		}
+		
+		$this->load->model('admin/mperiode');
+		$periode = $this->mperiode->getCurrentPeriode();
+		$data['adhoc_button'] = true;
+		if ($periode) {
+			$data['adhoc_button'] = false;
+		}
+		
+		$this->load->view('header', $data);
+		$this->load->view('actionplan_adtpic', $data);
+		$this->load->view('footer', $data);
+	}
 	
 	public function viewOwnedKri($rid = false) {
 		if ($rid && is_numeric($rid)) {

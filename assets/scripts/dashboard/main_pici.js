@@ -51,7 +51,7 @@ grid.init({
                 var vm = 'main/mainpic/viewRisk';
                 if (full.risk_status == '0' || full.risk_status == '1') {
                     cls = '';
-                    vm = 'risk/RiskRegister/modifyRisk';
+                    vm = 'riski/RiskRegister/modifyRisk';
                 } 
                 return '<a target="_self" class="'+cls+'" href="'+site_url+'/'+vm+'/'+full.risk_id+'">'+data+'</a>';
             }
@@ -62,7 +62,7 @@ grid.init({
                 var tt = '';
                 if (data >= 2) {
                     tt = '<div class="btn-group">'+
-                            '<button type="button" class="btn blue btn-xs button-grid-edit" onclick="location.href=\''+site_url+'/risk/RiskRegister/ChangeRequestInput/'+full.risk_id+'\'"><i class="fa fa-pencil"></i></button>'+
+                            '<button type="button" class="btn blue btn-xs button-grid-edit" onclick="location.href=\''+site_url+'/riski/RiskRegister/ChangeRequestInput/'+full.risk_id+'\'"><i class="fa fa-pencil"></i></button>'+
                         '</div>';
                 }
                 return tt;
@@ -132,9 +132,9 @@ grid_owned.init({
                 var ret = full.risk_treatment_owner_v;
                 var dat = '';
                 if (ret == '' || ret == null) {
-                    return '<a target="_self" href="'+site_url+'/main/mainpic/viewOwnedRisk/'+full.risk_id+'">'+data+'</a>';
+                    return '<a target="_self" href="'+site_url+'/maini/mainpic/viewOwnedRisk/'+full.risk_id+'">'+data+'</a>';
                 } else {
-                    return '<a target="_self" href="'+site_url+'/main/mainpic/viewOwnedRisk/'+full.risk_id+'">'+data+'</a>';
+                    return '<a target="_self" href="'+site_url+'/maini/mainpic/viewOwnedRisk/'+full.risk_id+'">'+data+'</a>';
                 }
                 return dat;
             }
@@ -160,7 +160,7 @@ grid_owned.init({
                 var tt = '';
                 if (data >= 5) {
                     tt = '<div class="btn-group">'+
-                            '<button type="button" class="btn blue btn-xs button-grid-edit" onclick="location.href=\''+site_url+'/risk/RiskRegister/ChangeRequestOwned/'+full.risk_id+'\'"><i class="fa fa-pencil"></i></button>'+
+                            '<button type="button" class="btn blue btn-xs button-grid-edit" onclick="location.href=\''+site_url+'/riski/RiskRegister/ChangeRequestOwned/'+full.risk_id+'\'"><i class="fa fa-pencil"></i></button>'+
                         '</div>';
                 }
                 return tt;
@@ -229,9 +229,9 @@ grid_action.init({
                 var ret = full.assigned_to_v;
                 var dat = '';
                 if (ret == '' || ret == null) {
-                    return '<a target="_self" href="'+site_url+'/main/mainpic/viewOwnedActionPlan/'+full.id+'">'+data+'</a>';
+                    return '<a target="_self" href="'+site_url+'/maini/mainpic/viewOwnedActionPlan/'+full.id+'">'+data+'</a>';
                 } else {
-                    return '<a target="_self" href="'+site_url+'/main/mainpic/viewOwnedActionPlan/'+full.id+'">'+data+'</a>';
+                    return '<a target="_self" href="'+site_url+'/maini/mainpic/viewOwnedActionPlan/'+full.id+'">'+data+'</a>';
                 }
                 return dat;
             }
@@ -253,7 +253,7 @@ grid_action.init({
             "targets": 5,
             "data": "risk_code",
             "render": function ( data, type, full, meta ) {
-                return '<a target="_self" href="'+site_url+'/main/mainpic/viewOwnedRisk/'+full.risk_id+'">'+data+'</a>';
+                return '<a target="_self" href="'+site_url+'/maini/mainpic/viewOwnedRisk/'+full.risk_id+'">'+data+'</a>';
             }
         }, {
             "targets": 6,
@@ -262,7 +262,7 @@ grid_action.init({
                 var tt = '';
                 if (data >= 3) {
                     tt = '<div class="btn-group">'+
-                            '<button type="button" class="btn blue btn-xs button-grid-edit" onclick="location.href=\''+site_url+'/risk/RiskRegister/ChangeRequestAction/'+full.id+'\'"><i class="fa fa-pencil"></i></button>'+
+                            '<button type="button" class="btn blue btn-xs button-grid-edit" onclick="location.href=\''+site_url+'/riski/RiskRegister/ChangeRequestAction/'+full.id+'\'"><i class="fa fa-pencil"></i></button>'+
                         '</div>';
                 }
                 return tt;
@@ -332,9 +332,9 @@ grid_exec.init({
                 var ret = full.assigned_to_v;
                 var dat = '';
                 if (ret == '' || ret == null) {
-                    return '<a target="_self" href="'+site_url+'/main/mainpic/viewOwnedActionPlan/'+full.id+'">'+data+'</a>';
+                    return '<a target="_self" href="'+site_url+'/maini/mainpic/viewOwnedActionPlan/'+full.id+'">'+data+'</a>';
                 } else {
-                    return '<a target="_self" href="'+site_url+'/main/mainpic/viewOwnedActionPlan/'+full.id+'">'+data+'</a>';
+                    return '<a target="_self" href="'+site_url+'/maini/mainpic/viewOwnedActionPlan/'+full.id+'">'+data+'</a>';
                 }
                 return dat;
             }
@@ -342,7 +342,7 @@ grid_exec.init({
             "targets": 6,
             "data": "act_code",
             "render": function ( data, type, full, meta ) {
-                return '<a target="_self" href="'+site_url+'/main/mainpic/viewRisk/'+full.risk_id+'">'+data+'</a>';
+                return '<a target="_self" href="'+site_url+'/maini/mainpic/viewRisk/'+full.risk_id+'">'+data+'</a>';
             }
         },{
             "targets": 5,
@@ -459,9 +459,9 @@ grid_kri.init({
                 var ret = full.kri_pic_v;
                 var dat = '';
                 if (ret == '' || ret == null) {
-                    return '<a target="_self" href="'+site_url+'/main/mainpic/viewOwnedKri/'+full.id+'">'+data+'</a>';
+                    return '<a target="_self" href="'+site_url+'/maini/mainpic/viewOwnedKri/'+full.id+'">'+data+'</a>';
                 } else {
-                    return '<a target="_self" href="'+site_url+'/main/mainpic/viewOwnedKri/'+full.id+'">'+data+'</a>';
+                    return '<a target="_self" href="'+site_url+'/maini/mainpic/viewOwnedKri/'+full.id+'">'+data+'</a>';
                 }
                 return dat;
             }
@@ -486,7 +486,7 @@ grid_kri.init({
             "targets": 6,
             "data": "risk_code",
             "render": function ( data, type, full, meta ) {
-                return '<a target="_self" href="'+site_url+'/main/mainpic/viewOwnedRisk/'+full.risk_id+'">'+data+'</a>';
+                return '<a target="_self" href="'+site_url+'/maini/mainpic/viewOwnedRisk/'+full.risk_id+'">'+data+'</a>';
             }
         }, {
             "targets": 7,
@@ -495,7 +495,7 @@ grid_kri.init({
                 var tt = '';
                 if (data >= 2) {
                     tt = '<div class="btn-group">'+
-                            '<button type="button" class="btn blue btn-xs button-grid-edit" onclick="location.href=\''+site_url+'/risk/RiskRegister/ChangeRequestKri/'+full.id+'\'"><i class="fa fa-pencil"></i></button>'+
+                            '<button type="button" class="btn blue btn-xs button-grid-edit" onclick="location.href=\''+site_url+'/riski/RiskRegister/ChangeRequestKri/'+full.id+'\'"><i class="fa fa-pencil"></i></button>'+
                         '</div>';
                 }
                 return tt;
@@ -551,9 +551,9 @@ grid_change.init({
                     var vm = 'risk/RiskRegister';
                     return '<a target="_self" class="'+cls+'" href="'+site_url+'/'+vm+'">'+data+'</a>';
                 }else if (full.cr_status == '1') {
-                    var vm = 'risk/riskregister/ChangeRequestView';
+                    var vm = 'riski/riskregister/ChangeRequestView';
                 } else {
-                    var vm = 'risk/riskregister/ChangeRequestView';
+                    var vm = 'riski/riskregister/ChangeRequestView';
                 }
                 return '<a target="_self" class="'+cls+'" href="'+site_url+'/'+vm+'/'+full.id+'">'+data+'</a>';
                 //var vm = 'risk/riskregister/ChangeRequestView';

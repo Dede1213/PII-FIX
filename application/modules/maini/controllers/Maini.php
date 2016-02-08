@@ -171,7 +171,7 @@ class Maini extends APP_Controlleri {
 			
 			$this->load->view('maini/header', $data);
 			$this->load->view('riski/risk_register_view', $data);
-			$this->load->view('main/footer', $data);
+			$this->load->view('maini/footer', $data);
 		}
 	}
 	

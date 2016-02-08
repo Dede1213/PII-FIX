@@ -3,7 +3,7 @@
 	<div class="page-content">
 		<!-- BEGIN PAGE HEADER-->
 		<h3 class="page-title">
-		Change Request Form
+		Form Permintaan Perubahan
 		</h3>
 		<div class="page-bar">
 			<ul class="page-breadcrumb">
@@ -34,73 +34,73 @@
 						<div class="form-body">
 							<div class="form-group">
 								<input type="hidden" name="risk_id" value=""/>
-								<label class="col-md-3 control-label smaller cl-compact" >Risk Code</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Kode Risiko</label>
 								<div class="col-md-9">
 								<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_code" placeholder="">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact">Risk Event
+								<label class="col-md-3 control-label smaller cl-compact">Peristiwa Risiko
 								</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_event" placeholder="">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label small cl-compact">Risk Event Description</label>
+								<label class="col-md-3 control-label small cl-compact">Deskripsi Peristiwa Risiko</label>
 								<div class="col-md-9">
 								<textarea class="form-control input-sm input-readview" readonly="true" rows="3" name="risk_description" placeholder=""></textarea>
 								</div>
 							</div>
 							<?php if ($change_type == 'Risk Form') { ?>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Cause</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Sebab</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_cause" placeholder="">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Impact</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Dampak</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_impact" placeholder="">
 								</div>
 							</div>
 							<?php } ?>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Impact Level</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Dampak Level</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm input-readview" readonly="true" name="impact_level_v" placeholder="">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Likelihood</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm input-readview" readonly="true" name="likelihood_v" placeholder="">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Risk Level</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Risiko Level</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_level_v" placeholder="">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Suggested Risk Treatment</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Usulan Penanganan Risiko</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm input-readview" readonly="true" name="treatment_v" placeholder="">
 								</div>
 							</div>
 							<hr/>
 							<?php if ($change_type == 'Risk Form') { ?>
-							<h4>Control</h4>
+							<h4>Kontrol</h4>
 							<div class="table-scrollable">
 								<table id="primary_control_table" class="table table-condensed table-bordered table-hover">
 									<thead>
 									<tr role="row" class="heading">
-										<th><span class="small">Existing Control ID</span></th>
-										<th><span class="small">Existing Control</span></th>
-										<th><span class="small">Evaluation on Existing Control</span></th>
-										<th><span class="small">Control Owner</span></th>
+										<th><span class="small">ID kontrol Yang Ada Saat Ini</span></th>
+										<th><span class="small">Kontrol Yang Ada Saat Ini</span></th>
+										<th><span class="small">Evaluasi dari Kontrol Yang Ada Saat ini </span></th>
+										<th><span class="small">Pemilik Kontrol</span></th>
 									</tr>
 									</thead>
 									<tbody>
@@ -114,9 +114,9 @@
 								<table id="primary_action_plan_table" class="table table-condensed table-bordered table-hover">
 									<thead>
 									<tr role="row" class="heading">
-										<th><span class="small">Suggested Action Plan</span></th>
-										<th><span class="small">Due Date</span></th>
-										<th><span class="small">Action Plan Owner</span></th>
+										<th><span class="small">Usulan Action Plan</span></th>
+										<th><span class="small">Batas Tanggal</span></th>
+										<th><span class="small">Pemilik Action Plan</span></th>
 									</tr>
 									</thead>
 									<tbody>
@@ -146,33 +146,33 @@
 						<div class="form-body">
 							<div class="form-group">
 								<input type="hidden" name="risk_id" value=""/>
-								<label class="col-md-3 control-label smaller cl-compact" >Risk Code</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Kode Risiko</label>
 								<div class="col-md-9">
 								<input type="text" class="form-control input-sm" readonly="true" name="risk_code" placeholder="">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact">Risk Event
+								<label class="col-md-3 control-label smaller cl-compact">Peristiwa Risiko
 								</label>
 								<div class="col-md-9">
 								<input type="text" class="form-control input-sm" readonly="true" name="risk_event" data-required="1" placeholder="">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label small cl-compact">Risk Event Description</label>
+								<label class="col-md-3 control-label small cl-compact">Deskripsi Peristiwa Risiko</label>
 								<div class="col-md-9">
 								<textarea class="form-control" rows="3" readonly="true" name="risk_description" placeholder=""></textarea>
 								</div>
 							</div>
 							<?php if ($change_type == 'Risk Form') { ?>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Cause <span class="required">* </span></label>
+								<label class="col-md-3 control-label smaller cl-compact" >Sebab <span class="required">* </span></label>
 								<div class="col-md-9">
 								<input type="text" class="form-control input-sm" name="risk_cause" placeholder="">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Impact <span class="required">* </span></label>
+								<label class="col-md-3 control-label smaller cl-compact" >Dampak <span class="required">* </span></label>
 								<div class="col-md-9">
 								<input type="text" class="form-control input-sm" name="risk_impact" placeholder="">
 								</div>
@@ -180,7 +180,7 @@
 							<?php } ?>
 							<?php if ($change_type == 'Risk Form' || $change_type == 'Risk Owner Form') { ?>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Impact Level <span class="required">* </span></label>
+								<label class="col-md-3 control-label smaller cl-compact" >Dampak Level <span class="required">* </span></label>
 								<div class="col-md-9">
 									<div class="input-group">
 										<input type="hidden" name="risk_impact_level_id" value=""/>
@@ -193,7 +193,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Likelihood <span class="required">* </span></label>
+								<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan <span class="required">* </span></label>
 								<div class="col-md-9">
 									<div class="input-group">
 										<input type="hidden" name="risk_likelihood_id" value=""/>
@@ -207,13 +207,13 @@
 							</div>
 							<div class="form-group">
 								<input type="hidden" name="risk_level_id" value=""/>
-								<label class="col-md-3 control-label smaller cl-compact" >Risk Level <span class="required">* </span></label>
+								<label class="col-md-3 control-label smaller cl-compact" >Risiko Level <span class="required">* </span></label>
 								<div class="col-md-9">
 								<input type="text" class="form-control input-sm" readonly="true" name="risk_level" placeholder="">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Suggested Risk Treatment</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Usulan Penanganan Risiko</label>
 								<div class="col-md-9">
 								<select class="form-control input-sm" name="suggested_risk_treatment">
 									<?php foreach($treatment_list as $row) { ?>
@@ -224,25 +224,25 @@
 							</div>
 							<?php } else { ?>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Impact Level</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Dampak Level</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm" readonly="true" name="impact_level_v" placeholder="">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Likelihood</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm" readonly="true" name="likelihood_v" placeholder="">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Risk Level</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Risiko Level</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm" readonly="true" name="risk_level_v" placeholder="">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Suggested Risk Treatment</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Usulan Penanganan Risiko</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm" readonly="true" name="treatment_v" placeholder="">
 								</div>
@@ -254,18 +254,18 @@
 								<a href="#form-control" id="button-form-control-open" data-toggle="modal" class="btn default green pull-right btn-sm">
 								<i class="fa fa-plus"></i>
 								<span class="hidden-480">
-								Add Control </span>
+								Tambah Kontrol </span>
 								</a>
-								<h4>Control</h4>
+								<h4>Kontrol</h4>
 							</div>
 							<div class="table-scrollable">
 								<table id="control_table" class="table table-condensed table-bordered table-hover">
 									<thead>
 									<tr role="row" class="heading">
-										<th><span class="small">Existing Control ID</span></th>
-										<th><span class="small">Existing Control</span></th>
-										<th><span class="small">Evaluation on Existing Control</span></th>
-										<th><span class="small">Control Owner</span></th>
+										<th><span class="small">ID Kontrol Yang Ada Saat Ini</span></th>
+										<th><span class="small">Kontrol Yang Ada Saat Ini</span></th>
+										<th><span class="small">Evaluasi dari kontrol yang ada saat ini</span></th>
+										<th><span class="small">Pemilik Kontrol</span></th>
 										<th width="30px">&nbsp;</th>
 									</tr>
 									</thead>
@@ -280,7 +280,7 @@
 								<a href="#form-data" id="button-form-data-open" data-toggle="modal" class="btn default green pull-right btn-sm">
 								<i class="fa fa-plus"></i>
 								<span class="hidden-480">
-								Add Plan Action Suggestion </span>
+								Tambah Usulan Action Plan </span>
 								</a>
 								<h4>Action Plan</h4>
 							</div>
@@ -291,9 +291,9 @@
 								<table id="action_plan_table" class="table table-condensed table-bordered table-hover">
 									<thead>
 									<tr role="row" class="heading">
-										<th><span class="small">Suggested Action Plan</span></th>
-										<th width="80px"><span class="small">Due Date</span></th>
-										<th><span class="small">Action Plan Owner</span></th>
+										<th><span class="small">Usulan Action Plan</span></th>
+										<th width="80px"><span class="small">Batas Tanggal</span></th>
+										<th><span class="small">Pemilik Action Plan</span></th>
 										<th width="70px">&nbsp;</th>
 									</tr>
 									</thead>

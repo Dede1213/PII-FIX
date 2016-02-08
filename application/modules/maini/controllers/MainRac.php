@@ -1,13 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class MainRac extends APP_Controller {
+class MainRac extends APP_Controlleri {
 	public function index()
 	{
 		$data = $this->loadDefaultAppConfig();
 		$data['indonya'] = base_url('index.php/maini/mainrac');
 		$data['engnya'] = base_url('index.php/main/mainrac');			
-		$data['sidebarMenu'] = $this->getSidebarMenuStructure('main/mainrac');
+		$data['sidebarMenu'] = $this->getSidebarMenuStructure('maini/mainrac');
 		
 		$data['pageLevelStyles'] = '
 		<link rel="stylesheet" type="text/css" href="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
@@ -20,7 +20,7 @@ class MainRac extends APP_Controller {
 		<script type="text/javascript" src="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
 		<script src="assets/global/plugins/flot/jquery.flot.min.js"></script>
 		<script src="assets/global/plugins/flot/jquery.flot.categories.min.js" type="text/javascript"></script>
-		<script src="assets/scripts/dashboard/main_rac.js"></script>
+		<script src="assets/scripts/dashboard/main_raci.js"></script>
 		<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
 		<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
 		 
@@ -52,7 +52,7 @@ class MainRac extends APP_Controller {
 		<script type="text/javascript" src="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
 		<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
 		<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
-		<script src="assets/scripts/dashboard/main_rac_risk.js"></script>
+		<script src="assets/scripts/dashboard/main_rac_riski.js"></script>
 		';
 		
 		$data['pageLevelScriptsInit'] = 'RiskList.init();';
@@ -70,9 +70,9 @@ class MainRac extends APP_Controller {
 			$data['filled_by'] = $userdata['display_name'];
 			$data['filled_by_id'] = $rid;
 			
-			$this->load->view('main/header', $data);
+			$this->load->view('maini/header', $data);
 			$this->load->view('risk_register_list', $data);
-			$this->load->view('main/footer', $data);
+			$this->load->view('maini/footer', $data);
 		}
 
 	}
@@ -112,9 +112,9 @@ class MainRac extends APP_Controller {
 			$data['filled_by'] = $userdata['display_name'];
 			$data['filled_by_id'] = $rid;
 			
-			$this->load->view('main/header', $data);
+			$this->load->view('maini/header', $data);
 			$this->load->view('risk_register_list', $data);
-			$this->load->view('main/footer', $data);
+			$this->load->view('maini/footer', $data);
 		}
 
 	}
@@ -358,7 +358,13 @@ class MainRac extends APP_Controller {
 		$menu = 'main/mainrac';
 		$data['valid_mode'] = true;
 		
+		$sql = "select risk_id from t_risk_change where risk_id='".$risk_id."' and risk_input_by ='".$user_by."' " ;
+		$query = $this->db->query($sql);
+	if ($query->num_rows() > 0){
+		$res = $this->risk->getRiskByIdNoRefChanges($risk_id,$user_by);
+	}else{
 		$res = $this->risk->getRiskByIdNoRef($risk_id);
+	}
 		if ($res) {
 			if ($res['risk_library_id'] == '' && $res['risk_library_id'] == null) { // NO LIBRARY
 				$verifyJs = '<script src="assets/scripts/risk/riskinput.js"></script>
@@ -411,9 +417,9 @@ class MainRac extends APP_Controller {
 			$data['treatment_list'] = $this->mriskregister->getReference('treatment.status');
 			$data['division_list'] = $this->mriskregister->getDivisionList();
 			
-			$this->load->view('main/header', $data);
+			$this->load->view('maini/header', $data);
 			$this->load->view($page_view, $data);
-			$this->load->view('main/footer', $data);
+			$this->load->view('maini/footer', $data);
 		}
 	}
 
@@ -473,9 +479,9 @@ class MainRac extends APP_Controller {
 			$data['treatment_list'] = $this->mriskregister->getReference('treatment.status');
 			$data['division_list'] = $this->mriskregister->getDivisionList();
 			
-			$this->load->view('main/header', $data);
+			$this->load->view('maini/header', $data);
 			$this->load->view($page_view, $data);
-			$this->load->view('main/footer', $data);
+			$this->load->view('maini/footer', $data);
 		}
 	}
 	
@@ -656,8 +662,13 @@ class MainRac extends APP_Controller {
 				foreach($_POST['control'] as $v) {
 					$control[] = $v;
 				}
+
+				$objective = array();
+				foreach($_POST['objective'] as $v) {
+					$objective[] = $v;
+				}
 				
-				$res = $this->risk->updateRisk1($_POST['risk_id'], $code, $risk, $impact_level, $actplan, $control, $data['session']['username'], $user);
+				$res = $this->risk->updateRisk1($_POST['risk_id'], $code, $risk, $impact_level, $actplan, $control, $objective, $data['session']['username'], $user);
 
 				//$res = $this->risk->updateRisk1change($_POST['risk_id'], $code, $risk, $impact_level, $actplan, $control, $data['session']['username']);
 				//$res = $this->risk->riskDeleteChange($_POST['risk_id']);
@@ -822,8 +833,13 @@ class MainRac extends APP_Controller {
 				foreach($_POST['control'] as $v) {
 					$control[] = $v;
 				}
+
+				$objective = array();
+				foreach($_POST['objective'] as $v) {
+					$objective[] = $v;
+				}
 				
-				$res = $this->risk->updateRiskrac($_POST['risk_id'], $code, $risk, $impact_level, $actplan, $control, $data['session']['username']);
+				$res = $this->risk->updateRiskrac($_POST['risk_id'], $code, $risk, $impact_level, $actplan, $control, $objective, $data['session']['username']);
 				//$res = $this->risk->riskDeleteChange($_POST['risk_id']);
 				
 				if (isset($_POST['add_user_flag']) && $_POST['add_user_flag'] == 'yes') {
@@ -978,8 +994,13 @@ class MainRac extends APP_Controller {
 				foreach($_POST['control'] as $v) {
 					$control[] = $v;
 				}
+
+				$objective = array();
+				foreach($_POST['objective'] as $v) {
+					$objective[] = $v;
+				}
 				
-				$res = $this->risk->updateRiskrac($_POST['risk_id'], $code, $risk, $impact_level, $actplan, $control, $data['session']['username']);
+				$res = $this->risk->updateRiskracsave($_POST['risk_id'], $code, $risk, $impact_level, $actplan, $control, $objective, $data['session']['username']);
 				
 				$resp = array();
 				if ($res) {
@@ -1053,8 +1074,13 @@ class MainRac extends APP_Controller {
 				foreach($_POST['control'] as $v) {
 					$control[] = $v;
 				}
+
+				$objective = array();
+				foreach($_POST['objective'] as $v) {
+					$objective[] = $v;
+				}
 				
-				$res = $this->risk->updateRisksave($_POST['risk_id'], $code, $risk, $impact_level, $actplan, $control, $data['session']['username'],$user);
+				$res = $this->risk->updateRisksave($_POST['risk_id'], $code, $risk, $impact_level, $actplan, $control, $objective, $data['session']['username'],$user);
 				
 				$resp = array();
 				if ($res) {
@@ -1127,8 +1153,13 @@ class MainRac extends APP_Controller {
 				foreach($_POST['control'] as $v) {
 					$control[] = $v;
 				}
+
+				$objective = array();
+				foreach($_POST['objective'] as $v) {
+					$objective[] = $v;
+				}
 				
-				$res = $this->risk->updateRisk2($_POST['risk_id'], $code, $risk, $impact_level, $actplan, $control, $data['session']['username']);
+				$res = $this->risk->updateRisk2($_POST['risk_id'], $code, $risk, $impact_level, $actplan, $control, $objective, $data['session']['username']);
 				//$res = $this->risk->riskSwitchPrimary($_POST['risk_id']);
 				
 				$resp = array();
@@ -1167,9 +1198,9 @@ class MainRac extends APP_Controller {
 				$data['risk'] = $risk;
 			}
 			
-			$this->load->view('main/header', $data);
-			$this->load->view('risk/risk_register_view', $data);
-			$this->load->view('main/footer', $data);
+			$this->load->view('maini/header', $data);
+			$this->load->view('riski/risk_register_view', $data);
+			$this->load->view('maini/footer', $data);
 		}
 	}
 	
@@ -1207,7 +1238,7 @@ class MainRac extends APP_Controller {
 		echo json_encode($data);
 	}
 	
-	public function riskTreatmentForm($rid=false) 
+	public function riskTreatmentForm($rid=false,$user) 
 	{
 		if ($rid && is_numeric($rid)) {
 			$data = $this->loadDefaultAppConfig();
@@ -1243,7 +1274,9 @@ class MainRac extends APP_Controller {
 			if ($risk) {
 				$data['valid_mode'] = true;
 				$data['risk'] = $risk;				
+				$data['user'] = $user;
 			}
+
 			
 			$this->load->model('risk/mriskregister');
 			$data['category'] = $this->mriskregister->getRiskCategory();
@@ -1252,20 +1285,34 @@ class MainRac extends APP_Controller {
 			$data['treatment_list'] = $this->mriskregister->getReference('treatment.status');
 			$data['division_list'] = $this->mriskregister->getDivisionList();
 			
-			$this->load->view('main/header', $data);
-			$this->load->view('risk/risk_treatment_verify', $data);
-			$this->load->view('main/footer', $data);
+			$this->load->view('maini/header', $data);
+			$this->load->view('riski/risk_treatment_verify', $data);
+			$this->load->view('maini/footer', $data);
 		}
 	}
 	
-	public function loadTreatmentChange($rid) 
+	public function loadTreatmentChange($rid,$user) 
 	{
 		if ($rid && is_numeric($rid)) {
 			$this->load->model('risk/risk');
 
-			$data = $this->risk->getRiskChangeById($rid);
+			$data = $this->risk->getRiskChangeById($rid,$user);
 			if (!$data) {
 				$data = $this->risk->getRiskById($rid);
+			}
+			echo json_encode($data);
+		}
+	}
+
+//ini untuk verify risk owner ngambil triskchange
+	public function loadTreatmentChange2($rid,$user) 
+	{
+		if ($rid && is_numeric($rid)) {
+			$this->load->model('risk/risk');
+
+			$data = $this->risk->getRiskChangeById2($rid,$user);
+			if (!$data) {
+				$data = $this->risk->getRiskChangeById2($rid,$user);
 			}
 			echo json_encode($data);
 		}
@@ -1359,10 +1406,12 @@ class MainRac extends APP_Controller {
 					'risk_impact' => $_POST['risk_impact'] 
 					*/
 				);
+
 				
 				$res = $this->risk->updateRisk($_POST['risk_id'], false, $risk_update, false, false, false, $data['session']['username']);
-				$res = $this->risk->riskDeleteChange($_POST['risk_id']);
-				$res = $this->risk->actionPlanSetToDraft($_POST['risk_id']);
+				
+				//$res = $this->risk->riskDeleteChange($_POST['risk_id']);
+				//$res = $this->risk->actionPlanSetToDraft($_POST['risk_id']);
 				$resp = array();
 				if ($res) {
 					$resp['success'] = true;
@@ -1393,21 +1442,26 @@ class MainRac extends APP_Controller {
 				// build data
 				$risk_update = array(
 					'risk_status' => 6,
-					'risk_event' => $_POST['risk_event'],
-					'risk_description' => $_POST['risk_description'],
-					'risk_level' => $_POST['risk_level_id'],
-					'risk_impact_level' => $_POST['risk_impact_level_id'],
-					'risk_likelihood_key' => $_POST['risk_likelihood_id'],
-					'suggested_risk_treatment' => $_POST['suggested_risk_treatment'],
+					//'risk_event' => $_POST['risk_event'],
+					//'risk_description' => $_POST['risk_description'],
+					//'risk_level' => $_POST['risk_level_id'],
+					//'risk_impact_level' => $_POST['risk_impact_level_id'],
+					//'risk_likelihood_key' => $_POST['risk_likelihood_id'],
+					//'suggested_risk_treatment' => $_POST['suggested_risk_treatment'],
 					'risk_owner' => $_POST['risk_division'],
-					'risk_cause' => $_POST['risk_cause'],
-					'risk_impact' => $_POST['risk_impact']
+					//'risk_cause' => $_POST['risk_cause'],
+					//'risk_impact' => $_POST['risk_impact']
 					
 				);
 				
-				$res = $this->risk->updateRisk($_POST['risk_id'], false, $risk_update, false, false, false, $data['session']['username']);
-				$res = $this->risk->riskDeleteChange($_POST['risk_id']);
-				$res = $this->risk->actionPlanSetToDraft($_POST['risk_id']);
+				$actplan = array();
+				foreach($_POST['actplan'] as $v) {
+					$actplan[] = $v;
+				}
+
+				$res = $this->risk->updateRiskverify($_POST['risk_id'], false, $risk_update, false, $actplan, false, $data['session']['username']);
+				//$res = $this->risk->riskDeleteChange($_POST['risk_id']);
+				//$res = $this->risk->actionPlanSetToDraft($_POST['risk_id']);
 				$resp = array();
 				if ($res) {
 					$resp['success'] = true;
@@ -1488,7 +1542,7 @@ class MainRac extends APP_Controller {
 		}
 	}
 	
-	public function treatmentSave()
+	public function treatmentSave($username)
 	{
 		$resp['success'] = false;
 		$resp['msg'] = '';
@@ -1529,7 +1583,7 @@ class MainRac extends APP_Controller {
 					$control[] = $v;
 				}
 
-				$res = $this->risk->riskChangeUpdate1ajah($_POST['risk_id'], $risk_update, $impact_level, $actplan, $control, $data['session']['username']);
+				$res = $this->risk->riskChangeUpdate1ajah($_POST['risk_id'], $risk_update, $impact_level, $actplan, $control, $username);
 				
 				$resp = array();
 				if ($res) {
@@ -1682,9 +1736,9 @@ class MainRac extends APP_Controller {
 			$this->load->model('risk/mriskregister');
 			$data['division_list'] = $this->mriskregister->getDivisionList();
 			
-			$this->load->view('main/header', $data);
-			$this->load->view('risk/action_plan_verify', $data);
-			$this->load->view('main/footer', $data);
+			$this->load->view('maini/header', $data);
+			$this->load->view('riski/action_plan_verify', $data);
+			$this->load->view('maini/footer', $data);
 		}
 	}
 	
@@ -1715,9 +1769,9 @@ class MainRac extends APP_Controller {
 				$data['action_plan'] = $risk;				
 			}
 			
-			$this->load->view('main/header', $data);
-			$this->load->view('risk/action_plan_view', $data);
-			$this->load->view('main/footer', $data);
+			$this->load->view('maini/header', $data);
+			$this->load->view('riski/action_plan_view', $data);
+			$this->load->view('maini/footer', $data);
 		}
 	}
 	
@@ -1948,7 +2002,7 @@ class MainRac extends APP_Controller {
 		echo json_encode($data);
 	}
 	
-	public function actionPlanExecForm($rid=false) 
+	public function actionPlanExecForm($rid=false,$view=null) 
 	{
 		if ($rid && is_numeric($rid)) {
 			$data = $this->loadDefaultAppConfig();
@@ -1990,12 +2044,13 @@ class MainRac extends APP_Controller {
 					$risk['revised_date_v'] = implode('-', array_reverse( explode('-', $risk['revised_date']) ));
 				}
 				$data['valid_mode'] = true;
-				$data['action_plan'] = $risk;				
+				$data['action_plan'] = $risk;
+				$data['view'] = $view;				
 			}
 						
-			$this->load->view('main/header', $data);
-			$this->load->view('risk/action_exec_verify', $data);
-			$this->load->view('main/footer', $data);
+			$this->load->view('maini/header', $data);
+			$this->load->view('riski/action_exec_verify', $data);
+			$this->load->view('maini/footer', $data);
 		}
 	}
 	
@@ -2195,9 +2250,9 @@ class MainRac extends APP_Controller {
 					$view = 'risk/kri_view';
 				}
 				
-				$this->load->view('main/header', $data);
+				$this->load->view('maini/header', $data);
 				$this->load->view($view, $data);
-				$this->load->view('main/footer', $data);
+				$this->load->view('maini/footer', $data);
 			}
 		}
 	}
@@ -2298,9 +2353,9 @@ class MainRac extends APP_Controller {
 			$data['change_code'] = $res['cr_code'];
 			$data['change_status'] = $res['cr_status'];
 			
-			$this->load->view('main/header', $data);
+			$this->load->view('maini/header', $data);
 			$this->load->view($v, $data);
-			$this->load->view('main/footer', $data);
+			$this->load->view('maini/footer', $data);
 		}
 	}
 	
@@ -2404,9 +2459,9 @@ class MainRac extends APP_Controller {
 					}
 				}
 				
-				$this->load->view('main/header', $data);
+				$this->load->view('maini/header', $data);
 				$this->load->view($view, $data);
-				$this->load->view('main/footer', $data);
+				$this->load->view('maini/footer', $data);
 			}
 		}
 	}
@@ -2422,18 +2477,21 @@ class MainRac extends APP_Controller {
 		
 		if (isset($_POST['id']) && is_numeric($_POST['id'])) {
 			$this->load->model('risk/risk');
-			$res = $this->risk->changeRequestSwitchPrimary($_POST['id']);
+			
+			// ini buat update t_cr_risk_change kayak nya ga perlu	
+			//$res = $this->risk->changeRequestSwitchPrimary($_POST['id']);
+
 			$changes = $this->risk->getChangeByIdNoRef($_POST['id']);
 			
-			$v_risk = true; $v_control = true; $v_action = true;
+			$v_risk = true; $v_control = true; $v_action = true; $v_objective = true;
 			if ($changes['cr_type'] == 'Risk Owner Form') {
-				$v_risk = true; $v_control = false; $v_action = true;
+				$v_risk = true; $v_control = false; $v_action = true; 
 			}
 			if ($changes['cr_type'] == 'Action Plan Form') {
 				$v_risk = false; $v_control = false; $v_action = true;
 			}
 			
-			$res = $this->risk->changeRequestApplyVerify($_POST['id'], $data['session']['username'], $v_risk, $v_control, $v_action);
+			$res = $this->risk->changeRequestApplyVerify($_POST['id'], $data['session']['username'], $v_risk, $v_control, $v_action, $v_objective);
 			
 			if ($res) {
 				$resp['success'] = true;
@@ -2615,7 +2673,9 @@ class MainRac extends APP_Controller {
 					'risk_level' => $_POST['risk_level_id'],
 					'risk_impact_level' => $_POST['risk_impact_level_id'],
 					'risk_likelihood_key' => $_POST['risk_likelihood_id'],
-					'suggested_risk_treatment' => $_POST['suggested_risk_treatment']
+					'suggested_risk_treatment' => $_POST['suggested_risk_treatment'],
+					'risk_event' => $_POST['risk_event'],
+					'risk_description' => $_POST['risk_description']
 				);
 			}
 			
@@ -2647,7 +2707,89 @@ class MainRac extends APP_Controller {
 				$control[] = $v;
 			}
 
-			$res = $this->risk->changeRequestSaveDraft($_POST['id'], $_POST['risk_id'], $risk_update, $impact_level, $actplan, $control, $data['session']['username']);
+			$objective = array();
+			foreach($_POST['objective'] as $v) {
+				$objective[] = $v;
+			}
+
+			$res = $this->risk->changeRequestSaveDraft($_POST['id'], $_POST['risk_id'], $risk_update, $impact_level, $actplan, $control, $objective, $data['session']['username']);
+			
+			$resp = array();
+			if ($res) {
+				$resp['success'] = true;
+				$resp['msg'] = 'SUCCESS';
+			} else {
+				$resp['success'] = false;
+				$resp['msg'] = $this->db->error();
+			}
+			
+			echo json_encode($resp);
+		}
+	}
+
+	public function changeRequestSaveDraftchanges()
+	{
+		$resp['success'] = false;
+		$resp['msg'] = '';
+		
+		$data = $this->loadDefaultAppConfig();
+		$cred = $this->session->credential;
+		
+		if (isset($_POST['id']) && is_numeric($_POST['id'])) {
+			$this->load->model('risk/risk');
+
+			$changes = $this->risk->getChangeByIdNoRef($_POST['id']);
+			
+			// build data
+			if ($changes['cr_type'] == 'Risk Form') {
+				$risk_update = array(
+					'risk_cause' => $_POST['risk_cause'],
+					'risk_impact' => $_POST['risk_impact'],
+					'risk_level' => $_POST['risk_level_id'],
+					'risk_impact_level' => $_POST['risk_impact_level_id'],
+					'risk_likelihood_key' => $_POST['risk_likelihood_id'],
+					'suggested_risk_treatment' => $_POST['suggested_risk_treatment'],
+					'risk_event' => $_POST['risk_event'],
+					'risk_description' => $_POST['risk_description']
+				);
+			}
+			
+			if ($changes['cr_type'] == 'Risk Owner Form') {
+				$risk_update = array(
+					'risk_level' => $_POST['risk_level_id'],
+					'risk_impact_level' => $_POST['risk_impact_level_id'],
+					'risk_likelihood_key' => $_POST['risk_likelihood_id'],
+					'suggested_risk_treatment' => $_POST['suggested_risk_treatment'],
+					'risk_event' => $_POST['risk_event'],
+					'risk_description' => $_POST['risk_description']
+				);
+			}
+			
+			if ($changes['cr_type'] == 'Action Plan Form') {
+				$risk_update = false;
+			}
+			
+			$impact_level = array();
+			foreach($_POST['impact'] as $v) {
+				$impact_level[] = $v;
+			}
+			
+			$actplan = array();
+			foreach($_POST['actplan'] as $v) {
+				$actplan[] = $v;
+			}
+			
+			$control = array();
+			foreach($_POST['control'] as $v) {
+				$control[] = $v;
+			}
+
+			$objective = array();
+			foreach($_POST['objective'] as $v) {
+				$objective[] = $v;
+			}
+
+			$res = $this->risk->changeRequestSaveDraftchanges($_POST['id'], $_POST['risk_id'], $risk_update, $impact_level, $actplan, $control, $objective, $data['session']['username']);
 			
 			$resp = array();
 			if ($res) {
@@ -3089,9 +3231,9 @@ class MainRac extends APP_Controller {
 	
 	public function actionplan_adt() {
 		$data = $this->loadDefaultAppConfig();
-		$data['indonya'] = base_url('index.php/riski/kri/krisetting');
-		$data['engnya'] = base_url('index.php/risk/kri/krisetting');		
-		$data['sidebarMenu'] = $this->getSidebarMenuStructure('risk/kri/krisetting');
+		$data['indonya'] = base_url('index.php/maini/mainrac/actionplan_adt');
+		$data['engnya'] = base_url('index.php/main/mainrac/actionplan_adt');		
+		$data['sidebarMenu'] = $this->getSidebarMenuStructure('maini');
 		$data['pageLevelStyles'] = '
 		<link rel="stylesheet" type="text/css" href="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
 		<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css"/>
@@ -3107,7 +3249,7 @@ class MainRac extends APP_Controller {
 		<script type="text/javascript" src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 		<script type="text/javascript" src="assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
 		
-		<script src="assets/scripts/dashboard/main_rac.js"></script>
+		<script src="assets/scripts/dashboard/main_raci.js"></script>
 		
 		';
 		
@@ -3128,9 +3270,9 @@ class MainRac extends APP_Controller {
 		 
 		
 		
-		$this->load->view('main/header', $data);
+		$this->load->view('maini/header', $data);
 		$this->load->view('actionplan_adt', $data);
-		$this->load->view('main/footer', $data);
+		$this->load->view('maini/footer', $data);
 	}
 	
 	public function crDeleteData()

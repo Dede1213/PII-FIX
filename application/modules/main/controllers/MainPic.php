@@ -933,8 +933,8 @@ class MainPic extends APP_Controller {
 	 
 		$data = $this->loadDefaultAppConfig();
 		$data['sidebarMenu'] = $this->getSidebarMenuStructure('main/mainpic/actionplan_adt');
-		$data['indonya'] = base_url('index.php/maini/mainpic');
-		$data['engnya'] = base_url('index.php/main/mainpic');		
+		$data['indonya'] = base_url('index.php/maini/mainpic/actionplan_adt');
+		$data['engnya'] = base_url('index.php/main/mainpic/actionplan_adt');		
 		$data['pageLevelStyles'] = '
 		<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css"/>
 		<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>

@@ -22,6 +22,7 @@
 		<script type="text/javascript">
 			var g_risk_id = <?=$risk['risk_id']?>;
 			var g_username = null;
+
 		</script>
 		<div class="row">
 		<div class="col-md-12">
@@ -38,51 +39,51 @@
 							<div class="row">
 							<div class="col-md-5">	
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact">Risk ID</label>
+									<label class="col-md-3 control-label smaller cl-compact">Kode Risiko</label>
 									<div class="col-md-9">
 										<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['risk_code']?>" name="risk_id" placeholder="">
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact">Risk Event</label>
+									<label class="col-md-3 control-label smaller cl-compact">Peristiwa Risiko</label>
 									<div class="col-md-9">
 									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_event" placeholder=""><?=$risk['risk_event']?></textarea>
 									</div>
 								</div>
 								
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact">Risk Event Description</label>
+									<label class="col-md-3 control-label smaller cl-compact">Deskripsi Peristiwa Risiko</label>
 									<div class="col-md-9">
 									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_description" placeholder=""><?=$risk['risk_description']?></textarea>
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact" >Impact Level</label>
+									<label class="col-md-3 control-label smaller cl-compact" >Dampak Level</label>
 									<div class="col-md-9">
 									<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['impact_level_v']?>" name="risk_impact_level_value" placeholder="">
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact" >Likelihood</label>
+									<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan</label>
 									<div class="col-md-9">
 										<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['likelihood_v']?>" name="risk_likelihood_value" placeholder="">
 									</div>
 								</div>
 								<div class="form-group">
 									<input type="hidden" name="risk_level_id" value=""/>
-									<label class="col-md-3 control-label smaller cl-compact" >Risk Level</label>
+									<label class="col-md-3 control-label smaller cl-compact" >Risiko Level</label>
 									<div class="col-md-9">
 									<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['risk_level_v']?>" name="risk_level" placeholder="">
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact">Cause <span class="required">* </span></label>
+									<label class="col-md-3 control-label smaller cl-compact">Sebab <span class="required">* </span></label>
 									<div class="col-md-9">
 									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_cause" placeholder=""><?=$risk['risk_cause']?></textarea>
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact">Impact <span class="required">* </span></label>
+									<label class="col-md-3 control-label smaller cl-compact">Dampak <span class="required">* </span></label>
 									<div class="col-md-9">
 									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_impact" placeholder=""><?=$risk['risk_impact']?></textarea>
 									</div>
@@ -91,20 +92,38 @@
 							</div>
 							<div class="col-md-7">
 								<div class="form-group">
-									<label class="col-md-3 control-label small cl-compact" >Suggested Risk Treatment</label>
+									<label class="col-md-3 control-label small cl-compact" >Usulan Penanganan Risiko</label>
 									<div class="col-md-6">
 										<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['treatment_v']?>" name="risk_likelihood_value" placeholder="">
 									</div>
 								</div>
-								
-								<h4>Control</h4>
+
+								<h4>Objective</h4>
 								<table class="table table-condensed table-bordered table-hover">
 									<thead>
 									<tr role="row" class="heading">
-										<th><small>Existing Control ID</small></th>
-										<th><small>Existing Control</small></th>
-										<th><small>Evaluation on Existing Control</small></th>
-										<th><small>Control Owner</small></th>
+										<th><small>Obj. ID</small></th>
+										<th><small>Objective</small></th>
+									</tr>
+									</thead>
+									<tbody>
+										<?php foreach($risk['objective_list'] as $k => $row) { ?>
+										<tr>
+											<td width="15%"> </td>
+											<td><?=$row['objective']?></td>
+										</tr>
+										<?php } ?>
+									</tbody>
+								</table>
+								
+								<h4>Kontrol</h4>
+								<table class="table table-condensed table-bordered table-hover">
+									<thead>
+									<tr role="row" class="heading">
+										<th><small>ID Kontrol yang ada saat ini</small></th>
+										<th><small>Kontrol yang ada saat ini</small></th>
+										<th><small>Evaluasi dari Kontrol yang ada saat ini</small></th>
+										<th><small>Pemilik Kontrol</small></th>
 									</tr>
 									</thead>
 									<tbody>
@@ -123,9 +142,9 @@
 								<table class="table table-condensed table-bordered table-hover">
 									<thead>
 									<tr role="row" class="heading">
-										<th nowrap><small>Suggested Action Plan</small></th>
-										<th><small>Due Date</small></th>
-										<th><small>Action Plan Owner</small></th>
+										<th nowrap><small>Usulan Action Plan</small></th>
+										<th><small>Batas Tanggal</small></th>
+										<th><small>Pemilik Action Plan</small></th>
 									</tr>
 									</thead>
 									<tbody>
@@ -149,7 +168,7 @@
 							<div class="row">
 							<div class="col-md-5">	
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact" >Impact Level</label>
+									<label class="col-md-3 control-label smaller cl-compact" >Dampak Level</label>
 									<div class="col-md-9">
 										<div class="input-group">
 											<input type="hidden" name="risk_impact_level_id"  value=""/>
@@ -162,7 +181,7 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact" >Likelihood</label>
+									<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan</label>
 									<div class="col-md-9">
 										<div class="input-group">
 											<input type="hidden" name="risk_likelihood_id" value=""/>
@@ -176,21 +195,23 @@
 								</div>
 								<div class="form-group">
 									<input type="hidden" name="risk_level_id" value=""/>
-									<label class="col-md-3 control-label smaller cl-compact" >Risk Level</label>
+									<label class="col-md-3 control-label smaller cl-compact" >Risiko Level</label>
 									<div class="col-md-9">
 									<input type="text" class="form-control input-sm" readonly="true" name="risk_level" placeholder="" value="">
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact" >Cause</label>
+									<label class="col-md-3 control-label smaller cl-compact" >Sebab</label>
 									<div class="col-md-9">
-									<input type="text" class="form-control input-sm" name="risk_cause" placeholder="" value="">
+									<textarea class="form-control input-readview"  rows="3" name="risk_cause" placeholder=""></textarea>
+									
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact" >Impact</label>
+									<label class="col-md-3 control-label smaller cl-compact" >Dampak</label>
 									<div class="col-md-9">
-									<input type="text" class="form-control input-sm" name="risk_impact" placeholder="" value="">
+									<textarea class="form-control input-readview"  rows="3" name="risk_impact" placeholder=""></textarea>
+									
 									</div>
 								</div>
 								
@@ -209,13 +230,13 @@
 								
 								<div class="row">
 									<div class="col-md-6">
-										<h4>Control</h4>
+										<h4>Kontrol</h4>
 									</div>
 									<div class="col-md-6 clearfix">
 										<a href="#form-control" id="button-form-control-open" data-toggle="modal" class="btn default green pull-right btn-sm">
 										<i class="fa fa-plus"></i>
 										<span class="hidden-480">
-										Add Control </span>
+										Tambah Kontrol </span>
 										</a>
 									</div>
 								</div>
@@ -224,10 +245,10 @@
 									<table id="control_table" class="table table-condensed table-bordered table-hover">
 										<thead>
 										<tr role="row" class="heading">
-											<th><small>Existing Control ID</small></th>
-											<th><small>Existing Control</small></th>
-											<th><small>Evaluation on Existing Control</small></th>
-											<th><small>Control Owner</small></th>
+											<th><small>ID Kontrol yang ada saat ini</small></th>
+											<th><small>Kontrol yang ada saat ini</small></th>
+											<th><small>Evaluasi dari Kontrol yang ada saat ini</small></th>
+											<th><small>Pemilik Kontrol</small></th>
 											<th width="30px">&nbsp;</th>
 										</tr>
 										</thead>
@@ -239,13 +260,13 @@
 								
 								<div class="row">
 									<div class="col-md-6">
-										<h4>Suggested Action Plan</h4>
+										<h4>Usulan Action Plan</h4>
 									</div>
 									<div class="col-md-6 clearfix">
-										<a href="#form-data" data-toggle="modal" class="btn default green pull-right btn-sm">
+										<a href="#form-data" data-toggle="modal" class="btn default green pull-right btn-sm" id ="button-form-control-open-ap">
 										<i class="fa fa-plus"></i>
 										<span class="hidden-480">
-										Add Plan Action Suggestion </span>
+										Tambah Usulan Action Plan </span>
 										</a>
 									</div>
 								</div>
@@ -254,9 +275,9 @@
 									<table id="action_plan_table" class="table table-condensed table-bordered table-hover">
 										<thead>
 										<tr role="row" class="heading">
-											<th><small>Suggested Action Plan</small></th>
-											<th><small>Due Date</small></th>
-											<th><small>Action Plan Owner</small></th>
+											<th><small>Usulan Action Plan</small></th>
+											<th><small>Batas Tanggal</small></th>
+											<th><small>Pemilik Action Plan</small></th>
 											<th width="30px">&nbsp;</th>
 										</tr>
 										</thead>
@@ -307,12 +328,13 @@
 	<div class="modal-body">
 		
 			<form id="input-form-control" role="form" class="form-horizontal">
+			<input type = "hidden" id = "tr_idnya">
 				<div class="form-body">
 					<div class="form-group">
 						<label class="col-md-3 control-label smaller cl-compact">Existing Control ID</label>
 						<div class="col-md-9">
 							<div class="input-group">
-								<input type="text" class="form-control input-sm" readonly="true" name="existing_control_id" placeholder="">
+								<input type="text" class="form-control input-sm" readonly="true" name="existing_control_id" id = "existing_control_id" placeholder="">
 								<span class="input-group-btn">
 								<button class="btn btn-primary btn-sm" type="button" data-toggle="modal" href="#modal-control"><i class="fa fa-search fa-fw"/></i></button>
 								</span>
@@ -321,23 +343,38 @@
 						</div>
 					</div>
 					<div class="form-group">
+					<input type = "hidden" id = "form-control-revid">
+						<label class="col-md-3 control-label smaller cl-compact">Existing Control <span class="required">* </span></label>
+						<div class="col-md-9">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" readonly="true" name="risk_existing_control" id = "risk_existing_control" placeholder="" value="NONE">
+								<span class="input-group-btn">
+								<button class="btn btn-primary btn-sm" type="button" data-toggle="modal" href="#modal-control-existing"><i class="fa fa-search fa-fw"/></i></button>
+								</span>
+								
+							</div>
+						</div>
+					</div>
+					<!--
+					<div class="form-group">
 						<label class="col-md-3 control-label smaller cl-compact" >Existing Control <span class="required">* </span></label>
 						<div class="col-md-9">
 						<textarea class="form-control input-sm" rows="3" name="risk_existing_control" placeholder="">NONE</textarea>
 						<button id="button_clear_control" type="button" class="hide btn red btn-xs" style="margin-top: 5px;"><i class="fa fa-minus-circle font-white"></i> Clear Existing Control</button>
 						</div>
 					</div>
+					-->
 					<div class="form-group">
 						<label class="col-md-3 control-label smaller cl-compact" >Evaluation on Existing Control <span class="required">* </span></label>
 						<div class="col-md-9">
-						<input type="text" class="form-control input-sm" name="risk_evaluation_control" placeholder="" value="NONE">
+						<input type="text" class="form-control input-sm" name="risk_evaluation_control" id = "risk_evaluation_control" placeholder="" value="NONE">
 						</div>
 					</div>
 					<div class="form-group">
 									<label class="col-md-3 control-label smaller cl-compact">Control Owner <span class="required">* </span></label>
 									<div class="col-md-9">
 									
-									<select class="form-control input-sm" name="risk_control_owner">
+									<select class="form-control input-sm" name="risk_control_owner" id = "risk_control_owner">
 										<option value="NONE">NONE</option>
 										<?php foreach($division_list as $row) { ?>
 										<option value="<?=$row['ref_key']?>"><?=$row['ref_value']?></option>
@@ -367,12 +404,12 @@
 		
 			<form id="input-form-action-plan" role="form" class="form-horizontal">
 				<div class="form-body">
-					
+					<input type = "hidden" id = "tr_idnya_ap">
 					<div class="form-group">
 						<label class="col-md-3 control-label smaller cl-compact">Suggested Action Plan<span class="required">* </span></label>
 						<div class="col-md-9">
 							<div class="input-group">
-								<input type="text" class="form-control input-sm" name="action_plan" placeholder=""> 
+								<input type="text" class="form-control input-sm" name="action_plan" id = "action_plan" placeholder=""> 
 								<span class="input-group-btn">
 								<button class="btn btn-primary btn-sm" type="button" data-toggle="modal" href="#modal-libraryaction"><i class="fa fa-search fa-fw"/></i></button>
 								</span> 
@@ -383,7 +420,7 @@
 						<label class="col-md-3 control-label">Due Date</label>
 						<div class="col-md-9">
 						<div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
-							<input type="text" class="form-control input-sm" name="due_date" readonly>
+							<input type="text" class="form-control input-sm" name="due_date" id = "due_date" readonly>
 							<span class="input-group-btn">
 							<button class="btn default btn-sm" type="button"><i class="fa fa-calendar"></i></button>
 							</span>
@@ -393,7 +430,7 @@
 					<div class="form-group">
 						<label class="col-md-3 control-label">Action Plan Owner</label>
 						<div class="col-md-9">
-						<select class="form-control input-sm" name="division">
+						<select class="form-control input-sm" name="division" id = "division">
 							<?php foreach($division_list as $row) { ?>
 							<option value="<?=$row['ref_key']?>"><?=$row['ref_value']?></option>
 							<?php } ?>
@@ -434,6 +471,38 @@
 				<tr role="row" class="heading">
 					<th width="30px">&nbsp;</th>
 					<th>Action Plan</th> 
+				</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<!-- Existing CONTROL -->
+<div id="modal-control-existing" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+		<h4 class="modal-title">Existing Control</h4>
+		<p style="color:red;">*Choose One</p>
+		<div class="inputs">
+			<div class="portlet-input input-inline">
+				<div class="input-group">
+					<input type="text" class="form-control" name="filter_search" placeholder="search...">
+					<span class="input-group-btn">
+					<button class="btn btn-default" type="button" id="modal-control-filter-submit">Search</button>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-body">
+		<div>
+			<table id="library_control_table_existing" class="table table-condensed table-bordered table-hover">
+				<thead>
+				<tr role="row" class="heading">
+					<th width="30px">&nbsp;</th>
+					<th>Existing Control</th>
+					<th>Description</th>
 				</tr>
 				</thead>
 				<tbody></tbody>

@@ -9,11 +9,11 @@
 			<ul class="page-breadcrumb">
 				<li>
 					<i class="fa fa-home"></i>
-					<a target="_self" href="<?=$site_url?>/main">Beranda</a>
+					<a target="_self" href="<?=$site_url?>/main">Home</a>
 					<i class="fa fa-angle-right"></i>
 				</li>
 				<li>
-					<a target="_self" href="javascript:;">Form Permintaan Perubahan</a>
+					<a target="_self" href="javascript:;">Change Request Form</a>
 				</li>
 			</ul>
 		</div>
@@ -34,9 +34,10 @@
 						<div class="form-body">
 							<div class="form-group">
 								<input type="hidden" name="risk_id" value=""/>
-								<label class="col-md-3 control-label smaller cl-compact" >Kode Risiko</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Code Risiko</label>
 								<div class="col-md-9">
-								<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_code" placeholder="">
+								<input type="text" class="form-control input-sm" readonly="true" name="risk_code" readonly="true" placeholder="">
+							
 								</div>
 							</div>
 							<div class="form-group">
@@ -53,8 +54,9 @@
 								</div>
 							</div>
 							<?php if ($change_type == 'Risk Form') { ?>
+							
 							<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact">Penyebab <span class="required">* </span></label>
+									<label class="col-md-3 control-label smaller cl-compact">Sebab <span class="required">* </span></label>
 									<div class="col-md-9">
 									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_cause" placeholder=""></textarea>
 									</div>
@@ -67,21 +69,22 @@
 								</div>
 							<?php } ?>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Level Dampak</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Dampak Level <span class="required">* </span></label>
 								<div class="col-md-9">
-									<input type="text" class="form-control input-sm input-readview" readonly="true" name="impact_level_v" placeholder="">
+									<input type="text" class="form-control input-sm" readonly="true" readonly="true" name="impact_level_v" placeholder="">
+									
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan Keterjadiaan</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan <span class="required">* </span></label>
 								<div class="col-md-9">
-									<input type="text" class="form-control input-sm input-readview" readonly="true" name="likelihood_v" placeholder="">
+								<input type="text" class="form-control input-sm" readonly="true" name="likelihood_v"  placeholder="">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Level Risiko</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Risiko Level <span class="required">* </span></label>
 								<div class="col-md-9">
-									<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_level_v" placeholder="">
+									<input type="text" class="form-control input-sm" readonly="true" name="risk_level_v" placeholder="">
 								</div>
 							</div>
 							<div class="form-group">
@@ -92,14 +95,29 @@
 							</div>
 							<hr/>
 							<?php if ($change_type == 'Risk Form') { ?>
-							<h4>Control</h4>
+							<h4>Objective</h4>
+							<div class="table-scrollable">
+								<table id="primary_objective_table" class="table table-condensed table-bordered table-hover">
+									<thead>
+									<tr role="row" class="heading">
+										<th width="15%"><span class="small">Obj.ID</span></th>
+										<th><span class="small">Objective</span></th>
+										
+									</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+							</div>
+							<hr/>
+							<h4>Kontrol</h4>
 							<div class="table-scrollable">
 								<table id="primary_control_table" class="table table-condensed table-bordered table-hover">
 									<thead>
 									<tr role="row" class="heading">
-										<th><span class="small">ID Kontrol Eksisting</span></th>
-										<th><span class="small">Kontrol Eksisting</span></th>
-										<th><span class="small">Evaluasi Atas Eksisting Kontrol</span></th>
+										<th><span class="small">ID Kontrol Yang ada saat ini</span></th>
+										<th><span class="small">Kontrol Yang Ada Saat Ini</span></th>
+										<th><span class="small">Evaluasi dari kontrol yang ada saat ini</span></th>
 										<th><span class="small">Pemilik Kontrol</span></th>
 									</tr>
 									</thead>
@@ -115,7 +133,7 @@
 									<thead>
 									<tr role="row" class="heading">
 										<th><span class="small">Usulan Action Plan</span></th>
-										<th><span class="small">Batas Waktu</span></th>
+										<th><span class="small">Batas Tanggal</span></th>
 										<th><span class="small">Pemilik Action Plan</span></th>
 									</tr>
 									</thead>
@@ -132,7 +150,7 @@
 			<div class="portlet box blue">
 				<div class="portlet-title">
 					<div class="caption" id="div-portlet-page-caption">
-						Perubahan
+						Changes
 					</div>
 				</div>
 				
@@ -143,40 +161,57 @@
 						<div class="form-body">
 							<div class="form-group">
 								<input type="hidden" name="risk_id" value=""/>
-								<label class="col-md-3 control-label smaller cl-compact" >Kode Risiko</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Code Risiko</label>
 								<div class="col-md-9">
+
 								<input type="text" class="form-control input-sm" readonly="true" name="risk_code" placeholder="">
 								</div>
 							</div>
+							<?php if ($change_type == 'Risk Form') { ?>
 							<div class="form-group">
 									<label class="col-md-3 control-label smaller cl-compact">Peristiwa Risiko</label>
 									<div class="col-md-9">
-									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_event" placeholder=""></textarea>
+									<textarea class="form-control input-readview"  rows="3" name="risk_event" placeholder=""></textarea>
 									</div>
 								</div>
 							<div class="form-group">
 								<label class="col-md-3 control-label small cl-compact">Deskripsi Peristiwa Risiko</label>
 								<div class="col-md-9">
-								<textarea class="form-control" rows="3" readonly="true" name="risk_description" placeholder=""></textarea>
+								<textarea class="form-control input-sm input-readview"  rows="3" name="risk_description" placeholder=""></textarea>
 								</div>
 							</div>
+							<?php }else{ ?>
+							<div class="form-group">
+									<label class="col-md-3 control-label smaller cl-compact">Peristiwa Risiko</label>
+									<div class="col-md-9">
+									<textarea class="form-control input-readview"  readonly="true" rows="3" name="risk_event" placeholder=""></textarea>
+									</div>
+								</div>
+							<div class="form-group">
+								<label class="col-md-3 control-label small cl-compact">Deskripsi Peristiwa Risiko</label>
+								<div class="col-md-9">
+								<textarea class="form-control input-sm input-readview"  readonly="true" rows="3" name="risk_description" placeholder=""></textarea>
+								</div>
+							</div>
+							<?php } ?>
 							<?php if ($change_type == 'Risk Form') { ?>
 							<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact">Penyebab <span class="required">* </span></label>
+									<label class="col-md-3 control-label smaller cl-compact">Sebab <span class="required">* </span></label>
 									<div class="col-md-9">
-									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_cause" placeholder=""></textarea>
+									<textarea class="form-control input-readview" rows="3" name="risk_cause" placeholder=""></textarea>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-md-3 control-label smaller cl-compact">Dampak <span class="required">* </span></label>
 									<div class="col-md-9">
-									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_impact" placeholder=""></textarea>
+									<textarea class="form-control input-readview"  rows="3" name="risk_impact" placeholder=""></textarea>
 									</div>
 								</div>
+
 							<?php } ?>
 							<?php if ($change_type == 'Risk Form' || $change_type == 'Risk Owner Form') { ?>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Level Dampak<span class="required">* </span></label>
+								<label class="col-md-3 control-label smaller cl-compact" >Dampak Level <span class="required">* </span></label>
 								<div class="col-md-9">
 									<div class="input-group">
 										<input type="hidden" name="risk_impact_level_id" value=""/>
@@ -189,7 +224,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan Keterjadiaan <span class="required">* </span></label>
+								<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan <span class="required">* </span></label>
 								<div class="col-md-9">
 									<div class="input-group">
 										<input type="hidden" name="risk_likelihood_id" value=""/>
@@ -203,7 +238,7 @@
 							</div>
 							<div class="form-group">
 								<input type="hidden" name="risk_level_id" value=""/>
-								<label class="col-md-3 control-label smaller cl-compact" >Level Risiko <span class="required">* </span></label>
+								<label class="col-md-3 control-label smaller cl-compact" >Risiko Level<span class="required">* </span></label>
 								<div class="col-md-9">
 								<input type="text" class="form-control input-sm" readonly="true" name="risk_level" placeholder="">
 								</div>
@@ -220,25 +255,25 @@
 							</div>
 							<?php } else { ?>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Level Dampak</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Dampak Level</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm" readonly="true" name="impact_level_v" placeholder="">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan Keterjadiaan</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm" readonly="true" name="likelihood_v" placeholder="">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Level Risiko</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Risiko Level</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm" readonly="true" name="risk_level_v" placeholder="">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Penanganan Risiko</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Usulan Penanganan Risiko</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm" readonly="true" name="treatment_v" placeholder="">
 								</div>
@@ -247,20 +282,42 @@
 							<hr/>
 							<?php if ($change_type == 'Risk Form') { ?>
 							<div class="clearfix">
+								<a href="#form-control-objective" id="button-form-control-open" data-toggle="modal" class="btn default green pull-right btn-sm">
+								<i class="fa fa-plus"></i>
+								<span class="hidden-480">
+								Add Objective </span>
+								</a>
+								<h4>Objective</h4>
+							</div>
+							<div class="table-scrollable">
+								<table id="objective_table" class="table table-condensed table-bordered table-hover">
+									<thead>
+									<tr role="row" class="heading">
+										<th width="15%"><span class="small">Obj.ID</span></th>
+										<th><span class="small">Objective</span></th>
+										<th width="30px">&nbsp;</th>
+									</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+							</div>
+							<hr/>
+							<div class="clearfix">
 								<a href="#form-control" id="button-form-control-open" data-toggle="modal" class="btn default green pull-right btn-sm">
 								<i class="fa fa-plus"></i>
 								<span class="hidden-480">
-								Tambah Control </span>
+								Tambah Kontrol </span>
 								</a>
-								<h4>Control</h4>
+								<h4>Kontrol</h4>
 							</div>
 							<div class="table-scrollable">
 								<table id="control_table" class="table table-condensed table-bordered table-hover">
 									<thead>
 									<tr role="row" class="heading">
-										<th><span class="small">ID Kontrol Eksisting</span></th>
-										<th><span class="small">Kontrol Eksisting</span></th>
-										<th><span class="small">Evaluasi Atas Eksisting Kontrol</span></th>
+										<th><span class="small">ID Kontrol Yang Ada Saat ini</span></th>
+										<th><span class="small">Kontrol Yang ada saat ini</span></th>
+										<th><span class="small">Evaluasi dari kontrol yang ada saat ini</span></th>
 										<th><span class="small">Pemilik Kontrol</span></th>
 										<th width="30px">&nbsp;</th>
 									</tr>
@@ -276,7 +333,7 @@
 								<a href="#form-data" id="button-form-data-open" data-toggle="modal" class="btn default green pull-right btn-sm">
 								<i class="fa fa-plus"></i>
 								<span class="hidden-480">
-								Tambah Plan Action Suggestion </span>
+								Tambah Usulan Action Plan </span>
 								</a>
 								<h4>Action Plan</h4>
 							</div>
@@ -288,7 +345,7 @@
 									<thead>
 									<tr role="row" class="heading">
 										<th><span class="small">Usulan Action Plan</span></th>
-										<th width="80px"><span class="small">Batas Waktu</span></th>
+										<th width="80px"><span class="small">Batas Tanggal</span></th>
 										<th><span class="small">Pemilik Action Plan</span></th>
 										<th width="70px">&nbsp;</th>
 									</tr>
@@ -299,8 +356,8 @@
 							</div>
 						</div>
 						<div class="form-actions right">
-							<button id="risk-button-submit" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Ajukan</button>
-							<button type="button" class="btn yellow" id="verify-risk-button-cancel"><i class="fa fa-times"></i> Batal</button>
+							<button id="risk-button-submit" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Submit</button>
+							<button type="button" class="btn yellow" id="verify-risk-button-cancel"><i class="fa fa-times"></i> Cancel</button>
 						</div>
 
 					</form>
@@ -312,13 +369,13 @@
 		<div class="row">
 		<div class="col-md-12">
 			<div class="note note-warning">
-			<h4 class="block">Error</h4>
+			<h4 class="block">Warning</h4>
 			<p>
-Tidak bisa melakukan perubahan permintaan karena risiko ini masih mempunyai permintaan perubahan yang tertunda.
+				 Cannot Input Change Request for this Risk, This Risk already have a Pending Change Request 
 			</p>
 			<p>
-				<a class="btn red" target="_self" href="<?=$site_url?>/maini">
-				Kembali Ke Beranda </a>
+				<a class="btn red" target="_self" href="<?=$site_url?>/main">
+				Back to Home </a>
 			</p>
 			</div>
 		</div>
@@ -335,19 +392,62 @@ Tidak bisa melakukan perubahan permintaan karena risiko ini masih mempunyai perm
 	var g_username = null;
 	var g_change_type = '<?=$change_type?>';
 </script>
-
+<!-- OBJECTIVE -->
+<div id="form-control-objective" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+		<h4 class="modal-title">Add Objective</h4>
+	</div>
+	<div class="modal-body">
+		
+			<form id="input-form-control-objective" role="form" class="form-horizontal">
+				<div class="form-body">
+					<div class="form-group">
+					<input type = "hidden" id = "form-control-revid-objective">
+						<label class="col-md-3 control-label smaller cl-compact">Obj. ID</label>
+						<div class="col-md-9">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" readonly="true" name="objective_id" id = "objective_id" placeholder="">
+								<span class="input-group-btn">
+								<button class="btn btn-primary btn-sm" type="button" data-toggle="modal" href="#modal-objective"><i class="fa fa-search fa-fw"/></i></button>
+								</span>
+								
+							</div>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-md-3 control-label smaller cl-compact" >Objective <span class="required">* </span></label>
+						<div class="col-md-9">
+						<textarea class="form-control input-sm " rows="3"  name="objective" id = "objective" placeholder="">NONE</textarea>
+						<button id="button_clear_control" type="button" class="hide btn red btn-xs" style="margin-top: 5px;"><i class="fa fa-minus-circle font-white"></i> Clear Existing Control</button>
+						</div>
+					</div>
+					
+				</div>
+			</form>
+	</div>
+	<div class="modal-footer">
+		<button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+		<button id="input-control-add-objective" type="button" 
+			class="btn blue ladda-button"
+			 data-style="expand-right"
+			>Add</button>
+	</div>
+</div>
 <!-- CONTROL -->
 <div id="form-control" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Tambah Kontrol</h4>
+		<h4 class="modal-title">Add Control</h4>
 	</div>
 	<div class="modal-body">
 		
 			<form id="input-form-control" role="form" class="form-horizontal">
+			<input type = "hidden" id = "tr_idnya" >
 				<div class="form-body">
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact">ID Kontrol Eksisting</label>
+						<label class="col-md-3 control-label smaller cl-compact">Existings Control ID</label>
 						<div class="col-md-9">
 							<div class="input-group">
 								<input type="text" class="form-control input-sm" readonly="true" name="existing_control_id" placeholder="">
@@ -359,20 +459,36 @@ Tidak bisa melakukan perubahan permintaan karena risiko ini masih mempunyai perm
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Kontrol Eksisting<span class="required">* </span></label>
+					<input type = "hidden" id = "form-control-revid">
+						<label class="col-md-3 control-label smaller cl-compact">Existing Control <span class="required">* </span></label>
 						<div class="col-md-9">
-						<textarea class="form-control input-sm" rows="3" name="risk_existing_control" placeholder=""></textarea>
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" readonly="true" name="risk_existing_control" id = "risk_existing_control" placeholder="" value="NONE">
+								<span class="input-group-btn">
+								<button class="btn btn-primary btn-sm" type="button" data-toggle="modal" href="#modal-control-existing"><i class="fa fa-search fa-fw"/></i></button>
+								</span>
+								
+							</div>
+						</div>
+					</div>
+					<!--
+					<div class="form-group">
+						<label class="col-md-3 control-label smaller cl-compact" >Existing Control <span class="required">* </span></label>
+						<div class="col-md-9">
+						<textarea class="form-control input-sm" rows="3" name="risk_existing_control" placeholder="">NONE</textarea>
 						<button id="button_clear_control" type="button" class="hide btn red btn-xs" style="margin-top: 5px;"><i class="fa fa-minus-circle font-white"></i> Clear Existing Control</button>
 						</div>
 					</div>
+					-->
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Evaluasi Atas Kontrol Eksisting <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact" >Evaluation on Existing Control <span class="required">* </span></label>
 						<div class="col-md-9">
-						<input type="text" class="form-control input-sm" name="risk_evaluation_control" placeholder="">
+						<input type="text" class="form-control input-sm" name="risk_evaluation_control" placeholder="" value="NONE">
 						</div>
 					</div>
+					
 					<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact">Pemilik Kontrol <span class="required">* </span></label>
+									<label class="col-md-3 control-label smaller cl-compact">Control Owner <span class="required">* </span></label>
 									<div class="col-md-9">
 									
 									<select class="form-control input-sm" name="risk_control_owner">
@@ -383,12 +499,11 @@ Tidak bisa melakukan perubahan permintaan karena risiko ini masih mempunyai perm
 									</select>
 									</div>
 								</div>
-					
 				</div>
 			</form>
 	</div>
 	<div class="modal-footer">
-		<button type="button" data-dismiss="modal" class="btn btn-default">Tutup</button>
+		<button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
 		<button id="input-control-add" type="button" 
 			class="btn blue ladda-button"
 			 data-style="expand-right"
@@ -400,14 +515,15 @@ Tidak bisa melakukan perubahan permintaan karena risiko ini masih mempunyai perm
 <div id="form-data" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Tambah Usulan Action Plan</h4>
+		<h4 class="modal-title">Add Suggested Action Plan</h4>
 	</div>
 	<div class="modal-body">
 		
 			<form id="input-form-action-plan" role="form" class="form-horizontal">
 				<div class="form-body">
-				<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact">Usulan Action Plan<span class="required">* </span></label>
+					
+					<div class="form-group">
+						<label class="col-md-3 control-label smaller cl-compact">Suggested Action Plan<span class="required">* </span></label>
 						<div class="col-md-9">
 							<div class="input-group">
 								<input type="text" class="form-control input-sm" name="action_plan" placeholder=""> 
@@ -418,7 +534,7 @@ Tidak bisa melakukan perubahan permintaan karena risiko ini masih mempunyai perm
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Batas Waktu <span class="required">* </span></label>
+						<label class="col-md-3 control-label">Due Date <span class="required">* </span></label>
 						<div class="col-md-9">
 						<div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
 							<input type="text" class="form-control input-sm" name="due_date" readonly>
@@ -429,7 +545,7 @@ Tidak bisa melakukan perubahan permintaan karena risiko ini masih mempunyai perm
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Pemilik Action Plan<span class="required">* </span></label>
+						<label class="col-md-3 control-label">Action Plan Owner <span class="required">* </span></label>
 						<div class="col-md-9">
 						<select class="form-control input-sm" name="division">
 							<?php foreach($division_list as $row) { ?>
@@ -442,19 +558,111 @@ Tidak bisa melakukan perubahan permintaan karena risiko ini masih mempunyai perm
 			</form>
 	</div>
 	<div class="modal-footer">
-		<button type="button" data-dismiss="modal" class="btn btn-default">Tutup</button>
+		<button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
 		<button id="input-actionplan-add" type="button" 
 			class="btn blue ladda-button"
 			 data-style="expand-right"
 			>Save</button>
 	</div>
 </div>
+<!-- OBJECTIVE search Library -->
+<div id="modal-objective" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+		<h4 class="modal-title">Objective</h4>
+		<div class="inputs">
+			<div class="portlet-input input-inline">
+				<div class="input-group">
+					<input type="text" class="form-control" name="filter_search" placeholder="search...">
+					<span class="input-group-btn">
+					<button class="btn btn-default" type="button" id="modal-control-filter-submit-objective">Search</button>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-body">
+		<div>
+			<table id="library_objective_table" class="table table-condensed table-bordered table-hover">
+				<thead>
+				<tr role="row" class="heading">
+					<th width="30px">&nbsp;</th>
+					<th>Objective</th>
+				</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+	</div>
+</div>
 
+<!-- LIBRARY ACTION-->
+<div id="modal-libraryaction" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+		<h4 class="modal-title">Suggested Action Plan Library</h4>
+		<div class="inputs">
+			<div class="portlet-input input-inline">
+				<div class="input-group">
+					<input type="text" class="form-control" name="filter_search" placeholder="search...">
+					<span class="input-group-btn">
+					<button class="btn btn-default" type="button" id="modal-libraryaction-filter-submit">Search</button>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-body">
+		<div>
+			<table id="library_tableaction" class="table table-condensed table-bordered table-hover">
+				<thead>
+				<tr role="row" class="heading">
+					<th width="30px">&nbsp;</th>
+					<th>Action Plan</th> 
+				</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<!-- Existing CONTROL -->
+<div id="modal-control-existing" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+		<h4 class="modal-title">Existing Controls</h4>
+		<p style="color:red;">*Choose One</p>
+		<div class="inputs">
+			<div class="portlet-input input-inline">
+				<div class="input-group">
+					<input type="text" class="form-control" name="filter_search" placeholder="search...">
+					<span class="input-group-btn">
+					<button class="btn btn-default" type="button" id="modal-control-filter-submit">Search</button>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-body">
+		<div>
+			<table id="library_control_table_existing" class="table table-condensed table-bordered table-hover">
+				<thead>
+				<tr role="row" class="heading">
+					<th width="30px">&nbsp;</th>
+					<th>Existing Control</th>
+					<th>Description</th>
+				</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+	</div>
+</div>
 <!-- CONTROL -->
 <div id="modal-control" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Kontrol Eksisting</h4>
+		<h4 class="modal-title">Existing Control</h4>
 		<div class="inputs">
 			<div class="portlet-input input-inline">
 				<div class="input-group">
@@ -472,9 +680,9 @@ Tidak bisa melakukan perubahan permintaan karena risiko ini masih mempunyai perm
 				<thead>
 				<tr role="row" class="heading">
 					<th width="30px">&nbsp;</th>
-					<th>Kontrol Eksisting</th>
-					<th>Evaluasi Atas Kontrol Eksisting</th>
-					<th>Pemilik Kontrol</th>
+					<th>Existing Control</th>
+					<th>Evaluation on Existing Control</th>
+					<th>Control Owner</th>
 				</tr>
 				</thead>
 				<tbody></tbody>
@@ -487,7 +695,7 @@ Tidak bisa melakukan perubahan permintaan karena risiko ini masih mempunyai perm
 <div id="modal-impact" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Evaluasi Atas Dampak Risiko</h4>
+		<h4 class="modal-title">Evaluation on Risk Impact</h4>
 		<span class="font-red">* Dapat diisi lebih dari satu(1) kategori, namun dalam Satu(1)
 		Kategori hanya boleh diisi satu(1) parameter</span>
 	</div>
@@ -533,7 +741,7 @@ Tidak bisa melakukan perubahan permintaan karena risiko ini masih mempunyai perm
 <div id="modal-likelihood" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Evaluasi Atas Kemungkinan Terjadinya Risiko</h4>
+		<h4 class="modal-title">Evaluation on Risk Likelihood</h4>
 		<span class="font-red">* Pilih Salah Satu</span>
 	</div>
 	<div class="modal-body">
@@ -563,7 +771,7 @@ Tidak bisa melakukan perubahan permintaan karena risiko ini masih mempunyai perm
 		<button id="input-form-likelihood-button" type="button" 
 			class="btn blue ladda-button"
 			 data-style="expand-right"
-			>Simpan</button>
+			>Save</button>
 	</div>
 </div>
 <?php } ?>

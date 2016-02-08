@@ -64,15 +64,15 @@
 				</li>
 				<li>
 					<a href="#tab_action_plan" data-toggle="tab">
-					My Action Plan </a>
+					Action Plan Ku </a>
 				</li>
 				<li>
 					<a href="#tab_action_exec" data-toggle="tab">
-					My Action Plan Execution </a>
+					Pelaksanaan Action Plan Ku</a>
 				</li>
 				<li>
 					<a href="#tab_kri" data-toggle="tab">
-					My KRI </a>
+					KRI Ku</a>
 				</li>
 				<li>
 					<a href="#tab_change_request_list" data-toggle="tab">

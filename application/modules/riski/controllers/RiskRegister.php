@@ -1,20 +1,20 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class RiskRegister extends APP_Controller {
+class RiskRegister extends APP_Controlleri {
 	function __construct()
     {
         parent::__construct();
         
         $this->load->model('admin/mperiode');
-        $this->load->model('risk/risk');
-        $this->load->model('risk/mriskregister');
+        $this->load->model('riski/risk');
+        $this->load->model('riski/mriskregister');
     }
 	
 	public function index()
 	{
 		$data = $this->loadDefaultAppConfig();
-		$data['sidebarMenu'] = $this->getSidebarMenuStructure('risk/RiskRegister');
+		$data['sidebarMenu'] = $this->getSidebarMenuStructure('maini');
 		$data['indonya'] = base_url('index.php/riski/RiskRegister/');
 		$data['engnya'] = base_url('index.php/risk/RiskRegister/');
 		$data['pageLevelStyles'] = '
@@ -29,7 +29,7 @@ class RiskRegister extends APP_Controller {
 		<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
 		<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
 		
-		<script src="assets/scripts/risk/risklist.js"></script>
+		<script src="assets/scripts/risk/risklisti.js"></script>
 		';
 		
 		$data['pageLevelScriptsInit'] = 'RiskList.init();';
@@ -42,9 +42,9 @@ class RiskRegister extends APP_Controller {
 		}
 		
 		
-		$this->load->view('main/header', $data);
+		$this->load->view('maini/header', $data);
 		$this->load->view('risk_register_list', $data);
-		$this->load->view('main/footer', $data);
+		$this->load->view('maini/footer', $data);
 	}
 
 	public function ChangeRequestRac($username)
@@ -80,9 +80,9 @@ class RiskRegister extends APP_Controller {
 		$data['username'] = $username;
 		
 		
-		$this->load->view('main/header', $data);
+		$this->load->view('maini/header', $data);
 		$this->load->view('risk_register_list_change_rac', $data);
-		$this->load->view('main/footer', $data);
+		$this->load->view('maini/footer', $data);
 	}
 	//ubah
 	public function undermaintenance()
@@ -116,9 +116,9 @@ class RiskRegister extends APP_Controller {
 		}
 		
 		
-		$this->load->view('main/header', $data);
+		$this->load->view('maini/header', $data);
 		$this->load->view('risk_register_list_under', $data);
-		$this->load->view('main/footer', $data);
+		$this->load->view('maini/footer', $data);
 	}
 //ubah 
 	public function riskGetRollOver_under()
@@ -294,9 +294,9 @@ class RiskRegister extends APP_Controller {
 		}
 		
 		
-		$this->load->view('main/header', $data);
+		$this->load->view('maini/header', $data);
 		$this->load->view('risk_register_list_recover', $data);
-		$this->load->view('main/footer', $data);
+		$this->load->view('maini/footer', $data);
 	}
 
 	public function recover_indo()
@@ -330,9 +330,9 @@ class RiskRegister extends APP_Controller {
 		}
 		
 		
-		$this->load->view('main/header', $data);
+		$this->load->view('maini/header', $data);
 		$this->load->view('risk_register_list_recover_i', $data);
-		$this->load->view('main/footer', $data);
+		$this->load->view('maini/footer', $data);
 	}
 
 	public function riskGetRollOver_recover()
@@ -426,7 +426,7 @@ class RiskRegister extends APP_Controller {
 			$menu = 'main';
 		} else if ($mode == 'periodic') {
 			$data['submit_mode'] = 'periodic';
-			$menu = 'risk/RiskRegister';
+			$menu = 'riski/RiskRegister';
 		} else {
 			exit;
 		}
@@ -465,9 +465,9 @@ class RiskRegister extends APP_Controller {
 		$data['treatment_list'] = $this->mriskregister->getReference('treatment.status');
 		$data['division_list'] = $this->mriskregister->getDivisionList();
 		
-		$this->load->view('main/header', $data);
+		$this->load->view('maini/header', $data);
 		$this->load->view('risk_register_input', $data);
-		$this->load->view('main/footer', $data);	
+		$this->load->view('maini/footer', $data);	
 	}
 	
 	public function modifyRisk($risk_id = null)
@@ -527,9 +527,9 @@ class RiskRegister extends APP_Controller {
 				$data['treatment_list'] = $this->mriskregister->getReference('treatment.status');
 				$data['division_list'] = $this->mriskregister->getDivisionList();
 				
-				$this->load->view('main/header', $data);
+				$this->load->view('maini/header', $data);
 				$this->load->view('risk_register_input', $data);
-				$this->load->view('main/footer', $data);
+				$this->load->view('maini/footer', $data);
 			}
 		}
 	}
@@ -1421,7 +1421,7 @@ class RiskRegister extends APP_Controller {
 					$data['valid_entry'] = true;
 				}
 				
-				$data['sidebarMenu'] = $this->getSidebarMenuStructure('main');
+				$data['sidebarMenu'] = $this->getSidebarMenuStructure('maini');
 				$data['indonya'] = base_url('index.php/riski/RiskRegister/ChangeRequestInput');
 				$data['engnya'] = base_url('index.php/risk/RiskRegister/ChangeRequestInput');				
 				$data['pageLevelStyles'] = '
@@ -1455,9 +1455,9 @@ class RiskRegister extends APP_Controller {
 					$data['division_list'] = $this->mriskregister->getDivisionList();
 				}
 				
-				$this->load->view('main/header', $data);
+				$this->load->view('maini/header', $data);
 				$this->load->view('change_request_input', $data);
-				$this->load->view('main/footer', $data);
+				$this->load->view('maini/footer', $data);
 			}
 		}
 	}
@@ -1590,9 +1590,9 @@ class RiskRegister extends APP_Controller {
 				$data['change_code'] = $res['cr_code'];
 				$data['change_status'] = $res['cr_status'];
 				
-				$this->load->view('main/header', $data);
+				$this->load->view('maini/header', $data);
 				$this->load->view($v, $data);
-				$this->load->view('main/footer', $data);
+				$this->load->view('maini/footer', $data);
 			}
 		}
 	}
@@ -1663,9 +1663,9 @@ class RiskRegister extends APP_Controller {
 					$data['division_list'] = $this->mriskregister->getDivisionList();
 				}
 				
-				$this->load->view('main/header', $data);
+				$this->load->view('maini/header', $data);
 				$this->load->view('change_request_input', $data);
-				$this->load->view('main/footer', $data);
+				$this->load->view('maini/footer', $data);
 			}
 		}
 	}
@@ -1726,9 +1726,9 @@ class RiskRegister extends APP_Controller {
 					
 				}
 				
-				$this->load->view('main/header', $data);
+				$this->load->view('maini/header', $data);
 				$this->load->view('change_request_input', $data);
-				$this->load->view('main/footer', $data);
+				$this->load->view('maini/footer', $data);
 			}
 		}
 	}

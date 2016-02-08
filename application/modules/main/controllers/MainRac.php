@@ -2477,7 +2477,10 @@ class MainRac extends APP_Controller {
 		
 		if (isset($_POST['id']) && is_numeric($_POST['id'])) {
 			$this->load->model('risk/risk');
-			$res = $this->risk->changeRequestSwitchPrimary($_POST['id']);
+			
+			// ini buat update t_cr_risk_change kayak nya ga perlu	
+			//$res = $this->risk->changeRequestSwitchPrimary($_POST['id']);
+
 			$changes = $this->risk->getChangeByIdNoRef($_POST['id']);
 			
 			$v_risk = true; $v_control = true; $v_action = true; $v_objective = true;

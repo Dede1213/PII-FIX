@@ -334,9 +334,7 @@ var ChangeRequest = function() {
         		'<td>'+nnode.action_plan+'</td>'+
         		'<td>'+nnode.due_date+'</td>'+
         		'<td>'+nnode.division_v+'</td>'+
-        		'<td>'+
-        		act_str+
-        		'</td>'+
+        		'<td></td>'+
         	'</tr>');
         	
         	me.actionPlanAdd(nnode, me.dataActionPlanCounter);

@@ -187,6 +187,32 @@ from m_risk_category
 		return $res;
 	}
 	
+	public function getAllRisk_objective($page, $row, $order_by = null, $order = null, $filter_by = null, $filter_value = null)
+	{
+		$ex_or = $ex_filter = '';
+		$par = false;
+		
+		if ($order_by != null) {
+			$order_by = $order_by;
+			$ex_or = ' order by '.$order_by.' '.$order;
+		}
+		
+		if ($filter_by != null && $filter_value != null) {
+			$ex_filter = ' where '.$filter_by.' like ? ';
+			$par['p1'] = '%'.$filter_value.'%';
+		}
+		$date = date("Y-m-d");
+		$sql = "select t_risk_objective.id, t_risk_objective.objective
+				from t_risk_objective
+				group by t_risk_objective.objective
+				"
+				
+				.$ex_filter
+				
+				.$ex_or;
+		$res = $this->getPagingData($sql, $par, $page, $row, 'id', true);
+		return $res;
+	}
 	public function deleteRisk($risk_id, $uid, $update_point = 'D') {
 		// delete risk in child
 		  
@@ -247,6 +273,20 @@ from m_risk_category
 		$par['risk_id'] = $risk_id;
 		
 		$sql1 = "delete   from t_risk_control where id = ?";
+		//$sql2 = "delete   from t_risk_control_change where id = ?"; 
+		
+		$res = $this->db->query($sql1, $par);
+		//$res = $this->db->query($sql2, $par); 
+
+		return $res;
+	}
+
+	public function deleteRisk_objective($risk_id, $uid, $update_point = 'D') {
+		// delete risk in child
+		  
+		$par['risk_id'] = $risk_id;
+		
+		$sql1 = "delete   from t_risk_objective where id = ?";
 		//$sql2 = "delete   from t_risk_control_change where id = ?"; 
 		
 		$res = $this->db->query($sql1, $par);
@@ -338,6 +378,30 @@ from m_risk_category
 			$sql = " 
 							
 				INSERT INTO t_risk_control (risk_existing_control,risk_evaluation_control,risk_control_owner) VALUES ('".$data['risk_existing_control']."','".$data['risk_evaluation_control']."','".$data['risk_control_owner']."')
+				 
+			";
+		}
+	  
+		$res = $this->db->query($sql);
+		return $res;
+	
+	}
+
+	function listriskobjective_update($data){
+	 
+		$idnya = explode("OB.",$data['id']);
+		  
+		if($data['id'] !=""){
+			$sql = " 			 
+				UPDATE t_risk_objective
+				SET objective='".$data['objective']."'
+				WHERE `id`='".$idnya[1]."'	
+			";
+		}
+		else{
+			$sql = " 
+							
+				INSERT INTO `t_risk_objective`(`id`,`objective` ) VALUES ('".$data['id']."','".$data['objective']."')
 				 
 			";
 		}

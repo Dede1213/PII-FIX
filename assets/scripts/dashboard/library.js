@@ -208,6 +208,59 @@ gridRiskList_ec.init({
     }
 });
 
+var gridRiskList_objective = new Datatable();
+gridRiskList_objective.init({
+    src: $("#datatableobjective_ajax"),
+    onSuccess: function (grid) {
+        // execute some code after table records loaded
+    },
+    onError: function (grid) {
+        // execute some code on network or other general error  
+    },
+    onDataLoad: function(grid) {
+        // execute some code on ajax data load
+    },
+    loadingMessage: 'Loading...',
+    dataTable: { // here you can define a typical datatable settings from http://datatables.net/usage/options 
+
+        // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
+        // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/scripts/datatable.js). 
+        // So when dropdowns used the scrollable div should be removed. 
+        //"dom": "<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r>t<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'>>",
+        
+        //"scrollX": true,
+        "pageLength": 25, // default record count per page
+        "ajax": {
+            "url": site_url+"/library/getAllRisk_objective" // ajax source
+        },
+        "columnDefs": [  {
+            "targets": 0,
+            "data": "id",
+            "render": function ( data, type, full, meta ) {
+                return 'OB.'+data+'';
+            }
+        } ],
+        
+        "columns": [
+            { "data": "id" },
+            { "data": "objective" }, 
+            { 
+            "data": null,
+            "orderable": false,
+            "defaultContent": '<div class="btn-group">'+
+                    '<button type="button" class="btn blue btn-xs button-grid-edit" > <i class="fa fa-pencil"></i></button>'+
+                     
+                    '<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"></i></button>'+
+                '</div>'
+               
+           }
+       ],
+        "order": [
+            [0, "asc"]
+        ]// set first column as a default sort by asc
+    }
+});
+
 
 var gridTaxonomi = new Datatable();
 gridTaxonomi.init({
@@ -322,6 +375,15 @@ var Dashboard = function() {
                     me.deleteData_ec(data);
 					
             });
+
+            $('#datatableobjective_ajax').on('click', 'button.button-grid-delete', function(e) {
+              
+                    e.preventDefault();                    
+                    var r = this.parentNode.parentNode.parentNode; 
+                    var data = gridRiskList_objective.getDataTable().row(r).data(); 
+                    me.deleteData_objective(data);
+                    
+            });
 			// error
 			$('#sel_risk_category').change(function() {
         		var val = $(this).val();
@@ -393,6 +455,17 @@ var Dashboard = function() {
                     me.showriskform_ec(data);
 				
 			});
+
+            $('#datatableobjective_ajax').on('click', 'button.button-grid-edit', function(e) {
+           
+           
+                e.preventDefault();
+                    
+                    var r = this.parentNode.parentNode.parentNode; 
+                    var data = gridRiskList_objective.getDataTable().row(r).data(); 
+                    me.showriskform_objective(data);
+                
+            });
 			
 			$('#datatabletax_ajax').on('click', 'button.button-grid-edit', function(e) {
 		   
@@ -422,6 +495,15 @@ var Dashboard = function() {
 
 				
 			});
+
+            $('#button-add-objective').on('click' , function(e) {
+            
+                    e.preventDefault();
+                     
+                    me.showriskform_objective_add();
+
+                
+            });
 			
 			$('#button-treshold-selection-add').click(function(e) {
 			 
@@ -556,6 +638,40 @@ var Dashboard = function() {
 	            		 });
 	            	 
 	            });
+
+                $('#library-modal-listriskobjective-update').click(function(e) {
+                      
+                        e.preventDefault();
+                        var l = Ladda.create(this);
+                        l.start();
+                        
+                         
+                            var url = site_url+'/library/listriskobjective_update';
+                            var tx = 'Insert';
+                         
+                        $.post(
+                            url,
+                            $( "#modal-listrisk-form-objective" ).serialize(),
+                            function( data ) {
+                                l.stop();
+                                if(data.success) {
+                                    gridRiskList_objective.getDataTable().ajax.reload();
+                                    
+                                    $('#modal_listrisk_objective').modal('hide');
+                                    
+                                    MainApp.viewGlobalModal('success', 'Success '+tx+' Data');
+                                } else {
+                                    MainApp.viewGlobalModal('error', data.msg);
+                                }
+                                
+                            },
+                            "json"
+                        ).fail(function() {
+                            l.stop();
+                            MainApp.viewGlobalModal('error', 'Error Submitting Data');
+                         });
+                     
+                });
 				
 				$('#library-modal-listrisktax-update').click(function(e) {
 	            	  
@@ -721,6 +837,35 @@ var Dashboard = function() {
                             Metronic.unblockUI();
                             if(data.success) {
                                 gridRiskList_ec.getDataTable().ajax.reload();
+                                
+                                MainApp.viewGlobalModal('success', 'Success Delete Data');
+                            } else {
+                                MainApp.viewGlobalModal('error123', data.msg);
+                            }
+                            
+                        },
+                        "json"
+                    ).fail(function() {
+                        Metronic.unblockUI();
+                        MainApp.viewGlobalModal('error', 'Error Submitting Data');
+                     });
+                });
+        },
+        deleteData_objective: function(data) {
+            
+                var mod = MainApp.viewGlobalModal('warning', 'Are You sure you want to delete this data?');
+                mod.find('button.btn-danger').one('click', function(){
+                    mod.modal('hide');
+                    
+                    Metronic.blockUI({ boxed: true });
+                    var url = site_url+'/library/libraryriskDeleteData_objective';
+                    $.post(
+                        url,
+                        { 'id':  data.DT_RowId},
+                        function(data) {
+                            Metronic.unblockUI();
+                            if(data.success) {
+                                gridRiskList_objective.getDataTable().ajax.reload();
                                 
                                 MainApp.viewGlobalModal('success', 'Success Delete Data');
                             } else {
@@ -1035,6 +1180,44 @@ var Dashboard = function() {
 				$('#modal_listrisk').modal('show');
 	        	this.dataMode = 'view';
 	        },
+
+            showriskform_objective: function(data) {
+                var htmlopt = "";
+                
+                 var url = site_url+'/library/getDivision';
+                    $.post(
+                        url,
+                        { 'id':  ""},
+                        function(datax) {
+                            
+                            for (var i = '0'; i < datax.length; i++) {
+                                var datanya = datax[i];
+                                  
+                                if(data.risk_control_owner == datanya.division_id){
+                                var select = "selected = selected";
+                             
+                                }else{
+                                var select = "";
+                                 
+                                }
+                                htmlopt += "<option value = '"+datanya.division_id+"' "+select+">"+datanya.division_id+"</option>";
+                                 
+                            }   
+                             
+                            $("#").html(htmlopt);
+            
+                        },
+                        "json"
+                    ).fail(function() {                         
+                        MainApp.viewGlobalModal('error', 'Error Submitting Data');
+                     });
+                    
+                $('#modal-listrisk-form-objective').find('input[name=id]').attr('readonly', true).val("OB."+data.id);
+                $('#modal-listrisk-form-objective').find('textarea[name=objective]').attr('readonly', false).val(data.objective);
+                  
+                $('#modal_listrisk_objective').modal('show');
+                this.dataMode = 'view';
+            },
 			
 			showriskform_tax: function(data) {
 				  
@@ -1078,7 +1261,7 @@ var Dashboard = function() {
 	        	this.dataMode = 'view';
 	        },
 			
-			showriskform_ec_add: function(data) {
+			showriskform_objective_add: function(data) {
 				var htmlopt = "";
 				
 				 var url = site_url+'/library/getDivision';
@@ -1093,7 +1276,7 @@ var Dashboard = function() {
 								htmlopt += "<option value = '"+datanya.division_id+"' >"+datanya.division_id+"</option>";
 								 
 							}	
-							$("#risk_control_owner").html(htmlopt);
+							$("#").html(htmlopt);
 			
                         },
                         "json"
@@ -1102,13 +1285,45 @@ var Dashboard = function() {
                      });
 				    
 					$('#id').val('');
-					$('#risk_existing_control').val('');
-					$('#risk_evaluation_control').val('');
+					$('#objective').val('');
 					
-					$('#modal_listrisk').modal('show');
+					$('#modal_listrisk_objective').modal('show');
 					
 	        	this.dataMode = 'view';
 	        },
+
+            showriskform_ec_add: function(data) {
+                var htmlopt = "";
+                
+                 var url = site_url+'/library/getDivision';
+                    $.post(
+                        url,
+                        { 'id':  ""},
+                        function(datax) {
+                            
+                            for (var i = '0'; i < datax.length; i++) {
+                                var datanya = datax[i];
+                                 
+                                htmlopt += "<option value = '"+datanya.division_id+"' >"+datanya.division_id+"</option>";
+                                 
+                            }   
+                            $("#risk_control_owner").html(htmlopt);
+            
+                        },
+                        "json"
+                    ).fail(function() {                         
+                        MainApp.viewGlobalModal('error', 'Error Submitting Data');
+                     });
+                    
+                    $('#id').val('');
+                    $('#risk_existing_control').val('');
+                    $('#risk_evaluation_control').val('');
+                    
+                    $('#modal_listrisk').modal('show');
+                    
+                this.dataMode = 'view';
+            },
+
         filterDataGridRiskList: function() {
         	var fby = $('#tab_risk_list-filterBy').val();
         	var fval = $('#tab_risk_list-filterValue').val();

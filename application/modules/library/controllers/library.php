@@ -139,6 +139,25 @@ class Library extends APP_Controller {
 			echo json_encode($data);
 		}
 	}
+
+	public function libraryriskDeleteData_objective()
+	{
+	
+		if (isset($_POST['id']) && is_numeric($_POST['id'])) {
+			$risk_id = $_POST['id'];
+			$this->load->model('Mlibrary');
+			$res = $this->Mlibrary->deleteRisk_objective($risk_id, $this->session->credential['username'], 'RISK_REGISTER_RAC-DELETE');
+			
+			if ($res) {
+				$data['success'] = true;
+				$data['msg'] = 'SUCCESS';
+			} else {
+				$data['success'] = false;
+				$data['msg'] = 'Error Deleting Data';
+			}
+			echo json_encode($data);
+		}
+	}
 	
 	public function libraryriskDeleteData_tax()
 	{
@@ -363,6 +382,22 @@ class Library extends APP_Controller {
 			echo json_encode($data);
 	
 	}
+
+	public function listriskobjective_update(){
+	
+		$this->load->model('Mlibrary');
+		$res = $this->Mlibrary->listriskobjective_update($this->input->post());
+		 
+			if ($res) {
+				$data['success'] = true;
+				$data['msg'] = 'SUCCESS';
+			} else {
+				$data['success'] = false;
+				$data['msg'] = 'Error saving Data';
+			}
+			echo json_encode($data);
+	
+	}
 	
 	public function listrisktax_update(){
 	
@@ -410,6 +445,37 @@ class Library extends APP_Controller {
 		$this->load->view('main/footer', $data);
 		 
 	}
+
+	public function list_objective()
+	{
+		$data = $this->loadDefaultAppConfig();
+		$data['indonya'] = base_url('index.php/library/list_ec');
+		$data['engnya'] = base_url('index.php/library/list_ec');			
+		$data['sidebarMenu'] = $this->getSidebarMenuStructure('library/list_ec');
+		$data['pageLevelStyles'] = '
+		<link rel="stylesheet" type="text/css" href="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
+		<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css"/>
+		<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
+		';
+		
+		$data['pageLevelScripts'] = '
+		<script type="text/javascript" src="assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+		<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
+		<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
+		<script src="assets/scripts/dashboard/library.js"></script>
+		';
+		
+		$data['pageLevelScriptsInit'] = 'Dashboard.init();
+		 
+		';
+		 
+		 
+		$this->load->view('main/header', $data);
+		$this->load->view('library_objective', $data);
+		$this->load->view('main/footer', $data);
+		 
+	}
 	
 	public function getAllRisk_ec() {
 		$sess = $this->loadDefaultAppConfig();
@@ -435,6 +501,36 @@ class Library extends APP_Controller {
 			'userid' => $sess['session']['username']
 		);
 		$data = $this->Mlibrary->getAllRisk_ec($page, $row, $order_by, $order, $filter_by, $filter_value);
+		   
+		$data['draw'] = $_POST['draw']*1;
+		$data['page'] = $page;
+		echo json_encode($data);
+	}
+
+	public function getAllRisk_objective() {
+		$sess = $this->loadDefaultAppConfig();
+		$order_by = $order = $filter_by = $filter_value = null;
+						
+		if (isset($_POST['order'][0]['column'])) {
+			$order_idx = $_POST['order'][0]['column'];
+			$order_by = $_POST['columns'][$order_idx]['data'];
+			$order = $_POST['order'][0]['dir'];
+		}
+		
+		if (isset($_POST['filter_by']) && isset($_POST['filter_value']) && $_POST['filter_value'] != '' ) {
+			$filter_by = $_POST['filter_by'];
+			$filter_value = $_POST['filter_value'];
+		}
+		
+		$page = ceil($_POST['start'] / $_POST['length'])+1;
+
+		$row = $_POST['length'];
+		$this->load->model('Mlibrary');
+		
+		$defFilter = array(
+			'userid' => $sess['session']['username']
+		);
+		$data = $this->Mlibrary->getAllRisk_objective($page, $row, $order_by, $order, $filter_by, $filter_value);
 		   
 		$data['draw'] = $_POST['draw']*1;
 		$data['page'] = $page;

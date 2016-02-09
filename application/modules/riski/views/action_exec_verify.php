@@ -123,11 +123,11 @@
 	$status = $_GET['status'];
 	if ($status == 'under'){
 	?>
-					<button id="exec-button-submit-under" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Save</button>
+					<button id="exec-button-submit-under" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Simpan</button>
 					<?php }else{ ?>
-					<button id="exec-button-submit" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Verify</button>
+					<button id="exec-button-submit" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Verifikasi</button>
 <?php } ?>
-					<button type="button" class="btn yellow" id="exec-button-cancel"><i class="fa fa-times"></i> Cancel</button>
+					<button type="button" class="btn yellow" id="exec-button-cancel"><i class="fa fa-times"></i> Batal</button>
 				</div>
 	<?php } ?>
 			</form>
@@ -240,7 +240,7 @@
 		<button id="modal-impactlevel-form-submit" type="button" 
 			class="btn blue ladda-button"
 			 data-style="expand-right"
-			>Save</button>
+			>Simpan</button>
 	</div>
 </div>
 
@@ -287,7 +287,7 @@
 		<button id="input-form-impact-button" type="button" 
 			class="btn blue ladda-button"
 			 data-style="expand-right"
-			>Save</button>
+			>Simpan</button>
 	</div>
 </div>
 
@@ -325,6 +325,6 @@
 		<button id="input-form-likelihood-button" type="button" 
 			class="btn blue ladda-button"
 			 data-style="expand-right"
-			>Save</button>
+			>Simpan</button>
 	</div>
 </div>

@@ -100,8 +100,8 @@
 								<table id="primary_objective_table" class="table table-condensed table-bordered table-hover">
 									<thead>
 									<tr role="row" class="heading">
-										<th width="15%"><span class="small">Obj.ID</span></th>
-										<th><span class="small">Objective</span></th>
+										<th width="15%"><span class="small">ID Objektif</span></th>
+										<th><span class="small">Objektife</span></th>
 										
 									</tr>
 									</thead>
@@ -285,16 +285,16 @@
 								<a href="#form-control-objective" id="button-form-control-open" data-toggle="modal" class="btn default green pull-right btn-sm">
 								<i class="fa fa-plus"></i>
 								<span class="hidden-480">
-								Add Objective </span>
+								Tambah Objektif </span>
 								</a>
-								<h4>Objective</h4>
+								<h4>Objektif</h4>
 							</div>
 							<div class="table-scrollable">
 								<table id="objective_table" class="table table-condensed table-bordered table-hover">
 									<thead>
 									<tr role="row" class="heading">
-										<th width="15%"><span class="small">Obj.ID</span></th>
-										<th><span class="small">Objective</span></th>
+										<th width="15%"><span class="small">ID Objektif</span></th>
+										<th><span class="small">Objektif</span></th>
 										<th width="30px">&nbsp;</th>
 									</tr>
 									</thead>
@@ -356,8 +356,8 @@
 							</div>
 						</div>
 						<div class="form-actions right">
-							<button id="risk-button-submit" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Submit</button>
-							<button type="button" class="btn yellow" id="verify-risk-button-cancel"><i class="fa fa-times"></i> Cancel</button>
+							<button id="risk-button-submit" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Ajukan</button>
+							<button type="button" class="btn yellow" id="verify-risk-button-cancel"><i class="fa fa-times"></i> Batal</button>
 						</div>
 
 					</form>
@@ -396,7 +396,7 @@
 <div id="form-control-objective" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Add Objective</h4>
+		<h4 class="modal-title">Tambah Objektif</h4>
 	</div>
 	<div class="modal-body">
 		
@@ -404,7 +404,7 @@
 				<div class="form-body">
 					<div class="form-group">
 					<input type = "hidden" id = "form-control-revid-objective">
-						<label class="col-md-3 control-label smaller cl-compact">Obj. ID</label>
+						<label class="col-md-3 control-label smaller cl-compact">ID Objektif</label>
 						<div class="col-md-9">
 							<div class="input-group">
 								<input type="text" class="form-control input-sm" readonly="true" name="objective_id" id = "objective_id" placeholder="">
@@ -417,7 +417,7 @@
 					</div>
 					
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Objective <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact" >Objektif <span class="required">* </span></label>
 						<div class="col-md-9">
 						<textarea class="form-control input-sm " rows="3"  name="objective" id = "objective" placeholder="">NONE</textarea>
 						<button id="button_clear_control" type="button" class="hide btn red btn-xs" style="margin-top: 5px;"><i class="fa fa-minus-circle font-white"></i> Clear Existing Control</button>
@@ -439,7 +439,7 @@
 <div id="form-control" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Add Control</h4>
+		<h4 class="modal-title">Tambah Kontrol</h4>
 	</div>
 	<div class="modal-body">
 		
@@ -515,7 +515,7 @@
 <div id="form-data" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Add Suggested Action Plan</h4>
+		<h4 class="modal-title">Tambah Usulan Action Plan</h4>
 	</div>
 	<div class="modal-body">
 		
@@ -523,7 +523,7 @@
 				<div class="form-body">
 					
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact">Suggested Action Plan<span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact">Usulan Action Plan<span class="required">* </span></label>
 						<div class="col-md-9">
 							<div class="input-group">
 								<input type="text" class="form-control input-sm" name="action_plan" placeholder=""> 
@@ -534,7 +534,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Due Date <span class="required">* </span></label>
+						<label class="col-md-3 control-label">Batas Tanggal <span class="required">* </span></label>
 						<div class="col-md-9">
 						<div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
 							<input type="text" class="form-control input-sm" name="due_date" readonly>
@@ -545,7 +545,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Action Plan Owner <span class="required">* </span></label>
+						<label class="col-md-3 control-label">Pemilik Action Plan <span class="required">* </span></label>
 						<div class="col-md-9">
 						<select class="form-control input-sm" name="division">
 							<?php foreach($division_list as $row) { ?>
@@ -562,7 +562,7 @@
 		<button id="input-actionplan-add" type="button" 
 			class="btn blue ladda-button"
 			 data-style="expand-right"
-			>Save</button>
+			>Simpan</button>
 	</div>
 </div>
 <!-- OBJECTIVE search Library -->
@@ -600,7 +600,7 @@
 <div id="modal-libraryaction" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Suggested Action Plan Library</h4>
+		<h4 class="modal-title">Usulan Action Plan dari Librari</h4>
 		<div class="inputs">
 			<div class="portlet-input input-inline">
 				<div class="input-group">
@@ -733,7 +733,7 @@
 		<button id="input-form-impact-button" type="button" 
 			class="btn blue ladda-button"
 			 data-style="expand-right"
-			>Save</button>
+			>Simpan</button>
 	</div>
 </div>
 
@@ -771,7 +771,7 @@
 		<button id="input-form-likelihood-button" type="button" 
 			class="btn blue ladda-button"
 			 data-style="expand-right"
-			>Save</button>
+			>Simpan</button>
 	</div>
 </div>
 <?php } ?>

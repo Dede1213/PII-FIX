@@ -147,7 +147,7 @@
 							</div>
 						</div>
 						<div class="form-actions right">
-							<button id="risk-button-save" type="button" class="btn blue"><i class="fa fa-circle-o"></i> Simpan sebagai Draft</button>
+							<button id="risk-button-save" type="button" class="btn blue"><i class="fa fa-circle-o"></i> Simpan sebagai Konsep</button>
 							<button id="risk-button-verify" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Ajukan</button>
 							<button type="button" class="btn yellow" id="risk-button-cancel"><i class="fa fa-times"></i> Batalkan</button>
 						</div>

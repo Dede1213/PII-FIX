@@ -303,10 +303,10 @@
 							</div>
 						</div>
 						<div class="form-actions right">
-							<button id="changes-risk-set-as-primary" type="button" class="btn blue"><i class="fa fa-arrows-h"></i> Set As Primary</button>
+							<button id="changes-risk-set-as-primary" type="button" class="btn blue"><i class="fa fa-arrows-h"></i> Simpan Sebagai Primary</button>
 						<!-- <button id="changes-risk-button-submit" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Verify</button> -->
-							<button id="changes-risk-button-save" type="button" class="btn blue"><i class="fa fa-circle-o"></i> Save</button>
-							<button type="button" class="btn yellow" id="changes-risk-button-cancel"><i class="fa fa-times"></i> Cancel</button>
+							<button id="changes-risk-button-save" type="button" class="btn blue"><i class="fa fa-circle-o"></i> Simpan</button>
+							<button type="button" class="btn yellow" id="changes-risk-button-cancel"><i class="fa fa-times"></i> Batal</button>
 						</div>
 
 					</form>
@@ -345,7 +345,7 @@
 <div id="form-control" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Add Control</h4>
+		<h4 class="modal-title">Tambah Kontrol</h4>
 	</div>
 	<div class="modal-body">
 		
@@ -398,20 +398,20 @@
 <div id="form-data" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Add Suggested Action Plan</h4>
+		<h4 class="modal-title">Tambah Usulan Action Plan</h4>
 	</div>
 	<div class="modal-body">
 		
 			<form id="input-form-action-plan" role="form" class="form-horizontal">
 				<div class="form-body">
 					<div class="form-group">
-						<label class="col-md-3 control-label">Suggested Action Plan <span class="required">* </span></label>
+						<label class="col-md-3 control-label">Usulan Action Plan <span class="required">* </span></label>
 						<div class="col-md-9">
 						<input type="text" class="form-control input-sm" name="action_plan" placeholder="">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Due Date <span class="required">* </span></label>
+						<label class="col-md-3 control-label">Batas Tanggal <span class="required">* </span></label>
 						<div class="col-md-9">
 						<div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
 							<input type="text" class="form-control input-sm" name="due_date" readonly>
@@ -422,7 +422,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Action Plan Owner <span class="required">* </span></label>
+						<label class="col-md-3 control-label">Pemilik Action Plan <span class="required">* </span></label>
 						<div class="col-md-9">
 						<select class="form-control input-sm" name="division">
 							<?php foreach($division_list as $row) { ?>
@@ -439,7 +439,7 @@
 		<button id="input-actionplan-add" type="button" 
 			class="btn blue ladda-button"
 			 data-style="expand-right"
-			>Save</button>
+			>Simpan</button>
 	</div>
 </div>
 
@@ -518,7 +518,7 @@
 		<button id="input-form-impact-button" type="button" 
 			class="btn blue ladda-button"
 			 data-style="expand-right"
-			>Save</button>
+			>Simpan</button>
 	</div>
 </div>
 
@@ -556,7 +556,7 @@
 		<button id="input-form-likelihood-button" type="button" 
 			class="btn blue ladda-button"
 			 data-style="expand-right"
-			>Save</button>
+			>Simpan</button>
 	</div>
 </div>
 <?php } ?>

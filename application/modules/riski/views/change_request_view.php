@@ -96,8 +96,8 @@
 								<table id="primary_objective_table" class="table table-condensed table-bordered table-hover">
 									<thead>
 									<tr role="row" class="heading">
-										<th width="15%"><span class="small">Obj.ID</span></th>
-										<th><span class="small">Objective</span></th>
+										<th width="15%"><span class="small">ID Objektif</span></th>
+										<th><span class="small">Objektif</span></th>
 										
 									</tr>
 									</thead>
@@ -217,16 +217,16 @@
 								<a href="#form-control-objective" id="button-form-control-open" data-toggle="modal" class="btn default green pull-right btn-sm">
 								<i class="fa fa-plus"></i>
 								<span class="hidden-480">
-								Add Objective </span>
+								Tambah Objektif </span>
 								</a>
-								<h4>Objective</h4>
+								<h4>Objektif</h4>
 							</div>
 							<div class="table-scrollable">
 								<table id="objective_table" class="table table-condensed table-bordered table-hover">
 									<thead>
 									<tr role="row" class="heading">
-										<th width="15%"><span class="small">Obj.ID</span></th>
-										<th><span class="small">Objective</span></th>
+										<th width="15%"><span class="small">ID Objektif</span></th>
+										<th><span class="small">Objektif</span></th>
 										
 									</tr>
 									</thead>
@@ -269,7 +269,7 @@
 							</div>
 						</div>
 						<div class="form-actions right">
-							<button type="button" class="btn yellow" id="verify-risk-button-cancel"><i class="fa fa-times"></i> Back</button>
+							<button type="button" class="btn yellow" id="verify-risk-button-cancel"><i class="fa fa-times"></i> Kembali</button>
 						</div>
 
 					</form>

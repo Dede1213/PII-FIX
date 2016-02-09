@@ -132,8 +132,8 @@ if($status == 'under'){ ?>
 						</div>
 						<div class="form-actions right">
 							
-							<button id="changes-risk-button-save-primary2" type="button" class="btn blue"><i class="fa fa-circle-o"></i> Save</button>
-							<button type="button" class="btn yellow" id="changes-risk-button-cancel"><i class="fa fa-times"></i> Cancel</button>
+							<button id="changes-risk-button-save-primary2" type="button" class="btn blue"><i class="fa fa-circle-o"></i> Simpan</button>
+							<button type="button" class="btn yellow" id="changes-risk-button-cancel"><i class="fa fa-times"></i> Batal</button>
 						</div>
 					</form>
 				</div>	
@@ -222,9 +222,9 @@ if($status == 'under'){ ?>
 							</div>
 						</div>
 						<div class="form-actions right">
-							<button id="primary-risk-button-submit" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Verify</button>
-							<button id="changes-risk-button-save-primary" type="button" class="btn blue"><i class="fa fa-circle-o"></i> Save</button>
-							<button type="button" class="btn yellow" id="changes-risk-button-cancel"><i class="fa fa-times"></i> Cancel</button>
+							<button id="primary-risk-button-submit" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Verifikasi</button>
+							<button id="changes-risk-button-save-primary" type="button" class="btn blue"><i class="fa fa-circle-o"></i> Simpan</button>
+							<button type="button" class="btn yellow" id="changes-risk-button-cancel"><i class="fa fa-times"></i> Batal</button>
 						</div>
 					</form>
 				</div>	
@@ -374,9 +374,9 @@ if($status == 'under'){ ?>
 							</div>
 						</div>
 						<div class="form-actions right">
-							<button id="changes-risk-set-as-primary" type="button" class="btn blue"><i class="fa fa-arrows-h"></i> Set As Primary</button>
-							<button id="changes-risk-button-save" type="button" class="btn blue"><i class="fa fa-circle-o"></i> Save</button>
-							<button type="button" class="btn yellow" id="changes-risk-button-cancel"><i class="fa fa-times"></i> Cancel</button>
+							<button id="changes-risk-set-as-primary" type="button" class="btn blue"><i class="fa fa-arrows-h"></i> Simpan Sebagai Primary</button>
+							<button id="changes-risk-button-save" type="button" class="btn blue"><i class="fa fa-circle-o"></i> Simpan</button>
+							<button type="button" class="btn yellow" id="changes-risk-button-cancel"><i class="fa fa-times"></i> Batal</button>
 						</div>
 					</form>
 				</div>	

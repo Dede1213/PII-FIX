@@ -48,7 +48,7 @@ grid.init({
             "data": "risk_code",
             "render": function ( data, type, full, meta ) {
                 var cls = 'font-green-jungle';
-                var vm = 'main/viewRisk';
+                var vm = 'maini/viewRisk';
                 if (full.risk_status == '0' || full.risk_status == '1') {
                     cls = '';
                     vm = 'riski/RiskRegister/modifyRisk';

@@ -38,7 +38,7 @@
 					<div class="form-group">
 						<label for="filterFormBy">Filter Dengan</label>
 						<select class="form-control input-medium input-sm" id="filterFormBy">
-							<option value="subject">Subject</option>
+							<option value="subject">Perihal</option>
 						</select>
 					</div>
 					<div class="form-group">
@@ -54,7 +54,7 @@
 						<tr role="row" class="heading">
 							<th>No</th>
 							<th>Tanggal</th>
-							<th>Subject</th>
+							<th>Perihal</th>
 							<th>Pertanyaan</th>
 						</tr>
 						</thead>
@@ -78,7 +78,7 @@
 				<input type="hidden" name="periode_id" value="">
 				<div class="form-body">
 					<div class="form-group">
-						<label class="col-md-2 control-label">Subject</label>
+						<label class="col-md-2 control-label">Perihal</label>
 						<div class="col-md-6">
 							<input type="text" class="form-control" placeholder="Subject" name="subject">
 						</div>
@@ -88,7 +88,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-2 control-label">Pertanyaan</label>
+						<label class="col-md-2 control-label">Tanya</label>
 						<div class="col-md-9">
 							<textarea  class="form-control" rows="4" name="question"></textarea>
 						</div>

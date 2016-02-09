@@ -290,9 +290,9 @@
 						</div>
 						<div class="form-actions right">
 							<input type="hidden" name="submit_mode" value="setOwnedRisk" />
-							<button id="risk-button-save" type="button" class="btn blue"><i class="fa fa-circle-o"></i> Save as Draft</button>
-							<button id="risk-button-verify" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Submit</button>
-							<button type="button" class="btn yellow" id="risk-button-cancel"><i class="fa fa-times"></i> Cancel</button>
+							<button id="risk-button-save" type="button" class="btn blue"><i class="fa fa-circle-o"></i>Simpan Sebagai Konsep</button>
+							<button id="risk-button-verify" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Ajukan</button>
+							<button type="button" class="btn yellow" id="risk-button-cancel"><i class="fa fa-times"></i> Batal</button>
 						</div>
 					</form>
 				</div>
@@ -323,7 +323,7 @@
 <div id="form-control" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Add Control</h4>
+		<h4 class="modal-title">Tambah Kontrol</h4>
 	</div>
 	<div class="modal-body">
 		
@@ -585,7 +585,7 @@
 		<button id="input-form-impact-button" type="button" 
 			class="btn blue ladda-button"
 			 data-style="expand-right"
-			>Save</button>
+			>Simpan</button>
 	</div>
 </div>
 
@@ -623,6 +623,6 @@
 		<button id="input-form-likelihood-button" type="button" 
 			class="btn blue ladda-button"
 			 data-style="expand-right"
-			>Save</button>
+			>Simpan</button>
 	</div>
 </div>

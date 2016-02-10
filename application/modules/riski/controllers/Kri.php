@@ -30,7 +30,7 @@ class Kri extends APP_Controlleri {
 		<script type="text/javascript" src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 		<script type="text/javascript" src="assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
 		
-		<script src="assets/scripts/risk/krientry.js"></script>
+		<script src="assets/scripts/riski/krientry.js"></script>
 		';
 		
 		$data['pageLevelScriptsInit'] = 'Kri.init();';

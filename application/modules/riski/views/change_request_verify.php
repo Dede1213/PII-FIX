@@ -352,7 +352,7 @@
 			<form id="input-form-control" role="form" class="form-horizontal">
 				<div class="form-body">
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact">Existing Control ID</label>
+						<label class="col-md-3 control-label smaller cl-compact">ID Kontrol Yang Ada Saat Ini</label>
 						<div class="col-md-9">
 							<div class="input-group">
 								<input type="text" class="form-control input-sm" readonly="true" name="existing_control_id" placeholder="">
@@ -364,20 +364,20 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Existing Control <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact" >Kontrol Yang Ada Saat Ini <span class="required">* </span></label>
 						<div class="col-md-9">
 						<textarea class="form-control input-sm" rows="3" name="risk_existing_control" placeholder=""></textarea>
 						<button id="button_clear_control" type="button" class="hide btn red btn-xs" style="margin-top: 5px;"><i class="fa fa-minus-circle font-white"></i> Clear Existing Control</button>
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Evaluation on Existing Control <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact" >Evaluasi Dari Kontrol Yang Ada Saat Ini <span class="required">* </span></label>
 						<div class="col-md-9">
 						<input type="text" class="form-control input-sm" name="risk_evaluation_control" placeholder="">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Control Owner <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact" >Pemilik Kontrol <span class="required">* </span></label>
 						<div class="col-md-9">
 						<input type="text" class="form-control input-sm" name="risk_control_owner" placeholder="">
 						</div>
@@ -386,11 +386,11 @@
 			</form>
 	</div>
 	<div class="modal-footer">
-		<button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+		<button type="button" data-dismiss="modal" class="btn btn-default">Batal</button>
 		<button id="input-control-add" type="button" 
 			class="btn blue ladda-button"
 			 data-style="expand-right"
-			>Add</button>
+			>Tambah</button>
 	</div>
 </div>
 

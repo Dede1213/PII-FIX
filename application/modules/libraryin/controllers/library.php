@@ -1,12 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Library extends APP_Controller {
+class Library extends APP_Controlleri {
 	 
 	public function list_risk()
 	{
 		$data = $this->loadDefaultAppConfig();
-		$data['indonya'] = base_url('index.php/libraryi/list_risk');
+		$data['indonya'] = base_url('index.php/libraryin/library/list_risk');
 		$data['engnya'] = base_url('index.php/library/list_risk');			
 		$data['sidebarMenu'] = $this->getSidebarMenuStructure('library/list_risk');
 		$data['pageLevelStyles'] = '
@@ -28,9 +28,9 @@ class Library extends APP_Controller {
 		';
 		 
 		 
-		$this->load->view('main/header', $data);
+		$this->load->view('maini/header', $data);
 		$this->load->view('library', $data);
-		$this->load->view('main/footer', $data);
+		$this->load->view('maini/footer', $data);
 		 
 	}
 	
@@ -197,7 +197,7 @@ class Library extends APP_Controller {
 	public function list_ap()
 	{
 		$data = $this->loadDefaultAppConfig();
-		$data['indonya'] = base_url('index.php/libraryi/list_ap');
+		$data['indonya'] = base_url('index.php/libraryin/library/list_ap');
 		$data['engnya'] = base_url('index.php/library/list_ap');			
 		$data['sidebarMenu'] = $this->getSidebarMenuStructure('library/list_ap');
 		$data['pageLevelStyles'] = '
@@ -222,9 +222,9 @@ class Library extends APP_Controller {
 		$this->load->model('risk/mriskregister');
 		$data['category'] = $this->mriskregister->getRiskCategory();
 		 
-		$this->load->view('main/header', $data);
+		$this->load->view('maini/header', $data);
 		$this->load->view('library_ap', $data);
-		$this->load->view('main/footer', $data);
+		$this->load->view('maini/footer', $data);
 		 
 	}
 	
@@ -418,7 +418,7 @@ class Library extends APP_Controller {
 	public function list_ec()
 	{
 		$data = $this->loadDefaultAppConfig();
-		$data['indonya'] = base_url('index.php/libraryi/list_ec');
+		$data['indonya'] = base_url('index.php/libraryin/library/list_ec');
 		$data['engnya'] = base_url('index.php/library/list_ec');			
 		$data['sidebarMenu'] = $this->getSidebarMenuStructure('library/list_ec');
 		$data['pageLevelStyles'] = '
@@ -440,16 +440,16 @@ class Library extends APP_Controller {
 		';
 		 
 		 
-		$this->load->view('main/header', $data);
+		$this->load->view('maini/header', $data);
 		$this->load->view('library_ec', $data);
-		$this->load->view('main/footer', $data);
+		$this->load->view('maini/footer', $data);
 		 
 	}
 
 	public function list_objective()
 	{
 		$data = $this->loadDefaultAppConfig();
-		$data['indonya'] = base_url('index.php/libraryi/list_ec');
+		$data['indonya'] = base_url('index.php/libraryin/library/list_ec');
 		$data['engnya'] = base_url('index.php/library/list_ec');			
 		$data['sidebarMenu'] = $this->getSidebarMenuStructure('library/list_ec');
 		$data['pageLevelStyles'] = '
@@ -471,9 +471,9 @@ class Library extends APP_Controller {
 		';
 		 
 		 
-		$this->load->view('main/header', $data);
+		$this->load->view('maini/header', $data);
 		$this->load->view('library_objective', $data);
-		$this->load->view('main/footer', $data);
+		$this->load->view('maini/footer', $data);
 		 
 	}
 	
@@ -540,7 +540,7 @@ class Library extends APP_Controller {
 	public function taksonomi()
 	{
 		$data = $this->loadDefaultAppConfig();
-		$data['indonya'] = base_url('index.php/libraryi/taksonomi');
+		$data['indonya'] = base_url('index.php/libraryin/library/taksonomi');
 		$data['engnya'] = base_url('index.php/library/taksonomi');			
 		$data['sidebarMenu'] = $this->getSidebarMenuStructure('library/taksonomi');
 		$data['pageLevelStyles'] = '
@@ -562,9 +562,9 @@ class Library extends APP_Controller {
 		';
 		 
 		 
-		$this->load->view('main/header', $data);
+		$this->load->view('maini/header', $data);
 		$this->load->view('taksonomi', $data);
-		$this->load->view('main/footer', $data);
+		$this->load->view('maini/footer', $data);
 		 
 	}
 	
@@ -602,7 +602,7 @@ class Library extends APP_Controller {
 	public function kri()
 	{
 		$data = $this->loadDefaultAppConfig();
-		$data['indonya'] = base_url('index.php/libraryi/kri');
+		$data['indonya'] = base_url('index.php/libraryin/library/kri');
 		$data['engnya'] = base_url('index.php/library/kri');			
 		$data['sidebarMenu'] = $this->getSidebarMenuStructure('library/kri');
 		$data['pageLevelStyles'] = '
@@ -627,9 +627,9 @@ class Library extends APP_Controller {
 		$this->load->model('risk/mriskregister');
 		$data['category'] = $this->mriskregister->getRiskCategory();
 		 
-		$this->load->view('main/header', $data);
+		$this->load->view('maini/header', $data);
 		$this->load->view('kri', $data);
-		$this->load->view('main/footer', $data);
+		$this->load->view('maini/footer', $data);
 		 
 	}
 	

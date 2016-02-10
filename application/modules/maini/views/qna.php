@@ -27,7 +27,7 @@
 				<a href="javascript:;" class="btn btn-sm green pull-right" id="btn-open-form">
 				<i class="fa fa-plus"></i>
 				<span class="hidden-480">
-				Tambah Pertanyaan Baru </span>
+				Tambah Tanya Baru </span>
 				</a>
 			</div>
 		</div>
@@ -55,7 +55,7 @@
 							<th>No</th>
 							<th>Tanggal</th>
 							<th>Perihal</th>
-							<th>Pertanyaan</th>
+							<th>Tanya</th>
 						</tr>
 						</thead>
 						<tbody></tbody>
@@ -70,7 +70,7 @@
 <div id="form-data" class="modal fade" tabindex="-1" data-width="760" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Tambah Pertanyaan Baru</h4>
+		<h4 class="modal-title">Tambah Tanya Baru</h4>
 	</div>
 	<div class="modal-body">
 		<div class="row">
@@ -94,7 +94,7 @@
 						</div>
 					</div>
 					<div class="form-group fg-answer">
-						<label class="col-md-2 control-label">Jawaban</label>
+						<label class="col-md-2 control-label">Jawab</label>
 						<div class="col-md-9">
 							<textarea readonly class="form-control" rows="4" name="answer"></textarea>
 						</div>

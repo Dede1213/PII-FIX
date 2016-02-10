@@ -138,7 +138,7 @@
 									</tbody>
 								</table>
 								
-								<h4>Suggested Action Plan</h4>
+								<h4>Usulan Action Plan</h4>
 								<table class="table table-condensed table-bordered table-hover">
 									<thead>
 									<tr role="row" class="heading">
@@ -218,7 +218,7 @@
 							</div>
 							<div class="col-md-7">
 								<div class="form-group">
-									<label class="col-md-3 control-label small cl-compact" >Agreed Risk Treatment</label>
+									<label class="col-md-3 control-label small cl-compact" >Penanganan Risiko Yang Disepakati</label>
 									<div class="col-md-6">
 										<select class="form-control input-sm" name="suggested_risk_treatment">
 											<?php foreach($treatment_list as $row) { ?>
@@ -331,7 +331,7 @@
 			<input type = "hidden" id = "tr_idnya">
 				<div class="form-body">
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact">Existing Control ID</label>
+						<label class="col-md-3 control-label smaller cl-compact">ID Kontrol Yang Ada Saat Ini</label>
 						<div class="col-md-9">
 							<div class="input-group">
 								<input type="text" class="form-control input-sm" readonly="true" name="existing_control_id" id = "existing_control_id" placeholder="">
@@ -344,7 +344,7 @@
 					</div>
 					<div class="form-group">
 					<input type = "hidden" id = "form-control-revid">
-						<label class="col-md-3 control-label smaller cl-compact">Existing Control <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact">Kontrol Yang Ada Saat Ini <span class="required">* </span></label>
 						<div class="col-md-9">
 							<div class="input-group">
 								<input type="text" class="form-control input-sm" readonly="true" name="risk_existing_control" id = "risk_existing_control" placeholder="" value="NONE">
@@ -365,13 +365,13 @@
 					</div>
 					-->
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Evaluation on Existing Control <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact" >Evaluasi Dari Kontrol Yang Ada Saat Ini <span class="required">* </span></label>
 						<div class="col-md-9">
 						<input type="text" class="form-control input-sm" name="risk_evaluation_control" id = "risk_evaluation_control" placeholder="" value="NONE">
 						</div>
 					</div>
 					<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact">Control Owner <span class="required">* </span></label>
+									<label class="col-md-3 control-label smaller cl-compact">Pemilik Kontrol <span class="required">* </span></label>
 									<div class="col-md-9">
 									
 									<select class="form-control input-sm" name="risk_control_owner" id = "risk_control_owner">
@@ -386,11 +386,11 @@
 			</form>
 	</div>
 	<div class="modal-footer">
-		<button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+		<button type="button" data-dismiss="modal" class="btn btn-default">Batal</button>
 		<button id="input-control-add" type="button" 
 			class="btn blue ladda-button"
 			 data-style="expand-right"
-			>Add</button>
+			>Tambah</button>
 	</div>
 </div>
 
@@ -406,7 +406,7 @@
 				<div class="form-body">
 					<input type = "hidden" id = "tr_idnya_ap">
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact">Suggested Action Plan<span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact">Usulan Action Plan<span class="required">* </span></label>
 						<div class="col-md-9">
 							<div class="input-group">
 								<input type="text" class="form-control input-sm" name="action_plan" id = "action_plan" placeholder=""> 
@@ -452,7 +452,7 @@
 <div id="modal-libraryaction" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Suggested Action Plan Library</h4>
+		<h4 class="modal-title">Usulan Action Plan Library</h4>
 		<div class="inputs">
 			<div class="portlet-input input-inline">
 				<div class="input-group">

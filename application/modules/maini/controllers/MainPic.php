@@ -119,7 +119,7 @@ class MainPic extends APP_Controlleri {
 						<script type="text/javascript" src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 						<script type="text/javascript" src="assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
 						
-						<script src="assets/scripts/risk/riskowned.js"></script>
+						<script src="assets/scripts/riski/riskowned.js"></script>
 						';
 						
 						$data['pageLevelScriptsInit'] = "RiskOwned.init();";
@@ -150,7 +150,7 @@ class MainPic extends APP_Controlleri {
 						<script type="text/javascript" src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 						<script type="text/javascript" src="assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
 						
-						<script src="assets/scripts/risk/riskowned.js"></script>
+						<script src="assets/scripts/riski/riskowned.js"></script>
 						';
 						
 						$data['pageLevelScriptsInit'] = "RiskOwned.init();";
@@ -519,7 +519,7 @@ class MainPic extends APP_Controlleri {
 						<script type="text/javascript" src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 						<script type="text/javascript" src="assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
 						
-						<script src="assets/scripts/risk/actionplanform.js"></script>
+						<script src="assets/scripts/riski/actionplanform.js"></script>
 						';
 						
 						$data['pageLevelScriptsInit'] = "apForm.init();";
@@ -543,7 +543,7 @@ class MainPic extends APP_Controlleri {
 						<script type="text/javascript" src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 						<script type="text/javascript" src="assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
 						
-						<script src="assets/scripts/risk/actionplanform.js"></script>
+						<script src="assets/scripts/riski/actionplanform.js"></script>
 						';
 						
 						$data['pageLevelScriptsInit'] = "apForm.init();";
@@ -802,7 +802,7 @@ class MainPic extends APP_Controlleri {
 		<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
 		<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
 		<script type="text/javascript" src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
-		<script src="assets/scripts/dashboard/main_pic.js"></script>
+		<script src="assets/scripts/dashboard/main_pici.js"></script>
 		';
 		
 		$data['pageLevelScriptsInit'] = 'Actionplan_adt.init();
@@ -883,7 +883,7 @@ class MainPic extends APP_Controlleri {
 					<script type="text/javascript" src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 					<script type="text/javascript" src="assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
 					
-					<script src="assets/scripts/risk/kriform.js"></script>
+					<script src="assets/scripts/riski/kriform.js"></script>
 					';
 					
 					$data['pageLevelScriptsInit'] = "KriForm.init();";
@@ -907,7 +907,7 @@ class MainPic extends APP_Controlleri {
 					<script type="text/javascript" src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 					<script type="text/javascript" src="assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
 					
-					<script src="assets/scripts/risk/kriform.js"></script>
+					<script src="assets/scripts/riski/kriform.js"></script>
 					';
 					
 					$data['pageLevelScriptsInit'] = "KriForm.init();";

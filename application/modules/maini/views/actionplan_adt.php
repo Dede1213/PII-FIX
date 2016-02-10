@@ -156,6 +156,6 @@
 			class="btn blue ladda-button"
 			 data-style="expand-right"
 			>Add</button>
-		<button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+		<button type="button" data-dismiss="modal" class="btn btn-default">Batal</button>
 	</div>
 </div>

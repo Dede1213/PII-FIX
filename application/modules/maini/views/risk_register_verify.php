@@ -285,10 +285,10 @@
 						</div>
 						<div class="form-actions right">
 							<input type="hidden" name="submit_mode" value="verifyRisk" />
-							<button id="risk-button-draft" type="button" class="btn blue"><i class="fa fa-circle-o"></i> Save</button>
-							<button id="risk-button-verify" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Verify</button>
-							<button id="risk-button-delete" type="button" class="btn red"><i class="fa  fa-trash-o"></i> Delete</button>
-							<button type="button" class="btn yellow" id="risk-button-cancel"><i class="fa fa-times"></i> Cancel</button>
+							<button id="risk-button-draft" type="button" class="btn blue"><i class="fa fa-circle-o"></i> Simpan</button>
+							<button id="risk-button-verify" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Verifikasi</button>
+							<button id="risk-button-delete" type="button" class="btn red"><i class="fa  fa-trash-o"></i> Hapus</button>
+							<button type="button" class="btn yellow" id="risk-button-cancel"><i class="fa fa-times"></i> Batal</button>
 						</div>
 
 					</form>
@@ -391,7 +391,7 @@
 <div id="form-data" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Add Suggested Action Plan</h4>
+		<h4 class="modal-title">Add Usulan Action Plan</h4>
 	</div>
 	<div class="modal-body">
 		
@@ -399,7 +399,7 @@
 				<div class="form-body">
 					
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact">Suggested Action Plan<span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact">Usulan Action Plan<span class="required">* </span></label>
 						<div class="col-md-9">
 							<div class="input-group">
 								<input type="text" class="form-control input-sm" name="action_plan" placeholder=""> 
@@ -445,7 +445,7 @@
 <div id="modal-libraryaction" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Suggested Action Plan Library</h4>
+		<h4 class="modal-title">Usulan Action Plan Library</h4>
 		<div class="inputs">
 			<div class="portlet-input input-inline">
 				<div class="input-group">

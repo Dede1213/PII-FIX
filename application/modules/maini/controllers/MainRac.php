@@ -368,7 +368,7 @@ class MainRac extends APP_Controlleri {
 		if ($res) {
 			if ($res['risk_library_id'] == '' && $res['risk_library_id'] == null) { // NO LIBRARY
 				$verifyJs = '<script src="assets/scripts/risk/riskinput.js"></script>
-				<script src="assets/scripts/risk/riskverify.js"></script>';
+				<script src="assets/scripts/riski/riskverify.js"></script>';
 				
 				$data['pageLevelScriptsInit'] = "RiskInput.init('".$data['submit_mode']."');
 				RiskVerify.init();";
@@ -376,7 +376,7 @@ class MainRac extends APP_Controlleri {
 				$page_view = 'risk_register_verify';
 			} else { // USE LIBRARY
 				$verifyJs = '<script src="assets/scripts/risk/riskinput.js"></script>
-				<script src="assets/scripts/risk/riskverifylibrary.js"></script>';
+				<script src="assets/scripts/riski/riskverifylibrary.js"></script>';
 				
 				$data['pageLevelScriptsInit'] = "RiskInput.init('".$data['submit_mode']."');
 				RiskVerify.init();";
@@ -1257,7 +1257,7 @@ class MainRac extends APP_Controlleri {
 			<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
 			<script type="text/javascript" src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 			<script type="text/javascript" src="assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
-			<script src="assets/scripts/risk/risktreatmentverify.js"></script>
+			<script src="assets/scripts/riski/risktreatmentverify.js"></script>
 			';
 			
 			$data['pageLevelScriptsInit'] = "RiskVerify.init();";
@@ -1713,7 +1713,7 @@ class MainRac extends APP_Controlleri {
 			<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
 			<script type="text/javascript" src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 			<script type="text/javascript" src="assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
-			<script src="assets/scripts/risk/actionverify.js"></script>
+			<script src="assets/scripts/riski/actionverify.js"></script>
 			';
 			
 			$data['pageLevelScriptsInit'] = "ActionVerify.init();";
@@ -2240,14 +2240,14 @@ class MainRac extends APP_Controlleri {
 					<script type="text/javascript" src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 					<script type="text/javascript" src="assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
 					
-					<script src="assets/scripts/risk/kriverify.js"></script>
+					<script src="assets/scripts/riski/kriverify.js"></script>
 					';
 					
 					$data['pageLevelScriptsInit'] = "KriForm.init();";
 					$data['verifyRac'] = true;
-					$view = 'risk/kri_form';
+					$view = 'riski/kri_form';
 				} else {
-					$view = 'risk/kri_view';
+					$view = 'riski/kri_view';
 				}
 				
 				$this->load->view('maini/header', $data);
@@ -2394,7 +2394,7 @@ class MainRac extends APP_Controlleri {
 						<script type="text/javascript" src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 						<script type="text/javascript" src="assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
 						
-						<script src="assets/scripts/risk/cr_riskregister_verify.js"></script>
+						<script src="assets/scripts/riski/cr_riskregister_verify.js"></script>
 						';
 						
 						$data['pageLevelScriptsInit'] = "ChangeRequest.init();";
@@ -2411,7 +2411,7 @@ class MainRac extends APP_Controlleri {
 						$data['treatment_list'] = $this->mriskregister->getReference('treatment.status');
 						$data['division_list'] = $this->mriskregister->getDivisionList();
 						
-						$view = 'risk/change_request_verify';
+						$view = 'riski/change_request_verify';
 					} else {
 						$data['pageLevelStyles'] = '
 						<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css"/>
@@ -2433,18 +2433,18 @@ class MainRac extends APP_Controlleri {
 						
 						$data['pageLevelScripts'] = '<script src="assets/scripts/risk/cr_riskregister_kri_verify.js"></script>';
 						$data['pageLevelScriptsInit'] = 'ChangeRequest.init();';
-						$view = 'risk/change_request_kri_rac';
+						$view = 'riski/change_request_kri_rac';
 					}
 				} else {
 					if ($change['cr_type'] != 'KRI Form') {
-						$data['pageLevelScripts'] = '<script src="assets/scripts/risk/cr_riskregister_view.js"></script>';
+						$data['pageLevelScripts'] = '<script src="assets/scripts/riski/cr_riskregister_view.js"></script>';
 						$data['change_id'] = $rid;
 						$data['change_type'] = $change['cr_type'];
 						$data['change_code'] = $change['cr_code'];
 						
 						$data['pageLevelScriptsInit'] = 'ChangeRequest.init();';
 						
-						$view = 'risk/change_request_view';
+						$view = 'riski/change_request_view';
 					} else {
 						$kri = $this->risk->getKriById($change['risk_cause']);
 						$data['kri'] = $kri;
@@ -2455,7 +2455,7 @@ class MainRac extends APP_Controlleri {
 						
 						$data['pageLevelScripts'] = '';
 						$data['pageLevelScriptsInit'] = '';
-						$view = 'risk/change_request_kri_rac';
+						$view = 'riski/change_request_kri_rac';
 					}
 				}
 				

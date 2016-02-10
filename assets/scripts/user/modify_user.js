@@ -120,7 +120,7 @@ var User = function() {
 	        editData: function(data) {
 	        	$('#input-form')[0].reset();
 	        	$('#input-form').find("input[name='username']").val(data.username).prop("readonly", true);
-	        	$('#input-form').find("input[name='display_name']").val(data.display_name).prop("readonly", true);
+	        	$('#input-form').find("input[name='display_name']").val(data.display_name).prop("readonly", false);
 				$('#input-form').find("input[name='email']").val(data.email).prop("readonly", false);
 	        	$('#input-form').find("select[name='role_id']").val(data.role_id);
 				$('#input-form').find("select[name='role_status']").val(data.role_status);

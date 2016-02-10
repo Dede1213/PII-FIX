@@ -294,7 +294,7 @@ if($status == 'under'){ ?>
 							</div>
 						</div>
 						<div class="form-actions right">
-							<button id="primary-risk-button-submit" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Verify</button>
+							<button id="primary-risk-button-submit" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Verifikasi</button>
 						</div>
 					</form>
 				</div>	

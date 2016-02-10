@@ -1,16 +1,25 @@
  
+		 
 			<div class="table-header">
-				<div class="table-caption">Total Data : <span class="label label-info"><?php echo $total_data;?></span></div>
-			</div>	 
+					<center>
+						<div class="table-caption">
+							<font = "3"><b>KRI Monitoring </b></font> 
+						</div>
+						<div class="table-caption">
+							<font = "3"><b>  Periode <?=$cekperiode[0]['periode_name'];?> (<?=date('d M Y',strtotime($cekperiode[0]['periode_start']));?>) s/d (<?=date('d M Y',strtotime($cekperiode[0]['periode_end']));?>)</b></font> 
+						</div>
+						 
+					</center>
+			 </div>		
 			<table class="responsive table table-striped table-bordered table-hover"  border = "1">
 				<thead>
 					  <tr>
 						<th> No </th>
-						<th>  Risk Code </th>   
+						<th>  Risk ID </th>   
 						<th>  Risk Event </th>
 						<th> Risk Level </th>
-						<th>  Suggested Risk Treatment</th>
-						<th>  KRI Code </th>  
+						<th>  Implementation</th>
+						<th>  KRI ID </th>  
 						<th>  Key Risk Indicator </th>
 						<th>  KRI  Owner </th>
 						<th> Treshold </th>
@@ -18,6 +27,7 @@
 						<th> Timing  Pelaporan</th>
 						<th> Owner Report </th>
 						<th> KRI Warning</th>
+						<th> Risk Level After KRI</th>
 					  </tr>
 				</thead> 
 				<tbody>
@@ -38,6 +48,7 @@
 								<td> <?=$key['timing_pelaporan'];?> </td>
 								<td> <?=$key['owner_report'];?> </td>
 								<td> <?=$key['kri_warning'];?> </td>
+								<td> <?=$key['risk_level_after_kri'];?> </td>
 							</tr>
 							 <?php $i++;?>
 					 <?php endforeach;?> 
@@ -49,6 +60,9 @@
 				</tbody>
 				
 			</table>
+			<div class="table-footer">
+				<div class="table-caption">Total Data : <span class="label label-info"><?php echo $total_data;?></span></div>
+			</div>	 
 			 
 	 
 

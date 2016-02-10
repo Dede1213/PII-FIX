@@ -208,13 +208,13 @@
 			<?php if (isset($verify) && $verify) { ?>
 			<input type="hidden" name="change_id" value="<?=$change['id']?>">
 			<div class="form-actions right">
-				<button id="risk-button-submit" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Verify</button>
-				<button type="button" class="btn yellow" id="verify-risk-button-cancel"><i class="fa fa-times"></i> Cancel</button>
+				<button id="risk-button-submit" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Verifikasi</button>
+				<button type="button" class="btn yellow" id="verify-risk-button-cancel"><i class="fa fa-times"></i> Batal</button>
 			</div>
 			<?php } else if (isset($input) && $input) { ?>
 			<div class="form-actions right">
-				<button id="risk-button-submit" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Submit</button>
-				<button type="button" class="btn yellow" id="verify-risk-button-cancel"><i class="fa fa-times"></i> Cancel</button>
+				<button id="risk-button-submit" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Ajukan</button>
+				<button type="button" class="btn yellow" id="verify-risk-button-cancel"><i class="fa fa-times"></i> Batal</button>
 			</div>
 			<?php } else { ?>
 			<div class="form-actions right">

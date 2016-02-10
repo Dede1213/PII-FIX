@@ -3,13 +3,13 @@
 	<div class="page-content">
 		<!-- BEGIN PAGE HEADER-->
 		<h3 class="page-title">
-		Laporan <small>Laporan Risiko</small>
+		Report <small>report all risk</small>
 		</h3>
 		<div class="page-bar">
 			<ul class="page-breadcrumb">
 				<li>
 					<i class="fa fa-home"></i>
-					<a target="_self" href="<?=$site_url?>/main/mainrac">Laporan</a>
+					<a target="_self" href="<?=$site_url?>/main/mainrac">Report</a>
 					<i class="fa fa-angle-right"></i>
 				</li>
 				<li class="bread_tab">
@@ -24,10 +24,10 @@
 			<div class="form">
 				<form class="form-horizontal">		
 					<div class="form-group">
-						<label class="col-md-3 control-label">Tipe Laporan</label>
+						<label class="col-md-3 control-label">Report type</label>
 							<div class="col-md-6">
 								<select class="form-control input-sm" id="typereport">
-									<option value="-">Pilih</option>
+									<option value="-">Choose</option>
 									<option value="excel">MS. Excel</option>
 									<option value="pdf">PDF</option>
 		<!-- 							<option value="word">MS. Word</option> -->

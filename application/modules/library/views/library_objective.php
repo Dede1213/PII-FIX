@@ -34,7 +34,7 @@
 			 
 			<div class="tab-content">
 				<div class="tab-pane active" id="tab_risk_list">
-				    <button id="button-add-objective" class="btn green btn-sm" type="button" style="margin-bottom: 10px;"  >Tambah Ojective</button>
+				    <button id="button-add-objective" class="btn green btn-sm" type="button" style="margin-bottom: 10px;"  >Add Objective</button>
 					<div ><!--class="table-scrollable"-->
 						<table class="table table-condensed table-bordered table-hover " id="datatableobjective_ajax">
 						<thead>

@@ -60,7 +60,7 @@
 						-->
 						<th>Status</th>
 						<th width="20%">
-							 Aksi
+							 
 						</th>
 					</tr>
 					</thead>

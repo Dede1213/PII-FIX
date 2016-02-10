@@ -49,7 +49,7 @@
 						<th width="20%">Awal Periode</th>
 						<th width="20%">Akhir Periode</th>
 						<th width="10%">
-							 Aksi
+							 
 						</th>
 					</tr>
 					</thead>

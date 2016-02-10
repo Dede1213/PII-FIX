@@ -1,63 +1,49 @@
 <?php
 class PDF extends FPDF
 {
-	//Page header
-	function Header()
-	{
-                $this->setFont('Arial','',10);
-                $this->setFillColor(255,255,255);
-                
-                $this->Ln(12);
-                $this->setFont('Arial','',14);
-                $this->setFillColor(255,255,255);
-                $this->cell(60,6,'',0,0,'C',0); 
-                $this->cell(105,10,'Laporan Daftar Lisk of All Risk',0,1,'L',1); 
-     // $this->cell(105,10,'Laporan Daftar Lisk of All Risk',0,1,'L',1);
+
+// Colored table
+function FancyTable($header,$data)
+{
+    $this->Cell(30,10,'List Of All Risk',1,0,'L');
+    $this->Ln(20);
+    // Colors, line width and bold font
+    $this->SetFillColor(255,0,0);
+    $this->SetTextColor(255);
+    $this->SetDrawColor(128,0,0);
+    $this->SetLineWidth(.3);
+    $this->SetFont('','B');
+    // Header
+    $w = array(20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20 ,20, 20);
+    for($i=0;$i<count($header);$i++)
+        $this->Cell($w[$i],3,$header[$i],1,0,'C',true);
+    $this->Ln();
+    // Color and font restoration
+    $this->SetFillColor(224,235,255);
+    $this->SetTextColor(0);
+    $this->SetFont('');
+    // Data
+    $fill = false;
+    foreach($data as $row)
+    {
+        $this->Cell($w[0],3,$row->cat_name,'LR',0,'L',$fill);
+        // $this->Cell($w[1],6,$row[1],'LR',0,'L',$fill);
+        // $this->Cell($w[2],6,number_format($row[2]),'LR',0,'R',$fill);
+        // $this->Cell($w[3],6,number_format($row[3]),'LR',0,'R',$fill);
+        // $this->Ln();
+        $fill = !$fill;
     }
- 
-	function Content($hai)
-	{
-    
-                $this->Ln(5);
-                $this->setFont('Arial','',10);
-                $this->setFillColor(230,230,200);
-                $this->cell(10,6,'No.',1,0,'C',1);
-                $this->cell(105,6,'Nama Lengkap'.$hai,1,0,'C',1);
-                $this->cell(30,6,'No. HP',1,0,'C',1);
-                $this->cell(50,6,'Jenis Kelamin',1,1,'C',1);
-
-             
-            $ya = 46;
-            $rw = 6;
-            $no = 1;
-                // foreach ($data as $key) {
-                //         $this->setFont('Arial','',10);
-                //         $this->setFillColor(255,255,255);	
-                //         $this->cell(10,10,$no,1,0,'L',1);
-                //         $this->cell(105,10,$key->namalengkap,1,0,'L',1);
-                //         $this->cell(30,10,$key->nohp,1,0,'L',1);
-                //         $this->cell(50,10,$key->kelamin,1,1,'L',1);
-                //         $ya = $ya + $rw;
-                //         $no++;
-                // }            
-
-	}
-	function Footer()
-	{
-		//atur posisi 1.5 cm dari bawah
-		$this->SetY(-15);
-		//buat garis horizontal
-		$this->Line(10,$this->GetY(),210,$this->GetY());
-		//Arial italic 9
-		$this->SetFont('Arial','I',9);
-                $this->Cell(0,10,'copyright gubugkoding.com Semarang ' . date('Y'),0,0,'L');
-		//nomor halaman
-		$this->Cell(0,10,'Halaman '.$this->PageNo().' dari {nb}',0,0,'R');
-	}
+    // Closing line
+    $this->Cell(array_sum($w),0,'','T');
+}
 }
 
 $pdf = new PDF();
-$pdf->AliasNbPages();
+// Column headings
+$header = array('No', '2nd Sub Category', 'Risk Event', 'Risk Description','Risk Owner','Cause','Impact','Existing Control','Control Owner','Control Evaluation','Impact Level','Likelihood Level','Risk Level');
+// Data loading
+$pdf->SetFont('Arial','',6);
 $pdf->AddPage();
-$pdf->Content($hai);
+$pdf->FancyTable($header,$data);
 $pdf->Output();
+?>

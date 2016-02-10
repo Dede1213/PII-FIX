@@ -34,7 +34,7 @@
 							<div class="row">
 							<div class="col-md-6">	
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact">Diajujan Oleh</label>
+									<label class="col-md-3 control-label smaller cl-compact">Diajukan Oleh</label>
 									<div class="col-md-9">
 										<input type="text" id="risk_submitted_by" class="form-control input-sm input-readview" readonly="true" placeholder="" value="<?php if($risk['username']==""){echo $risk['risk_input_by_v'];}else{echo $risk['username'];}; ?>">											
 									</div>

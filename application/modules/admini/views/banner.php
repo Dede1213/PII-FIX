@@ -74,7 +74,7 @@ tinymce.init({
 						</div>
 						-->
 						<div class="form-group">
-									<label class="col-md-3 control-label">Banner Text</label>
+									<label class="col-md-3 control-label">Banner Teks</label>
 									<div class="col-md-6">
 									<textarea class="" rows="3" name="banner_text" placeholder="Banner Text" id="banner-text"> <?=$banner['banner_text']?> </textarea>
 									</div>
@@ -92,8 +92,8 @@ tinymce.init({
 							<button id="input-form-submit-button" type="submit" 
 								class="btn blue ladda-button"
 								 data-style="expand-right"
-								>Save Banner</button>
-								<a href='index.php/main/mainrac'><button type="button" class="btn yellow" id="kri-button-cancel"><i class="fa fa-times"></i> Cancel</button></a>
+								>Simpan Banner</button>
+								<a href='index.php/main/mainrac'><button type="button" class="btn yellow" id="kri-button-cancel"><i class="fa fa-times"></i> Batal</button></a>
 						</div>
 					</div>
 				</form>

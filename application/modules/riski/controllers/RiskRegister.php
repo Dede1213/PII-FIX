@@ -89,7 +89,7 @@ class RiskRegister extends APP_Controlleri {
 	{
 		$data = $this->loadDefaultAppConfig();
 		$data['sidebarMenu'] = $this->getSidebarMenuStructure('risk/RiskRegister');
-		$data['indonya'] = base_url('index.php/risk/RiskRegister/undermaintenance');
+		$data['indonya'] = base_url('index.php/riski/RiskRegister/undermaintenance');
 		$data['engnya'] = base_url('index.php/risk/RiskRegister/undermaintenance');
 		$data['pageLevelStyles'] = '
 		<link rel="stylesheet" type="text/css" href="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
@@ -295,45 +295,11 @@ class RiskRegister extends APP_Controlleri {
 		
 		
 		$this->load->view('maini/header', $data);
-		$this->load->view('risk_register_list_recover', $data);
-		$this->load->view('maini/footer', $data);
-	}
-
-	public function recover_indo()
-	{
-		$data = $this->loadDefaultAppConfig();
-		$data['sidebarMenu'] = $this->getSidebarMenuStructure('risk/RiskRegister');
-		$data['indonya'] = base_url('index.php/risk/RiskRegister/recover');
-		$data['engnya'] = base_url('index.php/risk/RiskRegister/recover');
-		$data['pageLevelStyles'] = '
-		<link rel="stylesheet" type="text/css" href="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
-		<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css"/>
-		<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
-		';
-		
-		$data['pageLevelScripts'] = '
-		<script type="text/javascript" src="assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
-		<script type="text/javascript" src="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
-		<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
-		<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
-		
-		<script src="assets/scripts/risk/risklist_recover.js"></script>
-		';
-		
-		$data['pageLevelScriptsInit'] = 'RiskList.init();';
-		
-		$data['valid_mode'] = $this->validatePeriodeMode('periodic');
-		
-		$data['periode'] = null;
-		if ($data['valid_mode']) {
-			$data['periode'] = $this->mperiode->getCurrentPeriode();
-		}
-		
-		
-		$this->load->view('maini/header', $data);
 		$this->load->view('risk_register_list_recover_i', $data);
 		$this->load->view('maini/footer', $data);
 	}
+
+	
 
 	public function riskGetRollOver_recover()
 	{
@@ -451,7 +417,7 @@ class RiskRegister extends APP_Controlleri {
 		<script type="text/javascript" src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 		<script type="text/javascript" src="assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
 		
-		<script src="assets/scripts/risk/riskinput.js"></script>
+		<script src="assets/scripts/riski/riskinput.js"></script>
 		';
 		
 		$data['pageLevelScriptsInit'] = "RiskInput.init('".$mode."');
@@ -1439,7 +1405,7 @@ class RiskRegister extends APP_Controlleri {
 				<script type="text/javascript" src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 				<script type="text/javascript" src="assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
 				
-				<script src="assets/scripts/risk/cr_riskregister.js"></script>
+				<script src="assets/scripts/riski/cr_riskregister.js"></script>
 				';
 				
 				if ($res_valid) {
@@ -1579,7 +1545,7 @@ class RiskRegister extends APP_Controlleri {
 					$v = 'change_request_kri';
 				} else {
 					$data['pageLevelScripts'] = '
-					<script src="assets/scripts/risk/cr_riskregister_view.js"></script>
+					<script src="assets/scripts/riski/cr_riskregister_view.js"></script>
 					';
 					$data['pageLevelScriptsInit'] = 'ChangeRequest.init();';
 					$v = 'change_request_view';
@@ -1647,7 +1613,7 @@ class RiskRegister extends APP_Controlleri {
 				<script type="text/javascript" src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 				<script type="text/javascript" src="assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
 				
-				<script src="assets/scripts/risk/cr_riskregister.js"></script>
+				<script src="assets/scripts/riski/cr_riskregister.js"></script>
 				';
 				
 				if ($res_valid) {
@@ -1708,7 +1674,7 @@ class RiskRegister extends APP_Controlleri {
 				<script type="text/javascript" src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 				<script type="text/javascript" src="assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
 				
-				<script src="assets/scripts/risk/cr_riskregister.js"></script>
+				<script src="assets/scripts/riski/cr_riskregister.js"></script>
 				';
 				
 				if ($res_valid) {
@@ -1765,7 +1731,7 @@ class RiskRegister extends APP_Controlleri {
 				$data['risk'] = $risk;
 				$data['input'] = true;
 				$view = 'risk/change_request_kri';
-				$this->load->view('main/header', $data);
+				$this->load->view('maini/header', $data);
 				$this->load->view($view, $data);
 				$this->load->view('main/footer', $data);
 			}

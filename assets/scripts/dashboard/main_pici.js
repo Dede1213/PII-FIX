@@ -48,7 +48,7 @@ grid.init({
             "data": "risk_code",
             "render": function ( data, type, full, meta ) {
                 var cls = 'font-green-jungle';
-                var vm = 'main/mainpic/viewRisk';
+                var vm = 'maini/mainpic/viewRisk';
                 if (full.risk_status == '0' || full.risk_status == '1') {
                     cls = '';
                     vm = 'riski/RiskRegister/modifyRisk';
@@ -107,7 +107,7 @@ grid_owned.init({
         //"scrollX": true,
         "pageLength": 25, // default record count per page
         "ajax": {
-            "url": site_url+"/main/mainpic/getOwnedRisk" // ajax source
+            "url": site_url+"/maini/mainpic/getOwnedRisk" // ajax source
         },
         "columnDefs": [ {
             "targets": 0,
@@ -720,7 +720,7 @@ var Dashboard = function() {
                 
                 var url = site_url+'/main/mainpic/execSubmit';
                 
-                var mod = MainApp.viewGlobalModal('confirm', 'Are You sure you want to Submit this Action Plan Execution ?');
+                var mod = MainApp.viewGlobalModal('confirm', 'Are You sure you want to Submit this Action Plan Execution?');
                 mod.find('button.btn-primary').off('click');
                 mod.find('button.btn-primary').one('click', function(){
                     mod.modal('hide');
@@ -795,7 +795,7 @@ var Dashboard = function() {
                             //ubah
                             var mod = MainApp.viewGlobalModal('warning-maintenance', 'This Risk Is Under Maintenance by RAC you cannot modify this risk until the process done');
                             mod.find('button.btn-ok-success').one('click', function(){
-                                location.href=site_url+'/main/mainpic';
+                                location.href=site_url+'/maini/mainpic';
                             });
                                 }
                             },
@@ -1073,9 +1073,9 @@ grid_exec_adt.init({
                 var ret = full.assigned_to_v;
                 var dat = '';
                 if (ret == '' || ret == null) {
-                    return '<a target="_self" href="'+site_url+'/main/mainpic/viewOwnedActionPlan/'+full.id+'">'+data+'</a>';
+                    return '<a target="_self" href="'+site_url+'/maini/mainpic/viewOwnedActionPlan/'+full.id+'">'+data+'</a>';
                 } else {
-                    return '<a target="_self" href="'+site_url+'/main/mainpic/viewOwnedActionPlan/'+full.id+'">'+data+'</a>';
+                    return '<a target="_self" href="'+site_url+'/maini/mainpic/viewOwnedActionPlan/'+full.id+'">'+data+'</a>';
                 }
                 return dat;
             }
@@ -1199,7 +1199,7 @@ var Actionplan_adt = function() {
                 e.preventDefault();
                 
                 var r = this.parentNode.parentNode.parentNode;
-                var data = grid_exec.getDataTable().row(r).data();
+                var data = grid_exec_adt.getDataTable().row(r).data();
                 
                 var url = site_url+'/main/mainpic/execSubmit';
                 
@@ -1215,7 +1215,7 @@ var Actionplan_adt = function() {
                         function( data ) {
                             Metronic.unblockUI();
                             if(data.success) {
-                                grid_exec.getDataTable().ajax.reload();
+                                grid_exec_adt.getDataTable().ajax.reload();
                                 
                                 MainApp.viewGlobalModal('success', 'Success Updating Action Plan Execution');
                             } else {
@@ -1272,7 +1272,8 @@ var Actionplan_adt = function() {
                                 if(data.success) {
                                     grid_exec.getDataTable().ajax.reload();
                                     
-                                    MainApp.viewGlobalModal('success', 'Success Updating Action Plan Execution');
+                                    //MainApp.viewGlobalModal('success', 'Success Updating Action Plan Execution');
+                                    location.href=site_url+'/maini/mainpic/actionplan_adt';
                                 } else {
                                     MainApp.viewGlobalModal('error', data.msg);
                                 }

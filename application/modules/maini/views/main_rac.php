@@ -431,8 +431,8 @@
 		<input type = "hidden" id = "tabactive" name ="tabactive" value = "0">
 		
 		<!-- Modal -->
-		<div class="modal fade" id="modal-export" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		  <div class="modal-dialog" role="document">
+		<div class="modal fade" data-width="650" id="modal-export" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="#modal-dialog" role="document">
 			<div class="modal-content">
 			  <div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -461,8 +461,8 @@
 		</div>
 		
 		<!-- Modal -->
-		<div class="modal fade" id="modal-export-register" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		  <div class="modal-dialog" role="document">
+		<div class="modal fade" data-width="650" id="modal-export-register" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="#modal-dialog" role="document">
 			<div class="modal-content">
 			  <div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -487,8 +487,8 @@
 		</div>
 		
 		<!-- Modal -->
-		<div class="modal fade" id="modal-export-treatment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		  <div class="modal-dialog" role="document">
+		<div class="modal fade" data-width="650" id="modal-export-treatment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="#modal-dialog" role="document">
 			<div class="modal-content">
 			  <div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -516,8 +516,8 @@
 		
 		
 		<!-- Modal -->
-		<div class="modal fade" id="modal-actionplanlist" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		  <div class="modal-dialog" role="document">
+		<div class="modal fade" data-width="650" id="modal-actionplanlist" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="#modal-dialog" role="document">
 			<div class="modal-content">
 			  <div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -545,8 +545,8 @@
 		</div>
 		
 		<!-- Modal -->
-		<div class="modal fade" id="modal-executionlist" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		  <div class="modal-dialog" role="document">
+		<div class="modal fade" data-width="650" id="modal-executionlist" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="#modal-dialog" role="document">
 			<div class="modal-content">
 			  <div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -574,8 +574,8 @@
 		</div>
 		
 		<!-- Modal -->
-		<div class="modal fade" id="modal-kri" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		  <div class="modal-dialog" role="document">
+		<div class="modal fade" data-width="650" id="modal-kri" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="#modal-dialog" role="document">
 			<div class="modal-content">
 			  <div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -604,8 +604,8 @@
 		</div>
 		
  	<!-- Modal -->
-		<div class="modal fade" id="modal-changereq" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		  <div class="modal-dialog" role="document">
+		<div class="modal fade" data-width="650" id="modal-changereq" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="#modal-dialog" role="document">
 			<div class="modal-content">
 			  <div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>

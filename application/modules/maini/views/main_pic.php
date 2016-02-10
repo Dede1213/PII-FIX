@@ -42,11 +42,11 @@
 					<div id="chart_owned" class="chart" style="width: 200px; height: 120px;"></div>
 				</div>
 				<div class="col-md-3">
-					<span>My Action Plan</span>
+					<span>Action Plan Ku</span>
 					<div id="chart_action_plan" class="chart" style="width: 200px; height: 120px;"></div>
 				</div>
 				<div class="col-md-3">
-					<span>My KRI</span>
+					<span>KRI Ku</span>
 					<div id="chart_kri" class="chart" style="width: 200px; height: 120px;"></div>
 				</div>
 			</div>
@@ -155,7 +155,7 @@
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/treatment.png"/> &nbsp; 
-								 Dalam Penanganan Risiko
+								 Dalam Proses Penanganan Risiko
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/actplan.png"/> &nbsp; 
@@ -310,7 +310,7 @@
 							<th>KRI</th>
 							<th>Treshold</th>
 							<th>Timing Pelaporan</th>
-							<th>Ditugaskan ke[ada</th>
+							<th>Ditugaskan kepada</th>
 							<th>ID Risiko</th>
 							<th width="50px">Permintaan Perubahan</th>
 						</tr>
@@ -373,15 +373,15 @@
 <div id="modal-pic" class="modal fade" tabindex="-1" data-width="760" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Select Assignee</h4>
+		<h4 class="modal-title">Di Tugaskan Kepada</h4>
 	</div>
 	<div class="modal-body">
 		<table id="pic_list_table" class="table table-condensed table-bordered table-hover">
 			<thead>
 			<tr role="row" class="heading">
 				<th width="30px">&nbsp;</th>
-				<th>Name</th>
-				<th>Division</th>
+				<th>Nama</th>
+				<th>Divisi</th>
 			</tr>
 			</thead>
 			<tbody>
@@ -452,8 +452,8 @@
 			</div>
 			
 			<div class="form-actions right">
-				<button id="exec-button-save" type="button" class="btn blue"><i class="fa fa-circle-o"></i> Save </button>
-				<button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+				<button id="exec-button-save" type="button" class="btn blue"><i class="fa fa-circle-o"></i> Simpan </button>
+				<button type="button" data-dismiss="modal" class="btn btn-default">Batal</button>
 			</div>
 		</form>
 	</div>

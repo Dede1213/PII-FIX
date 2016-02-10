@@ -268,10 +268,10 @@
 									 	<table id="control_table" class="table table-condensed table-bordered table-hover">
 									 		<thead>
 									 		<tr role="row" class="heading">
-									 			<th>Existing Control ID</th>
-									 			<th>Existing Control</th>
-									 			<th>Evaluation on Existing Control</th>
-									 			<th>Control Owner</th>
+									 			<th>ID Kontrol Yang Ada Saat Ini</th>
+									 			<th>Kontrol Yang Ada Saat Ini</th>
+									 			<th>Evaluasi Dari Kontrol Yang Ada Saat Ini</th>
+									 			<th>Pemilik Kontrol</th>
 									 			<th width="30px">&nbsp;</th>
 									 		</tr>
 									 		</thead>
@@ -433,7 +433,7 @@
 				<div class="form-body">
 					<div class="form-group">
 					<input type = "hidden" id = "form-control-revid">
-						<label class="col-md-3 control-label smaller cl-compact">Existing Control ID</label>
+						<label class="col-md-3 control-label smaller cl-compact">ID Kontrol Yang Ada Saat Ini</label>
 						<div class="col-md-9">
 							<div class="input-group">
 								<input type="text" class="form-control input-sm" readonly="true" name="existing_control_id" id = "existing_control_id" placeholder="">
@@ -455,7 +455,7 @@
 					-->
 					<div class="form-group">
 					<input type = "hidden" id = "form-control-revid">
-						<label class="col-md-3 control-label smaller cl-compact">Existing Control <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact">Kontrol Yang Ada Saat Ini <span class="required">* </span></label>
 						<div class="col-md-9">
 							<div class="input-group">
 								<input type="text" class="form-control input-sm" readonly="true" name="risk_existing_control" id = "risk_existing_control" placeholder="" value="NONE">
@@ -468,13 +468,13 @@
 					</div>
 
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Evaluation on Existing Control <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact" >Evaluasi Dari Kontrol Yang Ada Saat Ini <span class="required">* </span></label>
 						<div class="col-md-9">
 						<input type="text" class="form-control input-sm" value="NONE" name="risk_evaluation_control" id = "risk_evaluation_control" placeholder="">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Control Owner <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact" >Pemilik Kontrol <span class="required">* </span></label>
 						<div class="col-md-9">
 						<select class="form-control input-sm" name="risk_control_owner" id = "risk_control_owner">
 										<option value="NONE">NONE</option>
@@ -489,11 +489,11 @@
 			</form>
 	</div>
 	<div class="modal-footer">
-		<button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+		<button type="button" data-dismiss="modal" class="btn btn-default">Batal</button>
 		<button id="input-control-add" type="button" 
 			class="btn blue ladda-button"
 			 data-style="expand-right"
-			>Add</button>
+			>Tambah</button>
 	</div>
 </div>
 
@@ -509,7 +509,7 @@
 			<form id="input-form-action-plan" role="form" class="form-horizontal">
 				<div class="form-body">
 					<!--<div class="form-group">
-						<label class="col-md-3 control-label">Suggested Action Plan <span class="required">* </span></label>
+						<label class="col-md-3 control-label">Usulan Action Plan <span class="required">* </span></label>
 						<div class="col-md-9">
 						<input type="text" class="form-control input-sm" name="action_plan" placeholder="">
 						</div>
@@ -550,7 +550,7 @@
 			</form>
 	</div>
 	<div class="modal-footer">
-		<button type="button" data-dismiss="modal" class="btn btn-default">Tutup</button>
+		<button type="button" data-dismiss="modal" class="btn btn-default">Batal</button>
 		<button id="input-actionplan-add" type="button" 
 			class="btn blue ladda-button"
 			 data-style="expand-right"
@@ -596,7 +596,7 @@
 <div id="modal-libraryaction" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Suggested Action Plan Library</h4>
+		<h4 class="modal-title">Usulan Action Plan Library</h4>
 		<div class="inputs">
 			<div class="portlet-input input-inline">
 				<div class="input-group">

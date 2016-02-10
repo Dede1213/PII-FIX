@@ -301,8 +301,8 @@ class Periode extends APP_Controller {
 	{
 		$data = $this->loadDefaultAppConfig();
 		$data['sidebarMenu'] = $this->getSidebarMenuStructure('admin/periode/actplan');
-		$data['indonya'] = base_url('index.php/admini/periode/actplan');
-		$data['engnya'] = base_url('index.php/admin/periode/actplan');			
+		$data['indonya'] = base_url('index.php/admini/periode/periode_r');
+		$data['engnya'] = base_url('index.php/admin/periode/periode_r');			
 		$data['pageLevelStyles'] = '
 		<link rel="stylesheet" type="text/css" href="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
 		<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css"/>

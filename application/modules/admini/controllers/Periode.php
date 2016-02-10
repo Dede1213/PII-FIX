@@ -38,6 +38,38 @@ class Periode extends APP_Controlleri {
 		$this->load->view('periode', $data);
 		$this->load->view('main/footer', $data);
 	}
+
+	//periode report
+	public function periode_r()
+	{
+		$data = $this->loadDefaultAppConfig();
+		$data['sidebarMenu'] = $this->getSidebarMenuStructure('admin/periode/actplan');
+		$data['indonya'] = base_url('index.php/admini/periode/periode_r');
+		$data['engnya'] = base_url('index.php/admin/periode/periode_r');			
+		$data['pageLevelStyles'] = '
+		<link rel="stylesheet" type="text/css" href="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
+		<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css"/>
+		<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
+		<link rel="stylesheet" type="text/css" href="assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css"/>
+		';
+//		<link rel="stylesheet" type="text/css" href="assets/global/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css"/>
+		
+		$data['pageLevelScripts'] = '
+		<script type="text/javascript" src="assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+		<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
+		<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
+		<script type="text/javascript" src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+		<script src="assets/scripts/admin/periode_report.js"></script>
+		';
+//		<script type="text/javascript" src="assets/global/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+		
+		$data['pageLevelScriptsInit'] = 'Periode.init();';
+		
+		$this->load->view('main/header', $data);
+		$this->load->view('periode_report', $data);
+		$this->load->view('main/footer', $data);
+	}
 	
 	public function periodeGetData()
 	{

@@ -36,11 +36,11 @@
 						<thead>
 						<tr role="row" class="heading">
 							 
-							<th>KRI ID</th>
-							<th>Key Risk Indicator</th> 
-							<th>Threshold</th> 
-							<th>Threshold Type</th> 
-							<th> Action</th>
+							<th>ID KRI</th>
+							<th>Indikator Risiko</th> 
+							<th>Kemungkinan</th> 
+							<th>Tipe Kemungkinan</th> 
+							<th> </th>
 						</tr>
 						</thead>
 						<tbody>

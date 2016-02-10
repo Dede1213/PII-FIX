@@ -34,7 +34,7 @@
 							<th>Diajukan Oleh</th>
 							<th>Tanggal</th>
 							<th>Perihal</th>
-							<th>Jawaban</th>
+							<th>Jawab</th>
 						</tr>
 						</thead>
 						<tbody></tbody>
@@ -50,7 +50,7 @@
 <div id="form-data" class="modal fade" tabindex="-1" data-width="760" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Jawab Pertanyaan</h4>
+		<h4 class="modal-title">Jawab Tanya</h4>
 	</div>
 	<div class="modal-body">
 		<div class="row">
@@ -68,13 +68,13 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-2 control-label">Pertanyaan</label>
+						<label class="col-md-2 control-label">Tanya</label>
 						<div class="col-md-9">
 							<textarea  class="form-control" rows="4" name="question"></textarea>
 						</div>
 					</div>
 					<div class="form-group fg-answer">
-						<label class="col-md-2 control-label">Jawaban</label>
+						<label class="col-md-2 control-label">Jawab</label>
 						<div class="col-md-9">
 							<textarea class="form-control" rows="4" name="answer"></textarea>
 						</div>

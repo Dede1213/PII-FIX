@@ -1,11 +1,20 @@
  
+			  
 			<div class="table-header">
-				<div class="table-caption">Total Data : <span class="label label-info"><?php echo $total_data;?></span></div>
-			</div>	 
+					<center>
+						<div class="table-caption">
+							<font = "3"><b>Comparison of outcome by 2nd Sub Category </b></font> 
+						</div>
+						<div class="table-caption">
+							<font = "3"><b> Periode <?=$cekperiode1[0]['periode_name'];?>  s/d  <?=$cekperiode2[0]['periode_name'];?></b></font> 
+						</div>
+						 
+					</center>
+			 </div>					
 			<table class="responsive table table-striped table-bordered table-hover"  border = "1">
 				<thead>
 					  <tr>
-							 <th> No </th>
+							 
 							<th>  Category Code </th>   
 							<th>  Risk Level </th>   
 							<th>  Jumlah Risk Periode 1 </th>
@@ -17,7 +26,7 @@
 						<?php if($datanya):?>
 						 <?php foreach($datanya as $key):?>
 							<tr>												  
-								<td> <?=$i;?> </td>
+								 
 								<td> <?=$key['cat_code'];?> </td>
 								<td> <?=$key['risk_level'];?> </td>
 								<td> <?=$key['jumlah risk periode 1'];?> </td> 

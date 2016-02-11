@@ -125,7 +125,7 @@
 							</div>
 						</div>
 						<div class="form-actions right">
-							<button id="primary-risk-button-submit" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Verify</button>
+							<button id="primary-risk-button-submit" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Verifikasi</button>
 						</div>
 					</form>
 				</div>
@@ -435,7 +435,7 @@
 			</form>
 	</div>
 	<div class="modal-footer">
-		<button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+		<button type="button" data-dismiss="modal" class="btn btn-default">Batal</button>
 		<button id="input-actionplan-add" type="button" 
 			class="btn blue ladda-button"
 			 data-style="expand-right"

@@ -130,7 +130,7 @@
 		<a href="javascript: ;" id="button-change-verify" class="btn default green pull-right" style="margin-right: 10px;">
 					<i class="fa  fa-circle-o"></i>
 					<span class="hidden-480">
-					Verify </span>
+					Verifikasi </span>
 					</a>
 
 					<?php } ?>

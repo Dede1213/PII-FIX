@@ -694,7 +694,7 @@
 <div id="modal-objective" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Objectif</h4>
+		<h4 class="modal-title">Objektif</h4>
 		<div class="inputs">
 			<div class="portlet-input input-inline">
 				<div class="input-group">
@@ -712,7 +712,7 @@
 				<thead>
 				<tr role="row" class="heading">
 					<th width="30px">&nbsp;</th>
-					<th>Objectif</th>
+					<th>Objektif</th>
 				</tr>
 				</thead>
 				<tbody></tbody>

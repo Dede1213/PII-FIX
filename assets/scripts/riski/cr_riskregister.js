@@ -617,7 +617,7 @@ var ChangeRequest = function() {
         		var mod = MainApp.viewGlobalModal('confirm', 'Are You sure you want to cancel your Change Request ? You will loose your unsaved data.');
         		mod.find('button.btn-primary').off('click');
         		mod.find('button.btn-primary').one('click', function(){
-        			location.href=site_url+'/maini/mainpic';
+        			location.href=site_url+'/maini/#tab_change_request_list';
         		});
         	});
         	
@@ -1245,7 +1245,7 @@ var ChangeRequest = function() {
             			if(data.success) {
             				var mod = MainApp.viewGlobalModal('success', 'Success Submitting Change Request');
             				mod.find('button.btn-ok-success').one('click', function(){
-            					location.href=site_url+'/maini/mainpic#tab_change_request_list';
+            					location.href=site_url+'/maini/#tab_change_request_list';
             				});
             				
             			} else {
@@ -1253,7 +1253,7 @@ var ChangeRequest = function() {
             				//ubah
             				var mod = MainApp.viewGlobalModal('warning-maintenance', 'This Risk Is Under Maintenance by RAC you cannot modify this risk until the process done');
             				mod.find('button.btn-ok-success').one('click', function(){
-            					location.href=site_url+'/maini/mainpic';
+            					location.href=site_url+'/maini/#tab_change_request_list';
             				});
             			}
             			

@@ -10,3 +10,7 @@ $config['app_config']['DASHBOARD_PIC'] = 'main/mainpic';
 
 $config['app_config']['UPLOAD_NEWS_PATH'] = 'uploadedFile/news';
 $config['app_config']['UPLOAD_MANUAL_PATH'] = 'uploadedFile/usermanual';
+
+$config['app_config']['DASHBOARD_USERI'] = 'maini';
+$config['app_config']['DASHBOARD_RACI'] = 'maini/mainrac';
+$config['app_config']['DASHBOARD_PICI'] = 'maini/mainpic';

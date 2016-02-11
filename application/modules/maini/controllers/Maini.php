@@ -4,16 +4,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Maini extends APP_Controlleri {
 	private function dashboardRoute($role_id){
 		if ($role_id == 2) {
-			redirect($this->config->config['app_config']['DASHBOARD_RAC']);
+			redirect($this->config->config['app_config']['DASHBOARD_RACI']);
 			exit;
 		} else if ($role_id == 3) {
-			redirect($this->config->config['app_config']['DASHBOARD_USER']);
+			redirect($this->config->config['app_config']['DASHBOARD_USERI']);
 			exit;
 		} else if ($role_id == 4 || $role_id == 5) {
-			redirect($this->config->config['app_config']['DASHBOARD_PIC']);
+			redirect($this->config->config['app_config']['DASHBOARD_PICI']);
 			exit;
 		} else {
-			redirect($this->config->config['app_config']['DASHBOARD_USER']);
+			redirect($this->config->config['app_config']['DASHBOARD_USERI']);
 			exit;
 		}
 	}

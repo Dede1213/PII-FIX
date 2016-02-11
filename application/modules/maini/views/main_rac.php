@@ -82,7 +82,7 @@
 				</li>
 				<li>
 					<a href="#tab_action_plan_exec" data-toggle="tab">
-					Action Plan Execution </a>
+					Eksekusi Action Plan </a>
 				</li>
 				<li>
 					<a href="#tab_kri_list" data-toggle="tab">

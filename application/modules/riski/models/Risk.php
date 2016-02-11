@@ -3871,15 +3871,15 @@ class Risk extends APP_Model {
 		$division = $risk['division'];
 		$par = array(
 			'ap' => $risk['action_plan_status'],
-			'action_plan' => $risk['action_plan'],
-			'due_date' => $risk['due_date'],
-			'division' => $risk['division'],
+			//'action_plan' => $risk['action_plan'],
+			//'due_date' => $risk['due_date'],
+			//'division' => $risk['division'],
 			'id' => $action_id, 
 			'risk_id' => $risk_id
 		);
 		
 		$sql = "update t_risk_action_plan 
-				set action_plan_status = ?,action_plan = ?,due_date = ?,division = ?,assigned_to = (select username from m_user where division_id = '$division' and role_id = 4)
+				set action_plan_status = ?,assigned_to = (select username from m_user where division_id = '$division' and role_id = 4)
 				where id = ? and risk_id = ?";
 		$query = $this->db->query($sql, $par);
 		

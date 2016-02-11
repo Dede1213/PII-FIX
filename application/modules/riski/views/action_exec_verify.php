@@ -181,7 +181,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan keterjadian <span class="required">* </span></label>
 						<div class="col-md-9">
 							<div class="input-group">
 								 <input type="hidden" name="risk_likelihood_id" id = "risk_likelihood_id" value=""/> 
@@ -236,7 +236,7 @@
 			</form>
 	</div>
 	<div class="modal-footer">
-		<button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+		<button type="button" data-dismiss="modal" class="btn btn-default">Batal</button>
 		<button id="modal-impactlevel-form-submit" type="button" 
 			class="btn blue ladda-button"
 			 data-style="expand-right"

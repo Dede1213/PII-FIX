@@ -503,7 +503,7 @@
 			</form>
 	</div>
 	<div class="modal-footer">
-		<button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+		<button type="button" data-dismiss="modal" class="btn btn-default">Batal</button>
 		<button id="input-control-add" type="button" 
 			class="btn blue ladda-button"
 			 data-style="expand-right"

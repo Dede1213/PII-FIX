@@ -64,7 +64,7 @@
 							<th width="30px">Status</th>
 							<th>AP ID</th>
 							<th>Action Plan</th>
-							<th>Batas Tanggal</th>
+							<th>Batas Waktu</th>
 							<th>Pemilik Action Plan</th>
 							<th>Ekseskusi</th>
 							<th>Kode Risiko</th>

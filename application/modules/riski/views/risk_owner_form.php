@@ -98,12 +98,12 @@
 									</div>
 								</div>
 
-								<h4>Objectif</h4>
+								<h4>Objektif</h4>
 								<table class="table table-condensed table-bordered table-hover">
 									<thead>
 									<tr role="row" class="heading">
 										<th><small>Obj. ID</small></th>
-										<th><small>Objectif</small></th>
+										<th><small>Objektif</small></th>
 									</tr>
 									</thead>
 									<tbody>
@@ -290,7 +290,7 @@
 						</div>
 						<div class="form-actions right">
 							<input type="hidden" name="submit_mode" value="setOwnedRisk" />
-							<button id="risk-button-save" type="button" class="btn blue"><i class="fa fa-circle-o"></i>simpan sebagai draft</button>
+							<button id="risk-button-save" type="button" class="btn blue"><i class="fa fa-circle-o"></i> Simpan sebagai draft</button>
 							<button id="risk-button-verify" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Ajukan</button>
 							<button type="button" class="btn yellow" id="risk-button-cancel"><i class="fa fa-times"></i> Batal</button>
 						</div>

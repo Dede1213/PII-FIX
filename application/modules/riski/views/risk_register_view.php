@@ -159,12 +159,12 @@
 							<div class="clearfix">
 							</div>
 							<hr/>
-							<h4>Objectif</h4>
+							<h4>Objektif</h4>
 							<table id="objective_table" class="table table-condensed table-bordered table-hover">
 								<thead>
 								<tr role="row" class="heading">
 									<th width="15%">Obj. ID</th>
-									<th>Objectif</th>
+									<th>Objektif</th>
 								</tr>
 								</thead>
 								<tbody>

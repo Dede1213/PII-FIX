@@ -91,7 +91,7 @@
 							</div>
 							<hr/>
 							<?php if ($change_type == 'Risk Form') { ?>
-							<h4>Objectif</h4>
+							<h4>Objektif</h4>
 							<div class="table-scrollable">
 								<table id="primary_objective_table" class="table table-condensed table-bordered table-hover">
 									<thead>

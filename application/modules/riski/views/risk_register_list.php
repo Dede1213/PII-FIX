@@ -218,7 +218,7 @@
 						<th width="20%">Risiko</th>
 						<th width="10%">Risiko Level</th>
 						<th width="10%">Dampak Level</th>
-						<th width="10%">Kemungkinan</th>
+						<th width="10%">Kemungkinan terjadinya</th>
 						<th width="10%">Pemilik Risiko</th>
 						<th width="10%">Status</th>
 						<th width="10%">&nbsp;</th>
@@ -317,7 +317,7 @@
 						<th width="40%">Risiko</th>
 						<th width="10%">Risiko Level</th>
 						<th width="10%">Dampak Level</th>
-						<th width="10%">Kemungkinan</th>
+						<th width="10%">Kemungkinan terjadinya</th>
 						<th width="10%">Pemilik Risiko</th>
 					</tr>
 					</thead>

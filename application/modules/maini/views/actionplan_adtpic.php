@@ -51,7 +51,7 @@
 							<th width="30px">Status</th>
 							<th>AP ID</th>
 							<th>Action Plan</th>
-							<th>Batas Tanggal</th>
+							<th>Batas Waktu</th>
 							<th>Ditugaskan Untuk</th>
 							<th>Eksekusi</th>
 							<!--<th width="50px">Change Request</th>-->

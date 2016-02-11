@@ -2854,9 +2854,10 @@ class MainRac extends APP_Controlleri {
 			$impact_level = false;
 			$actplan = false;
 			$control = false;
+			$objective = false;
 			
 			$uid = $data['session']['username'];
-			$res = $this->risk->changeRequestSaveDraft($_POST['change_id'], $_POST['risk_id'], $risk, $impact_level, $actplan, $control, $uid);
+			$res = $this->risk->changeRequestSaveDraft($_POST['change_id'], $_POST['risk_id'], $risk, $impact_level, $actplan, $control, $objective, $uid);
 			$res = $this->risk->changeRequestApplyKri($_POST['change_id'], $uid);
 			
 			$resp = array();

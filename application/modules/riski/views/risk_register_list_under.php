@@ -128,7 +128,7 @@
 							<option value="risk_event">Risiko</option>
 							<option value="risk_level">Risiko Level</option>
 							<option value="risk_impact_level">Dampak Level</option>
-							<option value="risk_likelihood_key">Kemungkinan</option>
+							<option value="risk_likelihood_key">Kemungkinan Keterjadian</option>
 						</select>
 					</div>
 

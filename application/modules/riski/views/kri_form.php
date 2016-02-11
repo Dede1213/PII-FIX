@@ -281,11 +281,11 @@ var t_treshold_list = <?=json_encode($kri['treshold_list'])?>;
 			</form>
 	</div>
 	<div class="modal-footer">
-		<button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+		<button type="button" data-dismiss="modal" class="btn btn-default">Batal</button>
 		<button id="modal-impactlevel-form-submit" type="button" 
 			class="btn blue ladda-button"
 			 data-style="expand-right"
-			>Save</button>
+			>Simpan</button>
 	</div>
 </div>
 
@@ -331,7 +331,7 @@ var t_treshold_list = <?=json_encode($kri['treshold_list'])?>;
 		<button id="input-form-impact-button" type="button" 
 			class="btn blue ladda-button"
 			 data-style="expand-right"
-			>Save</button>
+			>Simpan</button>
 	</div>
 </div>
 
@@ -369,6 +369,6 @@ var t_treshold_list = <?=json_encode($kri['treshold_list'])?>;
 		<button id="input-form-likelihood-button" type="button" 
 			class="btn blue ladda-button"
 			 data-style="expand-right"
-			>Save</button>
+			>Simpan</button>
 	</div>
 </div>

@@ -73,7 +73,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan Keterjadian</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm input-readview" readonly="true" name="likelihood_v" placeholder="">
 								</div>
@@ -115,7 +115,7 @@
 									<thead>
 									<tr role="row" class="heading">
 										<th><span class="small">Usulan Action Plan</span></th>
-										<th><span class="small">Batas Tanggal</span></th>
+										<th><span class="small">Batas Waktu</span></th>
 										<th><span class="small">Pemilik Action Plan</span></th>
 									</tr>
 									</thead>
@@ -135,7 +135,7 @@
 			<div class="portlet box blue">
 				<div class="portlet-title">
 					<div class="caption" id="div-portlet-page-caption">
-						Changes
+						Perubahan
 					</div>
 				</div>
 				
@@ -193,7 +193,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan <span class="required">* </span></label>
+								<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan Keterjadian <span class="required">* </span></label>
 								<div class="col-md-9">
 									<div class="input-group">
 										<input type="hidden" name="risk_likelihood_id" value=""/>
@@ -230,7 +230,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan Keterjadian</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm" readonly="true" name="likelihood_v" placeholder="">
 								</div>
@@ -292,7 +292,7 @@
 									<thead>
 									<tr role="row" class="heading">
 										<th><span class="small">Usulan Action Plan</span></th>
-										<th width="80px"><span class="small">Batas Tanggal</span></th>
+										<th width="80px"><span class="small">Batas Waktu</span></th>
 										<th><span class="small">Pemilik Action Plan</span></th>
 										<th width="70px">&nbsp;</th>
 									</tr>
@@ -411,7 +411,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Batas Tanggal <span class="required">* </span></label>
+						<label class="col-md-3 control-label">Batas Waktu <span class="required">* </span></label>
 						<div class="col-md-9">
 						<div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
 							<input type="text" class="form-control input-sm" name="due_date" readonly>

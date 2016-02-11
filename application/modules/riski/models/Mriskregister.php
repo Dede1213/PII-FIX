@@ -17,7 +17,7 @@ class Mriskregister extends APP_Model {
 	
 	public function getRiskLikelihood() {
 		$sql = 'select *
-				from m_likelihood order by l_id';
+				from m_likelihood_i order by l_id';
 		$query = $this->db->query($sql);
 		
 		foreach($query->result_array() as $row) {
@@ -42,7 +42,7 @@ class Mriskregister extends APP_Model {
 	
 	public function getRiskImpact() {
 		$sql = 'select *
-				from m_risk_impact order by impact_id';
+				from m_risk_impact_i order by impact_id';
 		$query = $this->db->query($sql);
 		
 		foreach($query->result_array() as $row) {

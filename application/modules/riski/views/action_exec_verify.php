@@ -45,7 +45,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact">Batas Tanggal</label>
+						<label class="col-md-3 control-label smaller cl-compact">Batas Waktu</label>
 						<div class="col-md-9">
 							<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$action_plan['due_date_v']?>" placeholder="">
 						</div>

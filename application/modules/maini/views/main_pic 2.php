@@ -216,7 +216,7 @@
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/verified.png"/> &nbsp; 
-								 Verified By RAC
+								 Telah Di Verifikasi RAC
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/treatment.png"/> &nbsp; 
@@ -314,15 +314,15 @@
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/verified_head.png"/> &nbsp; 
-								 To Be Verified by Head Division
+								 Menunggu Verifikasi Kepala Divisi
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/submit.png"/> &nbsp; 
-								 Submitted to RAC
+								 Menunggu Verfikasi RAC
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/verified.png"/> &nbsp; 
-								 Verified by RAC
+								 Telah Di Verifikasi RAC
 							</li>
 						</ul>
 		
@@ -409,15 +409,15 @@
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/verified_head.png"/> &nbsp; 
-								 To Be Verified by Head Division
+								 Menunggu Verifikasi Kepala Divisi
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/submit.png"/> &nbsp; 
-								 Submitted to RAC
+								 Menunggu Verfikasi RAC
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/verified.png"/> &nbsp; 
-								 Verified by RAC
+								 Telah Di Verifikasi RAC
 							</li>
 						</ul>
 		
@@ -510,15 +510,15 @@
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/verified_head.png"/> &nbsp; 
-								 To Be Verified by Head Division
+								 Menunggu Verifikasi Kepala Divisi
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/submit.png"/> &nbsp; 
-								 Submitted to RAC
+								 Menunggu Verfikasi RAC
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/verified.png"/> &nbsp; 
-								 Verified by RAC
+								 Telah Di Verifikasi RAC
 							</li>
 						</ul>
 		
@@ -608,15 +608,15 @@
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/verified_head.png"/> &nbsp; 
-								 To Be Verified by Head Division
+								 Menunggu Verifikasi Kepala Divisi
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/submit.png"/> &nbsp; 
-								 Submitted to RAC
+								 Menunggu Verfikasi RAC
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/verified.png"/> &nbsp; 
-								 Verified by RAC
+								 Telah Di Verifikasi RAC
 							</li>
 						</ul>
 		

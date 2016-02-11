@@ -44,7 +44,7 @@
 				<table id="datatable_ajax" class="table table-condensed table-bordered table-hover">
 					<thead>
 					<tr role="row" class="heading">
-						<th><small>Code Risiko</small></th>
+						<th><small>Kode Risiko</small></th>
 						<th><small>Perisitiwa Risiko</small></th>
 						<th><small>Level Risiko</small></th>
 					</tr>
@@ -110,7 +110,7 @@
 		<button id="library-modal-add" type="button" 
 			class="btn blue ladda-button"
 			 data-style="expand-right"
-			>Add</button>
-		<button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+			>Tambah</button>
+		<button type="button" data-dismiss="modal" class="btn btn-default">Batal</button>
 	</div>
 </div>

@@ -19,7 +19,7 @@
 		</div>
 		<!-- END PAGE HEADER-->
 		<?php if ($valid_entry) { ?>
-		<h4>Changes In : <?=$change_type?></h4>
+		<h4>Perubahan Pada : <?=$change_type?></h4>
 		<div class="row">
 		<div class="col-md-6">
 			<div class="portlet box blue">
@@ -34,7 +34,7 @@
 						<div class="form-body">
 							<div class="form-group">
 								<input type="hidden" name="risk_id" value=""/>
-								<label class="col-md-3 control-label smaller cl-compact" >Code Risiko</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Kode Risiko</label>
 								<div class="col-md-9">
 								<input type="text" class="form-control input-sm" readonly="true" name="risk_code" readonly="true" placeholder="">
 							
@@ -76,7 +76,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan <span class="required">* </span></label>
+								<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan Keterjadian <span class="required">* </span></label>
 								<div class="col-md-9">
 								<input type="text" class="form-control input-sm" readonly="true" name="likelihood_v"  placeholder="">
 								</div>
@@ -95,13 +95,13 @@
 							</div>
 							<hr/>
 							<?php if ($change_type == 'Risk Form') { ?>
-							<h4>Objective</h4>
+							<h4>Objektif</h4>
 							<div class="table-scrollable">
 								<table id="primary_objective_table" class="table table-condensed table-bordered table-hover">
 									<thead>
 									<tr role="row" class="heading">
 										<th width="15%"><span class="small">ID Objektif</span></th>
-										<th><span class="small">Objektife</span></th>
+										<th><span class="small">Objektif</span></th>
 										
 									</tr>
 									</thead>
@@ -133,7 +133,7 @@
 									<thead>
 									<tr role="row" class="heading">
 										<th><span class="small">Usulan Action Plan</span></th>
-										<th><span class="small">Batas Tanggal</span></th>
+										<th><span class="small">Batas Waktu</span></th>
 										<th><span class="small">Pemilik Action Plan</span></th>
 									</tr>
 									</thead>
@@ -150,7 +150,7 @@
 			<div class="portlet box blue">
 				<div class="portlet-title">
 					<div class="caption" id="div-portlet-page-caption">
-						Changes
+						Perubahan
 					</div>
 				</div>
 				
@@ -161,7 +161,7 @@
 						<div class="form-body">
 							<div class="form-group">
 								<input type="hidden" name="risk_id" value=""/>
-								<label class="col-md-3 control-label smaller cl-compact" >Code Risiko</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Kode Risiko</label>
 								<div class="col-md-9">
 
 								<input type="text" class="form-control input-sm" readonly="true" name="risk_code" placeholder="">
@@ -224,7 +224,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan <span class="required">* </span></label>
+								<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan Keterjadian <span class="required">* </span></label>
 								<div class="col-md-9">
 									<div class="input-group">
 										<input type="hidden" name="risk_likelihood_id" value=""/>
@@ -261,7 +261,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan Keterjadian</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm" readonly="true" name="likelihood_v" placeholder="">
 								</div>
@@ -345,7 +345,7 @@
 									<thead>
 									<tr role="row" class="heading">
 										<th><span class="small">Usulan Action Plan</span></th>
-										<th width="80px"><span class="small">Batas Tanggal</span></th>
+										<th width="80px"><span class="small">Batas Waktu</span></th>
 										<th><span class="small">Pemilik Action Plan</span></th>
 										<th width="70px">&nbsp;</th>
 									</tr>
@@ -428,11 +428,11 @@
 			</form>
 	</div>
 	<div class="modal-footer">
-		<button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+		<button type="button" data-dismiss="modal" class="btn btn-default">Batal</button>
 		<button id="input-control-add-objective" type="button" 
 			class="btn blue ladda-button"
 			 data-style="expand-right"
-			>Add</button>
+			>Tambah</button>
 	</div>
 </div>
 <!-- CONTROL -->
@@ -507,7 +507,7 @@
 		<button id="input-control-add" type="button" 
 			class="btn blue ladda-button"
 			 data-style="expand-right"
-			>Add</button>
+			>Tambah</button>
 	</div>
 </div>
 
@@ -534,7 +534,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Batas Tanggal <span class="required">* </span></label>
+						<label class="col-md-3 control-label">Batas Waktu <span class="required">* </span></label>
 						<div class="col-md-9">
 						<div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
 							<input type="text" class="form-control input-sm" name="due_date" readonly>
@@ -558,7 +558,7 @@
 			</form>
 	</div>
 	<div class="modal-footer">
-		<button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+		<button type="button" data-dismiss="modal" class="btn btn-default">Batal</button>
 		<button id="input-actionplan-add" type="button" 
 			class="btn blue ladda-button"
 			 data-style="expand-right"

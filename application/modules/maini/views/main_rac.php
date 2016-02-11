@@ -144,7 +144,7 @@
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/treatment.png"/> &nbsp; 
-								 Dalam Penanganan Risiko
+								 Dalam Proses Penanganan Risiko
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/actplan.png"/> &nbsp; 

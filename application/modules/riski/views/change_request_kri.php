@@ -2,7 +2,7 @@
 	<div class="page-content">
 		<!-- BEGIN PAGE HEADER-->
 		<h3 class="page-title">
-		Change Request Form
+		Form Permintaan Perubahan
 		</h3>
 		<div class="page-bar">
 			<ul class="page-breadcrumb">
@@ -52,25 +52,25 @@
 			<form id="input-form" role="form" class="form-horizontal">
 				<div class="form-body">
 					<div class="form-group">
-						<label class="col-md-2 control-label">Risk ID</label>
+						<label class="col-md-2 control-label">ID Risiko</label>
 						<div class="col-md-6">
 							<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_library_code" placeholder="" value="<?=$risk['risk_code']?>">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-2 control-label">Risk Event</label>
+						<label class="col-md-2 control-label">Peristiwa Risiko</label>
 						<div class="col-md-6">
 						<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_event" placeholder="" value="<?=$risk['risk_event']?>">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-2 control-label" >Risk Level</label>
+						<label class="col-md-2 control-label" >Level Risiko</label>
 						<div class="col-md-6">
 						<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_level" placeholder="" value="<?=$risk['risk_level_v']?>">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-2 control-label" >Risk Treatment</label>
+						<label class="col-md-2 control-label" >Penanganan Risiko</label>
 						<div class="col-md-6">
 							<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_treatment" placeholder="" value="<?=$risk['treatment_v']?>">
 						</div>
@@ -114,31 +114,31 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-2 control-label">Key Risk Indicator</label>
+					<label class="col-md-2 control-label">Indikator Risiko</label>
 					<div class="col-md-6">
 					<input type="text" class="form-control input-sm input-readview" readonly="true" name="key_risk_indicator" placeholder="" value="<?=$kri['key_risk_indicator']?>">
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-2 control-label">Treshold</label>
+					<label class="col-md-2 control-label">Kemungkinan Keterjadian</label>
 					<div class="col-md-6">
 					<input type="text" class="form-control input-sm input-readview" readonly="true" name="treshold" placeholder="" value="<?=$kri['treshold']?>">
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-2 control-label">Timing of Reporting</label>
+					<label class="col-md-2 control-label">Waktu Pelaporan</label>
 					<div class="col-md-6">
 					<input type="text" class="form-control input-sm input-readview" readonly="true" name="timing_pelaporan" placeholder="" value="<?=$kri['timing_pelaporan_v']?>">
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-2 control-label">KRI Owner</label>
+					<label class="col-md-2 control-label">Pemilik KRI</label>
 					<div class="col-md-6">
 					<input type="text" class="form-control input-sm input-readview" readonly="true" name="kri_owner" placeholder="" value="<?=$kri['kri_owner_v']?>">
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-2 control-label">Report</label>
+					<label class="col-md-2 control-label">Laporan</label>
 					<div class="col-md-6">
 					<input type="text" class="form-control input-sm input-readview" readonly="true" name="report" placeholder="" value="<?=$kri['owner_report']?>">
 					</div>
@@ -147,7 +147,7 @@
 				<hr/>
 				<?php if (isset($verify) && $verify) { ?>
 				<div class="form-group">
-					<label class="col-md-2 control-label" >Threshold</label>
+					<label class="col-md-2 control-label" >Kemungkinan Keterjadian</label>
 					<div class="col-md-8">
 						<table id="action_plan_table" class="table table-condensed table-bordered table-hover">
 							<thead>
@@ -198,7 +198,7 @@
 				<?php } else { ?>
 				<hr/>
 				<div class="form-group">
-					<label class="col-md-2 control-label">Change Report</label>
+					<label class="col-md-2 control-label">Perubahan Laporan</label>
 					<div class="col-md-6">
 					<input type="text" class="form-control input-sm input-readview" readonly="true" name="owner_report" placeholder="" value="<?=$change['risk_impact']?>">
 					</div>

@@ -69,16 +69,7 @@
 										</div>
 									</div>
 								</div>
-								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact">Pemilik Risiko</label>
-									<div class="col-md-9">
-									<select class="form-control input-sm" name="risk_division">
-										<?php foreach($division_list as $row) { ?>
-										<option value="<?=$row['ref_key']?>"><?=$row['ref_value']?></option>
-										<?php } ?>
-									</select>
-									</div>
-								</div>
+								
 								
 								<div class="form-group">
 									<label class="col-md-3 control-label small cl-compact">Peristiwa Risiko <span class="required">* </span></label>
@@ -116,6 +107,16 @@
 									<label class="col-md-3 control-label small cl-compact" >Sub Kategori Level 2</label>
 									<div class="col-md-9">
 									<select class="form-control input-sm" name="risk_2nd_sub_category" id="sel_risk_2nd_sub_category">
+									</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label smaller cl-compact">Pemilik Risiko</label>
+									<div class="col-md-9">
+									<select class="form-control input-sm" name="risk_division">
+										<?php foreach($division_list as $row) { ?>
+										<option value="<?=$row['ref_key']?>"><?=$row['ref_value']?></option>
+										<?php } ?>
 									</select>
 									</div>
 								</div>
@@ -413,11 +414,11 @@
 			</form>
 	</div>
 	<div class="modal-footer">
-		<button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+		<button type="button" data-dismiss="modal" class="btn btn-default">Batal</button>
 		<button id="input-control-add-objective" type="button" 
 			class="btn blue ladda-button"
 			 data-style="expand-right"
-			>Add</button>
+			>Tambah</button>
 	</div>
 </div>
 
@@ -693,7 +694,7 @@
 <div id="modal-objective" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Objective</h4>
+		<h4 class="modal-title">Objectif</h4>
 		<div class="inputs">
 			<div class="portlet-input input-inline">
 				<div class="input-group">
@@ -711,7 +712,7 @@
 				<thead>
 				<tr role="row" class="heading">
 					<th width="30px">&nbsp;</th>
-					<th>Objective</th>
+					<th>Objectif</th>
 				</tr>
 				</thead>
 				<tbody></tbody>

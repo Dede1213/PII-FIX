@@ -130,7 +130,7 @@ WHERE t_risk.risk_id ='$id'";
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-1 control-label smaller cl-compact" >Kemungkinan </label>
+								<label class="col-md-1 control-label smaller cl-compact" >Kemungkinan Keterjadian </label>
 								<div class="col-md-5">
 									<div class="input-group">
 										<input type="hidden" name="risk_likelihood_id" value=""/>
@@ -218,7 +218,7 @@ WHERE t_risk.risk_id ='$id'";
 									<thead>
 									<tr role="row" class="heading">
 										<th><small>Usulan Action Plan</small></th>
-										<th><small>Batas Tanggal</small></th>
+										<th><small>Batas Waktu</small></th>
 										<th><small>Pemilik Action Plan</small></th>
 										<th width="30px">&nbsp;</th>
 									</tr>
@@ -301,7 +301,7 @@ WHERE t_risk.risk_id ='$id'";
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan Keterjadian</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['likelihood_v']?>" name="risk_likelihood_value" placeholder="">
 								</div>
@@ -360,7 +360,7 @@ WHERE t_risk.risk_id ='$id'";
 								<thead>
 								<tr role="row" class="heading">
 									<th nowrap><small>Usulan Action Plan</small></th>
-									<th><small>Batas Tanggal</small></th>
+									<th><small>Batas Waktu</small></th>
 									<th><small>Pemilik Action Plan</small></th>
 								</tr>
 								</thead>
@@ -387,7 +387,7 @@ WHERE t_risk.risk_id ='$id'";
 			<div class="portlet box blue">
 				<div class="portlet-title">
 					<div class="caption">
-						CHANGES
+						Perubahan
 					</div>
 				</div>
 				
@@ -440,7 +440,7 @@ WHERE t_risk.risk_id ='$id'";
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan </label>
+								<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan Keterjadian </label>
 								<div class="col-md-9">
 									<div class="input-group">
 										<input type="hidden" name="risk_likelihood_id" value=""/>
@@ -528,7 +528,7 @@ WHERE t_risk.risk_id ='$id'";
 									<thead>
 									<tr role="row" class="heading">
 										<th><small>Usulan Action Plan</small></th>
-										<th><small>Batas Tanggal</small></th>
+										<th><small>Batas Waktu</small></th>
 										<th><small>Pemilik Action Plan</small></th>
 										<th width="30px">&nbsp;</th>
 									</tr>
@@ -672,7 +672,7 @@ WHERE t_risk.risk_id ='$id'";
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Batas Tanggal <span class="required">* </span></label>
+						<label class="col-md-3 control-label">Batas Waktu <span class="required">* </span></label>
 						<div class="col-md-9">
 						<div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
 							<input type="text" class="form-control input-sm" name="due_date" id = "due_date" readonly>

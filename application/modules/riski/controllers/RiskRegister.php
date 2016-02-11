@@ -1714,7 +1714,7 @@ class RiskRegister extends APP_Controlleri {
 			$data['pageLevelScripts'] = '
 			<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
 			<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
-			<script src="assets/scripts/risk/cr_riskregister_kri.js"></script>';
+			<script src="assets/scripts/riski/cr_riskregister_kri.js"></script>';
 			$data['pageLevelScriptsInit'] = 'ChangeRequest.init();';
 			
 			$data['valid_mode'] = false;
@@ -1730,7 +1730,7 @@ class RiskRegister extends APP_Controlleri {
 				$risk = $this->risk->getRiskById($kri['risk_id']);
 				$data['risk'] = $risk;
 				$data['input'] = true;
-				$view = 'risk/change_request_kri';
+				$view = 'riski/change_request_kri';
 				$this->load->view('maini/header', $data);
 				$this->load->view($view, $data);
 				$this->load->view('main/footer', $data);

@@ -109,7 +109,7 @@ if($status == 'under'){ ?>
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact">Batas Tanggal</label>
+								<label class="col-md-3 control-label smaller cl-compact">Batas Waktu</label>
 								<div class="col-md-9">
 								<div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
 									<input type="text" class="form-control input-sm" name="due_date" readonly value="<?=$action_plan['change_data']['due_date_v']?>">
@@ -200,7 +200,7 @@ if($status == 'under'){ ?>
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact">Batas Tanggal</label>
+								<label class="col-md-3 control-label smaller cl-compact">Batas Waktu</label>
 								<div class="col-md-9">
 								<div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
 									<input type="text" class="form-control input-sm" name="due_date" readonly value="<?=$action_plan['change_data']['due_date_v']?>">
@@ -281,7 +281,7 @@ if($status == 'under'){ ?>
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact">Batas Tanggal</label>
+								<label class="col-md-3 control-label smaller cl-compact">Batas Waktu</label>
 								<div class="col-md-9">
 								<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$action_plan['due_date_v']?>" placeholder="">
 								</div>
@@ -305,7 +305,7 @@ if($status == 'under'){ ?>
 			<div class="portlet box blue">
 				<div class="portlet-title">
 					<div class="caption">
-						CHANGES
+						Perubahan
 					</div>
 				</div>
 				
@@ -352,7 +352,7 @@ if($status == 'under'){ ?>
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact">Batas Tanggal</label>
+								<label class="col-md-3 control-label smaller cl-compact">Batas Waktu</label>
 								<div class="col-md-9">
 								<div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
 									<input type="text" class="form-control input-sm" name="due_date" readonly value="<?=$action_plan['change_data']['due_date_v']?>">

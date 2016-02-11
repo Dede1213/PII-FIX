@@ -135,7 +135,7 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan</label>
+									<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan Keterjadian</label>
 									<div class="col-md-9">
 										<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['likelihood_v']?>" name="risk_likelihood_value" placeholder="">
 									</div>
@@ -159,12 +159,12 @@
 							<div class="clearfix">
 							</div>
 							<hr/>
-							<h4>Objective</h4>
+							<h4>Objectif</h4>
 							<table id="objective_table" class="table table-condensed table-bordered table-hover">
 								<thead>
 								<tr role="row" class="heading">
 									<th width="15%">Obj. ID</th>
-									<th>Objective</th>
+									<th>Objectif</th>
 								</tr>
 								</thead>
 								<tbody>
@@ -205,7 +205,7 @@
 									<thead>
 									<tr role="row" class="heading">
 										<th>Usulan Action Plan</th>
-										<th>Batas Tanggal</th>
+										<th>Batas Waktu</th>
 										<th>Pemilik Action Plan</th>
 									</tr>
 									</thead>

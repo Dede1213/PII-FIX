@@ -42,7 +42,7 @@
 					<div id="chart_owned" class="chart" style="width: 200px; height: 120px;"></div>
 				</div>
 				<div class="col-md-3">
-					<span>Action Plan Ku</span>
+					<span>My Action Plan</span>
 					<div id="chart_action_plan" class="chart" style="width: 200px; height: 120px;"></div>
 				</div>
 				<div class="col-md-3">
@@ -64,15 +64,15 @@
 				</li>
 				<li>
 					<a href="#tab_action_plan" data-toggle="tab">
-					Action Plan Ku </a>
+					My Action Plan </a>
 				</li>
 				<li>
 					<a href="#tab_action_exec" data-toggle="tab">
-					Pelaksanaan Action Plan Ku</a>
+					My Action Plan Execution</a>
 				</li>
 				<li>
 					<a href="#tab_kri" data-toggle="tab">
-					KRI Ku</a>
+					My KRI</a>
 				</li>
 				<li>
 					<a href="#tab_change_request_list" data-toggle="tab">
@@ -95,7 +95,7 @@
 									<select class="form-control input-sm" name="risk_2nd_sub_category" id="sel_risk_2nd_sub_category"></select>
 								</div>
 								<div class="form-group">
-									<button type="button" id="button-filter-category" class="btn blue btn-sm">Filter Risk</button>
+									<button type="button" id="button-filter-category" class="btn blue btn-sm">Filter Risiko</button>
 									<button type="button" id="button-filter-clear" class="btn blue btn-sm">Hapus Filter</button>
 								</div>
 							</div>
@@ -208,7 +208,7 @@
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/verified.png"/> &nbsp; 
-								 Verified by RAC
+								 Telah di Verifikasi RAC
 							</li>
 						</ul>
 					</div>
@@ -251,7 +251,7 @@
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/verified.png"/> &nbsp; 
-								 Verified by RAC
+								 Telah di Verifikasi RAC
 							</li>
 						</ul>
 					</div>
@@ -294,7 +294,7 @@
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/verified.png"/> &nbsp; 
-								 Verified by RAC
+								 Telah di Verifikasi RAC
 							</li>
 						</ul>
 					</div>

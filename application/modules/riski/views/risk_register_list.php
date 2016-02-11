@@ -360,7 +360,7 @@
 		<a href="javascript: ;" id="button-save-draft" class="btn default green pull-right" style="margin-right: 10px;">
 					<i class="fa  fa-circle-o"></i>
 					<span class="hidden-480">
-					Simpan sebagai konsep </span>
+					Simpan sebagai draft </span>
 					</a>
 		
 	<?php }else{ ?>
@@ -396,11 +396,11 @@
 				</li>
 				<li class="list-group-item">
 					<img src="<?=$base_url?>assets/images/legend/confirm.png"/> &nbsp; 
-					 Confirmed
+					 Terkonfirmasi
 				</li>
 				<li class="list-group-item">
 					<img src="<?=$base_url?>assets/images/legend/submit.png"/> &nbsp; 
-					 Submited To RAC
+					 Menunggu Verifikasi RAC
 				</li>
 			</ul>
 

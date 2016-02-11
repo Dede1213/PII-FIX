@@ -1388,8 +1388,8 @@ class RiskRegister extends APP_Controller {
 				}
 				
 				$data['sidebarMenu'] = $this->getSidebarMenuStructure('main');
-				$data['indonya'] = base_url('index.php/riski/RiskRegister/ChangeRequestInput');
-				$data['engnya'] = base_url('index.php/risk/RiskRegister/ChangeRequestInput');				
+				$data['indonya'] = base_url('index.php/maini');
+				$data['engnya'] = base_url('index.php/main');				
 				$data['pageLevelStyles'] = '
 				<link rel="stylesheet" type="text/css" href="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
 				<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css"/>

@@ -72,7 +72,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan Keterjadian</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm input-readview" readonly="true" name="likelihood_v" placeholder="">
 								</div>
@@ -91,7 +91,7 @@
 							</div>
 							<hr/>
 							<?php if ($change_type == 'Risk Form') { ?>
-							<h4>Objective</h4>
+							<h4>Objectif</h4>
 							<div class="table-scrollable">
 								<table id="primary_objective_table" class="table table-condensed table-bordered table-hover">
 									<thead>
@@ -129,7 +129,7 @@
 									<thead>
 									<tr role="row" class="heading">
 										<th><span class="small">Usulan Action Plan</span></th>
-										<th><span class="small">Batas Tanggal</span></th>
+										<th><span class="small">Batas Waktu</span></th>
 										<th><span class="small">Pemilik Action Plan</span></th>
 									</tr>
 									</thead>
@@ -146,7 +146,7 @@
 			<div class="portlet box blue">
 				<div class="portlet-title">
 					<div class="caption" id="div-portlet-page-caption">
-						Changes
+						Perubahan
 					</div>
 				</div>
 				
@@ -194,7 +194,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan Keterjadian</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm input-readview" readonly="true" name="likelihood_v" placeholder="">
 								</div>
@@ -258,7 +258,7 @@
 									<thead>
 									<tr role="row" class="heading">
 										<th><span class="small">Usulan Action Plan</span></th>
-										<th><span class="small">Batas Tanggal</span></th>
+										<th><span class="small">Batas Waktu</span></th>
 										<th><span class="small">Pemilik Action Plan</span></th>
 										<th><span class="small">&nbsp;</span></th>
 									</tr>

@@ -64,7 +64,7 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan</label>
+									<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan Keterjadian</label>
 									<div class="col-md-9">
 										<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['likelihood_v']?>" name="risk_likelihood_value" placeholder="">
 									</div>
@@ -98,12 +98,12 @@
 									</div>
 								</div>
 
-								<h4>Objective</h4>
+								<h4>Objectif</h4>
 								<table class="table table-condensed table-bordered table-hover">
 									<thead>
 									<tr role="row" class="heading">
 										<th><small>Obj. ID</small></th>
-										<th><small>Objective</small></th>
+										<th><small>Objectif</small></th>
 									</tr>
 									</thead>
 									<tbody>
@@ -143,7 +143,7 @@
 									<thead>
 									<tr role="row" class="heading">
 										<th nowrap><small>Usulan Action Plan</small></th>
-										<th><small>Batas Tanggal</small></th>
+										<th><small>Batas Waktu</small></th>
 										<th><small>Pemilik Action Plan</small></th>
 									</tr>
 									</thead>
@@ -181,7 +181,7 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan</label>
+									<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan Keterjadian</label>
 									<div class="col-md-9">
 										<div class="input-group">
 											<input type="hidden" name="risk_likelihood_id" value=""/>
@@ -276,7 +276,7 @@
 										<thead>
 										<tr role="row" class="heading">
 											<th><small>Usulan Action Plan</small></th>
-											<th><small>Batas Tanggal</small></th>
+											<th><small>Batas Waktu</small></th>
 											<th><small>Pemilik Action Plan</small></th>
 											<th width="30px">&nbsp;</th>
 										</tr>
@@ -290,7 +290,7 @@
 						</div>
 						<div class="form-actions right">
 							<input type="hidden" name="submit_mode" value="setOwnedRisk" />
-							<button id="risk-button-save" type="button" class="btn blue"><i class="fa fa-circle-o"></i>Simpan Sebagai Konsep</button>
+							<button id="risk-button-save" type="button" class="btn blue"><i class="fa fa-circle-o"></i>simpan sebagai draft</button>
 							<button id="risk-button-verify" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Ajukan</button>
 							<button type="button" class="btn yellow" id="risk-button-cancel"><i class="fa fa-times"></i> Batal</button>
 						</div>
@@ -441,11 +441,11 @@
 			</form>
 	</div>
 	<div class="modal-footer">
-		<button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+		<button type="button" data-dismiss="modal" class="btn btn-default">Batal</button>
 		<button id="input-actionplan-add" type="button" 
 			class="btn blue ladda-button"
 			 data-style="expand-right"
-			>Add</button>
+			>Tambah</button>
 	</div>
 </div>
 <!-- LIBRARY ACTION-->

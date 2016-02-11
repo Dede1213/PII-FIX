@@ -89,7 +89,7 @@
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/verified.png"/> &nbsp; 
-								 Verified By RAC
+								 Telah Di Verifikasi RAC
 							</li>
 						</ul>
 		

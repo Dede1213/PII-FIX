@@ -1214,6 +1214,8 @@ var Dashboard = function() {
                     
                 $('#modal-listrisk-form-objective').find('input[name=id]').attr('readonly', true).val("OB."+data.id);
                 $('#modal-listrisk-form-objective').find('textarea[name=objective]').attr('readonly', false).val(data.objective);
+
+                $('#modal-listrisk-form-objective').find('textarea[name=objective_ex]').attr('readonly', false).val(data.objective);
                   
                 $('#modal_listrisk_objective').modal('show');
                 this.dataMode = 'view';

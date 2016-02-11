@@ -85,7 +85,8 @@
 								<label class="col-md-3 control-label">Objective :</label>
 							 
 									<div class="col-md-9">
-										<textarea class="form-control" name="objective" id = "objective"></textarea>										 
+										<textarea class="form-control" name="objective" id = "objective"></textarea>
+										<textarea style="display:none;" class="form-control" name="objective_ex" id = "objective_ex"></textarea>										 
 									</div> 
 							 
 						</div>

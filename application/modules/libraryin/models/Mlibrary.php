@@ -243,12 +243,18 @@ from m_risk_category
 		// delete risk in child
 		  
 		$par['risk_id'] = $risk_id;
+
+		$sql = "select action_plan,division from t_risk_action_plan where id = ?";
+		$res = $this->db->query($sql, $par);
+		$row = $res->row();
+		$action_plan = $row->action_plan;
+		$division = $row->division;
 		
-		$sql1 = "delete  from t_risk_action_plan where id = ?";
-		$sql2 = "delete  from t_risk_action_plan_change where id = ?"; 
+		$sql1 = "delete  from t_risk_action_plan where action_plan = '".$action_plan."' and division= '".$division."' ";
+		$sql2 = "delete  from t_risk_action_plan_change where action_plan = '".$action_plan."' and division= '".$division."' "; 
 		
-		$res = $this->db->query($sql1, $par);
-		$res = $this->db->query($sql2, $par); 
+		$res = $this->db->query($sql1);
+		$res = $this->db->query($sql2); 
 
 		return $res;
 	}
@@ -286,11 +292,16 @@ from m_risk_category
 		  
 		$par['risk_id'] = $risk_id;
 		
-		$sql1 = "delete   from t_risk_objective where id = ?";
-		//$sql2 = "delete   from t_risk_control_change where id = ?"; 
-		
-		$res = $this->db->query($sql1, $par);
-		//$res = $this->db->query($sql2, $par); 
+		$sql = "select objective from t_risk_objective where id = ?";
+		$res = $this->db->query($sql, $par);
+		$row = $res->row();
+		$hasil = $row->objective;
+
+		$sql1 = "delete   from t_risk_objective where objective = '".$hasil."'";
+		$res = $this->db->query($sql1);
+
+		$sql2 = "delete   from t_risk_objective_change where objective = '".$hasil."'";
+		$res = $this->db->query($sql2, $par); 
 
 		return $res;
 	}
@@ -395,7 +406,7 @@ from m_risk_category
 			$sql = " 			 
 				UPDATE t_risk_objective
 				SET objective='".$data['objective']."'
-				WHERE `id`='".$idnya[1]."'	
+				WHERE `objective`='".$data['objective_ex']."'	
 			";
 		}
 		else{

@@ -44,9 +44,8 @@
 					<th width="20%"> Role </th>
 					<th width="20%"> Role Status</th>
 					<th width="20%"> Email</th>
-					<th width="20%"> Division </th>
+					<th width="20%"> Divisi </th>
 					<th width="8%">
-						 Aksi
 					</th>
 				</tr>
 				</thead>

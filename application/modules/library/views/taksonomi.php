@@ -21,6 +21,23 @@
 					<a id="bread_tab_title" target="_self" href="javascript:;">Taxonomy 2nd Sub Category</a>
 				</li>
 			</ul>
+			
+			 <div class="page-toolbar">
+				<div class="btn-group pull-right">
+					<button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
+					Export <i class="fa fa-angle-down"></i>
+					</button>
+					<ul class="dropdown-menu pull-right" role="menu">
+						<li>
+							<a  target="_blank" href="<?php echo base_url("index.php/library/taksonomi_pdf");?>">PDF</a>
+						</li>
+						<li>
+							<a  target="_blank" href="<?php echo base_url("index.php/library/taksonomi_excel");?>">Excel</a>
+						</li>
+					 
+					</ul>
+				</div>
+			</div>
 			  
 		</div>
 <!-- END PAGE HEADER-->

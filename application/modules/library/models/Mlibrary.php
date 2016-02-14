@@ -76,6 +76,48 @@ class Mlibrary extends APP_Model {
 		return $res;
 	}
 	
+	public function getAllRisk_export()
+	{
+	 
+		$sql = "
+		SELECT
+		  t_risk.risk_id,
+		  t_risk.risk_code,
+		  t_risk.risk_event,
+		  t_risk.risk_description,
+		  t_risk.risk_cause,
+		  t_risk.risk_impact,
+		  m3.cat_name AS cat_name1,
+		  m2.cat_name AS cat_name2,
+		  m1.cat_name AS cat_name3,
+		  m3.cat_id AS cat_id1,
+		  m2.cat_id AS cat_id2,
+		  m1.cat_id AS cat_id3
+		  
+		FROM
+		  t_risk 
+		  JOIN m_risk_category m1 
+			ON t_risk.risk_2nd_sub_category = m1.cat_id 
+		  JOIN m_risk_category m2 
+			ON t_risk.risk_sub_category = m2.cat_id 
+		  JOIN m_risk_category m3 
+			ON t_risk.risk_category = m3.cat_id 
+		WHERE t_risk.risk_library_id IS NULL 
+				";
+				 
+		$query = $this->db->query($sql);
+			
+			if ($query->num_rows())
+			{
+				return $query->result_array();
+			}
+			else
+			{
+				return FALSE;
+			}		
+			
+	}
+	
 	public function getAllRisk_ap($page, $row, $order_by = null, $order = null, $filter_by = null, $filter_value = null)
 	{
 		$ex_or = $ex_filter = '';
@@ -101,6 +143,26 @@ class Mlibrary extends APP_Model {
 				.$ex_or;
 		$res = $this->getPagingData($sql, $par, $page, $row, 'id', true);
 		return $res;
+	}
+	
+	public function getAllRisk_ap_report()
+	{
+		 
+		$sql = "select t_risk_action_plan.id, t_risk_action_plan.action_plan, t_risk_action_plan.due_date, t_risk_action_plan.division
+					from t_risk_action_plan
+					group by t_risk_action_plan.division, t_risk_action_plan.action_plan
+				";
+				
+		$query = $this->db->query($sql);
+			
+			if ($query->num_rows())
+			{
+				return $query->result_array();
+			}
+			else
+			{
+				return FALSE;
+			}	
 	}
 	
 	public function getAllRisk_kri($page, $row, $order_by = null, $order = null, $filter_by = null, $filter_value = null)
@@ -129,6 +191,26 @@ from t_kri t1 where kri_library_id is null
 		return $res;
 	}
 	
+	public function getAllRisk_kri_report()
+	{
+		 
+		$sql = "select t1.id, t1.kri_code, t1.key_risk_indicator, t1.treshold, (select GROUP_CONCAT(t2.operator,' ', t2.value_1, ' = ', t2.result) from t_kri_treshold t2 where t2.kri_id=t1.id) as 'threshold value' 
+from t_kri t1 where kri_library_id is null
+				";
+				
+		$query = $this->db->query($sql);
+			
+			if ($query->num_rows())
+			{
+				return $query->result_array();
+			}
+			else
+			{
+				return FALSE;
+			}
+				 
+	}
+	
 	public function getAllRisk_tax($page, $row, $order_by = null, $order = null, $filter_by = null, $filter_value = null)
 	{
 		$ex_or = $ex_filter = '';
@@ -153,6 +235,26 @@ from m_risk_category
 				.$ex_or;
 		$res = $this->getPagingData($sql, $par, $page, $row, 'id', true);
 		return $res;
+	}
+	
+	public function getAllRisk_tax_report()
+	{
+		 
+		$sql = "select cat_id as id,cat_code, cat_name, cat_desc
+		from m_risk_category
+				";
+				
+		$query = $this->db->query($sql);
+			
+			if ($query->num_rows())
+			{
+				return $query->result_array();
+			}
+			else
+			{
+				return FALSE;
+			}		
+				 
 	}
 	
 	public function getAllRisk_ec($page, $row, $order_by = null, $order = null, $filter_by = null, $filter_value = null)
@@ -185,6 +287,30 @@ from m_risk_category
 				.$ex_or;
 		$res = $this->getPagingData($sql, $par, $page, $row, 'id', true);
 		return $res;
+	}
+	
+	public function getAllRisk_ec_report()
+	{ 
+		$sql = "SELECT
+			  t_risk_control.id,
+			  t_risk_control.risk_existing_control,
+			  t_risk_control.risk_evaluation_control,
+			  t_risk_control.risk_control_owner
+			FROM t_risk_control
+			WHERE existing_control_id IS NULL
+			 AND risk_existing_control <> 'NONE'
+				"; 
+				
+			$query = $this->db->query($sql);
+			
+			if ($query->num_rows())
+			{
+				return $query->result_array();
+			}
+			else
+			{
+				return FALSE;
+			}		
 	}
 	
 	public function getAllRisk_objective($page, $row, $order_by = null, $order = null, $filter_by = null, $filter_value = null)

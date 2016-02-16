@@ -9,16 +9,16 @@
 			<ul class="page-breadcrumb">
 				<li>
 					<i class="fa fa-home"></i>
-					<a target="_self" href="<?=$site_url?>/main/mainrac">Home</a>
+					<a target="_self" href="<?=$site_url?>/main/mainrac">Beranda</a>
 					<i class="fa fa-angle-right"></i>
 				</li>
 				<li class="bread_tab">
-					<a id="bread_tab_title" target="_self" href="javascript:;">Library Management</a>
+					<a id="bread_tab_title" target="_self" href="javascript:;">Pengaturan Library</a>
 					<i class="fa fa-angle-right"></i>
 				</li>
 				 
 				<li class="bread_tab">
-					<a id="bread_tab_title" target="_self" href="javascript:;">Taxonomy 2nd Sub Category</a>
+					<a id="bread_tab_title" target="_self" href="javascript:;">Daftar Taksonomi Risiko</a>
 				</li>
 			</ul>
 			
@@ -54,9 +54,9 @@
 						<tr role="row" class="heading">
 							 
 							<th>ID</th>
-							<th>Name</th> 
-							<th>Description</th> 
-							<th> Action</th>
+							<th>Nama</th> 
+							<th>Deksripsi</th> 
+							<th></th>
 						</tr>
 						</thead>
 						<tbody>
@@ -81,7 +81,7 @@
 <div id="modal_listrisk" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Library of Risk Taxonomy</h4>		 
+		<h4 class="modal-title">Library Taksonomi Risiko</h4>		 
 	</div>
 	<div class="modal-body">
 				<form id="modal-listrisk-form" role="form" class="form-horizontal">
@@ -97,14 +97,14 @@
 						
 						<div class="form-group">
 						 
-						<label class="col-md-3 control-label smaller cl-compact">Name  :</label>
+						<label class="col-md-3 control-label smaller cl-compact">Nama  :</label>
 							<div class="col-md-9">
 							<input type = "text" name = "cat_name" id = "cat_name" class = "form-control">  
 							</div>
 						</div>
 						
 						<div class="form-group">
-								<label class="col-md-3 control-label">Description :</label>
+								<label class="col-md-3 control-label">Deskripsi :</label>
 							 
 									<div class="col-md-9">
 										<textarea class="form-control" name="cat_desc" id = "cat_desc"></textarea>										 
@@ -121,8 +121,8 @@
 		<button id="library-modal-listrisktax-update" type="button" 
 			class="btn blue ladda-button"
 			 data-style="expand-right"
-			>Save</button>
-		<button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+			>Simpan</button>
+		<button type="button" data-dismiss="modal" class="btn btn-default">Batal</button>
 	</div>
 </div>
 

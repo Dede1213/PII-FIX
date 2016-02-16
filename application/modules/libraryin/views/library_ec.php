@@ -9,19 +9,19 @@
 			<ul class="page-breadcrumb">
 				<li>
 					<i class="fa fa-home"></i>
-					<a target="_self" href="<?=$site_url?>/main/mainrac">Home</a>
+					<a target="_self" href="<?=$site_url?>/main/mainrac">Beranda</a>
 					<i class="fa fa-angle-right"></i>
 				</li>
 				<li class="bread_tab">
-					<a id="bread_tab_title" target="_self" href="javascript:;">Library Management</a>
+					<a id="bread_tab_title" target="_self" href="javascript:;">Pengaturan Library</a>
 					<i class="fa fa-angle-right"></i>
 				</li>
 				<li class="bread_tab">
-					<a id="bread_tab_title" target="_self" href="javascript:;">Risk</a>
+					<a id="bread_tab_title" target="_self" href="javascript:;">Risiko</a>
 					<i class="fa fa-angle-right"></i>
 				</li>
 				<li class="bread_tab">
-					<a id="bread_tab_title" target="_self" href="javascript:;">List of Existing Control</a>
+					<a id="bread_tab_title" target="_self" href="javascript:;">Daftar Kontrol Eksisting</a>
 				</li>
 			</ul>
 			
@@ -51,17 +51,17 @@
 			 
 			<div class="tab-content">
 				<div class="tab-pane active" id="tab_risk_list">
-				    <button id="button-add-ec" class="btn green btn-sm" type="button" style="margin-bottom: 10px;"  >Add Existing Control</button>
+				    <button id="button-add-ec" class="btn green btn-sm" type="button" style="margin-bottom: 10px;"  >Tambah Kontrol Eksisting</button>
 					<div ><!--class="table-scrollable"-->
 						<table class="table table-condensed table-bordered table-hover " id="datatableec_ajax">
 						<thead>
 						<tr role="row" class="heading">
 							 
-							<th>Existing Control ID</th>
-							<th>Existing Control</th>
-							<th>Evaluation Control</th>
-							<th>Control Owner</th> 
-							<th> Action</th>
+							<th>ID Kontrol Eksisting</th>
+							<th>Kontrol Eksisting</th>
+							<th>Evaluasi atas Eksisting Kontrol</th>
+							<th>Pemilik Kontrol</th> 
+							<th></th>
 						</tr>
 						</thead>
 						<tbody>
@@ -86,7 +86,7 @@
 <div id="modal_listrisk" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Library Of Existing Control</h4>		 
+		<h4 class="modal-title">Library Kontrol Eksisting</h4>		 
 	</div>
 	<div class="modal-body">
 				<form id="modal-listrisk-form" role="form" class="form-horizontal">
@@ -94,7 +94,7 @@
 				
 						<div class="form-group">
 						 
-						<label class="col-md-3 control-label smaller cl-compact">Existing Control ID  :</label>
+						<label class="col-md-3 control-label smaller cl-compact">ID Kontrol Eksisting  :</label>
 							<div class="col-md-9">
 							<input class="form-control input-sm input-readview" type="text" placeholder="" name="id" id = "id" readonly="true"  >
 							</div>
@@ -102,14 +102,14 @@
 						
 						<div class="form-group">
 						 
-						<label class="col-md-3 control-label smaller cl-compact">Existing Control   :</label>
+						<label class="col-md-3 control-label smaller cl-compact">Kontrol Eksisting   :</label>
 							<div class="col-md-9">
 							<input type = "text" name = "risk_existing_control" id = "risk_existing_control" class = "form-control">  
 							</div>
 						</div>
 						
 						<div class="form-group">
-								<label class="col-md-3 control-label">Evaluation Control :</label>
+								<label class="col-md-3 control-label">Evaluasi atas Eksisting Kontrol :</label>
 							 
 									<div class="col-md-9">
 										<textarea class="form-control" name="risk_evaluation_control" id = "risk_evaluation_control"></textarea>										 
@@ -119,7 +119,7 @@
 						
 						<div class="form-group">
 						 
-						<label class="col-md-3 control-label smaller cl-compact">Control Owner :</label>
+						<label class="col-md-3 control-label smaller cl-compact">Pemilik Kontrol :</label>
 							<div class="col-md-9">
 							<select name="risk_control_owner"  class="form-control" id = "risk_control_owner"> 
 							</select>							 
@@ -135,8 +135,8 @@
 		<button id="library-modal-listriskec-update" type="button" 
 			class="btn blue ladda-button"
 			 data-style="expand-right"
-			>Save</button>
-		<button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+			>Simpan</button>
+		<button type="button" data-dismiss="modal" class="btn btn-default">Batal</button>
 	</div>
 </div>
 

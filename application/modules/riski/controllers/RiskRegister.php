@@ -65,7 +65,7 @@ class RiskRegister extends APP_Controlleri {
 		<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
 		<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
 		
-		<script src="assets/scripts/risk/risklist_change_rac.js"></script>
+		<script src="assets/scripts/riski/risklist_change_rac.js"></script>
 		';
 		
 		$data['pageLevelScriptsInit'] = 'RiskList.init();';
@@ -103,7 +103,7 @@ class RiskRegister extends APP_Controlleri {
 		<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
 		<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
 		
-		<script src="assets/scripts/risk/risklist_under.js"></script>
+		<script src="assets/scripts/riski/risklist_under.js"></script>
 		';
 		
 		$data['pageLevelScriptsInit'] = 'RiskList.init();';
@@ -281,7 +281,7 @@ class RiskRegister extends APP_Controlleri {
 		<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
 		<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
 		
-		<script src="assets/scripts/risk/risklist_recover.js"></script>
+		<script src="assets/scripts/riski/risklist_recover.js"></script>
 		';
 		
 		$data['pageLevelScriptsInit'] = 'RiskList.init();';

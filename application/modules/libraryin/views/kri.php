@@ -9,23 +9,23 @@
 			<ul class="page-breadcrumb">
 				<li>
 					<i class="fa fa-home"></i>
-					<a target="_self" href="<?=$site_url?>/main/mainrac">Home</a>
+					<a target="_self" href="<?=$site_url?>/main/mainrac">Beranda</a>
 					<i class="fa fa-angle-right"></i>
 				</li>
 				<li class="bread_tab">
-					<a id="bread_tab_title" target="_self" href="javascript:;">Library Management</a>
+					<a id="bread_tab_title" target="_self" href="javascript:;">Pengaturan Library</a>
 					<i class="fa fa-angle-right"></i>
 				</li>
 				 
 				<li class="bread_tab">
-					<a id="bread_tab_title" target="_self" href="javascript:;">KRI</a>
+					<a id="bread_tab_title" target="_self" href="javascript:;">Indikator Key Risk (KRI)</a>
 				</li>
 			</ul>
 			
 			 <div class="page-toolbar">
 				<div class="btn-group pull-right">
 					<button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
-					Export <i class="fa fa-angle-down"></i>
+					Ekspor <i class="fa fa-angle-down"></i>
 					</button>
 					<ul class="dropdown-menu pull-right" role="menu">
 						<li>
@@ -53,11 +53,11 @@
 						<thead>
 						<tr role="row" class="heading">
 							 
-							<th>KRI ID</th>
-							<th>Key Risk Indicator</th> 
+							<th>ID KRI</th>
+							<th>Indikator Key Risk</th> 
 							<th>Threshold</th> 
-							<th>Threshold Type</th> 
-							<th> Action</th>
+							<th>Tipe Threshold</th> 
+							<th></th>
 						</tr>
 						</thead>
 						<tbody>
@@ -83,7 +83,7 @@
 <div id="modal_listrisk" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Library of Key Risk Indicator (KRI)</h4>		 
+		<h4 class="modal-title">Library Indikator Key Risk (KRI)</h4>		 
 	</div>
 	<div class="modal-body">
 				<form id="modal-listrisk-form" role="form" class="form-horizontal">
@@ -91,7 +91,7 @@
 				
 						<div class="form-group">
 						 
-						<label class="col-md-3 control-label smaller cl-compact"> KRI ID  :</label>
+						<label class="col-md-3 control-label smaller cl-compact"> ID KRI  :</label>
 							<div class="col-md-9">
 							<input class="form-control input-sm input-readview" type="text" placeholder="" name="kri_code" id = "kri_code" readonly="true"  >
 							</div>
@@ -99,7 +99,7 @@
 						
 						<div class="form-group">
 						 
-						<label class="col-md-3 control-label smaller cl-compact">Key Risk Indicator :</label>
+						<label class="col-md-3 control-label smaller cl-compact">Indikator Key Risk :</label>
 							<div class="col-md-9">
 							<input type = "text" name = "key_risk_indicator" id = "key_risk_indicator" class = "form-control">  
 							</div>
@@ -115,7 +115,7 @@
 						 
 						<div class="form-group">
 						 
-						<label class="col-md-3 control-label smaller cl-compact">Threshold Type :</label>
+						<label class="col-md-3 control-label smaller cl-compact">Tipe Threshold :</label>
 							<div class="col-md-9">
 							<select name="treshold_type"  class="form-control"   id="select-treshold-type">
 							
@@ -126,15 +126,15 @@
 						<div class="form-group">
 							<label class="col-md-2 control-label">&nbsp;</label>
 							<div class="col-md-8">
-								 <button class="btn green btn-sm" style="margin-bottom: 10px;" type="button" id="button-kri-open-treshold">Add Treshold</button> 
+								 <button class="btn green btn-sm" style="margin-bottom: 10px;" type="button" id="button-kri-open-treshold">Tambah Treshold</button> 
 								<table id="treshold_table" class="table table-condensed table-bordered table-hover">
 									<thead>
 									<tr role="row" class="heading">
 										<th>Operator</th>
-										<th>Value 1</th>
-										<th>Value 2</th>
-										<th>Type Value</th>
-										<th>Result</th>
+										<th>Nilai 1</th>
+										<th>Nilai 2</th>
+										<th>Tipe Nilai</th>
+										<th>Hasil</th>
 										<th> &nbsp; </th>
 									</tr>
 									</thead>
@@ -153,8 +153,8 @@
 		<button id="library-modal-listriskkri-update" type="button" 
 			class="btn blue ladda-button"
 			 data-style="expand-right"
-			>Save</button>
-		<button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+			>Simpan</button>
+		<button type="button" data-dismiss="modal" class="btn btn-default">Batal</button>
 	</div>
 </div>
 
@@ -163,7 +163,7 @@
 <div id="modal-treshold-selection" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Add Treshold</h4>
+		<h4 class="modal-title">Tambah Treshold</h4>
 	</div>
 	<div class="modal-body">
 		<form id="kri-form-selection" role="form" class="form-horizontal">
@@ -171,13 +171,13 @@
 			<input type="hidden" name="kri_id" value="" />
 			<div class="form-body">
 				<div class="form-group">
-					<label class="col-md-2 control-label">Value</label>
+					<label class="col-md-2 control-label">Nilai</label>
 					<div class="col-md-6">
 					<input type="text" class="form-control input-sm input-readview" name="value_1" placeholder="">
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-2 control-label">Result</label>
+					<label class="col-md-2 control-label">Hasil</label>
 					<div class="col-md-6">
 					<select class="form-control input-sm" name="result">
 						<option value="GREEN">Green</option>
@@ -193,7 +193,7 @@
 		<button id="button-treshold-selection-add" type="button" 
 			class="btn blue ladda-button"
 			 data-style="expand-right"
-			>Add</button>
+			>Tambah</button>
 	</div>
 </div>
 
@@ -201,7 +201,7 @@
 <div id="modal-treshold-value" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Add Treshold</h4>
+		<h4 class="modal-title">Tambah Treshold</h4>
 	</div>
 	<div class="modal-body">
 		<form id="kri-form-value" role="form" class="form-horizontal">
@@ -335,7 +335,7 @@
 		<button id="button-treshold-value-add" type="button" 
 			class="btn blue ladda-button"
 			 data-style="expand-right"
-			>Add</button>
+			>Tambah</button>
 	</div>
 </div>
 

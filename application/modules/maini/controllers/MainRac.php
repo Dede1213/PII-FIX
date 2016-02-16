@@ -2021,7 +2021,7 @@ class MainRac extends APP_Controlleri {
 			<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
 			<script type="text/javascript" src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 			<script type="text/javascript" src="assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
-			<script src="assets/scripts/risk/actionexecverify.js"></script>
+			<script src="assets/scripts/riski/actionexecverify.js"></script>
 			';
 			
 			$this->load->model('risk/mriskregister');

@@ -9,19 +9,19 @@
 			<ul class="page-breadcrumb">
 				<li>
 					<i class="fa fa-home"></i>
-					<a target="_self" href="<?=$site_url?>/main/mainrac">Home</a>
+					<a target="_self" href="<?=$site_url?>/main/mainrac">Beranda</a>
 					<i class="fa fa-angle-right"></i>
 				</li>
 				<li class="bread_tab">
-					<a id="bread_tab_title" target="_self" href="javascript:;">Library Management</a>
+					<a id="bread_tab_title" target="_self" href="javascript:;">Pengaturan Library</a>
 					<i class="fa fa-angle-right"></i>
 				</li>
 				<li class="bread_tab">
-					<a id="bread_tab_title" target="_self" href="javascript:;">Risk</a>
+					<a id="bread_tab_title" target="_self" href="javascript:;">Risiko</a>
 					<i class="fa fa-angle-right"></i>
 				</li>
 				<li class="bread_tab">
-					<a id="bread_tab_title" target="_self" href="javascript:;">List of Objective</a>
+					<a id="bread_tab_title" target="_self" href="javascript:;">Daftar Objektif</a>
 				</li>
 			</ul>
 			
@@ -34,15 +34,15 @@
 			 
 			<div class="tab-content">
 				<div class="tab-pane active" id="tab_risk_list">
-				    <button id="button-add-objective" class="btn green btn-sm" type="button" style="margin-bottom: 10px;"  >Add Objective</button>
+				    <button id="button-add-objective" class="btn green btn-sm" type="button" style="margin-bottom: 10px;"  >Tambah Objective</button>
 					<div ><!--class="table-scrollable"-->
 						<table class="table table-condensed table-bordered table-hover " id="datatableobjective_ajax">
 						<thead>
 						<tr role="row" class="heading">
 							 
-							<th width="15%">Risk Objective ID</th>
-							<th>Risk Objective</th>
-							<th width="15%"> Action</th>
+							<th width="15%">ID Objektif</th>
+							<th>Objektif</th>
+							<th width="15%"></th>
 						</tr>
 						</thead>
 						<tbody>
@@ -67,7 +67,7 @@
 <div id="modal_listrisk_objective" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Library Of Objective</h4>		 
+		<h4 class="modal-title">Library Objektif</h4>		 
 	</div>
 	<div class="modal-body">
 				<form id="modal-listrisk-form-objective" role="form" class="form-horizontal">
@@ -75,14 +75,14 @@
 				
 						<div class="form-group">
 						 
-						<label class="col-md-3 control-label smaller cl-compact">Objective ID  :</label>
+						<label class="col-md-3 control-label smaller cl-compact">ID Objektif  :</label>
 							<div class="col-md-9">
 							<input class="form-control input-sm input-readview" type="text" placeholder="" name="id" id = "id" readonly="true"  >
 							</div>
 						</div>
 						
 						<div class="form-group">
-								<label class="col-md-3 control-label">Objective :</label>
+								<label class="col-md-3 control-label">Objektif :</label>
 							 
 									<div class="col-md-9">
 										<textarea class="form-control" name="objective" id = "objective"></textarea>
@@ -98,8 +98,8 @@
 		<button id="library-modal-listriskobjective-update" type="button" 
 			class="btn blue ladda-button"
 			 data-style="expand-right"
-			>Save</button>
-		<button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+			>Simpan</button>
+		<button type="button" data-dismiss="modal" class="btn btn-default">Batal</button>
 	</div>
 </div>
 

@@ -9,19 +9,19 @@
 			<ul class="page-breadcrumb">
 				<li>
 					<i class="fa fa-home"></i>
-					<a target="_self" href="<?=$site_url?>/main/mainrac">Home</a>
+					<a target="_self" href="<?=$site_url?>/main/mainrac">Beranda</a>
 					<i class="fa fa-angle-right"></i>
 				</li>
 				<li class="bread_tab">
-					<a id="bread_tab_title" target="_self" href="javascript:;">Library Management</a>
+					<a id="bread_tab_title" target="_self" href="javascript:;">Pengaturan Library</a>
 					<i class="fa fa-angle-right"></i>
 				</li>
 				<li class="bread_tab">
-					<a id="bread_tab_title" target="_self" href="javascript:;">Risk</a>
+					<a id="bread_tab_title" target="_self" href="javascript:;">Risiko</a>
 					<i class="fa fa-angle-right"></i>
 				</li>
 				<li class="bread_tab">
-					<a id="bread_tab_title" target="_self" href="javascript:;">List of Action Plan</a>
+					<a id="bread_tab_title" target="_self" href="javascript:;">Daftar Action Plan</a>
 				</li>
 			</ul>
 			  <div class="page-toolbar">
@@ -49,7 +49,7 @@
 			 
 			<div class="tab-content">
 				<div class="tab-pane active" id="tab_risk_list">
-				    <button id="button-add" class="btn green btn-sm" type="button" style="margin-bottom: 10px;"  >Add Action Plan</button>
+				    <button id="button-add" class="btn green btn-sm" type="button" style="margin-bottom: 10px;"  >Tambah Action Plan</button>
 					<div ><!--class="table-scrollable"-->
 						<table class="table table-condensed table-bordered table-hover " id="datatableap_ajax">
 						<thead>
@@ -58,8 +58,8 @@
 							<th>AP ID</th>
 							<th>Action Plan</th>
 							 
-							<th>Action Plan Owner</th> 
-							<th> Action</th>
+							<th>Pemilik Action Plan</th> 
+							<th></th>
 						</tr>
 						</thead>
 						<tbody>
@@ -84,7 +84,7 @@
 <div id="modal_listrisk" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Library of Action Plan</h4>		 
+		<h4 class="modal-title">Library Action Plan</h4>		 
 	</div>
 	<div class="modal-body">
 				<form id="modal-listrisk-form" role="form" class="form-horizontal">
@@ -122,7 +122,7 @@
 						
 						<div class="form-group">
 						 
-						<label class="col-md-3 control-label smaller cl-compact">Action Plan Owner :</label>
+						<label class="col-md-3 control-label smaller cl-compact">Pemilik Action Plan :</label>
 							<div class="col-md-9">
 							<select name="division"  class="form-control" id = "division"> 
 							</select>		
@@ -139,8 +139,8 @@
 		<button id="library-modal-listriskap-update" type="button" 
 			class="btn blue ladda-button"
 			 data-style="expand-right"
-			>Save</button>
-		<button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+			>Simpan</button>
+		<button type="button" data-dismiss="modal" class="btn btn-default">Batal</button>
 	</div>
 </div>
 

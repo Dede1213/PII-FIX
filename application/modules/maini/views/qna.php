@@ -27,7 +27,7 @@
 				<a href="javascript:;" class="btn btn-sm green pull-right" id="btn-open-form">
 				<i class="fa fa-plus"></i>
 				<span class="hidden-480">
-				Tambah Tanya Baru </span>
+				Tambah Pertanyaan Baru </span>
 				</a>
 			</div>
 		</div>
@@ -36,7 +36,7 @@
 			<div class="col-md-12">
 				<form class="form-inline" role="form" id="filterForm" style="margin-bottom: 10px;">
 					<div class="form-group">
-						<label for="filterFormBy">Filter Dengan</label>
+						<label for="filterFormBy">Filter dengan :</label>
 						<select class="form-control input-medium input-sm" id="filterFormBy">
 							<option value="subject">Perihal</option>
 						</select>
@@ -70,7 +70,7 @@
 <div id="form-data" class="modal fade" tabindex="-1" data-width="760" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Tambah Tanya Baru</h4>
+		<h4 class="modal-title">Tambah Pertanyaan Baru</h4>
 	</div>
 	<div class="modal-body">
 		<div class="row">

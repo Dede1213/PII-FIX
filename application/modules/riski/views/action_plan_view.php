@@ -3,7 +3,7 @@
 	<div class="page-content">
 		<!-- BEGIN PAGE HEADER-->
 		<h3 class="page-title">
-		Action Plan
+		Form Action Plan
 		</h3>
 		<div class="page-bar">
 			<ul class="page-breadcrumb">
@@ -67,7 +67,7 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan Keterjadiaan</label>
+									<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan Keterjadian</label>
 									<div class="col-md-9">
 										<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['likelihood_v']?>" name="risk_likelihood_value" placeholder="">
 									</div>
@@ -114,13 +114,13 @@
 		<div class="row">
 		<div class="col-md-12">
 			<div class="note note-danger">
-				<h4 class="block">Error</h4>
+				<h4 class="block">Informasi</h4>
 				<p>
-					 You are not allowed to view this Risk
+					 Tidak diperbolehkan untuk melihat risiko.
 				</p>
 				<p>
 					<a class="btn red" target="_self" href="<?=$site_url?>/main">
-					Back to Home </a>
+					Kembali ke Beranda </a>
 				</p>
 			</div>
 		</div>

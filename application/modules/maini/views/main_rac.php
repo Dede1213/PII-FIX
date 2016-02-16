@@ -9,11 +9,11 @@
 			<ul class="page-breadcrumb">
 				<li>
 					<i class="fa fa-home"></i>
-					<a target="_self" href="<?=$site_url?>/main/mainrac">Home</a>
+					<a target="_self" href="<?=$site_url?>/main/mainrac">Beranda</a>
 					<i class="fa fa-angle-right"></i>
 				</li>
 				<li class="bread_tab">
-					<a id="bread_tab_title" target="_self" href="javascript:;">Risk List</a>
+					<a id="bread_tab_title" target="_self" href="javascript:;">Daftar Risiko</a>
 				</li>
 			</ul>
 			<div class="page-toolbar">
@@ -74,7 +74,7 @@
 				</li>
 				<li>
 					<a href="#tab_treatment_list" data-toggle="tab">
-					Daftar Penanganan </a>
+					Daftar Penanganan Risiko</a>
 				</li>
 				<li>
 					<a href="#tab_action_plan_list" data-toggle="tab">
@@ -90,7 +90,7 @@
 				</li>
 				<li>
 					<a href="#tab_change_request_list" data-toggle="tab">
-					Daftar Change Request </a>
+					Daftar Permintaan Perubahan </a>
 				</li>
 			</ul>
 			<div class="tab-content">
@@ -164,8 +164,8 @@
 						<div class="form-group">
 							<label for="filterFormBy" class="smaller">Filter dengan : </label>
 							<select class="form-control input-medium input-sm" id="tab_risk_register_list-filterBy">
-								<option value="display_name">User Name</option>
-								<option value="division_name">Division</option>
+								<option value="display_name">Username</option>
+								<option value="division_name">Divisi</option>
 							</select>
 						</div>
 						<div class="form-group">
@@ -202,7 +202,7 @@
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/verified.png"/> &nbsp; 
-								 Telah diverifikasi RAC
+								 Terverifikasi RAC
 							</li>
 						</ul>
 		
@@ -253,7 +253,7 @@
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/verified.png"/> &nbsp; 
-								 Telah diverifikasi RAC
+								 Terverifikasi RAC
 							</li>
 						</ul>
 		
@@ -305,7 +305,7 @@
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/verified.png"/> &nbsp; 
-								 Telah diverifikasi RAC
+								 Terverifikasi RAC
 							</li>
 						</ul>
 		
@@ -321,7 +321,7 @@
 							<th>ID KRI</th>
 							<th>KRI</th>
 							<th>Pemilik KRI</th>
-							<th>Timing Pelaporan</th>
+							<th>Waktu Pelaporan</th>
 							<th>ID Risiko</th>
 							<th>KRI Warning</th>
 						</tr>
@@ -345,7 +345,7 @@
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/verified.png"/> &nbsp; 
-								 Telah diverifikasi RAC
+								 Terverifikasi RAC
 							</li>
 						</ul>
 		
@@ -359,7 +359,7 @@
 						<tr role="row" class="heading">
 							<th width="30px">Status</th>
 							<th>ID CH</th>
-							<th>Perubahan Dalam</th>
+							<th>Perubahan dalam</th>
 							<th>Pemohon</th>
 							<th>Status Permintaan Perubahan</th>
 						</tr>
@@ -392,7 +392,7 @@
 							<th>Action Plan</th>
 							<th>Batas Waktu</th>
 							<th>Pemilik Action Plan</th>
-							<th>Execution</th>
+							<th>Eksekusi</th>
 							<th>ID Risiko</th>
 						</tr>
 						</thead>
@@ -415,7 +415,7 @@
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/verified.png"/> &nbsp; 
-								 Telah diverifikasi RAC
+								 Terverifikasi RAC
 							</li>
 						</ul>
 		
@@ -436,25 +436,25 @@
 			<div class="modal-content">
 			  <div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Risk List Export - choose field to export</h4>
+				<h4 class="modal-title" id="myModalLabel">Daftar Risiko - Pilih kolom untuk di ekspor</h4>
 			  </div>
 			  <div class="modal-body">
 				<form id = "get_check_risklist">
 					<tr role="row" class="heading">
 						<th width="30px">Status <input type = "checkbox" checked="true"  name = "risk_status" ></th>
-						<th>Risk ID <input type = "checkbox" checked="true"  name = "risk_code"  > </th>
-						<th>Risk Event <input type = "checkbox" checked="true"  name = "risk_event"  > </th>
-						<th>Impact Level <input type = "checkbox" checked="true"  name = "risk_level_v" ></th>
-						<th>Likelihood <input type = "checkbox" checked="true"  name = "impact_level_v" > </th>
-						<th>Risk Level <input type = "checkbox" checked="true"  name = "likelihood_v"> </th>
-						<th>Risk Owner <input type = "checkbox" checked="true"  name = "risk_owner_v" > </th> 
+						<th>ID Risiko <input type = "checkbox" checked="true"  name = "risk_code"  > </th>
+						<th>Peristiwa Risiko <input type = "checkbox" checked="true"  name = "risk_event"  > </th>
+						<th>Level Dampak <input type = "checkbox" checked="true"  name = "risk_level_v" ></th>
+						<th>Kemungkinan Keterjadian <input type = "checkbox" checked="true"  name = "impact_level_v" > </th>
+						<th>Level Dampak <input type = "checkbox" checked="true"  name = "likelihood_v"> </th>
+						<th>Pemilik Risiko <input type = "checkbox" checked="true"  name = "risk_owner_v" > </th> 
 					</tr>
 				</form>							 
 			  </div>
 			  <div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button class = "btn btn-success" id = "risk_list_excel">export to excel</button>
-				<button class = "btn btn-success" id = "risk_list_pdf" >export to pdf</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+				<button class = "btn btn-success" id = "risk_list_excel">Ekspor ke Excel</button>
+				<button class = "btn btn-success" id = "risk_list_pdf" >Eksport ke PDF</button>
 			  </div>
 			</div>
 		  </div>
@@ -466,7 +466,7 @@
 			<div class="modal-content">
 			  <div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Risk Register List Export - choose field to export</h4>
+				<h4 class="modal-title" id="myModalLabel">Daftar Risk Register - Pilih kolom untuk di ekspor</h4>
 			  </div>
 			  <div class="modal-body">
 				<form id = "get_check_riskregisterlist">
@@ -478,9 +478,9 @@
 				</form>							 
 			  </div>
 			  <div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button class = "btn btn-success" id = "risk_register_list_excel">export to excel</button>
-				<button class = "btn btn-success" id = "risk_register_list_pdf" >export to pdf</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+				<button class = "btn btn-success" id = "risk_register_list_excel">Ekspor ke Excel</button>
+				<button class = "btn btn-success" id = "risk_register_list_pdf" >Ekspor ke PDF</button>
 			  </div>
 			</div>
 		  </div>
@@ -492,23 +492,23 @@
 			<div class="modal-content">
 			  <div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Treatment List Export - choose field to export</h4>
+				<h4 class="modal-title" id="myModalLabel">Daftar Penanganan Risiko - Pilih kolom untuk di ekspor</h4>
 			  </div>
 			  <div class="modal-body">
 				<form id = "get_check_risktreatment">
 					<tr role="row" class="heading">
 						<th width="30px">Status <input type = "checkbox" checked="true"  name = "risk_status" ></th>
-						<th>Risk ID <input type = "checkbox" checked="true"  name = "risk_code"  > </th>
-						<th>Risk Event<input type = "checkbox" checked="true"  name = "risk_event"  > </th> 
-						<th>Risk Owner<input type = "checkbox" checked="true"  name = "risk_owner_v"  > </th> 
-						<th>Risk Treatment<input type = "checkbox" checked="true"  name = "suggested_risk_treatment_v"  > </th>  
+						<th>ID Risiko <input type = "checkbox" checked="true"  name = "risk_code"  > </th>
+						<th>Peristiwa Risiko<input type = "checkbox" checked="true"  name = "risk_event"  > </th> 
+						<th>Pemilik Risiko<input type = "checkbox" checked="true"  name = "risk_owner_v"  > </th> 
+						<th>Penanganan Risiko<input type = "checkbox" checked="true"  name = "suggested_risk_treatment_v"  > </th>  
 					</tr>
 				</form>							 
 			  </div>
 			  <div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button class = "btn btn-success" id = "treatment_list_excel">export to excel</button>
-				<button class = "btn btn-success" id = "treatment_list_pdf" >export to pdf</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+				<button class = "btn btn-success" id = "treatment_list_excel">Ekspor ke Excel</button>
+				<button class = "btn btn-success" id = "treatment_list_pdf" >Eksport ke PDF</button>
 			  </div>
 			</div>
 		  </div>
@@ -521,7 +521,7 @@
 			<div class="modal-content">
 			  <div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Action Plan List Export - choose field to export</h4>
+				<h4 class="modal-title" id="myModalLabel">Daftar Action Plan - Pilih kolom untuk di ekspor</h4>
 			  </div>
 			  <div class="modal-body">
 				<form id = "get_check_actionplan">
@@ -529,16 +529,16 @@
 						<th width="30px">Status <input type = "checkbox" checked="true"  name = "action_plan_status" ></th>
 						<th>AP ID <input type = "checkbox" checked="true"  name = "act_code"  > </th>
 						<th>Action Plan<input type = "checkbox" checked="true"  name = "action_plan"  > </th> 
-						<th>Due Date<input type = "checkbox" checked="true"  name = "due_date_v"  > </th> 
-						<th>Action Plan Owner<input type = "checkbox" checked="true"  name = "division_name"  > </th>  
-						<th>Risk ID<input type = "checkbox" checked="true"  name = "risk_code"  > </th> 
+						<th>Batas Waktu<input type = "checkbox" checked="true"  name = "due_date_v"  > </th> 
+						<th>Pemilik Action Plan<input type = "checkbox" checked="true"  name = "division_name"  > </th>  
+						<th>ID Risiko<input type = "checkbox" checked="true"  name = "risk_code"  > </th> 
 					</tr>
 				</form>							 
 			  </div>
 			  <div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button class = "btn btn-success" id = "actionplan_list_excel">export to excel</button>
-				<button class = "btn btn-success" id = "actionplan_list_pdf" >export to pdf</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+				<button class = "btn btn-success" id = "actionplan_list_excel">Ekspor ke Excel</button>
+				<button class = "btn btn-success" id = "actionplan_list_pdf" >Ekspor ke PDF</button>
 			  </div>
 			</div>
 		  </div>
@@ -550,7 +550,7 @@
 			<div class="modal-content">
 			  <div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Action Plan Execution List Export - choose field to export</h4>
+				<h4 class="modal-title" id="myModalLabel">Daftar Eksekusi Action Plan - Pilih kolom untuk di ekspor</h4>
 			  </div>
 			  <div class="modal-body">
 				<form id = "get_check_execution">
@@ -558,16 +558,16 @@
 						<th width="30px">Status <input type = "checkbox" checked="true"  name = "action_plan_status" ></th>
 						<th>AP ID <input type = "checkbox" checked="true"  name = "act_code"  > </th>
 						<th>Action Plan<input type = "checkbox" checked="true"  name = "action_plan"  > </th> 
-						<th>Due Date<input type = "checkbox" checked="true"  name = "due_date_v"  > </th> 
-						<th>Action Plan Owner<input type = "checkbox" checked="true"  name = "division_name"  > </th>  
-						<th>Execution<input type = "checkbox" checked="true"  name = "execution_status"  > </th> 
+						<th>Batas Waktu<input type = "checkbox" checked="true"  name = "due_date_v"  > </th> 
+						<th>Pemilik Action Plan<input type = "checkbox" checked="true"  name = "division_name"  > </th>  
+						<th>Eksekusi<input type = "checkbox" checked="true"  name = "execution_status"  > </th> 
 					</tr>
 				</form>							 
 			  </div>
 			  <div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button class = "btn btn-success" id = "execution_list_excel">export to excel</button>
-				<button class = "btn btn-success" id = "execution_list_pdf" >export to pdf</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+				<button class = "btn btn-success" id = "execution_list_excel">Ekspor ke Excel</button>
+				<button class = "btn btn-success" id = "execution_list_pdf" >Ekspor ke PDF</button>
 			  </div>
 			</div>
 		  </div>
@@ -579,7 +579,7 @@
 			<div class="modal-content">
 			  <div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">KRI List Export - choose field to export</h4>
+				<h4 class="modal-title" id="myModalLabel">Daftar KRI - Pilih kolom untuk di ekspor</h4>
 			  </div>
 			  <div class="modal-body">
 				<form id = "get_check_kri">
@@ -587,17 +587,17 @@
 						<th width="30px">Status <input type = "checkbox" checked="true"  name = "kri_status" ></th>
 						<th>KRI ID <input type = "checkbox" checked="true"  name = "kri_code"  > </th>
 						<th>KRI<input type = "checkbox" checked="true"  name = "key_risk_indicator"  > </th> 
-						<th>KRI Owner<input type = "checkbox" checked="true"  name = "treshold"  > </th> 
-						<th>Timing Pelaporan<input type = "checkbox" checked="true"  name = "timing_pelaporan_v"  > </th>  
-						<th>Risk ID<input type = "checkbox" checked="true"  name = "risk_code"  > </th> 
+						<th>Pemilik KRI<input type = "checkbox" checked="true"  name = "treshold"  > </th> 
+						<th>Waktu Pelaporan<input type = "checkbox" checked="true"  name = "timing_pelaporan_v"  > </th>  
+						<th>ID Risiko<input type = "checkbox" checked="true"  name = "risk_code"  > </th> 
 						<th>KRI Warning<input type = "checkbox" checked="true"  name = "kri_warning"  > </th> 
 					</tr>
 				</form>							 
 			  </div>
 			  <div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button class = "btn btn-success" id = "kri_list_excel">export to excel</button>
-				<button class = "btn btn-success" id = "kri_list_pdf" >export to pdf</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+				<button class = "btn btn-success" id = "kri_list_excel">Ekspor ke Excel</button>
+				<button class = "btn btn-success" id = "kri_list_pdf" >Ekspor ke PDF</button>
 			  </div>
 			</div>
 		  </div>
@@ -609,23 +609,23 @@
 			<div class="modal-content">
 			  <div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Change Request List Export - choose field to export</h4>
+				<h4 class="modal-title" id="myModalLabel">Daftar Permintaan Perubahan - Pilih kolom untuk di ekspor</h4>
 			  </div>
 			  <div class="modal-body">
 				<form id = "get_check_changereq">
 					<tr role="row" class="heading">
 						<th width="30px">Status <input type = "checkbox" checked="true"  name = "GenRowNum" ></th>
 						<th>ID CH<input type = "checkbox" checked="true"  name = "cr_code"  > </th>
-						<th>Perubahan Dalam<input type = "checkbox" checked="true"  name = "cr_type"  > </th> 
+						<th>Perubahan dalam<input type = "checkbox" checked="true"  name = "cr_type"  > </th> 
 						<th>Pemohon<input type = "checkbox" checked="true"  name = "created_by_v"  > </th> 
 						<th>Status Permintaan Perubahan<input type = "checkbox" checked="true"  name = "cr_status"  > </th>  						 
 					</tr>
 				</form>							 
 			  </div>
 			  <div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button class = "btn btn-success" id = "changereq_list_excel">export to excel</button>
-				<button class = "btn btn-success" id = "changereq_list_pdf" >export to pdf</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+				<button class = "btn btn-success" id = "changereq_list_excel">Ekspor ke Excel</button>
+				<button class = "btn btn-success" id = "changereq_list_pdf" >Ekspor ke PDF</button>
 			  </div>
 			</div>
 		  </div>

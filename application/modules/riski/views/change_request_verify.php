@@ -9,11 +9,11 @@
 			<ul class="page-breadcrumb">
 				<li>
 					<i class="fa fa-home"></i>
-					<a target="_self" href="<?=$site_url?>/main">Home</a>
+					<a target="_self" href="<?=$site_url?>/main">Beranda</a>
 					<i class="fa fa-angle-right"></i>
 				</li>
 				<li>
-					<a target="_self" href="javascript:;">Change Request Form</a>
+					<a target="_self" href="javascript:;">Form Permintaan Perubahan</a>
 				</li>
 			</ul>
 		</div>
@@ -67,7 +67,7 @@
 							</div>
 							<?php } ?>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Dampak Level</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Level Dampak</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm input-readview" readonly="true" name="impact_level_v" placeholder="">
 								</div>
@@ -79,7 +79,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Risiko Level</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Level Risiko</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_level_v" placeholder="">
 								</div>
@@ -97,9 +97,9 @@
 								<table id="primary_control_table" class="table table-condensed table-bordered table-hover">
 									<thead>
 									<tr role="row" class="heading">
-										<th><span class="small">ID kontrol Yang Ada Saat Ini</span></th>
-										<th><span class="small">Kontrol Yang Ada Saat Ini</span></th>
-										<th><span class="small">Evaluasi dari Kontrol Yang Ada Saat ini </span></th>
+										<th><span class="small">ID Kontrol Eksisting</span></th>
+										<th><span class="small">Kontrol Eksisting</span></th>
+										<th><span class="small">Evaluasi atas Eksisting Kontrol</span></th>
 										<th><span class="small">Pemilik Kontrol</span></th>
 									</tr>
 									</thead>
@@ -180,7 +180,7 @@
 							<?php } ?>
 							<?php if ($change_type == 'Risk Form' || $change_type == 'Risk Owner Form') { ?>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Dampak Level <span class="required">* </span></label>
+								<label class="col-md-3 control-label smaller cl-compact" >Level Dampak <span class="required">* </span></label>
 								<div class="col-md-9">
 									<div class="input-group">
 										<input type="hidden" name="risk_impact_level_id" value=""/>
@@ -207,7 +207,7 @@
 							</div>
 							<div class="form-group">
 								<input type="hidden" name="risk_level_id" value=""/>
-								<label class="col-md-3 control-label smaller cl-compact" >Risiko Level <span class="required">* </span></label>
+								<label class="col-md-3 control-label smaller cl-compact" >Level Risiko <span class="required">* </span></label>
 								<div class="col-md-9">
 								<input type="text" class="form-control input-sm" readonly="true" name="risk_level" placeholder="">
 								</div>
@@ -224,7 +224,7 @@
 							</div>
 							<?php } else { ?>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Dampak Level</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Level Dampak</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm" readonly="true" name="impact_level_v" placeholder="">
 								</div>
@@ -236,7 +236,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Risiko Level</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Level Risiko</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm" readonly="true" name="risk_level_v" placeholder="">
 								</div>
@@ -262,9 +262,9 @@
 								<table id="control_table" class="table table-condensed table-bordered table-hover">
 									<thead>
 									<tr role="row" class="heading">
-										<th><span class="small">ID Kontrol Yang Ada Saat Ini</span></th>
-										<th><span class="small">Kontrol Yang Ada Saat Ini</span></th>
-										<th><span class="small">Evaluasi dari kontrol yang ada saat ini</span></th>
+										<th><span class="small">ID Kontrol Eksisting</span></th>
+										<th><span class="small">Kontrol Eksisting</span></th>
+										<th><span class="small">Evaluasi atas Eksisting Kontrol</span></th>
 										<th><span class="small">Pemilik Kontrol</span></th>
 										<th width="30px">&nbsp;</th>
 									</tr>
@@ -303,7 +303,7 @@
 							</div>
 						</div>
 						<div class="form-actions right">
-							<button id="changes-risk-set-as-primary" type="button" class="btn blue"><i class="fa fa-arrows-h"></i> Simpan Sebagai Primary</button>
+							<button id="changes-risk-set-as-primary" type="button" class="btn blue"><i class="fa fa-arrows-h"></i> Set as Primary</button>
 						<!-- <button id="changes-risk-button-submit" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Verify</button> -->
 							<button id="changes-risk-button-save" type="button" class="btn blue"><i class="fa fa-circle-o"></i> Simpan</button>
 							<button type="button" class="btn yellow" id="changes-risk-button-cancel"><i class="fa fa-times"></i> Batal</button>
@@ -318,13 +318,13 @@
 		<div class="row">
 		<div class="col-md-12">
 			<div class="note note-warning">
-			<h4 class="block">Error</h4>
+			<h4 class="block">Informasi</h4>
 			<p>
-				 Cannot Input Change Request for this Risk, This Risk already have a Pending Change Request 
+				Tidak bisa menginput Permintaan Perubahan pada Risiko ini, karena Risiko ini masih mempunyai Permintaan Perubahan dalam status pending.
 			</p>
 			<p>
 				<a class="btn red" target="_self" href="<?=$site_url?>/main">
-				Back to Home </a>
+				Kembali ke Beranda </a>
 			</p>
 			</div>
 		</div>
@@ -352,7 +352,7 @@
 			<form id="input-form-control" role="form" class="form-horizontal">
 				<div class="form-body">
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact">ID Kontrol Yang Ada Saat Ini</label>
+						<label class="col-md-3 control-label smaller cl-compact">ID Kontrol Eksisting</label>
 						<div class="col-md-9">
 							<div class="input-group">
 								<input type="text" class="form-control input-sm" readonly="true" name="existing_control_id" placeholder="">
@@ -364,14 +364,14 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Kontrol Yang Ada Saat Ini <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact" >Kontrol Eksisting<span class="required">* </span></label>
 						<div class="col-md-9">
 						<textarea class="form-control input-sm" rows="3" name="risk_existing_control" placeholder=""></textarea>
-						<button id="button_clear_control" type="button" class="hide btn red btn-xs" style="margin-top: 5px;"><i class="fa fa-minus-circle font-white"></i> Clear Existing Control</button>
+						<button id="button_clear_control" type="button" class="hide btn red btn-xs" style="margin-top: 5px;"><i class="fa fa-minus-circle font-white"></i> Hapus Kontrol Eksisting</button>
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Evaluasi Dari Kontrol Yang Ada Saat Ini <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact" >Evaluasi atas Eksisting Kontrol <span class="required">* </span></label>
 						<div class="col-md-9">
 						<input type="text" class="form-control input-sm" name="risk_evaluation_control" placeholder="">
 						</div>
@@ -447,13 +447,13 @@
 <div id="modal-control" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Existing Control</h4>
+		<h4 class="modal-title">Kontrol Eksisting</h4>
 		<div class="inputs">
 			<div class="portlet-input input-inline">
 				<div class="input-group">
 					<input type="text" class="form-control" name="filter_search" placeholder="search...">
 					<span class="input-group-btn">
-					<button class="btn btn-default" type="button" id="modal-control-filter-submit">Search</button>
+					<button class="btn btn-default" type="button" id="modal-control-filter-submit">Cari</button>
 					</span>
 				</div>
 			</div>
@@ -465,9 +465,9 @@
 				<thead>
 				<tr role="row" class="heading">
 					<th width="30px">&nbsp;</th>
-					<th>Existing Control</th>
-					<th>Evaluation on Existing Control</th>
-					<th>Control Owner</th>
+					<th>Kontrol Eksisting</th>
+					<th>Evaluasi atas Eksisting Kontrol</th>
+					<th>Pemilik Kontrol</th>
 				</tr>
 				</thead>
 				<tbody></tbody>
@@ -480,7 +480,7 @@
 <div id="modal-impact" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Evaluation on Risk Impact</h4>
+		<h4 class="modal-title">Evaluasi atas Dampak Risiko</h4>
 		<span class="font-red">* Dapat diisi lebih dari satu(1) kategori, namun dalam Satu(1)
 		Kategori hanya boleh diisi satu(1) parameter</span>
 	</div>
@@ -489,7 +489,7 @@
 		<table class="table table-condensed table-bordered table-hover">
 			<thead>
 			<tr role="row" class="heading">
-				<th>Category</th>
+				<th>Kategori</th>
 				<th>Parameter</th>
 			</tr>
 			</thead>
@@ -526,7 +526,7 @@
 <div id="modal-likelihood" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Evaluation on Risk Likelihood</h4>
+		<h4 class="modal-title">Evaluasi atas Kemungkinan Keterjadian</h4>
 		<span class="font-red">* Pilih Salah Satu</span>
 	</div>
 	<div class="modal-body">

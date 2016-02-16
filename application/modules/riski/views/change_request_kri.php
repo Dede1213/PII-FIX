@@ -8,11 +8,11 @@
 			<ul class="page-breadcrumb">
 				<li>
 					<i class="fa fa-home"></i>
-					<a target="_self" href="<?=$site_url?>/main">Home</a>
+					<a target="_self" href="<?=$site_url?>/main">Beranda</a>
 					<i class="fa fa-angle-right"></i>
 				</li>
 				<li>
-					<a target="_self" href="javascript:;">Change Request Form</a>
+					<a target="_self" href="javascript:;">Form Permintaan Perubahan</a>
 				</li>
 			</ul>
 		</div>
@@ -29,13 +29,13 @@
 								<div class="row">
 								<div class="col-md-12">
 								<div class="note note-warning">
-								<h4 class="block">Warning</h4>
+								<h4 class="block">Informasi</h4>
 								<p>
-								 Cannot Input Change Request for this KRI, This KRI already have a Pending Change Request 
+								 Tidak bisa menginput Permintaan Perubahan pada KRI ini, karena KRI ini masih mempunyai Permintaan Perubahan dengan status pending.
 								</p>
 								<p>
 								<a class="btn red" target="_self" href="<?=$base_url?>index.php/main/mainpic">
-								Back to Home </a>
+								Kembali ke Beranda</a>
 								</p>
 								</div>
 								</div>
@@ -82,8 +82,8 @@
 								<thead>
 								<tr role="row" class="heading">
 									<th>Action Plan</th>
-									<th>Due Date</th>
-									<th>Action Plan Owner</th>
+									<th>Batas Waktu</th>
+									<th>Pemilik Action Plan</th>
 								</tr>
 								</thead>
 								<tbody>
@@ -153,10 +153,10 @@
 							<thead>
 							<tr role="row" class="heading">
 								<th>Operator</th>
-								<th>Value 1</th>
-								<th>Value 2</th>
-								<th>Type Value</th>
-								<th>Result</th>
+								<th>Nilai 1</th>
+								<th>Nilai 2</th>
+								<th>Tipe Nilai</th>
+								<th>Hasil</th>
 							</tr>
 							</thead>
 							<tbody>
@@ -176,7 +176,7 @@
 				<?php } ?>
 				<?php if ($kri['treshold_type'] == 'SELECTION') { ?>
 					<div class="form-group">
-						<label class="col-md-2 control-label">Change Report</label>
+						<label class="col-md-2 control-label">Perubahan Laporan</label>
 						<div class="col-md-6">
 						<select class="form-control input-sm" id="owner_report" name="owner_report">
 							<?php foreach ($kri['treshold_list'] as $key => $value) { ?>
@@ -188,7 +188,7 @@
 				<?php } else { ?> 
 				
 					<div class="form-group">
-						<label class="col-md-2 control-label">Change Report</label>
+						<label class="col-md-2 control-label">Perubahan Laporan</label>
 						<div class="col-md-6">
 							<input type="number" class="form-control input-sm" id="owner_report" name="owner_report" placeholder="" value="<?=$kri['owner_report'] == '' ? '0' : $kri['owner_report'] ?>">
 						</div>
@@ -218,7 +218,7 @@
 			</div>
 			<?php } else { ?>
 			<div class="form-actions right">
-				<button onclick="javascript: location.href=site_url+'/main#tab_change_request_list'" type="button" class="btn yellow" id="verify-risk-button-cancel"><i class="fa fa-times"></i> Cancel</button>
+				<button onclick="javascript: location.href=site_url+'/main#tab_change_request_list'" type="button" class="btn yellow" id="verify-risk-button-cancel"><i class="fa fa-times"></i> Batal</button>
 			</div>
 			<?php } ?>
 			</form>

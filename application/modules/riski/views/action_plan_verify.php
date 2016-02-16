@@ -3,17 +3,17 @@
 	<div class="page-content">
 		<!-- BEGIN PAGE HEADER-->
 		<h3 class="page-title">
-		Action Plan Form
+		Form Action Plan
 		</h3>
 		<div class="page-bar">
 			<ul class="page-breadcrumb">
 				<li>
 					<i class="fa fa-home"></i>
-					<a target="_self" href="<?=$site_url?>/main">Home</a>
+					<a target="_self" href="<?=$site_url?>/main">Beranda</a>
 					<i class="fa fa-angle-right"></i>
 				</li>
 				<li>
-					<a target="_self" href="javascript:;">Risk Owner Form</a>
+					<a target="_self" href="javascript:;">Action Plan Form</a>
 				</li>
 			</ul>
 		</div>
@@ -90,7 +90,7 @@ if($status == 'under'){ ?>
 							</div>
 							-->
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact">Risiko Level</label>
+								<label class="col-md-3 control-label smaller cl-compact">Level Risiko</label>
 								<div class="col-md-9">
 								<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$action_plan['risk_data']['risk_level_v']?>" name="risk_level" placeholder="">
 								</div>
@@ -181,7 +181,7 @@ if($status == 'under'){ ?>
 								</div>
 							
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact">Risiko Level</label>
+								<label class="col-md-3 control-label smaller cl-compact">Level Risiko</label>
 								<div class="col-md-9">
 								<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$action_plan['risk_data']['risk_level_v']?>" name="risk_level" placeholder="">
 								</div>
@@ -262,7 +262,7 @@ if($status == 'under'){ ?>
 									</div>
 								</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact">Risiko Level</label>
+								<label class="col-md-3 control-label smaller cl-compact">Level Risiko</label>
 								<div class="col-md-9">
 								<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$action_plan['risk_data']['risk_level_v']?>" placeholder="">
 								</div>
@@ -333,7 +333,7 @@ if($status == 'under'){ ?>
 									</div>
 								</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact">Risiko Level</label>
+								<label class="col-md-3 control-label smaller cl-compact">Level Risiko</label>
 								<div class="col-md-9">
 								<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$action_plan['risk_data']['risk_level_v']?>" name="risk_level" placeholder="">
 								</div>
@@ -374,7 +374,7 @@ if($status == 'under'){ ?>
 							</div>
 						</div>
 						<div class="form-actions right">
-							<button id="changes-risk-set-as-primary" type="button" class="btn blue"><i class="fa fa-arrows-h"></i> Simpan Sebagai Primary</button>
+							<button id="changes-risk-set-as-primary" type="button" class="btn blue"><i class="fa fa-arrows-h"></i> Set as Primary</button>
 							<button id="changes-risk-button-save" type="button" class="btn blue"><i class="fa fa-circle-o"></i> Simpan</button>
 							<button type="button" class="btn yellow" id="changes-risk-button-cancel"><i class="fa fa-times"></i> Batal</button>
 						</div>
@@ -393,13 +393,13 @@ if($status == 'under'){ ?>
 		<div class="row">
 		<div class="col-md-12">
 			<div class="note note-danger">
-				<h4 class="block">Error</h4>
+				<h4 class="block">Informasi</h4>
 				<p>
-					 You are not allowed to view this Risk
+					 Tidak diperbolehkan untuk melihat risiko.
 				</p>
 				<p>
 					<a class="btn red" target="_self" href="<?=$site_url?>/main">
-					Back to Home </a>
+					Kembali ke Beranda </a>
 				</p>
 			</div>
 		</div>

@@ -70,13 +70,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <a href="<?php echo base_url();?>index.php/maini" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
                         <img alt="" src="assets/global/img/flags/id.png"> 
                         <span class="langname">
-                        Indonesian </span>
+                        Indonesia </span>
                         <i class="fa fa-angle-down"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-default">
                             <li>
                                 <a href="<?php echo base_url();?>index.php/main">
-                                <img alt="" src="assets/global/img/flags/gb.png"> EN </a>
+                                <img alt="" src="assets/global/img/flags/gb.png">Inggris</a>
                                  </a>
                             </li>
                         </ul>
@@ -109,39 +109,39 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							
 							<li>
 								<a target="_self" href="<?=$site_url."/main/mainrac/switchTo/pic"?>">
-								<i class="fa fa-gear"></i>Switch As PIC
+								<i class="fa fa-gear"></i>Ganti sebagai PIC
 								</a>
 							</li>
                             <li>
                             
                                 <a target="_self" href="<?=$site_url."/main/mainrac/switchTo/rac"?>">
-                                <i class="fa fa-gear"></i>Switch to RAC
+                                <i class="fa fa-gear"></i>Ganti sebagai RAC
                                 </a>
                             </li>
 							<?php }?>
 							<?php if ($session['role_status'] == 'HR' ) { ?>
 							<li>
 								<a target="_self" href="<?=$site_url."/main/mainrac/switchTo/head"?>">
-								<i class="fa fa-gear"></i>Switch As Division Head
+								<i class="fa fa-gear"></i>Ganti sebagai Kepala Divisi
 								</a>
 							</li>
                             <li>
                             
                                 <a target="_self" href="<?=$site_url."/main/mainrac/switchTo/rac"?>">
-                                <i class="fa fa-gear"></i>Switch to RAC
+                                <i class="fa fa-gear"></i>Ganti sebagai RAC
                                 </a>
                             </li>
 							<?php } ?>
 							<?php if ($session['role_status'] == 'UR' ) { ?>
 							<li>
 								<a target="_self" href="<?=$site_url."/main/mainrac/switchTo/user"?>">
-								<i class="fa fa-gear"></i>Switch As User Role
+								<i class="fa fa-gear"></i>Ganti sebagai User
 								</a>
 							</li>
                             <li>
                             
                                 <a target="_self" href="<?=$site_url."/main/mainrac/switchTo/rac"?>">
-                                <i class="fa fa-gear"></i>Switch to RAC
+                                <i class="fa fa-gear"></i>Ganti sebagai RAC
                                 </a>
                             </li>
 							<?php } ?>

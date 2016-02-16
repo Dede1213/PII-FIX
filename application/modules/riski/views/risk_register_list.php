@@ -3,26 +3,26 @@
 	<div class="page-content">
 		<!-- BEGIN PAGE HEADER-->
 		<h3 class="page-title">
-		Risk Register
+		Risk Register Berkala
 		</h3>
 		<!-- END PAGE HEADER-->
 		<div class="page-bar">
 			<ul class="page-breadcrumb">
 				<li>
 					<i class="fa fa-home"></i>
-					<a target="_self" href="<?=$site_url?>/main">Home</a>
+					<a target="_self" href="<?=$site_url?>/main">Beranda</a>
 					<i class="fa fa-angle-right"></i>
 				</li>
 				<li>
-					<a target="_self" href="javascript:;">Transaction</a>
+					<a target="_self" href="javascript:;">Transaksi</a>
 					<i class="fa fa-angle-right"></i>
 				</li>
 				<li>
-					<a target="_self" href="javascript:;">Regular Exercise</a>
+					<a target="_self" href="javascript:;">Pelaksaan Berkala</a>
 					<i class="fa fa-angle-right"></i>
 				</li>
 				<li>
-					<a target="_self" href="<?=$site_url?>/risk/RiskRegister">Risk Register Exercise</a>
+					<a target="_self" href="<?=$site_url?>/risk/RiskRegister">Risk Register Berkala</a>
 				</li>
 			</ul>
 		</div>
@@ -162,13 +162,13 @@
 			<div class="portlet-body">
 				<form class="form-inline" role="form" id="filterForm" style="margin-bottom: 10px;">
 					<div class="form-group">
-						<label for="filterFormBy">Filter By</label>
+						<label for="filterFormBy">Filter dengan : </label>
 						<select class="form-control input-medium input-sm" id="filterFormBy">
-							<option value="-">Choose</option>
-							<option value="risk_event">Risk</option>
-							<option value="risk_level">Risk Level</option>
-							<option value="risk_impact_level">Impact Level</option>
-							<option value="risk_likelihood_key">Likelihood</option>
+							<option value="-">Pilih</option>
+							<option value="risk_event">Risiko</option>
+							<option value="risk_level">Level Risiko</option>
+							<option value="risk_impact_level">Level Dampak</option>
+							<option value="risk_likelihood_key">Kemungkinan Keterjadian</option>
 						</select>
 					</div>
 					<div class="form-group" id="re">
@@ -186,7 +186,7 @@
 
 					<div class="form-group" id="il">
 						<select class="hish form-control input-sm" id="fi">
-							<option value="insignificant">Tidak significant</option>	
+							<option value="insignificant">Tidak Significant</option>	
 							<option value="minor">Minor</option>
 							<option value="major">Major</option>
 							<option value="moderate">Moderate</option>
@@ -206,7 +206,7 @@
 						
 					</div>											
 
-					<button type="button" id="filterFormSubmit" class="btn blue btn-sm">Search</button>
+					<button type="button" id="filterFormSubmit" class="btn blue btn-sm">Cari</button>
 				</form>
 				
 				<div class="table-container">
@@ -216,8 +216,8 @@
 						<th width="10%">Status</th>
 						<th width="10%">ID Risiko</th>
 						<th width="20%">Risiko</th>
-						<th width="10%">Risiko Level</th>
-						<th width="10%">Dampak Level</th>
+						<th width="10%">Level Risiko</th>
+						<th width="10%">Level Dampak</th>
 						<th width="10%">Kemungkinan terjadinya</th>
 						<th width="10%">Pemilik Risiko</th>
 						<th width="10%">Status</th>
@@ -261,13 +261,13 @@
 			<div class="portlet-body">
 				<form class="form-inline" role="form" id="filterForm2" style="margin-bottom: 10px;">
 					<div class="form-group">
-						<label for="filterFormBy2">Filter By</label>
+						<label for="filterFormBy2">Filter dengan :</label>
 						<select class="form-control input-medium input-sm" id="filterFormBy2">
-							<option value="-">Choose</option>
-							<option value="risk_event">Risk</option>
-							<option value="risk_level">Risk Level</option>
-							<option value="risk_impact_level">Impact Level</option>
-							<option value="risk_likelihood_key">Likelihood</option>
+							<option value="-">Pilih</option>
+							<option value="risk_event">Risiko</option>
+							<option value="risk_level">Level Risiko</option>
+							<option value="risk_impact_level">Level Dampak</option>
+							<option value="risk_likelihood_key">Kemungkinan Keterjadian</option>
 						</select>
 					</div>
 
@@ -305,7 +305,7 @@
 						</select>
 						
 					</div>						
-					<button type="button" id="filterFormSubmit2" class="btn blue btn-sm">Search</button>
+					<button type="button" id="filterFormSubmit2" class="btn blue btn-sm">Cari</button>
 				</form>	
 				
 				<div class="table-container">
@@ -315,8 +315,8 @@
 						<th width="10%">Status</th>
 						<th width="10%">Risiko ID</th>
 						<th width="40%">Risiko</th>
-						<th width="10%">Risiko Level</th>
-						<th width="10%">Dampak Level</th>
+						<th width="10%">Level Risiko</th>
+						<th width="10%">Level Dampak</th>
 						<th width="10%">Kemungkinan terjadinya</th>
 						<th width="10%">Pemilik Risiko</th>
 					</tr>
@@ -418,22 +418,24 @@
 	<div class="col-md-12">
 		<div class="note note-warning">
 			<?php if (isset($submit_mode) && $submit_mode == 'adhoc') { ?>
-			<h4 class="block">Warning</h4>
+			<h4 class="block">Informasi</h4>
 			<p>
-				 Cannot Input Adhoc Risk Register Exercise because Risk Period is already set, please contact RAC team for further information
+				 Tidak bisa menginput Risk Register Berkala Adhoc karena periode telah di setting oleh RAC.
+				 Silahkan hubungi RAC untuk keterangan lebih lanjut.
 				 <p>
 					<a class="btn red" target="_self" href="<?=$site_url?>/main">
-					Back to Home </a>
+					Kembali ke Beranda </a>
 				</p>
 			</p>
 			<?php } else { ?>
-			<h4 class="block">Warning</h4>
+			<h4 class="block">Informasi</h4>
 			<p>
-				 Cannot Input Risk Register Exercise because Risk Period is not set, please contact RAC team for further information
+				 Tidak bisa menginput Risk Register Berkala karena periode belum disetting oleh RAC.
+				 Silahkan hubungi RAC untuk keterangan lebih lanjut.
 			</p>
 			<p>
 				<a class="btn red" target="_self" href="<?=$site_url?>/main">
-				Back to Home </a>
+				Kembali ke Beranda </a>
 			</p>
 			<?php } ?>
 		</div>
@@ -448,15 +450,14 @@
 	<div class="col-md-12">
 		<div class="note note-warning">
 			
-			<h4 class="block">Warning</h4>
+			<h4 class="block">Informasi</h4>
 			<p>
-				Warning !
-Cannot submit the Risk Register Exercise because there is another risk which have not been review yet.
-Please check and review all of your risk and submit again.
-
+				Informasi !
+				Tidak bisa mengajukan Risk Register Berkala karena masih ada risiko yang belum direview.
+				Silahkan di cek dan review risiko lalu ajukan kembali.
 				 <p>
 					<a class="btn red" target="_self" href="<?=$site_url?>/main">
-					Back to Home </a>
+					Kembali ke Beranda </a>
 				</p>
 			</p>
 			

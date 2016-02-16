@@ -24,19 +24,24 @@
 					<a id="bread_tab_title" target="_self" href="javascript:;">Risk List</a>
 				</li>
 			</ul>
-			<!--<div class="page-toolbar">
+			 <div class="page-toolbar">
 				<div class="btn-group pull-right">
 					<button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
 					Export <i class="fa fa-angle-down"></i>
 					</button>
 					<ul class="dropdown-menu pull-right" role="menu">
 						<li>
-							<a id = "risk_list_export">Export</a>
+							<a  target="_blank" href="<?php echo base_url("index.php/library/list_risk_pdf");?>">PDF</a>
+						</li>
+						<li>
+							<a  target="_blank" href="<?php echo base_url("index.php/library/list_risk_excel");?>">Excel</a>
 						</li>
 					 
 					</ul>
 				</div>
-			</div>-->
+			</div> 
+			
+			 
 			
 			
 		</div>

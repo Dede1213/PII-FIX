@@ -3,17 +3,17 @@
 	<div class="page-content">
 		<!-- BEGIN PAGE HEADER-->
 		<h3 class="page-title">
-		Risk Owner Form
+		Form Pemilik Risiko
 		</h3>
 		<div class="page-bar">
 			<ul class="page-breadcrumb">
 				<li>
 					<i class="fa fa-home"></i>
-					<a target="_self" href="<?=$site_url?>/main">Home</a>
+					<a target="_self" href="<?=$site_url?>/main">Beranda</a>
 					<i class="fa fa-angle-right"></i>
 				</li>
 				<li>
-					<a target="_self" href="javascript:;">View Risk</a>
+					<a target="_self" href="javascript:;">Form Pemilik Risiko</a>
 				</li>
 			</ul>
 		</div>
@@ -29,7 +29,7 @@
 			<div class="portlet box blue">
 				<div class="portlet-title">
 					<div class="caption">
-						Risk Form
+						Form Risiko
 					</div>
 				</div>
 				
@@ -58,7 +58,7 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact" >Dampak Level</label>
+									<label class="col-md-3 control-label smaller cl-compact" >Level Dampak</label>
 									<div class="col-md-9">
 									<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['impact_level_v']?>" name="risk_impact_level_value" placeholder="">
 									</div>
@@ -71,7 +71,7 @@
 								</div>
 								<div class="form-group">
 									<input type="hidden" name="risk_level_id" value=""/>
-									<label class="col-md-3 control-label smaller cl-compact" >Risiko Level</label>
+									<label class="col-md-3 control-label smaller cl-compact" >Level Risiko</label>
 									<div class="col-md-9">
 									<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['risk_level_v']?>" name="risk_level" placeholder="">
 									</div>
@@ -102,7 +102,7 @@
 								<table class="table table-condensed table-bordered table-hover">
 									<thead>
 									<tr role="row" class="heading">
-										<th><small>Obj. ID</small></th>
+										<th><small>ID Objektif</small></th>
 										<th><small>Objektif</small></th>
 									</tr>
 									</thead>
@@ -120,9 +120,9 @@
 								<table class="table table-condensed table-bordered table-hover">
 									<thead>
 									<tr role="row" class="heading">
-										<th><small>ID Kontrol yang ada saat ini</small></th>
-										<th><small>Kontrol yang ada saat ini</small></th>
-										<th><small>Evaluasi dari Kontrol yang ada saat ini</small></th>
+										<th><small>ID Kontrol Eksisting</small></th>
+										<th><small>Kontrol Eksisting</small></th>
+										<th><small>Evaluasi atas Eksisting Kontrol</small></th>
 										<th><small>Pemilik Kontrol</small></th>
 									</tr>
 									</thead>
@@ -168,7 +168,7 @@
 							<div class="row">
 							<div class="col-md-5">	
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact" >Dampak Level</label>
+									<label class="col-md-3 control-label smaller cl-compact" >Level Dampak</label>
 									<div class="col-md-9">
 										<div class="input-group">
 											<input type="hidden" name="risk_impact_level_id"  value=""/>
@@ -195,7 +195,7 @@
 								</div>
 								<div class="form-group">
 									<input type="hidden" name="risk_level_id" value=""/>
-									<label class="col-md-3 control-label smaller cl-compact" >Risiko Level</label>
+									<label class="col-md-3 control-label smaller cl-compact" >Level Risiko</label>
 									<div class="col-md-9">
 									<input type="text" class="form-control input-sm" readonly="true" name="risk_level" placeholder="" value="">
 									</div>
@@ -218,7 +218,7 @@
 							</div>
 							<div class="col-md-7">
 								<div class="form-group">
-									<label class="col-md-3 control-label small cl-compact" >Penanganan Risiko Yang Disepakati</label>
+									<label class="col-md-3 control-label small cl-compact" >Penanganan Risiko yang disepakati</label>
 									<div class="col-md-6">
 										<select class="form-control input-sm" name="suggested_risk_treatment">
 											<?php foreach($treatment_list as $row) { ?>
@@ -245,9 +245,9 @@
 									<table id="control_table" class="table table-condensed table-bordered table-hover">
 										<thead>
 										<tr role="row" class="heading">
-											<th><small>ID Kontrol yang ada saat ini</small></th>
-											<th><small>Kontrol yang ada saat ini</small></th>
-											<th><small>Evaluasi dari Kontrol yang ada saat ini</small></th>
+											<th><small>ID Kontrol Eksisting</small></th>
+											<th><small>Kontrol Eksisting</small></th>
+											<th><small>Evaluasi atas Eksisting Kontrol</small></th>
 											<th><small>Pemilik Kontrol</small></th>
 											<th width="30px">&nbsp;</th>
 										</tr>
@@ -304,13 +304,13 @@
 		<div class="row">
 		<div class="col-md-12">
 			<div class="note note-danger">
-				<h4 class="block">Error</h4>
+				<h4 class="block">Informasi</h4>
 				<p>
-					 You are not allowed to view this Risk
+					 Tidak diperbolehkan untuk melihat risiko.
 				</p>
 				<p>
 					<a class="btn red" target="_self" href="<?=$site_url?>/main">
-					Back to Home </a>
+					Kembali ke Beranda </a>
 				</p>
 			</div>
 		</div>
@@ -331,7 +331,7 @@
 			<input type = "hidden" id = "tr_idnya">
 				<div class="form-body">
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact">ID Kontrol Yang Ada Saat Ini</label>
+						<label class="col-md-3 control-label smaller cl-compact">ID Kontrol Eksisting</label>
 						<div class="col-md-9">
 							<div class="input-group">
 								<input type="text" class="form-control input-sm" readonly="true" name="existing_control_id" id = "existing_control_id" placeholder="">
@@ -344,7 +344,7 @@
 					</div>
 					<div class="form-group">
 					<input type = "hidden" id = "form-control-revid">
-						<label class="col-md-3 control-label smaller cl-compact">Kontrol Yang Ada Saat Ini <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact">Kontrol Eksisting<span class="required">* </span></label>
 						<div class="col-md-9">
 							<div class="input-group">
 								<input type="text" class="form-control input-sm" readonly="true" name="risk_existing_control" id = "risk_existing_control" placeholder="" value="NONE">
@@ -365,7 +365,7 @@
 					</div>
 					-->
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Evaluasi Dari Kontrol Yang Ada Saat Ini <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact" >Evaluasi atas Eksisting Kontrol<span class="required">* </span></label>
 						<div class="col-md-9">
 						<input type="text" class="form-control input-sm" name="risk_evaluation_control" id = "risk_evaluation_control" placeholder="" value="NONE">
 						</div>
@@ -398,7 +398,7 @@
 <div id="form-data" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Add Suggested Treatment</h4>
+		<h4 class="modal-title">Tambah Usulan Penanganan Risiko</h4>
 	</div>
 	<div class="modal-body">
 		
@@ -417,7 +417,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Due Date</label>
+						<label class="col-md-3 control-label">Batas Waktu</label>
 						<div class="col-md-9">
 						<div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
 							<input type="text" class="form-control input-sm" name="due_date" id = "due_date" readonly>
@@ -428,7 +428,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Action Plan Owner</label>
+						<label class="col-md-3 control-label">Pemilik Action Plan</label>
 						<div class="col-md-9">
 						<select class="form-control input-sm" name="division" id = "division">
 							<?php foreach($division_list as $row) { ?>
@@ -452,13 +452,13 @@
 <div id="modal-libraryaction" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Usulan Action Plan Library</h4>
+		<h4 class="modal-title">Library Usulan Action Plan</h4>
 		<div class="inputs">
 			<div class="portlet-input input-inline">
 				<div class="input-group">
 					<input type="text" class="form-control" name="filter_search" placeholder="search...">
 					<span class="input-group-btn">
-					<button class="btn btn-default" type="button" id="modal-libraryaction-filter-submit">Search</button>
+					<button class="btn btn-default" type="button" id="modal-libraryaction-filter-submit">Cari</button>
 					</span>
 				</div>
 			</div>
@@ -482,14 +482,14 @@
 <div id="modal-control-existing" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Existing Control</h4>
-		<p style="color:red;">*Choose One</p>
+		<h4 class="modal-title">Kontrol Eksisting</h4>
+		<p style="color:red;">* Pilih salah satu</p>
 		<div class="inputs">
 			<div class="portlet-input input-inline">
 				<div class="input-group">
 					<input type="text" class="form-control" name="filter_search" placeholder="search...">
 					<span class="input-group-btn">
-					<button class="btn btn-default" type="button" id="modal-control-filter-submit">Search</button>
+					<button class="btn btn-default" type="button" id="modal-control-filter-submit">Cari</button>
 					</span>
 				</div>
 			</div>
@@ -501,8 +501,8 @@
 				<thead>
 				<tr role="row" class="heading">
 					<th width="30px">&nbsp;</th>
-					<th>Existing Control</th>
-					<th>Description</th>
+					<th>Kontrol Eksisting</th>
+					<th>Deksripsi</th>
 				</tr>
 				</thead>
 				<tbody></tbody>
@@ -514,13 +514,13 @@
 <div id="modal-control" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Existing Control</h4>
+		<h4 class="modal-title">Kontrol Eksisting</h4>
 		<div class="inputs">
 			<div class="portlet-input input-inline">
 				<div class="input-group">
 					<input type="text" class="form-control" name="filter_search" placeholder="search...">
 					<span class="input-group-btn">
-					<button class="btn btn-default" type="button" id="modal-control-filter-submit">Search</button>
+					<button class="btn btn-default" type="button" id="modal-control-filter-submit">Cari</button>
 					</span>
 				</div>
 			</div>
@@ -532,9 +532,9 @@
 				<thead>
 				<tr role="row" class="heading">
 					<th width="30px">&nbsp;</th>
-					<th>Existing Control</th>
-					<th>Evaluation on Existing Control</th>
-					<th>Control Owner</th>
+					<th>Kontrol Eksisting</th>
+					<th>Evaluasi atas Eksisting Kontrol</th>
+					<th>Pemilik Kontrol</th>
 				</tr>
 				</thead>
 				<tbody></tbody>
@@ -547,7 +547,7 @@
 <div id="modal-impact" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Evaluation on Risk Impact</h4>
+		<h4 class="modal-title">Evaluasi atas Dampak Risiko</h4>
 		<span class="font-red">* Dapat diisi lebih dari satu(1) kategori, namun dalam Satu(1)
 		Kategori hanya boleh diisi satu(1) parameter</span>
 	</div>
@@ -556,7 +556,7 @@
 		<table class="table table-condensed table-bordered table-hover">
 			<thead>
 			<tr role="row" class="heading">
-				<th>Category</th>
+				<th>Kategori</th>
 				<th>Parameter</th>
 			</tr>
 			</thead>
@@ -593,7 +593,7 @@
 <div id="modal-likelihood" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Evaluation on Risk Likelihood</h4>
+		<h4 class="modal-title">Evaluasi atas Kemungkinan Keterjadian</h4>
 		<span class="font-red">* Pilih Salah Satu</span>
 	</div>
 	<div class="modal-body">

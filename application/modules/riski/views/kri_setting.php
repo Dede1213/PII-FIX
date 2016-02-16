@@ -45,7 +45,7 @@
 					<thead>
 					<tr role="row" class="heading">
 						<th><small>Kode Risiko</small></th>
-						<th><small>Perisitiwa Risiko</small></th>
+						<th><small>Peristiwa Risiko</small></th>
 						<th><small>Level Risiko</small></th>
 					</tr>
 					</thead>
@@ -62,7 +62,7 @@
 <div id="modal-library" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Risk Library</h4>
+		<h4 class="modal-title">Library Risiko</h4>
 		<div class="inputs">
 			<div class="portlet-input input-inline">
 				<div class="col-md-6 input-group">
@@ -72,7 +72,7 @@
 						<option value="LOW">Rendah</option>
 					</select>
 					<span class="input-group-btn">
-					<button class="btn btn-default btn-sm" type="button" id="modal-library-filter-submit">Search</button>
+					<button class="btn btn-default btn-sm" type="button" id="modal-library-filter-submit">Cari</button>
 					</span>
 				</div>
 				<!--

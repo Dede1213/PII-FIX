@@ -9,7 +9,7 @@
 			<ul class="page-breadcrumb">
 				<li>
 					<i class="fa fa-home"></i>
-					<a target="_self" href="<?=$site_url?>/main">Home</a>
+					<a target="_self" href="<?=$site_url?>/main">Beranda</a>
 				</li>
 			</ul>
 		</div>
@@ -60,7 +60,7 @@
 				</li>
 				<li>
 					<a href="#tab_6" data-toggle="tab">
-					Change Request List </a>
+					Daftar Permintaan Perubahan </a>
 				</li>
 			</ul>
 			<div class="tab-content">
@@ -89,7 +89,7 @@
 								</div>
 								<div class="form-group">
 									<select class="form-control input-sm">
-										<option>Pilih Second Sub Kategori Resiko</option>
+										<option>Pilih Sub Kategori Resiko Level 2</option>
 										<option>Option 2</option>
 										<option>Option 3</option>
 										<option>Option 4</option>
@@ -97,7 +97,7 @@
 									</select>	
 								</div>
 								<div class="form-group">
-									<button type="button" class="btn blue btn-sm">Find Risk</button>
+									<button type="button" class="btn blue btn-sm">Cari Risiko</button>
 								</div>
 							</div>
 						</form>
@@ -106,7 +106,7 @@
 							<a href="javascript: location.href='<?=$site_url?>/risk/RiskRegister/RiskRegisterInput';" class="btn default green pull-right">
 							<i class="fa fa-plus"></i>
 							<span class="hidden-480">
-							Add New Risk </span>
+							Tambah Risiko Baru </span>
 							</a>
 						</div>
 					</div>
@@ -116,13 +116,13 @@
 							<thead>
 							<tr role="row" class="heading">
 								<th width="30px">Status</th>
-								<th>Risk ID</th>
-								<th>Risk Event</th>
-								<th>Impact Level</th>
-								<th>Likelihood</th>
-								<th>Risk Level</th>
-								<th>Risk Owner</th>
-								<th width="50px">Change Request</th>
+								<th>ID Risiko</th>
+								<th>Peristiwa Risiko</th>
+								<th>Level Dampak</th>
+								<th>Kemungkinan Keterjadian</th>
+								<th>Level Risiko</th>
+								<th>Pemilik Risiko</th>
+								<th width="50px">Permintaan Perubahan</th>
 							</tr>
 							</thead>
 							<tbody>

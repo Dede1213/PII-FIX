@@ -95,7 +95,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label small cl-compact" >Sub Kategori Level 2 Risiko</label>
+								<label class="col-md-3 control-label small cl-compact" >Sub Kategori Risiko Level 2</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_2nd_sub_category_v" placeholder="">
 								</div>
@@ -270,7 +270,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label small cl-compact" >Sub Kategori Level 2 Risiko</label>
+								<label class="col-md-3 control-label small cl-compact" >Sub Kategori Risiko Level 2</label>
 								<div class="col-md-9">
 								<select class="form-control input-sm" name="risk_2nd_sub_category" id="sel_risk_2nd_sub_category">
 								</select>
@@ -316,7 +316,7 @@
 							</div>
 							<div class="form-group">
 								<input type="hidden" name="risk_level_id" value=""/>
-								<label class="col-md-3 control-label smaller cl-compact" >Risiko Level <span class="required">* </span></label>
+								<label class="col-md-3 control-label smaller cl-compact" >Level Risiko <span class="required">* </span></label>
 								<div class="col-md-9">
 								<input type="text" class="form-control input-sm" readonly="true" name="risk_level" placeholder="">
 								</div>
@@ -409,7 +409,7 @@
 							</div>
 						</div>
 						<div class="form-actions right">
-							<button id="risk-set-as-primary" type="button" class="btn blue"><i class="fa fa-arrows-h"></i> Simpan Sebagai Primary</button>
+							<button id="risk-set-as-primary" type="button" class="btn blue"><i class="fa fa-arrows-h"></i> Set as Primary</button>
 							<!-- <button id="risk-button-verify" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Verify</button> -->
 							<button id="risk-button-draft" type="button" class="btn blue"><i class="fa fa-circle-o"></i> Simpan</button>
 							<button type="button" class="btn yellow" id="verify-risk-button-cancel"><i class="fa fa-times"></i> Batal</button>
@@ -426,22 +426,24 @@
 		<div class="col-md-12">
 			<div class="note note-danger">
 				<?php if (isset($submit_mode) && $submit_mode == 'adhoc') { ?>
-				<h4 class="block">Error</h4>
+				<h4 class="block">Informasi</h4>
 				<p>
-					 Cannot Input Adhoc Risk Register Exercise because Risk Period is already set, please contact RAC team for further information
+					 Tidak bisa menginput Risk Register Adhoc karena periode telah di setting oleh RAC.
+					 Silahkan hubungi RAC untuk penjelasan lebih lanjut.
 					 <p>
 						<a class="btn red" target="_self" href="<?=$site_url?>/main">
-						Back to Home </a>
+						Kembali ke Beranda </a>
 					</p>
 				</p>
 				<?php } else { ?>
-				<h4 class="block">Error</h4>
+				<h4 class="block">Informasi</h4>
 				<p>
-					 Cannot Input Risk Register Exercise because Risk Period is not set, please contact RAC team for further information
+					 Tidak bisa menginput Risk Register Berkala karena periode belum di setting oleh RAC.
+					 Silahkan hubungi RAC untuk penjelasan lebih lanjut.
 				</p>
 				<p>
 					<a class="btn red" target="_self" href="<?=$site_url?>/risk/RiskRegister">
-					Back to Risk Register List </a>
+					Kembali ke Risk Register Berkala </a>
 				</p>
 				<?php } ?>
 			</div>
@@ -480,7 +482,7 @@
 						<label class="col-md-3 control-label smaller cl-compact" >Objektif <span class="required">* </span></label>
 						<div class="col-md-9">
 						<textarea class="form-control input-sm " rows="3"  name="objective" id = "objective" placeholder="">NONE</textarea>
-						<button id="button_clear_control" type="button" class="hide btn red btn-xs" style="margin-top: 5px;"><i class="fa fa-minus-circle font-white"></i> Clear Existing Control</button>
+						<button id="button_clear_control" type="button" class="hide btn red btn-xs" style="margin-top: 5px;"><i class="fa fa-minus-circle font-white"></i> Hapus Kontrol Eksisting</button>
 						</div>
 					</div>
 					
@@ -709,7 +711,7 @@
 					<th width="30px">&nbsp;</th>
 					<th>Kontrol Eksisting</th>
 					<th>Evaluasi dari Eksisting Kontrol</th>
-					<th>Control Owner</th>
+					<th>Pemilik Kontrol</th>
 				</tr>
 				</thead>
 				<tbody></tbody>
@@ -760,7 +762,7 @@
 		<button id="input-form-impact-button" type="button" 
 			class="btn blue ladda-button"
 			 data-style="expand-right"
-			>Save</button>
+			>Simpan</button>
 	</div>
 </div>
 

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Library extends APP_Controlleri {
+class Library extends APP_Controller {
 	 
 	public function list_risk()
 	{
@@ -28,12 +28,208 @@ class Library extends APP_Controlleri {
 		';
 		 
 		 
-		$this->load->view('maini/header', $data);
+		$this->load->view('main/header', $data);
 		$this->load->view('library', $data);
-		$this->load->view('maini/footer', $data);
+		$this->load->view('main/footer', $data);
 		 
 	}
 	
+	public function list_risk_pdf() {
+	
+		$this->load->model('Mlibrary');		
+		$this->load->library('parser');
+		$this->load->library('dompdf_gen');
+		
+		$orientation = "landscape";
+		$paper_size='a4';
+		  
+		$data['datanya'] = $this->Mlibrary->getAllRisk_export($this->input->post());
+			 
+		//$data['total_data'] = count($data['datanya']);
+		 
+		$this->load->view('export/list_risk',$data);
+		 
+		// Get output html
+		$html = $this->output->get_output();
+		  
+		// Convert to PDF
+		$this->dompdf->load_html($html);
+		$this->dompdf->set_paper($paper_size, $orientation);
+		$this->dompdf->render();			
+		$this->dompdf->stream("risktreatmentreport.pdf");
+		 
+	}
+	
+	public function list_risk_excel() {
+		
+		$this->load->model('Mlibrary');
+		  
+		//$data['dataget'] = $this->input->get();
+		 
+		$data['datanya'] = $this->Mlibrary->getAllRisk_export($this->input->post());
+		 
+		$this->load->library('parser');
+		
+		//pass retrieved data into template and return as a string
+        $stringData = $this->parser->parse('export/list_risk', $data, true);
+		 
+		header("Pragma: public");
+		header("Expires: 0");
+		header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+		
+		header('Content-type: application/ms-excel');
+		header("Expires: 0");
+		header('Content-Disposition: attachment; filename=actionplan_list.xls');
+		header("Content-Description: File Transfer");
+	 
+		echo $stringData;
+		exit;		   
+	}
+	
+	public function list_ap_pdf() {
+	
+		$this->load->model('Mlibrary');		
+		$this->load->library('parser');
+		$this->load->library('dompdf_gen');
+		
+		$orientation = "landscape";
+		$paper_size='a4';
+		  
+		$data['datanya'] = $this->Mlibrary->getAllRisk_ap_report($this->input->post());
+			  
+		$this->load->view('export/list_ap',$data);
+		 
+		// Get output html
+		$html = $this->output->get_output();
+		  
+		// Convert to PDF
+		$this->dompdf->load_html($html);
+		$this->dompdf->set_paper($paper_size, $orientation);
+		$this->dompdf->render();			
+		$this->dompdf->stream("list_ap.pdf");
+		  
+	}
+	
+	public function list_ap_excel() {
+		
+		$this->load->model('Mlibrary');
+		    
+		$data['datanya'] = $this->Mlibrary->getAllRisk_ap_report($this->input->post());
+		 
+		$this->load->library('parser');
+		
+		//pass retrieved data into template and return as a string
+        $stringData = $this->parser->parse('export/list_ap', $data, true);
+		 
+		header("Pragma: public");
+		header("Expires: 0");
+		header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+		
+		header('Content-type: application/ms-excel');
+		header("Expires: 0");
+		header('Content-Disposition: attachment; filename=actionplan_list.xls');
+		header("Content-Description: File Transfer");
+	 
+		echo $stringData;
+		exit;		   
+	}
+	
+	public function list_ec_pdf() {
+	
+		$this->load->model('Mlibrary');		
+		$this->load->library('parser');
+		$this->load->library('dompdf_gen');
+		
+		$orientation = "landscape";
+		$paper_size='a4';
+		  
+		$data['datanya'] = $this->Mlibrary->getAllRisk_ec_report($this->input->post());
+			  
+		$this->load->view('export/list_ec',$data);
+		 
+		// Get output html
+		$html = $this->output->get_output();
+		  
+		// Convert to PDF
+		$this->dompdf->load_html($html);
+		$this->dompdf->set_paper($paper_size, $orientation);
+		$this->dompdf->render();			
+		$this->dompdf->stream("list_ec.pdf");
+		  
+	}
+	
+	public function list_ec_excel() {
+		
+		$this->load->model('Mlibrary');
+		    
+		$data['datanya'] = $this->Mlibrary->getAllRisk_ec_report($this->input->post());
+		 
+		$this->load->library('parser');
+		
+		//pass retrieved data into template and return as a string
+        $stringData = $this->parser->parse('export/list_ec', $data, true);
+		 
+		header("Pragma: public");
+		header("Expires: 0");
+		header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+		
+		header('Content-type: application/ms-excel');
+		header("Expires: 0");
+		header('Content-Disposition: attachment; filename=actionplan_list.xls');
+		header("Content-Description: File Transfer");
+	 
+		echo $stringData;
+		exit;		   
+	}
+	
+	public function taksonomi_pdf() {
+	
+		$this->load->model('Mlibrary');		
+		$this->load->library('parser');
+		$this->load->library('dompdf_gen');
+		
+		$orientation = "landscape";
+		$paper_size='a4';
+		  
+		$data['datanya'] = $this->Mlibrary->getAllRisk_tax_report($this->input->post());
+			  
+		$this->load->view('export/taksonomi',$data);
+		 
+		// Get output html
+		$html = $this->output->get_output();
+		  
+		// Convert to PDF
+		$this->dompdf->load_html($html);
+		$this->dompdf->set_paper($paper_size, $orientation);
+		$this->dompdf->render();			
+		$this->dompdf->stream("taksonomi.pdf");
+		  
+	}
+	
+	public function taksonomi_excel() {
+		
+		$this->load->model('Mlibrary');
+		    
+		$data['datanya'] = $this->Mlibrary->getAllRisk_tax_report($this->input->post());
+		 
+		$this->load->library('parser');
+		
+		//pass retrieved data into template and return as a string
+        $stringData = $this->parser->parse('export/taksonomi', $data, true);
+		 
+		header("Pragma: public");
+		header("Expires: 0");
+		header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+		
+		header('Content-type: application/ms-excel');
+		header("Expires: 0");
+		header('Content-Disposition: attachment; filename=taksonomi.xls');
+		header("Content-Description: File Transfer");
+	 
+		echo $stringData;
+		exit;		   
+	}
+	 
 	public function getAllRisk() {
 		$sess = $this->loadDefaultAppConfig();
 		$order_by = $order = $filter_by = $filter_value = null;
@@ -222,9 +418,9 @@ class Library extends APP_Controlleri {
 		$this->load->model('risk/mriskregister');
 		$data['category'] = $this->mriskregister->getRiskCategory();
 		 
-		$this->load->view('maini/header', $data);
+		$this->load->view('main/header', $data);
 		$this->load->view('library_ap', $data);
-		$this->load->view('maini/footer', $data);
+		$this->load->view('main/footer', $data);
 		 
 	}
 	
@@ -335,6 +531,54 @@ class Library extends APP_Controlleri {
 		echo json_encode($data);
 	}
 	
+	public function kri_pdf() {
+	
+		$this->load->model('Mlibrary');		
+		$this->load->library('parser');
+		$this->load->library('dompdf_gen');
+		
+		$orientation = "landscape";
+		$paper_size='a4';
+		  
+		$data['datanya'] = $this->Mlibrary->getAllRisk_kri_report($this->input->post());
+			  
+		$this->load->view('export/kri',$data);
+		 
+		// Get output html
+		$html = $this->output->get_output();
+		  
+		// Convert to PDF
+		$this->dompdf->load_html($html);
+		$this->dompdf->set_paper($paper_size, $orientation);
+		$this->dompdf->render();			
+		$this->dompdf->stream("kri.pdf");
+		  
+	}
+	
+	public function kri_excel() {
+		
+		$this->load->model('Mlibrary');
+		    
+		$data['datanya'] = $this->Mlibrary->getAllRisk_kri_report($this->input->post());
+		 
+		$this->load->library('parser');
+		
+		//pass retrieved data into template and return as a string
+        $stringData = $this->parser->parse('export/kri', $data, true);
+		 
+		header("Pragma: public");
+		header("Expires: 0");
+		header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+		
+		header('Content-type: application/ms-excel');
+		header("Expires: 0");
+		header('Content-Disposition: attachment; filename=taksonomi.xls');
+		header("Content-Description: File Transfer");
+	 
+		echo $stringData;
+		exit;		   
+	}
+	
 	public function listriskap_update(){
 	
 		$this->load->model('Mlibrary');
@@ -440,9 +684,9 @@ class Library extends APP_Controlleri {
 		';
 		 
 		 
-		$this->load->view('maini/header', $data);
+		$this->load->view('main/header', $data);
 		$this->load->view('library_ec', $data);
-		$this->load->view('maini/footer', $data);
+		$this->load->view('main/footer', $data);
 		 
 	}
 
@@ -471,9 +715,9 @@ class Library extends APP_Controlleri {
 		';
 		 
 		 
-		$this->load->view('maini/header', $data);
+		$this->load->view('main/header', $data);
 		$this->load->view('library_objective', $data);
-		$this->load->view('maini/footer', $data);
+		$this->load->view('main/footer', $data);
 		 
 	}
 	
@@ -562,9 +806,9 @@ class Library extends APP_Controlleri {
 		';
 		 
 		 
-		$this->load->view('maini/header', $data);
+		$this->load->view('main/header', $data);
 		$this->load->view('taksonomi', $data);
-		$this->load->view('maini/footer', $data);
+		$this->load->view('main/footer', $data);
 		 
 	}
 	
@@ -627,9 +871,9 @@ class Library extends APP_Controlleri {
 		$this->load->model('risk/mriskregister');
 		$data['category'] = $this->mriskregister->getRiskCategory();
 		 
-		$this->load->view('maini/header', $data);
+		$this->load->view('main/header', $data);
 		$this->load->view('kri', $data);
-		$this->load->view('maini/footer', $data);
+		$this->load->view('main/footer', $data);
 		 
 	}
 	

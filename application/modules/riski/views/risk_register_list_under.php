@@ -3,23 +3,23 @@
 	<div class="page-content">
 		<!-- BEGIN PAGE HEADER-->
 		<h3 class="page-title">
-		List Risiko 
+		Daftar Risiko 
 		</h3>
 		<!-- END PAGE HEADER-->
 		<div class="page-bar">
 			<ul class="page-breadcrumb">
 				<li>
 					<i class="fa fa-home"></i>
-					<a target="_self" href="<?=$site_url?>/main">Home</a>
+					<a target="_self" href="<?=$site_url?>/main">Beranda</a>
 					<i class="fa fa-angle-right"></i>
 				</li>
 				<li>
-					<a target="_self" href="javascript:;">Transaction</a>
+					<a target="_self" href="javascript:;">Transaksi</a>
 					<i class="fa fa-angle-right"></i>
 				</li>
 				
 				<li>
-					<a target="_self" href="<?=$site_url?>/risk/RiskRegister">Undermaintenance</a>
+					<a target="_self" href="<?=$site_url?>/risk/RiskRegister">Dalam Perbaikan</a>
 				</li>
 			</ul>
 		</div>
@@ -35,20 +35,20 @@
 			<div class="portlet box grey-silver">
 			<div class="portlet-title">
 				<div class="caption">
-					List Risiko 
+					Daftar Risiko 
 				</div>
 			</div>
 			
 			<div class="portlet-body">
 				<form class="form-inline" role="form" id="filterForm" style="margin-bottom: 10px;">
 					<div class="form-group">
-						<label for="filterFormBy">Filter By</label>
+						<label for="filterFormBy">Filter dengan :</label>
 						<select class="form-control input-medium input-sm" id="filterFormBy">
-							<option value="-">Choose</option>
-							<option value="risk_event">Risk</option>
-							<option value="risk_level">Risk Level</option>
-							<option value="risk_impact_level">Impact Level</option>
-							<option value="risk_likelihood_key">Likelihood</option>
+							<option value="-">Pilih</option>
+							<option value="risk_event">Risiko</option>
+							<option value="risk_level">Level Risiko</option>
+							<option value="risk_impact_level">Level Dampak</option>
+							<option value="risk_likelihood_key">Kemungkinan Keterjadian</option>
 						</select>
 					</div>
 					<div class="form-group" id="re">
@@ -66,7 +66,7 @@
 
 					<div class="form-group" id="il">
 						<select class="hish form-control input-sm" id="fi">
-							<option value="insignificant">Tidak significant</option>	
+							<option value="insignificant">Tidak Significant</option>	
 							<option value="minor">Minor</option>
 							<option value="major">Major</option>
 							<option value="moderate">Moderate</option>
@@ -86,7 +86,7 @@
 						
 					</div>											
 
-					<button type="button" id="filterFormSubmit" class="btn blue btn-sm">Search</button>
+					<button type="button" id="filterFormSubmit" class="btn blue btn-sm">Cari</button>
 				</form>
 				
 				<div class="table-container">
@@ -97,7 +97,7 @@
 						<th width="10%">ID Risiko</th>
 						<th width="20%">AP ID</th>
 						<th width="40%">Peristiwa Risiko</th>
-						<th width="10%">Risiko Level</th>
+						<th width="10%">Level Risiko</th>
 						<th width="10%">Pemilik risiko</th>
 						<th width="10%">&nbsp;</th>
 						
@@ -113,7 +113,7 @@
 			<div class="portlet box grey-silver">
 			<div class="portlet-title">
 				<div class="caption">
-					List Risiko Undermaintenance RAC
+					Daftar Risiko dalam Perbaikan oleh RAC
 				</div>
 				
 				
@@ -122,12 +122,12 @@
 			<div class="portlet-body">
 				<form class="form-inline" role="form" id="filterForm2" style="margin-bottom: 10px;">
 					<div class="form-group">
-						<label for="filterFormBy2">Filter By</label>
+						<label for="filterFormBy2">Filter dengan :</label>
 						<select class="form-control input-medium input-sm" id="filterFormBy2">
 							<option value="-">Pilih</option>
 							<option value="risk_event">Risiko</option>
-							<option value="risk_level">Risiko Level</option>
-							<option value="risk_impact_level">Dampak Level</option>
+							<option value="risk_level">Level Risiko</option>
+							<option value="risk_impact_level">Level Dampak</option>
 							<option value="risk_likelihood_key">Kemungkinan Keterjadian</option>
 						</select>
 					</div>
@@ -147,7 +147,7 @@
 
 					<div class="form-group" id="ti">
 						<select class="pish form-control input-sm" id="pi">
-							<option value="insignificant">Tidak significant</option>	
+							<option value="insignificant">Tidak Significant</option>	
 							<option value="minor">Minor</option>
 							<option value="major">Major</option>
 							<option value="moderate">Moderate</option>
@@ -166,7 +166,7 @@
 						</select>
 						
 					</div>						
-					<button type="button" id="filterFormSubmit2" class="btn blue btn-sm">Search</button>
+					<button type="button" id="filterFormSubmit2" class="btn blue btn-sm">Cari</button>
 				</form>	
 				
 				<div class="table-container">
@@ -177,7 +177,7 @@
 						<th width="10%">ID Risiko</th>
 						<th width="20%">AP ID</th>
 						<th width="40%">Peristiwa Risiko</th>
-						<th width="10%">Risiko Level</th>
+						<th width="10%">Level Risiko</th>
 						<th width="10%">Pemilik Risiko </th>
 						<th width="10%">&nbsp;</th>
 					</tr>
@@ -211,23 +211,24 @@
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/submit.png"/> &nbsp; 
-								 Submited To RAC
+								 Menunggu Verifikasi RAC
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/verified.png"/> &nbsp; 
-								 Verified By RAC
+								 Terverifikasi RAC
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/treatment.png"/> &nbsp; 
-								 on Risk Treatment Process
+								 Dalam Proses Penanganan Risiko
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/actplan.png"/> &nbsp; 
-								 on Action Plan Process
+								 Dalam Proses Action Plan
+
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/executed.png"/> &nbsp; 
-								 Action Plan Has Been Executed and Verified
+								 Action Plan Telah Dilaksanakan dan Diverifikasi
 							</li>
 						</ul>
 		</div>
@@ -260,8 +261,8 @@ $username = $this->session->credential['username'];
 					
 					<th>AP ID</th>
 					<th>Action Plan</th>
-					<th>Action Plan Owner</th>
-					<th>Execution</th>
+					<th>Pemilik Action Plan</th>
+					<th>Eksekusi</th>
 				</tr>
 				</thead>
 				<tbody>

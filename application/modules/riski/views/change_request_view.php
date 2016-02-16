@@ -9,11 +9,11 @@
 			<ul class="page-breadcrumb">
 				<li>
 					<i class="fa fa-home"></i>
-					<a target="_self" href="<?=$site_url?>/main">Home</a>
+					<a target="_self" href="<?=$site_url?>/main">Beranda</a>
 					<i class="fa fa-angle-right"></i>
 				</li>
 				<li>
-					<a target="_self" href="javascript:;">Change Request View</a>
+					<a target="_self" href="javascript:;">Lihat Permintaan Perubahan</a>
 				</li>
 			</ul>
 		</div>
@@ -66,7 +66,7 @@
 							</div>
 							<?php } ?>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Dampak Level</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Level Dampak</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm input-readview" readonly="true" name="impact_level_v" placeholder="">
 								</div>
@@ -78,7 +78,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Risiko Level</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Level Risiko</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_level_v" placeholder="">
 								</div>
@@ -111,9 +111,9 @@
 								<table id="primary_control_table" class="table table-condensed table-bordered table-hover">
 									<thead>
 									<tr role="row" class="heading">
-										<th><span class="small">ID Kontrol yang ada saat ini</span></th>
-										<th><span class="small">Kontrol yang ada saat ini</span></th>
-										<th><span class="small">Evaluasi dari Kontrol yang ada saat ini</span></th>
+										<th><span class="small">ID Kontrol Eksisting</span></th>
+										<th><span class="small">Kontrol Eksisting</span></th>
+										<th><span class="small">Evaluasi atas Eksisting Kontrol</span></th>
 										<th><span class="small">Pemilik Kontrol</span></th>
 									</tr>
 									</thead>
@@ -188,7 +188,7 @@
 							</div>
 							<?php } ?>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Dampak Level</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Level Dampak</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm input-readview" readonly="true" name="impact_level_v" placeholder="">
 								</div>
@@ -200,7 +200,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Risiko Level</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Level Risiko</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_level_v" placeholder="">
 								</div>
@@ -240,9 +240,9 @@
 								<table id="control_table" class="table table-condensed table-bordered table-hover">
 									<thead>
 									<tr role="row" class="heading">
-										<th><span class="small">ID Kontrol yang ada saat ini</span></th>
-										<th><span class="small">Kontrol yang ada saat ini</span></th>
-										<th><span class="small">Evaluasi dari Kontrol yang ada saat ini</span></th>
+										<th><span class="small">ID Kontrol Eksisting</span></th>
+										<th><span class="small">Kontrol Eksisting</span></th>
+										<th><span class="small">Evaluasi atas Eksisting Kontrol</span></th>
 										<th><span class="small">Pemilik Kontrol</span></th>
 									</tr>
 									</thead>

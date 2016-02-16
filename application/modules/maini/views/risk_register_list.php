@@ -39,7 +39,7 @@
 			<div class="portlet-body">
 				<form class="form-inline" role="form" id="filterForm" style="margin-bottom: 10px;">
 					<div class="form-group">
-						<label for="filterFormBy">Filter Dengan</label>
+						<label for="filterFormBy">Filter dengan :</label>
 						<select class="form-control input-medium input-sm" id="filterFormBy">
 							<option value="risk_event">Risiko</option>
 						</select>
@@ -59,7 +59,7 @@
 						<th width="20%">Risiko</th>
 						<th width="10%">Level Risiko</th>
 						<th width="10%">Level Dampak</th>
-						<th width="10%">Kemungkinan Keterjadiaan</th>
+						<th width="10%">Kemungkinan Keterjadian</th>
 						<th width="10%">Pemilik Risiko</th>
 						<th width="10%">Status</th>
 					</tr>
@@ -81,9 +81,9 @@
 			<div class="portlet-body">
 				<form class="form-inline" role="form" id="filterForm2" style="margin-bottom: 10px;">
 					<div class="form-group">
-						<label for="filterFormBy">Filter dengan</label>
+						<label for="filterFormBy">Filter dengan :</label>
 						<select class="form-control input-medium input-sm" id="filterFormBy2">
-							<option value="risk_event">Resiko</option>
+							<option value="risk_event">Risiko</option>
 						</select>
 					</div>
 					<div class="form-group">
@@ -101,7 +101,7 @@
 						<th width="40%">Risiko</th>
 						<th width="10%">Level Risiko</th>
 						<th width="10%">Dampak Risiko</th>
-						<th width="10%">Kemungkinan Keterjadiaan</th>
+						<th width="10%">Kemungkinan Keterjadian</th>
 						<th width="10%">Pemilik Risiko</th>
 					</tr>
 					</thead>
@@ -125,7 +125,7 @@
 		<a href="javascript: ;" id="button-change-ignore" class="btn default red pull-right" style="margin-right: 10px;">
 					<i class="fa  fa-circle-o"></i>
 					<span class="hidden-480">
-					Ignore </span>
+					Tolak </span>
 					</a>
 		<a href="javascript: ;" id="button-change-verify" class="btn default green pull-right" style="margin-right: 10px;">
 					<i class="fa  fa-circle-o"></i>
@@ -153,7 +153,7 @@
 				</li>
 				<li class="list-group-item">
 					<img src="<?=$base_url?>assets/images/legend/verified.png"/> &nbsp; 
-					 Telah diverifikasi RAC
+					 Terverifikasi RAC
 				</li>
 			</ul>
 
@@ -171,22 +171,24 @@
 	<div class="col-md-12">
 		<div class="note note-danger">
 			<?php if (isset($submit_mode) && $submit_mode == 'adhoc') { ?>
-			<h4 class="block">Error</h4>
+			<h4 class="block">Informasi</h4>
 			<p>
-				 Cannot Input Adhoc Risk Register Exercise because Risk Period is already set, please contact RAC team for further information
+				 Tidak bisa menginput Risk Register Berkala Adhoc karena periode telah di setting oleh RAC.
+				 Silahkan hubungi RAC untuk penjelasan lebih lanjut.
 				 <p>
 					<a class="btn red" target="_self" href="<?=$site_url?>/main">
-					Back to Home </a>
+					Kembali ke Beranda </a>
 				</p>
 			</p>
 			<?php } else { ?>
 			<h4 class="block">Error</h4>
 			<p>
-				 Cannot Input Risk Register Exercise because Risk Period is not set, please contact RAC team for further information
+				 Tidak bisa menginput Risk Register Berkala karena periode belum di setting oleh RAC.
+				 Silahkan hubungi RAC untuk penjelasan lebih lanjut.
 			</p>
 			<p>
 				<a class="btn red" target="_self" href="<?=$site_url?>/main">
-				Back to Home </a>
+				Kembali ke Beranda </a>
 			</p>
 			<?php } ?>
 		</div>

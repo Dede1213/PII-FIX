@@ -2,17 +2,17 @@
 	<div class="page-content">
 		<!-- BEGIN PAGE HEADER-->
 		<h3 class="page-title">
-		Change Request Form
+		Form Permintaan Perubahan
 		</h3>
 		<div class="page-bar">
 			<ul class="page-breadcrumb">
 				<li>
 					<i class="fa fa-home"></i>
-					<a target="_self" href="<?=$site_url?>/main">Home</a>
+					<a target="_self" href="<?=$site_url?>/main">Beranda</a>
 					<i class="fa fa-angle-right"></i>
 				</li>
 				<li>
-					<a target="_self" href="javascript:;">Change Request Form</a>
+					<a target="_self" href="javascript:;">Form Permintaan Perubahan</a>
 				</li>
 			</ul>
 		</div>
@@ -22,38 +22,38 @@
 			<form id="input-form" role="form" class="form-horizontal">
 				<div class="form-body">
 					<div class="form-group">
-						<label class="col-md-2 control-label">Risk ID</label>
+						<label class="col-md-2 control-label">ID Risiko</label>
 						<div class="col-md-6">
 							<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_library_code" placeholder="" value="<?=$risk['risk_code']?>">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-2 control-label">Risk Event</label>
+						<label class="col-md-2 control-label">Peristiwa Risiko</label>
 						<div class="col-md-6">
 						<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_event" placeholder="" value="<?=$risk['risk_event']?>">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-2 control-label" >Risk Level</label>
+						<label class="col-md-2 control-label" >Level Risiko</label>
 						<div class="col-md-6">
 						<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_level" placeholder="" value="<?=$risk['risk_level_v']?>">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-2 control-label" >Risk Treatment</label>
+						<label class="col-md-2 control-label" >Penanganan Risiko</label>
 						<div class="col-md-6">
 							<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_treatment" placeholder="" value="<?=$risk['treatment_v']?>">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-2 control-label" >Threshold</label>
+						<label class="col-md-2 control-label" >Action Plan</label>
 						<div class="col-md-8">
 							<table id="action_plan_table" class="table table-condensed table-bordered table-hover">
 								<thead>
 								<tr role="row" class="heading">
 									<th>Action Plan</th>
-									<th>Due Date</th>
-									<th>Action Plan Owner</th>
+									<th>Batas Waktu</th>
+									<th>Pemilik Action Plan</th>
 								</tr>
 								</thead>
 								<tbody>
@@ -96,19 +96,19 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-2 control-label">Timing of Reporting</label>
+					<label class="col-md-2 control-label">Waktu Pelaporan</label>
 					<div class="col-md-6">
 					<input type="text" class="form-control input-sm input-readview" readonly="true" name="timing_pelaporan" placeholder="" value="<?=$kri['timing_pelaporan_v']?>">
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-2 control-label">KRI Owner</label>
+					<label class="col-md-2 control-label">Pemilik KRI</label>
 					<div class="col-md-6">
 					<input type="text" class="form-control input-sm input-readview" readonly="true" name="kri_owner" placeholder="" value="<?=$kri['kri_owner_v']?>">
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-2 control-label">Report</label>
+					<label class="col-md-2 control-label">Laporan</label>
 					<div class="col-md-6">
 					<input type="text" class="form-control input-sm input-readview" readonly="true" name="report" placeholder="" value="<?=$kri['owner_report']?>">
 					</div>
@@ -117,16 +117,16 @@
 				<hr/>
 				<?php if (isset($verify) && $verify) { ?>
 				<div class="form-group">
-					<label class="col-md-2 control-label" >Action Plan</label>
+					<label class="col-md-2 control-label" >Threshold</label>
 					<div class="col-md-8">
 						<table id="action_plan_table" class="table table-condensed table-bordered table-hover">
 							<thead>
 							<tr role="row" class="heading">
 								<th>Operator</th>
-								<th>Value 1</th>
-								<th>Value 2</th>
-								<th>Type Value</th>
-								<th>Result</th>
+								<th>Nilai 1</th>
+								<th>Nilai 2</th>
+								<th>Tipe Nilai</th>
+								<th>Hasil</th>
 							</tr>
 							</thead>
 							<tbody>
@@ -146,7 +146,7 @@
 				<?php } ?>
 				<?php if ($kri['treshold_type'] == 'SELECTION') { ?>
 					<div class="form-group">
-						<label class="col-md-2 control-label">Change Report</label>
+						<label class="col-md-2 control-label">Perubahan Laporan</label>
 						<div class="col-md-6">
 						<select class="form-control input-sm" id="owner_report" name="owner_report">
 							<?php foreach ($kri['treshold_list'] as $key => $value) { ?>
@@ -157,7 +157,7 @@
 					</div>
 				<?php } else { ?> 
 					<div class="form-group">
-						<label class="col-md-2 control-label">Change Report</label>
+						<label class="col-md-2 control-label">Perubahan Laporan</label>
 						<div class="col-md-6">
 							<input type="number" class="form-control input-sm" id="owner_report" name="owner_report" placeholder="" value="<?=$change['risk_impact']?>">
 						</div>
@@ -167,7 +167,7 @@
 				<?php } else { ?>
 				<hr/>
 				<div class="form-group">
-					<label class="col-md-2 control-label">Change Report</label>
+					<label class="col-md-2 control-label">Perubahan Laporan/label>
 					<div class="col-md-6">
 					<input type="text" class="form-control input-sm input-readview" readonly="true" name="owner_report" placeholder="" value="<?=$change['risk_impact']?>">
 					</div>
@@ -187,7 +187,7 @@
 			</div>
 			<?php } else { ?>
 			<div class="form-actions right">
-				<button onclick="javascript: location.href=site_url+'/main#tab_change_request_list'" type="button" class="btn yellow" id="verify-risk-button-cancel"><i class="fa fa-times"></i> Cancel</button>
+				<button onclick="javascript: location.href=site_url+'/main#tab_change_request_list'" type="button" class="btn yellow" id="verify-risk-button-cancel"><i class="fa fa-times"></i> Batal</button>
 			</div>
 			<?php } ?>
 			</form>

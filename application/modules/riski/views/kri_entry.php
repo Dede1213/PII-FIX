@@ -109,7 +109,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-2 control-label">Treshold Type</label>
+					<label class="col-md-2 control-label">Tipe Treshold</label>
 					<div class="col-md-6">
 					<select class="form-control input-sm" id="select-treshold-type" name="treshold_type">
 						<option value="SELECTION">Selection</option>
@@ -120,7 +120,7 @@
 				<div class="form-group">
 					<label class="col-md-2 control-label">&nbsp;</label>
 					<div class="col-md-8">
-						<button class="btn green btn-sm" style="margin-bottom: 10px;" type="button" id="button-kri-open-treshold">Add Treshold</button>
+						<button class="btn green btn-sm" style="margin-bottom: 10px;" type="button" id="button-kri-open-treshold">Tambah Treshold</button>
 						<table id="treshold_table" class="table table-condensed table-bordered table-hover">
 							<thead>
 							<tr role="row" class="heading">
@@ -162,7 +162,7 @@
 			</div>
 			<div class="form-actions right">
 				<button id="kri-button-save" type="button" class="btn blue"><i class="fa fa-circle-o"></i> Simpan</button>
-				<button type="button" class="btn yellow" id="kri-button-cancel"><i class="fa fa-times"></i> Batalkan</button>
+				<button type="button" class="btn yellow" id="kri-button-cancel"><i class="fa fa-times"></i> Batal</button>
 			</div>
 			</form>
 			</div>
@@ -175,7 +175,7 @@
 <div id="modal-library" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Perpustakaan Risiko</h4>
+		<h4 class="modal-title">Library Risiko</h4>
 		<div class="inputs">
 			<div class="portlet-input input-inline">
 				<div class="input-group">
@@ -193,7 +193,7 @@
 				<thead>
 				<tr role="row" class="heading">
 					<th width="30px">&nbsp;</th>
-					<th>Id Risiko</th>
+					<th>ID Risiko</th>
 					<th>Perisitiwa Risiko</th>
 					<th>Deskripsi</th>
 				</tr>
@@ -208,7 +208,7 @@
 <div id="modal-kri" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Perpustakaan KRI</h4>
+		<h4 class="modal-title">Library KRI</h4>
 		<div class="inputs">
 			<div class="portlet-input input-inline">
 				<div class="input-group">
@@ -227,7 +227,7 @@
 				<tr role="row" class="heading">
 					<th width="30px">&nbsp;</th>
 					<th>ID KRI</th>
-					<th>Indicator Key Risk </th>
+					<th>Indikator Key Risk </th>
 					<th>Threshold</th>
 				</tr>
 				</thead>
@@ -241,7 +241,7 @@
 <div id="modal-treshold-selection" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Add Treshold</h4>
+		<h4 class="modal-title">Tambah Treshold</h4>
 	</div>
 	<div class="modal-body">
 		<form id="kri-form-selection" role="form" class="form-horizontal">

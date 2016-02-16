@@ -9,16 +9,16 @@
 			<ul class="page-breadcrumb">
 				<li>
 					<i class="fa fa-home"></i>
-					<a target="_self" href="<?=$site_url?>/main">Home</a>
+					<a target="_self" href="<?=$site_url?>/main">Berangda</a>
 					<i class="fa fa-angle-right"></i>
 				</li>
 				<li>
-					<a target="_self" href="javascript:;">Transaction</a>
+					<a target="_self" href="javascript:;">Transaksi</a>
 					<i class="fa fa-angle-right"></i>
 				</li>
 			 
 				<li>
-					<a target="_self" href="javascript:;">Action Plan Execution</a>
+					<a target="_self" href="javascript:;">Eksekusi Action Plan</a>
 				</li>
 			</ul>
 		</div>
@@ -28,13 +28,14 @@
 		<div class="col-md-12">
 			<div class="note note-warning">
 				 
-				<h4 class="block">Warning</h4>
+				<h4 class="block">Informasi</h4>
 				<p>
-					 Cannot Review Action Plan Execution because Risk Period is not set, please contact RAC team for further information
+					 Tidak bisa mereview Eksekusi Action Plan karena periode belum di setting oleh RAC.
+					 Silahkan hubungi RAC untuk penjelasan lebih lanjut.
 				</p>
 				<p>
 					<a class="btn red" target="_self" href="<?=$site_url?>/main">
-					Back to Home </a>
+					Kembali ke Beranda </a>
 				</p>
 				 
 			</div>
@@ -46,7 +47,7 @@
 		<div class="col-md-12">
 			<form class="form-inline" role="form" style="margin-bottom: 10px;">
 						<div class="form-group">
-							<label for="filterFormBy" class="smaller">Filter By : </label>
+							<label for="filterFormBy" class="smaller">Filter dengan : </label>
 							<select class="form-control input-medium input-sm" id="tab_action_plan_exec-filterBy">
 								<option value="action_plan">Action Plan</option>
 							</select>
@@ -54,7 +55,7 @@
 						<div class="form-group">
 							<input type="text" class="form-control input-sm" placeholder="Insert Filter Value" id="tab_action_plan_exec-filterValue">
 						</div>
-						<button type="button" class="btn blue btn-sm" id="tab_action_plan_exec-filterButton">Search</button>
+						<button type="button" class="btn blue btn-sm" id="tab_action_plan_exec-filterButton">Cari</button>
 					</form>
 						
 					<div ><!--class="table-scrollable"-->
@@ -66,7 +67,7 @@
 							<th>Action Plan</th>
 							<th>Batas Waktu</th>
 							<th>Pemilik Action Plan</th>
-							<th>Ekseskusi</th>
+							<th>Eksekusi</th>
 							<th>Kode Risiko</th>
 						</tr>
 						</thead>
@@ -85,11 +86,11 @@
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/submit.png"/> &nbsp; 
-								 Submited To RAC
+								 Menunggu Verifikasi RAC
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/verified.png"/> &nbsp; 
-								 Telah Di Verifikasi RAC
+								 Terverifikasi RAC
 							</li>
 						</ul>
 		
@@ -117,7 +118,7 @@
 						<option value="LOW">Rendah</option>
 					</select>
 					<span class="input-group-btn">
-					<button class="btn btn-default btn-sm" type="button" id="modal-library-filter-submit">Search</button>
+					<button class="btn btn-default btn-sm" type="button" id="modal-library-filter-submit">Cari</button>
 					</span>
 				</div>
 				<!--
@@ -142,9 +143,9 @@
 						<input type="checkbox" class="group-checkable">
 					</th>
 					<th>No</th>
-					<th>Risk ID</th>
-					<th>Risk Event</th>
-					<th>Risk Level</th>
+					<th>ID Risiko</th>
+					<th>Peristiwa Risiko</th>
+					<th>Level Risiko</th>
 				</tr>
 				</thead>
 				<tbody></tbody>
@@ -155,7 +156,7 @@
 		<button id="library-modal-add" type="button" 
 			class="btn blue ladda-button"
 			 data-style="expand-right"
-			>Add</button>
+			>Tambah</button>
 		<button type="button" data-dismiss="modal" class="btn btn-default">Batal</button>
 	</div>
 </div>

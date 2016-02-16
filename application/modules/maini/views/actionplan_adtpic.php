@@ -9,16 +9,16 @@
 			<ul class="page-breadcrumb">
 				<li>
 					<i class="fa fa-home"></i>
-					<a target="_self" href="<?=$site_url?>/main">Home</a>
+					<a target="_self" href="<?=$site_url?>/main">Beranda</a>
 					<i class="fa fa-angle-right"></i>
 				</li>
 				<li>
-					<a target="_self" href="javascript:;">Transaction</a>
+					<a target="_self" href="javascript:;">Transaksi</a>
 					<i class="fa fa-angle-right"></i>
 				</li>
 			 
 				<li>
-					<a target="_self" href="javascript:;">Action Plan Execution</a>
+					<a target="_self" href="javascript:;">Eksekusi Action Plan</a>
 				</li>
 			</ul>
 		</div>
@@ -29,13 +29,14 @@
 		<div class="col-md-12">
 			<div class="note note-warning">
 				 
-				<h4 class="block">Warning</h4>
+				<h4 class="block">Informasi</h4>
 				<p>
-					 Cannot Input Action Plan Execution because Risk Period is not set, please contact RAC team for further information
+					 Tidak bisa menginput Eksekusi Action Plan karena periode belum di setting oleh RAC.
+					 Silahkan hubungi RAC untuk penjelasan lebih lanjut.
 				</p>
 				<p>
 					<a class="btn red" target="_self" href="<?=$site_url?>/main">
-					Back to Home </a>
+					Kembali ke Beranda </a>
 				</p>
 				 
 			</div>
@@ -52,7 +53,7 @@
 							<th>AP ID</th>
 							<th>Action Plan</th>
 							<th>Batas Waktu</th>
-							<th>Ditugaskan Untuk</th>
+							<th>Ditugaskan Kepada</th>
 							<th>Eksekusi</th>
 							<!--<th width="50px">Change Request</th>-->
 						</tr>
@@ -80,7 +81,7 @@
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/verified.png"/> &nbsp; 
-								 Telah Di Verifikasi RAC
+								 Terverifikasi RAC
 							</li>
 						</ul>
 					</div>
@@ -95,7 +96,7 @@
 <div id="modal-exec" class="modal fade" tabindex="-1" data-width="760" data-keyboard="false" role="dialog" aria-hidden="true">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Action Plan Execution</h4>
+		<h4 class="modal-title">Eksekusi Action Plan</h4>
 	</div>
 	<div class="modal-body form">
 		<form id="exec-form" role="form" class="form-horizontal">
@@ -143,8 +144,8 @@
 			</div>
 			
 			<div class="form-actions right">
-				<button id="exec-button-save" type="button" class="btn blue"><i class="fa fa-circle-o"></i> Save </button>
-				<button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+				<button id="exec-button-save" type="button" class="btn blue"><i class="fa fa-circle-o"></i> Simpan </button>
+				<button type="button" data-dismiss="modal" class="btn btn-default">Batal</button>
 			</div>
 		</form>
 	</div>

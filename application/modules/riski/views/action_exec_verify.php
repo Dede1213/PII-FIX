@@ -3,17 +3,17 @@
 	<div class="page-content">
 		<!-- BEGIN PAGE HEADER-->
 		<h3 class="page-title">
-		Action Plan Execution
+		Eksekusi Action Plan
 		</h3>
 		<div class="page-bar">
 			<ul class="page-breadcrumb">
 				<li>
 					<i class="fa fa-home"></i>
-					<a target="_self" href="<?=$site_url?>/main">Home</a>
+					<a target="_self" href="<?=$site_url?>/main">Beranda</a>
 					<i class="fa fa-angle-right"></i>
 				</li>
 				<li>
-					<a target="_self" href="javascript:;">Action Plan Execution</a>
+					<a target="_self" href="javascript:;">Eksekusi Action Plan</a>
 				</li>
 			</ul>
 		</div>
@@ -139,13 +139,13 @@
 		<div class="row">
 		<div class="col-md-12">
 			<div class="note note-danger">
-				<h4 class="block">Error</h4>
+				<h4 class="block">Informasi</h4>
 				<p>
-					 You are not allowed to view this Risk
+					 Tidak diperbolehkan untuk melihat risiko.
 				</p>
 				<p>
 					<a class="btn red" target="_self" href="<?=$site_url?>/main">
-					Back to Home </a>
+					Kembali ke Beranda </a>
 				</p>
 			</div>
 		</div>
@@ -158,7 +158,7 @@
 <div id="modal-category" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Risiko Level </h4>
+		<h4 class="modal-title">Level Risiko </h4>
 	</div>
 	<div class="modal-body">
 			<form id="modal-risk-form" role="form" class="form-horizontal">
@@ -168,7 +168,7 @@
 				<div class="form-body">
 				
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Dampak Level <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact" >Level Dampak <span class="required">* </span></label>
 						<div class="col-md-9">
 							<div class="input-group">
 								 <input type="hidden" name="risk_impact_level_id" id = "risk_impact_level_id" value=""/> 
@@ -195,7 +195,7 @@
 					</div>
 					<div class="form-group">
 					    <input type="hidden" name="risk_level_id" id = "risk_level_id" value=""/> 
-						<label class="col-md-3 control-label smaller cl-compact" >Risiko Level <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact" >Level Risiko <span class="required">* </span></label>
 						<div class="col-md-9">
 						<input type="text" class="form-control input-sm" readonly="true" name="risk_level_after_mitigation" id = "risk_level_after_mitigation" placeholder="">
 						</div>
@@ -249,7 +249,7 @@
 <div id="modal-impact" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Evaluation on Risk Impact</h4>
+		<h4 class="modal-title">Evaluasi atas Dampak Risiko</h4>
 		<span class="font-red">* Dapat diisi lebih dari satu(1) kategori, namun dalam Satu(1)
 		Kategori hanya boleh diisi satu(1) parameter</span>
 	</div>
@@ -258,7 +258,7 @@
 		<table class="table table-condensed table-bordered table-hover">
 			<thead>
 			<tr role="row" class="heading">
-				<th>Category</th>
+				<th>Kategori</th>
 				<th>Parameter</th>
 			</tr>
 			</thead>
@@ -295,7 +295,7 @@
 <div id="modal-likelihood" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Evaluation on Risk Likelihood</h4>
+		<h4 class="modal-title">Evaluasi atas Kemungkinan Keterjadian</h4>
 		<span class="font-red">* Pilih Salah Satu</span>
 	</div>
 	<div class="modal-body">

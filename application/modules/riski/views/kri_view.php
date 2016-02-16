@@ -3,7 +3,7 @@
 	<div class="page-content">
 		<!-- BEGIN PAGE HEADER-->
 		<h3 class="page-title">
-		Indicator Key Risk (KRI) View
+		Form Indikator Key Risk (KRI)
 		</h3>
 		<div class="page-bar">
 			<ul class="page-breadcrumb">
@@ -13,7 +13,7 @@
 					<i class="fa fa-angle-right"></i>
 				</li>
 				<li>
-					<a target="_self" href="javascript:;">Indicator Key Risk View</a>
+					<a target="_self" href="javascript:;">Lihat Indikator Key Risk (KRI)</a>
 				</li>
 			</ul>
 		</div>
@@ -85,7 +85,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-2 control-label">Indicator Key Risk</label>
+					<label class="col-md-2 control-label">Indikator Key Risk</label>
 					<div class="col-md-6">
 					<input type="text" class="form-control input-sm input-readview" readonly="true" name="key_risk_indicator" placeholder="" value="<?=$kri['key_risk_indicator']?>">
 					</div>

@@ -23,7 +23,7 @@
 			<div class="col-md-12">
 				<ul class="list-group">
 					<?php foreach($news as $row) { ?>
-					<li class="list-group-item"><font style="font-size:19px;"><a target="_self" href="<?=$site_url?>/maini/news/view/<?=$row['id']?>"><?=$row['title']?></a></font> <br> <font style="color:gray; font-size:11px;"> --- Publish On <?=$row['date_publish_v']?> </font></li>
+					<li class="list-group-item"><font style="font-size:19px;"><a target="_self" href="<?=$site_url?>/maini/news/view/<?=$row['id']?>"><?=$row['title']?></a></font> <br> <font style="color:gray; font-size:11px;"> --- Dipublish pada <?=$row['date_publish_v']?> </font></li>
 					<?php } ?>
 				</ul>
 			</div>

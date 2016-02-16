@@ -3,7 +3,7 @@
 	<div class="page-content">
 		<!-- BEGIN PAGE HEADER-->
 		<h3 class="page-title">
-		Indicator Key Risk (KRI) Form
+		Form Indikator Key Risk (KRI)
 		</h3>
 		<div class="page-bar">
 			<ul class="page-breadcrumb">
@@ -13,7 +13,7 @@
 					<i class="fa fa-angle-right"></i>
 				</li>
 				<li>
-					<a target="_self" href="javascript:;">Indicator Key Risk (KRI) Form</a>
+					<a target="_self" href="javascript:;">Form Indikator Key Risk (KRI)</a>
 				</li>
 			</ul>
 		</div>
@@ -85,7 +85,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-2 control-label">Indicator Key Risk (KRI)</label>
+					<label class="col-md-2 control-label">Indikator Key Risk (KRI)</label>
 					<div class="col-md-6">
 					<input type="text" class="form-control input-sm input-readview" readonly="true" name="key_risk_indicator" placeholder="" value="<?=$kri['key_risk_indicator']?>">
 					</div>
@@ -101,7 +101,7 @@
 				
 				<?php if (isset($verifyRac) && $verifyRac) { ?>
 				<div class="form-group">
-					<label class="col-md-2 control-label" >Action Plan</label>
+					<label class="col-md-2 control-label" >Threshold</label>
 					<div class="col-md-8">
 						<table id="action_plan_table" class="table table-condensed table-bordered table-hover">
 							<thead>
@@ -109,7 +109,7 @@
 								<th>Operator</th>
 								<th>Nilai 1</th>
 								<th>Nilai 2</th>
-								<th>Type Nilai</th>
+								<th>Tipe Nilai</th>
 								<th>Hasil</th>
 							</tr>
 							</thead>
@@ -183,10 +183,10 @@
 			<div class="form-actions right">
 				<?php if (isset($verifyRac) && $verifyRac) { ?>
 				<button id="kri-button-verify" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Verifikasi</button>
-				<button type="button" class="btn yellow" id="kri-button-cancel"><i class="fa fa-times"></i> Batalkan</button>
+				<button type="button" class="btn yellow" id="kri-button-cancel"><i class="fa fa-times"></i> Batal</button>
 				<?php } else { ?>
 				<button id="kri-button-verify" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Ajukan</button>
-				<button type="button" class="btn yellow" id="kri-button-cancel"><i class="fa fa-times"></i> Batalkan</button>
+				<button type="button" class="btn yellow" id="kri-button-cancel"><i class="fa fa-times"></i> Batal</button>
 				<?php } ?>
 			</div>
 			</form>
@@ -205,7 +205,7 @@ var t_treshold_list = <?=json_encode($kri['treshold_list'])?>;
 <div id="modal-category" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Risk Level </h4>
+		<h4 class="modal-title">Level Risiko</h4>
 	</div>
 	<div class="modal-body">
 			<form id="modal-category-form" role="form" class="form-horizontal">
@@ -214,7 +214,7 @@ var t_treshold_list = <?=json_encode($kri['treshold_list'])?>;
 				<input type="hidden" name="cat_parent" value="0" />
 				<div class="form-body">
 					 <div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Impact Level <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact" >Dampak Level <span class="required">* </span></label>
 						<div class="col-md-9">
 							<div class="input-group">
 								 <input type="hidden" name="risk_impact_level_id" id = "risk_impact_level_id" value=""/> 
@@ -227,7 +227,7 @@ var t_treshold_list = <?=json_encode($kri['treshold_list'])?>;
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Likelihood <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan Keterjadian <span class="required">* </span></label>
 						<div class="col-md-9">
 							<div class="input-group">
 								 <input type="hidden" name="risk_likelihood_id" id = "risk_likelihood_id" value=""/> 
@@ -241,7 +241,7 @@ var t_treshold_list = <?=json_encode($kri['treshold_list'])?>;
 					</div>
 					<div class="form-group">
 					    <input type="hidden" name="risk_level_id" id = "risk_level_id" value=""/> 
-						<label class="col-md-3 control-label smaller cl-compact" >Risk Level <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact" >Level Risiko <span class="required">* </span></label>
 						<div class="col-md-9">
 						<input type="text" class="form-control input-sm" readonly="true" name="risk_level_after_kri" id = "risk_level_after_mitigation" placeholder="">
 						</div>
@@ -293,7 +293,7 @@ var t_treshold_list = <?=json_encode($kri['treshold_list'])?>;
 <div id="modal-impact" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Evaluation on Risk Impact</h4>
+		<h4 class="modal-title">Evaluasi atas Dampak Risiko</h4>
 		<span class="font-red">* Dapat diisi lebih dari satu(1) kategori, namun dalam Satu(1)
 		Kategori hanya boleh diisi satu(1) parameter</span>
 	</div>
@@ -302,7 +302,7 @@ var t_treshold_list = <?=json_encode($kri['treshold_list'])?>;
 		<table class="table table-condensed table-bordered table-hover">
 			<thead>
 			<tr role="row" class="heading">
-				<th>Category</th>
+				<th>Kategori</th>
 				<th>Parameter</th>
 			</tr>
 			</thead>
@@ -339,7 +339,7 @@ var t_treshold_list = <?=json_encode($kri['treshold_list'])?>;
 <div id="modal-likelihood" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Evaluation on Risk Likelihood</h4>
+		<h4 class="modal-title">Evaluasi atas Kemungkinan Keterjadian</h4>
 		<span class="font-red">* Pilih Salah Satu</span>
 	</div>
 	<div class="modal-body">

@@ -46,7 +46,7 @@
 					<div id="chart_action_plan" class="chart" style="width: 200px; height: 120px;"></div>
 				</div>
 				<div class="col-md-3">
-					<span>KRI Ku</span>
+					<span>My KRI</span>
 					<div id="chart_kri" class="chart" style="width: 200px; height: 120px;"></div>
 				</div>
 			</div>
@@ -208,7 +208,7 @@
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/verified.png"/> &nbsp; 
-								 Telah di Verifikasi RAC
+								 Terverifikasi RAC
 							</li>
 						</ul>
 					</div>
@@ -251,7 +251,7 @@
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/verified.png"/> &nbsp; 
-								 Telah di Verifikasi RAC
+								 Terverifikasi RAC
 							</li>
 						</ul>
 					</div>
@@ -267,7 +267,7 @@
 							<th>Action Plan</th>
 							<th>Batas Waktu</th>
 							<th>Ditugaskan Kepada</th>
-							<th>Execution</th>
+							<th>Eksekusi</th>
 							<th>ID Risiko</th>
 						</tr>
 						</thead>
@@ -294,7 +294,7 @@
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/verified.png"/> &nbsp; 
-								 Telah di Verifikasi RAC
+								 Terverifikasi RAC
 							</li>
 						</ul>
 					</div>
@@ -309,7 +309,7 @@
 							<th>KRI ID</th>
 							<th>KRI</th>
 							<th>Treshold</th>
-							<th>Timing Pelaporan</th>
+							<th>Waktu Pelaporan</th>
 							<th>Ditugaskan kepada</th>
 							<th>ID Risiko</th>
 							<th width="50px">Permintaan Perubahan</th>
@@ -338,7 +338,7 @@
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/verified.png"/> &nbsp; 
-								 Telah Diverifikasi RAC
+								 Terverifikasi RAC
 							</li>
 						</ul>
 					</div>
@@ -373,7 +373,7 @@
 <div id="modal-pic" class="modal fade" tabindex="-1" data-width="760" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Di Tugaskan Kepada</h4>
+		<h4 class="modal-title">Ditugaskan Kepada</h4>
 	</div>
 	<div class="modal-body">
 		<table id="pic_list_table" class="table table-condensed table-bordered table-hover">

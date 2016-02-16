@@ -36,13 +36,13 @@
 			<div class="portlet-body">
 				<form class="form-inline" role="form" id="filterForm" style="margin-bottom: 10px;">
 					<div class="form-group">
-						<label for="filterFormBy">Filter Dengan</label>
+						<label for="filterFormBy">Filter dengan :</label>
 						<select class="form-control input-medium input-sm" id="filterFormBy">
 							<option value="-">Pilih</option>
-							<option value="risk_event">Resiko</option>
-							<option value="risk_level">Level Resiko</option>
+							<option value="risk_event">Risiko</option>
+							<option value="risk_level">Level Risiko</option>
 							<option value="risk_impact_level">Level Dampak</option>
-							<option value="risk_likelihood_key">Kemungkinan Keterjadiaan</option>
+							<option value="risk_likelihood_key">Kemungkinan Keterjadian</option>
 						</select>
 					</div>
 					<div class="form-group" id="re">
@@ -60,7 +60,7 @@
 
 					<div class="form-group" id="il">
 						<select class="hish form-control input-sm" id="fi">
-							<option value="insignificant">Tidak significant</option>	
+							<option value="insignificant">Tidak Significant</option>	
 							<option value="minor">Minor</option>
 							<option value="major">Major</option>
 							<option value="moderate">Moderate</option>
@@ -80,7 +80,7 @@
 						
 					</div>											
 
-					<button type="button" id="filterFormSubmit" class="btn blue btn-sm">Search</button>
+					<button type="button" id="filterFormSubmit" class="btn blue btn-sm">Cari</button>
 				</form>
 				
 				<div class="table-container">
@@ -92,7 +92,7 @@
 						<th width="20%">Risiko</th>
 						<th width="10%">Level Risiko </th>
 						<th width="10%">Level Dampak </th>
-						<th width="10%">Kemungkinan Keterjadiaan </th>
+						<th width="10%">Kemungkinan Keterjadian </th>
 						<th width="10%">Pemilik Risiko</th>
 						
 						<th width="10%">&nbsp;</th>
@@ -119,23 +119,23 @@
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/submit.png"/> &nbsp; 
-								 Submited To RAC
+								 Menunggu Verifikasi RAC
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/verified.png"/> &nbsp; 
-								 Verified By RAC
+								 Terverifikasi RAC
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/treatment.png"/> &nbsp; 
-								 on Risk Treatment Process
+								 Dalam Proses Penanganan Risiko
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/actplan.png"/> &nbsp; 
-								 on Action Plan Process
+								 Dalam Proses Action Plan
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/executed.png"/> &nbsp; 
-								 Action Plan Has Been Executed and Verified
+								 Action Plan Telah Dilaksanakan dan Diverifikasi
 							</li>
 						</ul>
 

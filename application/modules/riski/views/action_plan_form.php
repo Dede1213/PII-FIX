@@ -3,7 +3,7 @@
 	<div class="page-content">
 		<!-- BEGIN PAGE HEADER-->
 		<h3 class="page-title">
-		Action Plan Form
+		Form Action Plan
 		</h3>
 		<div class="page-bar">
 			<ul class="page-breadcrumb">
@@ -13,7 +13,7 @@
 					<i class="fa fa-angle-right"></i>
 				</li>
 				<li>
-					<a target="_self" href="javascript:;">View Action Plan</a>
+					<a target="_self" href="javascript:;">Lihat Action Plan</a>
 				</li>
 			</ul>
 		</div>
@@ -48,13 +48,13 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact">Perisitiwa Risiko</label>
+									<label class="col-md-3 control-label smaller cl-compact">Peristiwa Risiko</label>
 									<div class="col-md-9">
 									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_event" placeholder=""><?=$risk['risk_event']?></textarea>
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact">Deskripsi Persitiwa Risiko</label>
+									<label class="col-md-3 control-label smaller cl-compact">Deskripsi Peristiwa Risiko</label>
 									<div class="col-md-9">
 									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_description" placeholder=""><?=$risk['risk_description']?></textarea>
 									</div>
@@ -68,7 +68,7 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan Keterjadiaan</label>
+									<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan Keterjadian</label>
 									<div class="col-md-9">
 										<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['likelihood_v']?>" name="risk_likelihood_value" placeholder="">
 									</div>
@@ -105,7 +105,7 @@
 							
 							<hr/>
 							
-							<h4>Changed Action Plan</h4>
+							<h4>Perubahan Action Plan</h4>
 							<div class="row">
 							<div class="col-md-8">	
 								<div class="form-group">
@@ -149,7 +149,7 @@
 						<div class="form-actions right">
 							<button id="risk-button-save" type="button" class="btn blue"><i class="fa fa-circle-o"></i> Simpan sebagai draft</button>
 							<button id="risk-button-verify" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Ajukan</button>
-							<button type="button" class="btn yellow" id="risk-button-cancel"><i class="fa fa-times"></i> Batalkan</button>
+							<button type="button" class="btn yellow" id="risk-button-cancel"><i class="fa fa-times"></i> Batal</button>
 						</div>
 					</form>
 				</div>
@@ -161,13 +161,13 @@
 		<div class="row">
 		<div class="col-md-12">
 			<div class="note note-danger">
-				<h4 class="block">Error</h4>
+				<h4 class="block">Informasi</h4>
 				<p>
-					 You are not allowed to view this Risk
+					 Tidak diperbolehkan untuk melihat risiko.
 				</p>
 				<p>
 					<a class="btn red" target="_self" href="<?=$site_url?>/main">
-					Back to Home </a>
+					Kembali ke Beranda </a>
 				</p>
 			</div>
 		</div>

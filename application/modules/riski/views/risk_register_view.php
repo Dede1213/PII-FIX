@@ -9,11 +9,11 @@
 			<ul class="page-breadcrumb">
 				<li>
 					<i class="fa fa-home"></i>
-					<a target="_self" href="<?=$site_url?>/main">Home</a>
+					<a target="_self" href="<?=$site_url?>/main">Beranda</a>
 					<i class="fa fa-angle-right"></i>
 				</li>
 				<li>
-					<a target="_self" href="javascript:;">View Risk</a>
+					<a target="_self" href="javascript:;">Lihat Risiko</a>
 				</li>
 			</ul>
 		</div>
@@ -24,7 +24,7 @@
 			<div class="portlet box blue">
 				<div class="portlet-title">
 					<div class="caption">
-						Risk Form
+						Form Risiko
 					</div>
 				</div>
 				
@@ -34,7 +34,7 @@
 							<div class="row">
 							<div class="col-md-6">	
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact">Diajukan Oleh</label>
+									<label class="col-md-3 control-label smaller cl-compact">Diajukan oleh</label>
 									<div class="col-md-9">
 										<input type="text" id="risk_submitted_by" class="form-control input-sm input-readview" readonly="true" placeholder="" value="<?php if($risk['username']==""){echo $risk['risk_input_by_v'];}else{echo $risk['username'];}; ?>">											
 									</div>
@@ -129,7 +129,7 @@
 									</div>
 								</div>-->
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact" >Dampak Level</label>
+									<label class="col-md-3 control-label smaller cl-compact" >Level Dampak</label>
 									<div class="col-md-9">
 									<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['impact_level_v']?>" name="risk_impact_level_value" placeholder="">
 									</div>
@@ -142,14 +142,14 @@
 								</div>
 								<div class="form-group">
 									<input type="hidden" name="risk_level_id" value=""/>
-									<label class="col-md-3 control-label smaller cl-compact" >Risiko Level</label>
+									<label class="col-md-3 control-label smaller cl-compact" >Level Risiko</label>
 									<div class="col-md-9">
 									<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['risk_level_v']?>" name="risk_level" placeholder="">
 									</div>
 								</div>
 								<div class="form-group">
 									<input type="hidden" name="risk_level_id" value=""/>
-									<label class="col-md-3 control-label smaller cl-compact" >Usulan Penangan Risiko</label>
+									<label class="col-md-3 control-label smaller cl-compact" >Usulan Penanganan Risiko</label>
 									<div class="col-md-9">
 									<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['treatment_v']?>" name="suggested_risk_treatment" placeholder="">
 									</div>
@@ -181,9 +181,9 @@
 							<table id="action_plan_table" class="table table-condensed table-bordered table-hover">
 								<thead>
 								<tr role="row" class="heading">
-									<th>ID Kontrol Yang Ada Saat Ini</th>
-									<th>Kontrol Yang Ada Saat Ini</th>
-									<th>Evaluation on Existing Control</th>
+									<th>ID Kontrol Eksisting</th>
+									<th>Kontrol Eksisting</th>
+									<th>Evaluasi atas Eksisting Kontrol</th>
 									<th>Pemilik Kontrol</th>
 								</tr>
 								</thead>
@@ -232,13 +232,13 @@
 		<div class="row">
 		<div class="col-md-12">
 			<div class="note note-danger">
-				<h4 class="block">Error</h4>
+				<h4 class="block">Informasi</h4>
 				<p>
-					 You are not allowed to view this Risk
+					 Tidak diperbolehkan untuk melihat risiko.
 				</p>
 				<p>
 					<a class="btn red" target="_self" href="<?=$site_url?>/main">
-					Back to Home </a>
+					Kembali ke Beranda </a>
 				</p>
 			</div>
 		</div>

@@ -86,8 +86,8 @@
 			  </div>
 			  <div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button class = "btn btn-success" id = "risk_list_excel">export to excel</button>
-				<button class = "btn btn-success" id = "risk_list_pdf" >export to pdf</button>
+				<button class = "btn btn-success" id = "risk_list_excel">Export to Excel</button>
+				<button class = "btn btn-success" id = "risk_list_pdf" >Export to PDF</button>
 			  </div>
 			</div>
 		  </div>
@@ -112,8 +112,8 @@
 			  </div>
 			  <div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button class = "btn btn-success" id = "risk_register_list_excel">export to excel</button>
-				<button class = "btn btn-success" id = "risk_register_list_pdf" >export to pdf</button>
+				<button class = "btn btn-success" id = "risk_register_list_excel">Export to Excel</button>
+				<button class = "btn btn-success" id = "risk_register_list_pdf" >Export to PDF</button>
 			  </div>
 			</div>
 		  </div>
@@ -140,8 +140,8 @@
 			  </div>
 			  <div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button class = "btn btn-success" id = "treatment_list_excel">export to excel</button>
-				<button class = "btn btn-success" id = "treatment_list_pdf" >export to pdf</button>
+				<button class = "btn btn-success" id = "treatment_list_excel">Export to Excel</button>
+				<button class = "btn btn-success" id = "treatment_list_pdf" >Export to PDF</button>
 			  </div>
 			</div>
 		  </div>
@@ -170,8 +170,8 @@
 			  </div>
 			  <div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button class = "btn btn-success" id = "actionplan_list_excel">export to excel</button>
-				<button class = "btn btn-success" id = "actionplan_list_pdf" >export to pdf</button>
+				<button class = "btn btn-success" id = "actionplan_list_excel">Export to Excel</button>
+				<button class = "btn btn-success" id = "actionplan_list_pdf" >Export to PDF</button>
 			  </div>
 			</div>
 		  </div>
@@ -199,8 +199,8 @@
 			  </div>
 			  <div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button class = "btn btn-success" id = "execution_list_excel">export to excel</button>
-				<button class = "btn btn-success" id = "execution_list_pdf" >export to pdf</button>
+				<button class = "btn btn-success" id = "execution_list_excel">Export to Excel</button>
+				<button class = "btn btn-success" id = "execution_list_pdf" >Export to PDF</button>
 			  </div>
 			</div>
 		  </div>
@@ -229,8 +229,8 @@
 			  </div>
 			  <div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button class = "btn btn-success" id = "kri_list_excel">export to excel</button>
-				<button class = "btn btn-success" id = "kri_list_pdf" >export to pdf</button>
+				<button class = "btn btn-success" id = "kri_list_excel">Export to Excel</button>
+				<button class = "btn btn-success" id = "kri_list_pdf" >Export to PDF</button>
 			  </div>
 			</div>
 		  </div>
@@ -257,8 +257,8 @@
 			  </div>
 			  <div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button class = "btn btn-success" id = "changereq_list_excel">export to excel</button>
-				<button class = "btn btn-success" id = "changereq_list_pdf" >export to pdf</button>
+				<button class = "btn btn-success" id = "changereq_list_excel">Export to Excel</button>
+				<button class = "btn btn-success" id = "changereq_list_pdf" >Export to PDF</button>
 			  </div>
 			</div>
 		  </div>

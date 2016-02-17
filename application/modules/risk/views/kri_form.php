@@ -200,7 +200,7 @@
 				<div class="form-group">
 					<label class="col-md-2 control-label">KRI Warning</label>
 					<div class="col-md-6">
-						<img id="#warning_img" src="<?=$base_url?>assets/images/legend/kri_<?=strtolower($kri['kri_warning'])?>.png"/>
+						<img id="warning_img" src="<?=$base_url?>assets/images/legend/kri_<?=strtolower($kri['kri_warning'])?>.png"/>
 					</div>
 				</div>
 				<?php } ?>

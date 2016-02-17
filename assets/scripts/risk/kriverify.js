@@ -189,7 +189,13 @@ var KriForm = function() {
         					def = v['result'];
         				}
         			});
-        		} else {
+        		}else if (t_treshold_type == 'VALUE') {
+                                $.each(t_treshold_list, function(k, v) {
+                                        if (v['value_1'] == nval) {
+                                                def = v['result'];
+                                        }
+                                });
+                        } else {
         			var tt = 'NUMERIC';
         			if (nval <= 100) tt = 'PERCENTAGE';
         			

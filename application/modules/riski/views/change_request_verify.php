@@ -40,16 +40,15 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact">Peristiwa Risiko
-								</label>
-								<div class="col-md-9">
-									<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_event" placeholder="">
+									<label class="col-md-3 control-label smaller cl-compact">Peristiwa Risiko</label>
+									<div class="col-md-9">
+									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_event" placeholder=""></textarea>
+									</div>
 								</div>
-							</div>
 							<div class="form-group">
 								<label class="col-md-3 control-label small cl-compact">Deskripsi Peristiwa Risiko</label>
 								<div class="col-md-9">
-								<textarea class="form-control input-sm input-readview" readonly="true" rows="3" name="risk_description" placeholder=""></textarea>
+								<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_description" placeholder=""></textarea>
 								</div>
 							</div>
 							<?php if ($change_type == 'Risk Form') { ?>
@@ -168,16 +167,15 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact">Peristiwa Risiko
-								</label>
-								<div class="col-md-9">
-								<input type="text" class="form-control input-sm" readonly="true" name="risk_event" data-required="1" placeholder="">
+									<label class="col-md-3 control-label smaller cl-compact">Peristiwa Risiko</label>
+									<div class="col-md-9">
+									<textarea class="form-control input-readview"  rows="3" name="risk_event" placeholder=""></textarea>
+									</div>
 								</div>
-							</div>
 							<div class="form-group">
 								<label class="col-md-3 control-label small cl-compact">Deskripsi Peristiwa Risiko</label>
 								<div class="col-md-9">
-								<textarea class="form-control" rows="3" readonly="true" name="risk_description" placeholder=""></textarea>
+								<textarea class="form-control input-readview" rows="3"  name="risk_description" placeholder=""></textarea>
 								</div>
 							</div>
 							<?php if ($change_type == 'Risk Form') { ?>

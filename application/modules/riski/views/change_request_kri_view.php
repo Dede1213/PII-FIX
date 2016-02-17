@@ -2,74 +2,47 @@
 	<div class="page-content">
 		<!-- BEGIN PAGE HEADER-->
 		<h3 class="page-title">
-		Change Request Form
+		Form Permintaan Perubahan
 		</h3>
 		<div class="page-bar">
 			<ul class="page-breadcrumb">
 				<li>
 					<i class="fa fa-home"></i>
-					<a target="_self" href="<?=$site_url?>/main">Home</a>
+					<a target="_self" href="<?=$site_url?>/main">Beranda</a>
 					<i class="fa fa-angle-right"></i>
 				</li>
 				<li>
-					<a target="_self" href="javascript:;">Change Request Form</a>
+					<a target="_self" href="javascript:;">Form Permintaan Perubahan</a>
 				</li>
 			</ul>
 		</div>
 
-				<?php
-					$this->load->database();
-					$kri_code =$kri['kri_code'];
-					$sql = "select t_cr_risk.cr_status from t_cr_risk join t_kri on t_cr_risk.risk_cause = t_kri.id where t_kri.kri_code = '$kri_code' and t_cr_risk.cr_status= 0 ";
-					//$sql = "select id from t_kri where kri_code = '$kri_code' ";
-					$rs = $this->db->query($sql);
-					if ($rs->num_rows() > 0) {
-							?>
-								<div class="row">
-								<div class="col-md-12">
-								<div class="note note-warning">
-								<h4 class="block">Warning</h4>
-								<p>
-								 Cannot Input Change Request for this KRI, This KRI already have a Pending Change Request 
-								</p>
-								<p>
-								<a class="btn red" target="_self" href="<?=$base_url?>index.php/main/mainpic">
-								Back to Home </a>
-								</p>
-								</div>
-								</div>
-								</div>
-					<?php
-						}else{
-					?>
-
-
-
+				
 		<!-- END PAGE HEADER-->
 		<div class="row">
 		<div class="col-md-12">
 			<form id="input-form" role="form" class="form-horizontal">
 				<div class="form-body">
 					<div class="form-group">
-						<label class="col-md-2 control-label">Risk ID</label>
+						<label class="col-md-2 control-label">ID Risiko</label>
 						<div class="col-md-6">
 							<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_library_code" placeholder="" value="<?=$risk['risk_code']?>">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-2 control-label">Risk Event</label>
+						<label class="col-md-2 control-label">Peristiwa Risiko</label>
 						<div class="col-md-6">
 						<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_event" placeholder="" value="<?=$risk['risk_event']?>">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-2 control-label" >Risk Level</label>
+						<label class="col-md-2 control-label" >Level Risiko</label>
 						<div class="col-md-6">
 						<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_level" placeholder="" value="<?=$risk['risk_level_v']?>">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-2 control-label" >Risk Treatment</label>
+						<label class="col-md-2 control-label" >Penanganan Risiko</label>
 						<div class="col-md-6">
 							<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_treatment" placeholder="" value="<?=$risk['treatment_v']?>">
 						</div>
@@ -81,8 +54,8 @@
 								<thead>
 								<tr role="row" class="heading">
 									<th>Action Plan</th>
-									<th>Due Date</th>
-									<th>Action Plan Owner</th>
+									<th>Batas Waktu</th>
+									<th>Pemilik Action Plan</th>
 								</tr>
 								</thead>
 								<tbody>
@@ -113,43 +86,33 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-2 control-label">Key Risk Indicator</label>
+					<label class="col-md-2 control-label">Indikator Risiko</label>
 					<div class="col-md-6">
 					<input type="text" class="form-control input-sm input-readview" readonly="true" name="key_risk_indicator" placeholder="" value="<?=$kri['key_risk_indicator']?>">
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-2 control-label">Treshold</label>
+					<label class="col-md-2 control-label">Kemungkinan Keterjadian</label>
 					<div class="col-md-6">
 					<input type="text" class="form-control input-sm input-readview" readonly="true" name="treshold" placeholder="" value="<?=$kri['treshold']?>">
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-2 control-label">Timing of Reporting</label>
+					<label class="col-md-2 control-label">Waktu Pelaporan</label>
 					<div class="col-md-6">
 					<input type="text" class="form-control input-sm input-readview" readonly="true" name="timing_pelaporan" placeholder="" value="<?=$kri['timing_pelaporan_v']?>">
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-2 control-label">KRI Owner</label>
+					<label class="col-md-2 control-label">Pemilik KRI</label>
 					<div class="col-md-6">
 					<input type="text" class="form-control input-sm input-readview" readonly="true" name="kri_owner" placeholder="" value="<?=$kri['kri_owner_v']?>">
 					</div>
 				</div>
-				<?php if ($kri['treshold_type'] == 'SELECTION') { ?>
-
 				<div class="form-group">
-						<label class="col-md-2 control-label">Report</label>
-						<div class="col-md-6">
-						<input type="text" class="form-control input-sm input-readview" readonly="true" name="report" placeholder="" value="<?=$kri['owner_report']?>">
-						</div>
-					</div>
-
-				<?php } else { ?> 
-				<div class="form-group">
-						<label class="col-md-2 control-label">Report</label>
-						<div class="col-md-6">
-						<input type="hidden" class="form-control input-sm input-readview" readonly="true" name="report" placeholder="" value="<?=$kri['owner_report']?>">
+					<label class="col-md-2 control-label">Laporan</label>
+					<div class="col-md-6">
+					<input type="hidden" class="form-control input-sm input-readview" readonly="true" name="report" placeholder="" value="<?=$kri['owner_report']?>">
 						<select class="form-control input-readview" disabled="true">
 							
 							<?php foreach ($kri['treshold_list'] as $key => $value) { 
@@ -174,23 +137,22 @@
 							<option value="<?=$value['value_1']?>" <?=$value['value_1'] == $kri['owner_report'] ? 'SELECTED' : ''?>><?=$value['operator']?> <?=$value['value_1']?> <?php echo $persen2 ;?> <?php echo $strip ;?> <?=$value['value_2']?> <?php echo $persen ;?> </option>
 							<?php } ?>
 						</select> 
-						</div>
-					</div>
-				<?php } ?>
+				</div>
+				</div>
 				<?php if ( (isset($verify) && $verify) || (isset($input) && $input) ) { ?>
 				<hr/>
 				<?php if (isset($verify) && $verify) { ?>
 				<div class="form-group">
-					<label class="col-md-2 control-label" >Threshold</label>
+					<label class="col-md-2 control-label" >Kemungkinan Keterjadian</label>
 					<div class="col-md-8">
 						<table id="action_plan_table" class="table table-condensed table-bordered table-hover">
 							<thead>
 							<tr role="row" class="heading">
 								<th>Operator</th>
-								<th>Value 1</th>
-								<th>Value 2</th>
-								<th>Type Value</th>
-								<th>Result</th>
+								<th>Nilai 1</th>
+								<th>Nilai 2</th>
+								<th>Tipe Nilai</th>
+								<th>Hasil</th>
 							</tr>
 							</thead>
 							<tbody>
@@ -210,7 +172,7 @@
 				<?php } ?>
 				<?php if ($kri['treshold_type'] == 'SELECTION') { ?>
 					<div class="form-group">
-						<label class="col-md-2 control-label">Change Report</label>
+						<label class="col-md-2 control-label">Perubahan Laporan</label>
 						<div class="col-md-6">
 						<select class="form-control input-sm" id="owner_report" name="owner_report">
 							<?php foreach ($kri['treshold_list'] as $key => $value) { ?>
@@ -220,6 +182,7 @@
 						</div>
 					</div>
 				<?php } else { ?> 
+				
 					<div class="form-group">
 						<label class="col-md-2 control-label">Change Report</label>
 						<div class="col-md-6">
@@ -261,22 +224,10 @@
 				
 				<?php } else { ?>
 				<hr/>
-				<?php if ($kri['treshold_type'] == 'SELECTION') { ?>
 					<div class="form-group">
-						<label class="col-md-2 control-label">Change Report</label>
+						<label class="col-md-2 control-label">Perubahan Laporan</label>
 						<div class="col-md-6">
-						<select class="form-control input-sm" id="owner_report" name="owner_report">
-							<?php foreach ($kri['treshold_list'] as $key => $value) { ?>
-							<option value="<?=$value['value_1']?>" <?=$value['value_1'] == $kri['owner_report'] ? 'SELECTED' : ''?>><?=$value['value_1']?></option>
-							<?php } ?>
-						</select>
-						</div>
-					</div>
-				<?php } else { ?> 
-					<div class="form-group">
-						<label class="col-md-2 control-label">Change Report</label>
-						<div class="col-md-6">
-						<select class="form-control input-sm" id="owner_report" name="owner_report">
+						<select class="form-control input-sm input-readview" id="owner_report" name="owner_report" disabled="true">
 							
 							<?php foreach ($kri['treshold_list'] as $key => $value) { 
 
@@ -302,32 +253,22 @@
 						</select> 
 						</div>
 					</div>
-				<!--
-					<div class="form-group">
-						<label class="col-md-2 control-label">Change Report</label>
-						<div class="col-md-6">
-							<input type="number" class="form-control input-sm" id="owner_report" name="owner_report" placeholder="" value="<?=$kri['owner_report'] == '' ? '0' : $kri['owner_report'] ?>">
-						</div>
-					</div>
-					-->
-				<?php } ?> 
-
 				<?php } ?> 
 			</div>
 			<?php if (isset($verify) && $verify) { ?>
 			<input type="hidden" name="change_id" value="<?=$change['id']?>">
 			<div class="form-actions right">
-				<button id="risk-button-submit" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Verify</button>
-				<button type="button" class="btn yellow" id="verify-risk-button-cancel"><i class="fa fa-times"></i> Cancel</button>
+				<button id="risk-button-submit" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Verifikasi</button>
+				<button type="button" class="btn yellow" id="verify-risk-button-cancel"><i class="fa fa-times"></i> Batal</button>
 			</div>
 			<?php } else if (isset($input) && $input) { ?>
 			<div class="form-actions right">
-				<button id="risk-button-submit" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Submit</button>
-				<button type="button" class="btn yellow" id="verify-risk-button-cancel"><i class="fa fa-times"></i> Cancel</button>
+				<button id="risk-button-submit" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Ajukan</button>
+				<button type="button" class="btn yellow" id="verify-risk-button-cancel"><i class="fa fa-times"></i> Batal</button>
 			</div>
 			<?php } else { ?>
 			<div class="form-actions right">
-				<button onclick="javascript: location.href=site_url+'/main#tab_change_request_list'" type="button" class="btn yellow" id="verify-risk-button-cancel"><i class="fa fa-times"></i> Cancel</button>
+				<button onclick="javascript: location.href=site_url+'/main#tab_change_request_list'" type="button" class="btn yellow" id="verify-risk-button-cancel"><i class="fa fa-times"></i> Batal</button>
 			</div>
 			<?php } ?>
 			</form>
@@ -335,9 +276,7 @@
 		</div>
 		</div>
 
-<?php
-}
-?>
+
 
 	</div>
 </div>

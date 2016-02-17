@@ -17,34 +17,7 @@
 			</ul>
 		</div>
 
-				<?php
-					$this->load->database();
-					$kri_code =$kri['kri_code'];
-					$sql = "select t_cr_risk.cr_status from t_cr_risk join t_kri on t_cr_risk.risk_cause = t_kri.id where t_kri.kri_code = '$kri_code' and t_cr_risk.cr_status= 0 ";
-					//$sql = "select id from t_kri where kri_code = '$kri_code' ";
-					$rs = $this->db->query($sql);
-					if ($rs->num_rows() > 0) {
-							?>
-								<div class="row">
-								<div class="col-md-12">
-								<div class="note note-warning">
-								<h4 class="block">Warning</h4>
-								<p>
-								 Cannot Input Change Request for this KRI, This KRI already have a Pending Change Request 
-								</p>
-								<p>
-								<a class="btn red" target="_self" href="<?=$base_url?>index.php/main/mainpic">
-								Back to Home </a>
-								</p>
-								</div>
-								</div>
-								</div>
-					<?php
-						}else{
-					?>
-
-
-
+				
 		<!-- END PAGE HEADER-->
 		<div class="row">
 		<div class="col-md-12">
@@ -336,7 +309,7 @@
 		</div>
 
 <?php
-}
+
 ?>
 
 	</div>

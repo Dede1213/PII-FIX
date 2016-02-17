@@ -1562,7 +1562,51 @@ class RiskRegister extends APP_Controlleri {
 			}
 		}
 	}
-	
+	public function ChangeRequestView2($risk_id)
+	{
+		$session_data = $this->session->credential;
+		
+		if (!empty($risk_id) && is_numeric($risk_id)) {
+			
+			$res = $this->risk->getRiskValidate('viewMyChange', $risk_id, $session_data);
+			if ($res) {
+				
+				$data = $this->loadDefaultAppConfig();
+				$data['sidebarMenu'] = $this->getSidebarMenuStructure('main');
+				$data['indonya'] = base_url('index.php/maini');
+				$data['engnya'] = base_url('index.php/main');				
+				$data['pageLevelStyles'] = '';
+				
+				if ($res['cr_type'] == 'KRI Form')  {
+					$kri = $this->risk->getKriById($res['risk_cause']);
+					$data['kri'] = $kri;
+					$risk = $this->risk->getRiskById($kri['risk_id']);
+					$data['risk'] = $risk;
+					
+					$data['change'] = $res;
+					
+					$data['pageLevelScripts'] = '';
+					$data['pageLevelScriptsInit'] = '';
+					$v = 'change_request_kri_view';
+				} else {
+					$data['pageLevelScripts'] = '
+					<script src="assets/scripts/risk/cr_riskregister_view.js"></script>
+					';
+					$data['pageLevelScriptsInit'] = 'ChangeRequest.init();';
+					$v = 'change_request_view';
+				}
+				
+				$data['change_id'] = $risk_id;
+				$data['change_type'] = $res['cr_type'];
+				$data['change_code'] = $res['cr_code'];
+				$data['change_status'] = $res['cr_status'];
+				
+				$this->load->view('main/header', $data);
+				$this->load->view($v, $data);
+				$this->load->view('main/footer', $data);
+			}
+		}
+	}
 	public function loadChangeRequest($mode, $rid) {
 		if (!empty($rid) && is_numeric($rid)) {
 			$data = array();

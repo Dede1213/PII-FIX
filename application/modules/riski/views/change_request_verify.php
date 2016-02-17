@@ -54,17 +54,18 @@
 							</div>
 							<?php if ($change_type == 'Risk Form') { ?>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Sebab</label>
-								<div class="col-md-9">
-									<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_cause" placeholder="">
+									<label class="col-md-3 control-label smaller cl-compact">Sebab <span class="required">* </span></label>
+									<div class="col-md-9">
+									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_cause" placeholder=""></textarea>
+									</div>
 								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Dampak</label>
-								<div class="col-md-9">
-									<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_impact" placeholder="">
+								<div class="form-group">
+									<label class="col-md-3 control-label smaller cl-compact">Dampak <span class="required">* </span></label>
+									<div class="col-md-9">
+									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_impact" placeholder=""></textarea>
+									</div>
 								</div>
-							</div>
+							
 							<?php } ?>
 							<div class="form-group">
 								<label class="col-md-3 control-label smaller cl-compact" >Level Dampak</label>
@@ -181,17 +182,18 @@
 							</div>
 							<?php if ($change_type == 'Risk Form') { ?>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Sebab <span class="required">* </span></label>
-								<div class="col-md-9">
-								<input type="text" class="form-control input-sm" name="risk_cause" placeholder="">
+									<label class="col-md-3 control-label smaller cl-compact">Sebab <span class="required">* </span></label>
+									<div class="col-md-9">
+									<textarea class="form-control input-readview" rows="3" name="risk_cause" placeholder=""></textarea>
+									</div>
 								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Dampak <span class="required">* </span></label>
-								<div class="col-md-9">
-								<input type="text" class="form-control input-sm" name="risk_impact" placeholder="">
+								<div class="form-group">
+									<label class="col-md-3 control-label smaller cl-compact">Dampak <span class="required">* </span></label>
+									<div class="col-md-9">
+									<textarea class="form-control input-readview"  rows="3" name="risk_impact" placeholder=""></textarea>
+									</div>
 								</div>
-							</div>
+							
 							<?php } ?>
 							<?php if ($change_type == 'Risk Form' || $change_type == 'Risk Owner Form') { ?>
 							<div class="form-group">

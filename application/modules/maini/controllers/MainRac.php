@@ -2463,7 +2463,7 @@ class MainRac extends APP_Controlleri {
 						$data['change'] = $change;
 						$data['verify'] = true;
 						
-						$data['pageLevelScripts'] = '<script src="assets/scripts/risk/cr_riskregister_kri_verify.js"></script>';
+						$data['pageLevelScripts'] = '<script src="assets/scripts/riski/cr_riskregister_kri_verify.js"></script>';
 						$data['pageLevelScriptsInit'] = 'ChangeRequest.init();';
 						$view = 'riski/change_request_kri_rac';
 					}

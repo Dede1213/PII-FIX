@@ -273,7 +273,7 @@ if ($query->num_rows() > 0)
    foreach ($query->result_array() as $row)
    {
       ?>
-      <tr><td><a href="<?php echo $site_url ?>/main/mainrac/actionPlanForm/<?php echo$row['id'] ?>?status=under"> <?php echo $row['id_plan']; ?> </a></td><td><?php echo $row['action_plan']; ?></td><td><?php echo $row['division']; ?></td><td><a href="<?php echo $site_url ?>/main/mainrac/actionPlanExecForm/<?php echo$row['id'] ?>?status=under"><?php echo $row['execution_status']; ?></a></td></tr>
+      <tr><td><a href="<?php echo $site_url ?>/maini/mainrac/actionPlanForm/<?php echo$row['id'] ?>?status=under"> <?php echo $row['id_plan']; ?> </a></td><td><?php echo $row['action_plan']; ?></td><td><?php echo $row['division']; ?></td><td><a href="<?php echo $site_url ?>/main/mainrac/actionPlanExecForm/<?php echo$row['id'] ?>?status=under"><?php echo $row['execution_status']; ?></a></td></tr>
 <?php
    }
 } 

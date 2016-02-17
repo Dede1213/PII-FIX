@@ -66,9 +66,9 @@ class Periode extends APP_Controlleri {
 		
 		$data['pageLevelScriptsInit'] = 'Periode.init();';
 		
-		$this->load->view('main/header', $data);
+		$this->load->view('maini/header', $data);
 		$this->load->view('periode_report', $data);
-		$this->load->view('main/footer', $data);
+		$this->load->view('maini/footer', $data);
 	}
 	
 	public function periodeGetData()

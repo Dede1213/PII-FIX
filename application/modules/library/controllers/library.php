@@ -85,6 +85,58 @@ class Library extends APP_Controller {
 		echo $stringData;
 		exit;		   
 	}
+
+	public function list_ob_excel() {
+		
+		$this->load->model('Mlibrary');
+		  
+		//$data['dataget'] = $this->input->get();
+		 
+		$data['datanya'] = $this->Mlibrary->getAllObjective_export($this->input->post());
+		 
+		$this->load->library('parser');
+		
+		//pass retrieved data into template and return as a string
+        $stringData = $this->parser->parse('export/list_objective', $data, true);
+		 
+		header("Pragma: public");
+		header("Expires: 0");
+		header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+		
+		header('Content-type: application/ms-excel');
+		header("Expires: 0");
+		header('Content-Disposition: attachment; filename=objective_list.xls');
+		header("Content-Description: File Transfer");
+	 
+		echo $stringData;
+		exit;		   
+	}
+
+	public function list_ob_pdf() {
+	
+		$this->load->model('Mlibrary');		
+		$this->load->library('parser');
+		$this->load->library('dompdf_gen');
+		
+		$orientation = "landscape";
+		$paper_size='a4';
+		  
+		$data['datanya'] = $this->Mlibrary->getAllObjective_export($this->input->post());
+			 
+		//$data['total_data'] = count($data['datanya']);
+		 
+		$this->load->view('export/list_objective',$data);
+		 
+		// Get output html
+		$html = $this->output->get_output();
+		  
+		// Convert to PDF
+		$this->dompdf->load_html($html);
+		$this->dompdf->set_paper($paper_size, $orientation);
+		$this->dompdf->render();			
+		$this->dompdf->stream("objectivereport.pdf");
+		 
+	}
 	
 	public function list_ap_pdf() {
 	
@@ -693,8 +745,8 @@ class Library extends APP_Controller {
 	public function list_objective()
 	{
 		$data = $this->loadDefaultAppConfig();
-		$data['indonya'] = base_url('index.php/libraryin/library/list_ec');
-		$data['engnya'] = base_url('index.php/library/list_ec');			
+		$data['indonya'] = base_url('index.php/libraryin/library/list_objective');
+		$data['engnya'] = base_url('index.php/library/list_objective');			
 		$data['sidebarMenu'] = $this->getSidebarMenuStructure('library/list_ec');
 		$data['pageLevelStyles'] = '
 		<link rel="stylesheet" type="text/css" href="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>

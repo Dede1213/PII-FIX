@@ -117,6 +117,27 @@ class Mlibrary extends APP_Model {
 			}		
 			
 	}
+
+	public function getAllObjective_export()
+	{
+	 
+		$sql = "select t_risk_objective.id, t_risk_objective.objective
+				from t_risk_objective
+				group by t_risk_objective.objective
+				";
+				 
+		$query = $this->db->query($sql);
+			
+			if ($query->num_rows())
+			{
+				return $query->result_array();
+			}
+			else
+			{
+				return FALSE;
+			}		
+			
+	}
 	
 	public function getAllRisk_ap($page, $row, $order_by = null, $order = null, $filter_by = null, $filter_value = null)
 	{

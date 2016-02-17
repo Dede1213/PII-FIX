@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Library extends APP_Controller {
+class Library extends APP_Controlleri {
 	 
 	public function list_risk()
 	{
@@ -28,9 +28,9 @@ class Library extends APP_Controller {
 		';
 		 
 		 
-		$this->load->view('main/header', $data);
+		$this->load->view('maini/header', $data);
 		$this->load->view('library', $data);
-		$this->load->view('main/footer', $data);
+		$this->load->view('maini/footer', $data);
 		 
 	}
 	
@@ -418,9 +418,9 @@ class Library extends APP_Controller {
 		$this->load->model('risk/mriskregister');
 		$data['category'] = $this->mriskregister->getRiskCategory();
 		 
-		$this->load->view('main/header', $data);
+		$this->load->view('maini/header', $data);
 		$this->load->view('library_ap', $data);
-		$this->load->view('main/footer', $data);
+		$this->load->view('maini/footer', $data);
 		 
 	}
 	
@@ -684,17 +684,17 @@ class Library extends APP_Controller {
 		';
 		 
 		 
-		$this->load->view('main/header', $data);
+		$this->load->view('maini/header', $data);
 		$this->load->view('library_ec', $data);
-		$this->load->view('main/footer', $data);
+		$this->load->view('maini/footer', $data);
 		 
 	}
 
 	public function list_objective()
 	{
 		$data = $this->loadDefaultAppConfig();
-		$data['indonya'] = base_url('index.php/libraryin/library/list_ec');
-		$data['engnya'] = base_url('index.php/library/list_ec');			
+		$data['indonya'] = base_url('index.php/libraryin/library/list_objective');
+		$data['engnya'] = base_url('index.php/library/list_objective');			
 		$data['sidebarMenu'] = $this->getSidebarMenuStructure('library/list_ec');
 		$data['pageLevelStyles'] = '
 		<link rel="stylesheet" type="text/css" href="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
@@ -715,9 +715,9 @@ class Library extends APP_Controller {
 		';
 		 
 		 
-		$this->load->view('main/header', $data);
+		$this->load->view('maini/header', $data);
 		$this->load->view('library_objective', $data);
-		$this->load->view('main/footer', $data);
+		$this->load->view('maini/footer', $data);
 		 
 	}
 	
@@ -806,9 +806,9 @@ class Library extends APP_Controller {
 		';
 		 
 		 
-		$this->load->view('main/header', $data);
+		$this->load->view('maini/header', $data);
 		$this->load->view('taksonomi', $data);
-		$this->load->view('main/footer', $data);
+		$this->load->view('maini/footer', $data);
 		 
 	}
 	
@@ -871,9 +871,9 @@ class Library extends APP_Controller {
 		$this->load->model('risk/mriskregister');
 		$data['category'] = $this->mriskregister->getRiskCategory();
 		 
-		$this->load->view('main/header', $data);
+		$this->load->view('maini/header', $data);
 		$this->load->view('kri', $data);
-		$this->load->view('main/footer', $data);
+		$this->load->view('maini/footer', $data);
 		 
 	}
 	

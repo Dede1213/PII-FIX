@@ -107,12 +107,47 @@
 					<input type="text" class="form-control input-sm input-readview" readonly="true" name="kri_owner" placeholder="" value="<?=$kri['kri_owner_v']?>">
 					</div>
 				</div>
+				<?php if ($kri['treshold_type'] == 'SELECTION') { ?>
+
 				<div class="form-group">
-					<label class="col-md-2 control-label">Report</label>
-					<div class="col-md-6">
-					<input type="text" class="form-control input-sm input-readview" readonly="true" name="report" placeholder="" value="<?=$kri['owner_report']?>">
+						<label class="col-md-2 control-label">Report</label>
+						<div class="col-md-6">
+						<input type="text" class="form-control input-sm input-readview" readonly="true" name="report" placeholder="" value="<?=$kri['owner_report']?>">
+						</div>
 					</div>
-				</div>
+
+				<?php } else { ?> 
+				<div class="form-group">
+						<label class="col-md-2 control-label">Report</label>
+						<div class="col-md-6">
+						<input type="hidden" class="form-control input-sm input-readview" readonly="true" name="report" placeholder="" value="<?=$kri['owner_report']?>">
+						<select class="form-control input-readview" disabled="true">
+							
+							<?php foreach ($kri['treshold_list'] as $key => $value) { 
+
+							if ($value['value_2'] != null){
+								$strip = "-" ;
+								}else{
+									$strip = "" ;
+									}
+							if ($value['value_type'] == 'PERCENTAGE'){
+								$persen = "%" ;
+								}else{
+									$persen = "" ;
+									}
+							if ($value['value_2'] != null && $value['value_type'] == 'PERCENTAGE') {
+								$persen2 = "%" ;
+								}else{
+									$persen2 = "" ;
+									}
+							 ?>
+									PERCENTAGE
+							<option value="<?=$value['value_1']?>" <?=$value['value_1'] == $kri['owner_report'] ? 'SELECTED' : ''?>><?=$value['operator']?> <?=$value['value_1']?> <?php echo $persen2 ;?> <?php echo $strip ;?> <?=$value['value_2']?> <?php echo $persen ;?> </option>
+							<?php } ?>
+						</select> 
+						</div>
+					</div>
+				<?php } ?>
 				<?php if ( (isset($verify) && $verify) || (isset($input) && $input) ) { ?>
 				<hr/>
 				<?php if (isset($verify) && $verify) { ?>
@@ -159,7 +194,33 @@
 					<div class="form-group">
 						<label class="col-md-2 control-label">Change Report</label>
 						<div class="col-md-6">
+							<select class="form-control input-sm" id="owner_report" name="owner_report">
+							
+							<?php foreach ($kri['treshold_list'] as $key => $value) { 
+
+							if ($value['value_2'] != null){
+								$strip = "-" ;
+								}else{
+									$strip = "" ;
+									}
+							if ($value['value_type'] == 'PERCENTAGE'){
+								$persen = "%" ;
+								}else{
+									$persen = "" ;
+									}
+							if ($value['value_2'] != null && $value['value_type'] == 'PERCENTAGE') {
+								$persen2 = "%" ;
+								}else{
+									$persen2 = "" ;
+									}
+							 ?>
+									PERCENTAGE
+							<option value="<?=$value['value_1']?>" <?=$value['value_1'] == $kri['owner_report'] ? 'SELECTED' : ''?>><?=$value['operator']?> <?=$value['value_1']?> <?php echo $persen2 ;?> <?php echo $strip ;?> <?=$value['value_2']?> <?php echo $persen ;?> </option>
+							<?php } ?>
+						</select> 
+						<!--
 							<input type="number" class="form-control input-sm" id="owner_report" name="owner_report" placeholder="" value="<?=$change['risk_impact']?>">
+						-->
 						</div>
 					</div>
 				<?php } ?> 

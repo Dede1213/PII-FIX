@@ -4157,6 +4157,37 @@ class Risk extends APP_Model {
 				$res3 = $this->db->query($sql, $par);
 			}
 			
+			
+			$sql = "select value_1 from t_kri_treshold where kri_id='".$rid."' and operator ='BELOW' ";
+			$query = $this->db->query($sql);
+			$row = $query->row();
+			$below = $row->value_1;
+
+
+			$sql = "select value_1, value_2 from t_kri_treshold where kri_id='".$rid."' and operator ='BETWEEN' ";
+			$query = $this->db->query($sql);
+			$row = $query->row();
+			$between = $row->value_1;
+			$between2 = $row->value_2;
+			
+
+			$sql = "select value_1 from t_kri_treshold where kri_id='".$rid."' and operator ='ABOVE' ";
+			$query = $this->db->query($sql);
+			$row = $query->row();
+			$above = $row->value_1;
+
+			if($below == $between){
+			$tambah = $between+1;
+			$sql = "update t_kri_treshold set value_1='".$tambah."'  where kri_id='".$rid."' and operator ='BETWEEN' ";
+			$res7 = $this->db->query($sql);
+			}
+
+			if($between2 == $above){
+			$tambah2 = $above+1;
+			$sql = "update t_kri_treshold set value_1='".$tambah2."'  where kri_id='".$rid."' and operator ='ABOVE' ";
+			$res8 = $this->db->query($sql);
+			}
+
 			return $res;
 		}
 	}

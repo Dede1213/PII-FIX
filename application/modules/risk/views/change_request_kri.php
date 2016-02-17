@@ -262,10 +262,22 @@
 				
 				<?php } else { ?>
 				<hr/>
-				<div class="form-group">
+				<?php if ($kri['treshold_type'] == 'SELECTION') { ?>
+					<div class="form-group">
 						<label class="col-md-2 control-label">Change Report</label>
 						<div class="col-md-6">
-						<select class="form-control input-sm input-readview" id="owner_report" name="owner_report" disabled="true">
+						<select class="form-control input-sm" id="owner_report" name="owner_report">
+							<?php foreach ($kri['treshold_list'] as $key => $value) { ?>
+							<option value="<?=$value['value_1']?>" <?=$value['value_1'] == $kri['owner_report'] ? 'SELECTED' : ''?>><?=$value['value_1']?></option>
+							<?php } ?>
+						</select>
+						</div>
+					</div>
+				<?php } else { ?> 
+					<div class="form-group">
+						<label class="col-md-2 control-label">Change Report</label>
+						<div class="col-md-6">
+						<select class="form-control input-sm" id="owner_report" name="owner_report">
 							
 							<?php foreach ($kri['treshold_list'] as $key => $value) { 
 
@@ -291,6 +303,16 @@
 						</select> 
 						</div>
 					</div>
+				<!--
+					<div class="form-group">
+						<label class="col-md-2 control-label">Change Report</label>
+						<div class="col-md-6">
+							<input type="number" class="form-control input-sm" id="owner_report" name="owner_report" placeholder="" value="<?=$kri['owner_report'] == '' ? '0' : $kri['owner_report'] ?>">
+						</div>
+					</div>
+					-->
+				<?php } ?> 
+
 				<?php } ?> 
 			</div>
 			<?php if (isset($verify) && $verify) { ?>

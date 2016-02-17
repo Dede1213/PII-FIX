@@ -4157,7 +4157,7 @@ class Risk extends APP_Model {
 				$res3 = $this->db->query($sql, $par);
 			}
 			
-			
+			if ($kri['treshold_type'] == 'VALUE'){
 			$sql = "select value_1 from t_kri_treshold where kri_id='".$rid."' and operator ='BELOW' ";
 			$query = $this->db->query($sql);
 			$row = $query->row();
@@ -4187,7 +4187,7 @@ class Risk extends APP_Model {
 			$sql = "update t_kri_treshold set value_1='".$tambah2."'  where kri_id='".$rid."' and operator ='ABOVE' ";
 			$res8 = $this->db->query($sql);
 			}
-
+		}
 			return $res;
 		}
 	}

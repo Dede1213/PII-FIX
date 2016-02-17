@@ -215,7 +215,7 @@
 									}
 							 ?>
 									PERCENTAGE
-							<option value="<?=$value['value_1']?>" <?=$value['value_1'] == $kri['owner_report'] ? 'SELECTED' : ''?>><?=$value['operator']?> <?=$value['value_1']?> <?php echo $persen2 ;?> <?php echo $strip ;?> <?=$value['value_2']?> <?php echo $persen ;?> </option>
+							<option value="<?=$value['value_1']?>" <?=$value['value_1'] == $change['risk_impact'] ? 'SELECTED' : ''?>><?=$value['operator']?> <?=$value['value_1']?> <?php echo $persen2 ;?> <?php echo $strip ;?> <?=$value['value_2']?> <?php echo $persen ;?> </option>
 							<?php } ?>
 						</select> 
 						<!--

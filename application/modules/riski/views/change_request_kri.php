@@ -140,8 +140,32 @@
 				<div class="form-group">
 					<label class="col-md-2 control-label">Laporan</label>
 					<div class="col-md-6">
-					<input type="text" class="form-control input-sm input-readview" readonly="true" name="report" placeholder="" value="<?=$kri['owner_report']?>">
-					</div>
+					<input type="hidden" class="form-control input-sm input-readview" readonly="true" name="report" placeholder="" value="<?=$kri['owner_report']?>">
+						<select class="form-control input-readview" disabled="true">
+							
+							<?php foreach ($kri['treshold_list'] as $key => $value) { 
+
+							if ($value['value_2'] != null){
+								$strip = "-" ;
+								}else{
+									$strip = "" ;
+									}
+							if ($value['value_type'] == 'PERCENTAGE'){
+								$persen = "%" ;
+								}else{
+									$persen = "" ;
+									}
+							if ($value['value_2'] != null && $value['value_type'] == 'PERCENTAGE') {
+								$persen2 = "%" ;
+								}else{
+									$persen2 = "" ;
+									}
+							 ?>
+									PERCENTAGE
+							<option value="<?=$value['value_1']?>" <?=$value['value_1'] == $kri['owner_report'] ? 'SELECTED' : ''?>><?=$value['operator']?> <?=$value['value_1']?> <?php echo $persen2 ;?> <?php echo $strip ;?> <?=$value['value_2']?> <?php echo $persen ;?> </option>
+							<?php } ?>
+						</select> 
+				</div>
 				</div>
 				<?php if ( (isset($verify) && $verify) || (isset($input) && $input) ) { ?>
 				<hr/>

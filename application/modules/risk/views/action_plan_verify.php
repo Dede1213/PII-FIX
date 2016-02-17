@@ -222,7 +222,7 @@ if($status == 'under'){ ?>
 							</div>
 						</div>
 						<div class="form-actions right">
-							<button id="primary-risk-button-submit" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Verify</button>
+							<button id="primary-risk-button-submit-1" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Verify</button>
 							<button id="changes-risk-button-save-primary" type="button" class="btn blue"><i class="fa fa-circle-o"></i> Save</button>
 							<button type="button" class="btn yellow" id="changes-risk-button-cancel"><i class="fa fa-times"></i> Cancel</button>
 						</div>

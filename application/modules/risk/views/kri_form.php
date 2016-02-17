@@ -161,6 +161,7 @@
 						<label class="col-md-2 control-label">Input Data</label>
 						<div class="col-md-6">
 						<select class="form-control input-sm" id="owner_report" name="owner_report">
+							
 							<?php foreach ($kri['treshold_list'] as $key => $value) { 
 
 							if ($value['value_2'] != null){
@@ -180,9 +181,9 @@
 									}
 							 ?>
 									PERCENTAGE
-							<option value="<?=$value['value_1']?>"><?=$value['operator']?> <?=$value['value_1']?> <?php echo $persen2 ;?> <?php echo $strip ;?> <?=$value['value_2']?> <?php echo $persen ;?> </option>
+							<option value="<?=$value['value_1']?>" <?=$value['value_1'] == $kri['owner_report'] ? 'SELECTED' : ''?>><?=$value['operator']?> <?=$value['value_1']?> <?php echo $persen2 ;?> <?php echo $strip ;?> <?=$value['value_2']?> <?php echo $persen ;?> </option>
 							<?php } ?>
-						</select>
+						</select> 
 						</div>
 					</div>
 					<!--
@@ -199,7 +200,7 @@
 				<div class="form-group">
 					<label class="col-md-2 control-label">KRI Warning</label>
 					<div class="col-md-6">
-						<img id="warning_img" src="<?=$base_url?>assets/images/legend/kri_<?=strtolower($kri['kri_warning'])?>.png"/>
+						<img id="#warning_img" src="<?=$base_url?>assets/images/legend/kri_<?=strtolower($kri['kri_warning'])?>.png"/>
 					</div>
 				</div>
 				<?php } ?>
@@ -224,6 +225,8 @@
 var t_treshold_type = '<?=$kri['treshold_type']?>';
 var t_treshold_list = <?=json_encode($kri['treshold_list'])?>;
 </script>
+
+
 <?php } ?>
 
 <!-- CATEGORY -->

@@ -1839,6 +1839,38 @@ class MainRac extends APP_Controller {
 			echo json_encode($resp);
 		}
 	}
+
+	public function actionVerify1form()
+	{
+		$resp['success'] = false;
+		$resp['msg'] = '';
+		
+		$data = $this->loadDefaultAppConfig();
+		$cred = $this->session->credential;
+		
+		if (isset($_POST['id']) && is_numeric($_POST['id'])) {
+			$dd = implode('-', array_reverse( explode('-', $_POST['due_date']) ));
+			$risk = array(
+				'action_plan_status' => 4,
+				'action_plan' => $_POST['action_plan'],
+				'due_date' => $dd,
+				'division' => $_POST['division']
+			);
+			
+			$this->load->model('risk/risk');
+			$res = $this->risk->actionPlanVerify1form($_POST['id'], $_POST['risk_id'], $risk, $data['session']['username']);
+			
+			$resp = array();
+			if ($res) {
+				$resp['success'] = true;
+				$resp['msg'] = 'SUCCESS';
+			} else {
+				$resp['success'] = false;
+				$resp['msg'] = $this->db->error();
+			}
+			echo json_encode($resp);
+		}
+	}
 	
 	public function actionSave()
 	{

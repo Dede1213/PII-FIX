@@ -164,7 +164,7 @@
 									}
 							 ?>
 									PERCENTAGE
-							<option value="<?=$value['value_1']?>"><?=$value['operator']?> <?=$value['value_1']?> <?php echo $persen2 ;?> <?php echo $strip ;?> <?=$value['value_2']?> <?php echo $persen ;?> </option>
+							<option value="<?=$value['value_1']?>" <?=$value['value_1'] == $kri['owner_report'] ? 'SELECTED' : ''?>><?=$value['operator']?> <?=$value['value_1']?> <?php echo $persen2 ;?> <?php echo $strip ;?> <?=$value['value_2']?> <?php echo $persen ;?> </option>
 							<?php } ?>
 						</select>
 						</div>
@@ -175,7 +175,7 @@
 				<div class="form-group">
 					<label class="col-md-2 control-label">KRI Warning</label>
 					<div class="col-md-6">
-						<img id="warning_img" src="<?=$base_url?>assets/images/legend/kri_<?=strtolower($kri['kri_warning'])?>.png"/>
+						<img id="#warning_img" src="<?=$base_url?>assets/images/legend/kri_<?=strtolower($kri['kri_warning'])?>.png"/>
 					</div>
 				</div>
 				<?php } ?>

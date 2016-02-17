@@ -3,18 +3,18 @@
 	<div class="page-content">
 		<!-- BEGIN PAGE HEADER-->
 		<h3 class="page-title">
-		Risk Register
+		Risk Register Berkala
 		</h3>
 		<!-- END PAGE HEADER-->
 		<div class="page-bar">
 			<ul class="page-breadcrumb">
 				<li>
 					<i class="fa fa-home"></i>
-					<a target="_self" href="<?=$site_url?>/main">Home</a>
+					<a target="_self" href="<?=$site_url?>/main">Beranda</a>
 					<i class="fa fa-angle-right"></i>
 				</li>
 				<li>
-					<a target="_self" href="<?=$site_url?>/risk/RiskRegister">Change Request Tab</a>
+					<a target="_self" href="<?=$site_url?>/risk/RiskRegister">Tab Permintaan Perubahan</a>
 				</li>
 			</ul>
 		</div>
@@ -36,7 +36,7 @@
 			<div class="portlet box grey-silver">
 			<div class="portlet-title">
 				<div class="caption">
-					Roll Forward Risk
+					Risiko dari Periode Sebelumnya
 				</div>
 				
 			</div>
@@ -44,13 +44,13 @@
 			<div class="portlet-body">
 				<form class="form-inline" role="form" id="filterForm" style="margin-bottom: 10px;">
 					<div class="form-group">
-						<label for="filterFormBy">Filter By</label>
+						<label for="filterFormBy">Filter dengan :</label>
 						<select class="form-control input-medium input-sm" id="filterFormBy">
-							<option value="-">Choose</option>
-							<option value="risk_event">Risk</option>
-							<option value="risk_level">Risk Level</option>
-							<option value="risk_impact_level">Impact Level</option>
-							<option value="risk_likelihood_key">Likelihood</option>
+							<option value="-">Pilih</option>
+							<option value="risk_event">Risiko</option>
+							<option value="risk_level">Level Risiko</option>
+							<option value="risk_impact_level">Level Dampak</option>
+							<option value="risk_likelihood_key">Kemungkinan Keterjadian</option>
 						</select>
 					</div>
 					<div class="form-group" id="re">
@@ -88,7 +88,7 @@
 						
 					</div>											
 
-					<button type="button" id="filterFormSubmit" class="btn blue btn-sm">Search</button>
+					<button type="button" id="filterFormSubmit" class="btn blue btn-sm">Cari</button>
 				</form>
 				
 				<div class="table-container">
@@ -96,12 +96,12 @@
 					<thead>
 					<tr role="row" class="heading">
 						<th width="10%">Status</th>
-						<th width="10%">Risk ID</th>
-						<th width="20%">Risk</th>
-						<th width="10%">Risk Level</th>
-						<th width="10%">Impact Level</th>
-						<th width="10%">Likelihood</th>
-						<th width="10%">Risk Owner</th>
+						<th width="10%">ID Risiko</th>
+						<th width="20%">Risiko</th>
+						<th width="10%">Level Risiko</th>
+						<th width="10%">Level Dampak</th>
+						<th width="10%">Kemungkinan Keterjadian</th>
+						<th width="10%">Pemilik Risiko</th>
 						<th width="10%">Status</th>
 						<th width="10%">&nbsp;</th>
 					</tr>
@@ -116,7 +116,7 @@
 			<div class="portlet box grey-silver">
 			<div class="portlet-title">
 				<div class="caption">
-					Risk Identified in This Periode ( <?=$periode['periode_name']?> ) 
+					Risiko yang Teridentifikasi di Periode ini ( <?=$periode['periode_name']?> ) 
 				</div>
 				
 			</div>
@@ -124,13 +124,13 @@
 			<div class="portlet-body">
 				<form class="form-inline" role="form" id="filterForm2" style="margin-bottom: 10px;">
 					<div class="form-group">
-						<label for="filterFormBy2">Filter By</label>
+						<label for="filterFormBy2">Filter dengan :</label>
 						<select class="form-control input-medium input-sm" id="filterFormBy2">
-							<option value="-">Choose</option>
-							<option value="risk_event">Risk</option>
-							<option value="risk_level">Risk Level</option>
-							<option value="risk_impact_level">Impact Level</option>
-							<option value="risk_likelihood_key">Likelihood</option>
+							<option value="-">Pilih</option>
+							<option value="risk_event">Risiko</option>
+							<option value="risk_level">Level Risiko</option>
+							<option value="risk_impact_level">Level Dampak</option>
+							<option value="risk_likelihood_key">Kemungkinan Keterjadian</option>
 						</select>
 					</div>
 
@@ -168,7 +168,7 @@
 						</select>
 						
 					</div>						
-					<button type="button" id="filterFormSubmit2" class="btn blue btn-sm">Search</button>
+					<button type="button" id="filterFormSubmit2" class="btn blue btn-sm">Cari</button>
 				</form>	
 				
 				<div class="table-container">
@@ -176,12 +176,12 @@
 					<thead>
 					<tr role="row" class="heading">
 						<th width="10%">Status</th>
-						<th width="10%">Risk ID</th>
-						<th width="40%">Risk</th>
-						<th width="10%">Risk Level</th>
-						<th width="10%">Impact Level</th>
-						<th width="10%">Likelihood</th>
-						<th width="10%">Risk Owner</th>
+						<th width="10%">ID Risiko</th>
+						<th width="40%">Risiko</th>
+						<th width="10%">Level Risiko</th>
+						<th width="10%">Level Dampak</th>
+						<th width="10%">Kemungkinan Keterjadian</th>
+						<th width="10%">Pemilik Risiko</th>
 					</tr>
 					</thead>
 					<tbody>
@@ -211,13 +211,13 @@
 		<a href="javascript: ;" id="button-change-ignore" class="btn default red pull-right" style="margin-right: 10px;">
 					<i class="fa  fa-circle-o"></i>
 					<span class="hidden-480">
-					Ignore </span>
+					Tolak </span>
 					</a>
 
 		<a href="javascript: ;" id="button-change-verify" class="btn default green pull-right" style="margin-right: 10px;">
 					<i class="fa  fa-circle-o"></i>
 					<span class="hidden-480">
-					Verify </span>
+					Verifikasi </span>
 					</a>
 		<?php }
 				}
@@ -240,11 +240,11 @@
 				</li>
 				<li class="list-group-item">
 					<img src="<?=$base_url?>assets/images/legend/confirm.png"/> &nbsp; 
-					 Confirmed
+					 Terkonfirmasi
 				</li>
 				<li class="list-group-item">
 					<img src="<?=$base_url?>assets/images/legend/submit.png"/> &nbsp; 
-					 Submited To RAC
+					 Menunggu Verifikasi RAC
 				</li>
 			</ul>
 
@@ -262,22 +262,24 @@
 	<div class="col-md-12">
 		<div class="note note-warning">
 			<?php if (isset($submit_mode) && $submit_mode == 'adhoc') { ?>
-			<h4 class="block">Warning</h4>
+			<h4 class="block">Informasi</h4>
 			<p>
-				 Cannot Input Adhoc Risk Register Exercise because Risk Period is already set, please contact RAC team for further information
+				 Tidak bisa menginput Risk Register Adhoc karena periode telah di setting oleh RAC.
+				 Silahkan hubungi RAC untuk keterangan lebih lanjut.
 				 <p>
 					<a class="btn red" target="_self" href="<?=$site_url?>/main">
-					Back to Home </a>
+					Kembali ke Beranda </a>
 				</p>
 			</p>
 			<?php } else { ?>
-			<h4 class="block">Warning</h4>
+			<h4 class="block">Informasi</h4>
 			<p>
-				 Cannot Input Risk Register Exercise because Risk Period is not set, please contact RAC team for further information
-			</p>
+				 Tidak bis menginput Risk Register Berkala karena periode belum di setting oleh RAC.
+				 Silahkan hubungi RAC untuk keterangan lebih lanjut.
+				 </p>
 			<p>
 				<a class="btn red" target="_self" href="<?=$site_url?>/main">
-				Back to Home </a>
+				Kembali ke Beranda </a>
 			</p>
 			<?php } ?>
 		</div>
@@ -292,15 +294,14 @@
 	<div class="col-md-12">
 		<div class="note note-warning">
 			
-			<h4 class="block">Warning</h4>
+			<h4 class="block">Informasi</h4>
 			<p>
-				Warning !
-Cannot submit the Risk Register Exercise because there is another risk which have not been review yet.
-Please check and review all of your risk and submit again.
-
+				Informasi !
+				Tidak bisa mengajukan Risk Register Berkala karena masih ada risiko yang belum di review.
+				Silahkan review risiko tersebut dan ajukan ulang.
 				 <p>
 					<a class="btn red" target="_self" href="<?=$site_url?>/main">
-					Back to Home </a>
+					Kembali ke Beranda </a>
 				</p>
 			</p>
 			

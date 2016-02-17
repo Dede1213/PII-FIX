@@ -3901,6 +3901,36 @@ class Risk extends APP_Model {
 		return true;
 	}
 	
+	public function actionPlanVerify1form($action_id, $risk_id, $risk, $uid) 
+	{	
+		$division = $risk['division'];
+		$par = array(
+			'ap' => $risk['action_plan_status'],
+			'action_plan' => $risk['action_plan'],
+			'due_date' => $risk['due_date'],
+			'division' => $risk['division'],
+			'id' => $action_id, 
+			'risk_id' => $risk_id
+		);
+		
+		$sql = "update t_risk_action_plan 
+				set action_plan_status = ?,action_plan = ?,due_date = ?,division = ?,assigned_to = (select username from m_user where division_id = '$division' and role_id = 4)
+				where id = ? and risk_id = ?";
+
+		$query = $this->db->query($sql, $par);
+		
+		$par = array(
+			'id' => $action_id, 'risk_id' => $risk_id
+		);
+		
+		
+		$sql = "delete from t_risk_action_plan_change 
+				where id = ? and risk_id = ?";
+		$query = $this->db->query($sql, $par);
+		
+		return true;
+	}
+
 	public function actionUpdateRiskStatus($risk_id, $uid) 
 	{
 		//ubah2

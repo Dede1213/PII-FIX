@@ -82,7 +82,7 @@ var KriForm = function() {
         		me.showImpactList();
         	});
 			
-			me.loadRiskLevelList();
+		me.loadRiskLevelList();
         	me.loadRiskLevelReference();
         	me.loadImpactLevelReference();
         	
@@ -181,7 +181,7 @@ var KriForm = function() {
         	}
         },
         recalculateWarning: function(nval) {
-        	if (t_treshold_type != '' && t_treshold_list.length > 0 ) {
+        	if (t_treshold_type != ''  ) {
         		var def = 'default';
         		if (t_treshold_type == 'SELECTION') {
         			$.each(t_treshold_list, function(k, v) {

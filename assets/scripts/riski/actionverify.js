@@ -38,6 +38,10 @@ var ActionVerify = function() {
         	$('#primary-risk-button-submit').on('click', function () {
         		me.submitRiskData('verify')
         	});
+
+            $('#primary-risk-button-submit-1').on('click', function () {
+                me.submitRiskData('verify-1-form')
+            });
         	
         },
         submitRiskData: function(submitMode) {
@@ -53,7 +57,10 @@ var ActionVerify = function() {
             	} else if (submitMode == 'verify') {
             		var url = site_url+'/main/mainrac/actionVerify';
             		var text = 'Are You sure you want to Verify this Action Plan ?';
-            	}else if (submitMode == 'save-primary') {
+            	}else if (submitMode == 'verify-1-form') {
+                    var url = site_url+'/main/mainrac/actionVerify1form';
+                    var text = 'Are You sure you want to Verify this Action Plan ?';
+                }else if (submitMode == 'save-primary') {
                     var url = site_url+'/main/mainrac/actionSaveprimary';
                     var text = 'Are You sure you want to save this Action Plan ?';
                 }else if (submitMode == 'save-primary2') {
@@ -82,7 +89,9 @@ var ActionVerify = function() {
             							location.href=site_url+'/maini/mainrac/actionPlanForm/'+g_risk_id;
             						} else if (submitMode == 'verify') {
             							location.href=site_url+'/maini/mainrac#tab_action_plan_list';
-            						}else if (submitMode == 'save-primary2') {
+            						}else if (submitMode == 'verify-1-form') {
+                                        location.href=site_url+'/main/mainrac#tab_action_plan_list';
+                                    }else if (submitMode == 'save-primary2') {
                                         location.href=site_url+'/riski/RiskRegister/undermaintenance';
                                     } else {
             							location.href=site_url+'/maini/mainrac/actionPlanForm/'+g_risk_id;

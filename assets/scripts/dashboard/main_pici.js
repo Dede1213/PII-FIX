@@ -553,7 +553,7 @@ grid_change.init({
                 }else if (full.cr_status == '1') {
                     var vm = 'riski/riskregister/ChangeRequestView';
                 } else {
-                    var vm = 'riski/riskregister/ChangeRequestView';
+                    var vm = 'riski/riskregister/ChangeRequestView2';
                 }
                 return '<a target="_self" class="'+cls+'" href="'+site_url+'/'+vm+'/'+full.id+'">'+data+'</a>';
                 //var vm = 'risk/riskregister/ChangeRequestView';

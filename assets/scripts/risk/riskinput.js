@@ -506,7 +506,7 @@ var RiskInput = function() {
 	        		var xeval = $('#input-form-control input[name=risk_evaluation_control]').val();
 	        		var xowner = $('#input-form-control select[name=risk_control_owner]').val();
 					
-					var tr_id = $('#tr_idnya').val();
+					var tr_id = $('#form-control-revid').val();
 					
 					$("#"+tr_id).html("");
 					 
@@ -533,7 +533,7 @@ var RiskInput = function() {
                     var xexis = $('#input-form-control-objective textarea[name=objective]').val();
                   
                     
-                    var tr_idob = $('#tr_idnyaob').val();
+                    var tr_idob = $('#form-control-revid-objective').val();
                     
                     $("#"+tr_idob).html("");
                     
@@ -555,7 +555,8 @@ var RiskInput = function() {
         		var fvalid = form1.form();
         		
         		if (fvalid) {
-					var tr_idnya2 = $('#tr_idnya2').val();
+					//var tr_idnya2 = $('#tr_idnya2').val();
+					var tr_idnya2 = $('#form-data-revid').val();
         			var xplan = $('#input-form-action-plan input[name=action_plan]').val();
         			var xdate = $('#input-form-action-plan input[name=due_date]').val();
         			var xdiv_view = $('#input-form-action-plan select[name=division] option:selected').text();
@@ -775,13 +776,15 @@ var RiskInput = function() {
 			
 			var lastidrand = $('#form-control-revid').val();
 			
-			$('#'+lastidrand).html('');
+			$('#tr_c'+lastidrand).remove();
+			
+			$('#tr_c'+lastidrand).html('');
         	
         	me.dataControlCounter++; 
 			
 			var idrand = Math.floor((Math.random() * 1000000) + 1); 
 
-        	$('#control_table > tbody:last-child').append('<tr id = '+me.dataControlCounter+'>'+
+        	$('#control_table > tbody:last-child').append('<tr id = "tr_c'+me.dataControlCounter+'">'+
         		'<td><input type = "hidden" id = "existing_control_id'+me.dataControlCounter+'" value = "'+nnode.existing_control_id+'">'+nnode.existing_control_id+'</td>'+
         		'<td><textarea style="display:none;"  id = "risk_existing_control'+me.dataControlCounter+'" > '+nnode.risk_existing_control+'</textarea>'+nnode.risk_existing_control+'</td>'+
         		'<td><input type = "hidden" id = "risk_evaluation_control'+me.dataControlCounter+'" value = "'+nnode.risk_evaluation_control+'">'+nnode.risk_evaluation_control+'</td>'+
@@ -800,14 +803,18 @@ var RiskInput = function() {
             var me = this;
             
             var lastidrand = $('#form-control-revid-objective').val();
+			
+			//alert(lastidrand);
             
             $('#'+lastidrand).html('');
+			  
+			$('#'+lastidrand).remove();
             
             me.dataControlCounterobjective++; 
             
             var idrand = Math.floor((Math.random() * 1000000) + 1); 
 
-            $('#objective_table > tbody:last-child').append('<tr id = '+me.dataControlCounterobjective+'>'+
+            $('#objective_table > tbody:last-child').append('<tr id = "'+me.dataControlCounterobjective+'">'+
                 '<td><input type = "hidden" id = "objective_id'+me.dataControlCounterobjective+' " value = '+nnode.objective_id+'>'+nnode.objective_id+'</td>'+
                 '<td><textarea style="display:none;" id = "objective'+me.dataControlCounterobjective+'"> '+nnode.objective+'</textarea>'+nnode.objective+'</td>'+
                 '<td>'+
@@ -843,7 +850,7 @@ var RiskInput = function() {
 			
 			var lastidrand = $('#form-data-revid').val();
 			
-			var tr_id2 = $('#tr_idnya2').val();
+			var tr_id2 = $('#form-data-revid').val();
 			 
 			//$("#tr_z"+tr_id2).html("");
 			$("#tr_z"+tr_id2).remove(); 

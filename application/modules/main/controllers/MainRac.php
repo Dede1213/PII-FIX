@@ -1444,22 +1444,26 @@ class MainRac extends APP_Controller {
 					'risk_status' => 6,
 					//'risk_event' => $_POST['risk_event'],
 					//'risk_description' => $_POST['risk_description'],
-					//'risk_level' => $_POST['risk_level_id'],
-					//'risk_impact_level' => $_POST['risk_impact_level_id'],
-					//'risk_likelihood_key' => $_POST['risk_likelihood_id'],
-					//'suggested_risk_treatment' => $_POST['suggested_risk_treatment'],
+					'risk_level' => $_POST['risk_level_id'],
+					'risk_impact_level' => $_POST['risk_impact_level_id'],
+					'risk_likelihood_key' => $_POST['risk_likelihood_id'],
+					'suggested_risk_treatment' => $_POST['suggested_risk_treatment'],
 					'risk_owner' => $_POST['risk_division'],
-					//'risk_cause' => $_POST['risk_cause'],
-					//'risk_impact' => $_POST['risk_impact']
-					
+					'risk_cause' => $_POST['risk_cause'],
+					'risk_impact' => $_POST['risk_impact']					
 				);
 				
+				$control = array();
+				foreach($_POST['control'] as $v) {
+					$control[] = $v;
+				}
+
 				$actplan = array();
 				foreach($_POST['actplan'] as $v) {
 					$actplan[] = $v;
 				}
 
-				$res = $this->risk->updateRiskverify($_POST['risk_id'], false, $risk_update, false, $actplan, false, $data['session']['username']);
+				$res = $this->risk->updateRiskverify($_POST['risk_id'], false, $risk_update, false, $actplan, $control, $data['session']['username']);
 				//$res = $this->risk->riskDeleteChange($_POST['risk_id']);
 				//$res = $this->risk->actionPlanSetToDraft($_POST['risk_id']);
 				$resp = array();

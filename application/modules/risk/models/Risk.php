@@ -1933,9 +1933,60 @@ class Risk extends APP_Model {
 		}
 
 		$par['risk_id'] = $risk_id;
-		$sql = "update t_risk set risk_status = 6 
-			  	where risk_id = '".$risk_id."' ";
+		$sql = "update t_risk set 
+				risk_status = '".$risk['risk_status']."', 
+				risk_level = '".$risk['risk_level']."', 
+				risk_impact_level = '".$risk['risk_impact_level']."', 
+				risk_likelihood_key = '".$risk['risk_likelihood_key']."', 
+				risk_owner = '".$risk['risk_owner']."', 
+				suggested_risk_treatment = '".$risk['suggested_risk_treatment']."',
+				risk_cause = '".$risk['risk_cause']."', 
+				risk_impact = '".$risk['risk_impact']."'
+			  	where risk_id = ".$risk_id." ";
 		$res = $this->db->query($sql, $par);
+
+		
+		// insert action plan
+			if ($actplan !== false) {
+				$sql = "delete from t_risk_action_plan where risk_id = ?  ";
+				$this->db->query($sql, array('rid' => $risk_id));
+				
+				$sql = "insert into t_risk_action_plan(risk_id, action_plan, due_date, division, switch_flag) 
+						values(?, ?, ?, ?, 'P')";
+				foreach ($actplan as $key => $value) {
+					$dd = implode('-', array_reverse( explode('-', $value['due_date']) ));
+					$par = array(
+						'rid' => $risk_id,
+						'ap' => $value['action_plan'],
+						'dd' => $dd,
+						'div' => $value['division']
+					);
+					$res4 = $this->db->query($sql, $par);
+				}
+			}
+			
+			// insert control
+			if ($control !== false) {
+				$sql = "delete from t_risk_control where risk_id = ?  ";
+				$this->db->query($sql, array('rid' => $risk_id));
+				
+				$sql = "insert into t_risk_control(
+							risk_id, existing_control_id, risk_existing_control, 
+							risk_evaluation_control, risk_control_owner, switch_flag) 
+						values(?, ?, ?, ?, ?, 'P' )";
+				foreach ($control as $key => $value) {
+					$value['existing_control_id'] = $value['existing_control_id'] == '' || $value['existing_control_id'] == '0' ? null : $value['existing_control_id'];
+					
+					$par = array(
+						'rid' => $risk_id,
+						'ap' => $value['existing_control_id'],
+						'dd' => $value['risk_existing_control'],
+						'da' => $value['risk_evaluation_control'],
+						'div' => $value['risk_control_owner']
+					);
+					$res5 = $this->db->query($sql, $par);
+				}
+			}
 
 		//update assgin to action plan nih
 		

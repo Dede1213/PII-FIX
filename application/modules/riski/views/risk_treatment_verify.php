@@ -101,7 +101,7 @@ WHERE t_risk.risk_id ='$id'";
 							<div class="form-group">
 								<label class="col-md-1 control-label smaller cl-compact">Deskripsi Peristiwa Risiko</label>
 								<div class="col-md-7">
-								<textarea class="form-control input-readview" rows="3" name="risk_description" placeholder=""></textarea>
+								<textarea class="form-control input-readview" rows="3" readonly="true" name="risk_description" placeholder=""></textarea>
 								</div>
 							</div>
 							<div class="form-group">

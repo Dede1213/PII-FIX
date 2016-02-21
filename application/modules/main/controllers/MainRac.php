@@ -627,7 +627,8 @@ class MainRac extends APP_Controller {
 				
 				// build data
 				$risk = array(
-					'risk_status' => 3
+					'risk_status' => 3,
+					'risk_division' => $_POST['risk_division']
 					/*
 					,
 					'risk_code' => $code,

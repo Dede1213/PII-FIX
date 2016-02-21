@@ -998,8 +998,8 @@ var ChangeRequest = function() {
         	this.dataActionPlan[dcounter] = data;
         },
         actionPlanDelete: function(id) {
-        	this.dataActionPlan[id].change_flag = 'DELETE';
-        	//delete this.dataActionPlan[id];
+        	this.dataActionPlan[id].change_flag = 'ADD';
+        	delete this.dataActionPlan[id];
         },
         actionPlanAddRow: function(nnode) {
         	var me = this;

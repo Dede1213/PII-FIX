@@ -2582,6 +2582,12 @@ class Risk extends APP_Model {
 			$par[$k] = $v;
 		}
 
+		//update assign to suggested risk treatment
+		$sql = "update t_risk 
+				set risk_treatment_owner = (select username from m_user where division_id = '".$risk['risk_division']."'  and role_id = 4) 
+			  	where risk_id = '".$risk_id."' ";
+		$res = $this->db->query($sql);
+
 		$par['risk_id'] = $risk_id;
 		$sql = "update t_risk set ".$keyupdate
 			  ."created_date = now(),switch_flag = 'P'
@@ -4861,7 +4867,8 @@ class Risk extends APP_Model {
 			$res = $this->db->query($sql, $par);
 		}
 		
-		//ini buat AP change set as primary yahh
+		//ini buat AP change set as primary yahh ga jadi kayaknya
+		/*
 		if ($change == false) {
 			foreach ($actplan as $key => $value) {
 						$dd = implode('-', array_reverse( explode('-', $value['due_date']) ));
@@ -4878,6 +4885,7 @@ class Risk extends APP_Model {
 						$res4 = $this->db->query($sql, $par);
 				}
 			}
+			*/
 		
 
 		if ($res) {
@@ -4941,23 +4949,57 @@ class Risk extends APP_Model {
 					$res5 = $this->db->query($sql, $par);
 				}
 			}
-			
-			// insert action plan
+
+
 			if ($actplan !== false) {
+				$sql = "delete from t_cr_action_plan where change_id = ?";
+				$this->db->query($sql, array('rid' => $ch_id));
+
 				foreach ($actplan as $key => $value) {
-					if ($value['cr_id'] != '') {
+					
 						$dd = implode('-', array_reverse( explode('-', $value['due_date']) ));
 						$par = array(
+							'change_id' => $ch_id,
+							'risk_id' => $risk_id,
 							'ap' => $value['action_plan'],
 							'dd' => $dd,
 							'div' => $value['division'],
-							'ch_flag' => $value['change_flag'],
-							'cr_id' => $value['cr_id']
+							'ch' => 'ADD'
 						);
-						$sql = "update t_cr_action_plan	
-									set action_plan = ?, due_date = ?, division = ?, change_flag = ?
-								where cr_id = ?";
+						$sql = "insert into t_cr_action_plan	
+									(change_id, id, risk_id, action_plan_status, action_plan,
+									due_date, division, change_flag)
+								values(?, NULL, ?, 0, ?,
+									?, ?, ?)";
 						$res4 = $this->db->query($sql, $par);
+
+				}
+			}
+			
+			/*
+			// insert action plan
+			if ($actplan !== false) {
+				$sql = "delete from t_cr_action_plan where change_id = ?";
+				$this->db->query($sql, array('rid' => $ch_id));
+
+				foreach ($actplan as $key => $value) {
+					if ($value['change_id'] != '') {
+						$dd = implode('-', array_reverse( explode('-', $value['due_date']) ));
+						$par = array(
+							'change_id' => $ch_id,
+							'risk_id' => $risk_id,
+							'ap' => $value['action_plan'],
+							'dd' => $dd,
+							'div' => $value['division'],
+							'ch' => 'ADD'
+						);
+						$sql = "insert into t_cr_action_plan	
+									(change_id, id, risk_id, action_plan_status, action_plan,
+									due_date, division, change_flag)
+								values(?, NULL, ?, 0, ?,
+									?, ?, ?)";
+						$res4 = $this->db->query($sql, $par);
+						
 					} else {
 						$dd = implode('-', array_reverse( explode('-', $value['due_date']) ));
 						$par = array(
@@ -4977,7 +5019,7 @@ class Risk extends APP_Model {
 					}
 				}
 			}
-			
+			*/
 			
 			
 			return true;
@@ -5067,6 +5109,33 @@ class Risk extends APP_Model {
 				}
 			}
 			
+
+			if ($actplan !== false) {
+				$sql = "delete from t_cr_action_plan_change where change_id = ?";
+				$this->db->query($sql, array('rid' => $ch_id));
+
+				foreach ($actplan as $key => $value) {
+					
+						$dd = implode('-', array_reverse( explode('-', $value['due_date']) ));
+						$par = array(
+							'change_id' => $ch_id,
+							'risk_id' => $risk_id,
+							'ap' => $value['action_plan'],
+							'dd' => $dd,
+							'div' => $value['division'],
+							'ch' => 'ADD'
+						);
+						$sql = "insert into t_cr_action_plan_change	
+									(change_id, id, risk_id, action_plan_status, action_plan,
+									due_date, division, change_flag)
+								values(?, NULL, ?, 0, ?,
+									?, ?, ?)";
+						$res4 = $this->db->query($sql, $par);
+
+				}
+			}
+
+			/*
 			// insert action plan
 			if ($actplan !== false) {
 				foreach ($actplan as $key => $value) {
@@ -5102,7 +5171,7 @@ class Risk extends APP_Model {
 					}
 				}
 			}
-			
+			*/
 			
 			
 			return true;

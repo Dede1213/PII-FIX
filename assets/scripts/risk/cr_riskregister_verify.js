@@ -382,7 +382,7 @@ var ChangeRequest = function() {
                     var tr_id = $('#tr_idnya').val();
                     
                     $("#"+tr_id).html("");
-                    $('#3').remove();
+                    $("#"+tr_id).remove();
                     
                     var nnode = {
                         'tr_id' : tr_id,
@@ -411,19 +411,23 @@ var ChangeRequest = function() {
 	        		var xeval = $('#input-form-control input[name=risk_evaluation_control]').val();
 	        		var xowner = $('#input-form-control input[name=risk_control_owner]').val();
 	        		
-					var tr_id = $('#tr_idnya').val();
-					$("#"+tr_id).html("");
+					var tc_id = $('#tc_idnya').val();
+					$("#tc_"+tc_id).html("");
+					$("#tc_"+tc_id).remove();
 					
 	        		var nnode = {
+						'tc_id' : tc_id,
 	        			'existing_control_id' : xcid,
 	        			'risk_existing_control' : xexis,
 	        			'risk_evaluation_control' : xeval,
 	        			'risk_control_owner' : xowner
 	        		};
-	
-	        		me.controlAddRow(nnode);
+					 
+					me.controlAddRow(nnode);
 	        		
 	        		$('#form-control').modal('hide');
+					
+					//t1
 	    		}
 	    	});
 	    	
@@ -906,7 +910,7 @@ var ChangeRequest = function() {
         	
         	me.dataControlCounter++;
 
-        	$('#control_table > tbody:last-child').append('<tr id = '+me.dataControlCounter+'>'+
+        	$('#control_table > tbody:last-child').append('<tr id = '+'tc_'+me.dataControlCounter+'>'+
         		'<td><input type = "hidden" id = "existing_control_id'+me.dataControlCounter+'" value = "'+nnode.existing_control_id+'">'+nnode.existing_control_id+'</td>'+
         		'<td><input type = "hidden" id = "risk_existing_control'+me.dataControlCounter+'" value = "'+nnode.risk_existing_control+'">'+nnode.risk_existing_control+'</td>'+
         		'<td><input type = "hidden" id = "risk_evaluation_control'+me.dataControlCounter+'" value = "'+nnode.risk_evaluation_control+'">'+nnode.risk_evaluation_control+'</td>'+
@@ -918,6 +922,10 @@ var ChangeRequest = function() {
         		'</div>'+
         		'</td>'+
         	'</tr>');
+			
+			//t2
+			
+			me.controlDelete(nnode.tc_id);
         	me.controlAdd(nnode, me.dataControlCounter);
         },
         controlTableDeleteobjective: function(xrow, dataId) {
@@ -1279,7 +1287,7 @@ var ChangeRequest = function() {
 
 function modal_control_edit(a){
 	 
-$('#tr_idnya').val(a); 
+$('#tc_idnya').val(a); 
 $('#existing_control_id').val($('#existing_control_id'+a).val());
 $('#risk_existing_control').val($('#risk_existing_control'+a).val());
 $('#risk_evaluation_control').val($('#risk_evaluation_control'+a).val());

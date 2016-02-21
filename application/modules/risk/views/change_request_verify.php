@@ -451,7 +451,7 @@
 	<div class="modal-body">
 		
 			<form id="input-form-control" role="form" class="form-horizontal">
-			<input type = "hidden" id = "tr_idnya">
+			<input type = "text" id = "tc_idnya">
 				<div class="form-body">
 					<div class="form-group">
 						<label class="col-md-3 control-label smaller cl-compact">Existing Control ID</label>

@@ -382,7 +382,7 @@ var ChangeRequest = function() {
                     var tr_id = $('#tr_idnya').val();
                     
                     $("#"+tr_id).html("");
-                    $('#3').remove();
+                    $("#"+tr_id).remove();
                     
                     var nnode = {
                         'tr_id' : tr_id,
@@ -411,19 +411,23 @@ var ChangeRequest = function() {
 	        		var xeval = $('#input-form-control input[name=risk_evaluation_control]').val();
 	        		var xowner = $('#input-form-control input[name=risk_control_owner]').val();
 	        		
-					var tr_id = $('#tr_idnya').val();
-					$("#"+tr_id).html("");
+					var tc_id = $('#tc_idnya').val();
+					$("#tc_"+tc_id).html("");
+					$("#tc_"+tc_id).remove();
 					
 	        		var nnode = {
+						'tc_id' : tc_id,
 	        			'existing_control_id' : xcid,
 	        			'risk_existing_control' : xexis,
 	        			'risk_evaluation_control' : xeval,
 	        			'risk_control_owner' : xowner
 	        		};
-	
-	        		me.controlAddRow(nnode);
+					 
+					me.controlAddRow(nnode);
 	        		
 	        		$('#form-control').modal('hide');
+					
+					//t1
 	    		}
 	    	});
 	    	
@@ -605,7 +609,7 @@ var ChangeRequest = function() {
         		var mod = MainApp.viewGlobalModal('confirm', 'Are You sure you want to cancel your Change Request Verification ? You will loose your unsaved data.');
         		mod.find('button.btn-primary').off('click');
         		mod.find('button.btn-primary').one('click', function(){
-        			location.href=site_url+'/maini/mainrac#tab_change_request_list';
+        			location.href=site_url+'/maini#tab_change_request_list';
         		});
         	});
         	
@@ -906,7 +910,7 @@ var ChangeRequest = function() {
         	
         	me.dataControlCounter++;
 
-        	$('#control_table > tbody:last-child').append('<tr id = '+me.dataControlCounter+'>'+
+        	$('#control_table > tbody:last-child').append('<tr id = '+'tc_'+me.dataControlCounter+'>'+
         		'<td><input type = "hidden" id = "existing_control_id'+me.dataControlCounter+'" value = "'+nnode.existing_control_id+'">'+nnode.existing_control_id+'</td>'+
         		'<td><input type = "hidden" id = "risk_existing_control'+me.dataControlCounter+'" value = "'+nnode.risk_existing_control+'">'+nnode.risk_existing_control+'</td>'+
         		'<td><input type = "hidden" id = "risk_evaluation_control'+me.dataControlCounter+'" value = "'+nnode.risk_evaluation_control+'">'+nnode.risk_evaluation_control+'</td>'+
@@ -918,6 +922,10 @@ var ChangeRequest = function() {
         		'</div>'+
         		'</td>'+
         	'</tr>');
+			
+			//t2
+			
+			me.controlDelete(nnode.tc_id);
         	me.controlAdd(nnode, me.dataControlCounter);
         },
         controlTableDeleteobjective: function(xrow, dataId) {
@@ -937,26 +945,33 @@ var ChangeRequest = function() {
         controlAddobjective: function(data, dcounter) {
         	this.dataControlobjective[dcounter] = data;
         },
-        controlAddRowobjective: function(nnode) {
-        	var me = this;
-        	
-        	me.dataControlCounter++;
-        	
-			var control_str = '';
-			if (g_change_type == "Risk Form") {
-				control_str = '<td>'+
-				'<div class="btn-group">'+
-					'<button type="button" class="btn btn-default btn-xs" onclick="ChangeRequest.controlTableDeleteobjective(this, '+me.dataControlCounter+')"><i class="fa fa-trash-o font-red"></i></button>'+
-				'</div>'+
-				'</td>';
-			}
+         controlAddRowobjective: function(nnode) {
+            var me = this;
+            
+            var lastidrand = $('#form-control-revid-objective').val();
 			
-        	$('#objective_table > tbody:last-child').append('<tr>'+
-        		'<td>'+nnode.objective_id+'</td>'+
-        		'<td>'+nnode.objective+'</td>'+
-        		control_str+
-        	'</tr>');
-        	me.controlAddobjective(nnode, me.dataControlCounter);
+			//alert(lastidrand);
+            
+            $('#'+lastidrand).html('');
+			  
+			$('#'+lastidrand).remove();
+            
+            me.dataControlCounterobjective++; 
+            
+            var idrand = Math.floor((Math.random() * 1000000) + 1); 
+
+            $('#objective_table > tbody:last-child').append('<tr id = "'+me.dataControlCounterobjective+'">'+
+                '<td><input type = "hidden" id = "objective_id'+me.dataControlCounterobjective+' " value = '+nnode.objective_id+'>'+nnode.objective_id+'</td>'+
+                '<td><textarea style="display:none;" id = "objective'+me.dataControlCounterobjective+'"> '+nnode.objective+'</textarea>'+nnode.objective+'</td>'+
+                '<td>'+
+                '<div class="btn-group">'+
+                    '<button type="button" class="btn btn-default btn-xs" onclick = "modal_control_edit_objective('+me.dataControlCounterobjective+')" ><i class="fa fa-pencil font-blue"></i></button>'+
+                    '<button type="button" class="btn btn-default btn-xs" onclick="ChangeRequest.controlTableDeleteobjective(this, '+me.dataControlCounterobjective+')"><i class="fa fa-trash-o font-red"></i></button>'+
+                '</div>'+
+                '</td>'+
+            '</tr>');
+            this.controlDeleteobjective(nnode.tr_idob); 
+            me.controlAddobjective(nnode, me.dataControlCounterobjective);
         },
 
          controlResetobjectiveprimary: function() {
@@ -1254,7 +1269,7 @@ var ChangeRequest = function() {
             				var mod = MainApp.viewGlobalModal('success', 'Success Submitting Change Request');
             				mod.find('button.btn-ok-success').one('click', function(){
             					if (mode == 'verifyPrimary' || mode == 'verify') {
-            						location.href=site_url+'/maini/mainrac#tab_change_request_list';
+            						location.href=site_url+'/maini#tab_change_request_list';
             					} else {
             						location.href=site_url+'/maini/mainrac/ChangeRequestVerify/'+xid;
             					}
@@ -1279,7 +1294,7 @@ var ChangeRequest = function() {
 
 function modal_control_edit(a){
 	 
-$('#tr_idnya').val(a); 
+$('#tc_idnya').val(a); 
 $('#existing_control_id').val($('#existing_control_id'+a).val());
 $('#risk_existing_control').val($('#risk_existing_control'+a).val());
 $('#risk_evaluation_control').val($('#risk_evaluation_control'+a).val());
@@ -1287,4 +1302,13 @@ $('#risk_control_owner').val($('#risk_control_owner'+a).val());
 $('#form-control-revid').val(a);
 
 $('#form-control').modal('show'); 
+}
+
+function modal_control_edit_objective(a){
+$('#tr_idnyaob').val(a); 
+$('#objective_id').val($('#objective_id'+a).val());
+$('#objective').val($('#objective'+a).val());
+$('#form-control-revid-objective').val(a);
+
+$('#form-control-objective').modal('show'); 
 }

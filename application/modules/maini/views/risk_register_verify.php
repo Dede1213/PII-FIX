@@ -448,7 +448,7 @@
 					<div class="form-group">
 						<label class="col-md-3 control-label smaller cl-compact" >Evaluasi atas Eksisting Kontrol<span class="required">* </span></label>
 						<div class="col-md-9">
-						<input type="text" class="form-control input-sm" name="risk_evaluation_control" placeholder="" value="NONE">
+						<input type="text" class="form-control input-sm" name="risk_evaluation_control" id = "risk_evaluation_control" placeholder="" value="NONE">
 						</div>
 					</div>
 		

@@ -649,6 +649,7 @@ WHERE t_risk.risk_id ='$id'";
 	</div>
 </div>
 
+
 <!-- ACTION PLAN -->
 <div id="form-data" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
 	<div class="modal-header">
@@ -656,11 +657,11 @@ WHERE t_risk.risk_id ='$id'";
 		<h4 class="modal-title">Tambah Usulan Action Plan</h4>
 	</div>
 	<div class="modal-body">
-		
+		<input type = "hidden" id = "tr_idnya2" >
 			<form id="input-form-action-plan" role="form" class="form-horizontal">
-				<input type = "hidden" id = "tr_idnya_ap">
 				<div class="form-body">
 					<div class="form-group">
+					<input type = "hidden" id = "form-data-revid">
 						<label class="col-md-3 control-label smaller cl-compact">Usulan Action Plan<span class="required">* </span></label>
 						<div class="col-md-9">
 							<div class="input-group">
@@ -683,9 +684,9 @@ WHERE t_risk.risk_id ='$id'";
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Pemilik Action Plan <span class="required">* </span></label>
+						<label class="col-md-3 control-label">Pemilik Action Plan  <span class="required">* </span></label>
 						<div class="col-md-9">
-						<select class="form-control input-sm" name="division" id = "division">
+						<select class="form-control input-sm" name="division" id ="division">
 							<?php foreach($division_list as $row) { ?>
 							<option value="<?=$row['ref_key']?>"><?=$row['ref_value']?></option>
 							<?php } ?>
@@ -703,6 +704,7 @@ WHERE t_risk.risk_id ='$id'";
 			>Tambah</button>
 	</div>
 </div>
+
 <!-- LIBRARY ACTION-->
 <div id="modal-libraryaction" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
 	<div class="modal-header">

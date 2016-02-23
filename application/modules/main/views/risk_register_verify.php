@@ -460,7 +460,7 @@
 					<div class="form-group">
 						<label class="col-md-3 control-label smaller cl-compact" >Evaluation on Existing Control <span class="required">* </span></label>
 						<div class="col-md-9">
-						<input type="text" class="form-control input-sm" name="risk_evaluation_control" placeholder="" value="NONE">
+						<input type="text" class="form-control input-sm" name="risk_evaluation_control" placeholder="" id = "risk_evaluation_control" value="NONE">
 						</div>
 					</div>
 		
@@ -498,6 +498,7 @@
 			<form id="input-form-action-plan" role="form" class="form-horizontal">
 				<div class="form-body">
 					<div class="form-group">
+					<input type = "hidden" id = "form-data-revid">
 						<label class="col-md-3 control-label smaller cl-compact">Suggested Action Plan<span class="required">* </span></label>
 						<div class="col-md-9">
 							<div class="input-group">

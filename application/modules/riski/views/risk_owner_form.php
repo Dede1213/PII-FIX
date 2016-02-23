@@ -326,9 +326,9 @@
 		<h4 class="modal-title">Tambah Kontrol</h4>
 	</div>
 	<div class="modal-body">
-		
-			<form id="input-form-control" role="form" class="form-horizontal">
+			
 			<input type = "hidden" id = "tr_idnya">
+			<form id="input-form-control" role="form" class="form-horizontal">
 				<div class="form-body">
 					<div class="form-group">
 						<label class="col-md-3 control-label smaller cl-compact">ID Kontrol Eksisting</label>
@@ -401,10 +401,10 @@
 		<h4 class="modal-title">Tambah Usulan Penanganan Risiko</h4>
 	</div>
 	<div class="modal-body">
-		
+			<input type = "hidden" id = "tr_idnya2">
 			<form id="input-form-action-plan" role="form" class="form-horizontal">
 				<div class="form-body">
-					<input type = "hidden" id = "tr_idnya_ap">
+				<input type = "hidden" id = "form-data-revid">
 					<div class="form-group">
 						<label class="col-md-3 control-label smaller cl-compact">Usulan Action Plan<span class="required">* </span></label>
 						<div class="col-md-9">

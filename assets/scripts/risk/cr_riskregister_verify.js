@@ -945,26 +945,33 @@ var ChangeRequest = function() {
         controlAddobjective: function(data, dcounter) {
         	this.dataControlobjective[dcounter] = data;
         },
-        controlAddRowobjective: function(nnode) {
-        	var me = this;
-        	
-        	me.dataControlCounter++;
-        	
-			var control_str = '';
-			if (g_change_type == "Risk Form") {
-				control_str = '<td>'+
-				'<div class="btn-group">'+
-					'<button type="button" class="btn btn-default btn-xs" onclick="ChangeRequest.controlTableDeleteobjective(this, '+me.dataControlCounter+')"><i class="fa fa-trash-o font-red"></i></button>'+
-				'</div>'+
-				'</td>';
-			}
+         controlAddRowobjective: function(nnode) {
+            var me = this;
+            
+            var lastidrand = $('#form-control-revid-objective').val();
 			
-        	$('#objective_table > tbody:last-child').append('<tr>'+
-        		'<td>'+nnode.objective_id+'</td>'+
-        		'<td>'+nnode.objective+'</td>'+
-        		control_str+
-        	'</tr>');
-        	me.controlAddobjective(nnode, me.dataControlCounter);
+			//alert(lastidrand);
+            
+            $('#'+lastidrand).html('');
+			  
+			$('#'+lastidrand).remove();
+            
+            me.dataControlCounterobjective++; 
+            
+            var idrand = Math.floor((Math.random() * 1000000) + 1); 
+
+            $('#objective_table > tbody:last-child').append('<tr id = "'+me.dataControlCounterobjective+'">'+
+                '<td><input type = "hidden" id = "objective_id'+me.dataControlCounterobjective+' " value = '+nnode.objective_id+'>'+nnode.objective_id+'</td>'+
+                '<td><textarea style="display:none;" id = "objective'+me.dataControlCounterobjective+'"> '+nnode.objective+'</textarea>'+nnode.objective+'</td>'+
+                '<td>'+
+                '<div class="btn-group">'+
+                    '<button type="button" class="btn btn-default btn-xs" onclick = "modal_control_edit_objective('+me.dataControlCounterobjective+')" ><i class="fa fa-pencil font-blue"></i></button>'+
+                    '<button type="button" class="btn btn-default btn-xs" onclick="ChangeRequest.controlTableDeleteobjective(this, '+me.dataControlCounterobjective+')"><i class="fa fa-trash-o font-red"></i></button>'+
+                '</div>'+
+                '</td>'+
+            '</tr>');
+            this.controlDeleteobjective(nnode.tr_idob); 
+            me.controlAddobjective(nnode, me.dataControlCounterobjective);
         },
 
          controlResetobjectiveprimary: function() {
@@ -1295,4 +1302,13 @@ $('#risk_control_owner').val($('#risk_control_owner'+a).val());
 $('#form-control-revid').val(a);
 
 $('#form-control').modal('show'); 
+}
+
+function modal_control_edit_objective(a){
+$('#tr_idnyaob').val(a); 
+$('#objective_id').val($('#objective_id'+a).val());
+$('#objective').val($('#objective'+a).val());
+$('#form-control-revid-objective').val(a);
+
+$('#form-control-objective').modal('show'); 
 }

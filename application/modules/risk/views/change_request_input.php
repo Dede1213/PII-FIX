@@ -392,6 +392,7 @@
 	var g_username = null;
 	var g_change_type = '<?=$change_type?>';
 </script>
+
 <!-- OBJECTIVE -->
 <div id="form-control-objective" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
 	<div class="modal-header">

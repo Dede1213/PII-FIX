@@ -620,6 +620,15 @@ class RiskRegister extends APP_Controlleri {
 			echo json_encode($data);
 		}
 	}
+
+	public function loadRiskLibrary_actplan($rid,$act_id) 
+	{
+		if (!empty($rid) && is_numeric($rid)) {
+			$this->load->model('risk/risk');
+			$data = $this->risk->getRiskById_actplan($rid,$act_id);
+			echo json_encode($data);
+		}
+	}
 	
 	public function loadRiskLibraryChange($rid,$risk_input_by) 
 	{
@@ -1718,7 +1727,7 @@ class RiskRegister extends APP_Controlleri {
 				<script type="text/javascript" src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 				<script type="text/javascript" src="assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
 				
-				<script src="assets/scripts/riski/cr_riskregister.js"></script>
+				<script src="assets/scripts/risk/cr_riskregister_actplan.js"></script>
 				';
 				
 				if ($res_valid) {

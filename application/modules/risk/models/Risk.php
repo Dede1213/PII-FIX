@@ -77,6 +77,54 @@ class Risk extends APP_Model {
 		
 		return $row;
 	}
+//actplan
+	public function getRiskById_actplan($risk_id,$act_id) 
+	{
+		$sql = "select 
+				a.*,
+				b.ref_value as risk_status_v,
+				c.ref_value as risk_level_v,
+				d.ref_value as impact_level_v,
+				e.l_title as likelihood_v,
+				f.division_name as risk_owner_v,
+				g.division_name as division_v,
+				t_risk_add_user.username,
+				concat(h.cat_code, '- Category ', h.cat_name) as risk_category_v,
+				concat(i.cat_code, '- Category ', i.cat_name) as risk_sub_category_v,
+				concat(j.cat_code, '- Category ', j.cat_name) as risk_2nd_sub_category_v,
+				k.ref_value as treatment_v,
+				l.display_name as risk_input_by_v,
+				m.division_name as risk_input_division_v,
+				n.risk_code as risk_library_code
+				from t_risk a 
+				left join m_reference b on a.risk_status = b.ref_key and b.ref_context = 'risk.status.user'
+				left join m_reference c on a.risk_level = c.ref_key and c.ref_context = 'risklevel.display'
+				left join m_reference d on a.risk_impact_level = d.ref_key and d.ref_context = 'impact.display'
+				left join m_likelihood e on a.risk_likelihood_key = e.l_key
+				left join m_division f on a.risk_owner = f.division_id
+				left join m_division g on a.risk_division = g.division_id
+				left join m_risk_category h on a.risk_category = h.cat_id
+				left join m_risk_category i on a.risk_sub_category = i.cat_id
+				left join m_risk_category j on a.risk_2nd_sub_category = j.cat_id
+				left join m_reference k on a.suggested_risk_treatment = k.ref_key and k.ref_context = 'treatment.status'
+				left join m_user l on a.risk_input_by = l.username
+				left join m_division m on a.risk_input_division = m.division_id
+				left join t_risk n on a.risk_library_id = n.risk_id
+				left join t_risk_add_user on a.risk_id = t_risk_add_user.risk_id
+				
+				where a.risk_id = ? ";
+		$query = $this->db->query($sql, array('divid' => $risk_id));
+		$row = $query->row_array();
+		
+		if ($row) {
+			$row['impact_list'] = $this->getRiskImpact($risk_id);
+			$row['action_plan_list'] = $this->getActionPlan_actplan($risk_id,$act_id);
+			$row['control_list'] = $this->getControlList($risk_id);
+			$row['objective_list'] = $this->getObjectiveList($risk_id);
+		}
+		
+		return $row;
+	}
 //get risk owner
 	public function getRiskByIdowner($risk_id) 
 	{
@@ -263,6 +311,25 @@ class Risk extends APP_Model {
 				left join m_division b on a.division = b.division_id 
 				where a.risk_id = ?";
 		$par = array('uid' => $risk_id);
+		
+		$query = $this->db->query($sql, $par);
+		$res = array();
+		foreach($query->result_array() as $row) {
+			$res[] = $row;
+		}
+		
+		return $res;
+	}
+
+	public function getActionPlan_actplan($risk_id,$act_id) 
+	{
+		$sql = "select a.*,
+				date_format(a.due_date, '%d-%m-%Y') as due_date_v,
+				b.division_name as division_v
+				from t_risk_action_plan a
+				left join m_division b on a.division = b.division_id 
+				where a.risk_id = ? and id= ? ";
+		$par = array('uid' => $risk_id,'uid2' => $act_id);
 		
 		$query = $this->db->query($sql, $par);
 		$res = array();

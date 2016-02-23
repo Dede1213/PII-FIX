@@ -142,6 +142,14 @@ class Mperiode extends APP_Model {
 		return $row;
 	}
 	
+	//periode AP Exec
+	public function getCurrentPeriode_exec() 
+	{
+		$sql = "select * from m_periode_plan where DATE(NOW()) between periode_start and periode_end";
+		$query = $this->db->query($sql);
+		$row = $query->row_array();
+		return $row;
+	}
 	// ACTION PLAN PERIODE
 	public function getDataPlan($page, $row, $order_by = null, $order = null, $filter_by = null, $filter_value = null)
 	{

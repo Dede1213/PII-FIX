@@ -46,6 +46,99 @@ gridControl.init({
     }
 });
 
+var gridControlobjective = new Datatable();
+gridControlobjective.init({
+    src: $("#library_objective_table"),
+    onSuccess: function (grid) {
+        // execute some code after table records loaded
+    },
+    onError: function (grid) {
+        // execute some code on network or other general error  
+    },
+    onDataLoad: function(grid) {
+        // execute some code on ajax data load
+    },
+    loadingMessage: 'Loading...',
+    dataTable: { // here you can define a typical datatable settings from http://datatables.net/usage/options 
+
+        // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
+        // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/scripts/datatable.js). 
+        // So when dropdowns used the scrollable div should be removed. 
+        //"dom": "<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r>t<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'>>",
+        
+        //"scrollX": true,
+        "pageLength": 10, // default record count per page
+        "lengthMenu": [[10], [10]],
+        "ajax": {
+            "url": site_url+"/risk/RiskRegister/getControlLibraryobjective" // ajax source
+        },
+        "columnDefs": [ {
+            "targets": 0,
+            "data": "id",
+            "render": function ( data, type, full, meta ) {
+                var ret = '<div class="btn-group">'+
+                '<button type="button" class="btn btn-default btn-xs" onclick="javascript: ChangeRequest.selectControlLibraryobjective('+full.id+')"><i class="fa fa-check-circle font-blue"></i></button>'+
+                '</div>';
+                return ret;
+            }
+        } ],
+        "columns": [
+            { "data": "id", "orderable": false },
+            { "data": "objective"}
+       ],
+        "order": [
+            [0, "asc"]
+        ]// set first column as a default sort by asc
+    }
+});
+
+
+
+var gridLibraryaction = new Datatable();
+gridLibraryaction.init({
+    src: $("#library_tableaction"),
+    onSuccess: function (grid) {
+        // execute some code after table records loaded
+    },
+    onError: function (grid) {
+        // execute some code on network or other general error  
+    },
+    onDataLoad: function(grid) {
+        // execute some code on ajax data load
+    },
+    loadingMessage: 'Loading...',
+    dataTable: { // here you can define a typical datatable settings from http://datatables.net/usage/options 
+
+        // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
+        // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/scripts/datatable.js). 
+        // So when dropdowns used the scrollable div should be removed. 
+        //"dom": "<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r>t<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'>>",
+        
+		//"scrollX": true,
+        "pageLength": 10, // default record count per page
+        "lengthMenu": [[10], [10]],
+        "ajax": {
+            "url": site_url+"/risk/RiskRegister/getActionLibrary" // ajax source
+        },
+        "columnDefs": [ {
+        	"targets": 0,
+        	"data": "action_plan",
+        	"render": function ( data, type, full, meta ) {
+        		var ret = '<div class="btn-group">'+
+        		'<button type="button" class="btn btn-default btn-xs" onclick="javascript: ChangeRequest.selectLibraryaction('+full.id+')"><i class="fa fa-check-circle font-blue"></i></button>'+
+        		'</div>';
+        		return ret;
+        	}
+        } ],
+        "columns": [
+			{ "data": "action_plan", "orderable": false },
+			{ "data": "action_plan", "orderable": false } 
+       ],
+        "order": [
+            [1, "asc"]
+        ]// set first column as a default sort by asc
+    }
+});
 var handleValidation = function() {
 	// for more info visit the official plugin documentation: 
 	// http://docs.jquery.com/Plugins/Validation
@@ -120,6 +213,51 @@ var handleValidation = function() {
 	    }
 	});
 }
+
+var handleValidationControl = function() {
+	var form1 = $('#input-form-control');
+	
+	form1.validate({
+	    errorElement: 'span', //default input error message container
+	    errorClass: 'help-block help-block-error', // default input error message class
+	    focusInvalid: true, // do not focus the last invalid input
+	    ignore: "",  // validate all fields including form hidden input
+	    rules: {
+	        risk_existing_control: {
+	            required: true
+	        },
+	        risk_evaluation_control: {
+	            required: true
+	        },
+	        risk_control_owner: {
+	            required: true
+	        }
+	    },
+	    invalidHandler: function (event, validator) { //display error alert on form submit              
+	        MainApp.viewGlobalModal('error', 'Please Fill All Mandatory Field');
+	    },
+	
+	    highlight: function (element) { // hightlight error inputs
+	        $(element)
+	            .closest('.form-group').addClass('has-error'); // set error class to the control group
+	    },
+	
+	    unhighlight: function (element) { // revert the change done by hightlight
+	        $(element)
+	            .closest('.form-group').removeClass('has-error'); // set error class to the control group
+	    },
+	
+	    success: function (label) {
+	        label
+	            .closest('.form-group').removeClass('has-error'); // set success class to the control group
+	    },
+	
+	    submitHandler: function (form) {
+	        return false;
+	    }
+	});
+}
+
 var gridControlExisting = new Datatable();
 gridControlExisting.init({
     src: $("#library_control_table_existing"),
@@ -167,95 +305,7 @@ gridControlExisting.init({
         ]// set first column as a default sort by asc
     }
 });
-var gridControlobjective = new Datatable();
-gridControlobjective.init({
-    src: $("#library_objective_table"),
-    onSuccess: function (grid) {
-        // execute some code after table records loaded
-    },
-    onError: function (grid) {
-        // execute some code on network or other general error  
-    },
-    onDataLoad: function(grid) {
-        // execute some code on ajax data load
-    },
-    loadingMessage: 'Loading...',
-    dataTable: { // here you can define a typical datatable settings from http://datatables.net/usage/options 
 
-        // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
-        // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/scripts/datatable.js). 
-        // So when dropdowns used the scrollable div should be removed. 
-        //"dom": "<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r>t<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'>>",
-        
-        //"scrollX": true,
-        "pageLength": 10, // default record count per page
-        "lengthMenu": [[10], [10]],
-        "ajax": {
-            "url": site_url+"/risk/RiskRegister/getControlLibraryobjective" // ajax source
-        },
-        "columnDefs": [ {
-            "targets": 0,
-            "data": "id",
-            "render": function ( data, type, full, meta ) {
-                var ret = '<div class="btn-group">'+
-                '<button type="button" class="btn btn-default btn-xs" onclick="javascript: ChangeRequest.selectControlLibraryobjective('+full.id+')"><i class="fa fa-check-circle font-blue"></i></button>'+
-                '</div>';
-                return ret;
-            }
-        } ],
-        "columns": [
-            { "data": "id", "orderable": false },
-            { "data": "objective"}
-       ],
-        "order": [
-            [0, "asc"]
-        ]// set first column as a default sort by asc
-    }
-});
-
-var handleValidationControl = function() {
-	var form1 = $('#input-form-control');
-	
-	form1.validate({
-	    errorElement: 'span', //default input error message container
-	    errorClass: 'help-block help-block-error', // default input error message class
-	    focusInvalid: true, // do not focus the last invalid input
-	    ignore: "",  // validate all fields including form hidden input
-	    rules: {
-	        risk_existing_control: {
-	            required: true
-	        },
-	        risk_evaluation_control: {
-	            required: true
-	        },
-	        risk_control_owner: {
-	            required: true
-	        }
-	    },
-	    invalidHandler: function (event, validator) { //display error alert on form submit              
-	        MainApp.viewGlobalModal('error', 'Please Fill All Mandatory Field');
-	    },
-	
-	    highlight: function (element) { // hightlight error inputs
-	        $(element)
-	            .closest('.form-group').addClass('has-error'); // set error class to the control group
-	    },
-	
-	    unhighlight: function (element) { // revert the change done by hightlight
-	        $(element)
-	            .closest('.form-group').removeClass('has-error'); // set error class to the control group
-	    },
-	
-	    success: function (label) {
-	        label
-	            .closest('.form-group').removeClass('has-error'); // set success class to the control group
-	    },
-	
-	    submitHandler: function (form) {
-	        return false;
-	    }
-	});
-}
 
 var handleValidationAction = function() {
 	// for more info visit the official plugin documentation: 
@@ -323,7 +373,6 @@ var handleValidationAction = function() {
 	});
 }
 
-
 var ChangeRequest = function() {
 	return {
 		primarydataControl: {},
@@ -338,8 +387,8 @@ var ChangeRequest = function() {
 		actionPlanChange : null,
 		init: function() {
         	var me = this;
-        	me.loadRiskPrimary(g_change_id);
-        	me.loadRisk(g_change_id);
+        	me.loadRiskPrimary(g_risk_id);
+        	me.loadRisk(g_risk_id);
         	
         	if (jQuery().datepicker) {
 	            $('.date-picker').datepicker({
@@ -355,6 +404,10 @@ var ChangeRequest = function() {
 	    		me.filterControl();
 	    	});
 	    	
+	    	$('#modal-control-filter-submit-objective').on('click', function() {
+                me.filterControlobjective();
+            });
+
 	    	$('#btn_impact_list').on('click', function() {
 	    		me.showImpactList();
 	    	});
@@ -368,6 +421,33 @@ var ChangeRequest = function() {
 	    		
 	    		$('#modal-likelihood').modal('hide');
 	    		me.setRiskLevel();
+	    	});
+	    	
+	    	$('#input-control-add').on('click', function() {
+	    		var form1 = $('#input-form-control').validate();
+	    		var fvalid = form1.form();
+	    		
+	    		if (fvalid) {
+	    			var xcid = $('#input-form-control input[name=existing_control_id]').val();
+	        		var xexis = $('#input-form-control input[name=risk_existing_control]').val();
+	        		var xeval = $('#input-form-control input[name=risk_evaluation_control]').val();
+	        		var xowner = $('#input-form-control select[name=risk_control_owner]').val();
+					
+					var tr_id = $('#tr_idnya').val();
+					
+					$("#"+tr_id).html("");
+					 
+	        		var nnode = {
+	        			'existing_control_id' : xcid,
+	        			'risk_existing_control' : xexis,
+	        			'risk_evaluation_control' : xeval,
+	        			'risk_control_owner' : xowner
+	        		};
+	
+	        		me.controlAddRow(nnode);
+	        		
+	        		$('#form-control').modal('hide');
+	    		}
 	    	});
 
 	    	$('#input-control-add-objective').on('click', function() {
@@ -396,36 +476,6 @@ var ChangeRequest = function() {
                     $('#form-control-objective').modal('hide');
                 }
             });
-			
-			$('#modal-control-filter-submit-objective').on('click', function() {
-                me.filterControlobjective();
-            });
-
-	    	$('#input-control-add').on('click', function() {
-	    		var form1 = $('#input-form-control').validate();
-	    		var fvalid = form1.form();
-	    		
-	    		if (fvalid) {
-	    			var xcid = $('#input-form-control input[name=existing_control_id]').val();
-	        		var xexis = $('#input-form-control input[name=risk_existing_control]').val();
-	        		var xeval = $('#input-form-control input[name=risk_evaluation_control]').val();
-	        		var xowner = $('#input-form-control input[name=risk_control_owner]').val();
-	        		
-					var tr_id = $('#tr_idnya').val();
-					$("#"+tr_id).html("");
-					
-	        		var nnode = {
-	        			'existing_control_id' : xcid,
-	        			'risk_existing_control' : xexis,
-	        			'risk_evaluation_control' : xeval,
-	        			'risk_control_owner' : xowner
-	        		};
-	
-	        		me.controlAddRow(nnode);
-	        		
-	        		$('#form-control').modal('hide');
-	    		}
-	    	});
 	    	
 	    	$('#input-actionplan-add').on('click', function() {
 	    		var form1 = $('#input-form-action-plan').validate();
@@ -443,8 +493,6 @@ var ChangeRequest = function() {
 	    					cf = 'ADD';
 	    				}
 	    				var nnode = {
-	    					'cr_id' : me.actionPlanChange.cr_id,
-	    					'change_id' : me.actionPlanChange.change_id,
 	    					'id' : me.actionPlanChange.id,
 	    					'risk_id' : me.actionPlanChange.risk_id,
 	    					'change_flag' : cf,
@@ -457,8 +505,6 @@ var ChangeRequest = function() {
 	    				me.actionPlanEditRow(me.actionPlanChange, nnode);
 	    			} else {
 	    				var nnode = {
-	    					'cr_id' : null,
-	    					'change_id' : null,
 	    					'id' : null,
 	    					'risk_id' : null,
 	    					'change_flag' : 'ADD',
@@ -534,8 +580,6 @@ var ChangeRequest = function() {
         		
         		me.actionPlanChange = {
         			'rowid': xid,
-        			'cr_id' : edData.cr_id,
-        			'change_id' : edData.change_id,
         			'id' : edData.id,
         			'risk_id' : edData.risk_id,
         			'change_flag' : edData.change_flag,
@@ -561,55 +605,6 @@ var ChangeRequest = function() {
         		});
         	});
         	
-        	$('#primary-risk-button-submit').on('click', function() {
-        		var mod = MainApp.viewGlobalModal('confirm', 'Are You sure you want to Verify Change Request with Primary Data ?');
-        		mod.find('button.btn-primary').off('click');
-        		mod.find('button.btn-primary').one('click', function(){
-        			me.submitRiskData('verifyPrimary');
-        		});
-        	});
-        	
-        	$('#changes-risk-set-as-primary').on('click', function() {
-        		var mod = MainApp.viewGlobalModal('confirm', 'Are You sure you want to Set the Changes Data to Primary ?');
-        		mod.find('button.btn-primary').off('click');
-        		mod.find('button.btn-primary').one('click', function(){
-        			me.submitRiskData('switchPrimary');
-        		});
-        	});
-        	
-        	$('#changes-risk-button-submit').on('click', function() {
-        		var mod = MainApp.viewGlobalModal('confirm', 'Are You sure you want to Verify Change Request with Changes Data ?');
-        		mod.find('button.btn-primary').off('click');
-        		mod.find('button.btn-primary').one('click', function(){
-        			me.submitRiskData('verify');
-        		});
-        	});
-        	
-        	$('#changes-risk-button-save').on('click', function() {
-        		var mod = MainApp.viewGlobalModal('confirm', 'Are You sure you want to Save your Change Request Changes ?');
-        		mod.find('button.btn-primary').off('click');
-        		mod.find('button.btn-primary').one('click', function(){
-        			me.submitRiskData('saveDraft');
-        		});
-        	});
-
-        	$('#changes-risk-button-save-changes').on('click', function() {
-        		var mod = MainApp.viewGlobalModal('confirm', 'Are You sure you want to Save your Change Request Changes ?');
-        		mod.find('button.btn-primary').off('click');
-        		mod.find('button.btn-primary').one('click', function(){
-        			me.submitRiskData('saveDraft-changes');
-        		});
-        	});
-        	
-        	$('#changes-risk-button-cancel').on('click', function() {
-        		var mod = MainApp.viewGlobalModal('confirm', 'Are You sure you want to cancel your Change Request Verification ? You will loose your unsaved data.');
-        		mod.find('button.btn-primary').off('click');
-        		mod.find('button.btn-primary').one('click', function(){
-        			location.href=site_url+'/maini/mainrac#tab_change_request_list';
-        		});
-        	});
-        	
-        	/*
         	$('#risk-button-submit').on('click', function() {
         		var mod = MainApp.viewGlobalModal('confirm', 'Are You sure you want to Submit your Change Request ?');
         		mod.find('button.btn-primary').off('click');
@@ -625,7 +620,7 @@ var ChangeRequest = function() {
         			location.href=site_url+'/main';
         		});
         	});
-        	*/
+        	
         	me.loadRiskLevelList();
         	me.loadRiskLevelReference();
         	me.loadImpactLevelReference();
@@ -713,6 +708,20 @@ var ChangeRequest = function() {
                 me.populateRisk($('#input-form-control-objective'), data_risk);
             });
         },
+        selectLibraryaction: function(rid) {
+        	var me = this;
+			  
+        	$('#modal-libraryaction').modal('hide');
+        	Metronic.blockUI({ boxed: true });
+        	$.getJSON( site_url+"/risk/RiskRegister/loadactionLibrary/"+rid, function( data_risk ) {
+        		Metronic.unblockUI();
+        		
+        		data_risk['action_plan'] = data_risk['action_plan'];
+        		
+        		me.populateRisk($('#input-form-action-plan'), data_risk);
+        	});
+         
+        },
          selectControlLibraryexisting: function(rid) {
             var me = this;
             $('#input-form-control input[name=risk_existing_control]').attr('readonly', true);
@@ -743,8 +752,7 @@ var ChangeRequest = function() {
         	var me = this;
         	
         	Metronic.blockUI({ boxed: true });
-        	$.getJSON( site_url+"/risk/RiskRegister/loadChangeRequest/primary/"+rid, function( data_risk ) {
-        	//$.getJSON( site_url+"/risk/RiskRegister/loadChangeRequest/changes/"+rid, function( data_risk ) {
+        	$.getJSON( site_url+'/risk/RiskRegister/loadRiskLibrary_actplan/'+rid+'/'+g_act_id, function( data_risk ) {
         		Metronic.unblockUI();
         		g_username = data_risk['risk_input_by'];
         		data_risk['risk_library_id'] = data_risk['risk_library_id'];
@@ -766,9 +774,7 @@ var ChangeRequest = function() {
         				'action_plan' : val.action_plan,
         				'due_date' : val.due_date_v,
         				'division_v' : val.division_v,
-        				'division' : val.division,
-        				'data_flag' : val.data_flag,
-        				'change_flag' : val.change_flag
+        				'division' : val.division
         			}
         			me.primaryactionPlanAddRow(nnode);
         		});
@@ -798,7 +804,6 @@ var ChangeRequest = function() {
         			
         			me.controlAddRowobjectiveprimary(nnode);
         		});
-
 
         	});
         },
@@ -870,8 +875,6 @@ var ChangeRequest = function() {
         },
         primaryactionPlanAddRow: function(nnode) {
         	var me = this;
-
-        	if (nnode.change_flag == 'DELETE') return false;
         	
         	me.primarydataActionPlanCounter++;
         	
@@ -890,6 +893,13 @@ var ChangeRequest = function() {
         	document.getElementById('control_table').deleteRow(i);
         	this.controlDelete(dataId);
         },
+        // CHANGES
+        controlTableDeleteobjective: function(xrow, dataId) {
+        	//console.log(dataId);
+        	var i=xrow.parentNode.parentNode.parentNode.rowIndex;
+        	document.getElementById('objective_table').deleteRow(i);
+        	this.controlDeleteobjective(dataId);
+        },
         controlReset: function() {
         	this.dataControl = {};
         	this.dataControlCounter = 0;
@@ -901,33 +911,34 @@ var ChangeRequest = function() {
         controlDelete: function(id) {
         	delete this.dataControl[id];
         },
+        controlDeleteobjective: function(id) {
+        	delete this.dataControlobjective[id];
+        },
         controlAddRow: function(nnode) {
         	var me = this;
         	
         	me.dataControlCounter++;
-
+        	
+			var control_str = '';
+			if (g_change_type == "Risk Form") {
+				control_str = '<td>'+
+				'<div class="btn-group">'+
+					'<button type="button" class="btn btn-default btn-xs" onclick = "modal_control_edit('+me.dataControlCounter+')" ><i class="fa fa-pencil font-blue"></i></button>'+
+					'<button type="button" class="btn btn-default btn-xs" onclick="ChangeRequest.controlTableDelete(this, '+me.dataControlCounter+')"><i class="fa fa-trash-o font-red"></i></button>'+
+				 '</div>'+
+				'</td>';
+			}
+			
         	$('#control_table > tbody:last-child').append('<tr id = '+me.dataControlCounter+'>'+
         		'<td><input type = "hidden" id = "existing_control_id'+me.dataControlCounter+'" value = "'+nnode.existing_control_id+'">'+nnode.existing_control_id+'</td>'+
         		'<td><input type = "hidden" id = "risk_existing_control'+me.dataControlCounter+'" value = "'+nnode.risk_existing_control+'">'+nnode.risk_existing_control+'</td>'+
         		'<td><input type = "hidden" id = "risk_evaluation_control'+me.dataControlCounter+'" value = "'+nnode.risk_evaluation_control+'">'+nnode.risk_evaluation_control+'</td>'+
         		'<td><input type = "hidden" id = "risk_control_owner'+me.dataControlCounter+'" value = "'+nnode.risk_control_owner+'">'+nnode.risk_control_owner+'</td>'+
-        		'<td>'+ 
-        		'<div class="btn-group">'+
-					'<button type="button" class="btn btn-default btn-xs" onclick = "modal_control_edit('+me.dataControlCounter+')" ><i class="fa fa-pencil font-blue"></i></button>'+
-        			'<button type="button" class="btn btn-default btn-xs" onclick="ChangeRequest.controlTableDelete(this, '+me.dataControlCounter+')"><i class="fa fa-trash-o font-red"></i></button>'+
-        		'</div>'+
-        		'</td>'+
+        		control_str+
         	'</tr>');
+			
+			
         	me.controlAdd(nnode, me.dataControlCounter);
-        },
-        controlTableDeleteobjective: function(xrow, dataId) {
-        	//console.log(dataId);
-        	var i=xrow.parentNode.parentNode.parentNode.rowIndex;
-        	document.getElementById('objective_table').deleteRow(i);
-        	this.controlDeleteobjective(dataId);
-        },
-        controlDeleteobjective: function(id) {
-        	delete this.dataControlobjective[id];
         },
         controlResetobjective: function() {
         	this.dataControlobjective = {};
@@ -958,8 +969,7 @@ var ChangeRequest = function() {
         	'</tr>');
         	me.controlAddobjective(nnode, me.dataControlCounter);
         },
-
-         controlResetobjectiveprimary: function() {
+        controlResetobjectiveprimary: function() {
         	this.dataControlobjectiveprimary = {};
         	this.dataControlCounter = 0;
         	$("#primary_objective_table > tbody").html("");
@@ -998,13 +1008,13 @@ var ChangeRequest = function() {
         	this.dataActionPlan[dcounter] = data;
         },
         actionPlanDelete: function(id) {
-        	this.dataActionPlan[id].change_flag = 'ADD';
-        	delete this.dataActionPlan[id];
+        	this.dataActionPlan[id].change_flag = 'DELETE';
+        	//delete this.dataActionPlan[id];
         },
         actionPlanAddRow: function(nnode) {
         	var me = this;
 
-			me.dataActionPlanCounter++;
+        	me.dataActionPlanCounter++;
         	
         	var del_btn = '<button type="button" class="btn btn-default btn-xs button-grid-delete" data-id="'+me.dataActionPlanCounter+'"><i class="fa fa-trash-o font-red"></i></button>';
         	if (g_change_type == "Action Plan Form") {
@@ -1017,10 +1027,6 @@ var ChangeRequest = function() {
         	'</div>';
         	if (nnode.data_flag == 'LOCKED') {
         		act_str = 'ASSIGNED';
-        	}
-        	
-        	if (nnode.change_flag == 'DELETE') {
-        		act_str = 'DELETED';
         	}
         	
         	$('#action_plan_table > tbody:last-child').append('<tr data-id="'+me.dataActionPlanCounter+'">'+
@@ -1077,10 +1083,13 @@ var ChangeRequest = function() {
         loadRisk: function(rid) {
         	var me = this;
         	
+        	var xfar = rid;
+        	if (g_act_id) xfar = rid+'/'+g_act_id;
+        	
         	$('#modal-library').modal('hide');
         	Metronic.blockUI({ boxed: true });
-        	$.getJSON( site_url+"/risk/RiskRegister/loadChangeRequest/changes/"+rid, function( data_risk ) {
-        	//$.getJSON( site_url+"/risk/RiskRegister/loadChangeRequest/primary/"+rid, function( data_risk ) {
+            $.getJSON( site_url+'/risk/RiskRegister/loadRiskLibrary_actplan/'+rid+'/'+g_act_id, function( data_risk ) {
+        	//$.getJSON( site_url+"/risk/RiskRegister/loadRiskForChange2/"+xfar, function( data_risk ) {
         		Metronic.unblockUI();
         		g_username = data_risk['risk_input_by'];
         		data_risk['risk_library_id'] = data_risk['risk_library_id'];
@@ -1118,8 +1127,6 @@ var ChangeRequest = function() {
         		me.actionPlanReset();
         		$.each( data_risk['action_plan_list'], function( key, val ) {
         			var nnode = {
-        				'cr_id' : val.cr_id,
-        				'change_id' : val.change_id,
         				'id' : val.id,
         				'risk_id' : val.risk_id,
         				'change_flag' : val.change_flag,
@@ -1160,14 +1167,13 @@ var ChangeRequest = function() {
 
         	});
         },
-        submitRiskData: function(mode) {
+        submitRiskData: function() {
         	var form1 = $('#input-form').validate();
         	var fvalid = form1.form();
         	if (fvalid) {
             	var me = this;
-				var xid = $('#input-form input[name=id]').val();
-				
-				// prepare impact data
+
+            	// prepare impact data
             	var impact_param = {};
             	var cnt = 0;
             	$.each(me.dataRiskImpact, function(key, value) { 
@@ -1212,8 +1218,6 @@ var ChangeRequest = function() {
             	var actplan_param = {};
             	var cnt = 0;
             	$.each(me.dataActionPlan, function(key, value) { 
-            		actplan_param['actplan['+cnt+'][cr_id]'] = value.cr_id;
-            		actplan_param['actplan['+cnt+'][change_id]'] = value.change_id;
             		actplan_param['actplan['+cnt+'][id]'] = value.id;
             		actplan_param['actplan['+cnt+'][risk_id]'] = value.risk_id;
             		actplan_param['actplan['+cnt+'][change_flag]'] = value.change_flag;
@@ -1231,20 +1235,8 @@ var ChangeRequest = function() {
             	}
             	
             	Metronic.blockUI({ boxed: true });
-            	if (mode == 'verifyPrimary') {
-            		var url = site_url+'/main/mainRac/changeRequestVerifyPrimary';
-            	} else if (mode == 'switchPrimary') {
-            		var url = site_url+'/main/mainRac/changeRequestSwitchPrimary';
-            	} else if (mode == 'verify') {
-            		var url = site_url+'/main/mainRac/changeRequestVerifyChanges';
-            	} else if (mode == 'saveDraft') {
-            		var url = site_url+'/main/mainRac/changeRequestSaveDraft';
-            	}else if (mode == 'saveDraft-changes') {
-            		var url = site_url+'/main/mainRac/changeRequestSaveDraftchanges';
-            	} else {
-            		return false;
-            	}
-            	
+            	var url = site_url+'/risk/RiskRegister/submitChangeRisk';
+
             	$.post(
             		url,
             		$( "#input-form" ).serialize()+ '&' + $.param(impact_param)+ '&' + $.param(actplan_param)+ '&' + $.param(control_param)+ '&' + $.param(objective_param),
@@ -1253,15 +1245,16 @@ var ChangeRequest = function() {
             			if(data.success) {
             				var mod = MainApp.viewGlobalModal('success', 'Success Submitting Change Request');
             				mod.find('button.btn-ok-success').one('click', function(){
-            					if (mode == 'verifyPrimary' || mode == 'verify') {
-            						location.href=site_url+'/maini/mainrac#tab_change_request_list';
-            					} else {
-            						location.href=site_url+'/maini/mainrac/ChangeRequestVerify/'+xid;
-            					}
+            					location.href=site_url+'/main#tab_change_request_list';
             				});
             				
             			} else {
-            				MainApp.viewGlobalModal('error', data.msg);
+            				
+            				//ubah
+            				var mod = MainApp.viewGlobalModal('warning-maintenance', 'This Risk Is Under Maintenance by RAC you cannot modify this risk until the process done');
+            				mod.find('button.btn-ok-success').one('click', function(){
+            					location.href=site_url+'/main';
+            				});
             			}
             			
             		},
@@ -1272,8 +1265,6 @@ var ChangeRequest = function() {
             	 });
             }
         }
-		
-		
 	 }
 }();
 
@@ -1283,7 +1274,7 @@ $('#tr_idnya').val(a);
 $('#existing_control_id').val($('#existing_control_id'+a).val());
 $('#risk_existing_control').val($('#risk_existing_control'+a).val());
 $('#risk_evaluation_control').val($('#risk_evaluation_control'+a).val());
-$('#risk_control_owner').val($('#risk_control_owner'+a).val());
+$('#risk_control_owner').select($('#risk_control_owner'+a).val());
 $('#form-control-revid').val(a);
 
 $('#form-control').modal('show'); 

@@ -491,7 +491,7 @@
 									<label class="col-md-3 control-label smaller cl-compact">Pemilik Kontrol<span class="required">* </span></label>
 									<div class="col-md-9">
 									
-									<select class="form-control input-sm" name="risk_control_owner">
+									<select class="form-control input-sm" name="risk_control_owner" id = "risk_control_owner">
 										<option value="NONE">NONE</option>
 										<?php foreach($division_list as $row) { ?>
 										<option value="<?=$row['ref_key']?>"><?=$row['ref_value']?></option>

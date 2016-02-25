@@ -1645,7 +1645,7 @@ class MainRac extends APP_Controlleri {
 
 				$res = $this->risk->riskChangeUpdate1ajah($_POST['risk_id'], $risk_update, $impact_level, $actplan, $control, $data['session']['username']);
 				
-				$res = $this->risk->updateRisk_primary($_POST['risk_id'], false, $risk_update, false, false, false, $data['session']['username']);
+				$res = $this->risk->updateRisk_primary($_POST['risk_id'], false, $risk_update, $impact_level, $actplan, $control, $data['session']['username']);
 
 				$resp = array();
 				if ($res) {

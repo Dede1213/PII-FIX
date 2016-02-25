@@ -839,6 +839,7 @@ WHERE t_risk.risk_id ='$id'";
 										<?php foreach($division_list as $row) { ?>
 										<option value="<?=$row['ref_key']?>"><?=$row['ref_value']?></option>
 										<?php } ?>
+										
 						</select>
 					<!-- <input type="text" class="form-control input-sm" name="risk_control_owner" placeholder=""> -->
 						</div>

@@ -1190,7 +1190,7 @@ $('#tr_idnya').val(a);
 $('#existing_control_id').val($('#existing_control_id'+a).val());
 $('#risk_existing_control').val($('#risk_existing_control'+a).val());
 $('#risk_evaluation_control').val($('#risk_evaluation_control'+a).val());
-$('#risk_control_owner').select($('#risk_control_owner'+a).val());
+$('#risk_control_owner').val($('#risk_control_owner'+a).val());
 $('#form-control-revid').val(a);
 
 $('#form-control').modal('show'); 

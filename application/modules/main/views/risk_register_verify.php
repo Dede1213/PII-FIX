@@ -214,7 +214,7 @@
 								</div>
 								<div class="panel-body">
 									 <div class="clearfix">
-									 	<a href="#form-control-objective" id="button-form-control-open-objective" data-toggle="modal" class="btn default green pull-right btn-sm">
+									 	<a href="#form-control-objective" id="#" data-toggle="modal" class="btn default green pull-right btn-sm">
 									 	<i class="fa fa-plus"></i>
 									 	<span class="hidden-480">
 									 	Add Objective </span>
@@ -243,7 +243,7 @@
 								</div>
 								<div class="panel-body">
 									 <div class="clearfix">
-									 	<a href="#form-control" id="button-form-control-open" data-toggle="modal" class="btn default green pull-right btn-sm">
+									 	<a href="#form-control" id="#button-form-control-open" data-toggle="modal" class="btn default green pull-right btn-sm">
 									 	<i class="fa fa-plus"></i>
 									 	<span class="hidden-480">
 									 	Add Control </span>
@@ -467,11 +467,12 @@
 					<div class="form-group">
 									<label class="col-md-3 control-label smaller cl-compact">Control Owner<span class="required">* </span></label>
 									<div class="col-md-9">
-									<select class="form-control input-sm" name="risk_control_owner">
+									<select class="form-control input-sm" name="risk_control_owner" id = "risk_control_owner">
 										<option value="NONE">NONE</option>
 										<?php foreach($division_list as $row) { ?>
 										<option value="<?=$row['ref_key']?>"><?=$row['ref_value']?></option>
 										<?php } ?>
+										
 									</select>
 									</div>
 								</div>

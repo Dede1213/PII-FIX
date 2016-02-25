@@ -508,7 +508,7 @@ var RiskInput = function() {
 					
 					var tr_id = $('#form-control-revid').val();
 					
-					$("#"+tr_id).html("");
+					$("#tr_c"+tr_id).html("");
 					 
 	        		var nnode = {
 						'tr_id' : tr_id,
@@ -622,7 +622,8 @@ var RiskInput = function() {
         	});
 
             $('#button-form-control-open-objective').on('click', function () {
-                $('#input-form-control-objective')[0].reset();
+				document.getElementById("input-form-control-objective").reset();
+               // $('#input-form-control-objective')[0].reset();
                 $('#input-form-control-objective textarea[name=objective]').attr('readonly', false);
             });
         	

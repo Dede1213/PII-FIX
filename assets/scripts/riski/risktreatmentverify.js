@@ -283,7 +283,10 @@ var RiskVerify = function() {
             });
             
             $('#button-form-data-open').on('click', function () {
-                $('#input-form-action-plan')[0].reset();
+                
+                //$('#input-form-action-plan').reset();
+                document.getElementById("input-form-action-plan").reset();
+                $('#form-data-revid').val('');
             });
             
             $('#changes-risk-set-as-primary').on('click', function () {

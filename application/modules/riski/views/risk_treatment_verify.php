@@ -515,7 +515,7 @@ WHERE t_risk.risk_id ='$id'";
 									<h4>Usulan Action Plan</h4>
 								</div>
 								<div class="col-md-6 clearfix">
-									<a href="#form-data" data-toggle="modal" class="btn default green pull-right btn-sm">
+									<a href="#form-data" id="button-form-data-open"  data-toggle="modal" class="btn default green pull-right btn-sm">
 									<i class="fa fa-plus"></i>
 									<span class="hidden-480">
 									Tambah Usulan Action Plan </span>

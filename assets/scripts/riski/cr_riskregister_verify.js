@@ -516,6 +516,12 @@ var ChangeRequest = function() {
 	    			me.setRiskLevel();
 	    		}
 	    	});
+
+			 $('#button-form-control-open-objective').on('click', function () {
+				document.getElementById("input-form-control-objective").reset();
+               // $('#input-form-control-objective')[0].reset();
+                $('#input-form-control-objective textarea[name=objective]').attr('readonly', false);
+            });
         	
         	$('#button-form-control-open').on('click', function () {
         		$('#input-form-control')[0].reset();

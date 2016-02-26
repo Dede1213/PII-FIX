@@ -613,7 +613,7 @@ var RiskInput = function() {
         		}
         	});
         	
-        	$('#button-form-control-open-control').on('click', function () {
+        	$('#button-form-control-open').on('click', function () {
         		//$('#input-form-control')[0].reset();
 				 
 				document.getElementById("input-form-control").reset();

@@ -968,7 +968,7 @@ var ChangeRequest = function() {
 
             $('#objective_table > tbody:last-child').append('<tr id = "'+me.dataControlCounterobjective+'">'+
                 '<td><input type = "hidden" id = "objective_id'+me.dataControlCounterobjective+' " value = '+nnode.objective_id+'>'+nnode.objective_id+'</td>'+
-                '<td><textarea style="display:none;" id = "objective'+me.dataControlCounterobjective+'"> '+nnode.objective+'</textarea>'+nnode.objective+'</td>'+
+                '<td><textarea style="display:none;" id = "objective'+me.dataControlCounterobjective+'">'+nnode.objective+'</textarea>'+nnode.objective+'</td>'+
                 '<td>'+
                 '<div class="btn-group">'+
                     '<button type="button" class="btn btn-default btn-xs" onclick = "modal_control_edit_objective('+me.dataControlCounterobjective+')" ><i class="fa fa-pencil font-blue"></i></button>'+

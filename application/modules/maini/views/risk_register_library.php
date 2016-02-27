@@ -572,6 +572,8 @@
 	</div>
 </div>
 
+
+
 <!-- ACTION PLAN -->
 <div id="form-data" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
 	<div class="modal-header">
@@ -579,20 +581,26 @@
 		<h4 class="modal-title">Tambah Usulan Action Plan</h4>
 	</div>
 	<div class="modal-body">
-		
+		<input type = "hidden" id = "tr_idnya2" >
 			<form id="input-form-action-plan" role="form" class="form-horizontal">
 				<div class="form-body">
 					<div class="form-group">
-						<label class="col-md-3 control-label">Usulan Action Plan <span class="required">* </span></label>
+					<input type = "hidden" id = "form-data-revid">
+						<label class="col-md-3 control-label smaller cl-compact">Usulan Action Plan<span class="required">* </span></label>
 						<div class="col-md-9">
-						<input type="text" class="form-control input-sm" name="action_plan" placeholder="">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" name="action_plan" id = "action_plan" placeholder=""> 
+								<span class="input-group-btn">
+								<button class="btn btn-primary btn-sm" type="button" data-toggle="modal" href="#modal-libraryaction"><i class="fa fa-search fa-fw"/></i></button>
+								</span> 
+							</div>
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Batas Waktu <span class="required">* </span></label>
+						<label class="col-md-3 control-label">Batas Waktu<span class="required">* </span></label>
 						<div class="col-md-9">
 						<div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
-							<input type="text" class="form-control input-sm" name="due_date" readonly>
+							<input type="text" class="form-control input-sm" name="due_date" id = "due_date" readonly>
 							<span class="input-group-btn">
 							<button class="btn default btn-sm" type="button"><i class="fa fa-calendar"></i></button>
 							</span>
@@ -600,9 +608,9 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Pemilik Action Plan<span class="required">* </span></label>
+						<label class="col-md-3 control-label">Pemilik Action Plan <span class="required">* </span></label>
 						<div class="col-md-9">
-						<select class="form-control input-sm" name="division">
+						<select class="form-control input-sm" name="division" id ="division">
 							<?php foreach($division_list as $row) { ?>
 							<option value="<?=$row['ref_key']?>"><?=$row['ref_value']?></option>
 							<?php } ?>

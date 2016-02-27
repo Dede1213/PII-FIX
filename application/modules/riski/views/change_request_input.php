@@ -282,7 +282,7 @@
 							<hr/>
 							<?php if ($change_type == 'Risk Form') { ?>
 							<div class="clearfix">
-								<a href="#form-control-objective" id="button-form-control-open" data-toggle="modal" class="btn default green pull-right btn-sm">
+								<a href="#form-control-objective" id="button-form-control-open-objective" data-toggle="modal" class="btn default green pull-right btn-sm">
 								<i class="fa fa-plus"></i>
 								<span class="hidden-480">
 								Tambah Objektif </span>
@@ -483,7 +483,7 @@
 					<div class="form-group">
 						<label class="col-md-3 control-label smaller cl-compact" >Evaluasi atas Eksisting Kontrol <span class="required">* </span></label>
 						<div class="col-md-9">
-						<input type="text" class="form-control input-sm" name="risk_evaluation_control" placeholder="" value="NONE">
+						<input type="text" class="form-control input-sm" name="risk_evaluation_control" id = "risk_evaluation_control" placeholder="" value="NONE">
 						</div>
 					</div>
 					

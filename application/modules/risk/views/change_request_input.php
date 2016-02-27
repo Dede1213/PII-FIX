@@ -282,7 +282,7 @@
 							<hr/>
 							<?php if ($change_type == 'Risk Form') { ?>
 							<div class="clearfix">
-								<a href="#form-control-objective" id="button-form-control-open" data-toggle="modal" class="btn default green pull-right btn-sm">
+								<a href="#form-control-objective" id="button-form-control-open-objective" data-toggle="modal" class="btn default green pull-right btn-sm">
 								<i class="fa fa-plus"></i>
 								<span class="hidden-480">
 								Add Objective </span>

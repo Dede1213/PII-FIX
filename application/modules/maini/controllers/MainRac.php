@@ -2313,7 +2313,7 @@ class MainRac extends APP_Controlleri {
 			}
 			$this->session->set_userdata('credential', $cur_sess);
 		}
-		redirect('main');
+		redirect('maini');
 	}
 	
 	public function getChangeRequest() {

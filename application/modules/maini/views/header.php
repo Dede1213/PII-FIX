@@ -108,39 +108,39 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							
 							
 							<li>
-								<a target="_self" href="<?=$site_url."/main/mainrac/switchTo/pic"?>">
+								<a target="_self" href="<?=$site_url."/maini/mainrac/switchTo/pic"?>">
 								<i class="fa fa-gear"></i>Ganti sebagai PIC
 								</a>
 							</li>
                             <li>
                             
-                                <a target="_self" href="<?=$site_url."/main/mainrac/switchTo/rac"?>">
+                                <a target="_self" href="<?=$site_url."/maini/mainrac/switchTo/rac"?>">
                                 <i class="fa fa-gear"></i>Ganti sebagai RAC
                                 </a>
                             </li>
 							<?php }?>
 							<?php if ($session['role_status'] == 'HR' ) { ?>
 							<li>
-								<a target="_self" href="<?=$site_url."/main/mainrac/switchTo/head"?>">
+								<a target="_self" href="<?=$site_url."/maini/mainrac/switchTo/head"?>">
 								<i class="fa fa-gear"></i>Ganti sebagai Kepala Divisi
 								</a>
 							</li>
                             <li>
                             
-                                <a target="_self" href="<?=$site_url."/main/mainrac/switchTo/rac"?>">
+                                <a target="_self" href="<?=$site_url."/maini/mainrac/switchTo/rac"?>">
                                 <i class="fa fa-gear"></i>Ganti sebagai RAC
                                 </a>
                             </li>
 							<?php } ?>
 							<?php if ($session['role_status'] == 'UR' ) { ?>
 							<li>
-								<a target="_self" href="<?=$site_url."/main/mainrac/switchTo/user"?>">
+								<a target="_self" href="<?=$site_url."/maini/mainrac/switchTo/user"?>">
 								<i class="fa fa-gear"></i>Ganti sebagai User
 								</a>
 							</li>
                             <li>
                             
-                                <a target="_self" href="<?=$site_url."/main/mainrac/switchTo/rac"?>">
+                                <a target="_self" href="<?=$site_url."/maini/mainrac/switchTo/rac"?>">
                                 <i class="fa fa-gear"></i>Ganti sebagai RAC
                                 </a>
                             </li>

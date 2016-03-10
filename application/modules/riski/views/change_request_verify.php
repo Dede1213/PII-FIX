@@ -279,7 +279,7 @@
 									<tr role="row" class="heading">
 										<th width="15%"><span class="small">ID Objektif</span></th>
 										<th><span class="small">Objektif</span></th>
-										<th width="30px">&nbsp;</th>
+										<th width="66px">&nbsp;</th>
 									</tr>
 									</thead>
 									<tbody>
@@ -303,7 +303,7 @@
 										<th><span class="small">Kontrol Eksisting</span></th>
 										<th><span class="small">Evaluasi atas Eksisting Kontrol</span></th>
 										<th><span class="small">Pemilik Kontrol</span></th>
-										<th width="30px">&nbsp;</th>
+										<th width="66px">&nbsp;</th>
 									</tr>
 									</thead>
 									<tbody>
@@ -560,7 +560,7 @@
 			<table id="library_control_table_existing" class="table table-condensed table-bordered table-hover">
 				<thead>
 				<tr role="row" class="heading">
-					<th width="30px">&nbsp;</th>
+					<th width="66px">&nbsp;</th>
 					<th>Kontrol Eksisting</th>
 					<th>Deskripsi</th>
 				</tr>
@@ -591,7 +591,7 @@
 			<table id="library_objective_table" class="table table-condensed table-bordered table-hover">
 				<thead>
 				<tr role="row" class="heading">
-					<th width="30px">&nbsp;</th>
+					<th width="66px">&nbsp;</th>
 					<th>Objektif</th>
 				</tr>
 				</thead>
@@ -621,7 +621,7 @@
 			<table id="library_control_table" class="table table-condensed table-bordered table-hover">
 				<thead>
 				<tr role="row" class="heading">
-					<th width="30px">&nbsp;</th>
+					<th width="66px">&nbsp;</th>
 					<th>Kontrol Eksisting</th>
 					<th>Evaluasi atas Eksisting Kontrol</th>
 					<th>Pemilik Kontrol</th>

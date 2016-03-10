@@ -535,7 +535,7 @@ WHERE t_risk.risk_id ='$id'";
 							<div class="form-group">
 								<label class="col-md-3 control-label small cl-compact">Risk Event Description <span class="required">* </span></label>
 								<div class="col-md-9">
-								<textarea class="form-control" rows="3" name="risk_description" placeholder=""></textarea>
+								<textarea class="form-control popovers" rows="3" name="risk_description" placeholder="" data-container="body" data-placement="bottom" placeholder="" data-content="fill this field with decription of identified risk which explains nature of the risk"></textarea>
 								</div>
 							</div>
 							<div class="form-group">
@@ -562,13 +562,13 @@ WHERE t_risk.risk_id ='$id'";
 							<div class="form-group">
 								<label class="col-md-3 control-label smaller cl-compact" >Cause <span class="required">* </span></label>
 								<div class="col-md-9">
-								<textarea class="form-control" rows="3" name="risk_cause" placeholder=""></textarea>
+								<textarea class="form-control popovers" rows="3" name="risk_cause" placeholder="" data-container="body" data-trigger="focus" data-placement="bottom" data-content="fill this field with the description of set of factors that may affects or lead to the occurrence of risk event"></textarea>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-md-3 control-label smaller cl-compact" >Impact <span class="required">* </span></label>
 								<div class="col-md-9">
-								<textarea class="form-control" rows="3" name="risk_impact" placeholder=""></textarea>
+								<textarea class="form-control popovers" rows="3" name="risk_impact" placeholder="" data-container="body" data-trigger="focus" data-placement="bottom" data-content="fill this field with the description of potential direct or indirect loss or cost to IIGF that could have been suffered from a risk event"></textarea>
 								</div>
 							</div>
 							<div class="form-group">

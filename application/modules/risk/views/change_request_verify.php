@@ -299,7 +299,7 @@
 									<tr role="row" class="heading">
 										<th width="15%"><span class="small">Obj.ID</span></th>
 										<th><span class="small">Objective</span></th>
-										<th width="30px">&nbsp;</th>
+										<th width="66px">&nbsp;</th>
 									</tr>
 									</thead>
 									<tbody>
@@ -323,7 +323,7 @@
 										<th><span class="small">Existing Control</span></th>
 										<th><span class="small">Evaluation on Existing Control</span></th>
 										<th><span class="small">Control Owner</span></th>
-										<th width="30px">&nbsp;</th>
+										<th width="66px">&nbsp;</th>
 									</tr>
 									</thead>
 									<tbody>
@@ -582,7 +582,7 @@
 			<table id="library_control_table_existing" class="table table-condensed table-bordered table-hover">
 				<thead>
 				<tr role="row" class="heading">
-					<th width="30px">&nbsp;</th>
+					<th width="66px">&nbsp;</th>
 					<th>Existing Control</th>
 					<th>Description</th>
 				</tr>
@@ -614,7 +614,7 @@
 			<table id="library_objective_table" class="table table-condensed table-bordered table-hover">
 				<thead>
 				<tr role="row" class="heading">
-					<th width="30px">&nbsp;</th>
+					<th width="66px">&nbsp;</th>
 					<th>Objective</th>
 				</tr>
 				</thead>
@@ -645,7 +645,7 @@
 			<table id="library_control_table" class="table table-condensed table-bordered table-hover">
 				<thead>
 				<tr role="row" class="heading">
-					<th width="30px">&nbsp;</th>
+					<th width="66px">&nbsp;</th>
 					<th>Existing Control</th>
 					<th>Evaluation on Existing Control</th>
 					<th>Control Owner</th>

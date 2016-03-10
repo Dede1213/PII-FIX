@@ -192,7 +192,7 @@
 			<table id="library_table" class="table table-condensed table-bordered table-hover">
 				<thead>
 				<tr role="row" class="heading">
-					<th width="30px">&nbsp;</th>
+					<th width="66px">&nbsp;</th>
 					<th>ID Risiko</th>
 					<th>Perisitiwa Risiko</th>
 					<th>Deskripsi</th>
@@ -225,7 +225,7 @@
 			<table id="kri_library_table" class="table table-condensed table-bordered table-hover">
 				<thead>
 				<tr role="row" class="heading">
-					<th width="30px">&nbsp;</th>
+					<th width="66px">&nbsp;</th>
 					<th>ID KRI</th>
 					<th>Indikator Key Risk </th>
 					<th>Threshold</th>

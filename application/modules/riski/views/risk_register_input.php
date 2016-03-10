@@ -242,7 +242,7 @@
 									 		<tr role="row" class="heading">
 									 			<th width="15%">ID Objektif</th>
 									 			<th>Objektif</th>
-									 			<th width="30px">&nbsp;</th>
+									 			<th width="66px">&nbsp;</th>
 									 		</tr>
 									 		</thead>
 									 		<tbody>
@@ -273,7 +273,7 @@
 									 			<th>Kontrol Eksisting</th>
 									 			<th>Evaluasi atas Eksisting Kontrol</th>
 									 			<th>Pemilik Kontrol</th>
-									 			<th width="30px">&nbsp;</th>
+									 			<th width="66px">&nbsp;</th>
 									 		</tr>
 									 		</thead>
 									 		<tbody>
@@ -303,7 +303,7 @@
 												<th>Usulan Action Plan</th>
 												<th>Batas Waktu</th>
 												<th>Pemilik Action Plan</th>
-												<th width="30px">&nbsp;</th>
+												<th width="66px">&nbsp;</th>
 											</tr>
 											</thead>
 											<tbody>
@@ -582,7 +582,7 @@
 			<table id="library_table" class="table table-condensed table-bordered table-hover">
 				<thead>
 				<tr role="row" class="heading">
-					<th width="30px">&nbsp;</th>
+					<th width="66px">&nbsp;</th>
 					<th>ID Risiko</th>
 					<th>Peristiwa Risiko</th>
 					<th>Deskripsi</th>
@@ -616,7 +616,7 @@
 			<table id="library_tableaction" class="table table-condensed table-bordered table-hover">
 				<thead>
 				<tr role="row" class="heading">
-					<th width="30px">&nbsp;</th>
+					<th width="66px">&nbsp;</th>
 					<th>Action Plan</th> 
 				</tr>
 				</thead>
@@ -648,7 +648,7 @@
 			<table id="library_control_table_existing" class="table table-condensed table-bordered table-hover">
 				<thead>
 				<tr role="row" class="heading">
-					<th width="30px">&nbsp;</th>
+					<th width="66px">&nbsp;</th>
 					<th>Kontrol Eksisting</th>
 					<th>Deksripsi</th>
 				</tr>
@@ -680,7 +680,7 @@
 			<table id="library_control_table" class="table table-condensed table-bordered table-hover">
 				<thead>
 				<tr role="row" class="heading">
-					<th width="30px">&nbsp;</th>
+					<th width="66px">&nbsp;</th>
 					<th>Kontrol Eksisting</th>
 					<th>Evaluasi atas Eksisting kontrol</th>
 					<th>Pemilik Kontrol</th>
@@ -713,7 +713,7 @@
 			<table id="library_objective_table" class="table table-condensed table-bordered table-hover">
 				<thead>
 				<tr role="row" class="heading">
-					<th width="30px">&nbsp;</th>
+					<th width="66px">&nbsp;</th>
 					<th>Objektif</th>
 				</tr>
 				</thead>

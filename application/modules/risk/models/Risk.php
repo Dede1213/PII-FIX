@@ -2012,6 +2012,11 @@ class Risk extends APP_Model {
 			  	where risk_id = ".$risk_id." ";
 		$res = $this->db->query($sql, $par);
 
+		$sql = "update t_risk 
+				set risk_treatment_owner = (select username from m_user where division_id = '".$risk['risk_owner']."'  and role_id = 4) 
+			  	where risk_id = '".$risk_id."' ";
+		$res = $this->db->query($sql);
+
 		
 		// insert action plan
 			if ($actplan !== false) {
@@ -2076,11 +2081,7 @@ class Risk extends APP_Model {
 		//$res = $this->db->query($sql, $par);
 
 
-		//$sql = "update t_risk 
-		//		set risk_treatment_owner = (select username from m_user where division_id = '".$risk['risk_division']."'  and role_id = 4) 
-		//	  	where risk_id = '".$risk_id."' ";
-		//$res = $this->db->query($sql);
-
+		
 
 
 		$par['risk_id'] = $risk_id;

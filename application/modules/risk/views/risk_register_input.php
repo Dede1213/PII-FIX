@@ -234,7 +234,7 @@
 									 		<tr role="row" class="heading">
 									 			<th width="15%">Obj.ID</th>
 									 			<th>Objective</th>
-									 			<th width="30px">&nbsp;</th>
+									 			<th width="66px">&nbsp;</th>
 									 		</tr>
 									 		</thead>
 									 		<tbody>
@@ -265,7 +265,7 @@
 									 			<th>Existing Control</th>
 									 			<th>Evaluation on Existing Control</th>
 									 			<th>Control Owner</th>
-									 			<th width="30px">&nbsp;</th>
+									 			<th width="66px">&nbsp;</th>
 									 		</tr>
 									 		</thead>
 									 		<tbody>
@@ -295,7 +295,7 @@
 												<th>Suggested Action Plan</th>
 												<th>Due Date</th>
 												<th>Action Plan Owner</th>
-												<th width="30px">&nbsp;</th>
+												<th width="66px">&nbsp;</th>
 											</tr>
 											</thead>
 											<tbody>
@@ -574,7 +574,7 @@
 			<table id="library_tableaction" class="table table-condensed table-bordered table-hover">
 				<thead>
 				<tr role="row" class="heading">
-					<th width="30px">&nbsp;</th>
+					<th width="66px">&nbsp;</th>
 					<th>Action Plan</th> 
 				</tr>
 				</thead>
@@ -605,7 +605,7 @@
 			<table id="library_table" class="table table-condensed table-bordered table-hover">
 				<thead>
 				<tr role="row" class="heading">
-					<th width="30px">&nbsp;</th>
+					<th width="66px">&nbsp;</th>
 					<th>Risk ID</th>
 					<th>Risk Event</th>
 					<th>Description</th>
@@ -642,7 +642,7 @@
 			<table id="library_control_table_existing" class="table table-condensed table-bordered table-hover">
 				<thead>
 				<tr role="row" class="heading">
-					<th width="30px">&nbsp;</th>
+					<th width="66px">&nbsp;</th>
 					<th>Existing Control</th>
 					<th>Description</th>
 				</tr>
@@ -673,7 +673,7 @@
 			<table id="library_control_table" class="table table-condensed table-bordered table-hover">
 				<thead>
 				<tr role="row" class="heading">
-					<th width="30px">&nbsp;</th>
+					<th width="66px">&nbsp;</th>
 					<th>Existing Control</th>
 					<th>Evaluation on Existing Control</th>
 					<th>Control Owner</th>
@@ -706,7 +706,7 @@
 			<table id="library_objective_table" class="table table-condensed table-bordered table-hover">
 				<thead>
 				<tr role="row" class="heading">
-					<th width="30px">&nbsp;</th>
+					<th width="66px">&nbsp;</th>
 					<th>Objective</th>
 				</tr>
 				</thead>

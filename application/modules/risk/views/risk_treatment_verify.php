@@ -107,13 +107,13 @@ WHERE t_risk.risk_id ='$id'";
 							<div class="form-group">
 								<label class="col-md-1 control-label smaller cl-compact">Risk cause</label>
 								<div class="col-md-7">
-								<textarea class="form-control input-readview" rows="3" name="risk_cause" placeholder=""></textarea>
+								<textarea class="form-control input-readview popovers" rows="3" name="risk_cause" placeholder="" data-container="body" data-trigger="focus" data-placement="bottom" data-content="fill this field with the description of set of factors that may affects or lead to the occurrence of risk event"></textarea>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-md-1 control-label smaller cl-compact">Risk impact</label>
 								<div class="col-md-7">
-								<textarea class="form-control input-readview" rows="3" name="risk_impact" placeholder=""></textarea>
+								<textarea class="form-control input-readview popovers" rows="3" name="risk_impact" placeholder="" data-container="body" data-trigger="focus" data-placement="bottom" data-content="fill this field with the description of potential direct or indirect loss or cost to IIGF that could have been suffered from a risk event"></textarea>
 								</div>
 							</div>
 							<div class="form-group">
@@ -191,7 +191,7 @@ WHERE t_risk.risk_id ='$id'";
 										<th><small>Existing Control</small></th>
 										<th><small>Evaluation on Existing Control</small></th>
 										<th><small>Control Owner</small></th>
-										<th width="30px">&nbsp;</th>
+										<th width="66px">&nbsp;</th>
 									</tr>
 									</thead>
 									<tbody>
@@ -220,7 +220,7 @@ WHERE t_risk.risk_id ='$id'";
 										<th><small>Suggested Action Plan</small></th>
 										<th><small>Due Date</small></th>
 										<th><small>Action Plan Owner</small></th>
-										<th width="30px">&nbsp;</th>
+										<th width="66px">&nbsp;</th>
 									</tr>
 									</thead>
 									<tbody>
@@ -285,7 +285,7 @@ WHERE t_risk.risk_id ='$id'";
 							<div class="form-group">
 								<label class="col-md-3 control-label smaller cl-compact">Risk Cause</label>
 								<div class="col-md-9">
-								<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_cause2" placeholder=""><?=$risk['risk_cause']?></textarea>
+								<textarea class="form-control input-readview " readonly="true" rows="3" name="risk_cause2" placeholder=""><?=$risk['risk_cause']?></textarea>
 								</div>
 							</div>
 							<div class="form-group">
@@ -417,13 +417,13 @@ WHERE t_risk.risk_id ='$id'";
 							<div class="form-group">
 								<label class="col-md-3 control-label smaller cl-compact">Risk cause</label>
 								<div class="col-md-9">
-								<textarea class="form-control input-readview" rows="3" name="risk_cause" placeholder=""></textarea>
+								<textarea class="form-control input-readview popovers" rows="3" name="risk_cause" placeholder="" data-container="body" data-trigger="focus" data-placement="bottom" data-content="fill this field with the description of set of factors that may affects or lead to the occurrence of risk event"></textarea>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-md-3 control-label smaller cl-compact">Risk impact</label>
 								<div class="col-md-9">
-								<textarea class="form-control input-readview" rows="3" name="risk_impact" placeholder=""></textarea>
+								<textarea class="form-control input-readview popovers" rows="3" name="risk_impact" placeholder="" data-container="body" data-trigger="focus" data-placement="bottom" data-content="fill this field with the description of potential direct or indirect loss or cost to IIGF that could have been suffered from a risk event"></textarea>
 								</div>
 							</div>
 							<div class="form-group">
@@ -501,7 +501,7 @@ WHERE t_risk.risk_id ='$id'";
 										<th><small>Existing Control</small></th>
 										<th><small>Evaluation on Existing Control</small></th>
 										<th><small>Control Owner</small></th>
-										<th width="30px">&nbsp;</th>
+										<th width="66px">&nbsp;</th>
 									</tr>
 									</thead>
 									<tbody>
@@ -530,7 +530,7 @@ WHERE t_risk.risk_id ='$id'";
 										<th><small>Suggested Action Plan</small></th>
 										<th><small>Due Date</small></th>
 										<th><small>Action Plan Owner</small></th>
-										<th width="30px">&nbsp;</th>
+										<th width="66px">&nbsp;</th>
 									</tr>
 									</thead>
 									<tbody>
@@ -724,7 +724,7 @@ WHERE t_risk.risk_id ='$id'";
 			<table id="library_tableaction" class="table table-condensed table-bordered table-hover">
 				<thead>
 				<tr role="row" class="heading">
-					<th width="30px">&nbsp;</th>
+					<th width="66px">&nbsp;</th>
 					<th>Action Plan</th> 
 				</tr>
 				</thead>
@@ -755,7 +755,7 @@ WHERE t_risk.risk_id ='$id'";
 			<table id="library_control_table_existing" class="table table-condensed table-bordered table-hover">
 				<thead>
 				<tr role="row" class="heading">
-					<th width="30px">&nbsp;</th>
+					<th width="66px">&nbsp;</th>
 					<th>Existing Control</th>
 					<th>Description</th>
 				</tr>
@@ -786,7 +786,7 @@ WHERE t_risk.risk_id ='$id'";
 			<table id="library_control_table" class="table table-condensed table-bordered table-hover">
 				<thead>
 				<tr role="row" class="heading">
-					<th width="30px">&nbsp;</th>
+					<th width="66px">&nbsp;</th>
 					<th>Existing Control</th>
 					<th>Evaluation on Existing Control</th>
 					<th>Control Owner</th>

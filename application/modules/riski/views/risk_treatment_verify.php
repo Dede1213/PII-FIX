@@ -107,13 +107,13 @@ WHERE t_risk.risk_id ='$id'";
 							<div class="form-group">
 								<label class="col-md-1 control-label smaller cl-compact">Sebab</label>
 								<div class="col-md-7">
-								<textarea class="form-control input-readview" rows="3" name="risk_cause" placeholder=""></textarea>
+								<textarea class="form-control input-readview popovers" rows="3" name="risk_cause" placeholder="" data-container="body" data-trigger="focus" data-placement="bottom" data-content="isilah kolom ini dengan deskripsi dari kumpulan faktor yang dapat mempengaruhi atau mengakibatkan terjadinya peristiwa risiko"></textarea>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-md-1 control-label smaller cl-compact">Dampak</label>
 								<div class="col-md-7">
-								<textarea class="form-control input-readview" rows="3" name="risk_impact" placeholder=""></textarea>
+								<textarea class="form-control input-readview popovers" rows="3" name="risk_impact" placeholder="" data-container="body" data-trigger="focus" data-placement="bottom" data-content="isilah kolom ini dengan deskripsi dari kemungkinan kehilangan atau kerugian biaya langsung atau tidak langsung yang ditanggung IIGF dari peristiwa risiko"></textarea>
 								</div>
 							</div>
 							<div class="form-group">
@@ -191,7 +191,7 @@ WHERE t_risk.risk_id ='$id'";
 										<th><small>Kontrol Eksisting</small></th>
 										<th><small>Evaluasi atas Eksisting Kontrol</small></th>
 										<th><small>Pemilik Kontrol</small></th>
-										<th width="30px">&nbsp;</th>
+										<th width="66px">&nbsp;</th>
 									</tr>
 									</thead>
 									<tbody>
@@ -220,7 +220,7 @@ WHERE t_risk.risk_id ='$id'";
 										<th><small>Usulan Action Plan</small></th>
 										<th><small>Batas Waktu</small></th>
 										<th><small>Pemilik Action Plan</small></th>
-										<th width="30px">&nbsp;</th>
+										<th width="66px">&nbsp;</th>
 									</tr>
 									</thead>
 									<tbody>
@@ -417,13 +417,13 @@ WHERE t_risk.risk_id ='$id'";
 							<div class="form-group">
 								<label class="col-md-3 control-label smaller cl-compact">Sebab</label>
 								<div class="col-md-9">
-								<textarea class="form-control input-readview" rows="3" name="risk_cause" placeholder=""></textarea>
+								<textarea class="form-control input-readview popovers" rows="3" name="risk_cause" placeholder="" data-container="body" data-trigger="focus" data-placement="bottom" data-content="isilah kolom ini dengan deskripsi dari kumpulan faktor yang dapat mempengaruhi atau mengakibatkan terjadinya peristiwa risiko"></textarea>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-md-3 control-label smaller cl-compact">Dampak</label>
 								<div class="col-md-9">
-								<textarea class="form-control input-readview" rows="3" name="risk_impact" placeholder=""></textarea>
+								<textarea class="form-control input-readview popovers" rows="3" name="risk_impact" placeholder="" data-container="body" data-trigger="focus" data-placement="bottom" data-content="isilah kolom ini dengan deskripsi dari kemungkinan kehilangan atau kerugian biaya langsung atau tidak langsung yang ditanggung IIGF dari peristiwa risiko"></textarea>
 								</div>
 							</div>
 							<div class="form-group">
@@ -501,7 +501,7 @@ WHERE t_risk.risk_id ='$id'";
 										<th><small>Kontrol Eksisting</small></th>
 										<th><small>Evaluasi atas Eksisting Kontrol</small></th>
 										<th><small>Pemilik Kontrol</small></th>
-										<th width="30px">&nbsp;</th>
+										<th width="66px">&nbsp;</th>
 									</tr>
 									</thead>
 									<tbody>
@@ -530,7 +530,7 @@ WHERE t_risk.risk_id ='$id'";
 										<th><small>Usulan Action Plan</small></th>
 										<th><small>Batas Waktu</small></th>
 										<th><small>Pemilik Action Plan</small></th>
-										<th width="30px">&nbsp;</th>
+										<th width="66px">&nbsp;</th>
 									</tr>
 									</thead>
 									<tbody>
@@ -726,7 +726,7 @@ WHERE t_risk.risk_id ='$id'";
 			<table id="library_tableaction" class="table table-condensed table-bordered table-hover">
 				<thead>
 				<tr role="row" class="heading">
-					<th width="30px">&nbsp;</th>
+					<th width="66px">&nbsp;</th>
 					<th>Action Plan</th> 
 				</tr>
 				</thead>
@@ -757,7 +757,7 @@ WHERE t_risk.risk_id ='$id'";
 			<table id="library_control_table_existing" class="table table-condensed table-bordered table-hover">
 				<thead>
 				<tr role="row" class="heading">
-					<th width="30px">&nbsp;</th>
+					<th width="66px">&nbsp;</th>
 					<th>Kontrol Eksisting</th>
 					<th>Deskripsi</th>
 				</tr>
@@ -788,7 +788,7 @@ WHERE t_risk.risk_id ='$id'";
 			<table id="library_control_table" class="table table-condensed table-bordered table-hover">
 				<thead>
 				<tr role="row" class="heading">
-					<th width="30px">&nbsp;</th>
+					<th width="66px">&nbsp;</th>
 					<th>Kontrol Eksisting</th>
 					<th>Evaluasi atas Eksisting Kontrol</th>
 					<th>Pemilik Kontrol</th>

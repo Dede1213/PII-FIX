@@ -624,6 +624,7 @@ var RiskInput = function() {
             $('#button-form-control-open-objective').on('click', function () {
 				document.getElementById("input-form-control-objective").reset();
                // $('#input-form-control-objective')[0].reset();
+			    $('#form-control-revid-objective').val("");
                 $('#input-form-control-objective textarea[name=objective]').attr('readonly', false);
             });
         	

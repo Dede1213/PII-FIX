@@ -278,7 +278,7 @@ var RiskVerify = function() {
             $('#button-form-control-open').on('click', function () {
                 //$('#input-form-control')[0].reset();
                 document.getElementById("input-form-control").reset();
-                
+                $('#form-control-revid').val("");
                 $('#input-form-control textarea[name=risk_existing_control]').attr('readonly', false);
             });
             

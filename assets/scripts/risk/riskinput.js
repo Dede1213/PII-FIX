@@ -618,6 +618,7 @@ var RiskInput = function() {
 				 
 				document.getElementById("input-form-control").reset();
 				 
+                $('#form-control-revid').val("");
         		$('#input-form-control textarea[name=risk_existing_control]').attr('readonly', false);
         	});
 

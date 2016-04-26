@@ -39,6 +39,7 @@
 							<label class="col-md-3 control-label">Upload News Content</label>
 							<div class="col-md-6">
 								<input type="file" class="form-control" placeholder="Filename" name="filename" id="news-file">
+								*PDF Only
 							</div>
 						</div>
 						<div class="form-group">

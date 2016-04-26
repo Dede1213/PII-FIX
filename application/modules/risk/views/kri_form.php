@@ -269,7 +269,7 @@ var t_treshold_list = <?=json_encode($kri['treshold_list'])?>;
 					</div>
 					<div class="form-group">
 					    <input type="hidden" name="risk_level_id" id = "risk_level_id" value=""/> 
-						<label class="col-md-3 control-label smaller cl-compact" >Risk Level <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact" >Risk Level </label>
 						<div class="col-md-9">
 						<input type="text" class="form-control input-sm" readonly="true" name="risk_level_after_kri" id = "risk_level_after_mitigation" placeholder="">
 						</div>

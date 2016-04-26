@@ -38,6 +38,8 @@ class Role extends APP_Model {
 		
 		return $res;
 	}
+
+	
 	
 	public function getDataById($id)
 	{

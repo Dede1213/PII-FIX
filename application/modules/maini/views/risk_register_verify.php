@@ -492,9 +492,12 @@
 						<label class="col-md-3 control-label smaller cl-compact">Usulan Action Plan<span class="required">* </span></label>
 						<div class="col-md-9">
 							<div class="input-group">
+								<textarea class="form-control input-sm " rows="3"  name="action_plan" id = "action_plan" placeholder=""> </textarea>
+								<!--
 								<input type="text" class="form-control input-sm" name="action_plan" id = "action_plan" placeholder=""> 
+								-->
 								<span class="input-group-btn">
-								<button class="btn btn-primary btn-sm" type="button" data-toggle="modal" href="#modal-libraryaction"><i class="fa fa-search fa-fw"/></i></button>
+								<button style="margin-top:-60px; margin-left:5px;" class="btn btn-primary btn-sm" type="button" data-toggle="modal" href="#modal-libraryaction"><i class="fa fa-search fa-fw"/></i></button>
 								</span> 
 							</div>
 						</div>

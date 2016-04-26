@@ -26,7 +26,7 @@ var RiskModify = function() {
                             if(data.success) {
                                 var mod2 = MainApp.viewGlobalModal('success', 'Success Delete Data');
                                 mod2.find('button.btn-ok-success').one('click', function(){
-                                    location.href=site_url+'/main';
+                                    location.href=site_url+'/maini';
                                 });
                             } else {
                                 MainApp.viewGlobalModal('error', data.msg);

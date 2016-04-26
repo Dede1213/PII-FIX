@@ -64,7 +64,7 @@ if($status == 'under'){ ?>
 					<input type="hidden" value="<?=$action_plan['risk_id']?>" name="risk_id" placeholder="">
 						<div class="form-body">
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact">Kode Risiko</label>
+								<label class="col-md-3 control-label smaller cl-compact">ID Risiko</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$action_plan['risk_data']['risk_code']?>" name="risk_code" placeholder="">
 								</div>
@@ -162,7 +162,7 @@ if($status == 'under'){ ?>
 					<input type="hidden" value="<?=$action_plan['risk_id']?>" name="risk_id" placeholder="">
 						<div class="form-body">
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact">Kode Risiko</label>
+								<label class="col-md-3 control-label smaller cl-compact">ID Risiko</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$action_plan['risk_data']['risk_code']?>" name="risk_code" placeholder="">
 								</div>
@@ -244,7 +244,7 @@ if($status == 'under'){ ?>
 					<form role="form" class="form-horizontal">
 						<div class="form-body">
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact">Kode Risiko</label>
+								<label class="col-md-3 control-label smaller cl-compact">ID Risiko</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$action_plan['risk_data']['risk_code']?>" placeholder="">
 								</div>
@@ -315,7 +315,7 @@ if($status == 'under'){ ?>
 					<input type="hidden" value="<?=$action_plan['risk_id']?>" name="risk_id" placeholder="">
 						<div class="form-body">
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact">Kode Risiko</label>
+								<label class="col-md-3 control-label smaller cl-compact">ID Risiko</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$action_plan['risk_data']['risk_code']?>" name="risk_code" placeholder="">
 								</div>

@@ -28,11 +28,55 @@ class Usermodel extends APP_Model {
 				from m_user a 
 				left join m_role b on a.role_id = b.role_id
 				left join m_division c on a.division_id = c.division_id
-				where a.role_id <> 1
+				where a.role_id <> 1 and password <> 1
 				) mtable "
 				.$ex_filter
 				.$ex_or ;
 		$res = $this->getPagingData($sql, $par, $page, $row, 'username', true);
+		return $res;
+	}
+
+
+	public function getAllUsername()
+	{
+		$sql = "select 
+				*
+				from m_user where role_id != 1 ";
+		$query = $this->db->query($sql);
+		
+		$res = array();
+		foreach($query->result_array() as $row) {
+			$res[] = $row;
+		}
+		
+		return $res;
+	}
+
+	public function getAllUsernameHide()
+	{
+		$sql = "select 
+				*
+				from m_user where role_id != 1 and password = 1 ";
+		$query = $this->db->query($sql);
+		
+		$res = array();
+		foreach($query->result_array() as $row) {
+			$res[] = $row;
+		}
+		
+		return $res;
+	}
+
+	public function updateMove($data_id, $data, $uid)
+	{
+		//$this->_logHistory($data_id, $uid, 'U');
+		$sql = "update t_risk
+				set risk_input_by = ?
+				where risk_input_by = ?";
+
+		$par = $data;
+		
+		$res = $this->db->query($sql, $par);
 		return $res;
 	}
 	
@@ -160,6 +204,8 @@ class Usermodel extends APP_Model {
 		$res = $this->db->query($sql, $par);
 		return $res;
 	}
+
+	
 	
 	private function _logHistory($data_id, $uid, $mode) {
 		$sql = "insert into m_user_hist
@@ -179,5 +225,19 @@ class Usermodel extends APP_Model {
 		
 		
 		
+	}
+
+
+	public function deleteRiskHide($username, $uid, $update_point = 'D') {
+		// delete risk in child
+		// t_risk t_risk_change t_risk_action_plan t_risk_action_plan_change 
+		// t_risk_control t_risk_control_change t_risk_impact t_risk_impact_change
+		
+		$par['username'] = $username;
+		
+		$sql = "update m_user set password = 1 where username = ?";
+		$res = $this->db->query($sql, $par);
+
+		return $res;
 	}
 }

@@ -33,7 +33,7 @@
 						<div class="form-body">
 							<div class="form-group">
 								<input type="hidden" name="risk_id" value=""/>
-								<label class="col-md-3 control-label smaller cl-compact" >Risk Code</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Risk ID</label>
 								<div class="col-md-9">
 								<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_code" placeholder="">
 								</div>
@@ -112,8 +112,9 @@
 									<thead>
 									<tr role="row" class="heading">
 										<th><span class="small">Existing Control ID</span></th>
-										<th><span class="small">Existing Control</span></th>
+										
 										<th><span class="small">Evaluation on Existing Control</span></th>
+										<th><span class="small">Existing Control</span></th>
 										<th><span class="small">Control Owner</span></th>
 									</tr>
 									</thead>
@@ -155,7 +156,7 @@
 						<div class="form-body">
 							<div class="form-group">
 								<input type="hidden" name="risk_id" value=""/>
-								<label class="col-md-3 control-label smaller cl-compact" >Risk Code</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Risk ID</label>
 								<div class="col-md-9">
 								<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_code" placeholder="">
 								</div>
@@ -219,7 +220,7 @@
 								<span class="hidden-480">
 								Add Objective </span>
 								</a>
-								<h4>Objective</h4>
+								<h4><font style="color:red;">*</font>Objective</h4>
 							</div>
 							<div class="table-scrollable">
 								<table id="objective_table" class="table table-condensed table-bordered table-hover">
@@ -235,14 +236,15 @@
 								</table>
 							</div>
 							<hr/>
-							<h4>Control</h4>
+							<h4><font style="color:red;">*</font>Control</h4>
 							<div class="table-scrollable">
 								<table id="control_table" class="table table-condensed table-bordered table-hover">
 									<thead>
 									<tr role="row" class="heading">
 										<th><span class="small">Existing Control ID</span></th>
-										<th><span class="small">Existing Control</span></th>
+										
 										<th><span class="small">Evaluation on Existing Control</span></th>
+										<th><span class="small">Existing Control</span></th>
 										<th><span class="small">Control Owner</span></th>
 									</tr>
 									</thead>
@@ -252,7 +254,7 @@
 							</div>
 							<hr/>
 							<?php } ?>
-							<h4>Action Plan</h4>
+							<h4><font style="color:red;">*</font>Action Plan</h4>
 							<div class="table-scrollable">
 								<table id="action_plan_table" class="table table-condensed table-bordered table-hover">
 									<thead>

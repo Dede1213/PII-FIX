@@ -105,7 +105,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								</a>
 							</li>
 							<li class="divider"></li>
-							<?php if ($session['role_status'] == 'PR' ) { ?>
+							<?php if ($session['role_status'] == 'PR (PIC Division - RAC)' ) { ?>
 							
 							
 							<li>
@@ -120,7 +120,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 </a>
                             </li>
 							<?php }?>
-							<?php if ($session['role_status'] == 'HR' ) { ?>
+							<?php if ($session['role_status'] == 'HR (Head Division - RAC)' ) { ?>
 							<li>
 								<a target="_self" href="<?=$site_url."/main/mainrac/switchTo/head"?>">
 								<i class="fa fa-gear"></i>Switch As Division Head
@@ -133,7 +133,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 </a>
                             </li>
 							<?php } ?>
-							<?php if ($session['role_status'] == 'UR' ) { ?>
+							<?php if ($session['role_status'] == 'UR (User - RAC)' ) { ?>
 							<li>
 								<a target="_self" href="<?=$site_url."/main/mainrac/switchTo/user"?>">
 								<i class="fa fa-gear"></i>Switch As User Role

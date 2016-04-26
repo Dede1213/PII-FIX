@@ -30,6 +30,10 @@ class MainRac extends APP_Controller {
 		Dashboard.initUserChart();
 		';
 		
+		//cek change request
+		$this->load->model('risk/risk');
+		$data['cekChangeRequest'] = $this->risk->cekChangeRequest();
+
 		$this->load->view('header', $data);
 		$this->load->view('main_rac', $data);
 		$this->load->view('footer', $data);
@@ -2413,6 +2417,12 @@ class MainRac extends APP_Controller {
 			
 			$change = $this->risk->getChangeById($rid, false);
 
+			//ini untuk cek status risk pada saat change request
+			$status = $this->risk->getRiskById($change['risk_id']);
+
+			//untuk ngambil status action plan nya
+			$status_action = $this->risk->getActionPlanStatus($change['risk_id']);
+
 			if ($change) {
 				if ($change['cr_status']*1 == 0) {
 					if ($change['cr_type'] != 'KRI Form') {
@@ -2440,6 +2450,10 @@ class MainRac extends APP_Controller {
 						$data['risk_id'] = $change['risk_id'];
 						$data['change_type'] = $change['cr_type'];
 						$data['change_code'] = $change['cr_code'];
+
+						//ambil status nya untuk change request
+						$data['status'] = $status;
+						$data['status_action'] = $status_action;
 						
 						$this->load->model('risk/mriskregister');
 						$data['category'] = $this->mriskregister->getRiskCategory();
@@ -2501,6 +2515,46 @@ class MainRac extends APP_Controller {
 				$this->load->view('main/footer', $data);
 			}
 		}
+	}
+
+	public function changeRequestVerifyDelete()
+	{
+		$resp = array();
+		$resp['success'] = false;
+		$resp['msg'] = '';
+		
+		$data = $this->loadDefaultAppConfig();
+		$cred = $this->session->credential;
+		
+		if (isset($_POST['id']) && is_numeric($_POST['id'])) {
+			$this->load->model('risk/risk');
+			
+			// ini buat update t_cr_risk_change kayak nya ga perlu	
+			//$res = $this->risk->changeRequestSwitchPrimary($_POST['id']);
+
+			$changes = $this->risk->getChangeByIdNoRef($_POST['id']);
+			
+			$v_risk = true; $v_control = true; $v_action = true; $v_objective = true;
+			if ($changes['cr_type'] == 'Risk Owner Form') {
+				$v_risk = true; $v_control = false; $v_action = true; 
+			}
+			if ($changes['cr_type'] == 'Action Plan Form') {
+				$v_risk = false; $v_control = false; $v_action = true;
+			}
+			
+			$res = $this->risk->changeRequestApplyDelete($_POST['id'], $data['session']['username'], $v_risk, $v_control, $v_action, $v_objective);
+			
+			if ($res) {
+				$resp['success'] = true;
+				$resp['msg'] = 'SUCCESS';
+			} else {
+				$resp['success'] = false;
+				$resp['msg'] = $this->db->error();
+			}
+			
+			echo json_encode($resp);
+		}
+		
 	}
 	
 	public function changeRequestVerifyPrimary()

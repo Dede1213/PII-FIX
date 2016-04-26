@@ -36,7 +36,10 @@ grid.init({
            	"data": null,
            	"orderable": false,
            	"defaultContent": '<div class="btn-group">'+
+
            			'<button type="button" class="btn btn-default btn-xs button-grid-edit"><i class="fa fa-pencil font-blue"></i></button>'+
+           			'<button type="button" class="btn btn-default btn-xs button-grid-confirm"><i class="fa fa-thumbs-up font-green"></i></button>'+
+           			'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"></i></button>'+
            		'</div>'
            }
        ],
@@ -92,6 +95,38 @@ var User = function() {
 	                	MainApp.viewGlobalModal('error', 'Error Submitting Data');
 	                 });
 	            });
+
+	            //move user
+	            $('#input-form-submit-button-move').click(function(e) {
+	                e.preventDefault();
+	                var l = Ladda.create(this);
+	                l.start();
+	                
+                	var url = site_url+'/user/userMove';
+                	var tx = 'Update';
+
+	                $.post(
+	                	url,
+	                	$( "#input-form-move" ).serialize(),
+	                	function( data ) {
+	                		l.stop();
+	            			if(data.success) {
+	            				grid.getDataTable().ajax.reload();
+	            				
+	            				$('#form-data-move').modal('hide');
+	            				
+	            				MainApp.viewGlobalModal('success', 'Success '+tx+' Data');
+	            			} else {
+	            				MainApp.viewGlobalModal('error', data.msg);
+	            			}
+							
+	                	},
+	                	"json"
+	                ).fail(function() {
+	                	l.stop();
+	                	MainApp.viewGlobalModal('error', 'Error Submitting Data');
+	                 });
+	            });
 	            
 	            // datatables filter button
 	            $("#filterFormSubmit").click(function(e) {
@@ -110,6 +145,68 @@ var User = function() {
 	            	
 	            	me.editData(data);
 	            });
+
+	            $("#datatable_ajax").on('click', 'button.button-grid-delete', function(e) {
+    	        	e.preventDefault();
+    	        	
+    	        	var r = this.parentNode.parentNode.parentNode;
+    	        	var data = grid.getDataTable().row(r).data();
+    	        	
+    	        	me.deleteRisk(data);
+    	        });
+
+    	        $("#datatable_ajax").on('click', 'button.button-grid-confirm', function(e) {
+    	        	e.preventDefault();
+    	        	
+    	        	var r = this.parentNode.parentNode.parentNode;
+    	        	var data = grid.getDataTable().row(r).data();
+    	        	
+    	        	me.moveRisk(data);
+    	        });
+
+	        },
+
+	        moveRisk: function(data) {
+	        	$('#input-form-move')[0].reset();
+	        	$('#input-form-move').find("input[name='username_id']").val(data.username).prop("readonly", true);
+	        	$('#input-form-move').find("input[name='username_old']").val(data.display_name).prop("readonly", true);
+	        	$('#form-data-move').find('h4.modal-title').html('Move User');
+	        	$('#form-data-move').modal('show');
+	        	this.dataMode = 'edit';
+	        },
+
+	        deleteRisk: function(data) {
+	        	var mod = MainApp.viewGlobalModal('warning', 'Are you sure to <b>HIDE</b> User : <b>'+data.username+'</b> ?');
+	        	mod.find('button.btn-danger').off('click');
+	        	mod.find('button.btn-danger').one('click', function(){
+	        		mod.modal('hide');
+	        		var eparam = {
+	        			'username' : data.username
+	        		};
+	        		var url = site_url+'/user/user/deleteRiskHide';
+	        		
+	        		Metronic.blockUI({ boxed: true });
+	        		$.post(
+	        			url,
+	        			$.param(eparam),
+	        			function( data ) {
+	        				Metronic.unblockUI();
+	        				if(data.success) {
+	        					grid.getDataTable().ajax.reload();
+	        					grid2.getDataTable().ajax.reload();
+	        					
+	        					MainApp.viewGlobalModal('success', 'Success Delete Risk');
+	        				} else {
+	        					MainApp.viewGlobalModal('error', data.msg);
+	        				}
+	        				
+	        			},
+	        			"json"
+	        		).fail(function() {
+	        			Metronic.unblockUI();
+	        			MainApp.viewGlobalModal('error', 'Error Submitting Data');
+	        		 });
+	        	});
 	        },
 	        filterDataGrid: function(fby, fval) {
 	        	grid.clearAjaxParams();

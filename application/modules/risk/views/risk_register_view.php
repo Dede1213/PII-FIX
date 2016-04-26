@@ -44,7 +44,7 @@
 							<div class="row">
 							<div class="col-md-6">	
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact">Risk Code</label>
+									<label class="col-md-3 control-label smaller cl-compact">Risk ID</label>
 									<div class="col-md-9">
 										<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['risk_code']?>" name="risk_id" placeholder="">
 									</div>
@@ -182,8 +182,9 @@
 								<thead>
 								<tr role="row" class="heading">
 									<th>Existing Control ID</th>
-									<th>Existing Control</th>
 									<th>Evaluation on Existing Control</th>
+									<th>Existing Control</th>
+									
 									<th>Control Owner</th>
 								</tr>
 								</thead>

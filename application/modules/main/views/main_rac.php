@@ -293,7 +293,15 @@
 				</li>
 				<li>
 					<a href="#tab_change_request_list" data-toggle="tab">
-					Change Request List </a>
+					Change Request List 
+					
+					<?php 
+					if($cekChangeRequest > 0){
+					echo "($cekChangeRequest)";
+					}
+					?>
+					
+					</a>
 				</li>
 			</ul>
 			<div class="tab-content">

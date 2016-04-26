@@ -39,7 +39,7 @@
 							<div class="row">
 							<div class="col-md-5">	
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact">Kode Risiko</label>
+									<label class="col-md-3 control-label smaller cl-compact">ID Risiko</label>
 									<div class="col-md-9">
 										<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['risk_code']?>" name="risk_id" placeholder="">
 									</div>
@@ -344,7 +344,7 @@
 					</div>
 					<div class="form-group">
 					<input type = "hidden" id = "form-control-revid">
-						<label class="col-md-3 control-label smaller cl-compact">Kontrol Eksisting<span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact">Evaluasi atas Eksisting Kontrol <span class="required">* </span></label>
 						<div class="col-md-9">
 							<div class="input-group">
 								<input type="text" class="form-control input-sm" readonly="true" name="risk_existing_control" id = "risk_existing_control" placeholder="" value="NONE">
@@ -365,7 +365,7 @@
 					</div>
 					-->
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Evaluasi atas Eksisting Kontrol<span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact" >Kontrol Eksisting <span class="required">* </span></label>
 						<div class="col-md-9">
 						<input type="text" class="form-control input-sm" name="risk_evaluation_control" id = "risk_evaluation_control" placeholder="" value="NONE">
 						</div>
@@ -409,9 +409,12 @@
 						<label class="col-md-3 control-label smaller cl-compact">Usulan Action Plan<span class="required">* </span></label>
 						<div class="col-md-9">
 							<div class="input-group">
+								<textarea class="form-control input-sm " rows="3"  name="action_plan" id = "action_plan" placeholder=""> </textarea>
+								<!--
 								<input type="text" class="form-control input-sm" name="action_plan" id = "action_plan" placeholder=""> 
+								-->
 								<span class="input-group-btn">
-								<button class="btn btn-primary btn-sm" type="button" data-toggle="modal" href="#modal-libraryaction"><i class="fa fa-search fa-fw"/></i></button>
+								<button style="margin-top:-60px; margin-left:5px;" class="btn btn-primary btn-sm" type="button" data-toggle="modal" href="#modal-libraryaction"><i class="fa fa-search fa-fw"/></i></button>
 								</span> 
 							</div>
 						</div>

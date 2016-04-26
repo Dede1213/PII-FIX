@@ -339,6 +339,44 @@ class RiskRegister extends APP_Controller {
 		echo json_encode($data);
 	}
 
+	public function riskGetRollOver_recover_modify()
+	{
+		$sess = $this->loadDefaultAppConfig();
+		$order_by = $order = $filter_by = $filter_value = null;
+				
+		if (isset($_POST['order'][0]['column'])) {
+			$order_idx = $_POST['order'][0]['column'];
+			$order_by = $_POST['columns'][$order_idx]['data'];
+			$order = $_POST['order'][0]['dir'];
+		}
+		
+		if (isset($_POST['filter_by']) && isset($_POST['filter_value']) && $_POST['filter_value'] != '' ) {
+			$filter_by = $_POST['filter_by'];
+			$filter_value = $_POST['filter_value'];
+		}
+		
+		$page = ceil($_POST['start'] / $_POST['length'])+1;
+
+		$row = $_POST['length'];
+		
+		$periode = $this->mperiode->getCurrentPeriode();
+		$periode_id = null;
+		if ($periode) {
+			$periode_id = $periode['periode_id'];
+		} 
+		
+		
+		$defFilter = array(
+			'userid' => $sess['session']['username'],
+			'periodid' => $periode_id
+		);
+		$data = $this->mriskregister->getDataMode('userRollover_recover_modify', $defFilter, $page, $row, $order_by, $order, $filter_by, $filter_value);
+		
+		$data['draw'] = $_POST['draw']*1;
+		$data['page'] = $page;
+		echo json_encode($data);
+	}
+
 	public function confirmRisk_recover() {
 		$session_data = $this->session->credential;
 		
@@ -497,6 +535,24 @@ class RiskRegister extends APP_Controller {
 				$this->load->view('risk_register_input', $data);
 				$this->load->view('main/footer', $data);
 			}
+		}
+	}
+
+	public function deleteRiskModify()
+	{
+		if (isset($_POST['risk_id']) && is_numeric($_POST['risk_id'])) {
+			$risk_id = $_POST['risk_id'];
+			$this->load->model('risk/risk');
+			$res = $this->risk->deleteRiskModify($risk_id, $this->session->credential['username'], 'RISK_REGISTER_RAC-DELETE');
+			
+			if ($res) {
+				$data['success'] = true;
+				$data['msg'] = 'SUCCESS';
+			} else {
+				$data['success'] = false;
+				$data['msg'] = 'Error Deleting Data';
+			}
+			echo json_encode($data);
 		}
 	}
 	
@@ -1360,8 +1416,13 @@ class RiskRegister extends APP_Controller {
 				foreach($_POST['control'] as $v) {
 					$control[] = $v;
 				}
+
+				$objective = array();
+				foreach($_POST['objective'] as $v) {
+					$objective[] = $v;
+				}
 				
-				$res = $this->risk->updateRisk($_POST['risk_id'], $code, $risk, $impact_level, $actplan, $control, $data['session']['username'], 'RISK_REGISTER-MODIFY');
+				$res = $this->risk->updateRiskModify($_POST['risk_id'], $code, $risk, $impact_level, $actplan, $control, $objective, $data['session']['username'], 'RISK_REGISTER-MODIFY');
 				
 				$resp = array();
 				if ($res) {
@@ -1436,6 +1497,65 @@ class RiskRegister extends APP_Controller {
 			}
 		}
 	}
+
+	public function ChangeRequestDelete($risk_id)
+	{
+		$session_data = $this->session->credential;
+		
+		if (!empty($risk_id) && is_numeric($risk_id)) {
+		
+			$res = $this->risk->getRiskValidate('viewMyRisk', $risk_id, $session_data);
+			
+			if ($res) {
+				$data = $this->loadDefaultAppConfig();
+				
+				$res_valid = $this->risk->getRiskValidate('valEntryRiskChange', $risk_id, $session_data);
+				$data['valid_entry'] = false;
+
+				if ($res_valid) {
+					$data['valid_entry'] = true;
+				}
+				
+				$data['sidebarMenu'] = $this->getSidebarMenuStructure('main');
+				$data['indonya'] = base_url('index.php/maini');
+				$data['engnya'] = base_url('index.php/main');				
+				$data['pageLevelStyles'] = '
+				<link rel="stylesheet" type="text/css" href="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
+				<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css"/>
+				<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
+				<link rel="stylesheet" type="text/css" href="assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css"/>
+				';
+				
+				$data['pageLevelScripts'] = '
+				<script type="text/javascript" src="assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+				<script type="text/javascript" src="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+				<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
+				<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
+				<script type="text/javascript" src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+				<script type="text/javascript" src="assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
+				
+				<script src="assets/scripts/risk/cr_riskregister.js"></script>
+				';
+				
+				if ($res_valid) {
+					$data['pageLevelScriptsInit'] = 'ChangeRequest.init();';
+					
+					$data['risk_id'] = $risk_id;
+					$data['change_type'] = 'Delete Risk';
+					
+					$data['category'] = $this->mriskregister->getRiskCategory();
+					$data['likelihood'] = $this->mriskregister->getRiskLikelihood();
+					$data['impact_list'] = $this->mriskregister->getRiskImpactForList();
+					$data['treatment_list'] = $this->mriskregister->getReference('treatment.status');
+					$data['division_list'] = $this->mriskregister->getDivisionList();
+				}
+				
+				$this->load->view('main/header', $data);
+				$this->load->view('change_request_input', $data);
+				$this->load->view('main/footer', $data);
+			}
+		}
+	}
 	
 	public function submitChangeRisk()
 	{
@@ -1443,6 +1563,22 @@ class RiskRegister extends APP_Controller {
 		if (isset($_POST['risk_id'])) {
 			// build data
 			if ($_POST['change_type'] == 'Risk Form') {
+				$risk = array(
+					'cr_type' => $_POST['change_type'],
+					'risk_id' => $_POST['risk_id'],
+					'risk_cause' => $_POST['risk_cause'],
+					'risk_impact' => $_POST['risk_impact'],
+					'risk_level' => $_POST['risk_level_id'],
+					'risk_impact_level' => $_POST['risk_impact_level_id'],
+					'risk_likelihood_key' => $_POST['risk_likelihood_id'],
+					'suggested_risk_treatment' => $_POST['suggested_risk_treatment'],
+					'created_by' => $session_data['username'],
+					'risk_event' => $_POST['risk_event'],
+					'risk_description' => $_POST['risk_description']
+				);
+			}
+
+			if ($_POST['change_type'] == 'Delete Risk') {
 				$risk = array(
 					'cr_type' => $_POST['change_type'],
 					'risk_id' => $_POST['risk_id'],

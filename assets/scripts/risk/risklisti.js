@@ -264,7 +264,8 @@ grid2.init({
         	"render": function ( data, type, full, meta ) {
         		var cls = 'font-green';
         		if (full.risk_status == '0' || full.risk_status == '1') cls = '';
-        		return '<a target="_self" class="'+cls+'" href="'+site_url+'/maini/viewRisk/'+full.risk_id+'">'+data+'</a>';
+        		//return '<a target="_self" class="'+cls+'" href="'+site_url+'/maini/viewRisk/'+full.risk_id+'">'+data+'</a>';
+        		return '<a target="_self" class="'+cls+'" href="'+site_url+'/riski/RiskRegister/modifyRisk/'+full.risk_id+'">'+data+'</a>';
         	}
         } ],    
         "columns": [

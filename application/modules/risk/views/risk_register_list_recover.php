@@ -59,9 +59,9 @@
 
 					<div class="form-group" id="rl">
 						<select class="hesh form-control input-sm" id="fl">
-							<option value="low">Rendah</option>	
-							<option value="moderate">Sedang</option>
-							<option value="high">Tinggi</option>
+							<option value="low">Low</option>	
+							<option value="moderate">Moderate</option>
+							<option value="high">High</option>
 						</select>
 						
 					</div>
@@ -79,11 +79,11 @@
 
 					<div class="form-group" id="li">
 						<select class="hosh form-control input-sm" id="fk">
-							<option value="very low">Sangat Rendah</option>	
-							<option value="low">Rendah</option>
-							<option value="medium">Sedang</option>
-							<option value="high">Tinggi</option>
-							<option value="very high">Sangat Tinggi</option>
+							<option value="very low">Very Low</option>	
+							<option value="low">Low</option>
+							<option value="medium">Medium</option>
+							<option value="high">High</option>
+							<option value="very high">Very High</option>
 						</select>
 						
 					</div>											
@@ -112,10 +112,88 @@
 				</div>
 			</div>
 		</div>
-	
-			
 		</div>
 		
+		<div class="col-md-12">
+			<div class="portlet box grey-silver">
+			<div class="portlet-title">
+				<div class="caption">
+					Recover Risk Delete from Modify
+				</div>
+			</div>
+			
+			<div class="portlet-body">
+				<form class="form-inline" role="form" id="filterForm2" style="margin-bottom: 10px;">
+					<div class="form-group">
+						<label for="filterFormBy2">Filter By</label>
+						<select class="form-control input-medium input-sm" id="filterFormBy2">
+							<option value="-">Choose</option>
+							<option value="risk_event">Risk</option>
+							<option value="risk_level">Risk Level</option>
+							<option value="risk_impact_level">Impact Level</option>
+							<option value="risk_likelihood_key">Likelihood</option>
+						</select>
+					</div>
+
+					<div class="form-group" id="tr">
+						<input type="text" class="pash form-control input-sm" id="pe" placeholder="Insert Filter Value">
+					</div>
+
+					<div class="form-group" id="tl">
+						<select class="pesh form-control input-sm" id="pl">
+							<option value="low">Low</option>	
+							<option value="moderate">Moderate</option>
+							<option value="high">High</option>
+						</select>
+						
+					</div>
+
+					<div class="form-group" id="ti">
+						<select class="pish form-control input-sm" id="pi">
+							<option value="insignificant">Insignificant</option>	
+							<option value="minor">Minor</option>
+							<option value="major">Major</option>
+							<option value="moderate">Moderate</option>
+							<option value="catasthropic">Catasthropic</option>
+						</select>
+						
+					</div>
+
+					<div class="form-group" id="tk">
+						<select class="posh form-control input-sm" id="pk">
+							<option value="very low">Very Low</option>	
+							<option value="low">Low</option>
+							<option value="medium">Medium</option>
+							<option value="high">High</option>
+							<option value="very high">Very High</option>
+						</select>
+						
+					</div>						
+					<button type="button" id="filterFormSubmit2" class="btn blue btn-sm">Search</button>
+				</form>	
+				<div class="table-container">
+					<table class="table table-striped table-bordered " id="datatable_ajax2">
+					<thead>
+					<tr role="row" class="heading">
+						<th width="10%">Status</th>
+						<th width="10%">Risk ID</th>
+						<th width="20%">Risk</th>
+						<th width="10%">Risk Level</th>
+						<th width="10%">Impact Level</th>
+						<th width="10%">Likelihood</th>
+						<th width="10%">Risk Owner</th>
+						
+						<th width="10%">&nbsp;</th>
+					</tr>
+					</thead>
+					<tbody>
+					</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		</div>
+
 		<div class="row">
 		<div class="col-md-6" style="padding-left: 40px;">
 			<h4>Legend</h4>

@@ -812,11 +812,20 @@ class MainPic extends APP_Controlleri {
 		';
 		
 		$this->load->model('admin/mperiode');
+		/*
 		$data['valid_mode'] = $this->validatePeriodeMode('periodic');
 		
 		$data['periode'] = null;
 		if ($data['valid_mode']) {
 			$data['periode'] = $this->mperiode->getCurrentPeriode();
+			$data['periodenya'] = 1;
+		}else{
+			$data['periodenya'] = 0;
+		}
+		*/
+		$data['periode'] = $this->mperiode->getCurrentPeriode_exec();
+		if ($data['periode']) {
+			//periode AP Exec nya
 			$data['periodenya'] = 1;
 		}else{
 			$data['periodenya'] = 0;

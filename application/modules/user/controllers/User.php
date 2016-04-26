@@ -475,6 +475,7 @@ class User extends APP_Controller {
 		
 		$this->load->model('user/role');
 		$this->load->model('user/division');
+		$this->load->model('user/usermodel');
 		
 		$roles = $this->role->getAll();
 		$data['role_list'] = array();
@@ -485,7 +486,7 @@ class User extends APP_Controller {
 			);
 		}
 		
-		$array_role_status = array("PR","UR","HR","NONE");
+		$array_role_status = array("PR (PIC Division - RAC)","UR (User - RAC)","HR (Head Division - RAC)","NONE");
 		foreach($array_role_status as $key){			
 			$data['role_status'][] = array(
 				'key' => $key,
@@ -501,10 +502,50 @@ class User extends APP_Controller {
 				'value' => $division['division_name']
 			);
 		}
+
+		$users = $this->usermodel->getAllUsername();
+		$data['username_list'] = array();
+		foreach($users as $user) {
+			$data['username_list'][] = array(
+				'key' => $user['username'],
+				'value' => $user['display_name']
+			);
+		}
+
+		$data['userhide'] = $this->usermodel->getAllUsernameHide();
 		
 		$this->load->view('main/header', $data);
 		$this->load->view('modify_user', $data);
 		$this->load->view('main/footer', $data);
+	}
+
+	public function userMove()
+	{
+		$session_data = $this->session->credential;
+		
+		if ($_POST['username_id'] != 'admin') {
+			$this->load->model('user/usermodel');
+			
+			
+			$par['username_new'] = $_POST['username_new'];
+			$par['username_id'] = $_POST['username_id'];
+			
+			$res = $this->usermodel->updateMove($_POST['username_id'], $par, $session_data['username']);
+			
+			if ($res) {
+				$data['success'] = true;
+				$data['msg'] = 'SUCCESS';
+			} else {
+				$data['success'] = false;
+				$data['msg'] = $this->db->error();
+			}
+		
+		} else {
+			$data['success'] = false;
+			$data['msg'] = 'Administrator is protected and cannot be edited';
+		}
+		
+		echo json_encode($data);
 	}
 	
 	public function userEditRac()
@@ -536,6 +577,24 @@ class User extends APP_Controller {
 		}
 		
 		echo json_encode($data);
+	}
+
+	public function deleteRiskHide()
+	{
+		if (isset($_POST['username'])) {
+			$username = $_POST['username'];
+			$this->load->model('usermodel');
+			$res = $this->usermodel->deleteRiskHide($username, $this->session->credential['username'], 'RISK_REGISTER_RAC-DELETE');
+			
+			if ($res) {
+				$data['success'] = true;
+				$data['msg'] = 'SUCCESS';
+			} else {
+				$data['success'] = false;
+				$data['msg'] = 'Error Deleting Data';
+			}
+			echo json_encode($data);
+		}
 	}
 }
 

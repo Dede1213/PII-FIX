@@ -272,7 +272,10 @@ var handleValidation = function() {
 	        },
 	        risk_level: {
 	            required: true
-	        }
+	        },
+            suggested_risk_treatment: {
+                required: true
+            }
 	    },
 		errorPlacement: function (error, element) { // render error placement for each input type
             if (element.parent(".input-group").size() > 0) {
@@ -359,6 +362,44 @@ var handleValidationControl = function() {
 	        return false;
 	    }
 	});
+}
+
+var handleValidationObjective = function() {
+    var form1 = $('#input-form-control-objective');
+    
+    form1.validate({
+        errorElement: 'span', //default input error message container
+        errorClass: 'help-block help-block-error', // default input error message class
+        focusInvalid: true, // do not focus the last invalid input
+        ignore: "",  // validate all fields including form hidden input
+        rules: {
+            objective: {
+                required: true
+            }
+        },
+        invalidHandler: function (event, validator) { //display error alert on form submit              
+            MainApp.viewGlobalModal('error', 'Please Fill All Mandatory Field');
+        },
+    
+        highlight: function (element) { // hightlight error inputs
+            $(element)
+                .closest('.form-group').addClass('has-error'); // set error class to the control group
+        },
+    
+        unhighlight: function (element) { // revert the change done by hightlight
+            $(element)
+                .closest('.form-group').removeClass('has-error'); // set error class to the control group
+        },
+    
+        success: function (label) {
+            label
+                .closest('.form-group').removeClass('has-error'); // set success class to the control group
+        },
+    
+        submitHandler: function (form) {
+            return false;
+        }
+    });
 }
 
 var handleValidationAction = function() {
@@ -557,7 +598,7 @@ var RiskInput = function() {
         		if (fvalid) {
 					//var tr_idnya2 = $('#tr_idnya2').val();
 					var tr_idnya2 = $('#form-data-revid').val();
-        			var xplan = $('#input-form-action-plan input[name=action_plan]').val();
+        			var xplan = $('#input-form-action-plan textarea[name=action_plan]').val();
         			var xdate = $('#input-form-action-plan input[name=due_date]').val();
         			var xdiv_view = $('#input-form-action-plan select[name=division] option:selected').text();
         			var xdiv_id = $('#input-form-action-plan select[name=division] option:selected').val();
@@ -647,15 +688,18 @@ var RiskInput = function() {
         	$('#risk-button-cancel').on('click', function() {
         		var mod = MainApp.viewGlobalModal('confirm', 'Are You sure you want to cancel your Risk Register ? You will loose your unsaved data.');
         		mod.find('button.btn-primary').one('click', function(){
-        			location.href=site_url+'/risk/RiskRegister/';
+        			location.href=site_url+'/main/';
         		});
         	});
+
+          
         	
         	me.loadRiskLevelList();
         	me.loadRiskLevelReference();
         	me.loadImpactLevelReference();
         	handleValidation();
         	handleValidationControl();
+            handleValidationObjective();
         	handleValidationAction();
         },
         initLoadCategory: function() {
@@ -1169,7 +1213,8 @@ var RiskInput = function() {
 	        			if(data.success) {
 	        				var mod = MainApp.viewGlobalModal('success', 'Success Inserting your Risk');
 	        				mod.find('button.btn-ok-success').one('click', function(){
-	        					location.href=site_url+'/risk/RiskRegister/RiskRegisterInput/'+me.dataMode;
+	        					//location.href=site_url+'/risk/RiskRegister/RiskRegisterInput/'+me.dataMode;
+                                location.href=site_url+'/risk/RiskRegister';
 	        				});
 	        				
 	        			} else {

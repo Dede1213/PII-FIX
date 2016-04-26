@@ -436,7 +436,7 @@ var ChangeRequest = function() {
 	    		var fvalid = form1.form();
 	    		
 	    		if (fvalid) {
-	    			var xplan = $('#input-form-action-plan input[name=action_plan]').val();
+	    			var xplan = $('#input-form-action-plan textarea[name=action_plan]').val();
 	    			var xdate = $('#input-form-action-plan input[name=due_date]').val();
 	    			var xdiv_view = $('#input-form-action-plan select[name=division] option:selected').text();
 	    			var xdiv_id = $('#input-form-action-plan select[name=division] option:selected').val();
@@ -555,7 +555,7 @@ var ChangeRequest = function() {
         			'data_flag': edData.data_flag
         		};
         		
-        		$('#input-form-action-plan input[name=action_plan]').val(edData.action_plan);
+        		$('#input-form-action-plan textarea[name=action_plan]').val(edData.action_plan);
         		$('#input-form-action-plan input[name=due_date]').val(edData.due_date);
         		$('#input-form-action-plan select[name=division]').val(edData.division);
 
@@ -579,6 +579,14 @@ var ChangeRequest = function() {
         		mod.find('button.btn-primary').off('click');
         		mod.find('button.btn-primary').one('click', function(){
         			me.submitRiskData('verifyPrimary');
+        		});
+        	});
+
+        	$('#primary-risk-button-delete').on('click', function() {
+        		var mod = MainApp.viewGlobalModal('confirm', 'Are You sure you want to Verify Change Request with Primary Data ?');
+        		mod.find('button.btn-primary').off('click');
+        		mod.find('button.btn-primary').one('click', function(){
+        			me.submitRiskData('delete');
         		});
         	});
         	
@@ -1265,6 +1273,8 @@ var ChangeRequest = function() {
             		var url = site_url+'/main/mainRac/changeRequestSaveDraft';
             	}else if (mode == 'saveDraft-changes') {
             		var url = site_url+'/main/mainRac/changeRequestSaveDraftchanges';
+            	}else if (mode == 'delete') {
+            		var url = site_url+'/main/mainRac/changeRequestVerifyDelete';
             	} else {
             		return false;
             	}
@@ -1277,7 +1287,7 @@ var ChangeRequest = function() {
             			if(data.success) {
             				var mod = MainApp.viewGlobalModal('success', 'Success Submitting Change Request');
             				mod.find('button.btn-ok-success').one('click', function(){
-            					if (mode == 'verifyPrimary' || mode == 'verify') {
+            					if (mode == 'verifyPrimary' || mode == 'verify' || mode == 'delete') {
             						location.href=site_url+'/main#tab_change_request_list';
             					} else {
             						location.href=site_url+'/main/mainrac/ChangeRequestVerify/'+xid;

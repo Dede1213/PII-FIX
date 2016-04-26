@@ -44,7 +44,7 @@
 				<table id="datatable_ajax" class="table table-condensed table-bordered table-hover">
 					<thead>
 					<tr role="row" class="heading">
-						<th><small>Kode Risiko</small></th>
+						<th><small>ID Risiko</small></th>
 						<th><small>Peristiwa Risiko</small></th>
 						<th><small>Level Risiko</small></th>
 					</tr>

@@ -36,17 +36,17 @@
 			<div class="portlet-body">
 				<form class="form-inline" role="form" id="filterForm" style="margin-bottom: 10px;">
 					<div class="form-group">
-						<label for="filterFormBy">Filter dengan :</label>
+						<label for="filterFormBy">Filter By</label>
 						<select class="form-control input-medium input-sm" id="filterFormBy">
-							<option value="-">Pilih</option>
-							<option value="risk_event">Risiko</option>
-							<option value="risk_level">Level Risiko</option>
-							<option value="risk_impact_level">Level Dampak</option>
-							<option value="risk_likelihood_key">Kemungkinan Keterjadian</option>
+							<option value="-">Choose</option>
+							<option value="risk_event">Risk</option>
+							<option value="risk_level">Risk Level</option>
+							<option value="risk_impact_level">Impact Level</option>
+							<option value="risk_likelihood_key">Likelihood</option>
 						</select>
 					</div>
 					<div class="form-group" id="re">
-						<input type="text" class="hash form-control input-sm" id="fe" placeholder="Masukkan Nilai Filter">
+						<input type="text" class="hash form-control input-sm" id="fe" placeholder="Insert Filter Value">
 					</div>
 
 					<div class="form-group" id="rl">
@@ -60,7 +60,7 @@
 
 					<div class="form-group" id="il">
 						<select class="hish form-control input-sm" id="fi">
-							<option value="insignificant">Tidak Significant</option>	
+							<option value="insignificant">Tidak significant</option>	
 							<option value="minor">Minor</option>
 							<option value="major">Major</option>
 							<option value="moderate">Moderate</option>
@@ -80,7 +80,7 @@
 						
 					</div>											
 
-					<button type="button" id="filterFormSubmit" class="btn blue btn-sm">Cari</button>
+					<button type="button" id="filterFormSubmit" class="btn blue btn-sm">Search</button>
 				</form>
 				
 				<div class="table-container">
@@ -104,8 +104,87 @@
 				</div>
 			</div>
 		</div>
-	
+		</div>
+
+		<div class="col-md-12">
+			<div class="portlet box grey-silver">
+			<div class="portlet-title">
+				<div class="caption">
+					Risiko Dari Modify
+				</div>
+			</div>
 			
+			<div class="portlet-body">
+				<form class="form-inline" role="form" id="filterForm2" style="margin-bottom: 10px;">
+					<div class="form-group">
+						<label for="filterFormBy2">Filter dengan :</label>
+						<select class="form-control input-medium input-sm" id="filterFormBy2">
+							<option value="-">Pilih</option>
+							<option value="risk_event">Risiko</option>
+							<option value="risk_level">Level Risiko</option>
+							<option value="risk_impact_level">Level Dampak</option>
+							<option value="risk_likelihood_key">Kemungkinan Keterjadian</option>
+						</select>
+					</div>
+
+					<div class="form-group" id="tr">
+						<input type="text" class="pash form-control input-sm" id="pe" placeholder="Insert Filter Value">
+					</div>
+
+					<div class="form-group" id="tl">
+						<select class="pesh form-control input-sm" id="pl">
+							<option value="low">Rendah</option>	
+							<option value="moderate">Sedang</option>
+							<option value="high">Tinggi</option>
+						</select>
+						
+					</div>
+
+					<div class="form-group" id="ti">
+						<select class="pish form-control input-sm" id="pi">
+							<option value="insignificant">Tidak significant</option>	
+							<option value="minor">Minor</option>
+							<option value="major">Major</option>
+							<option value="moderate">Moderate</option>
+							<option value="catasthropic">Catasthropic</option>
+						</select>
+						
+					</div>
+
+					<div class="form-group" id="tk">
+						<select class="posh form-control input-sm" id="pk">
+							<option value="very low">Sangat Rendah</option>	
+							<option value="low">Rendah</option>
+							<option value="medium">Sedang</option>
+							<option value="high">Tinggi</option>
+							<option value="very high">Sangat Tinggi</option>
+						</select>
+						
+					</div>						
+					<button type="button" id="filterFormSubmit2" class="btn blue btn-sm">Cari</button>
+				</form>	
+				
+				<div class="table-container">
+					<table class="table table-striped table-bordered " id="datatable_ajax2">
+					<thead>
+					<tr role="row" class="heading">
+						<th width="10%">Status</th>
+						<th width="10%">Risk ID</th>
+						<th width="20%">Risk</th>
+						<th width="10%">Risk Level</th>
+						<th width="10%">Impact Level</th>
+						<th width="10%">Likelihood</th>
+						<th width="10%">Risk Owner</th>
+						
+						<th width="10%">&nbsp;</th>
+					</tr>
+					</thead>
+					<tbody>
+					</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
 		</div>
 		
 		<div class="row">

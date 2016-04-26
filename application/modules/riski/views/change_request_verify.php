@@ -34,7 +34,7 @@
 						<div class="form-body">
 							<div class="form-group">
 								<input type="hidden" name="risk_id" value=""/>
-								<label class="col-md-3 control-label smaller cl-compact" >Kode Risiko</label>
+								<label class="col-md-3 control-label smaller cl-compact" >ID Risiko</label>
 								<div class="col-md-9">
 								<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_code" placeholder="">
 								</div>
@@ -51,7 +51,7 @@
 								<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_description" placeholder=""></textarea>
 								</div>
 							</div>
-							<?php if ($change_type == 'Risk Form') { ?>
+							<?php if ($change_type == 'Risk Form' || $change_type == 'Delete Risk') { ?>
 							<div class="form-group">
 									<label class="col-md-3 control-label smaller cl-compact">Sebab <span class="required">* </span></label>
 									<div class="col-md-9">
@@ -91,7 +91,7 @@
 								</div>
 							</div>
 							<hr/>
-							<?php if ($change_type == 'Risk Form') { ?>
+							<?php if ($change_type == 'Risk Form' || $change_type == 'Delete Risk') { ?>
 							<h4>Objektif</h4>
 							<div class="table-scrollable">
 								<table id="primary_objective_table" class="table table-condensed table-bordered table-hover">
@@ -140,7 +140,10 @@
 							</div>
 						</div>
 						<div class="form-actions right">
+						<?php if ($change_type != 'Delete Risk') { ?>
+							<a href="#form-info-modal" id="" data-toggle="modal" class="btn blue">Detail Status Risk</a>
 							<button id="primary-risk-button-submit" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Verifikasi</button>
+						<?php } ?>
 						</div>
 					</form>
 				</div>
@@ -161,7 +164,7 @@
 						<div class="form-body">
 							<div class="form-group">
 								<input type="hidden" name="risk_id" value=""/>
-								<label class="col-md-3 control-label smaller cl-compact" >Kode Risiko</label>
+								<label class="col-md-3 control-label smaller cl-compact" >ID Risiko</label>
 								<div class="col-md-9">
 								<input type="text" class="form-control input-sm" readonly="true" name="risk_code" placeholder="">
 								</div>
@@ -178,7 +181,28 @@
 								<textarea class="form-control input-readview" rows="3"  name="risk_description" placeholder=""></textarea>
 								</div>
 							</div>
-							<?php if ($change_type == 'Risk Form') { ?>
+							<div class="clearfix">
+								<a href="#form-control-objective" id="button-form-control-open-objective" data-toggle="modal" class="btn default green pull-right btn-sm">
+								<i class="fa fa-plus"></i>
+								<span class="hidden-480">
+								Tambah Objektif </span>
+								</a>
+								<h4>Objektif</h4>
+							</div>
+							<div class="table-scrollable">
+								<table id="objective_table" class="table table-condensed table-bordered table-hover">
+									<thead>
+									<tr role="row" class="heading">
+										<th width="15%"><span class="small">ID Objektif</span></th>
+										<th><span class="small">Objektif</span></th>
+										<th width="66px">&nbsp;</th>
+									</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+							</div>
+							<?php if ($change_type == 'Risk Form' || $change_type == 'Delete Risk') { ?>
 							<div class="form-group">
 									<label class="col-md-3 control-label smaller cl-compact">Sebab <span class="required">* </span></label>
 									<div class="col-md-9">
@@ -193,7 +217,7 @@
 								</div>
 							
 							<?php } ?>
-							<?php if ($change_type == 'Risk Form' || $change_type == 'Risk Owner Form') { ?>
+							<?php if ($change_type == 'Risk Form' || $change_type == 'Risk Owner Form' || $change_type == 'Delete Risk') { ?>
 							<div class="form-group">
 								<label class="col-md-3 control-label smaller cl-compact" >Level Dampak <span class="required">* </span></label>
 								<div class="col-md-9">
@@ -264,7 +288,8 @@
 							</div>
 							<?php } ?>
 							<hr/>
-							<?php if ($change_type == 'Risk Form') { ?>
+							<?php if ($change_type == 'Risk Form' || $change_type == 'Delete Risk') { ?>
+							<!--
 							<div class="clearfix">
 								<a href="#form-control-objective" id="button-form-control-open-objective" data-toggle="modal" class="btn default green pull-right btn-sm">
 								<i class="fa fa-plus"></i>
@@ -287,6 +312,7 @@
 								</table>
 							</div>
 							<hr/>
+							-->
 							<div class="clearfix">
 								<a href="#form-control" id="button-form-control-open" data-toggle="modal" class="btn default green pull-right btn-sm">
 								<i class="fa fa-plus"></i>
@@ -312,7 +338,7 @@
 							</div>
 							<hr/>
 							<?php } ?>
-							<?php if ($change_type == 'Risk Form' || $change_type == 'Risk Owner Form') { ?>
+							<?php if ($change_type == 'Risk Form' || $change_type == 'Risk Owner Form' || $change_type == 'Delete Risk') { ?>
 							<div class="clearfix">
 								<a href="#form-data" id="button-form-data-open" data-toggle="modal" class="btn default green pull-right btn-sm">
 								<i class="fa fa-plus"></i>
@@ -340,11 +366,17 @@
 							</div>
 						</div>
 						<div class="form-actions right">
-							<button id="changes-risk-button-save" type="button" class="btn blue"><i class="fa fa-arrows-h"></i> Set as Primary</button>
+						<?php if ($change_type == 'Delete Risk') { ?>
+							<button type="button" class="btn red" id="primary-risk-button-delete"><i class="fa fa-times"></i> Delete</button>
+							<button type="button" class="btn yellow" id="changes-risk-button-cancel"><i class="fa fa-times"></i> Cancel</button>
+						<?php }else{?>
+						<!--	<button id="changes-risk-set-as-primary" type="button" class="btn blue"><i class="fa fa-arrows-h"></i> Set As Primary</button> -->
+						<!--	<button id="changes-risk-button-submit" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Verify</button> -->
+							<button id="changes-risk-button-save" type="button" class="btn blue"><i class="fa fa-arrows-h"></i> Set As Primary</button>
 							<button id="changes-risk-button-save-changes" type="button" class="btn blue"><i class="fa fa-circle-o"></i> Simpan</button>
 							<button type="button" class="btn yellow" id="changes-risk-button-cancel"><i class="fa fa-times"></i> Batal</button>
+						<?php }?>
 						</div>
-
 					</form>
 				</div>
 			</div>
@@ -376,6 +408,101 @@
 	var g_username = null;
 	var g_change_type = '<?=$change_type?>';
 </script>
+
+<!-- Change info -->
+<div id="form-info-modal" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+		<h4 class="modal-title">Detail Risk Status</h4>
+	</div>
+	<div class="modal-body">
+
+			<div class="table-scrollable">
+								<table id="" class="table table-condensed table-bordered table-hover">
+									<thead>
+									<tr role="row" class="heading">
+										<th ><span class="small">Risk Status</span></th>
+										<th><span class="small">Risk Event</span></th>
+										<th><span class="small">Risk Event Description</span></th>
+										<th><span class="small">Cause</span></th>
+										<th><span class="small">Impact</span></th>
+										<th><span class="small">Impact Level</span></th>
+										<th><span class="small">likelihood</span></th>
+										<th><span class="small">Risk Level</span></th>
+										<th><span class="small">Suggested Risk Treatment</span></th>
+										
+									</tr>
+									<tr>
+										<td>
+				<?php 
+			 	if ($status['risk_status'] == 0 || $status['risk_status'] == 1 ){
+			 	echo "Draft";
+			 	}else if ($status['risk_status'] == 2){
+			 	echo "Submited To RAC";
+			 	}else if ($status['risk_status'] == 3 || $status['risk_status'] == 4){
+			 	echo "Verified By RAC";
+			 	}else if ($status['risk_status'] == 5 || $status['risk_status'] == 6){
+			 	echo "on Risk Treatment Process";
+			 	}else if ($status['risk_status'] == 10){
+			 	echo "on Action Plan Process";
+			 	}else if ($status['risk_status'] == 20){
+			 	echo "Action Plan Has Been Executed and Verified";
+			 	}
+			  	?>
+										</td>
+										<td><?php echo $status['risk_event'];?></td>
+										<td><?php echo $status['risk_description'];?></td>
+										<td><?php echo $status['risk_cause'];?></td>
+										<td><?php echo $status['risk_impact'];?></td>
+										<td><?php echo $status['risk_impact_level'];?></td>
+										<td><?php echo $status['risk_likelihood_key'];?></td>
+										<td><?php echo $status['risk_level'];?></td>
+										<td><?php echo $status['suggested_risk_treatment'];?></td>
+										
+									</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+								
+							</div>
+							<div class="table-scrollable">
+							<table id="" class="table table-condensed table-bordered table-hover">
+									<thead>
+									<tr role="row" class="heading">
+										<th><span class="small">Action Plan Status</span></th>
+										<th><span class="small">Suggested Action Plan</span></th>
+										<th><span class="small">Due Date</span></th>
+										<th><span class="small">Action Plan Owner</span></th>
+									</tr>
+									</thead>
+									<tbody>
+									<?php foreach ($status_action as $row) {
+									?>
+										<tr>
+										<td>
+				<?php 
+			 	if ($status['risk_status'] == 4){
+			 	echo "Draft";
+			 	}else if ($status['risk_status'] == 5){
+			 	echo "Submited To RAC";
+			 	}else if ($status['risk_status'] == 6){
+			 	echo "Verified By RAC ";
+			 	}
+			  	?>
+										</td>
+										<td><?php echo $row['action_plan'];?></td>
+										<td><?php echo $row['due_date'];?></td>
+										<td><?php echo $row['division'];?></td>
+										</tr>
+									<?php
+									}
+									?>
+									</tbody>
+								</table>
+							</div>
+	</div>
+</div>
 
 <!-- OBJECTIVE -->
 <div id="form-control-objective" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
@@ -445,7 +572,7 @@
 					</div>
 					<div class="form-group">
 					<input type = "hidden" id = "form-control-revid">
-						<label class="col-md-3 control-label smaller cl-compact">Kontrol Eksisting<span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact">Evaluasi atas Eksisting Kontrol <span class="required">* </span></label>
 						<div class="col-md-9">
 							<div class="input-group">
 								<input type="text" class="form-control input-sm" readonly="true" name="risk_existing_control" id = "risk_existing_control" placeholder="" value="NONE">
@@ -466,7 +593,7 @@
 					</div>
 					-->
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Evaluasi atas Eksisting Kontrol<span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact" >Kontrol Eksisting <span class="required">* </span></label>
 						<div class="col-md-9">
 						<input type="text" class="form-control input-sm" name="risk_evaluation_control" id = "risk_evaluation_control" placeholder="" value="NONE">
 						</div>
@@ -503,7 +630,10 @@
 					<div class="form-group">
 						<label class="col-md-3 control-label">Usulan Action Plan <span class="required">* </span></label>
 						<div class="col-md-9">
-						<input type="text" class="form-control input-sm" name="action_plan" placeholder="">
+						<textarea class="form-control input-sm " rows="3"  name="action_plan" id = "action_plan" placeholder=""> </textarea>
+								<!--
+								<input type="text" class="form-control input-sm" name="action_plan" id = "action_plan" placeholder=""> 
+								-->
 						</div>
 					</div>
 					<div class="form-group">

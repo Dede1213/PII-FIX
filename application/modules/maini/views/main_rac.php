@@ -90,7 +90,13 @@
 				</li>
 				<li>
 					<a href="#tab_change_request_list" data-toggle="tab">
-					Daftar Permintaan Perubahan </a>
+					Daftar Permintaan Perubahan 
+					<?php 
+					if($cekChangeRequest > 0){
+					echo "($cekChangeRequest)";
+					}
+					?>
+					</a>
 				</li>
 			</ul>
 			<div class="tab-content">

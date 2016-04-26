@@ -39,6 +39,7 @@
 							<label class="col-md-3 control-label">Upload Konten Berita</label>
 							<div class="col-md-6">
 								<input type="file" class="form-control" placeholder="Nama File" name="filename" id="news-file">
+								*Hanya PDF
 							</div>
 						</div>
 						<div class="form-group">

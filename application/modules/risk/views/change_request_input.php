@@ -34,7 +34,7 @@
 						<div class="form-body">
 							<div class="form-group">
 								<input type="hidden" name="risk_id" value=""/>
-								<label class="col-md-3 control-label smaller cl-compact" >Risk Code</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Risk ID</label>
 								<div class="col-md-9">
 								<input type="text" class="form-control input-sm" readonly="true" name="risk_code" readonly="true" placeholder="">
 							
@@ -53,7 +53,7 @@
 								<textarea class="form-control input-sm input-readview" readonly="true" rows="3" name="risk_description" placeholder=""></textarea>
 								</div>
 							</div>
-							<?php if ($change_type == 'Risk Form') { ?>
+							<?php if ($change_type == 'Risk Form' || $change_type == 'Delete Risk') { ?>
 							
 							<div class="form-group">
 									<label class="col-md-3 control-label smaller cl-compact">Cause <span class="required">* </span></label>
@@ -94,7 +94,7 @@
 								</div>
 							</div>
 							<hr/>
-							<?php if ($change_type == 'Risk Form') { ?>
+							<?php if ($change_type == 'Risk Form' || $change_type == 'Delete Risk') { ?>
 							<h4>Objective</h4>
 							<div class="table-scrollable">
 								<table id="primary_objective_table" class="table table-condensed table-bordered table-hover">
@@ -116,8 +116,9 @@
 									<thead>
 									<tr role="row" class="heading">
 										<th><span class="small">Existing Control ID</span></th>
-										<th><span class="small">Existing Control</span></th>
+										
 										<th><span class="small">Evaluation on Existing Control</span></th>
+										<th><span class="small">Existing Control</span></th>
 										<th><span class="small">Control Owner</span></th>
 									</tr>
 									</thead>
@@ -161,13 +162,13 @@
 						<div class="form-body">
 							<div class="form-group">
 								<input type="hidden" name="risk_id" value=""/>
-								<label class="col-md-3 control-label smaller cl-compact" >Risk Code</label>
+								<label class="col-md-3 control-label smaller cl-compact" >Risk ID</label>
 								<div class="col-md-9">
 
 								<input type="text" class="form-control input-sm" readonly="true" name="risk_code" placeholder="">
 								</div>
 							</div>
-							<?php if ($change_type == 'Risk Form') { ?>
+							<?php if ($change_type == 'Risk Form' || $change_type == 'Delete Risk') { ?>
 							<div class="form-group">
 									<label class="col-md-3 control-label smaller cl-compact">Risk Event</label>
 									<div class="col-md-9">
@@ -179,6 +180,27 @@
 								<div class="col-md-9">
 								<textarea class="form-control input-sm input-readview"  rows="3" name="risk_description" placeholder=""></textarea>
 								</div>
+							</div>
+							<div class="clearfix">
+								<a href="#form-control-objective" id="button-form-control-open-objective" data-toggle="modal" class="btn default green pull-right btn-sm">
+								<i class="fa fa-plus"></i>
+								<span class="hidden-480">
+								Add Objective </span>
+								</a>
+								<h4><font style="color:red;">*</font>Objective</h4>
+							</div>
+							<div class="table-scrollable">
+								<table id="objective_table" class="table table-condensed table-bordered table-hover">
+									<thead>
+									<tr role="row" class="heading">
+										<th width="15%"><span class="small">Obj.ID</span></th>
+										<th><span class="small">Objective</span></th>
+										<th width="66px">&nbsp;</th>
+									</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
 							</div>
 							<?php }else{ ?>
 							<div class="form-group">
@@ -194,7 +216,7 @@
 								</div>
 							</div>
 							<?php } ?>
-							<?php if ($change_type == 'Risk Form') { ?>
+							<?php if ($change_type == 'Risk Form' || $change_type == 'Delete Risk') { ?>
 							<div class="form-group">
 									<label class="col-md-3 control-label smaller cl-compact">Cause <span class="required">* </span></label>
 									<div class="col-md-9">
@@ -209,7 +231,7 @@
 								</div>
 
 							<?php } ?>
-							<?php if ($change_type == 'Risk Form' || $change_type == 'Risk Owner Form') { ?>
+							<?php if ($change_type == 'Risk Form' || $change_type == 'Risk Owner Form' || $change_type == 'Delete Risk') { ?>
 							<div class="form-group">
 								<label class="col-md-3 control-label smaller cl-compact" >Impact Level <span class="required">* </span></label>
 								<div class="col-md-9">
@@ -280,14 +302,15 @@
 							</div>
 							<?php } ?>
 							<hr/>
-							<?php if ($change_type == 'Risk Form') { ?>
+							<?php if ($change_type == 'Risk Form' || $change_type == 'Delete Risk') { ?>
+							<!--
 							<div class="clearfix">
 								<a href="#form-control-objective" id="button-form-control-open-objective" data-toggle="modal" class="btn default green pull-right btn-sm">
 								<i class="fa fa-plus"></i>
 								<span class="hidden-480">
 								Add Objective </span>
 								</a>
-								<h4>Objective</h4>
+								<h4><font style="color:red;">*</font>Objective</h4>
 							</div>
 							<div class="table-scrollable">
 								<table id="objective_table" class="table table-condensed table-bordered table-hover">
@@ -302,22 +325,24 @@
 									</tbody>
 								</table>
 							</div>
-							<hr/>
+
+							<hr/> -->
 							<div class="clearfix">
 								<a href="#form-control" id="button-form-control-open" data-toggle="modal" class="btn default green pull-right btn-sm">
 								<i class="fa fa-plus"></i>
 								<span class="hidden-480">
 								Add Control </span>
 								</a>
-								<h4>Control</h4>
+								<h4><font style="color:red;">*</font>Control</h4>
 							</div>
 							<div class="table-scrollable">
 								<table id="control_table" class="table table-condensed table-bordered table-hover">
 									<thead>
 									<tr role="row" class="heading">
 										<th><span class="small">Existing Control ID</span></th>
-										<th><span class="small">Existing Control</span></th>
 										<th><span class="small">Evaluation on Existing Control</span></th>
+										<th><span class="small">Existing Control</span></th>
+										
 										<th><span class="small">Control Owner</span></th>
 										<th width="66px">&nbsp;</th>
 									</tr>
@@ -328,14 +353,14 @@
 							</div>
 							<hr/>
 							<?php } ?>
-							<?php if ($change_type == 'Risk Form' || $change_type == 'Risk Owner Form') { ?>
+							<?php if ($change_type == 'Risk Form' || $change_type == 'Risk Owner Form' || $change_type == 'Delete Risk') { ?>
 							<div class="clearfix">
 								<a href="#form-data" id="button-form-data-open" data-toggle="modal" class="btn default green pull-right btn-sm">
 								<i class="fa fa-plus"></i>
 								<span class="hidden-480">
 								Add Plan Action Suggestion </span>
 								</a>
-								<h4>Action Plan</h4>
+								<h4><font style="color:red;">*</font>Action Plan</h4>
 							</div>
 							<?php } else { ?>
 							<h4>Action Plan</h4>
@@ -459,9 +484,10 @@
 							</div>
 						</div>
 					</div>
+					
 					<div class="form-group">
 					<input type = "hidden" id = "form-control-revid">
-						<label class="col-md-3 control-label smaller cl-compact">Existing Control <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact">Evaluation on Existing Control <span class="required">* </span></label>
 						<div class="col-md-9">
 							<div class="input-group">
 								<input type="text" class="form-control input-sm" readonly="true" name="risk_existing_control" id = "risk_existing_control" placeholder="" value="NONE">
@@ -481,12 +507,14 @@
 						</div>
 					</div>
 					-->
+
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Evaluation on Existing Control <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact" >Existing Control <span class="required">* </span></label>
 						<div class="col-md-9">
 						<input type="text" class="form-control input-sm" name="risk_evaluation_control" id = "risk_evaluation_control" placeholder="" value="NONE">
 						</div>
 					</div>
+					
 					
 					<div class="form-group">
 									<label class="col-md-3 control-label smaller cl-compact">Control Owner <span class="required">* </span></label>
@@ -527,9 +555,13 @@
 						<label class="col-md-3 control-label smaller cl-compact">Suggested Action Plan<span class="required">* </span></label>
 						<div class="col-md-9">
 							<div class="input-group">
+								<textarea class="form-control input-sm " rows="3"  name="action_plan" id = "action_plan" placeholder=""> </textarea>
+								<!--
 								<input type="text" class="form-control input-sm" name="action_plan" id = "action_plan" placeholder=""> 
+								-->
+								
 								<span class="input-group-btn">
-								<button class="btn btn-primary btn-sm" type="button" data-toggle="modal" href="#modal-libraryaction"><i class="fa fa-search fa-fw"/></i></button>
+								<button style="margin-top:-60px; margin-left:5px;" class="btn btn-primary btn-sm" type="button" data-toggle="modal" href="#modal-libraryaction"><i class="fa fa-search fa-fw"/></i></button>
 								</span> 
 							</div>
 						</div>
@@ -681,8 +713,9 @@
 				<thead>
 				<tr role="row" class="heading">
 					<th width="66px">&nbsp;</th>
-					<th>Existing Control</th>
 					<th>Evaluation on Existing Control</th>
+					<th>Existing Control</th>
+					
 					<th>Control Owner</th>
 				</tr>
 				</thead>

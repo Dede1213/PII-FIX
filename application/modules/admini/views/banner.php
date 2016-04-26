@@ -27,9 +27,11 @@
 <script type="text/javascript">
 tinymce.init({
         selector: "textarea",
+        elementpath: false,
+        statusbar: false,
         plugins: [
                 "advlist autolink autosave link image lists charmap print preview hr anchor pagebreak spellchecker",
-                "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+                "searchreplace visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
                 "table contextmenu directionality emoticons template textcolor paste fullpage textcolor colorpicker textpattern"
         ],
 

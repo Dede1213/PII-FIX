@@ -83,6 +83,35 @@
 									<textarea class="form-control popovers" rows="3" name="risk_description" data-container="body" data-placement="bottom" placeholder="" data-content="fill this field with decription of identified risk which explains nature of the risk"></textarea>
 									</div>
 								</div>
+								<div class="panel panel-default">
+								<div class="panel-heading">
+									<h3 class="panel-title">Objective</h3>
+								</div>
+								<div class="panel-body">
+									 <div class="clearfix">
+									 	<a href="#form-control-objective" id="button-form-control-open-objective" data-toggle="modal" class="btn default green pull-right btn-sm">
+									 	<i class="fa fa-plus"></i>
+									 	<span class="hidden-480">
+									 	Add Objective </span>
+									 	</a>
+									 </div>
+									 
+									 <div class="table-scrollable">
+									 	<table id="objective_table" class="table table-condensed table-bordered table-hover">
+									 		<thead>
+									 		<tr role="row" class="heading">
+									 			<th width="20%">Obj. ID</th>
+									 			<th>Objective</th>
+									 			<th width="30px">&nbsp;</th>
+									 		</tr>
+									 		</thead>
+									 		<tbody>
+									 		</tbody>
+									 	</table>
+									 </div>
+								</div>
+							</div>
+
 								<div class="form-group">
 									<label class="col-md-3 control-label smaller cl-compact" >Risk Category</label>
 									<div class="col-md-9">
@@ -90,6 +119,10 @@
 									</select>
 									</div>
 								</div>
+								
+								
+							</div>
+							<div class="col-md-6">
 								<div class="form-group">
 									<label class="col-md-3 control-label smaller cl-compact" >Risk Sub Category</label>
 									<div class="col-md-9">
@@ -114,8 +147,6 @@
 									</select>
 									</div>
 								</div>
-							</div>
-							<div class="col-md-6">
 								<div class="form-group">
 									<label class="col-md-3 control-label smaller cl-compact">Cause <span class="required">* </span></label>
 									<div class="col-md-9">
@@ -208,35 +239,7 @@
 							</div>
 							<div class="clearfix">
 							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h3 class="panel-title">Objective</h3>
-								</div>
-								<div class="panel-body">
-									 <div class="clearfix">
-									 	<a href="#form-control-objective" id="button-form-control-open-objective" data-toggle="modal" class="btn default green pull-right btn-sm">
-									 	<i class="fa fa-plus"></i>
-									 	<span class="hidden-480">
-									 	Add Objective </span>
-									 	</a>
-									 </div>
-									 
-									 <div class="table-scrollable">
-									 	<table id="objective_table" class="table table-condensed table-bordered table-hover">
-									 		<thead>
-									 		<tr role="row" class="heading">
-									 			<th width="20%">Obj. ID</th>
-									 			<th>Objective</th>
-									 			<th width="30px">&nbsp;</th>
-									 		</tr>
-									 		</thead>
-									 		<tbody>
-									 		</tbody>
-									 	</table>
-									 </div>
-								</div>
-							</div>
-
+							
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<h3 class="panel-title">Control</h3>
@@ -503,9 +506,13 @@
 						<label class="col-md-3 control-label smaller cl-compact">Suggested Action Plan<span class="required">* </span></label>
 						<div class="col-md-9">
 							<div class="input-group">
+								<textarea class="form-control input-sm " rows="3"  name="action_plan" id = "action_plan" placeholder=""> </textarea>
+								<!--
 								<input type="text" class="form-control input-sm" name="action_plan" id = "action_plan" placeholder=""> 
+								-->
+								
 								<span class="input-group-btn">
-								<button class="btn btn-primary btn-sm" type="button" data-toggle="modal" href="#modal-libraryaction"><i class="fa fa-search fa-fw"/></i></button>
+								<button style="margin-top:-60px; margin-left:5px;" class="btn btn-primary btn-sm" type="button" data-toggle="modal" href="#modal-libraryaction"><i class="fa fa-search fa-fw"/></i></button>
 								</span> 
 							</div>
 						</div>

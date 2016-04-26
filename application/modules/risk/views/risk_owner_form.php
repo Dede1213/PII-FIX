@@ -98,7 +98,7 @@
 									</div>
 								</div>
 
-								<h4>Objective</h4>
+								<h4><font style="color:red;">*</font>Objective</h4>
 								<table class="table table-condensed table-bordered table-hover">
 									<thead>
 									<tr role="row" class="heading">
@@ -116,13 +116,14 @@
 									</tbody>
 								</table>
 								
-								<h4>Control</h4>
+								<h4><font style="color:red;">*</font>Control</h4>
 								<table class="table table-condensed table-bordered table-hover">
 									<thead>
 									<tr role="row" class="heading">
 										<th><small>Existing Control ID</small></th>
-										<th><small>Existing Control</small></th>
+										
 										<th><small>Evaluation on Existing Control</small></th>
+										<th><small>Existing Control</small></th>
 										<th><small>Control Owner</small></th>
 									</tr>
 									</thead>
@@ -138,7 +139,7 @@
 									</tbody>
 								</table>
 								
-								<h4>Suggested Action Plan</h4>
+								<h4><font style="color:red;">*</font>Suggested Action Plan</h4>
 								<table class="table table-condensed table-bordered table-hover">
 									<thead>
 									<tr role="row" class="heading">
@@ -246,8 +247,9 @@
 										<thead>
 										<tr role="row" class="heading">
 											<th><small>Existing Control ID</small></th>
-											<th><small>Existing Control</small></th>
+											
 											<th><small>Evaluation on Existing Control</small></th>
+											<th><small>Existing Control</small></th>
 											<th><small>Control Owner</small></th>
 											<th width="66px">&nbsp;</th>
 										</tr>
@@ -341,9 +343,10 @@
 							</div>
 						</div>
 					</div>
+					
 					<div class="form-group">
 					<input type = "hidden" id = "form-control-revid">
-						<label class="col-md-3 control-label smaller cl-compact">Existing Control <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact">Evaluation on Existing Control <span class="required">* </span></label>
 						<div class="col-md-9">
 							<div class="input-group">
 								<input type="text" class="form-control input-sm" readonly="true" name="risk_existing_control" id = "risk_existing_control" placeholder="" value="NONE">
@@ -364,11 +367,12 @@
 					</div>
 					-->
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Evaluation on Existing Control <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact" >Existing Control <span class="required">* </span></label>
 						<div class="col-md-9">
 						<input type="text" class="form-control input-sm" name="risk_evaluation_control" id = "risk_evaluation_control" placeholder="" value="NONE">
 						</div>
 					</div>
+					
 					<div class="form-group">
 									<label class="col-md-3 control-label smaller cl-compact">Control Owner <span class="required">* </span></label>
 									<div class="col-md-9">
@@ -408,7 +412,11 @@
 						<label class="col-md-3 control-label smaller cl-compact">Suggested Action Plan<span class="required">* </span></label>
 						<div class="col-md-9">
 							<div class="input-group">
+								<textarea class="form-control input-sm " rows="3"  name="action_plan" id = "action_plan" placeholder=""> </textarea>
+								<!--
 								<input type="text" class="form-control input-sm" name="action_plan" id = "action_plan" placeholder=""> 
+								-->
+								
 								<span class="input-group-btn">
 								<button class="btn btn-primary btn-sm" type="button" data-toggle="modal" href="#modal-libraryaction"><i class="fa fa-search fa-fw"/></i></button>
 								</span> 
@@ -531,8 +539,9 @@
 				<thead>
 				<tr role="row" class="heading">
 					<th width="66px">&nbsp;</th>
-					<th>Existing Control</th>
+					
 					<th>Evaluation on Existing Control</th>
+					<th>Existing Control</th>
 					<th>Control Owner</th>
 				</tr>
 				</thead>

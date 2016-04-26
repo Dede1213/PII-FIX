@@ -484,7 +484,7 @@ var ChangeRequest = function() {
                 if (fvalid) {
                     //var tr_idnya2 = $('#tr_idnya2').val();
                     var tr_idnya2 = $('#form-data-revid').val();
-                    var xplan = $('#input-form-action-plan input[name=action_plan]').val();
+                    var xplan = $('#input-form-action-plan textarea[name=action_plan]').val();
                     var xdate = $('#input-form-action-plan input[name=due_date]').val();
                     var xdiv_view = $('#input-form-action-plan select[name=division] option:selected').text();
                     var xdiv_id = $('#input-form-action-plan select[name=division] option:selected').val();
@@ -622,7 +622,7 @@ var ChangeRequest = function() {
                     'data_flag': edData.data_flag
                 };
                 
-                $('#input-form-action-plan input[name=action_plan]').val(edData.action_plan);
+                $('#input-form-action-plan textarea[name=action_plan]').val(edData.action_plan);
                 $('#input-form-action-plan input[name=due_date]').val(edData.due_date);
                 $('#input-form-action-plan select[name=division]').val(edData.division);
 

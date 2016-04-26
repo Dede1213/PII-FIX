@@ -188,8 +188,9 @@ WHERE t_risk.risk_id ='$id'";
 									<thead>
 									<tr role="row" class="heading">
 										<th><small>Existing Control ID</small></th>
-										<th><small>Existing Control</small></th>
+										
 										<th><small>Evaluation on Existing Control</small></th>
+										<th><small>Existing Control</small></th>
 										<th><small>Control Owner</small></th>
 										<th width="66px">&nbsp;</th>
 									</tr>
@@ -334,8 +335,9 @@ WHERE t_risk.risk_id ='$id'";
 								<thead>
 								<tr role="row" class="heading">
 									<th><small>Existing Control ID</small></th>
-									<th><small>Existing Control</small></th>
+									
 									<th><small>Evaluation on Existing Control</small></th>
+									<th><small>Existing Control</small></th>
 									<th><small>Control Owner</small></th>
 								</tr>
 								</thead>
@@ -498,8 +500,9 @@ WHERE t_risk.risk_id ='$id'";
 									<thead>
 									<tr role="row" class="heading">
 										<th><small>Existing Control ID</small></th>
-										<th><small>Existing Control</small></th>
+										
 										<th><small>Evaluation on Existing Control</small></th>
+										<th><small>Existing Control</small></th>
 										<th><small>Control Owner</small></th>
 										<th width="66px">&nbsp;</th>
 									</tr>
@@ -598,9 +601,10 @@ WHERE t_risk.risk_id ='$id'";
 							</div>
 						</div>
 					</div>
+					
 					<div class="form-group">
 					<input type = "hidden" id = "form-control-revid">
-						<label class="col-md-3 control-label smaller cl-compact">Existing Control <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact">Evaluation on Existing Control <span class="required">* </span></label>
 						<div class="col-md-9">
 							<div class="input-group">
 								<input type="text" class="form-control input-sm" readonly="true" name="risk_existing_control" id = "risk_existing_control" placeholder="" value="NONE">
@@ -621,7 +625,7 @@ WHERE t_risk.risk_id ='$id'";
 					</div>
 					-->
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Evaluation on Existing Control <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact" >Existing Control <span class="required">* </span></label>
 						<div class="col-md-9">
 						<input type="text" class="form-control input-sm" name="risk_evaluation_control" id = "risk_evaluation_control"placeholder="" value="NONE">
 						</div>
@@ -664,9 +668,12 @@ WHERE t_risk.risk_id ='$id'";
 						<label class="col-md-3 control-label smaller cl-compact">Suggested Action Plan<span class="required">* </span></label>
 						<div class="col-md-9">
 							<div class="input-group">
+								<textarea class="form-control input-sm " rows="3"  name="action_plan" id = "action_plan" placeholder=""> </textarea>
+								<!--
 								<input type="text" class="form-control input-sm" name="action_plan" id = "action_plan" placeholder=""> 
+								-->
 								<span class="input-group-btn">
-								<button class="btn btn-primary btn-sm" type="button" data-toggle="modal" href="#modal-libraryaction"><i class="fa fa-search fa-fw"/></i></button>
+								<button style="margin-top:-60px; margin-left:5px;" class="btn btn-primary btn-sm" type="button" data-toggle="modal" href="#modal-libraryaction"><i class="fa fa-search fa-fw"/></i></button>
 								</span> 
 							</div>
 						</div>
@@ -787,8 +794,9 @@ WHERE t_risk.risk_id ='$id'";
 				<thead>
 				<tr role="row" class="heading">
 					<th width="66px">&nbsp;</th>
-					<th>Existing Control</th>
+					
 					<th>Evaluation on Existing Control</th>
+					<th>Existing Control</th>
 					<th>Control Owner</th>
 				</tr>
 				</thead>

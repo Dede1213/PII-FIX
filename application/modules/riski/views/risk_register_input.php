@@ -51,12 +51,15 @@
 								<?php if(isset($modifyRisk)) { ?>
 								<div class="form-group">
 									<input type="hidden" name="risk_id" value=""/>
-									<label class="col-md-3 control-label smaller cl-compact" >Kode Risiko</label>
+									<label class="col-md-3 control-label smaller cl-compact" >ID Risiko</label>
 									<div class="col-md-9">
 									<input type="text" class="form-control input-sm" readonly="true" name="risk_code" placeholder="">
 									</div>
 								</div>
-								<?php } ?>
+								<div class="form-group">
+									<input type="hidden" name="risk_library_id" value=""/>
+								</div>
+								<?php }else{ ?>
 								<div class="form-group">
 									<input type="hidden" name="risk_library_id" value=""/>
 									<label class="col-md-3 control-label smaller cl-compact">Library ID Risiko</label>
@@ -69,6 +72,9 @@
 										</div>
 									</div>
 								</div>
+								<?php
+								}
+								?>
 								
 								
 								<div class="form-group">
@@ -89,6 +95,38 @@
 
 									</div>
 								</div>
+
+								<!--   OBJECTIVE -->
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h3 class="panel-title">Objektif</h3>
+								</div>
+								<div class="panel-body">
+									 <div class="clearfix">
+									 	<a href="#form-control-objective" id="button-form-control-open-objective" data-toggle="modal" class="btn default green pull-right btn-sm">
+									 	<i class="fa fa-plus"></i>
+									 	<span class="hidden-480">
+									 	Tambah Objektif </span>
+									 	</a>
+									 </div>
+									 
+									 <div class="table-scrollable">
+									 	<table id="objective_table" class="table table-condensed table-bordered table-hover">
+									 		<thead>
+									 		<tr role="row" class="heading">
+									 			<th width="15%">ID Objektif</th>
+									 			<th>Objektif</th>
+									 			<th width="66px">&nbsp;</th>
+									 		</tr>
+									 		</thead>
+									 		<tbody>
+									 		</tbody>
+									 	</table>
+									 </div>
+								</div>
+							</div>
+
+
 								<div class="form-group">
 									<label class="col-md-3 control-label smaller cl-compact" >Kategori Risiko</label>
 									<div class="col-md-9">
@@ -103,6 +141,9 @@
 									</select>
 									</div>
 								</div>
+								
+							</div>
+							<div class="col-md-6">
 								<div class="form-group">
 									<label class="col-md-3 control-label small cl-compact" >Sub Kategori Level 2</label>
 									<div class="col-md-9">
@@ -120,8 +161,7 @@
 									</select>
 									</div>
 								</div>
-							</div>
-							<div class="col-md-6">
+								
 								<div class="form-group">
 									<label class="col-md-3 control-label smaller cl-compact" >Sebab <span class="required">* </span></label>
 									<div class="col-md-9">
@@ -201,7 +241,7 @@
 								</div>
 								<div class="form-group">
 									<input type="hidden" name="risk_level_id" value=""/>
-									<label class="col-md-3 control-label smaller cl-compact" >Level Risiko <span class="required">* </span></label>
+									<label class="col-md-3 control-label smaller cl-compact" >Level Risiko</label>
 									<div class="col-md-9">
 									<input type="text" class="form-control input-sm" readonly="true" name="risk_level" placeholder="">
 									</div>
@@ -210,6 +250,7 @@
 									<label class="col-md-3 control-label smaller cl-compact" >Usulan Penanganan Risiko</label>
 									<div class="col-md-9">
 									<select class="form-control input-sm" name="suggested_risk_treatment">
+										<option value="">Pilih Satu...</option>
 										<?php foreach($treatment_list as $row) { ?>
 										<option value="<?=$row['ref_key']?>"><?=$row['ref_value']?></option>
 										<?php } ?>
@@ -222,7 +263,7 @@
 							</div>
 							
 
-							<!--   OBJECTIVE -->
+							<!--   OBJECTIVE 
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<h3 class="panel-title">Objektif</h3>
@@ -251,6 +292,7 @@
 									 </div>
 								</div>
 							</div>
+							-->
 
 							<div class="panel panel-default">
 								<div class="panel-heading">
@@ -329,6 +371,7 @@
 						<div class="form-actions right">
 						<?php if(isset($modifyRisk)) { ?>
 							<button id="risk-button-modify" type="button" class="btn blue"><i class="fa fa-circle-o"></i> Simpan</button>
+							<button id="risk-button-delete" type="button" class="btn red"><i class="fa  fa-trash-o"></i> Hapus</button>
 						<?php } else { ?>
 							<?php if (isset($submit_mode) && $submit_mode == 'adhoc') { ?>
 								<input type="hidden" name="submit_mode" value="adhoc" />
@@ -458,7 +501,7 @@
 					-->
 					<div class="form-group">
 					<input type = "hidden" id = "form-control-revid">
-						<label class="col-md-3 control-label smaller cl-compact">Kontrol Eksisting<span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact">Evaluasi atas Eksisting Kontrol <span class="required">* </span></label>
 						<div class="col-md-9">
 							<div class="input-group">
 								<input type="text" class="form-control input-sm" readonly="true" name="risk_existing_control" id = "risk_existing_control" placeholder="" value="NONE">
@@ -471,7 +514,7 @@
 					</div>
 
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Evaluasi atas Eksisting Kontrol<span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact" >Kontrol Eksisting <span class="required">* </span></label>
 						<div class="col-md-9">
 						<input type="text" class="form-control input-sm" value="NONE" name="risk_evaluation_control" id = "risk_evaluation_control" placeholder="">
 						</div>
@@ -520,9 +563,13 @@
 						<label class="col-md-3 control-label smaller cl-compact">Usulan Action Plan</label>
 						<div class="col-md-9">
 							<div class="input-group">
-								<input type="text" class="form-control input-sm" name="action_plan" id = "action_plan"placeholder=""> 
+								<textarea class="form-control input-sm " rows="3"  name="action_plan" id = "action_plan" placeholder=""> </textarea>
+								<!--
+								<input type="text" class="form-control input-sm" name="action_plan" id = "action_plan" placeholder=""> 
+								-->
+								
 								<span class="input-group-btn">
-								<button class="btn btn-primary btn-sm" type="button" data-toggle="modal" href="#modal-libraryaction"><i class="fa fa-search fa-fw"/></i></button>
+								<button style="margin-top:-60px; margin-left:5px;" class="btn btn-primary btn-sm" type="button" data-toggle="modal" href="#modal-libraryaction"><i class="fa fa-search fa-fw"/></i></button>
 								</span> 
 							</div>
 						</div>

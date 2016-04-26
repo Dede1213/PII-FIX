@@ -272,6 +272,9 @@ var handleValidation = function() {
             },
             risk_level: {
                 required: true
+            },
+            suggested_risk_treatment: {
+                required: true
             }
         },
         errorPlacement: function (error, element) { // render error placement for each input type
@@ -557,7 +560,7 @@ var RiskInput = function() {
                 if (fvalid) {
                     //var tr_idnya2 = $('#tr_idnya2').val();
                     var tr_idnya2 = $('#form-data-revid').val();
-                    var xplan = $('#input-form-action-plan input[name=action_plan]').val();
+                    var xplan = $('#input-form-action-plan textarea[name=action_plan]').val();
                     var xdate = $('#input-form-action-plan input[name=due_date]').val();
                     var xdiv_view = $('#input-form-action-plan select[name=division] option:selected').text();
                     var xdiv_id = $('#input-form-action-plan select[name=division] option:selected').val();
@@ -646,7 +649,7 @@ var RiskInput = function() {
             $('#risk-button-cancel').on('click', function() {
                 var mod = MainApp.viewGlobalModal('confirm', 'Are You sure you want to cancel your Risk Register ? You will loose your unsaved data.');
                 mod.find('button.btn-primary').one('click', function(){
-                    location.href=site_url+'/riski/RiskRegister/';
+                    location.href=site_url+'/main/';
                 });
             });
             
@@ -1168,7 +1171,8 @@ var RiskInput = function() {
                         if(data.success) {
                             var mod = MainApp.viewGlobalModal('success', 'Success Inserting your Risk');
                             mod.find('button.btn-ok-success').one('click', function(){
-                                location.href=site_url+'/riski/RiskRegister/RiskRegisterInput/'+me.dataMode;
+                               // location.href=site_url+'/riski/RiskRegister/RiskRegisterInput/'+me.dataMode;
+                                location.href=site_url+'/riski/RiskRegister';
                             });
                             
                         } else {

@@ -41,6 +41,7 @@
 							<label class="col-md-3 control-label">Upload Konten</label>
 							<div class="col-md-6">
 								<input type="file" class="form-control" placeholder="Filename" name="filename" id="news-file">
+								*Hanya PDF
 							</div>
 						</div>
 						<?php } ?>

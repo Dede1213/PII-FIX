@@ -3,7 +3,7 @@
 	<div class="page-content">
 		<!-- BEGIN PAGE HEADER-->
 		<h3 class="page-title">
-		Risk Information
+		Risk Form
 		</h3>
 	
 		<div class="page-bar">
@@ -40,7 +40,7 @@
 			<div class="portlet box blue">
 				<div class="portlet-title">
 					<div class="caption" id="div-portlet-page-caption">
-						Risk Information
+						Risk Form
 					</div>
 				</div>
 				
@@ -50,14 +50,20 @@
 							<div class="row">
 							<div class="col-md-6">	
 								<?php if(isset($modifyRisk)) { ?>
+								
 								<div class="form-group">
 									<input type="hidden" name="risk_id" value=""/>
-									<label class="col-md-3 control-label smaller cl-compact" >Risk Code</label>
+									<label class="col-md-3 control-label smaller cl-compact" >Risk ID</label>
 									<div class="col-md-9">
 									<input type="text" class="form-control input-sm" readonly="true" name="risk_code" placeholder="">
 									</div>
 								</div>
-								<?php } ?>
+
+								<div class="form-group">
+									<input type="hidden" name="risk_library_id" value=""/>
+								</div>
+
+								<?php }else{ ?>
 								<div class="form-group">
 									<input type="hidden" name="risk_library_id" value=""/>
 									<label class="col-md-3 control-label smaller cl-compact">Risk ID</label>
@@ -70,6 +76,9 @@
 										</div>
 									</div>
 								</div>
+								<?php
+								}
+								?>
 								
 								<div class="form-group">
 									<label class="col-md-3 control-label small cl-compact">Risk Event <span class="required">* </span>
@@ -86,6 +95,39 @@
 									<textarea class="form-control input-sm popovers" data-container="body" data-placement="bottom" rows="3" name="risk_description" placeholder="" data-content="fill this field with decription of identified risk which explains nature of the risk"></textarea>
 									</div>
 								</div>
+
+
+
+								<div class="panel panel-default">
+								<div class="panel-heading">
+									<h3 class="panel-title"><font style="color:red;">*</font>Objective</h3>
+								</div>
+								<div class="panel-body">
+									 <div class="clearfix">
+									 	<a href="#form-control-objective" id="button-form-control-open-objective" data-toggle="modal" class="btn default green pull-right btn-sm">
+									 	<i class="fa fa-plus"></i>
+									 	<span class="hidden-480">
+									 	Add Objective </span>
+									 	</a>
+									 </div>
+									 
+									 <div class="table-scrollable">
+									 	<table id="objective_table" class="table table-condensed table-bordered table-hover">
+									 		<thead>
+									 		<tr role="row" class="heading">
+									 			<th width="15%">Obj.ID</th>
+									 			<th>Objective</th>
+									 			<th width="66px">&nbsp;</th>
+									 		</tr>
+									 		</thead>
+									 		<tbody>
+									 		</tbody>
+									 	</table>
+									 </div>
+								</div>
+							</div>
+
+
 								<div class="form-group">
 									<label class="col-md-3 control-label smaller cl-compact" >Risk Category<span class="required">* </span></label>
 									<div class="col-md-9">
@@ -99,6 +141,9 @@
 									</select>
 									</div>
 								</div>
+								
+							</div>
+							<div class="col-md-6">
 								<div class="form-group">
 									<label class="col-md-3 control-label small cl-compact" >Risk 2nd Sub Category<span class="required">* </span></label>
 									<div class="col-md-9">
@@ -116,8 +161,6 @@
 									</select>
 									</div>
 								</div>
-							</div>
-							<div class="col-md-6">
 								<div class="form-group">
 									<label class="col-md-3 control-label smaller cl-compact" >Cause <span class="required">* </span></label>
 									<div class="col-md-9">
@@ -195,7 +238,7 @@
 								</div>
 								<div class="form-group">
 									<input type="hidden" name="risk_level_id" value=""/>
-									<label class="col-md-3 control-label smaller cl-compact" >Risk Level <span class="required">* </span></label>
+									<label class="col-md-3 control-label smaller cl-compact" >Risk Level</label>
 									<div class="col-md-9">
 									<input type="text" class="form-control input-sm" readonly="true" name="risk_level" placeholder="">
 									</div>
@@ -204,6 +247,7 @@
 									<label class="col-md-3 control-label smaller cl-compact" >Suggested Risk Treatment <span class="required">* </span></label>
 									<div class="col-md-9">
 									<select class="form-control input-sm" name="suggested_risk_treatment">
+										<option value="">Choose One...</option>
 										<?php foreach($treatment_list as $row) { ?>
 										<option value="<?=$row['ref_key']?>"><?=$row['ref_value']?></option>
 										<?php } ?>
@@ -214,10 +258,10 @@
 							</div>
 							<div class="clearfix">
 							</div>
-							<!--   OBJECTIVE -->
+							<!--   OBJECTIVE 
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h3 class="panel-title">Objective</h3>
+									<h3 class="panel-title"><font style="color:red;">*</font>Objective</h3>
 								</div>
 								<div class="panel-body">
 									 <div class="clearfix">
@@ -243,10 +287,11 @@
 									 </div>
 								</div>
 							</div>
-							
+							-->
+
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h3 class="panel-title">Control</h3>
+									<h3 class="panel-title"><font style="color:red;">*</font>Control</h3>
 								</div>
 								<div class="panel-body">
 									 <div class="clearfix">
@@ -262,8 +307,9 @@
 									 		<thead>
 									 		<tr role="row" class="heading">
 									 			<th>Existing Control ID</th>
-									 			<th>Existing Control</th>
+									 			
 									 			<th>Evaluation on Existing Control</th>
+									 			<th>Existing Control</th>
 									 			<th>Control Owner</th>
 									 			<th width="66px">&nbsp;</th>
 									 		</tr>
@@ -277,7 +323,7 @@
 
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h3 class="panel-title">Action Plan</h3>
+									<h3 class="panel-title"><font style="color:red;">*</font>Action Plan</h3>
 								</div>
 								<div class="panel-body">
 									 <div class="clearfix">
@@ -321,6 +367,7 @@
 						<div class="form-actions right">
 						<?php if(isset($modifyRisk)) { ?>
 							<button id="risk-button-modify" type="button" class="btn blue"><i class="fa fa-circle-o"></i> Save</button>
+							<button id="risk-button-delete" type="button" class="btn red"><i class="fa  fa-trash-o"></i> Delete</button>
 						<?php } else { ?>
 							<?php if (isset($submit_mode) && $submit_mode == 'adhoc') { ?>
 								<input type="hidden" name="submit_mode" value="adhoc" />
@@ -448,9 +495,11 @@
 						</div>
 					</div>
 					-->
+					
+
 					<div class="form-group">
 					<input type = "hidden" id = "form-control-revid">
-						<label class="col-md-3 control-label smaller cl-compact">Existing Control <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact">Evaluation on Existing Control <span class="required">* </span></label>
 						<div class="col-md-9">
 							<div class="input-group">
 								<input type="text" class="form-control input-sm" readonly="true" name="risk_existing_control" id = "risk_existing_control" placeholder="" value="NONE">
@@ -461,13 +510,13 @@
 							</div>
 						</div>
 					</div>
-
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Evaluation on Existing Control <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact" >Existing Control <span class="required">* </span></label>
 						<div class="col-md-9">
 						<input type="text" class="form-control input-sm" value="NONE" name="risk_evaluation_control" id = "risk_evaluation_control" placeholder="">
 						</div>
 					</div>
+					
 					<div class="form-group">
 						<label class="col-md-3 control-label smaller cl-compact" >Control Owner <span class="required">* </span></label>
 						<div class="col-md-9">
@@ -512,9 +561,12 @@
 						<label class="col-md-3 control-label smaller cl-compact">Suggested Action Plan</label>
 						<div class="col-md-9">
 							<div class="input-group">
-								<input type="text" class="form-control input-sm" name="action_plan" id = "action_plan"placeholder=""> 
+								<textarea class="form-control input-sm " rows="3"  name="action_plan" id = "action_plan" placeholder=""> </textarea>
+								<!--
+								<input type="text" class="form-control input-sm" name="action_plan" id = "action_plan" placeholder=""> 
+								-->
 								<span class="input-group-btn">
-								<button class="btn btn-primary btn-sm" type="button" data-toggle="modal" href="#modal-libraryaction"><i class="fa fa-search fa-fw"/></i></button>
+								<button style="margin-top:-60px; margin-left:5px;" class="btn btn-primary btn-sm" type="button" data-toggle="modal" href="#modal-libraryaction"><i class="fa fa-search fa-fw"/></i></button>
 								</span> 
 							</div>
 						</div>
@@ -674,8 +726,9 @@
 				<thead>
 				<tr role="row" class="heading">
 					<th width="66px">&nbsp;</th>
-					<th>Existing Control</th>
+					
 					<th>Evaluation on Existing Control</th>
+					<th>Existing Control</th>
 					<th>Control Owner</th>
 				</tr>
 				</thead>
@@ -785,7 +838,7 @@
 			<thead>
 			<tr role="row" class="heading">
 				<th>&nbsp;</th>
-				<th width="250px">Probability of risk could occur</th>
+				<th width="250px">Likelihood of risk occurrence</th>
 				<th>Description</th>
 			</tr>
 			</thead>

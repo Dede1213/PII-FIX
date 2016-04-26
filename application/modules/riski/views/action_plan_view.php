@@ -34,7 +34,7 @@
 							<div class="row">
 							<div class="col-md-6">	
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact">Kode Risiko</label>
+									<label class="col-md-3 control-label smaller cl-compact">ID Risiko</label>
 									<div class="col-md-9">
 										<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['risk_code']?>" name="risk_id" placeholder="">
 									</div>

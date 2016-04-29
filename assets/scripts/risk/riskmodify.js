@@ -9,7 +9,7 @@ var RiskModify = function() {
         		me.submitRiskData();
         	});
         	
-        	$('#div-portlet-page-caption').html('Modify Risk Information');
+        	$('#div-portlet-page-caption').html('Modify Risk Form');
 
               $('#risk-button-delete').on('click', function() {
                 var mod = MainApp.viewGlobalModal('warning', 'Are You sure you want to delete this Risk ?');

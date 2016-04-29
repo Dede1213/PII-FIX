@@ -53,47 +53,9 @@
 								<textarea class="form-control input-sm input-readview" readonly="true" rows="3" name="risk_description" placeholder=""></textarea>
 								</div>
 							</div>
-							<?php if ($change_type == 'Risk Form' || $change_type == 'Delete Risk') { ?>
+
 							
-							<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact">Cause <span class="required">* </span></label>
-									<div class="col-md-9">
-									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_cause" placeholder=""></textarea>
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact">Impact <span class="required">* </span></label>
-									<div class="col-md-9">
-									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_impact" placeholder=""></textarea>
-									</div>
-								</div>
-							<?php } ?>
-							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Impact Level <span class="required">* </span></label>
-								<div class="col-md-9">
-									<input type="text" class="form-control input-sm" readonly="true" readonly="true" name="impact_level_v" placeholder="">
-									
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Likelihood <span class="required">* </span></label>
-								<div class="col-md-9">
-								<input type="text" class="form-control input-sm" readonly="true" name="likelihood_v"  placeholder="">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Risk Level <span class="required">* </span></label>
-								<div class="col-md-9">
-									<input type="text" class="form-control input-sm" readonly="true" name="risk_level_v" placeholder="">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Suggested Risk Treatment</label>
-								<div class="col-md-9">
-									<input type="text" class="form-control input-sm input-readview" readonly="true" name="treatment_v" placeholder="">
-								</div>
-							</div>
-							<hr/>
+							
 							<?php if ($change_type == 'Risk Form' || $change_type == 'Delete Risk') { ?>
 							<h4>Objective</h4>
 							<div class="table-scrollable">
@@ -109,7 +71,48 @@
 									</tbody>
 								</table>
 							</div>
+							
+							<div class="form-group">
+									<label class="col-md-3 control-label smaller cl-compact">Cause </label>
+									<div class="col-md-9">
+									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_cause" placeholder=""></textarea>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label smaller cl-compact">Impact </label>
+									<div class="col-md-9">
+									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_impact" placeholder=""></textarea>
+									</div>
+								</div>
+							<?php } ?>
+							<div class="form-group">
+								<label class="col-md-3 control-label smaller cl-compact" >Impact Level </label>
+								<div class="col-md-9">
+									<input type="text" class="form-control input-sm" readonly="true" readonly="true" name="impact_level_v" placeholder="">
+									
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-3 control-label smaller cl-compact" >Likelihood </label>
+								<div class="col-md-9">
+								<input type="text" class="form-control input-sm" readonly="true" name="likelihood_v"  placeholder="">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-3 control-label smaller cl-compact" >Risk Level </label>
+								<div class="col-md-9">
+									<input type="text" class="form-control input-sm" readonly="true" name="risk_level_v" placeholder="">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-3 control-label smaller cl-compact" >Suggested Risk Treatment</label>
+								<div class="col-md-9">
+									<input type="text" class="form-control input-sm input-readview" readonly="true" name="treatment_v" placeholder="">
+								</div>
+							</div>
 							<hr/>
+							<?php if ($change_type == 'Risk Form' || $change_type == 'Delete Risk') { ?>
+							
 							<h4>Control</h4>
 							<div class="table-scrollable">
 								<table id="primary_control_table" class="table table-condensed table-bordered table-hover">
@@ -187,7 +190,7 @@
 								<span class="hidden-480">
 								Add Objective </span>
 								</a>
-								<h4><font style="color:red;">*</font>Objective</h4>
+								<h4>Objective</h4>
 							</div>
 							<div class="table-scrollable">
 								<table id="objective_table" class="table table-condensed table-bordered table-hover">
@@ -218,13 +221,13 @@
 							<?php } ?>
 							<?php if ($change_type == 'Risk Form' || $change_type == 'Delete Risk') { ?>
 							<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact">Cause <span class="required">* </span></label>
+									<label class="col-md-3 control-label smaller cl-compact">Cause </label>
 									<div class="col-md-9">
 									<textarea class="form-control input-readview" rows="3" name="risk_cause" placeholder=""></textarea>
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact">Impact <span class="required">* </span></label>
+									<label class="col-md-3 control-label smaller cl-compact">Impact </label>
 									<div class="col-md-9">
 									<textarea class="form-control input-readview"  rows="3" name="risk_impact" placeholder=""></textarea>
 									</div>
@@ -233,7 +236,7 @@
 							<?php } ?>
 							<?php if ($change_type == 'Risk Form' || $change_type == 'Risk Owner Form' || $change_type == 'Delete Risk') { ?>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Impact Level <span class="required">* </span></label>
+								<label class="col-md-3 control-label smaller cl-compact" >Impact Level </label>
 								<div class="col-md-9">
 									<div class="input-group">
 										<input type="hidden" name="risk_impact_level_id" value=""/>
@@ -246,7 +249,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Likelihood <span class="required">* </span></label>
+								<label class="col-md-3 control-label smaller cl-compact" >Likelihood </label>
 								<div class="col-md-9">
 									<div class="input-group">
 										<input type="hidden" name="risk_likelihood_id" value=""/>
@@ -260,7 +263,7 @@
 							</div>
 							<div class="form-group">
 								<input type="hidden" name="risk_level_id" value=""/>
-								<label class="col-md-3 control-label smaller cl-compact" >Risk Level <span class="required">* </span></label>
+								<label class="col-md-3 control-label smaller cl-compact" >Risk Level </label>
 								<div class="col-md-9">
 								<input type="text" class="form-control input-sm" readonly="true" name="risk_level" placeholder="">
 								</div>
@@ -333,7 +336,7 @@
 								<span class="hidden-480">
 								Add Control </span>
 								</a>
-								<h4><font style="color:red;">*</font>Control</h4>
+								<h4>Control</h4>
 							</div>
 							<div class="table-scrollable">
 								<table id="control_table" class="table table-condensed table-bordered table-hover">
@@ -360,7 +363,7 @@
 								<span class="hidden-480">
 								Add Plan Action Suggestion </span>
 								</a>
-								<h4><font style="color:red;">*</font>Action Plan</h4>
+								<h4>Action Plan</h4>
 							</div>
 							<?php } else { ?>
 							<h4>Action Plan</h4>
@@ -443,7 +446,7 @@
 					</div>
 					
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Objective <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact" >Objective </label>
 						<div class="col-md-9">
 						<textarea class="form-control input-sm " rows="3"  name="objective" id = "objective" placeholder="">NONE</textarea>
 						<button id="button_clear_control" type="button" class="hide btn red btn-xs" style="margin-top: 5px;"><i class="fa fa-minus-circle font-white"></i> Clear Existing Control</button>
@@ -487,7 +490,7 @@
 					
 					<div class="form-group">
 					<input type = "hidden" id = "form-control-revid">
-						<label class="col-md-3 control-label smaller cl-compact">Evaluation on Existing Control <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact">Evaluation on Existing Control </label>
 						<div class="col-md-9">
 							<div class="input-group">
 								<input type="text" class="form-control input-sm" readonly="true" name="risk_existing_control" id = "risk_existing_control" placeholder="" value="NONE">
@@ -500,7 +503,7 @@
 					</div>
 					<!--
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Existing Control <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact" >Existing Control </label>
 						<div class="col-md-9">
 						<textarea class="form-control input-sm" rows="3" name="risk_existing_control" placeholder="">NONE</textarea>
 						<button id="button_clear_control" type="button" class="hide btn red btn-xs" style="margin-top: 5px;"><i class="fa fa-minus-circle font-white"></i> Clear Existing Control</button>
@@ -509,7 +512,7 @@
 					-->
 
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Existing Control <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact" >Existing Control </label>
 						<div class="col-md-9">
 						<input type="text" class="form-control input-sm" name="risk_evaluation_control" id = "risk_evaluation_control" placeholder="" value="NONE">
 						</div>
@@ -517,7 +520,7 @@
 					
 					
 					<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact">Control Owner <span class="required">* </span></label>
+									<label class="col-md-3 control-label smaller cl-compact">Control Owner </label>
 									<div class="col-md-9">
 									
 									<select class="form-control input-sm" name="risk_control_owner" id = "risk_control_owner">
@@ -552,7 +555,7 @@
 				<div class="form-body">
 					<div class="form-group">
 					<input type = "hidden" id = "form-data-revid">
-						<label class="col-md-3 control-label smaller cl-compact">Suggested Action Plan<span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact">Suggested Action Plan</label>
 						<div class="col-md-9">
 							<div class="input-group">
 								<textarea class="form-control input-sm " rows="3"  name="action_plan" id = "action_plan" placeholder=""> </textarea>
@@ -567,7 +570,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Due Date <span class="required">* </span></label>
+						<label class="col-md-3 control-label">Due Date </label>
 						<div class="col-md-9">
 						<div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
 							<input type="text" class="form-control input-sm" name="due_date" id = "due_date" readonly>
@@ -578,7 +581,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Action Plan Owner <span class="required">* </span></label>
+						<label class="col-md-3 control-label">Action Plan Owner </label>
 						<div class="col-md-9">
 						<select class="form-control input-sm" name="division" id ="division">
 							<?php foreach($division_list as $row) { ?>
@@ -663,7 +666,7 @@
 <div id="modal-control-existing" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Existing Controls</h4>
+		<h4 class="modal-title">Evaluation on Existing Control</h4>
 		<p style="color:red;">*Choose One</p>
 		<div class="inputs">
 			<div class="portlet-input input-inline">

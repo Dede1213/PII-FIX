@@ -1097,7 +1097,7 @@ WHERE t_risk.risk_id ='$id'";
 <div id="modal-control-existing" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Existing Control</h4>
+		<h4 class="modal-title">Evaluation on Existing Control</h4>
 		<p style="color:red;">*Choose One</p>
 		<div class="inputs">
 			<div class="portlet-input input-inline">

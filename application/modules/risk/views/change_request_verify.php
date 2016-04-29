@@ -53,14 +53,29 @@
 								</div>
 							</div>
 							<?php if ($change_type == 'Risk Form' || $change_type == 'Delete Risk') { ?>
+							<h4>Objective</h4>
+							<div class="table-scrollable">
+								<table id="primary_objective_table" class="table table-condensed table-bordered table-hover">
+									<thead>
+									<tr role="row" class="heading">
+										<th width="15%"><span class="small">Obj.ID</span></th>
+										<th><span class="small">Objective</span></th>
+										
+									</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+							</div>
+							
 							<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact">Cause <span class="required">* </span></label>
+									<label class="col-md-3 control-label smaller cl-compact">Cause </label>
 									<div class="col-md-9">
 									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_cause" placeholder=""></textarea>
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact">Impact <span class="required">* </span></label>
+									<label class="col-md-3 control-label smaller cl-compact">Impact </label>
 									<div class="col-md-9">
 									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_impact" placeholder=""></textarea>
 									</div>
@@ -93,21 +108,7 @@
 							</div>
 							<hr/>
 							<?php if ($change_type == 'Risk Form' || $change_type == 'Delete Risk') { ?>
-							<h4>Objective</h4>
-							<div class="table-scrollable">
-								<table id="primary_objective_table" class="table table-condensed table-bordered table-hover">
-									<thead>
-									<tr role="row" class="heading">
-										<th width="15%"><span class="small">Obj.ID</span></th>
-										<th><span class="small">Objective</span></th>
-										
-									</tr>
-									</thead>
-									<tbody>
-									</tbody>
-								</table>
-							</div>
-							<hr/>
+							
 							<h4>Control</h4>
 							<div class="table-scrollable">
 								<table id="primary_control_table" class="table table-condensed table-bordered table-hover">
@@ -224,14 +225,14 @@
 							<?php } ?>
 							<?php if ($change_type == 'Risk Form' || $change_type == 'Delete Risk') { ?>
 							<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact">Cause <span class="required">* </span></label>
+									<label class="col-md-3 control-label smaller cl-compact">Cause </label>
 									<div class="col-md-9">
 									<textarea class="form-control input-readview"  rows="3" name="risk_cause" placeholder=""></textarea>
 									</div>
 								</div>
 
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact">Impact <span class="required">* </span></label>
+									<label class="col-md-3 control-label smaller cl-compact">Impact </label>
 									<div class="col-md-9">
 									<textarea class="form-control input-readview"  rows="3" name="risk_impact" placeholder=""></textarea>
 									</div>
@@ -241,7 +242,7 @@
 							<?php } ?>
 							<?php if ($change_type == 'Risk Form' || $change_type == 'Risk Owner Form' || $change_type == 'Delete Risk') { ?>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Impact Level <span class="required">* </span></label>
+								<label class="col-md-3 control-label smaller cl-compact" >Impact Level </label>
 								<div class="col-md-9">
 									<div class="input-group">
 										<input type="hidden" name="risk_impact_level_id" value=""/>
@@ -254,7 +255,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Likelihood <span class="required">* </span></label>
+								<label class="col-md-3 control-label smaller cl-compact" >Likelihood </label>
 								<div class="col-md-9">
 									<div class="input-group">
 										<input type="hidden" name="risk_likelihood_id" value=""/>
@@ -268,7 +269,7 @@
 							</div>
 							<div class="form-group">
 								<input type="hidden" name="risk_level_id" value=""/>
-								<label class="col-md-3 control-label smaller cl-compact" >Risk Level <span class="required">* </span></label>
+								<label class="col-md-3 control-label smaller cl-compact" >Risk Level </label>
 								<div class="col-md-9">
 								<input type="text" class="form-control input-sm" readonly="true" name="risk_level" placeholder="">
 								</div>
@@ -552,7 +553,7 @@
 					</div>
 					
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Objective <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact" >Objective </label>
 						<div class="col-md-9">
 						<textarea class="form-control input-sm " rows="3"  name="objective" id = "objective" placeholder="">NONE</textarea>
 						<button id="button_clear_control" type="button" class="hide btn red btn-xs" style="margin-top: 5px;"><i class="fa fa-minus-circle font-white"></i> Clear Existing Control</button>
@@ -596,7 +597,7 @@
 					
 					<div class="form-group">
 					<input type = "hidden" id = "form-control-revid">
-						<label class="col-md-3 control-label smaller cl-compact">Evaluation on Existing Control <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact">Evaluation on Existing Control </label>
 						<div class="col-md-9">
 							<div class="input-group">
 								<input type="text" class="form-control input-sm" readonly="true" name="risk_existing_control" id = "risk_existing_control" placeholder="" value="NONE">
@@ -609,7 +610,7 @@
 					</div>
 					<!--
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Existing Control <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact" >Existing Control </label>
 						<div class="col-md-9">
 						<textarea class="form-control input-sm" rows="3" name="risk_existing_control" placeholder=""></textarea>
 						<button id="button_clear_control" type="button" class="hide btn red btn-xs" style="margin-top: 5px;"><i class="fa fa-minus-circle font-white"></i> Clear Existing Control</button>
@@ -617,14 +618,14 @@
 					</div>
 					-->
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Existing Control <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact" >Existing Control </label>
 						<div class="col-md-9">
 						<input type="text" class="form-control input-sm" name="risk_evaluation_control" id = "risk_evaluation_control" placeholder="" value="NONE">
 						</div>
 					</div>
 					
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Control Owner <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact" >Control Owner </label>
 						<div class="col-md-9">
 						<input type="text" class="form-control input-sm" name="risk_control_owner" id = "risk_control_owner" placeholder="" value="NONE">
 						</div>
@@ -652,7 +653,7 @@
 			<form id="input-form-action-plan" role="form" class="form-horizontal">
 				<div class="form-body">
 					<div class="form-group">
-						<label class="col-md-3 control-label">Suggested Action Plan <span class="required">* </span></label>
+						<label class="col-md-3 control-label">Suggested Action Plan </label>
 						<div class="col-md-9">
 						<textarea class="form-control input-sm " rows="3"  name="action_plan" id = "action_plan" placeholder=""> </textarea>
 								<!--
@@ -662,7 +663,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Due Date <span class="required">* </span></label>
+						<label class="col-md-3 control-label">Due Date </label>
 						<div class="col-md-9">
 						<div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
 							<input type="text" class="form-control input-sm" name="due_date" readonly>
@@ -673,7 +674,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Action Plan Owner <span class="required">* </span></label>
+						<label class="col-md-3 control-label">Action Plan Owner </label>
 						<div class="col-md-9">
 						<select class="form-control input-sm" name="division">
 							<?php foreach($division_list as $row) { ?>
@@ -698,7 +699,7 @@
 <div id="modal-control-existing" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Existing Control</h4>
+		<h4 class="modal-title">Evaluation on Existing Control</h4>
 		<p style="color:red;">*Choose One</p>
 		<div class="inputs">
 			<div class="portlet-input input-inline">
@@ -717,7 +718,7 @@
 				<thead>
 				<tr role="row" class="heading">
 					<th width="66px">&nbsp;</th>
-					<th>Existing Control</th>
+					<th>Evaluation on Existing Control</th>
 					<th>Description</th>
 				</tr>
 				</thead>

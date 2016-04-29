@@ -168,7 +168,7 @@
 				<div class="form-body">
 				
 					<div class="form-group">
-						<label class="col-md-2 control-label smaller cl-compact" >Impact Level <span class="required">* </span></label>
+						<label class="col-md-2 control-label smaller cl-compact" >Impact Level </label>
 						<div class="col-md-9">
 							<div class="input-group">
 								 <input type="hidden" name="risk_impact_level_id" id = "risk_impact_level_id" value=""/> 
@@ -181,7 +181,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-2 control-label smaller cl-compact" >Likelihood <span class="required">* </span></label>
+						<label class="col-md-2 control-label smaller cl-compact" >Likelihood </label>
 						<div class="col-md-9">
 							<div class="input-group">
 								 <input type="hidden" name="risk_likelihood_id" id = "risk_likelihood_id" value=""/> 

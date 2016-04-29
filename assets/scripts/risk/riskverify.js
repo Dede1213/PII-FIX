@@ -5,7 +5,7 @@ var RiskVerify = function() {
         	
         	me.loadRisk(g_risk_id);
         	
-        	$('#div-portlet-page-caption').html('Verify Risk Information');
+        	$('#div-portlet-page-caption').html('Verify Risk Form');
         	
         	$('#risk-button-verify').on('click', function() {
         		var mod = MainApp.viewGlobalModal('confirm', 'Are You sure you want to Verify this risk ?');

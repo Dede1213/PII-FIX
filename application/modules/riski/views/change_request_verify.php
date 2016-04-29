@@ -672,7 +672,7 @@
 <div id="modal-control-existing" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Kontrol Eksisting</h4>
+		<h4 class="modal-title">Evaluasi atas Eksisting Kontrol</h4>
 		<p style="color:red;">*Pilih salah satu</p>
 		<div class="inputs">
 			<div class="portlet-input input-inline">
@@ -691,7 +691,7 @@
 				<thead>
 				<tr role="row" class="heading">
 					<th width="66px">&nbsp;</th>
-					<th>Kontrol Eksisting</th>
+					<th>Evaluasi atas Eksisting Kontrol</th>
 					<th>Deskripsi</th>
 				</tr>
 				</thead>

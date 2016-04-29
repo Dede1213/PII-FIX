@@ -77,13 +77,13 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact">Sebab <span class="required">* </span></label>
+									<label class="col-md-3 control-label smaller cl-compact">Sebab </label>
 									<div class="col-md-9">
 									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_cause" placeholder=""><?=$risk['risk_cause']?></textarea>
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact">Dampak <span class="required">* </span></label>
+									<label class="col-md-3 control-label smaller cl-compact">Dampak </label>
 									<div class="col-md-9">
 									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_impact" placeholder=""><?=$risk['risk_impact']?></textarea>
 									</div>
@@ -121,8 +121,9 @@
 									<thead>
 									<tr role="row" class="heading">
 										<th><small>ID Kontrol Eksisting</small></th>
-										<th><small>Kontrol Eksisting</small></th>
 										<th><small>Evaluasi atas Eksisting Kontrol</small></th>
+										<th><small>Kontrol Eksisting</small></th>
+										
 										<th><small>Pemilik Kontrol</small></th>
 									</tr>
 									</thead>
@@ -168,7 +169,7 @@
 							<div class="row">
 							<div class="col-md-5">	
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact" >Level Dampak</label>
+									<label class="col-md-3 control-label smaller cl-compact" title="isikan kolom ini dengan pengklasifikasian seperti yang dideskripsikan pada “Kategori Dampak” (misalnya tidak signifikan, minor, sedang, major dan berbahaya) setelah mempertimbangkan efektivitas kontrol eksisting">Level Dampak</label>
 									<div class="col-md-9">
 										<div class="input-group">
 											<input type="hidden" name="risk_impact_level_id"  value=""/>
@@ -181,7 +182,7 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan Keterjadian</label>
+									<label class="col-md-3 control-label smaller cl-compact" title="isikan kolom ini dengan kriteria pengklasifikasian seperti yang dideskripsikan dalam tabel “Kemungkinan Terjadinya Risiko” (misalnya sangat rendah, rendah, sedang, tinggi, dan sangat tinggi) setelah mepertimbangkan efektivitas kontrol eksisting">Kemungkinan Keterjadian</label>
 									<div class="col-md-9">
 										<div class="input-group">
 											<input type="hidden" name="risk_likelihood_id" value=""/>
@@ -195,20 +196,20 @@
 								</div>
 								<div class="form-group">
 									<input type="hidden" name="risk_level_id" value=""/>
-									<label class="col-md-3 control-label smaller cl-compact" >Level Risiko</label>
+									<label class="col-md-3 control-label smaller cl-compact" title="isikan kolom ini dengan kriteria pengklasifikasian yang dideskripsikan dalam matriks “Level Risiko” (misalkan tidak signifikan, minor, sedang, major dan berbahaya) bedasarkan nilai yang sudah ditentukan dalam ‘Kemungkinan Keterjadian’ dan ‘Level Dampak’">Level Risiko</label>
 									<div class="col-md-9">
 									<input type="text" class="form-control input-sm" readonly="true" name="risk_level" placeholder="" value="">
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact" >Sebab</label>
+									<label class="col-md-3 control-label smaller cl-compact" title="isikan kolom ini dengan deskripsi dari kumpulan faktor yang dapat mempengaruhi atau mengakibatkan terjadinya peristiwa risiko">Sebab</label>
 									<div class="col-md-9">
 									<textarea class="form-control input-readview popovers"  rows="3" name="risk_cause" placeholder="" data-container="body" data-trigger="focus" data-placement="bottom" data-content="isilah kolom ini dengan deskripsi dari kumpulan faktor yang dapat mempengaruhi atau mengakibatkan terjadinya peristiwa risiko"></textarea>
 									
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact" >Dampak</label>
+									<label class="col-md-3 control-label smaller cl-compact" title="isikan kolom ini dengan deskripsi dari kemungkinan kehilangan atau kerugian biaya langsung atau tidak langsung yang dapat IIGF alami dari peristiwa risiko">Dampak</label>
 									<div class="col-md-9">
 									<textarea class="form-control input-readview popovers"  rows="3" name="risk_impact" placeholder="" data-container="body" data-trigger="focus" data-placement="bottom" data-content="isilah kolom ini dengan deskripsi dari kemungkinan kehilangan atau kerugian biaya langsung atau tidak langsung yang ditanggung IIGF dari peristiwa risiko"></textarea>
 									
@@ -218,7 +219,7 @@
 							</div>
 							<div class="col-md-7">
 								<div class="form-group">
-									<label class="col-md-3 control-label small cl-compact" >Penanganan Risiko yang disepakati</label>
+									<label class="col-md-3 control-label small cl-compact" title="isikan kolom ini dengan kategori penanganan yang dideskripsikan dalam “Panduan Penanganan Risiko” bedasarkan level risiko itu sendiri">Penanganan Risiko yang disepakati</label>
 									<div class="col-md-6">
 										<select class="form-control input-sm" name="suggested_risk_treatment">
 											<?php foreach($treatment_list as $row) { ?>
@@ -246,8 +247,9 @@
 										<thead>
 										<tr role="row" class="heading">
 											<th><small>ID Kontrol Eksisting</small></th>
-											<th><small>Kontrol Eksisting</small></th>
 											<th><small>Evaluasi atas Eksisting Kontrol</small></th>
+											<th><small>Kontrol Eksisting</small></th>
+											
 											<th><small>Pemilik Kontrol</small></th>
 											<th width="66px">&nbsp;</th>
 										</tr>
@@ -344,7 +346,7 @@
 					</div>
 					<div class="form-group">
 					<input type = "hidden" id = "form-control-revid">
-						<label class="col-md-3 control-label smaller cl-compact">Evaluasi atas Eksisting Kontrol <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact" title="isikan kolom ini dengan tingkat efektivitas dari kontrol eksisting (mengacu pada kontrol kriteria penilaian)">Evaluasi atas Eksisting Kontrol </label>
 						<div class="col-md-9">
 							<div class="input-group">
 								<input type="text" class="form-control input-sm" readonly="true" name="risk_existing_control" id = "risk_existing_control" placeholder="" value="NONE">
@@ -357,7 +359,7 @@
 					</div>
 					<!--
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Existing Control <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact" >Existing Control </label>
 						<div class="col-md-9">
 						<textarea class="form-control input-sm" rows="3" name="risk_existing_control" placeholder="">NONE</textarea>
 						<button id="button_clear_control" type="button" class="hide btn red btn-xs" style="margin-top: 5px;"><i class="fa fa-minus-circle font-white"></i> Clear Existing Control</button>
@@ -365,13 +367,13 @@
 					</div>
 					-->
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Kontrol Eksisting <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact" title="isikan kolom ini dengan deskripsi dari action apapun (misalnya kebijakan, prosedur, atau aktivitas) yang diambil oleh personil yang bersangkutan (pemilik control), dirancang untuk memastikan bahwa risiko terdapat dalam minat risiko / toleransi" >Kontrol Eksisting </label>
 						<div class="col-md-9">
 						<input type="text" class="form-control input-sm" name="risk_evaluation_control" id = "risk_evaluation_control" placeholder="" value="NONE">
 						</div>
 					</div>
 					<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact">Pemilik Kontrol <span class="required">* </span></label>
+									<label class="col-md-3 control-label smaller cl-compact" title="isikan kolom ini dengan orang yang ditugaskan yang mana bertanggungjawab untuk unit bisnis, yang memiliki kontrol yang berhubungan dengan peristiwa risiko">Pemilik Kontrol </label>
 									<div class="col-md-9">
 									
 									<select class="form-control input-sm" name="risk_control_owner" id = "risk_control_owner">
@@ -406,7 +408,7 @@
 				<div class="form-body">
 				<input type = "hidden" id = "form-data-revid">
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact">Usulan Action Plan<span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact" title="isikan kolom ini dengan deskripsi dari penanganan risiko action yang harus dilakukan dalam menangani risiko">Usulan Action Plan</label>
 						<div class="col-md-9">
 							<div class="input-group">
 								<textarea class="form-control input-sm " rows="3"  name="action_plan" id = "action_plan" placeholder=""> </textarea>
@@ -420,7 +422,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Batas Waktu</label>
+						<label class="col-md-3 control-label" title="isikan kolom ini dengan target tanggal penyelesaian dari rencana penanganan risiko">Batas Waktu</label>
 						<div class="col-md-9">
 						<div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
 							<input type="text" class="form-control input-sm" name="due_date" id = "due_date" readonly>
@@ -431,7 +433,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Pemilik Action Plan</label>
+						<label class="col-md-3 control-label" title="isikan kolom ini dengan orang yang ditugaskan yang mana bertanggungjawab atas aktivitas penanganan risiko yang ditetapkan dalam ‘Action Plan’">Pemilik Action Plan</label>
 						<div class="col-md-9">
 						<select class="form-control input-sm" name="division" id = "division">
 							<?php foreach($division_list as $row) { ?>
@@ -504,7 +506,7 @@
 				<thead>
 				<tr role="row" class="heading">
 					<th width="66px">&nbsp;</th>
-					<th>Kontrol Eksisting</th>
+					<th>Evaluasi dari Eksisting Kontrol</th>
 					<th>Deksripsi</th>
 				</tr>
 				</thead>

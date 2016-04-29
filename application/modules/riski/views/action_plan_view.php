@@ -24,7 +24,7 @@
 			<div class="portlet box blue">
 				<div class="portlet-title">
 					<div class="caption">
-						Informasi Risiko
+						Form Risiko
 					</div>
 				</div>
 				

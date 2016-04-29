@@ -65,6 +65,7 @@ tinymce.init({
 							<label class="col-md-2 control-label">User Manual Title</label>
 							<div class="col-md-6">
 								<input type="text" class="form-control" placeholder="News Title" name="title" id="news-title">
+								<font style="color:red;">*PDF Only </font>
 							</div>
 						</div>
 						<?php $var = 0 ;

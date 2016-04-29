@@ -711,7 +711,7 @@ class Risk extends APP_Model {
 				left join m_likelihood e on a.risk_likelihood_key = e.l_key
 				left join m_division f on a.risk_owner = f.division_id
 				left join m_periode on m_periode.periode_id = a.periode_id
-				where a.risk_status != 0 and a.risk_status != 1 
+				where a.risk_status != 0 and a.risk_status != 1 and a.existing_control_id is null
 				"
 				
 				.$ex_filter
@@ -1868,6 +1868,44 @@ class Risk extends APP_Model {
 		return $res;
 	}
 
+	public function deleteRiskgrid2($risk_id, $uid, $update_point = 'D') {
+		
+		$par['risk_id'] = $risk_id;
+		
+		$sql = "delete from t_risk where risk_id = ?";
+		$res = $this->db->query($sql, $par);
+
+		$sql = "delete from t_risk_action_plan where risk_id = ?";
+		$res = $this->db->query($sql, $par);
+
+		$sql = "delete from t_risk_control where risk_id = ?";
+		$res = $this->db->query($sql, $par);
+
+		$sql = "delete from t_risk_impact where risk_id = ?";
+		$res = $this->db->query($sql, $par);
+
+		$sql = "delete from t_risk_objective where risk_id = ?";
+		$res = $this->db->query($sql, $par);
+
+		$sql = "delete from t_risk_change where risk_id = ?";
+		$res = $this->db->query($sql, $par);
+
+		$sql = "delete from t_risk_impact_change where risk_id = ?";
+		$res = $this->db->query($sql, $par);
+
+		$sql = "delete from t_risk_action_plan_change where risk_id = ?";
+		$res = $this->db->query($sql, $par);
+
+		$sql = "delete from t_risk_control_change where risk_id = ?";
+		$res = $this->db->query($sql, $par);
+
+		$sql = "delete from t_risk_objective_change where risk_id = ?";
+		$res = $this->db->query($sql, $par);
+
+
+		return $res;
+	}
+
 	public function deleteRiskrac($risk_id, $uid, $update_point = 'D') {
 		// delete risk in child
 		// t_risk t_risk_change t_risk_action_plan t_risk_action_plan_change 
@@ -1875,7 +1913,7 @@ class Risk extends APP_Model {
 		
 		$par['risk_id'] = $risk_id;
 		
-		$sql = "update t_risk set existing_control_id = 1 where risk_id = ?";
+		$sql = "update t_risk set existing_control_id = 2 where risk_id = ?";
 		$res = $this->db->query($sql, $par);
 
 		return $res;

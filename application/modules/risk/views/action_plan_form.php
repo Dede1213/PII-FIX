@@ -42,7 +42,7 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact">Risk Owner</label>
+									<label class="col-md-3 control-label smaller cl-compact" title="fill this field with risk owner who is responsible in managing the activities that direcly related to the risk">Risk Owner</label>
 									<div class="col-md-9">
 										<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['risk_owner_v']?>" name="risk_owner_v" placeholder="">
 									</div>
@@ -55,7 +55,7 @@
 								</div>
 								
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact">Risk Event Description</label>
+									<label class="col-md-3 control-label smaller cl-compact" title="fill this field with decription of identified risk which explains nature of the risk">Risk Event Description</label>
 									<div class="col-md-9">
 									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_description" placeholder=""><?=$risk['risk_description']?></textarea>
 									</div>
@@ -63,20 +63,20 @@
 							</div>
 							<div class="col-md-6">	
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact" >Impact Level</label>
+									<label class="col-md-3 control-label smaller cl-compact" title="fill this field with grading as describe in “Impact Category” (e.g. insignificant, minor, moderate, major, and catastrophic) after consideration to existing control effectiveness">Impact Level</label>
 									<div class="col-md-9">
 									<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['impact_level_v']?>" name="risk_impact_level_value" placeholder="">
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact" >Likelihood</label>
+									<label class="col-md-3 control-label smaller cl-compact" title="fill this field withthe grading criteria as described in “Likelihood of Risk Occurrence” table (e.g. very low, low, medium, high, and very high) after consideration to existing control effectiveness">Likelihood</label>
 									<div class="col-md-9">
 										<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['likelihood_v']?>" name="risk_likelihood_value" placeholder="">
 									</div>
 								</div>
 								<div class="form-group">
 									<input type="hidden" name="risk_level_id" value=""/>
-									<label class="col-md-3 control-label smaller cl-compact" >Risk Level</label>
+									<label class="col-md-3 control-label smaller cl-compact" title="fill this field with the grading criteria as described in “Risk Level” matrix (e.g. insignificant, minor, moderate, major, and catastrophic) based on defined value in ‘Likelihood’ and ‘Impact Level’">Risk Level</label>
 									<div class="col-md-9">
 									<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['risk_level_v']?>" name="risk_level" placeholder="">
 									</div>
@@ -116,13 +116,13 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact">Assigned Action Plan</label>
+									<label class="col-md-3 control-label smaller cl-compact" title="fill this field with description of risk treatment action to be done in addressing the risk">Assigned Action Plan</label>
 									<div class="col-md-9">
 										<input type="text" class="form-control input-sm input-readview" value="<?=$action_plan_change['action_plan']?>" name="action_plan" placeholder="">
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-md-3 control-label">Due Date</label>
+									<label class="col-md-3 control-label" title="fill this field with the target completion date of risk treatment plan.">Due Date</label>
 									<div class="col-md-9">
 									<div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
 										<input type="text" class="form-control input-sm" name="due_date" readonly value="<?=$action_plan_change['due_date_v']?>">
@@ -133,7 +133,7 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-md-3 control-label">Action Plan Owner </label>
+									<label class="col-md-3 control-label" title="fill this field with the assigned person who is responsible for defined risk treatment activities in ‘Action Plan’">Action Plan Owner </label>
 									<div class="col-md-9">
 									<select class="form-control input-sm" name="division">
 										<?php foreach($division_list as $row) { ?>

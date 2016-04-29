@@ -91,11 +91,13 @@
 				<li>
 					<a href="#tab_change_request_list" data-toggle="tab">
 					Daftar Permintaan Perubahan 
+					<font style="color:red;">
 					<?php 
 					if($cekChangeRequest > 0){
 					echo "($cekChangeRequest)";
 					}
 					?>
+					</font>
 					</a>
 				</li>
 			</ul>

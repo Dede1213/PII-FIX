@@ -33,32 +33,32 @@
 			<input type="hidden" value="<?=$action_plan['risk_id']?>" name="risk_id" placeholder="">
 				<div class="form-body">
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact">AP ID</label>
+						<label class="col-md-2 control-label smaller cl-compact">AP ID</label>
 						<div class="col-md-9">
 						<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$action_plan['act_code']?>" placeholder="">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact">Assigned Action Plan</label>
+						<label class="col-md-2 control-label smaller cl-compact">Assigned Action Plan</label>
 						<div class="col-md-9">
 							<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$action_plan['action_plan']?>" placeholder="">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact">Due Date</label>
+						<label class="col-md-2 control-label smaller cl-compact">Due Date</label>
 						<div class="col-md-9">
 							<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$action_plan['due_date_v']?>" placeholder="">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact">Action Plan Owner</label>
+						<label class="col-md-2 control-label smaller cl-compact">Action Plan Owner</label>
 						<div class="col-md-9">
 							<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$action_plan['division_v']?>" placeholder="">
 						</div>
 					</div>
 					<hr/>
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact">Status  </label>
+						<label class="col-md-2 control-label smaller cl-compact">Status  </label>
 						<div class="col-md-9">
 						<select class="form-control input-sm" name="execution_status" id="exec-select-status">
 							<option value="COMPLETE" <?=$action_plan['execution_status'] == 'COMPLETE' ? 'selected' : ''?>>Complete</option>
@@ -83,26 +83,26 @@
 						}
 					?>
 					<div class="form-group" id="fgroup-explain" <?=$g1?>>
-						<label class="col-md-3 control-label smaller cl-compact">Explanation</label>
+						<label class="col-md-2 control-label smaller cl-compact">Explanation</label>
 						<div class="col-md-9">
 						<textarea class="form-control" rows="3" name="execution_explain" placeholder=""><?=$action_plan['execution_explain']?></textarea>
 						</div>
 					</div>
 
 					<div class="form-group" id="fgroup-evidence" <?=$g3?>>
-						<label class="col-md-3 control-label smaller cl-compact">Evidence</label>
+						<label class="col-md-2 control-label smaller cl-compact">Evidence</label>
 						<div class="col-md-9">
 						<textarea class="form-control" rows="3" name="execution_evidence" placeholder=""><?=$action_plan['execution_evidence']?></textarea>
 						</div>
 					</div>
 					<div class="form-group" id="fgroup-reason" <?=$g2?>>
-						<label class="col-md-3 control-label smaller cl-compact">Reason</label>
+						<label class="col-md-2 control-label smaller cl-compact">Reason</label>
 						<div class="col-md-9">
 						<textarea class="form-control" rows="3" name="execution_reason" placeholder=""><?=$action_plan['execution_reason']?></textarea>
 						</div>
 					</div>
 					<div class="form-group" id="fgroup-date" <?=$g2?>>
-						<label class="col-md-3 control-label smaller cl-compact">Revised Date</label>
+						<label class="col-md-2 control-label smaller cl-compact">Revised Date</label>
 						<div class="col-md-9">
 						<div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
 							<input type="text" class="form-control input-sm" name="revised_date" readonly value="<?=$action_plan['revised_date_v']?>">
@@ -168,7 +168,7 @@
 				<div class="form-body">
 				
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Impact Level <span class="required">* </span></label>
+						<label class="col-md-2 control-label smaller cl-compact" >Impact Level <span class="required">* </span></label>
 						<div class="col-md-9">
 							<div class="input-group">
 								 <input type="hidden" name="risk_impact_level_id" id = "risk_impact_level_id" value=""/> 
@@ -181,7 +181,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Likelihood <span class="required">* </span></label>
+						<label class="col-md-2 control-label smaller cl-compact" >Likelihood <span class="required">* </span></label>
 						<div class="col-md-9">
 							<div class="input-group">
 								 <input type="hidden" name="risk_likelihood_id" id = "risk_likelihood_id" value=""/> 
@@ -195,14 +195,14 @@
 					</div>
 					<div class="form-group">
 					    <input type="hidden" name="risk_level_id" id = "risk_level_id" value=""/> 
-						<label class="col-md-3 control-label smaller cl-compact" >Risk Level</label>
+						<label class="col-md-2 control-label smaller cl-compact" >Risk Level</label>
 						<div class="col-md-9">
 						<input type="text" class="form-control input-sm" readonly="true" name="risk_level_after_mitigation" id = "risk_level_after_mitigation" placeholder="">
 						</div>
 					</div>
 					 
 					<!--<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Impact Level</label>
+						<label class="col-md-2 control-label smaller cl-compact" >Impact Level</label>
 						<div class="col-md-9">
 						<select name = "risk_impact_level_after_mitigation" id = "risk_impact_level_after_mitigation" class = "form-control">
 							<option value = "HIGH">High</option>
@@ -212,7 +212,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Likelihood Level</label>
+						<label class="col-md-2 control-label smaller cl-compact" >Likelihood Level</label>
 						<div class="col-md-9">
 						<select name = "risk_likelihood_key_after_mitigation" id = "risk_likelihood_key_after_mitigation" class = "form-control">
 							<option value = "HIGH">High</option>
@@ -222,7 +222,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Risk Level</label>
+						<label class="col-md-2 control-label smaller cl-compact" >Risk Level</label>
 						<div class="col-md-9">
 						<select name = "risk_level_after_mitigation"id = "risk_level_after_mitigation"  class = "form-control">
 							<option value = "HIGH">High</option>

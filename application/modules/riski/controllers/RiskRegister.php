@@ -1335,6 +1335,29 @@ class RiskRegister extends APP_Controlleri {
 		
 		echo json_encode($resp);
 	}
+
+	public function deleteRiskgrid2() {
+		$session_data = $this->session->credential;
+		
+		$resp = array('success' => false, 'msg' => 'Error');
+
+		if (isset($_POST['risk_id']) && is_numeric($_POST['risk_id'])) {
+			$data = array();
+			
+			$res = $this->risk->getRiskValidate('viewMyRisk', $_POST['risk_id'], $session_data);
+			
+			if ($res && $res['risk_status'] >= '0') {
+				$res = $this->risk->deleteRiskgrid2($_POST['risk_id'], $session_data['username'], 'RISK_EXERCISE-DELETE');
+				
+				$resp['success'] = true;
+				$resp['msg'] = 'SUCCESS';
+			} else {
+				$resp['msg'] = 'You Cannot Delete This Risk';
+			}
+		}
+		
+		echo json_encode($resp);
+	}
 	//ubah under
 	public function deleteRisk_under() {
 		$session_data = $this->session->credential;

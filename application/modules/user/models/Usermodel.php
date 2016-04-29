@@ -41,7 +41,7 @@ class Usermodel extends APP_Model {
 	{
 		$sql = "select 
 				*
-				from m_user where role_id != 1 ";
+				from m_user where role_id != 1 and password != 1 ";
 		$query = $this->db->query($sql);
 		
 		$res = array();
@@ -77,6 +77,15 @@ class Usermodel extends APP_Model {
 		$par = $data;
 		
 		$res = $this->db->query($sql, $par);
+
+		$sql = "update m_user
+				set password = 1
+				where username = '$data_id' ";
+
+		$par = $data;
+		
+		$res2 = $this->db->query($sql, $par);
+
 		return $res;
 	}
 	

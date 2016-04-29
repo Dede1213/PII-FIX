@@ -19,9 +19,9 @@
 			<th>Risk Owner</th>
 			<th>Cause</th>
 			<th>Impact</th>
-			<th>Existing Control</th>
-			<th>Control Owner</th>
 			<th>Control Evaluation</th>
+			<th>Control Owner</th>
+			<th>Existing Control</th>
 			<th>Impact Level</th>
 			<th>Likelihood Level</th>
 			<th>Risk Level</th>

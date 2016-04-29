@@ -263,9 +263,11 @@ grid2.init({
         	"data": "risk_code",
         	"render": function ( data, type, full, meta ) {
         		var cls = 'font-green';
-        		if (full.risk_status == '0' || full.risk_status == '1') cls = '';
-        		//return '<a target="_self" class="'+cls+'" href="'+site_url+'/maini/viewRisk/'+full.risk_id+'">'+data+'</a>';
-        		return '<a target="_self" class="'+cls+'" href="'+site_url+'/riski/RiskRegister/modifyRisk/'+full.risk_id+'">'+data+'</a>';
+        		if (full.risk_status == '0' || full.risk_status == '1'){ cls = '';
+        		return '<a target="_self" class="'+cls+'" href="'+site_url+'/risk/RiskRegister/modifyRisk/'+full.risk_id+'">'+data+'</a>';
+        		}else if (full.risk_status == '2'){ cls = '';
+        		return '<a target="_self" class="'+cls+'" href="'+site_url+'/main/viewRisk/'+full.risk_id+'">'+data+'</a>';
+        		}
         	}
         } ],    
         "columns": [

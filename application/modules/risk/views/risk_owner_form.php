@@ -52,49 +52,9 @@
 								</div>
 								
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact">Risk Event Description</label>
+									<label class="col-md-3 control-label smaller cl-compact" title="fill this field with decription of identified risk which explains nature of the risk">Risk Event Description</label>
 									<div class="col-md-9">
 									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_description" placeholder=""><?=$risk['risk_description']?></textarea>
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact" >Impact Level</label>
-									<div class="col-md-9">
-									<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['impact_level_v']?>" name="risk_impact_level_value" placeholder="">
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact" >Likelihood</label>
-									<div class="col-md-9">
-										<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['likelihood_v']?>" name="risk_likelihood_value" placeholder="">
-									</div>
-								</div>
-								<div class="form-group">
-									<input type="hidden" name="risk_level_id" value=""/>
-									<label class="col-md-3 control-label smaller cl-compact" >Risk Level</label>
-									<div class="col-md-9">
-									<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['risk_level_v']?>" name="risk_level" placeholder="">
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact">Cause <span class="required">* </span></label>
-									<div class="col-md-9">
-									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_cause" placeholder=""><?=$risk['risk_cause']?></textarea>
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact">Impact <span class="required">* </span></label>
-									<div class="col-md-9">
-									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_impact" placeholder=""><?=$risk['risk_impact']?></textarea>
-									</div>
-								</div>
-								
-							</div>
-							<div class="col-md-7">
-								<div class="form-group">
-									<label class="col-md-3 control-label small cl-compact" >Suggested Risk Treatment</label>
-									<div class="col-md-6">
-										<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['treatment_v']?>" name="risk_likelihood_value" placeholder="">
 									</div>
 								</div>
 
@@ -115,6 +75,49 @@
 										<?php } ?>
 									</tbody>
 								</table>
+								
+								<div class="form-group">
+									<label class="col-md-3 control-label smaller cl-compact" title="fill this field with grading as describe in “Impact Category” (e.g. insignificant, minor, moderate, major, and catastrophic) after consideration to existing control effectiveness" >Impact Level</label>
+									<div class="col-md-9">
+									<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['impact_level_v']?>" name="risk_impact_level_value" placeholder="">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label smaller cl-compact" title="fill this field withthe grading criteria as described in “Likelihood of Risk Occurrence” table (e.g. very low, low, medium, high, and very high) after consideration to existing control effectiveness">Likelihood</label>
+									<div class="col-md-9">
+										<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['likelihood_v']?>" name="risk_likelihood_value" placeholder="">
+									</div>
+								</div>
+								<div class="form-group">
+									<input type="hidden" name="risk_level_id" value=""/>
+									<label class="col-md-3 control-label smaller cl-compact" title="fill this field with the grading criteria as described in “Risk Level” matrix (e.g. insignificant, minor, moderate, major, and catastrophic) based on defined value in ‘Likelihood’ and ‘Impact Level’">Risk Level</label>
+									<div class="col-md-9">
+									<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['risk_level_v']?>" name="risk_level" placeholder="">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label smaller cl-compact" title="fill this field with the description of set of factors that may affects or lead to the occurrence of risk event">Cause </label>
+									<div class="col-md-9">
+									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_cause" placeholder=""><?=$risk['risk_cause']?></textarea>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label smaller cl-compact" title="fill this field with the description of potential direct or indirect loss or cost to IIGF that could have been suffered from a risk event">Impact </label>
+									<div class="col-md-9">
+									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_impact" placeholder=""><?=$risk['risk_impact']?></textarea>
+									</div>
+								</div>
+								
+							</div>
+							<div class="col-md-7">
+								<div class="form-group">
+									<label class="col-md-3 control-label small cl-compact" title="fill this field with treatment category as described in “Risk Treatment Guideline” based on its risk level" >Suggested Risk Treatment</label>
+									<div class="col-md-6">
+										<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['treatment_v']?>" name="risk_likelihood_value" placeholder="">
+									</div>
+								</div>
+
+								
 								
 								<h4><font style="color:red;">*</font>Control</h4>
 								<table class="table table-condensed table-bordered table-hover">
@@ -169,7 +172,7 @@
 							<div class="row">
 							<div class="col-md-5">	
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact" >Impact Level</label>
+									<label class="col-md-3 control-label smaller cl-compact" title="fill this field with grading as describe in “Impact Category” (e.g. insignificant, minor, moderate, major, and catastrophic) after consideration to existing control effectiveness" >Impact Level</label>
 									<div class="col-md-9">
 										<div class="input-group">
 											<input type="hidden" name="risk_impact_level_id"  value=""/>
@@ -182,7 +185,7 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact" >Likelihood</label>
+									<label class="col-md-3 control-label smaller cl-compact" title="fill this field withthe grading criteria as described in “Likelihood of Risk Occurrence” table (e.g. very low, low, medium, high, and very high) after consideration to existing control effectiveness">Likelihood</label>
 									<div class="col-md-9">
 										<div class="input-group">
 											<input type="hidden" name="risk_likelihood_id" value=""/>
@@ -196,22 +199,22 @@
 								</div>
 								<div class="form-group">
 									<input type="hidden" name="risk_level_id" value=""/>
-									<label class="col-md-3 control-label smaller cl-compact" >Risk Level</label>
+									<label class="col-md-3 control-label smaller cl-compact" title="fill this field with the grading criteria as described in “Risk Level” matrix (e.g. insignificant, minor, moderate, major, and catastrophic) based on defined value in ‘Likelihood’ and ‘Impact Level’">Risk Level</label>
 									<div class="col-md-9">
 									<input type="text" class="form-control input-sm" readonly="true" name="risk_level" placeholder="" value="">
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact" >Cause</label>
+									<label class="col-md-3 control-label smaller cl-compact" title="fill this field with the description of set of factors that may affects or lead to the occurrence of risk event" >Cause</label>
 									<div class="col-md-9">
-									<textarea class="form-control input-readview popovers"  rows="3" name="risk_cause" placeholder="" data-container="body" data-trigger="focus" data-placement="bottom" data-content="fill this field with the description of set of factors that may affects or lead to the occurrence of risk event"></textarea>
+									<textarea class="form-control input-readview popovers"  rows="3" name="risk_cause" placeholder="" data-container="body" data-trigger="focus" data-placement="bottom" data-content=""></textarea>
 									
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact" >Impact</label>
+									<label class="col-md-3 control-label smaller cl-compact" title="fill this field with the description of potential direct or indirect loss or cost to IIGF that could have been suffered from a risk event" >Impact</label>
 									<div class="col-md-9">
-									<textarea class="form-control input-readview popovers"  rows="3" name="risk_impact" placeholder="" data-container="body" data-trigger="focus" data-placement="bottom" data-content="fill this field with the description of potential direct or indirect loss or cost to IIGF that could have been suffered from a risk event"></textarea>
+									<textarea class="form-control input-readview popovers"  rows="3" name="risk_impact" placeholder="" data-container="body" data-trigger="focus" data-placement="bottom" data-content=""></textarea>
 									
 									</div>
 								</div>
@@ -219,7 +222,7 @@
 							</div>
 							<div class="col-md-7">
 								<div class="form-group">
-									<label class="col-md-3 control-label small cl-compact" >Agreed Risk Treatment</label>
+									<label class="col-md-3 control-label small cl-compact" title="fill this field with treatment category as described in “Risk Treatment Guideline” based on its risk level">Suggested Risk Treatment</label>
 									<div class="col-md-6">
 										<select class="form-control input-sm" name="suggested_risk_treatment">
 											<?php foreach($treatment_list as $row) { ?>
@@ -346,7 +349,7 @@
 					
 					<div class="form-group">
 					<input type = "hidden" id = "form-control-revid">
-						<label class="col-md-3 control-label smaller cl-compact">Evaluation on Existing Control <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact" title="fill this field with the effectiveness level of existing control (refers to control assessment criteria)">Evaluation on Existing Control </label>
 						<div class="col-md-9">
 							<div class="input-group">
 								<input type="text" class="form-control input-sm" readonly="true" name="risk_existing_control" id = "risk_existing_control" placeholder="" value="NONE">
@@ -359,7 +362,7 @@
 					</div>
 					<!--
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Existing Control <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact" >Existing Control </label>
 						<div class="col-md-9">
 						<textarea class="form-control input-sm" rows="3" name="risk_existing_control" placeholder="">NONE</textarea>
 						<button id="button_clear_control" type="button" class="hide btn red btn-xs" style="margin-top: 5px;"><i class="fa fa-minus-circle font-white"></i> Clear Existing Control</button>
@@ -367,14 +370,14 @@
 					</div>
 					-->
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Existing Control <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact" >Existing Control </label>
 						<div class="col-md-9">
 						<input type="text" class="form-control input-sm" name="risk_evaluation_control" id = "risk_evaluation_control" placeholder="" value="NONE">
 						</div>
 					</div>
 					
 					<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact">Control Owner <span class="required">* </span></label>
+									<label class="col-md-3 control-label smaller cl-compact" title="fill this field with the assigned person who is responsible for the business unit, which owns the controls associated with the risk event">Control Owner </label>
 									<div class="col-md-9">
 									
 									<select class="form-control input-sm" name="risk_control_owner" id = "risk_control_owner">
@@ -409,7 +412,7 @@
 				<div class="form-body">
 					<input type = "hidden" id = "form-data-revid">
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact">Suggested Action Plan<span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact" title="fill this field with description of risk treatment action to be done in addressing the risk">Suggested Action Plan</label>
 						<div class="col-md-9">
 							<div class="input-group">
 								<textarea class="form-control input-sm " rows="3"  name="action_plan" id = "action_plan" placeholder=""> </textarea>
@@ -424,7 +427,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Due Date</label>
+						<label class="col-md-3 control-label" title="fill this field with the target completion date of risk treatment plan.">Due Date</label>
 						<div class="col-md-9">
 						<div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
 							<input type="text" class="form-control input-sm" name="due_date" id = "due_date" readonly>
@@ -508,7 +511,7 @@
 				<thead>
 				<tr role="row" class="heading">
 					<th width="66px">&nbsp;</th>
-					<th>Existing Control</th>
+					<th>Evaluation on Existing Control</th>
 					<th>Description</th>
 				</tr>
 				</thead>

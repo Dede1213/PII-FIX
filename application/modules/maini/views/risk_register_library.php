@@ -64,7 +64,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact">Pemilik Risiko</label>
+								<label class="col-md-3 control-label smaller cl-compact" title="isikan kolom ini dengan pemilik risiko yang bertanggung jawab mengelola aktivitas yang berhubungan langsung dengan risiko">Pemilik Risiko</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm input-readview" readonly="true" name="division_v" placeholder="">
 								</div>
@@ -77,13 +77,29 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label small cl-compact">Deskripsi Peristiwa Risiko</label>
+								<label class="col-md-3 control-label small cl-compact" title="isikan kolom ini dengan deskripsi dari identifikasi risiko yang menjelaskan sifat risiko">Deskripsi Peristiwa Risiko</label>
 								<div class="col-md-9">
 								<textarea class="form-control input-sm input-readview" readonly="true" rows="3" name="risk_description" placeholder=""></textarea>
 								</div>
 							</div>
+
+							<h4>Objektif</h4>
+							<div class="table-scrollable">
+								<table id="primary_objective_table" class="table table-condensed table-bordered table-hover">
+									<thead>
+									<tr role="row" class="heading">
+										<th><span class="small">ID Objektif</span></th>
+										<th><span class="small">Objektif</span></th>
+										
+									</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+							</div>
+
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Kategori Risiko</label>
+								<label class="col-md-3 control-label smaller cl-compact" title="isikan kolom ini dengan kategori risiko yang berhubungan dengan identifikasi risk seperti yang dijelaskan pada ‘Deskripsi Risiko’">Kategori Risiko</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_category_v" placeholder="">
 								</div>
@@ -101,56 +117,42 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Sebab</label>
+								<label class="col-md-3 control-label smaller cl-compact" title="isikan kolom ini dengan deskripsi dari kumpulan faktor yang dapat mempengaruhi atau mengakibatkan terjadinya peristiwa risiko">Sebab</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_cause" placeholder="">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Dampak</label>
+								<label class="col-md-3 control-label smaller cl-compact" title="isikan kolom ini dengan deskripsi dari kemungkinan kehilangan atau kerugian biaya langsung atau tidak langsung yang dapat IIGF alami dari peristiwa risiko">Dampak</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_impact" placeholder="">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Impact Level</label>
+								<label class="col-md-3 control-label smaller cl-compact" title="isikan kolom ini dengan pengklasifikasian seperti yang dideskripsikan pada “Kategori Dampak” (misalnya tidak signifikan, minor, sedang, major dan berbahaya) setelah mempertimbangkan efektivitas kontrol eksisting">Impact Level</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm input-readview" readonly="true" name="impact_level_v" placeholder="">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan Keterjadian</label>
+								<label class="col-md-3 control-label smaller cl-compact" title="isikan kolom ini dengan kriteria pengklasifikasian seperti yang dideskripsikan dalam tabel “Kemungkinan Terjadinya Risiko” (misalnya sangat rendah, rendah, sedang, tinggi, dan sangat tinggi) setelah mepertimbangkan efektivitas kontrol eksisting">Kemungkinan Keterjadian</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm input-readview" readonly="true" name="likelihood_v" placeholder="">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Risiko Level</label>
+								<label class="col-md-3 control-label smaller cl-compact" title="isikan kolom ini dengan kriteria pengklasifikasian yang dideskripsikan dalam matriks “Level Risiko” (misalkan tidak signifikan, minor, sedang, major dan berbahaya) bedasarkan nilai yang sudah ditentukan dalam ‘Kemungkinan Keterjadian’ dan ‘Level Dampak’" >Risiko Level</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm input-readview" readonly="true" name="risk_level_v" placeholder="">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Usulan Penanganan Risiko</label>
+								<label class="col-md-3 control-label smaller cl-compact" title="isikan kolom ini dengan kategori penanganan yang dideskripsikan dalam “Panduan Penanganan Risiko” bedasarkan level risiko itu sendiri">Usulan Penanganan Risiko</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control input-sm input-readview" readonly="true" name="treatment_v" placeholder="">
 								</div>
 							</div>
-							<hr/>
-							<h4>Objektif</h4>
-							<div class="table-scrollable">
-								<table id="primary_objective_table" class="table table-condensed table-bordered table-hover">
-									<thead>
-									<tr role="row" class="heading">
-										<th><span class="small">ID Objektif</span></th>
-										<th><span class="small">Objektif</span></th>
-										
-									</tr>
-									</thead>
-									<tbody>
-									</tbody>
-								</table>
-							</div>
+							
 							<hr/>
 							<h4>Kontrol</h4>
 							<div class="table-scrollable">
@@ -158,8 +160,9 @@
 									<thead>
 									<tr role="row" class="heading">
 										<th><span class="small">ID Kontrol Eksisting</span></th>
-										<th><span class="small">Kontrol Eksisting</span></th>
+										
 										<th><span class="small">Evaluasi dari Eksisting Kontrol</span></th>
+										<th><span class="small">Kontrol Eksisting</span></th>
 										<th><span class="small">Pemilik Kontrol</span></th>
 									</tr>
 									</thead>
@@ -233,7 +236,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact">Pemilik Risiko</label>
+								<label class="col-md-3 control-label smaller cl-compact" title="isikan kolom ini dengan pemilik risiko yang bertanggung jawab mengelola aktivitas yang berhubungan langsung dengan risiko">Pemilik Risiko</label>
 								<div class="col-md-9">
 								<select class="form-control input-sm" name="risk_division">
 									<?php foreach($division_list as $row) { ?>
@@ -243,95 +246,20 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact">Peristiwa Risiko <span class="required">* </span>
+								<label class="col-md-3 control-label smaller cl-compact" tit>Peristiwa Risiko 
 								</label>
 								<div class="col-md-9">
 								<input type="text" class="form-control input-sm" name="risk_event" data-required="1" placeholder="">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label small cl-compact">Deskripsi Peristiwa Risiko <span class="required">* </span></label>
+								<label class="col-md-3 control-label small cl-compact" title="isikan kolom ini dengan deskripsi dari identifikasi risiko yang menjelaskan sifat risiko">Deskripsi Peristiwa Risiko </label>
 								<div class="col-md-9">
-								<textarea class="form-control popovers" rows="3" name="risk_description" placeholder="" data-container="body" data-placement="bottom" placeholder="" data-content="isilah kolom ini dengan deskripsi risiko yang telah di-identifikasi yang menjelaskan sifat risiko"></textarea>
+								<textarea class="form-control popovers" rows="3" name="risk_description" placeholder="" data-container="body" data-placement="bottom" placeholder="" data-content=""></textarea>
 								</div>
 							</div>
-							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Kategori Risiko</label>
-								<div class="col-md-9">
-								<select class="form-control input-sm" name="risk_category" id="sel_risk_category">
-								</select>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Sub Kategori Risiko</label>
-								<div class="col-md-9">
-								<select class="form-control input-sm" name="risk_sub_category" id="sel_risk_sub_category">
-								</select>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-md-3 control-label small cl-compact" >Sub Kategori Risiko Level 2</label>
-								<div class="col-md-9">
-								<select class="form-control input-sm" name="risk_2nd_sub_category" id="sel_risk_2nd_sub_category">
-								</select>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Sebab <span class="required">* </span></label>
-								<div class="col-md-9">
-								<input type="text" class="form-control input-sm popovers" name="risk_cause" placeholder="" data-container="body" data-trigger="focus" data-placement="bottom" data-content="isilah kolom ini dengan deskripsi dari kumpulan faktor yang dapat mempengaruhi atau mengakibatkan terjadinya peristiwa risiko">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Dampak <span class="required">* </span></label>
-								<div class="col-md-9">
-								<input type="text" class="form-control input-sm popovers" name="risk_impact" placeholder="" data-container="body" data-trigger="focus" data-placement="bottom" data-content="isilah kolom ini dengan deskripsi dari kemungkinan kehilangan atau kerugian biaya langsung atau tidak langsung yang ditanggung IIGF dari peristiwa risiko">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Dampak Level <span class="required">* </span></label>
-								<div class="col-md-9">
-									<div class="input-group">
-										<input type="hidden" name="risk_impact_level_id" value=""/>
-										<input type="text" class="form-control input-sm" readonly="true" name="risk_impact_level_value" placeholder="">
-										<span class="input-group-btn">
-										<button class="btn btn-primary btn-sm" type="button" id="btn_impact_list"><i class="fa fa-search fa-fw"/></i></button>
-										</span>
-										
-									</div>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Kemungkinan Keterjadian<span class="required">* </span></label>
-								<div class="col-md-9">
-									<div class="input-group">
-										<input type="hidden" name="risk_likelihood_id" value=""/>
-										<input type="text" class="form-control input-sm" readonly="true" name="risk_likelihood_value" placeholder="">
-										<span class="input-group-btn">
-										<button class="btn btn-primary btn-sm" type="button" data-toggle="modal" href="#modal-likelihood"><i class="fa fa-search fa-fw"/></i></button>
-										</span>
-										
-									</div>
-								</div>
-							</div>
-							<div class="form-group">
-								<input type="hidden" name="risk_level_id" value=""/>
-								<label class="col-md-3 control-label smaller cl-compact" >Level Risiko <span class="required">* </span></label>
-								<div class="col-md-9">
-								<input type="text" class="form-control input-sm" readonly="true" name="risk_level" placeholder="">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-md-3 control-label smaller cl-compact" >Usulan Penanganan Risiko</label>
-								<div class="col-md-9">
-								<select class="form-control input-sm" name="suggested_risk_treatment">
-									<?php foreach($treatment_list as $row) { ?>
-									<option value="<?=$row['ref_key']?>"><?=$row['ref_value']?></option>
-									<?php } ?>
-								</select>
-								</div>
-							</div>
-							<hr/>
+
+						
 								<div class="panel-heading">
 									<h3 class="panel-title">Objektif</h3>
 								</div>
@@ -358,6 +286,84 @@
 									 	</table>
 									 </div>
 								</div>
+
+							<div class="form-group">
+								<label class="col-md-3 control-label smaller cl-compact" title="isikan kolom ini dengan kategori risiko yang berhubungan dengan identifikasi risk seperti yang dijelaskan pada ‘Deskripsi Risiko’" >Kategori Risiko</label>
+								<div class="col-md-9">
+								<select class="form-control input-sm" name="risk_category" id="sel_risk_category">
+								</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-3 control-label smaller cl-compact" >Sub Kategori Risiko</label>
+								<div class="col-md-9">
+								<select class="form-control input-sm" name="risk_sub_category" id="sel_risk_sub_category">
+								</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-3 control-label small cl-compact" >Sub Kategori Risiko Level 2</label>
+								<div class="col-md-9">
+								<select class="form-control input-sm" name="risk_2nd_sub_category" id="sel_risk_2nd_sub_category">
+								</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-3 control-label smaller cl-compact" title="isikan kolom ini dengan deskripsi dari kumpulan faktor yang dapat mempengaruhi atau mengakibatkan terjadinya peristiwa risiko">Sebab </label>
+								<div class="col-md-9">
+								<input type="text" class="form-control input-sm popovers" name="risk_cause" placeholder="" data-container="body" data-trigger="focus" data-placement="bottom" data-content="">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-3 control-label smaller cl-compact" title="isikan kolom ini dengan deskripsi dari kemungkinan kehilangan atau kerugian biaya langsung atau tidak langsung yang dapat IIGF alami dari peristiwa risiko">Dampak </label>
+								<div class="col-md-9">
+								<input type="text" class="form-control input-sm popovers" name="risk_impact" placeholder="" data-container="body" data-trigger="focus" data-placement="bottom" data-content="">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-3 control-label smaller cl-compact" title="isikan kolom ini dengan pengklasifikasian seperti yang dideskripsikan pada “Kategori Dampak” (misalnya tidak signifikan, minor, sedang, major dan berbahaya) setelah mempertimbangkan efektivitas kontrol eksisting">Dampak Level </label>
+								<div class="col-md-9">
+									<div class="input-group">
+										<input type="hidden" name="risk_impact_level_id" value=""/>
+										<input type="text" class="form-control input-sm" readonly="true" name="risk_impact_level_value" placeholder="">
+										<span class="input-group-btn">
+										<button class="btn btn-primary btn-sm" type="button" id="btn_impact_list"><i class="fa fa-search fa-fw"/></i></button>
+										</span>
+										
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-3 control-label smaller cl-compact" title="isikan kolom ini dengan kriteria pengklasifikasian seperti yang dideskripsikan dalam tabel “Kemungkinan Terjadinya Risiko” (misalnya sangat rendah, rendah, sedang, tinggi, dan sangat tinggi) setelah mepertimbangkan efektivitas kontrol eksisting">Kemungkinan Keterjadian</label>
+								<div class="col-md-9">
+									<div class="input-group">
+										<input type="hidden" name="risk_likelihood_id" value=""/>
+										<input type="text" class="form-control input-sm" readonly="true" name="risk_likelihood_value" placeholder="">
+										<span class="input-group-btn">
+										<button class="btn btn-primary btn-sm" type="button" data-toggle="modal" href="#modal-likelihood"><i class="fa fa-search fa-fw"/></i></button>
+										</span>
+										
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<input type="hidden" name="risk_level_id" value=""/>
+								<label class="col-md-3 control-label smaller cl-compact" title="isikan kolom ini dengan kriteria pengklasifikasian yang dideskripsikan dalam matriks “Level Risiko” (misalkan tidak signifikan, minor, sedang, major dan berbahaya) bedasarkan nilai yang sudah ditentukan dalam ‘Kemungkinan Keterjadian’ dan ‘Level Dampak’">Level Risiko </label>
+								<div class="col-md-9">
+								<input type="text" class="form-control input-sm" readonly="true" name="risk_level" placeholder="">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-3 control-label smaller cl-compact" title="isikan kolom ini dengan kategori penanganan yang dideskripsikan dalam “Panduan Penanganan Risiko” bedasarkan level risiko itu sendiri">Usulan Penanganan Risiko</label>
+								<div class="col-md-9">
+								<select class="form-control input-sm" name="suggested_risk_treatment">
+									<?php foreach($treatment_list as $row) { ?>
+									<option value="<?=$row['ref_key']?>"><?=$row['ref_value']?></option>
+									<?php } ?>
+								</select>
+								</div>
+							</div>
+							
 							
 							<hr/>
 							<div class="clearfix">
@@ -373,8 +379,8 @@
 									<thead>
 									<tr role="row" class="heading">
 										<th><span class="small">ID Kontrol Eksisting</span></th>
-										<th><span class="small">Kontrol Eksisting</span></th>
 										<th><span class="small">Evaluasi dari Eksisting Kontrol</span></th>
+										<th><span class="small">Kontrol Eksisting</span></th>
 										<th><span class="small">Pemilik Kontrol</span></th>
 										<th width="30px">&nbsp;</th>
 									</tr>
@@ -479,9 +485,9 @@
 					</div>
 					
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Objektif <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact" >Objektif </label>
 						<div class="col-md-9">
-						<textarea class="form-control input-sm " rows="3"  name="objective" id = "objective" placeholder="">NONE</textarea>
+						<textarea class="form-control input-sm " rows="3"  name="objective" id = "objective" placeholder="NONE"></textarea>
 						<button id="button_clear_control" type="button" class="hide btn red btn-xs" style="margin-top: 5px;"><i class="fa fa-minus-circle font-white"></i> Hapus Kontrol Eksisting</button>
 						</div>
 					</div>
@@ -522,7 +528,7 @@
 					</div>
 					<div class="form-group">
 					<input type = "hidden" id = "form-control-revid">
-						<label class="col-md-3 control-label smaller cl-compact">Kontrol Eksisting<span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact" title="isikan kolom ini dengan tingkat efektivitas dari kontrol eksisting (mengacu pada kontrol kriteria penilaian)">Evaluasi dari Kontrol Eksisting</label>
 						<div class="col-md-9">
 							<div class="input-group">
 								<input type="text" class="form-control input-sm" readonly="true" name="risk_existing_control" id = "risk_existing_control" placeholder="" value="NONE">
@@ -535,7 +541,7 @@
 					</div>
 					<!--
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Existing Control <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact" >Existing Control </label>
 						<div class="col-md-9">
 						<textarea class="form-control input-sm " rows="3" name="risk_existing_control" id = "risk_existing_control" placeholder="">NONE</textarea>
 						<button id="button_clear_control" type="button" class="hide btn red btn-xs" style="margin-top: 5px;"><i class="fa fa-minus-circle font-white"></i> Clear Existing Control</button>
@@ -543,13 +549,14 @@
 					</div>
 					-->
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Evaluasi dari Kontrol Eksisting<span class="required">* </span></label>
+						
+						<label class="col-md-3 control-label smaller cl-compact" title="isikan kolom ini dengan deskripsi dari action apapun (misalnya kebijakan, prosedur, atau aktivitas) yang diambil oleh personil yang bersangkutan (pemilik control), dirancang untuk memastikan bahwa risiko terdapat dalam minat risiko / toleransi">Kontrol Eksisting</label>
 						<div class="col-md-9">
 						<input type="text" class="form-control input-sm" value="NONE" name="risk_evaluation_control" id = "risk_evaluation_control" placeholder="">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Pemilik Kontrol <span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact" title="isikan kolom ini dengan orang yang ditugaskan yang mana bertanggungjawab untuk unit bisnis, yang memiliki kontrol yang berhubungan dengan peristiwa risiko">Pemilik Kontrol </label>
 						<div class="col-md-9">
 						<select class="form-control input-sm" name="risk_control_owner" id = "risk_control_owner">
 										<option value="NONE">NONE</option>
@@ -586,7 +593,7 @@
 				<div class="form-body">
 					<div class="form-group">
 					<input type = "hidden" id = "form-data-revid">
-						<label class="col-md-3 control-label smaller cl-compact">Usulan Action Plan<span class="required">* </span></label>
+						<label class="col-md-3 control-label smaller cl-compact" title="isikan kolom ini dengan deskripsi dari penanganan risiko action yang harus dilakukan dalam menangani risiko">Usulan Action Plan</label>
 						<div class="col-md-9">
 							<div class="input-group">
 								<textarea class="form-control input-sm " rows="3"  name="action_plan" id = "action_plan" placeholder=""> </textarea>
@@ -600,7 +607,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Batas Waktu<span class="required">* </span></label>
+						<label class="col-md-3 control-label" title="isikan kolom ini dengan target tanggal penyelesaian dari rencana penanganan risiko">Batas Waktu</label>
 						<div class="col-md-9">
 						<div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
 							<input type="text" class="form-control input-sm" name="due_date" id = "due_date" readonly>
@@ -611,7 +618,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Pemilik Action Plan <span class="required">* </span></label>
+						<label class="col-md-3 control-label" title="isikan kolom ini dengan orang yang ditugaskan yang mana bertanggungjawab atas aktivitas penanganan risiko yang ditetapkan dalam ‘Action Plan’">Pemilik Action Plan </label>
 						<div class="col-md-9">
 						<select class="form-control input-sm" name="division" id ="division">
 							<?php foreach($division_list as $row) { ?>
@@ -688,7 +695,7 @@
 				<thead>
 				<tr role="row" class="heading">
 					<th width="30px">&nbsp;</th>
-					<th>Kontrol Eksisting</th>
+					<th>Evaluasi dari Eksisting Kontrol </th>
 					<th>Deskripsi</th>
 				</tr>
 				</thead>

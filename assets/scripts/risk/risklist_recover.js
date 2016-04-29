@@ -271,16 +271,18 @@ grid2.init({
         		if (data == '0') {
         			img = '<div class="btn-group">'+
         					'<button type="button" class="btn btn-default btn-xs button-grid-confirm"><i class="fa fa-thumbs-up font-green"></i></button>'+
-        					
+        					'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"></i></button>'+
         				'</div>';
         		} else if (data == '1') {
         			img = '<div class="btn-group">'+
         					'<button type="button" class="btn btn-default btn-xs button-grid-confirm"><i class="fa fa-thumbs-up font-green"></i></button>'+
+        					'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"></i></button>'+
         					
         				'</div>';
         		} else{
         			img = '<div class="btn-group">'+
         					'<button type="button" class="btn btn-default btn-xs button-grid-confirm"><i class="fa fa-thumbs-up font-green"></i></button>'+
+        					'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"></i></button>'+
         					
         				'</div>';
         		}
@@ -339,11 +341,11 @@ var RiskList = function() {
     	        	me.draftRisk(data);
     	        });
     	        
-    	        $("#datatable_ajax").on('click', 'button.button-grid-delete', function(e) {
+    	        $("#datatable_ajax2").on('click', 'button.button-grid-delete', function(e) {
     	        	e.preventDefault();
     	        	
     	        	var r = this.parentNode.parentNode.parentNode;
-    	        	var data = grid.getDataTable().row(r).data();
+    	        	var data = grid2.getDataTable().row(r).data();
     	        	
     	        	me.deleteRisk(data);
     	        });
@@ -406,6 +408,8 @@ var RiskList = function() {
 	        		 });
 	        	});
 	        },
+
+
 	        draftRisk: function(data) {
 	        	var mod = MainApp.viewGlobalModal('confirm', 'Update Risk Status to <b>Draft</b> for risk : <b>'+data.risk_event+'</b> ? ');
 	        	mod.find('button.btn-ok-success').one('click', function(){
@@ -445,7 +449,7 @@ var RiskList = function() {
 	        		var eparam = {
 	        			'risk_id' : data.risk_id
 	        		};
-	        		var url = site_url+'/risk/RiskRegister/deleteRisk';
+	        		var url = site_url+'/risk/RiskRegister/deleteRiskgrid2';
 	        		
 	        		Metronic.blockUI({ boxed: true });
 	        		$.post(

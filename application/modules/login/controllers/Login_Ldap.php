@@ -11,12 +11,16 @@ class Login extends CI_Controller {
 		$this->load->library('session');
 
 
+		//GA JADI DI PAKEDI BUAT NOTE AJA 1 DEVICE
+		/*
 		//update status login
 		$this->load->database();
 		$user= $this->session->credential['username'];
 		$sql_login_status = "update m_user_login set status_login = 'logout' where username = '$user' ";
 		$res = $this->db->query($sql_login_status);
 		//end
+		*/
+
 		$this->session->unset_userdata('credential');
 		
 		$this->load->config('app_config');
@@ -184,11 +188,13 @@ class Login extends CI_Controller {
 						}else{
 							$this->db->query($sql3);
 							
+							//GA JADI DI NOTE AJA 1 device
+							/*
 							//----- tambah untuk insert m_user_login cek device
-
 								$sql_cek_device = "INSERT INTO m_user SET username='".$_POST['username']."'";
 								$this->db->query($sql_cek_device);
 							//end cek device
+							*/
 
 							$data['msg'] = 'data belum ada';
 							$sql4 = "select 
@@ -239,29 +245,32 @@ class Login extends CI_Controller {
 							fclose($fp);
 							// end log
 
-							//cek change request
+							//pembatas 1 device nih
+							//GA JADI DI PAKE DI BUAT NOTE AJA DULU
+							
+							/*
 							$this->load->model('user/usermodel');
 							$cekStatusLogin = $this->usermodel->cekStatusLogin($_POST['username']);
 							
 							if($cekStatusLogin == 'login'){
-
 								$this->load->library('session');
 								$this->session->unset_userdata('credential');
 								$this->load->helper('url');
 								redirect('login?status=device','refresh');
-
 							}else{
-
-							//insert status login
+							//update status login
 							$sql_login_status = "update m_user_login set status_login = 'login' where username = '".$_POST['username']."' ";
 							$this->db->query($sql_login_status);
+							*/
 
 							//klo ga pake ajax
 							$this->load->helper('url');
 							redirect('main','refresh');
 							//end klo ga pake ajax
 
+						/*
 						}
+						*/
 
 
 							$data['success'] = true;

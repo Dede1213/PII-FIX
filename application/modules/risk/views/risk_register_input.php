@@ -340,7 +340,7 @@
 												<th>Suggested Action Plan</th>
 												<th>Due Date</th>
 												<th>Action Plan Owner</th>
-												<th>period</th>
+												<th>status Action Plan</th>
 												<th width="66px">&nbsp;</th>
 											</tr>
 											</thead>
@@ -616,9 +616,9 @@
 						</div>
 					</div>-->
 					<div class="form-group">
-						<label class="col-md-3 control-label">Period <span class="required">* </span></label>
+						<label class="col-md-3 control-label">Status Action Plan <span class="required">* </span></label>
 						<div class="col-md-9">
-						<select class="form-control input-sm" name="berkala" id = "berkala">
+						<select class="form-control input-sm" name="status_act" id = "status_act">
 							
 							<option value="">Choose one...</option>
 							<option value="berkala">Berkala</option>

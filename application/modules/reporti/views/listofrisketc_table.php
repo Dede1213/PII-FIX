@@ -41,6 +41,7 @@
 							<th> Action Plan </th>
 							<th> Action Plan Owner</th>
 							<th> Due Date</th>
+							<th> Status Action Plan</th>
 					  </tr>
 				</thead> 
 				<tbody>
@@ -66,7 +67,8 @@
 								<td> <?=$key['suggested_risk_treatment'];?> </td>
 								<td> <?=$key['Action Plan'];?> </td> 
 								<td> <?=$key['Action Plan Owner'];?> </td>			
-								<td> <?=$key['Due Date'];?> </td>								
+								<td> <?=$key['Due Date'];?> </td>
+								<td> <?=$key['status_act'];?> </td>								
 							</tr>
 							<?php $i++;?>
 					 <?php endforeach;?> 

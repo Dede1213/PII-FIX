@@ -146,6 +146,7 @@
 										<th nowrap><small>Usulan Action Plan</small></th>
 										<th><small>Batas Waktu</small></th>
 										<th><small>Pemilik Action Plan</small></th>
+										<th><small>Status Action Plan</small></th>
 									</tr>
 									</thead>
 									<tbody>
@@ -154,6 +155,7 @@
 											<td><?=$row['action_plan']?></td>
 											<td nowrap><?=$row['due_date_v']?></td>
 											<td><?=$row['division_v']?></td>
+											<td><?=$row['status_act']?></td>
 										</tr>
 										<?php } ?>
 									</tbody>
@@ -280,6 +282,7 @@
 											<th><small>Usulan Action Plan</small></th>
 											<th><small>Batas Waktu</small></th>
 											<th><small>Pemilik Action Plan</small></th>
+											<th><span class="small">Status Action Plan</span></th>
 											<th width="66px">&nbsp;</th>
 										</tr>
 										</thead>
@@ -467,6 +470,18 @@
 			<form id="input-form-action-plan" role="form" class="form-horizontal">
 				<div class="form-body">
 				<input type = "hidden" id = "form-data-revid">
+					<div class="form-group">
+						<label class="col-md-3 control-label">Status Action Plan</label>
+						<div class="col-md-9">
+						<select class="form-control input-sm" name="status_act" id = "status_act">
+							
+							<option value="">Choose one...</option>
+							<option value="berkala">Berkala</option>
+							<option value="tidak berkala">Tidak Berkala</option>
+							
+						</select>
+						</div>
+					</div>
 					<div class="form-group">
 						<label class="col-md-3 control-label smaller cl-compact" title="isikan kolom ini dengan deskripsi dari penanganan risiko action yang harus dilakukan dalam menangani risiko">Usulan Action Plan</label>
 						<div class="col-md-9">

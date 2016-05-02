@@ -124,15 +124,16 @@ var RiskVerify = function() {
         		});
         		
         		me.actionPlanReset();
-        		$.each( data_risk['action_plan_list'], function( key, val ) {
-        			var nnode = {
-        				'action_plan' : val.action_plan,
-        				'due_date' : val.due_date_v,
-        				'division_v' : val.division_v,
-        				'division' : val.division
-        			}
-        			me.actionPlanAddRow(nnode);
-        		});
+                $.each( data_risk['action_plan_list'], function( key, val ) {
+                    var nnode = {
+                        'action_plan' : val.action_plan,
+                        'due_date' : val.due_date_v,
+                        'division_v' : val.division_v,
+                        'division' : val.division,
+                        'status_act' : val.status_act,
+                    }
+                    me.actionPlanAddRow(nnode);
+                });
         		
         		me.controlReset();
         		$.each( data_risk['control_list'], function( key, val ) {
@@ -217,6 +218,7 @@ var RiskVerify = function() {
             		actplan_param['actplan['+cnt+'][action_plan]'] = value.action_plan;
             		actplan_param['actplan['+cnt+'][due_date]'] = value.due_date;
             		actplan_param['actplan['+cnt+'][division]'] = value.division;
+                    actplan_param['actplan['+cnt+'][status_act]'] = value.status_act;
             		cnt++;
             	});
             	//console.log(impact_param);

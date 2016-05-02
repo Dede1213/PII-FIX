@@ -10,13 +10,15 @@ class Login extends CI_Controller {
 
 		$this->load->library('session');
 
-
+		//GA JADI DI PAKEDI BUAT NOTE AJA 1 DEVICE
+		/*
 		//update status login
 		$this->load->database();
 		$user= $this->session->credential['username'];
 		$sql_login_status = "update m_user_login set status_login = 'logout' where username = '$user' ";
 		$res = $this->db->query($sql_login_status);
 		//end
+		*/
 		$this->session->unset_userdata('credential');
 		
 		$this->load->config('app_config');
@@ -84,6 +86,7 @@ class Login extends CI_Controller {
 							redirect('main','refresh');
 							//end klo ga pake ajax
 
+							//klo pake ajax 
 							$data['success'] = true;
 							$data['msg'] = 'success';
 						} else {
@@ -322,7 +325,9 @@ class Login extends CI_Controller {
 
 							//pembatas 1 device nih
 
-							//cek change request
+							//GA JADI DI PAKE DI BUAT NOTE AJA DULU
+							/*
+							//cek status login
 							$this->load->model('user/usermodel');
 							$cekStatusLogin = $this->usermodel->cekStatusLogin($_POST['username']);
 							
@@ -334,11 +339,10 @@ class Login extends CI_Controller {
 								redirect('login?status=device','refresh');
 
 							}else{
-
-							
 							//insert status login
 							$sql_login_status = "update m_user_login set status_login = 'login' where username = '".$_POST['username']."' ";
 							$this->db->query($sql_login_status);
+							*/
 
 							//klo ga pake ajax
 							$this->load->helper('url');
@@ -348,7 +352,9 @@ class Login extends CI_Controller {
 							$data['success'] = true;
 							$data['msg'] = 'success';
 
+							/*
 							}
+							*/
 							
 
 						} else {

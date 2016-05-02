@@ -2020,15 +2020,16 @@ class Risk extends APP_Model {
 				$sql = "delete from t_risk_action_plan where risk_id = ?";
 				$this->db->query($sql, array('rid' => $risk_id));
 				
-				$sql = "insert into t_risk_action_plan(risk_id, action_plan, due_date, division) 
-						values(?, ?, ?, ?)";
+				$sql = "insert into t_risk_action_plan(risk_id, action_plan, due_date, division, status_act) 
+						values(?, ?, ?, ?, ?)";
 				foreach ($actplan as $key => $value) {
 					$dd = implode('-', array_reverse( explode('-', $value['due_date']) ));
 					$par = array(
 						'rid' => $risk_id,
 						'ap' => $value['action_plan'],
 						'dd' => $dd,
-						'div' => $value['division']
+						'div' => $value['division'],
+						'ss' => $value['status_act']
 					);
 					$res4 = $this->db->query($sql, $par);
 				}
@@ -2120,15 +2121,16 @@ class Risk extends APP_Model {
 				$sql = "delete from t_risk_action_plan where risk_id = ? and switch_flag = '$uid'";
 				$this->db->query($sql, array('rid' => $risk_id));
 				
-				$sql = "insert into t_risk_action_plan(risk_id, action_plan, due_date, division, switch_flag) 
-						values(?, ?, ?, ?, '$uid')";
+				$sql = "insert into t_risk_action_plan(risk_id, action_plan, due_date, division, switch_flag, status_act) 
+						values(?, ?, ?, ?, '$uid', ?)";
 				foreach ($actplan as $key => $value) {
 					$dd = implode('-', array_reverse( explode('-', $value['due_date']) ));
 					$par = array(
 						'rid' => $risk_id,
 						'ap' => $value['action_plan'],
 						'dd' => $dd,
-						'div' => $value['division']
+						'div' => $value['division'],
+						'ss' => $value['status_act']
 					);
 					$res4 = $this->db->query($sql, $par);
 				}
@@ -2259,15 +2261,16 @@ class Risk extends APP_Model {
 				$sql = "delete from t_risk_action_plan where risk_id = ?  ";
 				$this->db->query($sql, array('rid' => $risk_id));
 				
-				$sql = "insert into t_risk_action_plan(risk_id, action_plan, due_date, division, switch_flag) 
-						values(?, ?, ?, ?, 'P')";
+				$sql = "insert into t_risk_action_plan(risk_id, action_plan, due_date, division, switch_flag, status_act) 
+						values(?, ?, ?, ?, 'P', ?)";
 				foreach ($actplan as $key => $value) {
 					$dd = implode('-', array_reverse( explode('-', $value['due_date']) ));
 					$par = array(
 						'rid' => $risk_id,
 						'ap' => $value['action_plan'],
 						'dd' => $dd,
-						'div' => $value['division']
+						'div' => $value['division'],
+						'ss' => $value['status_act']
 					);
 					$res4 = $this->db->query($sql, $par);
 				}
@@ -2402,15 +2405,16 @@ class Risk extends APP_Model {
 				$sql = "delete from t_risk_action_plan_change where risk_id = ? and switch_flag = '".$userasli."' ";
 				$this->db->query($sql, array('rid' => $risk_id));
 				
-				$sql = "insert into t_risk_action_plan_change(risk_id, action_plan, due_date, division, switch_flag) 
-						values(?, ?, ?, ?, '".$userasli."')";
+				$sql = "insert into t_risk_action_plan_change(risk_id, action_plan, due_date, division, switch_flag, status_act) 
+						values(?, ?, ?, ?, '".$userasli."', ?)";
 				foreach ($actplan as $key => $value) {
 					$dd = implode('-', array_reverse( explode('-', $value['due_date']) ));
 					$par = array(
 						'rid' => $risk_id,
 						'ap' => $value['action_plan'],
 						'dd' => $dd,
-						'div' => $value['division']
+						'div' => $value['division'],
+						'ss' => $value['status_act']
 					);
 					$res4 = $this->db->query($sql, $par);
 				}
@@ -2509,15 +2513,16 @@ class Risk extends APP_Model {
 				$sql = "delete from t_risk_action_plan where risk_id = ?";
 				$this->db->query($sql, array('rid' => $risk_id));
 				
-				$sql = "insert into t_risk_action_plan(risk_id, action_plan, due_date, division) 
-						values(?, ?, ?, ?)";
+				$sql = "insert into t_risk_action_plan(risk_id, action_plan, due_date, division, status_act) 
+						values(?, ?, ?, ?, ?)";
 				foreach ($actplan as $key => $value) {
 					$dd = implode('-', array_reverse( explode('-', $value['due_date']) ));
 					$par = array(
 						'rid' => $risk_id,
 						'ap' => $value['action_plan'],
 						'dd' => $dd,
-						'div' => $value['division']
+						'div' => $value['division'],
+						'ss' => $value['status_act']
 					);
 					$res4 = $this->db->query($sql, $par);
 				}
@@ -2669,15 +2674,16 @@ class Risk extends APP_Model {
 				$sql = "delete from t_risk_action_plan where risk_id = ?";
 				$this->db->query($sql, array('rid' => $risk_id));
 				
-				$sql = "insert into t_risk_action_plan(risk_id, action_plan, due_date, division) 
-						values(?, ?, ?, ?)";
+				$sql = "insert into t_risk_action_plan(risk_id, action_plan, due_date, division, status_act) 
+						values(?, ?, ?, ?, ?)";
 				foreach ($actplan as $key => $value) {
 					$dd = implode('-', array_reverse( explode('-', $value['due_date']) ));
 					$par = array(
 						'rid' => $risk_id,
 						'ap' => $value['action_plan'],
 						'dd' => $dd,
-						'div' => $value['division']
+						'div' => $value['division'],
+						'ss' => $value['status_act']
 					);
 					$res4 = $this->db->query($sql, $par);
 				}
@@ -3119,15 +3125,17 @@ class Risk extends APP_Model {
 				$sql = "delete from t_risk_action_plan where risk_id = ? ";
 				$this->db->query($sql, array('rid' => $risk_id));
 				
-				$sql = "insert into t_risk_action_plan(risk_id, action_plan, due_date, division) 
-						values(?, ?, ?, ?)";
+				$sql = "insert into t_risk_action_plan(risk_id, action_plan, due_date, division, status_act) 
+						values(?, ?, ?, ?, ?)";
 				foreach ($actplan as $key => $value) {
 					$dd = implode('-', array_reverse( explode('-', $value['due_date']) ));
 					$par = array(
 						'rid' => $risk_id,
 						'ap' => $value['action_plan'],
 						'dd' => $dd,
-						'div' => $value['division']
+						'div' => $value['division'],
+						'ss' => $value['status_act']
+
 					);
 					$res4 = $this->db->query($sql, $par);
 				}
@@ -3219,15 +3227,16 @@ class Risk extends APP_Model {
 				$sql = "delete from t_risk_action_plan where risk_id = ?";
 				$this->db->query($sql, array('rid' => $risk_id));
 				
-				$sql = "insert into t_risk_action_plan(risk_id, action_plan, due_date, division) 
-						values(?, ?, ?, ?)";
+				$sql = "insert into t_risk_action_plan(risk_id, action_plan, due_date, division, status_act) 
+						values(?, ?, ?, ?, ?)";
 				foreach ($actplan as $key => $value) {
 					$dd = implode('-', array_reverse( explode('-', $value['due_date']) ));
 					$par = array(
 						'rid' => $risk_id,
 						'ap' => $value['action_plan'],
 						'dd' => $dd,
-						'div' => $value['division']
+						'div' => $value['division'],
+						'ss' => $value['status_act']
 					);
 					$res4 = $this->db->query($sql, $par);
 				}
@@ -3417,15 +3426,16 @@ class Risk extends APP_Model {
 			}
 			
 			// insert action plan
-			$sql = "insert into t_risk_action_plan_change(risk_id, action_plan_status, action_plan, due_date, division, switch_flag) 
-					values(?, 0, ?, ?, ?, 'P')";
+			$sql = "insert into t_risk_action_plan_change(risk_id, action_plan_status, action_plan, due_date, division, switch_flag, status_act) 
+					values(?, 0, ?, ?, ?, 'P', ?)";
 			foreach ($actplan as $key => $value) {
 				$dd = implode('-', array_reverse( explode('-', $value['due_date']) ));
 				$par = array(
 					'rid' => $risk_id,
 					'ap' => $value['action_plan'],
 					'dd' => $dd,
-					'div' => $value['division']
+					'div' => $value['division'],
+					'ss' => $value['status_act']
 				);
 				$res4 = $this->db->query($sql, $par);
 			}
@@ -3595,15 +3605,16 @@ class Risk extends APP_Model {
 			}
 			
 			// insert action plan
-			$sql = "insert into t_risk_action_plan_change(risk_id, action_plan_status, action_plan, due_date, division,switch_flag) 
-					values(?, 0, ?, ?, ?,'P')";
+			$sql = "insert into t_risk_action_plan_change(risk_id, action_plan_status, action_plan, due_date, division,switch_flag, status_act) 
+					values(?, 0, ?, ?, ?,'P', ?)";
 			foreach ($actplan as $key => $value) {
 				$dd = implode('-', array_reverse( explode('-', $value['due_date']) ));
 				$par = array(
 					'rid' => $risk_id,
 					'ap' => $value['action_plan'],
 					'dd' => $dd,
-					'div' => $value['division']
+					'div' => $value['division'],
+					'ss' => $value['status_act']
 				);
 				$res4 = $this->db->query($sql, $par);
 			}
@@ -3675,15 +3686,16 @@ class Risk extends APP_Model {
 			}
 			
 			// insert action plan
-			$sql = "insert into t_risk_action_plan(risk_id, action_plan_status, action_plan, due_date, division,switch_flag) 
-					values(?, 0, ?, ?, ?, 'P')";
+			$sql = "insert into t_risk_action_plan(risk_id, action_plan_status, action_plan, due_date, division,switch_flag, status_act) 
+					values(?, 0, ?, ?, ?, 'P', ?)";
 			foreach ($actplan as $key => $value) {
 				$dd = implode('-', array_reverse( explode('-', $value['due_date']) ));
 				$par = array(
 					'rid' => $risk_id,
 					'ap' => $value['action_plan'],
 					'dd' => $dd,
-					'div' => $value['division']
+					'div' => $value['division'],
+					'ss' => $value['status_act']
 				);
 				$res4 = $this->db->query($sql, $par);
 			}
@@ -3932,13 +3944,13 @@ class Risk extends APP_Model {
 							risk_id, action_plan_status, action_plan, 
 							due_date, division, assigned_to, 
 							execution_status, execution_explain, execution_evidence, 
-							execution_reason, revised_date, switch_flag
+							execution_reason, revised_date, switch_flag, status_act
 						) 
 						select 
 						risk_id, action_plan_status, action_plan, 
 						due_date, division, assigned_to, 
 						execution_status, execution_explain, execution_evidence, 
-						execution_reason, revised_date, switch_flag
+						execution_reason, revised_date, switch_flag, status_act
 						from t_risk_action_plan_change where switch_flag = 'C' and risk_id = ?";
 				$res3 = $this->db->query($sql, $par);
 				
@@ -4060,11 +4072,11 @@ class Risk extends APP_Model {
 		
 	*/
 		$sql = "update t_risk_action_plan_change 
-				set action_plan = ?, due_date = ?, division = ?
+				set action_plan = ?, due_date = ?, division = ?, status_act = ?
 				where id = ? and risk_id = ?";
 		$par = array(
-			'ap' => $risk['action_plan'], 'dd' => $risk['due_date'], 'division' => $risk['division'],
-			'id' => $action_id, 'risk_id' => $risk_id
+			'ap' => $risk['action_plan'], 'dd' => $risk['due_date'], 'division' => $risk['division'],'status_act' => $risk['status_act'],
+			'id' => $action_id, 'risk_id' => $risk_id, 
 		);
 		$query = $this->db->query($sql, $par);
 
@@ -4087,10 +4099,10 @@ class Risk extends APP_Model {
 	public function actionPlanSaveDraft2($action_id, $risk_id, $risk, $uid) 
 	{
 		$sql = "update t_risk_action_plan 
-				set action_plan = ?, due_date = ?, division = ?
+				set action_plan = ?, due_date = ?, division = ? , status_act = ?
 				where id = ? and risk_id = ?";
 		$par = array(
-			'ap' => $risk['action_plan'], 'dd' => $risk['due_date'], 'division' => $risk['division'],
+			'ap' => $risk['action_plan'], 'dd' => $risk['due_date'], 'division' => $risk['division'], 'status_act' => $risk['status_act'],
 			'id' => $action_id, 'risk_id' => $risk_id
 		);
 		$query = $this->db->query($sql, $par);
@@ -4108,19 +4120,19 @@ class Risk extends APP_Model {
 		$query = $this->db->query($sql, array('id' => $action_id, 'risk_id' => $risk_id));
 		
 		$sql = "update t_risk_action_plan_change 
-				set action_plan = ?, due_date = ?, division = ?
+				set action_plan = ?, due_date = ?, division = ?, status_act = ?
 				where id = ? and risk_id = ?";
 		$par = array(
-			'ap' => $risk['action_plan'], 'dd' => $risk['due_date'], 'division' => $risk['division'],
+			'ap' => $risk['action_plan'], 'dd' => $risk['due_date'], 'division' => $risk['division'], 'status_act' => $risk['status_act'],
 			'id' => $action_id, 'risk_id' => $risk_id
 		);
 		$query = $this->db->query($sql, $par);
 
 		$sql = "update t_risk_action_plan 
-				set action_plan = ?, due_date = ?, division = ?
+				set action_plan = ?, due_date = ?, division = ?, status_act = ?
 				where id = ? and risk_id = ?";
 		$par = array(
-			'ap' => $risk['action_plan'], 'dd' => $risk['due_date'], 'division' => $risk['division'],
+			'ap' => $risk['action_plan'], 'dd' => $risk['due_date'], 'division' => $risk['division'], 'status_act' => $risk['status_act'],
 			'id' => $action_id, 'risk_id' => $risk_id
 		);
 		$query = $this->db->query($sql, $par);
@@ -4131,10 +4143,10 @@ class Risk extends APP_Model {
 	{
 		
 		$sql = "update t_risk_action_plan 
-				set action_plan = ?, due_date = ?, division = ?
+				set action_plan = ?, due_date = ?, division = ?, status_act = ?
 				where id = ? and risk_id = ?";
 		$par = array(
-			'ap' => $risk['action_plan'], 'dd' => $risk['due_date'], 'division' => $risk['division'],
+			'ap' => $risk['action_plan'], 'dd' => $risk['due_date'], 'division' => $risk['division'],'status_act' => $risk['status_act'],
 			'id' => $action_id, 'risk_id' => $risk_id
 		);
 		$query = $this->db->query($sql, $par);
@@ -4270,12 +4282,13 @@ class Risk extends APP_Model {
 			'action_plan' => $risk['action_plan'],
 			'due_date' => $risk['due_date'],
 			'division' => $risk['division'],
+			'status_act' => $risk['status_act'],
 			'id' => $action_id, 
 			'risk_id' => $risk_id
 		);
 		
 		$sql = "update t_risk_action_plan 
-				set action_plan_status = ?,action_plan = ?,due_date = ?,division = ?,assigned_to = (select username from m_user where division_id = '$division' and role_id = 4)
+				set action_plan_status = ?,action_plan = ?,due_date = ?,division = ?,status_act = ?, assigned_to = (select username from m_user where division_id = '$division' and role_id = 4)
 				where id = ? and risk_id = ?";
 
 		$query = $this->db->query($sql, $par);
@@ -4960,9 +4973,9 @@ class Risk extends APP_Model {
 				$add = ' and id = ? ';
 				$par = array('i' => $risk_id, 'a' => $act_id);
 			}
-			$sql = "insert into t_cr_action_plan(change_id, id, risk_id, action_plan_status, action_plan, due_date, division)
+			$sql = "insert into t_cr_action_plan(change_id, id, risk_id, action_plan_status, action_plan, due_date, division, status_act)
 					select 
-					".$rid." as change_id, id, risk_id, action_plan_status, action_plan, due_date, division
+					".$rid." as change_id, id, risk_id, action_plan_status, action_plan, due_date, division, status_act
 					from t_risk_action_plan
 					where risk_id = ? ".$add;
 			$res4 = $this->db->query($sql, $par);
@@ -4997,12 +5010,12 @@ class Risk extends APP_Model {
 			foreach ($actplan as $key => $value) {
 					$sql = "insert into t_cr_action_plan_change(
 								change_id, risk_id, action_plan_status, action_plan, 
-								due_date, division, 
+								due_date, division, status_act,
 								change_flag, data_flag
 							) values(
 								?, ?, 0, ?, 
 								?, ?, 
-								?, ?
+								?, ?, ?
 							)";
 					$dd = implode('-', array_reverse( explode('-', $value['due_date']) ));
 					$par = array(
@@ -5011,6 +5024,7 @@ class Risk extends APP_Model {
 						'ap' => $value['action_plan'],
 						'dd' => $dd,
 						'div' => $value['division'],
+						'ss' => $value['status_act'],
 						'cf' => $value['change_flag'],
 						'df' => $value['data_flag']
 					);
@@ -5268,13 +5282,15 @@ class Risk extends APP_Model {
 							'ap' => $value['action_plan'],
 							'dd' => $dd,
 							'div' => $value['division'],
-							'ch' => 'ADD'
+							'ch' => 'ADD',
+							'ss' => $value['status_act'],
+
 						);
 						$sql = "insert into t_cr_action_plan	
 									(change_id, id, risk_id, action_plan_status, action_plan,
-									due_date, division, change_flag)
+									due_date, division, change_flag, status_act)
 								values(?, NULL, ?, 0, ?,
-									?, ?, ?)";
+									?, ?, ?, ?)";
 						$res4 = $this->db->query($sql, $par);
 
 				}
@@ -5427,13 +5443,14 @@ class Risk extends APP_Model {
 							'ap' => $value['action_plan'],
 							'dd' => $dd,
 							'div' => $value['division'],
-							'ch' => 'ADD'
+							'ch' => 'ADD',
+							'ss' => $value['status_act'],
 						);
 						$sql = "insert into t_cr_action_plan_change	
 									(change_id, id, risk_id, action_plan_status, action_plan,
-									due_date, division, change_flag)
+									due_date, division, change_flag, status_act)
 								values(?, NULL, ?, 0, ?,
-									?, ?, ?)";
+									?, ?, ?, ?)";
 						$res4 = $this->db->query($sql, $par);
 
 				}
@@ -5573,7 +5590,7 @@ class Risk extends APP_Model {
 				cr_id, change_id, id, risk_id, action_plan_status, action_plan, 
 				due_date, division, assigned_to, 
 				execution_status, execution_explain, execution_evidence, 
-				execution_reason, revised_date, switch_flag, change_flag, data_flag
+				execution_reason, revised_date, switch_flag, change_flag, data_flag, status_act
 				from t_cr_action_plan where change_id = ?";
 		$res = $this->db->query($sql, $par);
 		if ($res) {

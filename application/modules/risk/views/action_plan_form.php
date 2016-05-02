@@ -92,6 +92,7 @@
 									<th>Assigned Action Plan</th>
 									<th>Due Date</th>
 									<th>Action Plan Owner</th>
+									<th>Status Action Plan</th>
 								</tr>
 								</thead>
 								<tbody>
@@ -100,6 +101,7 @@
 										<td><?=$action_plan['action_plan']?></td>
 										<td><?=$action_plan['due_date_v']?></td>
 										<td><?=$action_plan['division_v']?></td>
+										<td><?=$action_plan['status_act']?></td>
 									</tr>
 								</tbody>
 							</table>
@@ -139,6 +141,28 @@
 										<?php foreach($division_list as $row) { ?>
 										<option value="<?=$row['ref_key']?>" <?=$row['ref_key'] == $action_plan_change['division'] ? 'SELECTED' : '' ?>><?=$row['ref_value']?></option>
 										<?php } ?>
+									</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label" title="">Status Action Plan </label>
+									<div class="col-md-9">
+									<select class="form-control input-sm" name="status_act">
+										<?php 
+										if($action_plan_change['status_act'] == 'berkala'){
+										?>
+											<option value="berkala">Berkala</option>
+											<option value="tidak berkala">Tidak Berkala</option>
+										<?php
+										}else{
+										?>
+											<option value="tidak berkala">Tidak Berkala</option>
+											<option value="berkala">Berkala</option>
+										<?php
+										}
+										?>
+										
+										
 									</select>
 									</div>
 								</div>

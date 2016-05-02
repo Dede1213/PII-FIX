@@ -90,6 +90,7 @@
 									<th>Action Plan yang ditugaskan</th>
 									<th>Batas Waktu</th>
 									<th>Pemilik Action Plan</th>
+									<th>Status Action Plan</th>
 								</tr>
 								</thead>
 								<tbody>
@@ -98,6 +99,7 @@
 										<td><?=$action_plan['action_plan']?></td>
 										<td><?=$action_plan['due_date_v']?></td>
 										<td><?=$action_plan['division_v']?></td>
+										<td><?=$row['status_act']?></td>
 									</tr>
 								</tbody>
 							</table>

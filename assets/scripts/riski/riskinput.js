@@ -553,23 +553,26 @@ var RiskInput = function() {
                 }
             });
             
-            $('#input-actionplan-add').on('click', function() {
+          $('#input-actionplan-add').on('click', function() {
                 var form1 = $('#input-form-action-plan').validate();
                 var fvalid = form1.form();
                 
                 if (fvalid) {
                     //var tr_idnya2 = $('#tr_idnya2').val();
                     var tr_idnya2 = $('#form-data-revid').val();
+
                     var xplan = $('#input-form-action-plan textarea[name=action_plan]').val();
                     var xdate = $('#input-form-action-plan input[name=due_date]').val();
                     var xdiv_view = $('#input-form-action-plan select[name=division] option:selected').text();
                     var xdiv_id = $('#input-form-action-plan select[name=division] option:selected').val();
+                    var xdiv_status = $('#input-form-action-plan select[name=status_act] option:selected').val();
                     var nnode = {
                         'tr_idnya2' : tr_idnya2,
                         'action_plan' : xplan,
                         'due_date' : xdate,
                         'division_v' : xdiv_view,
-                        'division' : xdiv_id
+                        'division' : xdiv_id,
+                        'status_act' : xdiv_status
                     };
                     
                     me.actionPlanAddRow(nnode);
@@ -913,6 +916,8 @@ var RiskInput = function() {
                 '<td><input type = "hidden" value = "'+nnode.action_plan+'" id = "action_plan'+me.dataActionPlanCounter+'">'+nnode.action_plan+'</td>'+
                 '<td><input type = "hidden" value = "'+nnode.due_date+'" id = "due_date'+me.dataActionPlanCounter+'">'+nnode.due_date+'</td>'+
                 '<td><input type = "hidden" value = "'+nnode.division_v+'" id = "division_v'+me.dataActionPlanCounter+'">'+nnode.division_v+'</td>'+
+                '<td><input type = "hidden" value = "'+nnode.status_act+'" id = "status'+me.dataActionPlanCounter+'">'+nnode.status_act+'</td>'+
+                
                 '<td>'+
                 '<div class="btn-group">'+
                     '<button type="button" class="btn btn-default btn-xs" onclick="modal_ap_edit('+me.dataActionPlanCounter+')" ><i class="fa fa-pencil font-blue"></i></button>'+
@@ -1142,7 +1147,7 @@ var RiskInput = function() {
             gridControlobjective.setAjaxParam("filter_library", fval);
             gridControlobjective.getDataTable().ajax.reload();   
         },
-        submitRiskData: function() {
+       submitRiskData: function() {
             var form1 = $('#input-form').validate();
             var fvalid = form1.form();
             if (fvalid) {
@@ -1197,6 +1202,7 @@ var RiskInput = function() {
                     actplan_param['actplan['+cnt+'][action_plan]'] = value.action_plan;
                     actplan_param['actplan['+cnt+'][due_date]'] = value.due_date;
                     actplan_param['actplan['+cnt+'][division]'] = value.division;
+                    actplan_param['actplan['+cnt+'][status_act]'] = value.status_act;
                     cnt++;
                 });
                 //console.log(impact_param);
@@ -1216,8 +1222,8 @@ var RiskInput = function() {
                         if(data.success) {
                             var mod = MainApp.viewGlobalModal('success', 'Success Inserting your Risk');
                             mod.find('button.btn-ok-success').one('click', function(){
-                               // location.href=site_url+'/riski/RiskRegister/RiskRegisterInput/'+me.dataMode;
-                                location.href=site_url+'/riski/RiskRegister';
+                                //location.href=site_url+'/risk/RiskRegister/RiskRegisterInput/'+me.dataMode;
+                                location.href=site_url+'/risk/RiskRegister';
                             });
                             
                         } else {
@@ -1259,6 +1265,7 @@ $('#form-control-objective').modal('show');
 function modal_ap_edit(a){
     
 //$('#form-data-revid').val(a);
+$('#status_act').val($('#status_act'+a).val());
 $('#action_plan').val($('#action_plan'+a).val());
 $('#due_date').val($('#due_date'+a).val());
 $('#form-data-revid').val(a);

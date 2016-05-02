@@ -3,7 +3,7 @@
 	<div class="page-content">
 		<!-- BEGIN PAGE HEADER-->
 		<h3 class="page-title">
-		Laporan <small>Laporan Risiko</small>
+		Report <small>Risk Report</small>
 		</h3>
 		<div class="page-bar">
 			<ul class="page-breadcrumb">
@@ -25,10 +25,10 @@
 			<div class="form">
 				<form class="form-horizontal">		
 					<div class="form-group">
-						<label class="col-md-3 control-label">Tipe laporan</label>
+						<label class="col-md-3 control-label">Report type</label>
 							<div class="col-md-6">
 								<select class="form-control input-sm" id="typereport">
-									<option value="-">Pilih</option>
+									<option value="-">Choose</option>
 									<option value="excel">MS. Excel</option>
 									<option value="pdf">PDF</option>
 		<!-- 							<option value="word">MS. Word</option> -->
@@ -48,7 +48,7 @@
 										<button id="input-form-submit-button" type="submit" 
 											class="btn blue ladda-button"
 											 data-style="expand-right"
-											>Ajukan</button>
+											>Submit</button>
 									</div>
 								</div>
 							</form>
@@ -67,7 +67,7 @@
 										<button id="input-form-submit-button" type="submit" 
 											class="btn blue ladda-button"
 											 data-style="expand-right"
-											>Ajukan</button>
+											>Submit</button>
 									</div>
 								</div>
 							</form>
@@ -84,7 +84,7 @@
 										<button id="input-form-submit-button" type="submit" 
 											class="btn blue ladda-button"
 											 data-style="expand-right"
-											>Ajukan</button>
+											>Submit</button>
 									</div>
 								</div>
 							</form>

@@ -482,10 +482,12 @@ var ChangeRequest = function() {
 	    		var fvalid = form1.form();
 	    		
 	    		if (fvalid) {
-	    			var xplan = $('#input-form-action-plan input[name=action_plan]').val();
+	    			var xplan = $('#input-form-action-plan textarea[name=action_plan]').val();
 	    			var xdate = $('#input-form-action-plan input[name=due_date]').val();
 	    			var xdiv_view = $('#input-form-action-plan select[name=division] option:selected').text();
 	    			var xdiv_id = $('#input-form-action-plan select[name=division] option:selected').val();
+                    var xdiv_status = $('#input-form-action-plan select[name=status_act] option:selected').val();
+                    
 	    			
 	    			if (me.actionPlanChange != null) {
 	    				var cf = 'CHANGE';
@@ -500,7 +502,8 @@ var ChangeRequest = function() {
 	    					'action_plan' : xplan,
 	    					'due_date' : xdate,
 	    					'division_v' : xdiv_view,
-	    					'division' : xdiv_id
+	    					'division' : xdiv_id,
+                            'status_act' : xdiv_status
 	    				};
 	    				me.actionPlanEditRow(me.actionPlanChange, nnode);
 	    			} else {
@@ -512,7 +515,8 @@ var ChangeRequest = function() {
 	    					'action_plan' : xplan,
 	    					'due_date' : xdate,
 	    					'division_v' : xdiv_view,
-	    					'division' : xdiv_id
+	    					'division' : xdiv_id,
+                            'status_act' : xdiv_status,
 	    				};
 	    				me.actionPlanAddRow(nnode);
 	    			}
@@ -583,12 +587,14 @@ var ChangeRequest = function() {
         			'id' : edData.id,
         			'risk_id' : edData.risk_id,
         			'change_flag' : edData.change_flag,
-        			'data_flag': edData.data_flag
+        			'data_flag': edData.data_flag,
+                    'status_act': edData.status_act
         		};
         		
-        		$('#input-form-action-plan input[name=action_plan]').val(edData.action_plan);
+        		$('#input-form-action-plan textarea[name=action_plan]').val(edData.action_plan);
         		$('#input-form-action-plan input[name=due_date]').val(edData.due_date);
         		$('#input-form-action-plan select[name=division]').val(edData.division);
+                $('#input-form-action-plan select[name=status_act]').val(edData.status_act);
 
         	});
         	
@@ -774,7 +780,8 @@ var ChangeRequest = function() {
         				'action_plan' : val.action_plan,
         				'due_date' : val.due_date_v,
         				'division_v' : val.division_v,
-        				'division' : val.division
+        				'division' : val.division,
+                        'status_act' : val.status_act
         			}
         			me.primaryactionPlanAddRow(nnode);
         		});
@@ -882,6 +889,7 @@ var ChangeRequest = function() {
         		'<td>'+nnode.action_plan+'</td>'+
         		'<td>'+nnode.due_date+'</td>'+
         		'<td>'+nnode.division_v+'</td>'+
+                '<td>'+nnode.status_act+'</td>'+
         	'</tr>');
         	
         	me.primaryactionPlanAdd(nnode, me.primarydataActionPlanCounter);
@@ -1033,6 +1041,7 @@ var ChangeRequest = function() {
         		'<td>'+nnode.action_plan+'</td>'+
         		'<td>'+nnode.due_date+'</td>'+
         		'<td>'+nnode.division_v+'</td>'+
+                '<td>'+nnode.status_act+'</td>'+
         		'<td>'+
         		act_str+
         		'</td>'+
@@ -1060,6 +1069,7 @@ var ChangeRequest = function() {
         		'<td>'+nnode.action_plan+'</td>'+
         		'<td>'+nnode.due_date+'</td>'+
         		'<td>'+nnode.division_v+'</td>'+
+                '<td>'+nnode.status_act+'</td>'+
         		'<td>'+
         		act_str+
         		'</td>'
@@ -1134,7 +1144,8 @@ var ChangeRequest = function() {
         				'action_plan' : val.action_plan,
         				'due_date' : val.due_date_v,
         				'division_v' : val.division_v,
-        				'division' : val.division
+        				'division' : val.division,
+                        'status_act' : val.status_act
         			}
         			me.actionPlanAddRow(nnode);
         		});
@@ -1225,6 +1236,7 @@ var ChangeRequest = function() {
             		actplan_param['actplan['+cnt+'][action_plan]'] = value.action_plan;
             		actplan_param['actplan['+cnt+'][due_date]'] = value.due_date;
             		actplan_param['actplan['+cnt+'][division]'] = value.division;
+                    actplan_param['actplan['+cnt+'][status_act]'] = value.status_act;
             		cnt++;
             	});
             	//console.log(impact_param);
@@ -1235,7 +1247,7 @@ var ChangeRequest = function() {
             	}
             	
             	Metronic.blockUI({ boxed: true });
-            	var url = site_url+'/risk/RiskRegister/submitChangeRisk';
+            	var url = site_url+'/risk/RiskRegister/submitChangeRisk/'+g_time_compare;
 
             	$.post(
             		url,
@@ -1279,3 +1291,4 @@ $('#form-control-revid').val(a);
 
 $('#form-control').modal('show'); 
 }
+

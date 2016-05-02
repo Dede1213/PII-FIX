@@ -593,7 +593,8 @@ class MainPic extends APP_Controller {
 				'action_plan' => $_POST['action_plan'],
 				'due_date' => $dd,
 				'division' => $_POST['division'],
-				'created_by' => $data['session']['username']
+				'created_by' => $data['session']['username'],
+				'status_act' => $_POST['status_act']
 			);
 			
 			$this->load->model('risk/risk');
@@ -632,7 +633,9 @@ class MainPic extends APP_Controller {
 				'action_plan' => $_POST['action_plan'],
 				'due_date' => $dd,
 				'division' => $_POST['division'],
-				'created_by' => $data['session']['username']
+				'created_by' => $data['session']['username'],
+				'status_act' => $_POST['status_act']
+				
 			);
 			
 			$this->load->model('risk/risk');

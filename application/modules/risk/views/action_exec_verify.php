@@ -56,6 +56,12 @@
 							<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$action_plan['division_v']?>" placeholder="">
 						</div>
 					</div>
+					<div class="form-group">
+						<label class="col-md-2 control-label smaller cl-compact">Status Action Plan</label>
+						<div class="col-md-9">
+							<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$action_plan['status_act']?>" placeholder="">
+						</div>
+					</div>
 					<hr/>
 					<div class="form-group">
 						<label class="col-md-2 control-label smaller cl-compact">Status  </label>

@@ -42,7 +42,8 @@ var ChangeRequest = function() {
         				'division_v' : val.division_v,
         				'division' : val.division,
         				'data_flag' : val.data_flag,
-        				'change_flag' : val.change_flag
+        				'change_flag' : val.change_flag,
+                        'status_act' : val.status_act
         			}
         			
         			me.primaryactionPlanAddRow(nnode);
@@ -99,7 +100,8 @@ var ChangeRequest = function() {
         				'division_v' : val.division_v,
         				'division' : val.division,
         				'data_flag' : val.data_flag,
-        				'change_flag' : val.change_flag
+        				'change_flag' : val.change_flag,
+                        'status_act' : val.status_act
         			}
         			me.actionPlanAddRow(nnode);
         		});
@@ -211,6 +213,7 @@ var ChangeRequest = function() {
         		'<td>'+nnode.action_plan+'</td>'+
         		'<td>'+nnode.due_date+'</td>'+
         		'<td>'+nnode.division_v+'</td>'+
+                '<td>'+nnode.status_act+'</td>'+
         	'</tr>');
         	
         	me.primaryactionPlanAdd(nnode, me.primarydataActionPlanCounter);
@@ -334,6 +337,7 @@ var ChangeRequest = function() {
         		'<td>'+nnode.action_plan+'</td>'+
         		'<td>'+nnode.due_date+'</td>'+
         		'<td>'+nnode.division_v+'</td>'+
+                '<td>'+nnode.status_act+'</td>'+
         		'<td></td>'+
         	'</tr>');
         	
@@ -354,6 +358,7 @@ var ChangeRequest = function() {
         		'<td>'+nnode.action_plan+'</td>'+
         		'<td>'+nnode.due_date+'</td>'+
         		'<td>'+nnode.division_v+'</td>'+
+                '<td>'+nnode.status_act+'</td>'+
         		'<td>'+
         		act_str+
         		'</td>'

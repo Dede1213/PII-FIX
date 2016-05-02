@@ -288,6 +288,7 @@
 												<th>Usulan Action Plan</th>
 												<th>Batas Waktu</th>
 												<th>Pemilik Action Plan</th>
+												<th>status Action Plan</th>
 												<th width="30px">&nbsp;</th>
 											</tr>
 											</thead>
@@ -548,6 +549,19 @@
 		<input type = "hidden" id = "tr_idnya2" >
 			<form id="input-form-action-plan" role="form" class="form-horizontal">
 				<div class="form-body">
+					<div class="form-group">
+						<label class="col-md-3 control-label">Status Action Plan <span class="required">* </span></label>
+						<div class="col-md-9">
+						<select class="form-control input-sm" name="status_act" id = "status_act">
+							
+							<option value="">Choose one...</option>
+							<option value="berkala">Berkala</option>
+							<option value="tidak berkala">Tidak Berkala</option>
+							
+						</select>
+						</div>
+					</div>
+
 					<div class="form-group">
 					<input type = "hidden" id = "form-data-revid">
 						<label class="col-md-3 control-label smaller cl-compact" title="isikan kolom ini dengan deskripsi dari penanganan risiko action yang harus dilakukan dalam menangani risiko">Usulan Action Plan</label>

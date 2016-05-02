@@ -184,8 +184,8 @@
 									<th>Existing Control ID</th>
 									<th>Evaluation on Existing Control</th>
 									<th>Existing Control</th>
-									
 									<th>Control Owner</th>
+									<th>Status Action Plan</th>
 								</tr>
 								</thead>
 								<tbody>
@@ -195,6 +195,7 @@
 										<td><?=$row['risk_existing_control']?></td>
 										<td><?=$row['risk_evaluation_control']?></td>
 										<td><?=$row['risk_control_owner']?></td>
+										<td><?=$row['status_act']?></td>
 									</tr>
 									<?php } ?>
 								</tbody>
@@ -208,6 +209,7 @@
 										<th>Suggested Action Plan</th>
 										<th>Due Date</th>
 										<th>Action Plan Owner</th>
+										<th>Status Action Plan</th>
 									</tr>
 									</thead>
 									<tbody>
@@ -216,6 +218,7 @@
 											<td><?=$row['action_plan']?></td>
 											<td><?=$row['due_date_v']?></td>
 											<td><?=$row['division_v']?></td>
+											<td><?=$row['status_act']?></td>
 										</tr>
 										<?php } ?>
 									</tbody>

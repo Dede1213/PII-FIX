@@ -14,6 +14,22 @@ class Mriskregister extends APP_Model {
 		
 		return $res;
 	}
+
+	public function getUserRole($parent = 0) {
+		
+		if ($parent == 2){
+			$sql = "select * from m_role_status where id_role_status != 4  ";
+		}else{
+			$sql = "select * from m_role_status where id_role_status = 4 ";
+		}
+		$query = $this->db->query($sql, array('divid' => $parent));
+		
+		foreach($query->result_array() as $row) {
+			$res[] = $row;
+		}
+		
+		return $res;
+	}
 	
 	public function getRiskLikelihood() {
 		$sql = 'select *
@@ -781,5 +797,28 @@ class Mriskregister extends APP_Model {
 		$rid = $this->insertRiskRegister2($risk, $code, $impact, $actplan, $control, $objective);
 		return true;
 		}
+	}
+
+
+	public function time_compare($risk_id){
+	$sql = "select created_date from t_risk where risk_id = '".$risk_id."' ";
+	$query = $this->db->query($sql);
+	$row = $query->row();
+	return $row;
+	}
+
+	
+	function cek_risk_compare($risk_id, $time_compare){
+	
+	$sql = "select created_date from t_risk where risk_id = '".$risk_id."' and created_date = '".$time_compare."' ";
+	$query = $this->db->query($sql);
+	if ($query->num_rows() > 0)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}	
 	}
 }

@@ -249,4 +249,14 @@ class Usermodel extends APP_Model {
 
 		return $res;
 	}
+
+	function cekStatusLogin($username){
+
+	$sql = "select status_login from m_user_login where username = '".$username."' ";
+	$query = $this->db->query($sql);
+	$row = $query->row();
+	$hasil = $row->status_login;
+	return $hasil;
+	}
+
 }

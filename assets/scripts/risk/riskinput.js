@@ -562,6 +562,7 @@ var RiskInput = function() {
 	        		me.controlAddRow(nnode);
 	        		
 	        		$('#form-control').modal('hide');
+                    $('#form-control-2').modal('hide');
         		}
         	});
 
@@ -598,16 +599,19 @@ var RiskInput = function() {
         		if (fvalid) {
 					//var tr_idnya2 = $('#tr_idnya2').val();
 					var tr_idnya2 = $('#form-data-revid').val();
+
         			var xplan = $('#input-form-action-plan textarea[name=action_plan]').val();
         			var xdate = $('#input-form-action-plan input[name=due_date]').val();
         			var xdiv_view = $('#input-form-action-plan select[name=division] option:selected').text();
         			var xdiv_id = $('#input-form-action-plan select[name=division] option:selected').val();
+                    var xdiv_berkala = $('#input-form-action-plan select[name=berkala] option:selected').val();
         			var nnode = {
 						'tr_idnya2' : tr_idnya2,
         				'action_plan' : xplan,
         				'due_date' : xdate,
         				'division_v' : xdiv_view,
-        				'division' : xdiv_id
+        				'division' : xdiv_id,
+                        'period' : xdiv_berkala
         			};
         			
         			me.actionPlanAddRow(nnode);
@@ -692,6 +696,40 @@ var RiskInput = function() {
         		});
         	});
 
+            $('#control_id').change(function() {
+                var val = $(this).val();
+                me.loadCategorySelectcontrol('control_status', val);
+                });
+
+            $('#input-control-add-3').on('click', function() {
+                var form1 = $('#input-form-control-3').validate();
+                var fvalid = form1.form();
+                 
+                if (fvalid) {
+                    var xcid = $('#input-form-control-3 input[name=existing_control_id]').val();
+                    var xexis = $('#input-form-control-3 input[name=risk_existing_control]').val();
+                    var xeval = $('#input-form-control-3 input[name=risk_evaluation_control]').val();
+                    var xowner = $('#input-form-control-3 select[name=risk_control_owner]').val();
+                    
+                    var tr_id = $('#form-control-revid-3').val();
+                    
+                    $("#tr_c"+tr_id).html("");
+                     
+                    var nnode = {
+                        'tr_id' : tr_id,
+                        'existing_control_id' : xcid,
+                        'risk_existing_control' : xexis,
+                        'risk_evaluation_control' : xeval,
+                        'risk_control_owner' : xowner
+                    };
+                    
+                    me.controlAddRow(nnode);
+                    
+                    $('#form-control-2').modal('hide');
+                    $('#form-control-3').modal('hide');
+                }
+            });
+
           
         	
         	me.loadRiskLevelList();
@@ -702,6 +740,18 @@ var RiskInput = function() {
             handleValidationObjective();
         	handleValidationAction();
         },
+
+        loadCategorySelectcontrol: function(sel_id, parent) {
+                if(parent == 1){
+                $('#form-control').modal('show');
+                $('#form-control-2').modal('hide');
+            }else{ 
+                $('#form-control-3').modal('show');
+                 $('#form-control-2').modal('hide');
+            }
+             },
+            
+
         initLoadCategory: function() {
         	// init Category select
         	var cnt1 = cnt2 = cnt3 = 0; 
@@ -910,6 +960,8 @@ var RiskInput = function() {
         		'<td><input type = "hidden" value = "'+nnode.action_plan+'" id = "action_plan'+me.dataActionPlanCounter+'">'+nnode.action_plan+'</td>'+
         		'<td><input type = "hidden" value = "'+nnode.due_date+'" id = "due_date'+me.dataActionPlanCounter+'">'+nnode.due_date+'</td>'+
         		'<td><input type = "hidden" value = "'+nnode.division_v+'" id = "division_v'+me.dataActionPlanCounter+'">'+nnode.division_v+'</td>'+
+                '<td><input type = "hidden" value = "'+nnode.perio+'" id = "period'+me.dataActionPlanCounter+'">'+nnode.period+'</td>'+
+                
         		'<td>'+
         		'<div class="btn-group">'+
 					'<button type="button" class="btn btn-default btn-xs" onclick="modal_ap_edit('+me.dataActionPlanCounter+')" ><i class="fa fa-pencil font-blue"></i></button>'+
@@ -1194,6 +1246,7 @@ var RiskInput = function() {
 	        		actplan_param['actplan['+cnt+'][action_plan]'] = value.action_plan;
 	        		actplan_param['actplan['+cnt+'][due_date]'] = value.due_date;
 	        		actplan_param['actplan['+cnt+'][division]'] = value.division;
+                    actplan_param['actplan['+cnt+'][period]'] = value.period;
 	        		cnt++;
 	        	});
 	        	//console.log(impact_param);

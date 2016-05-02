@@ -93,7 +93,7 @@
 							<div class="form-group">
 								<label class="col-md-3 control-label">Role</label>
 								<div class="col-md-6">
-									<select class="form-control" name="role_id">
+									<select class="form-control" name="role_id" id="role_id">
 										<?php foreach($role_list as $v) { ?>
 										<option value="<?=$v['key']?>"><?=$v['value']?></option>
 										<?php } ?>
@@ -103,10 +103,13 @@
 							<div class="form-group">
 								<label class="col-md-3 control-label">Role Status</label>
 								<div class="col-md-6">
-									<select class="form-control" name="role_status">
-										<?php foreach($role_status as $v) { ?>
-										<option value="<?=$v['key']?>"><?=$v['value']?></option>
-										<?php } ?>
+									<select class="form-control" name="role_status" id="role_status">
+										
+										<?php// foreach($role_status as $v) { ?>
+										<!--
+										<option value="<?//=$v['key']?>"><?//=$v['value']?></option>
+										-->
+										<?php// } ?>
 									</select>
 								</div>
 							</div>

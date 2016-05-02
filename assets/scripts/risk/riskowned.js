@@ -408,6 +408,40 @@ var RiskOwned = function() {
         			location.href=site_url+'/main/mainpic';
         		});
         	});
+
+             $('#control_id').change(function() {
+                var val = $(this).val();
+                me.loadCategorySelectcontrol('control_status', val);
+                });
+
+            $('#input-control-add-3').on('click', function() {
+                var form1 = $('#input-form-control-3').validate();
+                var fvalid = form1.form();
+                 
+                if (fvalid) {
+                    var xcid = $('#input-form-control-3 input[name=existing_control_id]').val();
+                    var xexis = $('#input-form-control-3 input[name=risk_existing_control]').val();
+                    var xeval = $('#input-form-control-3 input[name=risk_evaluation_control]').val();
+                    var xowner = $('#input-form-control-3 select[name=risk_control_owner]').val();
+                    
+                    var tr_id = $('#form-control-revid-3').val();
+                    
+                    $("#tr_c"+tr_id).html("");
+                     
+                    var nnode = {
+                        'tr_id' : tr_id,
+                        'existing_control_id' : xcid,
+                        'risk_existing_control' : xexis,
+                        'risk_evaluation_control' : xeval,
+                        'risk_control_owner' : xowner
+                    };
+                    
+                    me.controlAddRow(nnode);
+                    
+                    $('#form-control-2').modal('hide');
+                    $('#form-control-3').modal('hide');
+                }
+            });
         	
         	me.loadInitialData();
         	me.loadRiskLevelList();
@@ -417,6 +451,17 @@ var RiskOwned = function() {
         	handleValidationControl();
         	handleValidationAction();
         },
+
+        loadCategorySelectcontrol: function(sel_id, parent) {
+                if(parent == 1){
+                $('#form-control').modal('show');
+                $('#form-control-2').modal('hide');
+            }else{ 
+                $('#form-control-3').modal('show');
+                 $('#form-control-2').modal('hide');
+            }
+             },
+             
         loadInitialData: function() {
         	var me = this;
         	Metronic.blockUI({ boxed: true });

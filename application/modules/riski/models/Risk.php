@@ -6296,5 +6296,18 @@ class Risk extends APP_Model {
 	
 	}
 	
+	function cek_changerequest($risk_id){
+	$sql = "select risk_id from t_cr_risk where risk_id = '".$risk_id."' and cr_status = 0";
+	$query = $this->db->query($sql);
+	if ($query->num_rows() > 0)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}	
+	}
+
 	
 }

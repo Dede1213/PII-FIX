@@ -485,7 +485,8 @@ class User extends APP_Controller {
 				'value' => $role['role_name']
 			);
 		}
-		
+
+		//udah ga kepake akibat revisi 3
 		$array_role_status = array("PR (PIC Division - RAC)","UR (User - RAC)","HR (Head Division - RAC)","NONE");
 		foreach($array_role_status as $key){			
 			$data['role_status'][] = array(

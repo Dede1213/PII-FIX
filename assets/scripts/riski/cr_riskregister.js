@@ -1283,7 +1283,7 @@ var ChangeRequest = function() {
                 }
                 
                 Metronic.blockUI({ boxed: true });
-                var url = site_url+'/risk/RiskRegister/submitChangeRisk';
+                var url = site_url+'/risk/RiskRegister/submitChangeRisk/'+g_time_compare;
 
                 $.post(
                     url,
@@ -1296,6 +1296,11 @@ var ChangeRequest = function() {
                                location.href=site_url+'/maini/#tab_change_request_list';
                             });
                             
+                        }else if(data.time_compare){
+                            var mod = MainApp.viewGlobalModal('warning-maintenance', 'Risiko ini sudah di perbarui  RAC, Mohon ulangi kembali');
+                            mod.find('button.btn-ok-success').one('click', function(){
+                                location.href=site_url+'/main';
+                            });
                         } else {
                             
                             //ubah

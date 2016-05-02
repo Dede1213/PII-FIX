@@ -91,14 +91,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                    
                    <?php 
                             $status = $this->input->get('status');
-                            if ($status== 'false'){
+                            if ($status == 'false'){
                      ?>
                             <div class="alert alert-danger">
                             <span id="">Invalid Username / Password !</span>
                             </div>
                     <?php
+                            }else if ($status == 'device') {
+                    ?>
+                            <div class="alert alert-danger">
+                            <span id="">Your Account still login at another device, Please Logout First</span>
+                            </div>
+                    <?php
                             }
-                   ?>
+                    ?>
                  <div class="form-group">
                     <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
                     <label class="control-label visible-ie8 visible-ie9">Username</label>

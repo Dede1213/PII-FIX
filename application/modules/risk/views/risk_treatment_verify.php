@@ -175,7 +175,7 @@ WHERE t_risk.risk_id ='$id'";
 									<h4>Control</h4>
 								</div>
 								<div class="col-md-6 clearfix">
-									<a href="#form-control" id="button-form-control-open" data-toggle="modal" class="btn default green pull-right btn-sm">
+									<a href="#form-control-2" id="button-form-control-open" data-toggle="modal" class="btn default green pull-right btn-sm">
 									<i class="fa fa-plus"></i>
 									<span class="hidden-480">
 									Add Control </span>
@@ -487,7 +487,7 @@ WHERE t_risk.risk_id ='$id'";
 									<h4>Control</h4>
 								</div>
 								<div class="col-md-6 clearfix">
-									<a href="#form-control" id="button-form-control-open" data-toggle="modal" class="btn default green pull-right btn-sm">
+									<a href="#form-control-2" id="button-form-control-open" data-toggle="modal" class="btn default green pull-right btn-sm">
 									<i class="fa fa-plus"></i>
 									<span class="hidden-480">
 									Add Control </span>
@@ -578,7 +578,34 @@ WHERE t_risk.risk_id ='$id'";
 	</div>
 </div>
 
-<!-- CONTROL -->
+<!-- CONTROL Option  -->
+<div id="form-control-2" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+		<h4 class="modal-title">Add Control</h4>
+	</div>
+	<div class="modal-body">
+		
+			<form id="input-form-control2" role="form" class="form-horizontal">
+				<div class="form-body">
+					<div class="form-group">
+								<label class="col-md-3 control-label">Add Control</label>
+								<div class="col-md-6">
+									<select class="form-control" name="control_id" id="control_id">
+										
+										<option value="-">Choose One</option>
+										<option value="1">Available</option>
+										<option value="2">Not Available</option>
+										
+									</select>
+								</div>
+							</div>
+				</div>
+			</form>
+	</div>
+</div>
+
+<!-- CONTROL Available -->
 <div id="form-control" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
@@ -587,9 +614,9 @@ WHERE t_risk.risk_id ='$id'";
 	<div class="modal-body">
 		
 			<form id="input-form-control" role="form" class="form-horizontal">
-			<input type = "hidden" id = "tr_idnya">
 				<div class="form-body">
 					<div class="form-group">
+					<input type = "hidden" id = "form-control-revid">
 						<label class="col-md-3 control-label smaller cl-compact">Existing Control ID</label>
 						<div class="col-md-9">
 							<div class="input-group">
@@ -601,13 +628,13 @@ WHERE t_risk.risk_id ='$id'";
 							</div>
 						</div>
 					</div>
-					
+
 					<div class="form-group">
 					<input type = "hidden" id = "form-control-revid">
-						<label class="col-md-3 control-label smaller cl-compact" title="fill this field with the effectiveness level of existing control (refers to control assessment criteria)">Evaluation on Existing Control </label>
+						<label class="col-md-3 control-label smaller cl-compact" title="fill this field with the effectiveness level of existing control (refers to control assessment criteria)">Evaluation on Existing Control <span class="required">* </span></label>
 						<div class="col-md-9">
 							<div class="input-group">
-								<input type="text" class="form-control input-sm" readonly="true" name="risk_existing_control" id = "risk_existing_control" placeholder="" value="NONE">
+								<input type="text" class="form-control input-sm" readonly="true" name="risk_existing_control" id = "risk_existing_control" placeholder="" value="">
 								<span class="input-group-btn">
 								<button class="btn btn-primary btn-sm" type="button" data-toggle="modal" href="#modal-control-existing"><i class="fa fa-search fa-fw"/></i></button>
 								</span>
@@ -615,30 +642,23 @@ WHERE t_risk.risk_id ='$id'";
 							</div>
 						</div>
 					</div>
-					<!--
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Existing Control </label>
+						<label class="col-md-3 control-label smaller cl-compact" >Existing Control <span class="required">* </span></label>
 						<div class="col-md-9">
-						<textarea class="form-control input-sm" rows="3" name="risk_existing_control" placeholder="">NONE</textarea>
-						<button id="button_clear_control" type="button" class="hide btn red btn-xs" style="margin-top: 5px;"><i class="fa fa-minus-circle font-white"></i> Clear Existing Control</button>
+						<input type="text" class="form-control input-sm" value="" name="risk_evaluation_control" id = "risk_evaluation_control" placeholder="">
 						</div>
 					</div>
-					-->
+					
 					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" title="fill this field with the description of any action (e.g.policies, procedures, or activities) taken by relevant personnel (Control Owner), designed to ensure that risks are contained within the risk appetite/tolerance">Existing Control </label>
-						<div class="col-md-9">
-						<input type="text" class="form-control input-sm" name="risk_evaluation_control" id = "risk_evaluation_control"placeholder="" value="NONE">
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" title="fill this field with the assigned person who is responsible for the business unit, which owns the controls associated with the risk event">Control Owner </label>
+						<label class="col-md-3 control-label smaller cl-compact" title="fill this field with the assigned person who is responsible for the business unit, which owns the controls associated with the risk event">Control Owner <span class="required">* </span></label>
 						<div class="col-md-9">
 						<select class="form-control input-sm" name="risk_control_owner" id = "risk_control_owner">
-										<option value="NONE">NONE</option>
+										<option value="">Choose One</option>
 										<?php foreach($division_list as $row) { ?>
 										<option value="<?=$row['ref_key']?>"><?=$row['ref_value']?></option>
 										<?php } ?>
-									</select>
+						</select>
+					<!-- <input type="text" class="form-control input-sm" name="risk_control_owner" placeholder=""> -->
 						</div>
 					</div>
 				</div>
@@ -652,6 +672,47 @@ WHERE t_risk.risk_id ='$id'";
 			>Add</button>
 	</div>
 </div>
+
+<!-- CONTROL Not Available -->
+<div id="form-control-3" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+		<h4 class="modal-title">Add Control</h4>
+	</div>
+	<div class="modal-body">
+			<form id="input-form-control-3" role="form" class="form-horizontal">
+				<div class="form-body">
+					<div class="form-group">
+								<div class="form-group">
+								<label class="col-md-3 control-label">Add Control</label>
+								<div class="col-md-6">
+									<select class="form-control" name="control_id" id="control_id">
+										
+										<option value="-">Not Available</option>
+										
+									</select>
+								</div>
+							</div>
+								<input type="hidden" class="form-control input-sm" readonly="true" name="existing_control_id" id = "existing_control_id" placeholder="">
+								<input type = "hidden" id = "form-control-revid-3">
+								<input type="hidden" class="form-control input-sm" readonly="true" name="risk_existing_control" id = "risk_existing_control" placeholder="" value="Not Available">
+								<input type="hidden" class="form-control input-sm" value="Not Available" name="risk_evaluation_control" id = "risk_evaluation_control" placeholder="">
+								<select style="display:none;" name="risk_control_owner" id = "risk_control_owner">
+								<option value="Not Available">NONE</option>
+								</select>
+					</div>
+				</div>
+			</form>
+	</div>
+	<div class="modal-footer">
+		<button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+		<button id="input-control-add-3" type="button" 
+			class="btn blue ladda-button"
+			 data-style="expand-right"
+			>Add</button>
+	</div>
+</div>
+
 
 <!-- ACTION PLAN -->
 <div id="form-data" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">

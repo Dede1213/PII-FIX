@@ -408,6 +408,11 @@
 	</div>
 </div>
 
+
+<?php
+$time_compare_format = str_replace(' ', '_', $time_compare);
+?>
+
 <?php if ($valid_entry) { ?>
 <script type="text/javascript">
 	var g_risk_id = <?=$risk_id?>;
@@ -415,7 +420,9 @@
 	<?php if (isset($act_id)) { ?> var g_act_id = <?=$act_id?>;<?php } ?>
 	var g_username = null;
 	var g_change_type = '<?=$change_type?>';
+	var g_time_compare = '<?=$time_compare_format?>';
 </script>
+
 <!-- OBJECTIVE -->
 <div id="form-control-objective" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
 	<div class="modal-header">

@@ -673,6 +673,13 @@ class MainRac extends APP_Controller {
 					$objective[] = $v;
 				}
 				
+
+				$cek_changerequest = $this->risk->cek_changerequest($_POST['risk_id']);
+
+				if($cek_changerequest){
+					$resp['msg'] = 'You have change request for this Risk';
+				}else{
+
 				$res = $this->risk->updateRisk1($_POST['risk_id'], $code, $risk, $impact_level, $actplan, $control, $objective, $data['session']['username'], $user);
 
 				//$res = $this->risk->updateRisk1change($_POST['risk_id'], $code, $risk, $impact_level, $actplan, $control, $data['session']['username']);
@@ -691,6 +698,8 @@ class MainRac extends APP_Controller {
 					$resp['success'] = false;
 					$resp['msg'] = $this->db->error();
 				}
+			}
+			
 			} else {
 				$resp['msg'] = 'You Are Not Allowed to Modify this Risk';
 			}
@@ -844,6 +853,12 @@ class MainRac extends APP_Controller {
 					$objective[] = $v;
 				}
 				
+				$cek_changerequest = $this->risk->cek_changerequest($_POST['risk_id']);
+
+				if($cek_changerequest){
+					$resp['msg'] = 'You have change request for this Risk';
+				}else{
+
 				$res = $this->risk->updateRiskrac($_POST['risk_id'], $code, $risk, $impact_level, $actplan, $control, $objective, $data['session']['username']);
 				//$res = $this->risk->riskDeleteChange($_POST['risk_id']);
 				
@@ -851,7 +866,7 @@ class MainRac extends APP_Controller {
 					$dd = implode('-', array_reverse( explode('-', $_POST['add_user_date_changed']) ));
 					$res = $this->risk->riskAddUser($_POST['risk_id'], $_POST['add_user_username'], $dd);
 				}
-				
+
 				$resp = array();
 				if ($res) {
 					$resp['success'] = true;
@@ -860,6 +875,8 @@ class MainRac extends APP_Controller {
 					$resp['success'] = false;
 					$resp['msg'] = $this->db->error();
 				}
+			}
+
 			} else {
 				$resp['msg'] = 'You Are Not Allowed to Modify this Risk';
 			}
@@ -1005,6 +1022,13 @@ class MainRac extends APP_Controller {
 					$objective[] = $v;
 				}
 				
+				$cek_changerequest = $this->risk->cek_changerequest($_POST['risk_id']);
+				
+
+				if($cek_changerequest){
+					$resp['msg'] = 'You have change request for this Risk';
+				}else{
+
 				$res = $this->risk->updateRiskracsave($_POST['risk_id'], $code, $risk, $impact_level, $actplan, $control, $objective, $data['session']['username']);
 				
 				$resp = array();
@@ -1015,6 +1039,8 @@ class MainRac extends APP_Controller {
 					$resp['success'] = false;
 					$resp['msg'] = $this->db->error();
 				}
+			}
+
 			} else {
 				$resp['msg'] = 'You Are Not Allowed to Modify this Risk';
 			}
@@ -1084,6 +1110,12 @@ class MainRac extends APP_Controller {
 				foreach($_POST['objective'] as $v) {
 					$objective[] = $v;
 				}
+
+				$cek_changerequest = $this->risk->cek_changerequest($_POST['risk_id']);
+
+				if($cek_changerequest){
+					$resp['msg'] = 'You have change request for this Risk';
+				}else{
 				
 				$res = $this->risk->updateRisksave($_POST['risk_id'], $code, $risk, $impact_level, $actplan, $control, $objective, $data['session']['username'],$user);
 				
@@ -1095,6 +1127,9 @@ class MainRac extends APP_Controller {
 					$resp['success'] = false;
 					$resp['msg'] = $this->db->error();
 				}
+
+			}
+
 			} else {
 				$resp['msg'] = 'You Are Not Allowed to Modify this Risk';
 			}
@@ -1163,6 +1198,12 @@ class MainRac extends APP_Controller {
 				foreach($_POST['objective'] as $v) {
 					$objective[] = $v;
 				}
+
+				$cek_changerequest = $this->risk->cek_changerequest($_POST['risk_id']);
+
+				if($cek_changerequest){
+					$resp['msg'] = 'You have change request for this Risk';
+				}else{
 				
 				$res = $this->risk->updateRisk2($_POST['risk_id'], $code, $risk, $impact_level, $actplan, $control, $objective, $data['session']['username']);
 				//$res = $this->risk->riskSwitchPrimary($_POST['risk_id']);
@@ -1175,6 +1216,8 @@ class MainRac extends APP_Controller {
 					$resp['success'] = false;
 					$resp['msg'] = $this->db->error();
 				}
+			}
+
 			} else {
 				$resp['msg'] = 'You Are Not Allowed to Modify this Risk';
 			}

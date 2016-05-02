@@ -164,7 +164,22 @@ var User = function() {
     	        	me.moveRisk(data);
     	        });
 
+    	        $('#role_id').change(function() {
+        		var val = $(this).val();
+        		me.loadCategorySelect('role_status', val);
+        		});
+
 	        },
+
+	        loadCategorySelect: function(sel_id, parent) {
+        	$('#'+sel_id)[0].options.length = 0;
+        	$.getJSON( site_url+"/risk/RiskRegister/getUserRole/"+parent, function( data ) {
+        		$.each( data, function( key, val ) {
+        		    $('#'+sel_id).append($('<option>').text(val.role_status).attr('value', val.role_status));
+        		});
+        		$('#'+sel_id).trigger('change');
+        	});
+       		 },
 
 	        moveRisk: function(data) {
 	        	$('#input-form-move')[0].reset();

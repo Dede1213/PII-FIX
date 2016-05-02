@@ -563,6 +563,14 @@ class RiskRegister extends APP_Controller {
 		echo json_encode($data);
 		exit;
 	}
+
+	public function getUserRole($parent) 
+	{
+		
+		$data = $this->mriskregister->getUserRole($parent);
+		echo json_encode($data);
+		exit;
+	}
 	
 	public function getRiskLevelList() 
 	{
@@ -1512,6 +1520,11 @@ class RiskRegister extends APP_Controller {
 					$data['impact_list'] = $this->mriskregister->getRiskImpactForList();
 					$data['treatment_list'] = $this->mriskregister->getReference('treatment.status');
 					$data['division_list'] = $this->mriskregister->getDivisionList();
+
+
+					//compare change request user
+					$time_compare = $this->mriskregister->time_compare($risk_id);
+					$data['time_compare'] = $time_compare->created_date;
 				}
 				
 				$this->load->view('main/header', $data);
@@ -1580,7 +1593,7 @@ class RiskRegister extends APP_Controller {
 		}
 	}
 	
-	public function submitChangeRisk()
+	public function submitChangeRisk($time_compare)
 	{
 		$session_data = $this->session->credential;
 		if (isset($_POST['risk_id'])) {
@@ -1671,15 +1684,22 @@ class RiskRegister extends APP_Controller {
 				$objective[] = $v;
 			}
 
+			//compare change request
+			$time_format = str_replace('_', ' ', $time_compare);
+			$cek_risk_compare = $this->mriskregister->cek_risk_compare($_POST['risk_id'],$time_format);
+
+			if($cek_risk_compare){
 			$res = $this->risk->insertChangeRequest($risk, $impact_level, $actplan, $control, $objective);
-			
 			$resp = array();
-			if ($res) {
-				$resp['success'] = true;
-				$resp['msg'] = 'SUCCESS';
-			} else {
-				$resp['success'] = false;
-				$resp['msg'] = $this->db->error();
+				if ($res) {
+					$resp['success'] = true;
+					$resp['msg'] = 'SUCCESS';
+				} else {
+					$resp['success'] = false;
+					$resp['msg'] = $this->db->error();
+				}
+			}else{
+				$resp['time_compare'] = true;
 			}
 			echo json_encode($resp);
 		}

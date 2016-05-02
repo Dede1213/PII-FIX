@@ -1283,7 +1283,7 @@ var ChangeRequest = function() {
             	}
             	
             	Metronic.blockUI({ boxed: true });
-            	var url = site_url+'/risk/RiskRegister/submitChangeRisk';
+            	var url = site_url+'/risk/RiskRegister/submitChangeRisk/'+g_time_compare;
 
             	$.post(
             		url,
@@ -1296,7 +1296,12 @@ var ChangeRequest = function() {
             					location.href=site_url+'/main#tab_change_request_list';
             				});
             				
-            			} else {
+            			}else if(data.time_compare){
+                            var mod = MainApp.viewGlobalModal('warning-maintenance', 'This risk has been edit by RAC Team, Please Try Again');
+                            mod.find('button.btn-ok-success').one('click', function(){
+                                location.href=site_url+'/main';
+                            });
+                        }else {
             				
             				//ubah
             				var mod = MainApp.viewGlobalModal('warning-maintenance', 'This Risk Is Under Maintenance by RAC you cannot modify this risk until the process done');

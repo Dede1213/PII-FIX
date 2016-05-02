@@ -193,7 +193,7 @@
 								<span class="hidden-480">
 								Add Objective </span>
 								</a>
-								<h4><font style="color:red;">*</font>Objective</h4>
+								<h4>Objective</h4>
 							</div>
 							<div class="table-scrollable">
 								<table id="objective_table" class="table table-condensed table-bordered table-hover">
@@ -319,7 +319,7 @@
 								<span class="hidden-480">
 								Add Objective </span>
 								</a>
-								<h4><font style="color:red;">*</font>Objective</h4>
+								<h4>Objective</h4>
 							</div>
 							<div class="table-scrollable">
 								<table id="objective_table" class="table table-condensed table-bordered table-hover">
@@ -342,7 +342,7 @@
 								<span class="hidden-480">
 								Add Control </span>
 								</a>
-								<h4><font style="color:red;">*</font>Control</h4>
+								<h4>Control</h4>
 							</div>
 							<div class="table-scrollable">
 								<table id="control_table" class="table table-condensed table-bordered table-hover">
@@ -369,7 +369,7 @@
 								<span class="hidden-480">
 								Add Plan Action Suggestion </span>
 								</a>
-								<h4><font style="color:red;">*</font>Action Plan</h4>
+								<h4>Action Plan</h4>
 							</div>
 							<?php } else { ?>
 							<h4>Action Plan</h4>

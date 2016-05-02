@@ -7,7 +7,16 @@ class Login extends CI_Controller {
 		parent::__construct();
 		$this->load->helper('url');
 		
+
 		$this->load->library('session');
+
+
+		//update status login
+		$this->load->database();
+		$user= $this->session->credential['username'];
+		$sql_login_status = "update m_user_login set status_login = 'logout' where username = '$user' ";
+		$res = $this->db->query($sql_login_status);
+		//end
 		$this->session->unset_userdata('credential');
 		
 		$this->load->config('app_config');
@@ -311,8 +320,26 @@ class Login extends CI_Controller {
 							fclose($fp);
 							// end log
 
+							//pembatas 1 device nih
+
+							//cek change request
+							$this->load->model('user/usermodel');
+							$cekStatusLogin = $this->usermodel->cekStatusLogin($_POST['username']);
+							
+							if($cekStatusLogin == 'login'){
+
+								$this->load->library('session');
+								$this->session->unset_userdata('credential');
+								$this->load->helper('url');
+								redirect('login?status=device','refresh');
+
+							}else{
 
 							
+							//insert status login
+							$sql_login_status = "update m_user_login set status_login = 'login' where username = '".$_POST['username']."' ";
+							$this->db->query($sql_login_status);
+
 							//klo ga pake ajax
 							$this->load->helper('url');
 							redirect('main','refresh');
@@ -320,6 +347,9 @@ class Login extends CI_Controller {
 
 							$data['success'] = true;
 							$data['msg'] = 'success';
+
+							}
+							
 
 						} else {
 

@@ -10,6 +10,7 @@ class Login extends CI_Controller {
 
 		$this->load->library('session');
 
+
 		//GA JADI DI PAKEDI BUAT NOTE AJA 1 DEVICE
 		/*
 		//update status login
@@ -19,6 +20,7 @@ class Login extends CI_Controller {
 		$res = $this->db->query($sql_login_status);
 		//end
 		*/
+
 		$this->session->unset_userdata('credential');
 		
 		$this->load->config('app_config');
@@ -48,7 +50,6 @@ class Login extends CI_Controller {
 	public function authenticate()
 	{
 		$auth_mode = 'local';
-		
 		$this->load->library('session');
 		$this->session->unset_userdata('credential');
 		$data = array();
@@ -56,6 +57,7 @@ class Login extends CI_Controller {
 			// Admin Auth
 			if ($auth_mode == 'local') {
 				$this->load->database();
+				/*
 				//-------------------------------------------- LOCAL LOGIN ---------------------->>>>>
 				if ($_POST['username'] == 'admin') {
 					$sql = "select * from m_user where username = 'admin' and role_id = 1";
@@ -86,7 +88,6 @@ class Login extends CI_Controller {
 							redirect('main','refresh');
 							//end klo ga pake ajax
 
-							//klo pake ajax 
 							$data['success'] = true;
 							$data['msg'] = 'success';
 						} else {
@@ -111,12 +112,12 @@ class Login extends CI_Controller {
 					}
 				}
 				//---------------------------------------------End Local Login----> 
+				*/
 				
-				/*// ----------------------------------------------- LDAP Login ----------> 
+				// ----------------------------------------------- LDAP Login ----------> 
 				if ($_POST['username'] != '') {
-	
-	//ngilangin Pesan Error / Notice saat Login Nih
-	error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
+		//ngilangin Pesan Error / Notice saat Login Nih
+		error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
 
 					// using ldap bind
 	$ldaprd1  = $_POST['username']; // ldap rdn or dn
@@ -154,7 +155,6 @@ class Login extends CI_Controller {
     ldap_set_option($ldapconn, LDAP_OPT_REFERRALS, 0);
 
     if ($ldapconn) {
-
             // binding to ldap server
             $ldapbind = @ldap_bind($ldapconn, $ldaprdn, $ldappass);
 
@@ -188,6 +188,14 @@ class Login extends CI_Controller {
 						}else{
 							$this->db->query($sql3);
 							
+							//GA JADI DI NOTE AJA 1 device
+							/*
+							//----- tambah untuk insert m_user_login cek device
+								$sql_cek_device = "INSERT INTO m_user SET username='".$_POST['username']."'";
+								$this->db->query($sql_cek_device);
+							//end cek device
+							*/
+
 							$data['msg'] = 'data belum ada';
 							$sql4 = "select 
 							a.username,
@@ -237,18 +245,38 @@ class Login extends CI_Controller {
 							fclose($fp);
 							// end log
 
-
+							//pembatas 1 device nih
+							//GA JADI DI PAKE DI BUAT NOTE AJA DULU
 							
+							/*
+							$this->load->model('user/usermodel');
+							$cekStatusLogin = $this->usermodel->cekStatusLogin($_POST['username']);
+							
+							if($cekStatusLogin == 'login'){
+								$this->load->library('session');
+								$this->session->unset_userdata('credential');
+								$this->load->helper('url');
+								redirect('login?status=device','refresh');
+							}else{
+							//update status login
+							$sql_login_status = "update m_user_login set status_login = 'login' where username = '".$_POST['username']."' ";
+							$this->db->query($sql_login_status);
+							*/
+
 							//klo ga pake ajax
 							$this->load->helper('url');
 							redirect('main','refresh');
 							//end klo ga pake ajax
 
+						/*
+						}
+						*/
+
 
 							$data['success'] = true;
 						}
 			
-			}else{
+			}else{	
 
 							//klo ga pake ajax
 							$this->load->helper('url');
@@ -270,7 +298,7 @@ class Login extends CI_Controller {
 					   $data['msg'] = 'Invalid Username / Password';
 					}
 				}
-				 //----------------------------------- End LDAP Login --------------> */
+				 //----------------------------------- End LDAP Login -------------->
 				
 				else {
 					$sql = "select 
@@ -323,27 +351,8 @@ class Login extends CI_Controller {
 							fclose($fp);
 							// end log
 
-							//pembatas 1 device nih
 
-							//GA JADI DI PAKE DI BUAT NOTE AJA DULU
-							/*
-							//cek status login
-							$this->load->model('user/usermodel');
-							$cekStatusLogin = $this->usermodel->cekStatusLogin($_POST['username']);
 							
-							if($cekStatusLogin == 'login'){
-
-								$this->load->library('session');
-								$this->session->unset_userdata('credential');
-								$this->load->helper('url');
-								redirect('login?status=device','refresh');
-
-							}else{
-							//insert status login
-							$sql_login_status = "update m_user_login set status_login = 'login' where username = '".$_POST['username']."' ";
-							$this->db->query($sql_login_status);
-							*/
-
 							//klo ga pake ajax
 							$this->load->helper('url');
 							redirect('main','refresh');
@@ -351,11 +360,6 @@ class Login extends CI_Controller {
 
 							$data['success'] = true;
 							$data['msg'] = 'success';
-
-							/*
-							}
-							*/
-							
 
 						} else {
 

@@ -86,6 +86,7 @@ class Login extends CI_Controller {
 							redirect('main','refresh');
 							//end klo ga pake ajax
 
+							//klo pake ajax 
 							$data['success'] = true;
 							$data['msg'] = 'success';
 						} else {

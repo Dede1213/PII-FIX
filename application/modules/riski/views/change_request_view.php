@@ -131,7 +131,6 @@
 										<th><span class="small">Usulan Action Plan</span></th>
 										<th><span class="small">Batas Waktu</span></th>
 										<th><span class="small">Pemilik Action Plan</span></th>
-										<th><span class="small">Status Action Plan</span></th>
 									</tr>
 									</thead>
 									<tbody>
@@ -261,7 +260,6 @@
 										<th><span class="small">Usulan Action Plan</span></th>
 										<th><span class="small">Batas Waktu</span></th>
 										<th><span class="small">Pemilik Action Plan</span></th>
-										<th><span class="small">Status Action Plan</span></th>
 										<th><span class="small">&nbsp;</span></th>
 									</tr>
 									</thead>

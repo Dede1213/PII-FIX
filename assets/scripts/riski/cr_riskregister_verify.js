@@ -410,7 +410,6 @@ var ChangeRequest = function() {
 	        		var xexis = $('#input-form-control input[name=risk_existing_control]').val();
 	        		var xeval = $('#input-form-control input[name=risk_evaluation_control]').val();
 	        		var xowner = $('#input-form-control input[name=risk_control_owner]').val();
-
 	        		
 					var tc_id = $('#tc_idnya').val();
 					$("#tc_"+tc_id).html("");
@@ -431,7 +430,29 @@ var ChangeRequest = function() {
 					//t1
 	    		}
 	    	});
+
+	    	$('#primary-risk-button-delete').on('click', function() {
+        		var mod = MainApp.viewGlobalModal('confirm', 'Are You sure you want to Verify Change Request with Primary Data ?');
+        		mod.find('button.btn-primary').off('click');
+        		mod.find('button.btn-primary').one('click', function(){
+        			me.submitRiskData('delete');
+        		});
+        	});
+        	
 	    	
+	    	$("#action_plan_table").on('click', 'button.button-grid-delete', function(e) {
+        		var xid = $(this).attr('data-id');
+        		var tr_par = $(this)[0]; //.parentNode.parentNode.parentNode;
+        		
+        		var mod = MainApp.viewGlobalModal('confirm', 'Delete Action Plan ?');
+        		mod.find('button.btn-primary').off('click');
+        		mod.find('button.btn-primary').one('click', function(){
+        			mod.modal('hide');
+        			me.actionPlanTableDelete(tr_par, xid);
+        			//console.log('Delete', xid);
+        		});
+        	});
+        	
 	    	$('#input-actionplan-add').on('click', function() {
 	    		var form1 = $('#input-form-action-plan').validate();
 	    		var fvalid = form1.form();
@@ -441,7 +462,6 @@ var ChangeRequest = function() {
 	    			var xdate = $('#input-form-action-plan input[name=due_date]').val();
 	    			var xdiv_view = $('#input-form-action-plan select[name=division] option:selected').text();
 	    			var xdiv_id = $('#input-form-action-plan select[name=division] option:selected').val();
-	    			var xdiv_status = $('#input-form-action-plan select[name=status_act] option:selected').val();
 	    			
 	    			if (me.actionPlanChange != null) {
 	    				var cf = 'CHANGE';
@@ -458,8 +478,7 @@ var ChangeRequest = function() {
 	    					'action_plan' : xplan,
 	    					'due_date' : xdate,
 	    					'division_v' : xdiv_view,
-	    					'division' : xdiv_id,
-	    					'status_act' : xdiv_status
+	    					'division' : xdiv_id
 	    				};
 	    				me.actionPlanEditRow(me.actionPlanChange, nnode);
 	    			} else {
@@ -473,8 +492,7 @@ var ChangeRequest = function() {
 	    					'action_plan' : xplan,
 	    					'due_date' : xdate,
 	    					'division_v' : xdiv_view,
-	    					'division' : xdiv_id,
-	    					'status_act' : xdiv_status
+	    					'division' : xdiv_id
 	    				};
 	    				me.actionPlanAddRow(nnode);
 	    			}
@@ -520,6 +538,13 @@ var ChangeRequest = function() {
 	    			me.setRiskLevel();
 	    		}
 	    	});
+
+			 $('#button-form-control-open-objective').on('click', function () {
+				document.getElementById("input-form-control-objective").reset();
+               // $('#input-form-control-objective')[0].reset();
+               $('#form-control-revid-objective').val("");
+                $('#input-form-control-objective textarea[name=objective]').attr('readonly', false);
+            });
         	
         	$('#button-form-control-open').on('click', function () {
         		//$('#input-form-control')[0].reset();
@@ -527,13 +552,6 @@ var ChangeRequest = function() {
         		$('#form-control-revid').val("");
         		$('#input-form-control textarea[name=risk_existing_control]').attr('readonly', false);
         	});
-
-        	 $('#button-form-control-open-objective').on('click', function () {
-				document.getElementById("input-form-control-objective").reset();
-               // $('#input-form-control-objective')[0].reset();
-               $('#form-control-revid-objective').val("");
-                $('#input-form-control-objective textarea[name=objective]').attr('readonly', false);
-            });
         	
         	$('#button-form-data-open').on('click', function () {
         		$('#input-form-action-plan')[0].reset();
@@ -556,14 +574,12 @@ var ChangeRequest = function() {
         			'id' : edData.id,
         			'risk_id' : edData.risk_id,
         			'change_flag' : edData.change_flag,
-        			'data_flag': edData.data_flag,
-        			'status_act': edData.status_act
+        			'data_flag': edData.data_flag
         		};
         		
         		$('#input-form-action-plan textarea[name=action_plan]').val(edData.action_plan);
         		$('#input-form-action-plan input[name=due_date]').val(edData.due_date);
         		$('#input-form-action-plan select[name=division]').val(edData.division);
-        		$('#input-form-action-plan select[name=status_act]').val(edData.status_act);
 
         	});
         	
@@ -585,14 +601,6 @@ var ChangeRequest = function() {
         		mod.find('button.btn-primary').off('click');
         		mod.find('button.btn-primary').one('click', function(){
         			me.submitRiskData('verifyPrimary');
-        		});
-        	});
-
-        	$('#primary-risk-button-delete').on('click', function() {
-        		var mod = MainApp.viewGlobalModal('confirm', 'Are You sure you want to Verify Change Request with Primary Data ?');
-        		mod.find('button.btn-primary').off('click');
-        		mod.find('button.btn-primary').one('click', function(){
-        			me.submitRiskData('delete');
         		});
         	});
         	
@@ -795,8 +803,7 @@ var ChangeRequest = function() {
         				'division_v' : val.division_v,
         				'division' : val.division,
         				'data_flag' : val.data_flag,
-        				'change_flag' : val.change_flag,
-        				'status_act' : val.status_act
+        				'change_flag' : val.change_flag
         			}
         			me.primaryactionPlanAddRow(nnode);
         		});
@@ -907,7 +914,6 @@ var ChangeRequest = function() {
         		'<td>'+nnode.action_plan+'</td>'+
         		'<td>'+nnode.due_date+'</td>'+
         		'<td>'+nnode.division_v+'</td>'+
-        		'<td>'+nnode.status_act+'</td>'+
         	'</tr>');
         	
         	me.primaryactionPlanAdd(nnode, me.primarydataActionPlanCounter);
@@ -1067,7 +1073,6 @@ var ChangeRequest = function() {
         		'<td>'+nnode.action_plan+'</td>'+
         		'<td>'+nnode.due_date+'</td>'+
         		'<td>'+nnode.division_v+'</td>'+
-        		'<td>'+nnode.status_act+'</td>'+
         		'<td>'+
         		act_str+
         		'</td>'+
@@ -1095,7 +1100,6 @@ var ChangeRequest = function() {
         		'<td>'+nnode.action_plan+'</td>'+
         		'<td>'+nnode.due_date+'</td>'+
         		'<td>'+nnode.division_v+'</td>'+
-        		'<td>'+nnode.status_act+'</td>'+
         		'<td>'+
         		act_str+
         		'</td>'
@@ -1169,8 +1173,7 @@ var ChangeRequest = function() {
         				'action_plan' : val.action_plan,
         				'due_date' : val.due_date_v,
         				'division_v' : val.division_v,
-        				'division' : val.division,
-        				'status_act' : val.status_act
+        				'division' : val.division
         			}
         			me.actionPlanAddRow(nnode);
         		});
@@ -1264,7 +1267,6 @@ var ChangeRequest = function() {
             		actplan_param['actplan['+cnt+'][action_plan]'] = value.action_plan;
             		actplan_param['actplan['+cnt+'][due_date]'] = value.due_date;
             		actplan_param['actplan['+cnt+'][division]'] = value.division;
-            		actplan_param['actplan['+cnt+'][status_act]'] = value.status_act;
             		cnt++;
             	});
             	//console.log(impact_param);

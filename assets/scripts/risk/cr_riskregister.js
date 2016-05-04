@@ -488,15 +488,12 @@ var ChangeRequest = function() {
                     var xdate = $('#input-form-action-plan input[name=due_date]').val();
                     var xdiv_view = $('#input-form-action-plan select[name=division] option:selected').text();
                     var xdiv_id = $('#input-form-action-plan select[name=division] option:selected').val();
-                    var xdiv_status = $('#input-form-action-plan select[name=status_act] option:selected').val();
                     var nnode = {
                         'tr_idnya2' : tr_idnya2,
                         'action_plan' : xplan,
                         'due_date' : xdate,
                         'division_v' : xdiv_view,
-                        'division' : xdiv_id,
-                        'status_act' : xdiv_status
-
+                        'division' : xdiv_id
                     };
                     
                     me.actionPlanAddRow(nnode);
@@ -628,7 +625,6 @@ var ChangeRequest = function() {
         		$('#input-form-action-plan textarea[name=action_plan]').val(edData.action_plan);
         		$('#input-form-action-plan input[name=due_date]').val(edData.due_date);
         		$('#input-form-action-plan select[name=division]').val(edData.division);
-                $('#input-form-action-plan select[name=status_act]').val(edData.status_act);
 
         	});
         	
@@ -814,8 +810,7 @@ var ChangeRequest = function() {
         				'action_plan' : val.action_plan,
         				'due_date' : val.due_date_v,
         				'division_v' : val.division_v,
-        				'division' : val.division,
-                        'status_act' : val.status_act
+        				'division' : val.division
         			}
         			me.primaryactionPlanAddRow(nnode);
         		});
@@ -923,7 +918,6 @@ var ChangeRequest = function() {
         		'<td>'+nnode.action_plan+'</td>'+
         		'<td>'+nnode.due_date+'</td>'+
         		'<td>'+nnode.division_v+'</td>'+
-                '<td>'+nnode.status_act+'</td>'+
         	'</tr>');
         	
         	me.primaryactionPlanAdd(nnode, me.primarydataActionPlanCounter);
@@ -1083,7 +1077,6 @@ var ChangeRequest = function() {
                 '<td><input type = "hidden" value = "'+nnode.action_plan+'" id = "action_plan'+me.dataActionPlanCounter+'">'+nnode.action_plan+'</td>'+
                 '<td><input type = "hidden" value = "'+nnode.due_date+'" id = "due_date'+me.dataActionPlanCounter+'">'+nnode.due_date+'</td>'+
                 '<td><input type = "hidden" value = "'+nnode.division_v+'" id = "division_v'+me.dataActionPlanCounter+'">'+nnode.division_v+'</td>'+
-                '<td><input type = "hidden" value = "'+nnode.status_act+'" id = "status_act'+me.dataActionPlanCounter+'">'+nnode.status_act+'</td>'+
                 '<td>'+
                 '<div class="btn-group">'+
                     '<button type="button" class="btn btn-default btn-xs" onclick="modal_ap_edit('+me.dataActionPlanCounter+')" ><i class="fa fa-pencil font-blue"></i></button>'+
@@ -1115,7 +1108,6 @@ var ChangeRequest = function() {
         		'<td>'+nnode.action_plan+'</td>'+
         		'<td>'+nnode.due_date+'</td>'+
         		'<td>'+nnode.division_v+'</td>'+
-                '<td>'+nnode.status_act+'</td>'+
         		'<td>'+
         		act_str+
         		'</td>'
@@ -1190,8 +1182,7 @@ var ChangeRequest = function() {
         				'action_plan' : val.action_plan,
         				'due_date' : val.due_date_v,
         				'division_v' : val.division_v,
-        				'division' : val.division,
-                        'status_act' : val.status_act
+        				'division' : val.division
         			}
         			me.actionPlanAddRow(nnode);
         		});
@@ -1282,7 +1273,6 @@ var ChangeRequest = function() {
             		actplan_param['actplan['+cnt+'][action_plan]'] = value.action_plan;
             		actplan_param['actplan['+cnt+'][due_date]'] = value.due_date;
             		actplan_param['actplan['+cnt+'][division]'] = value.division;
-                    actplan_param['actplan['+cnt+'][status_act]'] = value.status_act;
             		cnt++;
             	});
             	//console.log(impact_param);
@@ -1354,7 +1344,6 @@ $('#form-control-objective').modal('show');
 function modal_ap_edit(a){
     
 //$('#form-data-revid').val(a);
-$('#status_act').val($('#status_act'+a).val());
 $('#action_plan').val($('#action_plan'+a).val());
 $('#due_date').val($('#due_date'+a).val());
 $('#form-data-revid').val(a);

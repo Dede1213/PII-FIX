@@ -1839,7 +1839,6 @@ class MainRac extends APP_Controller {
 			$dd = implode('-', array_reverse( explode('-', $_POST['due_date']) ));
 			$risk = array(
 				'action_plan' => $_POST['action_plan'],
-				'status_act' => $_POST['status_act'],
 				'due_date' => $dd,
 				'division' => $_POST['division'],
 				'created_by' => $data['session']['username']
@@ -1906,7 +1905,6 @@ class MainRac extends APP_Controller {
 			$risk = array(
 				'action_plan_status' => 4,
 				'action_plan' => $_POST['action_plan'],
-				'status_act' => $_POST['status_act'],
 				'due_date' => $dd,
 				'division' => $_POST['division']
 			);
@@ -1970,7 +1968,6 @@ class MainRac extends APP_Controller {
 			$dd = implode('-', array_reverse( explode('-', $_POST['due_date']) ));
 			$risk = array(
 				'action_plan' => $_POST['action_plan'],
-				'status_act' => $_POST['status_act'],
 				'due_date' => $dd,
 				'division' => $_POST['division'],
 				'created_by' => $data['session']['username']
@@ -2003,7 +2000,6 @@ class MainRac extends APP_Controller {
 			$dd = implode('-', array_reverse( explode('-', $_POST['due_date']) ));
 			$risk = array(
 				'action_plan' => $_POST['action_plan'],
-				'status_act' => $_POST['status_act'],
 				'due_date' => $dd,
 				'division' => $_POST['division'],
 				'created_by' => $data['session']['username']

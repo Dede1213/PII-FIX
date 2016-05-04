@@ -141,34 +141,11 @@
 									</select>
 									</div>
 								</div>
-								<div class="form-group">
-									<label class="col-md-3 control-label" title="">Status Action Plan </label>
-									<div class="col-md-9">
-									<select class="form-control input-sm" name="status_act">
-										<?php 
-										if($action_plan_change['status_act'] == 'berkala'){
-										?>
-											<option value="berkala">Berkala</option>
-											<option value="tidak berkala">Tidak Berkala</option>
-										<?php
-										}else{
-										?>
-											<option value="tidak berkala">Tidak Berkala</option>
-											<option value="berkala">Berkala</option>
-										<?php
-										}
-										?>
-										
-										
-									</select>
-									</div>
-								</div>
 								
 							</div>
 							
 							</div>
 						</div>
-
 						<div class="form-actions right">
 							<button id="risk-button-save" type="button" class="btn blue"><i class="fa fa-circle-o"></i> Simpan sebagai draft</button>
 							<button id="risk-button-verify" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Ajukan</button>

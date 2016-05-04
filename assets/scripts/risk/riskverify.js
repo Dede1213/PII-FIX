@@ -129,8 +129,7 @@ var RiskVerify = function() {
         				'action_plan' : val.action_plan,
         				'due_date' : val.due_date_v,
         				'division_v' : val.division_v,
-        				'division' : val.division,
-                        'status_act' : val.status_act,
+        				'division' : val.division
         			}
         			me.actionPlanAddRow(nnode);
         		});
@@ -163,7 +162,6 @@ var RiskVerify = function() {
 
         	});
         },
-        
         submitRiskData: function(submitMode) {
         	var form1 = $('#input-form').validate();
         	var fvalid = form1.form();
@@ -219,7 +217,6 @@ var RiskVerify = function() {
             		actplan_param['actplan['+cnt+'][action_plan]'] = value.action_plan;
             		actplan_param['actplan['+cnt+'][due_date]'] = value.due_date;
             		actplan_param['actplan['+cnt+'][division]'] = value.division;
-                    actplan_param['actplan['+cnt+'][status_act]'] = value.status_act;
             		cnt++;
             	});
             	//console.log(impact_param);

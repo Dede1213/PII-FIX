@@ -118,62 +118,61 @@ var RiskVerify = function() {
         		});
         	});
         },
-         loadRiskPrimary: function(rid) {
-            var me = this;
-            
-            Metronic.blockUI({ boxed: true });
+        loadRiskPrimary: function(rid) {
+        	var me = this;
+        	
+        	Metronic.blockUI({ boxed: true });
             $.getJSON( site_url+"/risk/RiskRegister/loadRiskLibrary/"+rid, function( data_risk ) {
-            
-                Metronic.unblockUI();
-                g_username = data_risk['risk_input_by'];
-                data_risk['risk_library_id'] = data_risk['risk_library_id'];
-                data_risk['risk_level_id'] = data_risk['risk_level'];
-                data_risk['risk_level'] = data_risk['risk_level_v'];
-                
-                data_risk['risk_impact_level_id'] = data_risk['risk_impact_level'];
-                data_risk['risk_impact_level_value'] = data_risk['impact_level_v'];
-                data_risk['risk_likelihood_id'] = data_risk['risk_likelihood_key'];
-                data_risk['risk_likelihood_value'] = data_risk['likelihood_v'];
-                
-                RiskInput.populateRisk($('#primary-input-form'), data_risk);
-                //$('#primary-risk_submitted_by').val(data_risk.risk_input_by_v);
-                
-                if(data_risk.username == ""){
-                    //alert(data_risk.risk_input_by_v);
-                    var datasubmitby = data_risk.risk_input_by_v ;
-                }else{                  
-                    //alert(data_risk.username);
-                    var datasubmitby =data_risk.username;
-                }
-                
-                $('#primary-risk_submitted_by').val(datasubmitby);
-                $('#primary-risk_submitted_division').val(data_risk.risk_input_division_v);
-                
-                me.actionPlanReset();
-                $.each( data_risk['action_plan_list'], function( key, val ) {
-                    var nnode = {
-                        'action_plan' : val.action_plan,
-                        'due_date' : val.due_date_v,
-                        'division_v' : val.division_v,
-                        'division' : val.division,
-                        'status_act' : val.status_act
-                    }
-                    me.actionPlanAddRow(nnode);
-                });
-                
-                me.controlReset();
-                $.each( data_risk['control_list'], function( key, val ) {
-                    var ecid = '';
-                    if (val.existing_control_id == null) ecid = '';
-                    var nnode = {
-                        'existing_control_id' : ecid,
-                        'risk_existing_control' : val.risk_existing_control,
-                        'risk_evaluation_control' : val.risk_evaluation_control,
-                        'risk_control_owner' : val.risk_control_owner
-                    };
-                    
-                    me.controlAddRow(nnode);
-                });
+        	
+        		Metronic.unblockUI();
+        		g_username = data_risk['risk_input_by'];
+        		data_risk['risk_library_id'] = data_risk['risk_library_id'];
+        		data_risk['risk_level_id'] = data_risk['risk_level'];
+        		data_risk['risk_level'] = data_risk['risk_level_v'];
+        		
+        		data_risk['risk_impact_level_id'] = data_risk['risk_impact_level'];
+        		data_risk['risk_impact_level_value'] = data_risk['impact_level_v'];
+        		data_risk['risk_likelihood_id'] = data_risk['risk_likelihood_key'];
+        		data_risk['risk_likelihood_value'] = data_risk['likelihood_v'];
+        		
+        		RiskInput.populateRisk($('#primary-input-form'), data_risk);
+        		//$('#primary-risk_submitted_by').val(data_risk.risk_input_by_v);
+				
+				if(data_risk.username == ""){
+					//alert(data_risk.risk_input_by_v);
+					var datasubmitby = data_risk.risk_input_by_v ;
+				}else{					
+					//alert(data_risk.username);
+					var datasubmitby =data_risk.username;
+				}
+				
+				$('#primary-risk_submitted_by').val(datasubmitby);
+        		$('#primary-risk_submitted_division').val(data_risk.risk_input_division_v);
+        		
+        		me.actionPlanReset();
+        		$.each( data_risk['action_plan_list'], function( key, val ) {
+        			var nnode = {
+        				'action_plan' : val.action_plan,
+        				'due_date' : val.due_date_v,
+        				'division_v' : val.division_v,
+        				'division' : val.division
+        			}
+        			me.actionPlanAddRow(nnode);
+        		});
+        		
+        		me.controlReset();
+        		$.each( data_risk['control_list'], function( key, val ) {
+        			var ecid = '';
+        			if (val.existing_control_id == null) ecid = '';
+        			var nnode = {
+        				'existing_control_id' : ecid,
+        				'risk_existing_control' : val.risk_existing_control,
+        				'risk_evaluation_control' : val.risk_evaluation_control,
+        				'risk_control_owner' : val.risk_control_owner
+        			};
+        			
+        			me.controlAddRow(nnode);
+        		});
 
                 me.controlResetobjective();
                 $.each( data_risk['objective_list'], function( key, val ) {
@@ -187,7 +186,7 @@ var RiskVerify = function() {
                     me.controlAddRowobjective(nnode);
                 });
 
-            });
+        	});
         },
         controlTableDelete: function(xrow, dataId) {
         	//console.log(dataId);
@@ -254,19 +253,18 @@ var RiskVerify = function() {
         actionPlanDelete: function(id) {
         	delete this.dataActionPlan[id];
         },
-       actionPlanAddRow: function(nnode) {
-            var me = this;
-            
-            me.dataActionPlanCounter++;
-            
-            $('#primary_action_plan_table > tbody:last-child').append('<tr>'+
-                '<td>'+nnode.action_plan+'</td>'+
-                '<td>'+nnode.due_date+'</td>'+
-                '<td>'+nnode.division_v+'</td>'+
-                '<td>'+nnode.status_act+'</td>'+
-            '</tr>');
-            
-            me.actionPlanAdd(nnode, me.dataActionPlanCounter);
+        actionPlanAddRow: function(nnode) {
+        	var me = this;
+        	
+        	me.dataActionPlanCounter++;
+        	
+        	$('#primary_action_plan_table > tbody:last-child').append('<tr>'+
+        		'<td>'+nnode.action_plan+'</td>'+
+        		'<td>'+nnode.due_date+'</td>'+
+        		'<td>'+nnode.division_v+'</td>'+
+        	'</tr>');
+        	
+        	me.actionPlanAdd(nnode, me.dataActionPlanCounter);
         },
         loadRisk: function(rid,risk_input_by) {
         	var me = RiskInput;
@@ -361,16 +359,15 @@ var RiskVerify = function() {
                 });
                 
         		me.actionPlanReset();
-                $.each( data_risk['action_plan_list'], function( key, val ) {
-                    var nnode = {
-                        'action_plan' : val.action_plan,
-                        'due_date' : val.due_date_v,
-                        'division_v' : val.division_v,
-                        'division' : val.division,
-                        'status_act' : val.status_act
-                    }
-                    me.actionPlanAddRow(nnode);
-                });
+        		$.each( data_risk['action_plan_list'], function( key, val ) {
+        			var nnode = {
+        				'action_plan' : val.action_plan,
+        				'due_date' : val.due_date_v,
+        				'division_v' : val.division_v,
+        				'division' : val.division
+        			}
+        			me.actionPlanAddRow(nnode);
+        		});
         		
         		me.controlReset();
         		$.each( data_risk['control_list'], function( key, val ) {
@@ -464,7 +461,6 @@ var RiskVerify = function() {
             		actplan_param['actplan['+cnt+'][action_plan]'] = value.action_plan;
             		actplan_param['actplan['+cnt+'][due_date]'] = value.due_date;
             		actplan_param['actplan['+cnt+'][division]'] = value.division;
-                      actplan_param['actplan['+cnt+'][status_act]'] = value.status_act;
             		cnt++;
             	});
             	//console.log(impact_param);

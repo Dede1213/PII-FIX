@@ -132,7 +132,6 @@
 										<th><span class="small">Usulan Action Plan</span></th>
 										<th><span class="small">Batas Waktu</span></th>
 										<th><span class="small">Pemilik Action Plan</span></th>
-										<th><span class="small">Status Action Plan</span></th>
 									</tr>
 									</thead>
 									<tbody>
@@ -358,7 +357,6 @@
 										<th><span class="small">Usulan Action Plan</span></th>
 										<th width="80px"><span class="small">Batas Waktu</span></th>
 										<th><span class="small">Pemilik Action Plan</span></th>
-										<th><span class="small">Status Action Plan</span></th>
 										<th width="70px">&nbsp;</th>
 									</tr>
 									</thead>
@@ -475,7 +473,7 @@
 										<th><span class="small">Action Plan Status</span></th>
 										<th><span class="small">Suggested Action Plan</span></th>
 										<th><span class="small">Due Date</span></th>
-										<th><span class="small">Status Action Plan</span></th>
+										<th><span class="small">Action Plan Owner</span></th>
 									</tr>
 									</thead>
 									<tbody>
@@ -496,7 +494,6 @@
 										<td><?php echo $row['action_plan'];?></td>
 										<td><?php echo $row['due_date'];?></td>
 										<td><?php echo $row['division'];?></td>
-										<td><?php echo $row['status_act'];?></td>
 										</tr>
 									<?php
 									}
@@ -630,19 +627,6 @@
 		
 			<form id="input-form-action-plan" role="form" class="form-horizontal">
 				<div class="form-body">
-					<div class="form-group">
-						<label class="col-md-3 control-label">Status Action Plan <span class="required">* </span></label>
-						<div class="col-md-9">
-						<select class="form-control input-sm" name="status_act" id = "status_act">
-							
-							<option value="">Choose one...</option>
-							<option value="berkala">Berkala</option>
-							<option value="tidak berkala">Tidak Berkala</option>
-							
-						</select>
-						</div>
-					</div>
-
 					<div class="form-group">
 						<label class="col-md-3 control-label">Usulan Action Plan <span class="required">* </span></label>
 						<div class="col-md-9">

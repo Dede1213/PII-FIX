@@ -129,28 +129,6 @@ if($status == 'under'){ ?>
 								</select>
 								</div>
 							</div>
-							<div class="form-group">
-									<label class="col-md-2 control-label" title="">Status Action Plan </label>
-									<div class="col-md-9">
-									<select class="form-control input-sm" name="status_act">
-										<?php 
-										if($action_plan['status_act'] == 'berkala'){
-										?>
-											<option value="berkala">Berkala</option>
-											<option value="tidak berkala">Tidak Berkala</option>
-										<?php
-										}else{
-										?>
-											<option value="tidak berkala">Tidak Berkala</option>
-											<option value="berkala">Berkala</option>
-										<?php
-										}
-										?>
-										
-										
-									</select>
-									</div>
-								</div>
 						</div>
 						<div class="form-actions right">
 							
@@ -242,28 +220,6 @@ if($status == 'under'){ ?>
 								</select>
 								</div>
 							</div>
-							<div class="form-group">
-									<label class="col-md-2 control-label" title="">Status Action Plan </label>
-									<div class="col-md-9">
-									<select class="form-control input-sm" name="status_act">
-										<?php 
-										if($action_plan['status_act'] == 'berkala'){
-										?>
-											<option value="berkala">Berkala</option>
-											<option value="tidak berkala">Tidak Berkala</option>
-										<?php
-										}else{
-										?>
-											<option value="tidak berkala">Tidak Berkala</option>
-											<option value="berkala">Berkala</option>
-										<?php
-										}
-										?>
-										
-										
-									</select>
-									</div>
-								</div>
 						</div>
 						<div class="form-actions right">
 							<button id="primary-risk-button-submit-1" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Verifikasi</button>
@@ -416,28 +372,6 @@ if($status == 'under'){ ?>
 								</select>
 								</div>
 							</div>
-							<div class="form-group">
-									<label class="col-md-2 control-label" title="">Status Action Plan </label>
-									<div class="col-md-9">
-									<select class="form-control input-sm" name="status_act">
-										<?php 
-										if($action_plan['status_act'] == 'berkala'){
-										?>
-											<option value="berkala">Berkala</option>
-											<option value="tidak berkala">Tidak Berkala</option>
-										<?php
-										}else{
-										?>
-											<option value="tidak berkala">Tidak Berkala</option>
-											<option value="berkala">Berkala</option>
-										<?php
-										}
-										?>
-										
-										
-									</select>
-									</div>
-								</div>
 						</div>
 						<div class="form-actions right">
 							<button id="changes-risk-set-as-primary" type="button" class="btn blue"><i class="fa fa-arrows-h"></i> Set as Primary</button>

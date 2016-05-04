@@ -1983,7 +1983,7 @@ class RiskRegister extends APP_Controlleri {
 				<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
 				<script type="text/javascript" src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 				<script type="text/javascript" src="assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
-
+				
 				<script src="assets/scripts/risk/cr_riskregister_actplan.js"></script>
 				';
 				
@@ -1999,16 +1999,12 @@ class RiskRegister extends APP_Controlleri {
 					$data['impact_list'] = $this->mriskregister->getRiskImpactForList();
 					$data['treatment_list'] = $this->mriskregister->getReference('treatment.status');
 					$data['division_list'] = $this->mriskregister->getDivisionList();
-
-					//compare change request user
- 					$time_compare = $this->mriskregister->time_compare($risk_id);
-  					$data['time_compare'] = $time_compare->created_date;
 					
 				}
 				
-				$this->load->view('main/header', $data);
+				$this->load->view('maini/header', $data);
 				$this->load->view('change_request_input', $data);
-				$this->load->view('main/footer', $data);
+				$this->load->view('maini/footer', $data);
 			}
 		}
 	}

@@ -132,7 +132,6 @@
 										<th><span class="small">Suggested Action Plan</span></th>
 										<th><span class="small">Due Date</span></th>
 										<th><span class="small">Action Plan Owner</span></th>
-										<th><span class="small">Status Action Plan</span></th>
 									</tr>
 									</thead>
 									<tbody>
@@ -263,7 +262,6 @@
 										<th><span class="small">Suggested Action Plan</span></th>
 										<th><span class="small">Due Date</span></th>
 										<th><span class="small">Action Plan Owner</span></th>
-										<th><span class="small">Status Action Plan</span></th>
 										<th><span class="small">&nbsp;</span></th>
 									</tr>
 									</thead>

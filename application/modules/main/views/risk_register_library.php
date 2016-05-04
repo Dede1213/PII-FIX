@@ -461,8 +461,6 @@ WHERE t_risk.risk_id ='$id'";
 										<th><span class="small">Suggested Action Plan</span></th>
 										<th><span class="small">Due Date</span></th>
 										<th><span class="small">Action Plan Owner</span></th>
-										<th><span class="small">status Action Plan</span></th>
-										
 									</tr>
 									</thead>
 									<tbody>
@@ -690,7 +688,6 @@ WHERE t_risk.risk_id ='$id'";
 										<th><span class="small">Suggested Action Plan</span></th>
 										<th><span class="small">Due Date</span></th>
 										<th><span class="small">Action Plan Owner</span></th>
-										<th><span class="small">Status Action Plan</span></th>
 										<th width="30px">&nbsp;</th>
 									</tr>
 									</thead>
@@ -936,19 +933,6 @@ WHERE t_risk.risk_id ='$id'";
 			<input type="hidden"   id = "form-data-revid"  > 
 			<form id="input-form-action-plan" role="form" class="form-horizontal">
 				<div class="form-body">
-				<div class="form-group">
-						<label class="col-md-3 control-label">Status <span class="required">* </span></label>
-						<div class="col-md-9">
-						<select class="form-control input-sm" name="status_act" id = "status_act">
-							
-							<option value="">Choose one...</option>
-							<option value="berkala">Berkala</option>
-							<option value="tidak berkala">Tidak Berkala</option>
-							
-						</select>
-						</div>
-					</div>
-
 					<!--<div class="form-group">
 						<label class="col-md-3 control-label">Suggested Action Plan </label>
 						<div class="col-md-9">

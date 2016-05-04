@@ -1,11 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-	class Risk extends APP_Controller {
+	class Risk extends APP_Controlleri {
 		public function index()
 		{
 			$data = $this->loadDefaultAppConfig();
-			$data['sidebarMenu'] = $this->getSidebarMenuStructure('main/mainpic');
+			$data['sidebarMenu'] = $this->getSidebarMenuStructure('maini/mainpic');
 			$data['pageLevelStyles'] = '
 			<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css"/>
 			<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
@@ -57,7 +57,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<script src="assets/scripts/dashboard/getallrisk.js"></script>
 			';
 			
-			$this->load->view('main/header', $data);
+			$this->load->view('maini/header', $data);
 			//$this->load->view('getallrisk_option', $data); -->>>> prepare lap pertgl
 			$this->load->view('getallrisk', $data);
 			$this->load->view('footer', $data);
@@ -77,7 +77,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<script src="assets/scripts/dashboard/getallrisk.js"></script>
 			';
 			
-			$this->load->view('main/header', $data);
+			$this->load->view('maini/header', $data);
 			$this->load->view('getallrisk', $data);
 			$this->load->view('footer', $data);
 		}
@@ -96,7 +96,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<script src="assets/scripts/dashboard/getallrisk.js"></script>
 			';
 			
-			$this->load->view('main/header', $data);
+			$this->load->view('maini/header', $data);
 			$this->load->view('getallrisk_pertgl', $data);
 			$this->load->view('footer', $data);
 		}
@@ -117,7 +117,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$data['pageLevelScripts'] = '
 			<script src="assets/scripts/dashboard/getallrisk.js"></script>';
 			
-			$this->load->view('main/header', $data);
+			$this->load->view('maini/header', $data);
 			$this->load->view('getallriskperiode', $data);
 			$this->load->view('footer', $data);
 		}
@@ -138,7 +138,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$data['pageLevelScripts'] = '
 			<script src="assets/scripts/dashboard/getallrisk.js"></script>';
 			
-			$this->load->view('main/header', $data);
+			$this->load->view('maini/header', $data);
 			$this->load->view('get2ndcategory', $data);
 			$this->load->view('footer', $data);
 		}		
@@ -158,7 +158,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$data['pageLevelScripts'] = '
 			<script src="assets/scripts/dashboard/getallrisk.js"></script>';
 			
-			$this->load->view('main/header', $data);
+			$this->load->view('maini/header', $data);
 			$this->load->view('getactionplan', $data);
 			$this->load->view('footer', $data);
 		}		
@@ -178,7 +178,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$data['pageLevelScripts'] = '
 			<script src="assets/scripts/dashboard/getallrisk.js"></script>';
 			
-			$this->load->view('main/header', $data);
+			$this->load->view('maini/header', $data);
 			$this->load->view('gettreatment', $data);
 			$this->load->view('footer', $data);
 		}
@@ -198,7 +198,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$data['pageLevelScripts'] = '
 			<script src="assets/scripts/dashboard/getallrisk.js"></script>';
 			
-			$this->load->view('main/header', $data);
+			$this->load->view('maini/header', $data);
 			$this->load->view('gettable', $data);
 			$this->load->view('footer', $data);
 		}		
@@ -218,7 +218,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$data['pageLevelScripts'] = '
 			<script src="assets/scripts/dashboard/getallrisk.js"></script>';
 			
-			$this->load->view('main/header', $data);
+			$this->load->view('maini/header', $data);
 			$this->load->view('getkri', $data);
 			$this->load->view('footer', $data);
 		}	
@@ -238,7 +238,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$data['pageLevelScripts'] = '
 			<script src="assets/scripts/dashboard/getallrisk.js"></script>';
 			
-			$this->load->view('main/header', $data);
+			$this->load->view('maini/header', $data);
 			$this->load->view('getcomparison', $data);
 			$this->load->view('footer', $data);
 		}				
@@ -257,7 +257,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<script src="assets/scripts/dashboard/getallrisk.js"></script>
 			';
 			
-			$this->load->view('main/header', $data);
+			$this->load->view('maini/header', $data);
 			$this->load->view('gettopten', $data);
 			$this->load->view('footer', $data);
 		}
@@ -929,7 +929,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$data['pageLevelScripts'] = '
 			<script src="assets/scripts/dashboard/getallrisk.js"></script>';
 			
-			$this->load->view('main/header', $data);
+			$this->load->view('maini/header', $data);
 			$this->load->view('report_listofrisk', $data);
 			$this->load->view('footer', $data);
 		}	
@@ -1002,7 +1002,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$data['pageLevelScripts'] = '
 			<script src="assets/scripts/dashboard/getallrisk.js"></script>';
 			
-			$this->load->view('main/header', $data);
+			$this->load->view('maini/header', $data);
 			$this->load->view('report_listofrisketc', $data);
 			$this->load->view('footer', $data);
 		}	
@@ -1076,7 +1076,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$data['pageLevelScripts'] = '
 			<script src="assets/scripts/dashboard/getallrisk.js"></script>';
 			
-			$this->load->view('main/header', $data);
+			$this->load->view('maini/header', $data);
 			$this->load->view('report_risktreatmentreport', $data);
 			$this->load->view('footer', $data);
 			
@@ -1150,7 +1150,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$data['pageLevelScripts'] = '
 			<script src="assets/scripts/dashboard/getallrisk.js"></script>';
 			
-			$this->load->view('main/header', $data);
+			$this->load->view('maini/header', $data);
 			$this->load->view('report_listofall', $data);
 			$this->load->view('footer', $data);
 		}	
@@ -1227,7 +1227,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$data['pageLevelScripts'] = '
 			<script src="assets/scripts/dashboard/getallrisk.js"></script>';
 			
-			$this->load->view('main/header', $data);
+			$this->load->view('maini/header', $data);
 			$this->load->view('report_listofall1', $data);
 			$this->load->view('footer', $data);
 		}	
@@ -1300,7 +1300,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$data['pageLevelScripts'] = '
 			<script src="assets/scripts/dashboard/getallrisk.js"></script>';
 			
-			$this->load->view('main/header', $data);
+			$this->load->view('maini/header', $data);
 			$this->load->view('report_comparison1', $data);
 			$this->load->view('footer', $data);
 		}	
@@ -1377,7 +1377,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$data['pageLevelScripts'] = '
 			<script src="assets/scripts/dashboard/getallrisk.js"></script>';
 			
-			$this->load->view('main/header', $data);
+			$this->load->view('maini/header', $data);
 			$this->load->view('report_comparison2', $data);
 			$this->load->view('footer', $data);
 		}	
@@ -1454,7 +1454,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$data['pageLevelScripts'] = '
 			<script src="assets/scripts/dashboard/getallrisk.js"></script>';
 			
-			$this->load->view('main/header', $data);
+			$this->load->view('maini/header', $data);
 			$this->load->view('report_topten', $data);
 			$this->load->view('footer', $data);
 		}	
@@ -1523,7 +1523,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$data['pageLevelScripts'] = '
 			<script src="assets/scripts/dashboard/getallrisk.js"></script>';
 			
-			$this->load->view('main/header', $data);
+			$this->load->view('maini/header', $data);
 			$this->load->view('report_topten2', $data);
 			$this->load->view('footer', $data);
 		}	
@@ -1592,7 +1592,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$data['pageLevelScripts'] = '
 			<script src="assets/scripts/dashboard/getallrisk.js"></script>';
 			
-			$this->load->view('main/header', $data);
+			$this->load->view('maini/header', $data);
 			$this->load->view('report_KRI_monitoring', $data);
 			$this->load->view('footer', $data);
 		}	
@@ -1666,7 +1666,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$data['pageLevelScripts'] = '
 			<script src="assets/scripts/dashboard/getallrisk.js"></script>';
 			
-			$this->load->view('main/header', $data);
+			$this->load->view('maini/header', $data);
 			$this->load->view('report_getcomparison1', $data);
 			$this->load->view('footer', $data);
 		}	
@@ -1743,7 +1743,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$data['pageLevelScripts'] = '
 			<script src="assets/scripts/dashboard/getallrisk.js"></script>';
 			
-			$this->load->view('main/header', $data);
+			$this->load->view('maini/header', $data);
 			$this->load->view('report_getcomparison2', $data);
 			$this->load->view('footer', $data);
 		}	
@@ -1823,7 +1823,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$this->load->model('report/risk_model','risk',true);
 			$data['periode'] = $this->risk->getAllPeriode();			
 			
-			$this->load->view('main/header', $data); 
+			$this->load->view('maini/header', $data); 
 			$this->load->view('riskmap', $data);
 			$this->load->view('footer', $data);
 		}

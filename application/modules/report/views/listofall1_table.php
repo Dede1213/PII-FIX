@@ -24,7 +24,6 @@
 							<th> Risk Level </th> 
 							<th> Execution Status</th> 
 							<th> Risk Level After Mitigation</th> 
-							<th> Status Action Plan</th> 
 					  </tr>
 				</thead> 
 				<tbody>
@@ -42,8 +41,7 @@
 								<td> <?=$key['risk_owner'];?> </td> 
 								<td> <?=$key['risk_level'];?> </td>
 								<td> <?=$key['Execution Status'];?> </td> 		
-								<td> <?=$key['risk_level_after_mitigation'];?> </td> 
-								<td> <?=$key['status_act'];?> </td> 										
+								<td> <?=$key['risk_level_after_mitigation'];?> </td> 										
 							</tr>
 							<?php $i ++;?>
 					 <?php endforeach;?> 

@@ -185,7 +185,6 @@
 									<th>Kontrol Eksisting</th>
 									<th>Evaluasi atas Eksisting Kontrol</th>
 									<th>Pemilik Kontrol</th>
-									<th>Status Action Plan</th>
 								</tr>
 								</thead>
 								<tbody>
@@ -195,7 +194,6 @@
 										<td><?=$row['risk_existing_control']?></td>
 										<td><?=$row['risk_evaluation_control']?></td>
 										<td><?=$row['risk_control_owner']?></td>
-										<td><?=$row['status_act']?></td>
 									</tr>
 									<?php } ?>
 								</tbody>

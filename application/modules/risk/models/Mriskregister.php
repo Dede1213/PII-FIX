@@ -514,16 +514,15 @@ class Mriskregister extends APP_Model {
 			}
 			
 			// insert action plan
-			$sql = "insert into t_risk_action_plan(risk_id, action_plan_status, action_plan, due_date, division, status_act) 
-					values(?, 0, ?, ?, ?, ?)";
+			$sql = "insert into t_risk_action_plan(risk_id, action_plan_status, action_plan, due_date, division) 
+					values(?, 0, ?, ?, ?)";
 			foreach ($actplan as $key => $value) {
 				$dd = implode('-', array_reverse( explode('-', $value['due_date']) ));
 				$par = array(
 					'rid' => $rid,
 					'ap' => $value['action_plan'],
 					'dd' => $dd,
-					'div' => $value['division'],
-					'ss' => $value['status_act']
+					'div' => $value['division']
 				);
 				$res4 = $this->db->query($sql, $par);
 			}
@@ -631,8 +630,8 @@ class Mriskregister extends APP_Model {
 			}
 			
 			// insert action plan
-			$sql = "insert into t_risk_action_plan_change(risk_id, action_plan_status, action_plan, due_date, division, switch_flag, status_act) 
-					values((select risk_id from t_risk where risk_code ='".$risk['risk_code']."' and periode_id ='".$risk['periode_id']."'), 0, ?, ?, ?, ?, ?)";
+			$sql = "insert into t_risk_action_plan_change(risk_id, action_plan_status, action_plan, due_date, division, switch_flag) 
+					values((select risk_id from t_risk where risk_code ='".$risk['risk_code']."' and periode_id ='".$risk['periode_id']."'), 0, ?, ?, ?, ?)";
 			foreach ($actplan as $key => $value) {
 				$dd = implode('-', array_reverse( explode('-', $value['due_date']) ));
 				$par = array(
@@ -640,8 +639,7 @@ class Mriskregister extends APP_Model {
 					'ap' => $value['action_plan'],
 					'dd' => $dd,
 					'div' => $value['division'],
-					'rib' => $risk['risk_input_by'],
-					'ss' => $value['status_act']
+					'rib' => $risk['risk_input_by']
 				);
 				$res4 = $this->db->query($sql, $par);
 			}
@@ -761,10 +759,10 @@ class Mriskregister extends APP_Model {
 			$res = $this->db->query($sql, $lib_par);
 			
 			// insert action plan
-			$sql = "insert into t_risk_action_plan(risk_id,action_plan_status, action_plan, due_date, division, status_act) 
+			$sql = "insert into t_risk_action_plan(risk_id,action_plan_status, action_plan, due_date, division) 
 					select 
 					
-					".$hasil." as risk_id, 0 as action_plan_status, action_plan, due_date, division, status_act
+					".$hasil." as risk_id, 0 as action_plan_status, action_plan, due_date, division
 					from t_risk_action_plan
 					where risk_id = ?";
 			$res = $this->db->query($sql, $lib_par);

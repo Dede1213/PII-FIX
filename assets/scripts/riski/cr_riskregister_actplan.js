@@ -1235,7 +1235,7 @@ var ChangeRequest = function() {
             	}
             	
             	Metronic.blockUI({ boxed: true });
-            	var url = site_url+'/risk/RiskRegister/submitChangeRisk';
+            	var url = site_url+'/risk/RiskRegister/submitChangeRisk/'+g_time_compare;
 
             	$.post(
             		url,

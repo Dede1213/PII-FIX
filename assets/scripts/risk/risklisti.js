@@ -265,7 +265,7 @@ grid2.init({
         		var cls = 'font-green';
         		if (full.risk_status == '0' || full.risk_status == '1'){ cls = '';
         		return '<a target="_self" class="'+cls+'" href="'+site_url+'/risk/RiskRegister/modifyRisk/'+full.risk_id+'">'+data+'</a>';
-        		}else if (full.risk_status == '2'){ cls = '';
+        		}else if (full.risk_status > '1'){ cls = '';
         		return '<a target="_self" class="'+cls+'" href="'+site_url+'/main/viewRisk/'+full.risk_id+'">'+data+'</a>';
         		}
         	}

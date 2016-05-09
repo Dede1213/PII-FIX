@@ -1925,6 +1925,10 @@ class RiskRegister extends APP_Controller {
 					$data['impact_list'] = $this->mriskregister->getRiskImpactForList();
 					$data['treatment_list'] = $this->mriskregister->getReference('treatment.status');
 					$data['division_list'] = $this->mriskregister->getDivisionList();
+
+					//compare change request user
+					$time_compare = $this->mriskregister->time_compare($risk_id);
+					$data['time_compare'] = $time_compare->created_date;
 					
 				}
 				

@@ -6397,9 +6397,12 @@ select
 	}
 
 	function getRiskUser($risk_id){
-	$sql = "select * from t_risk_add_user where risk_id = '".$risk_id."' ";
+	$sql = "SELECT GROUP_CONCAT(t_risk.risk_input_by, ' | ', (SELECT GROUP_CONCAT(t_risk_add_user.username ) 
+from t_risk_add_user where t_risk.risk_id = t_risk_add_user.risk_id AND t_risk.risk_input_by <> t_risk_add_user.username)) as 'nama'
+FROM t_risk
+WHERE t_risk.risk_id = '".$risk_id."' ";
 	$query = $this->db->query($sql);
-	$res = $query->result_array();
+	$res = $query->row_array();
 	return $res;
 	}
 	

@@ -228,12 +228,7 @@
 			</div>
 			Risk Submited By :
 			<?php
-			foreach ($risk_user as $row) {
-			?>
-			<td><?php echo $row['username']; ?> |</td>
-
-			<?php
-			}
+			echo $risk_user['nama'];
 			?>
 		</div>
 		</div>

@@ -852,6 +852,38 @@ class Risk extends APP_Model {
 			$date = date("Y-m-d");
 			
 			$sql = "select 
+					a.*,
+					b.ref_value as risk_status_v,
+					c.ref_value as risk_level_v,
+					d.ref_value as impact_level_v,
+					e.l_title as likelihood_v,
+					f.division_name as risk_owner_v
+					from t_risk a
+					left join m_reference b on a.risk_status = b.ref_key and b.ref_context = 'risk.status.user'
+					left join m_reference c on a.risk_level = c.ref_key and c.ref_context = 'risklevel.display'
+					left join m_reference d on a.risk_impact_level = d.ref_key and d.ref_context = 'impact.display'
+					left join m_likelihood e on a.risk_likelihood_key = e.l_key
+					left join m_division f on a.risk_owner = f.division_id
+					where 	
+					a.risk_input_by = ? and a.existing_control_id is null
+					UNION
+					select 
+					a.*,
+					b.ref_value as risk_status_v,
+					c.ref_value as risk_level_v,
+					d.ref_value as impact_level_v,
+					e.l_title as likelihood_v,
+					f.division_name as risk_owner_v
+					from t_risk_change a
+					left join m_reference b on a.risk_status = b.ref_key and b.ref_context = 'risk.status.user'
+					left join m_reference c on a.risk_level = c.ref_key and c.ref_context = 'risklevel.display'
+					left join m_reference d on a.risk_impact_level = d.ref_key and d.ref_context = 'impact.display'
+					left join m_likelihood e on a.risk_likelihood_key = e.l_key
+					left join m_division f on a.risk_owner = f.division_id
+					where 	
+					a.risk_input_by = '".$defFilter['userid']."' and a.existing_control_id is null
+					UNION
+					select 
                                                                                 a.*,
                                                                                 b.ref_value as risk_status_v,
                                                                                 c.ref_value as risk_level_v,
@@ -866,23 +898,7 @@ class Risk extends APP_Model {
                                                                                 left join m_division f on a.risk_owner = f.division_id
                                                                                 join t_risk_add_user t on a.risk_id = t.risk_id
                                                                                 where   
-                                                                                t.username = ? and a.existing_control_id is null
-                                                                                UNION
-                                                                                select 
-                                                                                a.*,
-                                                                                b.ref_value as risk_status_v,
-                                                                                c.ref_value as risk_level_v,
-                                                                                d.ref_value as impact_level_v,
-                                                                                e.l_title as likelihood_v,
-                                                                                f.division_name as risk_owner_v
-                                                                                from t_risk_change a
-                                                                                left join m_reference b on a.risk_status = b.ref_key and b.ref_context = 'risk.status.user'
-                                                                                left join m_reference c on a.risk_level = c.ref_key and c.ref_context = 'risklevel.display'
-                                                                                left join m_reference d on a.risk_impact_level = d.ref_key and d.ref_context = 'impact.display'
-                                                                                left join m_likelihood e on a.risk_likelihood_key = e.l_key
-                                                                                left join m_division f on a.risk_owner = f.division_id
-                                                                                where   
-                                                                                a.risk_input_by = '".$defFilter['userid']."' and a.existing_control_id is null
+                                                                                t.username = '".$defFilter['userid']."' and a.existing_control_id is null
 
 					";
 			$rpar = array('user_id' => $defFilter['userid']);

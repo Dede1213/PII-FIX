@@ -115,11 +115,29 @@ gridRegister.init({
         	"render": function ( data, type, full, meta ) {
         		return '<a target="_self" href="'+site_url+'/main/mainrac/riskRegister/'+full.username+'">'+data+'</a>';
         	}
+        },{
+            "targets": 5,
+            "data": "risk_treatment_owner_v",
+            "render": function ( data, type, full, meta ) {
+                var ret = full.risk_treatment_owner_v;
+                if (data == '' || data == null) {
+                    ret = '<span></span> &nbsp; '+
+                          '<button onclick="javascript: Dashboard.viewOwnedAssignForm('+full.username+', \'treatment\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"></i></button>';
+                }else{
+                    ret = '<span></span> &nbsp; '+
+                          '<button onclick="javascript: Dashboard.viewOwnedAssignForm('+full.username+', \'treatment\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"></i></button>';
+                    
+                }
+                return ret;
+            }
         } ],
         "columns": [
 			{ "data": "risk_status" },
 			{ "data": "display_name" },
-			{ "data": "division_name" }
+			{ "data": "division_name" },
+            { "data": "tanggal_submit" },
+            { "data": "note" },
+            { "data": "note_v" }
        ],
         "order": [
             [1, "asc"]
@@ -696,6 +714,16 @@ var Dashboard = function() {
             	
             	$.plot("#chart_cr_to_verify", data, on_options);
             });
+            
+        },
+        viewOwnedAssignForm: function(username, mode) {
+            var me = this;
+            me.tmpRiskId = username;
+            me.tmpRiskMode = mode;
+
+            $('#modal-pic').modal('show');
+               
+            
             
         },
 		  

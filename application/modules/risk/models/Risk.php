@@ -1479,54 +1479,64 @@ class Risk extends APP_Model {
 			$par['p1'] = '%'.$filter_value.'%';
 		}
 		
-		$sql = "
-				select 
+		$sql = "select 
                                                                 b.risk_status,
                                                                 a.username,
                                                                 a.display_name,
                                                                 a.division_id, 
-                                                                b.division_name 
+                                                                b.division_name,
+                                                                z.tanggal_submit,
+                                                                z.note  
                                                                 from m_user a 
                                                                 join m_division b on a.division_id = b.division_id
                                                                 join (
-                                                                                select min(risk_status) as risk_status, risk_input_by from t_risk_change
+                                                                                select min(risk_status) as risk_status, risk_input_by, periode_id from t_risk_change
                                                                                 where
                                                                                 risk_status > 1
                                                                                 group by risk_input_by
                                                                 ) b on a.username = b.risk_input_by
-                                                                WHERE a.username NOT IN (select username from m_user join t_risk on m_user.username = t_risk.risk_input_by)
-                                                                UNION
-                                                                select 
-                                                                b.risk_status,
-                                                                a.username,
-                                                                a.display_name,
-                                                                a.division_id, 
-                                                                b.division_name 
-                                                                from m_user a 
-                                                                join m_division b on a.division_id = b.division_id
-                                                                join (
-                                                                                select min(risk_status) as risk_status, risk_input_by from t_risk
-                                                                                where
-                                                                                risk_status > 1
-                                                                                group by risk_input_by
-                                                                ) b on a.username = b.risk_input_by where a.username is not null
+                                                                join t_risk_add_informasi z on a.username = z.risk_input_by
+                                                                WHERE a.username NOT IN (select username from m_user join t_risk on m_user.username = t_risk.risk_input_by) and z.periode_id = b.periode_id
 UNION
 select 
                                                                 b.risk_status,
                                                                 a.username,
                                                                 a.display_name,
                                                                 a.division_id, 
-                                                                b.division_name 
+                                                                b.division_name,
+                                                                z.tanggal_submit,
+                                                                z.note 
                                                                 from m_user a 
                                                                 join m_division b on a.division_id = b.division_id
                                                                 join (
-                                                                                select min(s.risk_status) as risk_status, t.username from t_risk s
+                                                                                select min(risk_status) as risk_status, risk_input_by, periode_id from t_risk
+                                                                                where
+                                                                                risk_status > 1
+                                                                                group by risk_input_by
+                                                                ) b on a.username = b.risk_input_by
+                                                                join t_risk_add_informasi z on a.username = z.risk_input_by
+                                                                where a.username is not null and z.periode_id = b.periode_id
+UNION
+select 
+                                                                b.risk_status,
+                                                                a.username,
+                                                                a.display_name,
+                                                                a.division_id, 
+                                                                b.division_name,
+                                                                z.tanggal_submit,
+                                                                z.note  
+                                                                from m_user a 
+                                                                join m_division b on a.division_id = b.division_id
+                                                                join (
+                                                                                select min(s.risk_status) as risk_status, periode_id, t.username from t_risk s
                                                                                 join t_risk_add_user t on s.risk_id = t.risk_id
                                                                                 where
                                                                                 risk_status > 1
                                                                                 group by t.username
-                                                                ) b on a.username = b.username 
-                                                                where a.username is not null
+                                                                ) b on a.username = b.username
+                                                                join t_risk_add_informasi z on a.username = z.risk_input_by 
+                                                                where a.username is not null and z.periode_id = b.periode_id
+
 
 "
 				.$ex_filter

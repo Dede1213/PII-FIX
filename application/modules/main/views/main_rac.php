@@ -396,6 +396,9 @@
 							<th width="30px">Status</th>
 							<th>User</th>
 							<th>Divisi</th>
+							<th>Submited</th>
+							<th width="30%">Note</th>
+							<th></th>
 						</tr>
 						</thead>
 						<tbody>
@@ -649,5 +652,19 @@
 			
 		</div>
 		<!-- END CONTENT-->
+	</div>
+</div>
+
+<!-- PIC -->
+<div id="modal-pic" class="modal fade" tabindex="-1" data-width="760" data-keyboard="false">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+		<h4 class="modal-title">Edit Note</h4>
+	</div>
+	<div class="modal-body">
+		<form id="input-form" role="form" class="form-horizontal">
+						blum biar wawan
+		</form>
+
 	</div>
 </div>

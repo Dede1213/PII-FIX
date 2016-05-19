@@ -1244,8 +1244,18 @@ class MainRac extends APP_Controller {
 			
 			$this->load->model('risk/risk');
 			$cred = $this->session->credential;
-			
-			$risk = $this->risk->getRiskValidate('viewRiskByRac', $rid, $cred);
+
+			//cek triskchange ada apa nggak
+			$cek_change = $this->risk->cek_change($rid);
+
+			if($cek_change){
+				$risk = $this->risk->getRiskValidate('viewRiskByRacChange', $rid, $cred);
+
+			}else{
+				$risk = $this->risk->getRiskValidate('viewRiskByRac', $rid, $cred);
+
+			}
+
 			$risk_user = $this->risk->getRiskUser($rid);
 			$data['risk_user'] = $risk_user;
 

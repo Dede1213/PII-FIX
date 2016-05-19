@@ -78,6 +78,7 @@ var RiskVerify = function() {
         		
         		me.populateRisk($('#input-form'), data_risk);
         		$('#risk_submitted_by').val(data_risk.risk_input_by_v);
+                $('#risk_input_by').val(data_risk.risk_input_by);
         		$('#risk_submitted_division').val(data_risk.risk_input_division_v);
         		
         		//console.log(data_risk);

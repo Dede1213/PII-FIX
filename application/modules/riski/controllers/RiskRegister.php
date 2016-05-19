@@ -1,20 +1,20 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class RiskRegister extends APP_Controlleri {
+class RiskRegister extends APP_Controller {
 	function __construct()
     {
         parent::__construct();
         
         $this->load->model('admin/mperiode');
-        $this->load->model('riski/risk');
-        $this->load->model('riski/mriskregister');
+        $this->load->model('risk/risk');
+        $this->load->model('risk/mriskregister');
     }
 	
 	public function index()
 	{
 		$data = $this->loadDefaultAppConfig();
-		$data['sidebarMenu'] = $this->getSidebarMenuStructure('maini');
+		$data['sidebarMenu'] = $this->getSidebarMenuStructure('risk/RiskRegister');
 		$data['indonya'] = base_url('index.php/riski/RiskRegister/');
 		$data['engnya'] = base_url('index.php/risk/RiskRegister/');
 		$data['pageLevelStyles'] = '
@@ -29,7 +29,7 @@ class RiskRegister extends APP_Controlleri {
 		<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
 		<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
 		
-		<script src="assets/scripts/risk/risklisti.js"></script>
+		<script src="assets/scripts/risk/risklist.js"></script>
 		';
 		
 		$data['pageLevelScriptsInit'] = 'RiskList.init();';
@@ -42,9 +42,9 @@ class RiskRegister extends APP_Controlleri {
 		}
 		
 		
-		$this->load->view('maini/header', $data);
+		$this->load->view('main/header', $data);
 		$this->load->view('risk_register_list', $data);
-		$this->load->view('maini/footer', $data);
+		$this->load->view('main/footer', $data);
 	}
 
 	public function ChangeRequestRac($username)
@@ -65,7 +65,7 @@ class RiskRegister extends APP_Controlleri {
 		<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
 		<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
 		
-		<script src="assets/scripts/riski/risklist_change_rac.js"></script>
+		<script src="assets/scripts/risk/risklist_change_rac.js"></script>
 		';
 		
 		$data['pageLevelScriptsInit'] = 'RiskList.init();';
@@ -80,9 +80,9 @@ class RiskRegister extends APP_Controlleri {
 		$data['username'] = $username;
 		
 		
-		$this->load->view('maini/header', $data);
+		$this->load->view('main/header', $data);
 		$this->load->view('risk_register_list_change_rac', $data);
-		$this->load->view('maini/footer', $data);
+		$this->load->view('main/footer', $data);
 	}
 	//ubah
 	public function undermaintenance()
@@ -103,7 +103,7 @@ class RiskRegister extends APP_Controlleri {
 		<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
 		<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
 		
-		<script src="assets/scripts/riski/risklist_under.js"></script>
+		<script src="assets/scripts/risk/risklist_under.js"></script>
 		';
 		
 		$data['pageLevelScriptsInit'] = 'RiskList.init();';
@@ -116,9 +116,9 @@ class RiskRegister extends APP_Controlleri {
 		}
 		
 		
-		$this->load->view('maini/header', $data);
+		$this->load->view('main/header', $data);
 		$this->load->view('risk_register_list_under', $data);
-		$this->load->view('maini/footer', $data);
+		$this->load->view('main/footer', $data);
 	}
 //ubah 
 	public function riskGetRollOver_under()
@@ -267,7 +267,7 @@ class RiskRegister extends APP_Controlleri {
 	{
 		$data = $this->loadDefaultAppConfig();
 		$data['sidebarMenu'] = $this->getSidebarMenuStructure('risk/RiskRegister');
-		$data['indonya'] = base_url('index.php/risk/RiskRegister/recover_indo');
+		$data['indonya'] = base_url('index.php/riski/RiskRegister/recover');
 		$data['engnya'] = base_url('index.php/risk/RiskRegister/recover');
 		$data['pageLevelStyles'] = '
 		<link rel="stylesheet" type="text/css" href="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
@@ -281,7 +281,7 @@ class RiskRegister extends APP_Controlleri {
 		<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
 		<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
 		
-		<script src="assets/scripts/riski/risklist_recover.js"></script>
+		<script src="assets/scripts/risk/risklist_recover.js"></script>
 		';
 		
 		$data['pageLevelScriptsInit'] = 'RiskList.init();';
@@ -294,9 +294,9 @@ class RiskRegister extends APP_Controlleri {
 		}
 		
 		
-		$this->load->view('maini/header', $data);
-		$this->load->view('risk_register_list_recover_i', $data);
-		$this->load->view('maini/footer', $data);
+		$this->load->view('main/header', $data);
+		$this->load->view('risk_register_list_recover', $data);
+		$this->load->view('main/footer', $data);
 	}
 
 	
@@ -376,7 +376,7 @@ class RiskRegister extends APP_Controlleri {
 		$data['page'] = $page;
 		echo json_encode($data);
 	}
-	
+
 	public function confirmRisk_recover() {
 		$session_data = $this->session->credential;
 		
@@ -430,7 +430,7 @@ class RiskRegister extends APP_Controlleri {
 			$menu = 'main';
 		} else if ($mode == 'periodic') {
 			$data['submit_mode'] = 'periodic';
-			$menu = 'riski/RiskRegister';
+			$menu = 'risk/RiskRegister';
 		} else {
 			exit;
 		}
@@ -455,7 +455,7 @@ class RiskRegister extends APP_Controlleri {
 		<script type="text/javascript" src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 		<script type="text/javascript" src="assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
 		
-		<script src="assets/scripts/riski/riskinput.js"></script>
+		<script src="assets/scripts/risk/riskinput.js"></script>
 		';
 		
 		$data['pageLevelScriptsInit'] = "RiskInput.init('".$mode."');
@@ -469,9 +469,9 @@ class RiskRegister extends APP_Controlleri {
 		$data['treatment_list'] = $this->mriskregister->getReference('treatment.status');
 		$data['division_list'] = $this->mriskregister->getDivisionList();
 		
-		$this->load->view('maini/header', $data);
+		$this->load->view('main/header', $data);
 		$this->load->view('risk_register_input', $data);
-		$this->load->view('maini/footer', $data);	
+		$this->load->view('main/footer', $data);	
 	}
 	
 	public function modifyRisk($risk_id = null)
@@ -515,7 +515,7 @@ class RiskRegister extends APP_Controlleri {
 				<script type="text/javascript" src="assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
 				
 				<script src="assets/scripts/risk/riskinput.js"></script>
-				<script src="assets/scripts/riski/riskmodify.js"></script>
+				<script src="assets/scripts/risk/riskmodify.js"></script>
 				';
 				
 				$data['pageLevelScriptsInit'] = "RiskInput.init('".$data['submit_mode']."');
@@ -531,9 +531,9 @@ class RiskRegister extends APP_Controlleri {
 				$data['treatment_list'] = $this->mriskregister->getReference('treatment.status');
 				$data['division_list'] = $this->mriskregister->getDivisionList();
 				
-				$this->load->view('maini/header', $data);
+				$this->load->view('main/header', $data);
 				$this->load->view('risk_register_input', $data);
-				$this->load->view('maini/footer', $data);
+				$this->load->view('main/footer', $data);
 			}
 		}
 	}
@@ -1469,84 +1469,7 @@ class RiskRegister extends APP_Controlleri {
 			echo json_encode($resp);
 		}
 	}
-/*
-	public function modifyRiskData()
-	{
-		$resp['success'] = false;
-		$resp['msg'] = '';
-		
-		$data = $this->loadDefaultAppConfig();
-		$cred = $this->session->credential;
-		
-		if (isset($_POST['risk_id']) && is_numeric($_POST['risk_id'])) {
-			$risk = $this->risk->getRiskValidate('viewMyRisk', $_POST['risk_id'], $cred);
-			if ($risk) {
-				// category
-				if ($risk['risk_2nd_sub_category'] != $_POST['risk_2nd_sub_category']) {
-					$this->load->model('admin/mcategory');
-					$cats = $this->mcategory->getDataById($_POST['risk_2nd_sub_category']);
-					$seq_id = $this->mcategory->getSequence($_POST['risk_2nd_sub_category']);
-					$code = $cats['cat_code'].'-'.$seq_id;
-				} else {
-					$code = $_POST['risk_code'];
-				}
-				
-				if ($_POST['risk_library_id'] == '') $_POST['risk_library_id'] = null;
-				
-				// build data
-				$risk = array(
-					'risk_code' => $code,
-					'risk_input_by' => $data['session']['username'],
-					'risk_input_division' => $data['session']['division_id'],
-					'risk_owner' => $_POST['risk_division'],
-					'risk_division' => $_POST['risk_division'],
-					'risk_library_id' => $_POST['risk_library_id'],
-					'risk_event' => $_POST['risk_event'],
-					'risk_description' => $_POST['risk_description'],
-					'risk_category' => $_POST['risk_category'],
-					'risk_sub_category' => $_POST['risk_sub_category'],
-					'risk_2nd_sub_category' => $_POST['risk_2nd_sub_category'],
-					'risk_cause' => $_POST['risk_cause'],
-					'risk_impact' => $_POST['risk_impact'],
-					'risk_level' => $_POST['risk_level_id'],
-					'risk_impact_level' => $_POST['risk_impact_level_id'],
-					'risk_likelihood_key' => $_POST['risk_likelihood_id'],
-					'suggested_risk_treatment' => $_POST['suggested_risk_treatment'],
-					'created_by' => $data['session']['username']
-				);
-				
-				$impact_level = array();
-				foreach($_POST['impact'] as $v) {
-					$impact_level[] = $v;
-				}
-				
-				$actplan = array();
-				foreach($_POST['actplan'] as $v) {
-					$actplan[] = $v;
-				}
-				
-				$control = array();
-				foreach($_POST['control'] as $v) {
-					$control[] = $v;
-				}
-				
-				$res = $this->risk->updateRisk($_POST['risk_id'], $code, $risk, $impact_level, $actplan, $control, $data['session']['username'], 'RISK_REGISTER-MODIFY');
-				
-				$resp = array();
-				if ($res) {
-					$resp['success'] = true;
-					$resp['msg'] = 'SUCCESS';
-				} else {
-					$resp['success'] = false;
-					$resp['msg'] = $this->db->error();
-				}
-			} else {
-				$resp['msg'] = 'You Are Not Allowed to Modify this Risk';
-			}
-			echo json_encode($resp);
-		}
-	}
-	*/
+	
 	public function ChangeRequestInput($risk_id)
 	{
 		$session_data = $this->session->credential;
@@ -1610,7 +1533,7 @@ class RiskRegister extends APP_Controlleri {
 			}
 		}
 	}
-	
+
 	public function ChangeRequestDelete($risk_id)
 	{
 		$session_data = $this->session->credential;
@@ -1669,7 +1592,7 @@ class RiskRegister extends APP_Controlleri {
 			}
 		}
 	}
-
+	
 	public function submitChangeRisk($time_compare)
 	{
 		$session_data = $this->session->credential;
@@ -1782,7 +1705,6 @@ class RiskRegister extends APP_Controlleri {
 		}
 	}
 	
-	
 	public function ChangeRequestView($risk_id)
 	{
 		$session_data = $this->session->credential;
@@ -1811,7 +1733,7 @@ class RiskRegister extends APP_Controlleri {
 					$v = 'change_request_kri';
 				} else {
 					$data['pageLevelScripts'] = '
-					<script src="assets/scripts/riski/cr_riskregister_view.js"></script>
+					<script src="assets/scripts/risk/cr_riskregister_view.js"></script>
 					';
 					$data['pageLevelScriptsInit'] = 'ChangeRequest.init();';
 					$v = 'change_request_view';
@@ -1822,12 +1744,14 @@ class RiskRegister extends APP_Controlleri {
 				$data['change_code'] = $res['cr_code'];
 				$data['change_status'] = $res['cr_status'];
 				
-				$this->load->view('maini/header', $data);
+				$this->load->view('main/header', $data);
 				$this->load->view($v, $data);
-				$this->load->view('maini/footer', $data);
+				$this->load->view('main/footer', $data);
 			}
 		}
 	}
+	
+
 	public function ChangeRequestView2($risk_id)
 	{
 		$session_data = $this->session->credential;
@@ -1873,6 +1797,8 @@ class RiskRegister extends APP_Controlleri {
 			}
 		}
 	}
+	
+
 	public function loadChangeRequest($mode, $rid) {
 		if (!empty($rid) && is_numeric($rid)) {
 			$data = array();
@@ -1923,7 +1849,7 @@ class RiskRegister extends APP_Controlleri {
 				<script type="text/javascript" src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 				<script type="text/javascript" src="assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
 				
-				<script src="assets/scripts/riski/cr_riskregister.js"></script>
+				<script src="assets/scripts/risk/cr_riskregister.js"></script>
 				';
 				
 				if ($res_valid) {
@@ -1937,11 +1863,15 @@ class RiskRegister extends APP_Controlleri {
 					$data['impact_list'] = $this->mriskregister->getRiskImpactForList();
 					$data['treatment_list'] = $this->mriskregister->getReference('treatment.status');
 					$data['division_list'] = $this->mriskregister->getDivisionList();
+
+					//compare change request user
+					$time_compare = $this->mriskregister->time_compare($risk_id);
+					$data['time_compare'] = $time_compare->created_date;
 				}
 				
-				$this->load->view('maini/header', $data);
+				$this->load->view('main/header', $data);
 				$this->load->view('change_request_input', $data);
-				$this->load->view('maini/footer', $data);
+				$this->load->view('main/footer', $data);
 			}
 		}
 	}
@@ -1983,7 +1913,7 @@ class RiskRegister extends APP_Controlleri {
 				<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
 				<script type="text/javascript" src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 				<script type="text/javascript" src="assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
-				
+
 				<script src="assets/scripts/risk/cr_riskregister_actplan.js"></script>
 				';
 				
@@ -2002,9 +1932,9 @@ class RiskRegister extends APP_Controlleri {
 					
 				}
 				
-				$this->load->view('maini/header', $data);
+				$this->load->view('main/header', $data);
 				$this->load->view('change_request_input', $data);
-				$this->load->view('maini/footer', $data);
+				$this->load->view('main/footer', $data);
 			}
 		}
 	}
@@ -2024,7 +1954,7 @@ class RiskRegister extends APP_Controlleri {
 			$data['pageLevelScripts'] = '
 			<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
 			<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
-			<script src="assets/scripts/riski/cr_riskregister_kri.js"></script>';
+			<script src="assets/scripts/risk/cr_riskregister_kri.js"></script>';
 			$data['pageLevelScriptsInit'] = 'ChangeRequest.init();';
 			
 			$data['valid_mode'] = false;
@@ -2040,8 +1970,8 @@ class RiskRegister extends APP_Controlleri {
 				$risk = $this->risk->getRiskById($kri['risk_id']);
 				$data['risk'] = $risk;
 				$data['input'] = true;
-				$view = 'riski/change_request_kri';
-				$this->load->view('maini/header', $data);
+				$view = 'risk/change_request_kri';
+				$this->load->view('main/header', $data);
 				$this->load->view($view, $data);
 				$this->load->view('main/footer', $data);
 			}

@@ -862,9 +862,14 @@ class MainRac extends APP_Controller {
 				$res = $this->risk->updateRiskrac($_POST['risk_id'], $code, $risk, $impact_level, $actplan, $control, $objective, $data['session']['username']);
 				//$res = $this->risk->riskDeleteChange($_POST['risk_id']);
 				
+
+				//tadinya library aja yg di masukin add user
 				if (isset($_POST['add_user_flag']) && $_POST['add_user_flag'] == 'yes') {
 					$dd = implode('-', array_reverse( explode('-', $_POST['add_user_date_changed']) ));
 					$res = $this->risk->riskAddUser($_POST['risk_id'], $_POST['add_user_username'], $dd);
+				}else{
+					$dd = date("Y-m-d");
+					$res = $this->risk->riskAddUser($_POST['risk_id'], $_POST['risk_input_by'], $dd);
 				}
 
 				$resp = array();
@@ -1241,6 +1246,9 @@ class MainRac extends APP_Controller {
 			$cred = $this->session->credential;
 			
 			$risk = $this->risk->getRiskValidate('viewRiskByRac', $rid, $cred);
+			$risk_user = $this->risk->getRiskUser($rid);
+			$data['risk_user'] = $risk_user;
+
 			if ($risk) {
 				$data['valid_mode'] = true;
 				$data['risk'] = $risk;

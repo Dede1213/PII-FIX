@@ -226,6 +226,15 @@
 					</form>
 				</div>
 			</div>
+			Risk Submited By :
+			<?php
+			foreach ($risk_user as $row) {
+			?>
+			<td><?php echo $row['username']; ?> |</td>
+
+			<?php
+			}
+			?>
 		</div>
 		</div>
 		<?php } else { ?>

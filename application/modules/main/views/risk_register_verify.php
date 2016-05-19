@@ -48,6 +48,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label smaller cl-compact" >Submitted By</label>
 									<div class="col-md-9">
+									<input type="hidden" class="form-control input-sm" name="risk_input_by" id="risk_input_by" placeholder="">
 									<input type="text" class="form-control input-sm" readonly="true" id="risk_submitted_by" placeholder="">
 									</div>
 								</div>

@@ -21,7 +21,7 @@
 			$stat = "Verified By Head";
 		}	
 		if($key['action_plan_status']=="3"){
-			$stat = "Submited To RAC";
+			$stat = "submitted to rac";
 		}	
 		if($key['action_plan_status'] > "3" ){
 			$stat = "Verified By RAC";

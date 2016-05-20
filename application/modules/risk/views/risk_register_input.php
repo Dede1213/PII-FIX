@@ -98,16 +98,13 @@
 
 
 
-								<div class="panel panel-default">
-								<div class="panel-heading">
-									<h3 class="panel-title">Objective<font style="color:red;">*</font></h3>
-								</div>
+								
 								<div class="panel-body">
 									 <div class="clearfix">
 									 	<a href="#form-control-objective" id="button-form-control-open-objective" data-toggle="modal" class="btn default green pull-right btn-sm">
 									 	<i class="fa fa-plus"></i>
 									 	<span class="hidden-480">
-									 	Add Objective </span>
+									 	Add </span>
 									 	</a>
 									 </div>
 									 
@@ -125,8 +122,7 @@
 									 	</table>
 									 </div>
 								</div>
-							</div>
-
+							
 
 								<div class="form-group">
 									<label class="col-md-3 control-label smaller cl-compact" title="fill this field with risk category that related to identified risk as decribed in ‘Risk Description’ ">Risk Category<span class="required">* </span></label>
@@ -737,16 +733,6 @@
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 		<h4 class="modal-title">Evaluation on Existing Control</h4>
 		<p style="color:red;">*Choose One</p>
-		<div class="inputs">
-			<div class="portlet-input input-inline">
-				<div class="input-group">
-					<input type="text" class="form-control" name="filter_search" placeholder="search...">
-					<span class="input-group-btn">
-					<button class="btn btn-default" type="button" id="modal-control-filter-submit">Search</button>
-					</span>
-				</div>
-			</div>
-		</div>
 	</div>
 	<div class="modal-body">
 		<div>
@@ -927,4 +913,13 @@
 </script>
 <?php } ?>
 
+<?php
+if ($submit_mode == 'adhoc'){
+?>
+<script type="text/javascript">
+	var g_submit_mode = <?php echo "$submit_mode";?>;
+</script>
+<?php
+}
+?>
 <?php } ?>

@@ -114,7 +114,8 @@ var RiskVerify = function() {
         	$('#verify-risk-button-cancel').on('click', function() {
         		var mod = MainApp.viewGlobalModal('confirm', 'Are You sure you want to cancel your Risk Verification ? You will loose your unsaved data.');
         		mod.find('button.btn-primary').one('click', function(){
-        			location.href=site_url+'/main/mainrac/riskRegister/'+g_username;
+        			//location.href=site_url+'/main/mainrac/riskRegister/'+g_username;
+                    location.href=site_url+'/main/mainrac/';
         		});
         	});
         },

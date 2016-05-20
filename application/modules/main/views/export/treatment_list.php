@@ -14,7 +14,7 @@
 		 
 		<?php 
 		if ($key['risk_status'] == '5') {
-			$stat = "Submited To RAC";
+			$stat = "submitted to rac";
 		}	 
 		else{
 			$stat = "Verified By RAC";

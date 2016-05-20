@@ -19,7 +19,7 @@
 			$stat = "Draft";
 		}
 		if($key['risk_status']=="2"){
-			$stat = "Submited To RAC";
+			$stat = "submitted to rac";
 		}	
 		if($key['risk_status']=="3" || $key['risk_status']=="4" ){
 			$stat = "Verified By RAC";

@@ -946,6 +946,8 @@ class Risk extends APP_Model {
 					left join m_likelihood e on a.risk_likelihood_key = e.l_key
 					left join m_division f on a.risk_owner = f.division_id
 					where 
+					risk_library_id is not null
+					and
 					a.periode_id = '".$defFilter['periodid']."'
 					and a.risk_input_by = '".$defFilter['userid']."'
 					
@@ -1499,7 +1501,7 @@ class Risk extends APP_Model {
 			$par['p1'] = '%'.$filter_value.'%';
 		}
 		
-		$sql = "select 
+		$sql = "select
                                                                 b.risk_status,
                                                                 a.username,
                                                                 a.display_name,
@@ -1518,7 +1520,7 @@ class Risk extends APP_Model {
                                                                 join t_risk_add_informasi z on a.username = z.risk_input_by
                                                                 WHERE a.username NOT IN (select username from m_user join t_risk on m_user.username = t_risk.risk_input_by) and z.periode_id = b.periode_id
 UNION
-select 
+select
                                                                 b.risk_status,
                                                                 a.username,
                                                                 a.display_name,
@@ -1533,11 +1535,11 @@ select
                                                                                 where
                                                                                 risk_status > 1
                                                                                 group by risk_input_by
-                                                                ) b on a.username = b.risk_input_by
+                                                               ) b on a.username = b.risk_input_by
                                                                 join t_risk_add_informasi z on a.username = z.risk_input_by
                                                                 where a.username is not null and z.periode_id = b.periode_id
 UNION
-select 
+select
                                                                 b.risk_status,
                                                                 a.username,
                                                                 a.display_name,
@@ -1556,9 +1558,7 @@ select
                                                                 ) b on a.username = b.username
                                                                 join t_risk_add_informasi z on a.username = z.risk_input_by 
                                                                 where a.username is not null and z.periode_id = b.periode_id
-
-
-"
+                                                                and a.username NOT IN (select username from m_user join t_risk on m_user.username = t_risk.risk_input_by) and z.periode_id = b.periode_id"
 				.$ex_filter
 				.$ex_or;
 		$res = $this->getPagingData($sql, $par, $page, $row, 'username', true);
@@ -6459,5 +6459,10 @@ WHERE t_risk.risk_id = '".$risk_id."' ";
 			}	
 	}
 
+	function cekOwned($username){
+	$sql = "select id from t_risk_action_plan where assigned_to = '".$username."' and action_plan_status = 0";
+	$query = $this->db->query($sql);
+	return $query->num_rows();
+	}
 	
 }

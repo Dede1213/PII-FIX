@@ -85,7 +85,7 @@
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/submit.png"/> &nbsp; 
-								 Submited To RAC
+								 submitted to rac
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/verified.png"/> &nbsp; 

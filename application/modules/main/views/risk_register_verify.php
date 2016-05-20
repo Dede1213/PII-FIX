@@ -84,16 +84,13 @@
 									<textarea class="form-control popovers" rows="3" name="risk_description" data-container="body" data-placement="bottom" placeholder="" data-content=""></textarea>
 									</div>
 								</div>
-								<div class="panel panel-default">
-								<div class="panel-heading">
-									<h3 class="panel-title">Objective</h3>
-								</div>
+								
 								<div class="panel-body">
 									 <div class="clearfix">
 									 	<a href="#form-control-objective" id="button-form-control-open-objective" data-toggle="modal" class="btn default green pull-right btn-sm">
 									 	<i class="fa fa-plus"></i>
 									 	<span class="hidden-480">
-									 	Add Objective </span>
+									 	Add </span>
 									 	</a>
 									 </div>
 									 
@@ -111,7 +108,7 @@
 									 	</table>
 									 </div>
 								</div>
-							</div>
+							
 
 								<div class="form-group">
 									<label class="col-md-3 control-label smaller cl-compact" title="fill this field with risk category that related to identified risk as decribed in ‘Risk Description’ ">Risk Category</label>

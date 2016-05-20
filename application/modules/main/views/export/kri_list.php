@@ -18,10 +18,10 @@
 			$stat = "Draft";
 		}
 		if($key['kri_status']=="1"){
-			$stat = "Submited To RAC";
+			$stat = "submitted to rac";
 		}	
 		if($key['kri_status']=="2"  ){
-			$stat = "Submited To RAC";
+			$stat = "submitted to rac";
 		}	
 		if($key['kri_status'] > "2" ){
 			$stat = "Verified By RAC";

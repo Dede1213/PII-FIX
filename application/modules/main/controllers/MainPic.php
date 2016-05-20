@@ -45,6 +45,12 @@ class MainPic extends APP_Controller {
 			$data['adhoc_button'] = false;
 		}
 		
+		//cek owned
+		$username = $this->session->credential['username'];
+		$this->load->model('risk/risk');
+		$data['cekowned'] = $this->risk->cekOwned($username);
+
+
 		$this->load->view('header', $data);
 		$this->load->view('main_pic', $data);
 		$this->load->view('footer', $data);

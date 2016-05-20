@@ -25,7 +25,7 @@
 
 		</script>
 		<div class="row">
-		<div class="col-md-12">
+		<div class="col-md-6">
 			<div class="portlet box blue">
 				<div class="portlet-title">
 					<div class="caption">
@@ -37,7 +37,7 @@
 					<form role="form" class="form-horizontal">
 						<div class="form-body">
 							<div class="row">
-							<div class="col-md-5">	
+							<div class="col-md-12">	
 								<div class="form-group">
 									<label class="col-md-3 control-label smaller cl-compact">Risk ID</label>
 									<div class="col-md-9">
@@ -107,15 +107,14 @@
 									<textarea class="form-control input-readview" readonly="true" rows="3" name="risk_impact" placeholder=""><?=$risk['risk_impact']?></textarea>
 									</div>
 								</div>
-								
-							</div>
-							<div class="col-md-7">
 								<div class="form-group">
 									<label class="col-md-3 control-label small cl-compact" title="fill this field with treatment category as described in “Risk Treatment Guideline” based on its risk level" >Suggested Risk Treatment</label>
 									<div class="col-md-6">
 										<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$risk['treatment_v']?>" name="risk_likelihood_value" placeholder="">
 									</div>
 								</div>
+							<hr>
+								
 
 								
 								
@@ -165,12 +164,23 @@
 							</div>
 						</div>
 					</form>
-					<hr/>
+					
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="portlet box blue">
+				<div class="portlet-title">
+					<div class="caption">
+						Risk Form
+					</div>
+				</div>
+				<div class="portlet-body form">
 					<form id="input-form" role="form" class="form-horizontal">
 						<input type="hidden" name="risk_id" value="<?=$risk['risk_id']?>" />
 						<div class="form-body">
 							<div class="row">
-							<div class="col-md-5">	
+							<div class="col-md-12">	
 								<div class="form-group">
 									<label class="col-md-3 control-label smaller cl-compact" title="fill this field with grading as describe in “Impact Category” (e.g. insignificant, minor, moderate, major, and catastrophic) after consideration to existing control effectiveness" >Impact Level</label>
 									<div class="col-md-9">
@@ -219,10 +229,10 @@
 									</div>
 								</div>
 								
-							</div>
-							<div class="col-md-7">
+							<hr> 
+
 								<div class="form-group">
-									<label class="col-md-3 control-label small cl-compact" title="fill this field with treatment category as described in “Risk Treatment Guideline” based on its risk level">Suggested Risk Treatment</label>
+									<label class="col-md-3 control-label small cl-compact" title="fill this field with treatment category as described in “Risk Treatment Guideline” based on its risk level">Assigned Risk Treatment</label>
 									<div class="col-md-6">
 										<select class="form-control input-sm" name="suggested_risk_treatment">
 											<?php foreach($treatment_list as $row) { ?>
@@ -265,7 +275,7 @@
 								
 								<div class="row">
 									<div class="col-md-6">
-										<h4>Suggested Action Plan</h4>
+										<h4>Assigned Action Plan</h4>
 									</div>
 									<div class="col-md-6 clearfix">
 										<a href="#form-data" data-toggle="modal" class="btn default green pull-right btn-sm" id ="button-form-control-open-ap">
@@ -280,7 +290,7 @@
 									<table id="action_plan_table" class="table table-condensed table-bordered table-hover">
 										<thead>
 										<tr role="row" class="heading">
-											<th><small>Suggested Action Plan</small></th>
+											<th><small>Assigned Action Plan</small></th>
 											<th><small>Due Date</small></th>
 											<th><small>Action Plan Owner</small></th>
 											<th width="66px">&nbsp;</th>
@@ -554,16 +564,7 @@
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 		<h4 class="modal-title">Evaluation on Existing Control</h4>
 		<p style="color:red;">*Choose One</p>
-		<div class="inputs">
-			<div class="portlet-input input-inline">
-				<div class="input-group">
-					<input type="text" class="form-control" name="filter_search" placeholder="search...">
-					<span class="input-group-btn">
-					<button class="btn btn-default" type="button" id="modal-control-filter-submit">Search</button>
-					</span>
-				</div>
-			</div>
-		</div>
+		
 	</div>
 	<div class="modal-body">
 		<div>

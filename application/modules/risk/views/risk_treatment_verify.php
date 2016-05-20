@@ -807,16 +807,7 @@ WHERE t_risk.risk_id ='$id'";
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 		<h4 class="modal-title">Evaluation on Existing Control</h4>
 		<p style="color:red;">*Choose One</p>
-		<div class="inputs">
-			<div class="portlet-input input-inline">
-				<div class="input-group">
-					<input type="text" class="form-control" name="filter_search" placeholder="search...">
-					<span class="input-group-btn">
-					<button class="btn btn-default" type="button" id="modal-control-filter-submit">Search</button>
-					</span>
-				</div>
-			</div>
-		</div>
+		
 	</div>
 	<div class="modal-body">
 		<div>

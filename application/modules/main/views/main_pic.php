@@ -60,7 +60,13 @@
 				</li>
 				<li>
 					<a href="#tab_owned" data-toggle="tab">
-					Risk Owned By Me </a>
+					Risk Owned By Me 
+					<?php 
+					if($cekowned > 0){
+					echo "($cekowned)";
+					}
+					?>
+					</a>
 				</li>
 				<li>
 					<a href="#tab_action_plan" data-toggle="tab">
@@ -146,7 +152,7 @@
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/submit.png"/> &nbsp; 
-								 Submited To RAC
+								 submitted to rac
 							</li>
 							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/verified.png"/> &nbsp; 

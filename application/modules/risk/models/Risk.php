@@ -2780,8 +2780,8 @@ select
 				$sql = "delete from t_risk_action_plan where risk_id = ?";
 				$this->db->query($sql, array('rid' => $risk_id));
 				
-				$sql = "insert into t_risk_action_plan(risk_id, action_plan, due_date, division) 
-						values(?, ?, ?, ?)";
+				$sql = "insert into t_risk_action_plan(risk_id, action_plan_status, action_plan, due_date, division, assigned_to) 
+						values(?, 1, ?, ?, ?, (select username from m_user where division_id = '".$risk['risk_division']."'  and role_id = 4))";
 				foreach ($actplan as $key => $value) {
 					$dd = implode('-', array_reverse( explode('-', $value['due_date']) ));
 					$par = array(

@@ -322,7 +322,7 @@ select
                                                                                 left join m_division f on a.risk_owner = f.division_id
                                                                                 join m_periode on m_periode.periode_id = a.periode_id
                                                                                 where 
-                                                                                a.periode_id is null
+                                                                                a.periode_id = 0
                                                                                 and a.risk_date <> (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end)
                                                                                 and a.existing_control_id is null
                                                                                 and a.risk_input_by = '".$defFilter['userid']."'

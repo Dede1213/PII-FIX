@@ -1142,7 +1142,8 @@ class MainRac extends APP_Controller {
 		}
 	}
 	
-	public function verifySetAsPrimary() {
+	public function verifySetAsPrimary($risk_input_by=null) {
+		 
 		$resp['success'] = false;
 		$resp['msg'] = '';
 		
@@ -1209,7 +1210,15 @@ class MainRac extends APP_Controller {
 				if($cek_changerequest){
 					$resp['msg'] = 'You have change request for this Risk';
 				}else{
+					
+				// update t_risk ke t_risk change 
 				
+				//echo "<pre>";print_r($this->input->post());exit;
+				
+				$data_t_risk = $this->risk->get_t_risk($_POST['risk_id']);
+				
+				// end update t_risk ke t_risk change 
+					 
 				$res = $this->risk->updateRisk2($_POST['risk_id'], $code, $risk, $impact_level, $actplan, $control, $objective, $data['session']['username']);
 				//$res = $this->risk->riskSwitchPrimary($_POST['risk_id']);
 				
@@ -1221,6 +1230,14 @@ class MainRac extends APP_Controller {
 					$resp['success'] = false;
 					$resp['msg'] = $this->db->error();
 				}
+				
+				//echo update t_risk_change;
+				
+				$this->risk->update_t_risk_change($data_t_risk,$_POST['risk_id'],$this->input->post('risk_input_by_change'));
+				
+				// endupdate t_risk_change
+				
+				
 			}
 
 			} else {
@@ -1407,8 +1424,7 @@ class MainRac extends APP_Controller {
 					'risk_owner' => $_POST['risk_division'],
 					'risk_cause' => $_POST['risk_cause'],
 					'risk_impact' => $_POST['risk_impact']
-
-					
+ 
 				);
 				
 				$impact_level = array();
@@ -1425,7 +1441,16 @@ class MainRac extends APP_Controller {
 				foreach($_POST['control'] as $v) {
 					$control[] = $v;
 				}
+				
+				// update t_risk ke t_risk change 
 
+				//echo "<pre>";print_r($this->input->post());exit;
+
+				$data_t_risk = $this->risk->get_t_risk($_POST['risk_id']);
+
+				// end update t_risk ke t_risk change 
+
+				
 				$res = $this->risk->riskChangeUpdate($_POST['risk_id'], $risk_update, $impact_level, $actplan, $control, $data['session']['username']);
 				//$res = $this->risk->riskSwitchPrimary($_POST['risk_id']);
 				
@@ -1437,9 +1462,19 @@ class MainRac extends APP_Controller {
 					$resp['success'] = false;
 					$resp['msg'] = $this->db->error();
 				}
+				
+				//echo update t_risk_change;
+				
+				$this->risk->update_t_risk_change($data_t_risk,$_POST['risk_id'] );
+				
+				// endupdate t_risk_change
+				
 			} else {
 				$resp['msg'] = 'You Are Not Allowed to Modify this Risk';
 			}
+			
+			
+			
 			echo json_encode($resp);
 		}
 	}
@@ -1861,8 +1896,17 @@ class MainRac extends APP_Controller {
 				'division' => $_POST['division'],
 				'created_by' => $data['session']['username']
 			);
-			
+			 
 			$this->load->model('risk/risk');
+			
+			// update t_risk ke t_risk change 
+				
+			//echo "<pre>";print_r($this->input->post());exit;
+			
+			$data_t_risk = $this->risk->get_t_risk_actionplan($_POST['id']);
+			
+			// end update t_risk ke t_risk change
+			
 			$res = $this->risk->actionPlanSaveDraft2($_POST['id'], $_POST['risk_id'], $risk, $data['session']['username']);
 			//$res = $this->risk->actionSwitchPrimary($_POST['id']);
 			
@@ -1874,6 +1918,13 @@ class MainRac extends APP_Controller {
 				$resp['success'] = false;
 				$resp['msg'] = $this->db->error();
 			}
+			
+			//echo update t_risk_change;
+				
+			$this->risk->update_t_risk_actionplan_change($data_t_risk,$_POST['id']);
+			
+			// endupdate t_risk_change
+			
 			echo json_encode($resp);
 		}
 	}

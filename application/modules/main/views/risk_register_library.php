@@ -495,7 +495,7 @@ WHERE t_risk.risk_id ='$id'";
 							<div class="form-group">
 								<label class="col-md-3 control-label smaller cl-compact" >Submitted By</label>
 								<div class="col-md-9">
-								<input type="text" class="form-control input-sm" readonly="true" value="<?php echo $risk_input_by ?>" id="--risk_submitted_by--" placeholder="">
+								<input type="text" name = "risk_input_by_change" class="form-control input-sm" readonly="true" value="<?php echo $risk_input_by ?>" id="--risk_submitted_by--" placeholder="">
 								</div>
 							</div>
 							<div class="form-group">

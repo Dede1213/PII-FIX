@@ -3194,6 +3194,7 @@ select
 
 
 	public function updateRisk2($risk_id, $code, $risk, $impact, $actplan, $control, $objective, $uid, $update_point = 'U') {
+		 
 		$this->_logHistory($risk_id, $uid, $update_point);
 		$par = array();
 		$keyupdate = '';
@@ -3209,6 +3210,7 @@ select
 		$res = $this->db->query($sql, $par);
 		
 		if ($res) {
+			 
 			// insert impact
 			if ($impact !== false) {
 				$sql = "delete from t_risk_impact where risk_id = ? ";
@@ -6463,6 +6465,79 @@ WHERE t_risk.risk_id = '".$risk_id."' ";
 	$sql = "select id from t_risk_action_plan where assigned_to = '".$username."' and action_plan_status = 0";
 	$query = $this->db->query($sql);
 	return $query->num_rows();
+	}
+	
+	function get_t_risk($risk_id){
+		
+		$this->db->where("risk_id",$risk_id);
+		
+		$query = $this->db->get('t_risk');
+	 
+			if ($query->num_rows())
+			{
+				return $query->result_array();
+			}
+			else
+			{
+				return FALSE;
+			}	
+		
+	}
+	
+	function get_t_risk_change($risk_id,$risk_input_by ){
+		
+		$this->db->where("risk_id",$risk_id);
+		
+		$this->db->where("risk_input_by",$risk_input_by);
+		
+		$query = $this->db->get('t_risk_change');
+	 
+			if ($query->num_rows())
+			{
+				return $query->result_array();
+			}
+			else
+			{
+				return FALSE;
+			}	
+		
+	}
+	
+	function update_t_risk_change($data,$risk_id,$risk_input_by=null){
+		  
+		$this->db->where('risk_id',$risk_id);
+		if($risk_input_by!=null){
+			$data[0]['risk_input_by'] = $risk_input_by;
+			$this->db->where('risk_input_by',$risk_input_by);
+		}
+		
+		$query = $this->db->update('t_risk_change',$data[0]);
+	  
+	}
+	
+	function get_t_risk_actionplan($id){
+		
+		$this->db->where("id",$id);
+		
+		$query = $this->db->get('t_risk_action_plan');
+	 
+			if ($query->num_rows())
+			{
+				return $query->result_array();
+			}
+			else
+			{
+				return FALSE;
+			}	
+		
+	}
+	
+	function update_t_risk_actionplan_change($data,$id){
+		  
+		$this->db->where('id',$id);
+		 
+		$query = $this->db->update('t_risk_action_plan_change',$data[0]);
+	  
 	}
 	
 }

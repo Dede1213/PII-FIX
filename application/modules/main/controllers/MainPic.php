@@ -100,6 +100,7 @@ class MainPic extends APP_Controller {
 			$cred = $this->session->credential;
 			$risk = $this->risk->getRiskValidate('viewRiskByDivision', $rid, $cred);
 			$view = 'risk/risk_register_view';
+			$data['risk_user']['nama'] = '';
 			if ($risk) {
 				if ($risk['risk_status']*1 > 2) {
 					$data['valid_mode'] = true;

@@ -118,7 +118,10 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label smaller cl-compact" title="fill this field with description of risk treatment action to be done in addressing the risk">Assigned Action Plan</label>
 									<div class="col-md-9">
-										<input type="text" class="form-control input-sm input-readview" value="<?=$action_plan_change['action_plan']?>" name="action_plan" placeholder="">
+										<textarea class="form-control input-sm input-readview" value="" name="action_plan"><?=$action_plan_change['action_plan']?></textarea>
+										<!--
+										<input type="text" class="form-control input-sm input-readview" value="<?//=$action_plan_change['action_plan']?>" name="action_plan" placeholder="">
+										-->
 									</div>
 								</div>
 								<div class="form-group">

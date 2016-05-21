@@ -196,7 +196,8 @@ if($status == 'under'){ ?>
 							<div class="form-group">
 								<label class="col-md-2 control-label smaller cl-compact" title="fill this field with description of risk treatment action to be done in addressing the risk">Action Plan</label>
 								<div class="col-md-9">
-									<input type="text" class="form-control input-sm input-readview" value="<?=$action_plan['change_data']['action_plan']?>" name="action_plan" placeholder="">
+									<textarea class="form-control input-sm input-readview" name="action_plan"><?=$action_plan['change_data']['action_plan']?></textarea>
+									
 								</div>
 							</div>
 							<div class="form-group">

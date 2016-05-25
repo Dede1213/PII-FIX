@@ -142,7 +142,7 @@ var RiskVerify = function() {
         			var ecid = '';
         			if (val.existing_control_id == null) ecid = '';
         			var nnode = {
-        				'existing_control_id' : ecid,
+        				'existing_control_id' : "EC."+val.id,
         				'risk_existing_control' : val.risk_existing_control,
         				'risk_evaluation_control' : val.risk_evaluation_control,
         				'risk_control_owner' : val.risk_control_owner
@@ -156,7 +156,7 @@ var RiskVerify = function() {
                     var ecid = '';
                     if (val.objective_id == null) ecid = '';
                     var nnode = {
-                        'objective_id' : ecid,
+                        'objective_id' : "OB."+val.id,
                         'objective' : val.objective
                     };
                     

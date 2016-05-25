@@ -203,7 +203,7 @@ WHERE t_risk.risk_id ='$id'";
 							<hr/>
 							<div class="row">
 								<div class="col-md-6">
-									<h4>Suggested Action Plan</h4>
+									<h4>Assigned Action Plan</h4>
 								</div>
 								<div class="col-md-6 clearfix">
 									<a href="#form-data" id="button-form-data-open" data-toggle="modal" class="btn default green pull-right btn-sm">
@@ -218,7 +218,7 @@ WHERE t_risk.risk_id ='$id'";
 								<table id="action_plan_table" class="table table-condensed table-bordered table-hover">
 									<thead>
 									<tr role="row" class="heading">
-										<th><small>Suggested Action Plan</small></th>
+										<th><small>Assigned Action Plan</small></th>
 										<th><small>Due Date</small></th>
 										<th><small>Action Plan Owner</small></th>
 										<th width="66px">&nbsp;</th>
@@ -344,7 +344,7 @@ WHERE t_risk.risk_id ='$id'";
 								<tbody>
 									<?php foreach($risk['control_list'] as $k => $row) { ?>
 									<tr>
-										<td><?=$row['existing_control_id']?></td>
+										<td>EC.<?=$row['id']?></td>
 										<td><?=$row['risk_existing_control']?></td>
 										<td><?=$row['risk_evaluation_control']?></td>
 										<td><?=$row['risk_control_owner']?></td>
@@ -515,7 +515,7 @@ WHERE t_risk.risk_id ='$id'";
 							<hr/>
 							<div class="row">
 								<div class="col-md-6">
-									<h4>Suggested Action Plan</h4>
+									<h4>Assigned Action Plan</h4>
 								</div>
 								<div class="col-md-6 clearfix">
 									<a href="#form-data" data-toggle="modal" class="btn default green pull-right btn-sm">
@@ -530,7 +530,7 @@ WHERE t_risk.risk_id ='$id'";
 								<table id="action_plan_table" class="table table-condensed table-bordered table-hover">
 									<thead>
 									<tr role="row" class="heading">
-										<th><small>Suggested Action Plan</small></th>
+										<th><small>Assigned Action Plan</small></th>
 										<th><small>Due Date</small></th>
 										<th><small>Action Plan Owner</small></th>
 										<th width="66px">&nbsp;</th>
@@ -718,7 +718,7 @@ WHERE t_risk.risk_id ='$id'";
 <div id="form-data" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Add Suggested Action Plan</h4>
+		<h4 class="modal-title">Add Assigned Action Plan</h4>
 	</div>
 	<div class="modal-body">
 		<input type = "hidden" id = "tr_idnya2" >
@@ -726,7 +726,7 @@ WHERE t_risk.risk_id ='$id'";
 				<div class="form-body">
 					<div class="form-group">
 					<input type = "hidden" id = "form-data-revid">
-						<label class="col-md-3 control-label smaller cl-compact" title="fill this field with description of risk treatment action to be done in addressing the risk">Suggested Action Plan</label>
+						<label class="col-md-3 control-label smaller cl-compact" title="fill this field with description of risk treatment action to be done in addressing the risk">Assigned Action Plan</label>
 						<div class="col-md-9">
 							<div class="input-group">
 								<textarea class="form-control input-sm " rows="3"  name="action_plan" id = "action_plan" placeholder=""> </textarea>
@@ -775,7 +775,7 @@ WHERE t_risk.risk_id ='$id'";
 <div id="modal-libraryaction" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Suggested Action Plan Library</h4>
+		<h4 class="modal-title">Assigned Action Plan Library</h4>
 		<div class="inputs">
 			<div class="portlet-input input-inline">
 				<div class="input-group">

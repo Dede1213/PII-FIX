@@ -69,7 +69,7 @@
 									<tbody>
 										<?php foreach($risk['objective_list'] as $k => $row) { ?>
 										<tr>
-											<td width="15%"> </td>
+											<td width="15%">OB.<?=$row['id']?> </td>
 											<td><?=$row['objective']?></td>
 										</tr>
 										<?php } ?>
@@ -132,7 +132,7 @@
 									<tbody>
 										<?php foreach($risk['control_list'] as $k => $row) { ?>
 										<tr>
-											<td><?=$row['existing_control_id']?></td>
+											<td>EC.<?=$row['id']?></td>
 											<td><?=$row['risk_existing_control']?></td>
 											<td><?=$row['risk_evaluation_control']?></td>
 											<td><?=$row['risk_control_owner']?></td>

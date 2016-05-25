@@ -178,6 +178,8 @@ class Main extends APP_Controller {
 				$data['valid_mode'] = true;
 				$data['risk'] = $risk;
 			}
+
+			$data['risk_user']['nama'] ='';
 			
 			$this->load->view('main/header', $data);
 			$this->load->view('risk/risk_register_view', $data);

@@ -33,10 +33,11 @@ gridRiskList.init({
         		} else if (data == '2') {
         			img = 'submit.png';
         		} else if (data == '3' || data == '4') {
-        			img = 'verified.png';
-        		}else if (data == '5' || data == '6') {
+        			//img = 'verified.png';
+                    img = 'treatment.png';
+        		}else if (data == '5') {
         			img = 'treatment.png';
-        		}else if (data == '10') {
+        		}else if (data == '10' || data == '6') {
         			img = 'actplan.png';
         		}else if (data == '20') {
         			img = 'executed.png';
@@ -179,6 +180,8 @@ gridTreatment.init({
         		if (data == '5') {
         			img = 'submit.png';
         		}else if (data == '3') {
+                    img = 'draft.png';
+                }else if (data == '4') {
                     img = 'draft.png';
                 } else {
         			img = 'verified.png';

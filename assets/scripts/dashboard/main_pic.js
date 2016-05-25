@@ -33,10 +33,11 @@ grid.init({
         		} else if (data == '2') {
         			img = 'submit.png';
         		} else if (data == '3' || data == '4') {
-        			img = 'verified.png';
-        		}else if (data == '5' || data == '6') {
+        			//img = 'verified.png';
+                    img = 'treatment.png';
+        		}else if (data == '5') {
         			img = 'treatment.png';
-        		}else if (data == '10') {
+        		}else if (data == '10' || data == '6') {
         			img = 'actplan.png';
         		}else if (data == '20') {
         			img = 'executed.png';
@@ -117,7 +118,8 @@ grid_owned.init({
         		if (data == 3) {
         			img = 'draft.png';
         		} else if (data == 4) {
-        			img = 'verified_head.png';
+        			//img = 'verified_head.png'; gara2 ngambil dari trisk_change
+                    img = 'draft.png';
         		} else if (data == 5) {
         			img = 'submit.png';
         		}else if (data > 5) {

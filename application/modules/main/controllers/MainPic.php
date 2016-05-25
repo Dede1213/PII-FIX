@@ -492,8 +492,17 @@ class MainPic extends APP_Controller {
 			'role_id' => $sess['session']['role_id'], // 4 div head, 5 PIC
 			'division_id' => $sess['session']['division_id']
 		);
+
+		$division_euy = $this->session->credential['division_name'];
+
+		$cek_ap_change = $this->risk->cek_ap_change($division_euy);
+
+		if($cek_ap_change == true){
+			$data = $this->risk->getDataMode('ownedActionPlanChange', $defFilter, $page, $row, $order_by, $order, $filter_by, $filter_value);
+		}else{
+			$data = $this->risk->getDataMode('ownedActionPlan', $defFilter, $page, $row, $order_by, $order, $filter_by, $filter_value);
+		}
 		
-		$data = $this->risk->getDataMode('ownedActionPlan', $defFilter, $page, $row, $order_by, $order, $filter_by, $filter_value);
 		
 		$data['draw'] = $_POST['draw']*1;
 		$data['page'] = $page;

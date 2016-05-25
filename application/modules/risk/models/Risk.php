@@ -1044,7 +1044,7 @@ class Risk extends APP_Model {
 						f.division_name as risk_owner_v,
 						g.display_name as risk_treatment_owner_v,
 						h.ref_value as suggested_risk_treatment_v
-						from t_risk a
+						from t_risk_change a
 						left join m_reference b on a.risk_status = b.ref_key and b.ref_context = 'risk.status.user'
 						left join m_reference c on a.risk_level = c.ref_key and c.ref_context = 'risklevel.display'
 						left join m_reference d on a.risk_impact_level = d.ref_key and d.ref_context = 'impact.display'
@@ -1089,6 +1089,49 @@ class Risk extends APP_Model {
 						date_format(a.due_date, '%d-%m-%Y') as due_date_v
 						from 
 						t_risk_action_plan a
+						left join t_risk b on a.risk_id = b.risk_id
+						left join m_user c on a.assigned_to = c.username
+						left join m_division d on a.division = d.division_id
+						join m_periode on m_periode.periode_id = b.periode_id
+						where 
+						a.action_plan_status > 0
+						and a.division = ?
+						
+						".$ext;
+				if ($par) {
+					$rpar['p1'] = $par['p1'];
+				}
+				$par = $rpar;
+				
+				$sql = $sql.$ex_filter.$ex_or;
+				$res = $this->getPagingData($sql, $par, $page, $row, 'id', true);
+				return $res;
+			} else {
+				return false;
+			}
+		}
+
+		if ($mode == 'ownedActionPlanChange') {
+			if (isset($defFilter['role_id']) && ($defFilter['role_id'] == '4' || $defFilter['role_id'] == '5')) {
+				$ext = '';
+				$rpar = array('division_id' => $defFilter['division_id']);
+				
+				if ($defFilter['role_id'] == '4') { // division_head
+				} else {  // pic
+					$ext = ' and a.assigned_to = ? ';
+					$rpar['uid'] = $defFilter['userid'];
+				}
+				$date = date("Y-m-d");
+				
+				$sql = "select 
+						a.*,
+						concat('AP.', LPAD(a.id, 6, '0')) as act_code,
+						b.risk_code,
+						c.display_name as assigned_to_v,
+						d.division_name as division_name,
+						date_format(a.due_date, '%d-%m-%Y') as due_date_v
+						from 
+						t_risk_action_plan_change a
 						left join t_risk b on a.risk_id = b.risk_id
 						left join m_user c on a.assigned_to = c.username
 						left join m_division d on a.division = d.division_id
@@ -6538,6 +6581,23 @@ WHERE t_risk.risk_id = '".$risk_id."' ";
 		 
 		$query = $this->db->update('t_risk_action_plan_change',$data[0]);
 	  
+	}
+
+	function cek_ap_change($division){
+		
+		$this->db->where("division",$division);
+		
+		$query = $this->db->get('t_risk_action_plan_change');
+	 
+			if ($query->num_rows() > 0)
+			{
+				return true;
+			}
+			else
+			{
+				return FALSE;
+			}	
+		
 	}
 	
 }

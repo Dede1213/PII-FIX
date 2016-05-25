@@ -344,8 +344,7 @@
 									<tr role="row" class="heading">
 										<th><span class="small">Existing Control ID</span></th>
 										<th><span class="small">Evaluation on Existing Control</span></th>
-										<th><span class="small">Existing Control</span></th>
-										
+										<th><span class="small">Existing Control</span></th>										
 										<th><span class="small">Control Owner</span></th>
 										<th width="66px">&nbsp;</th>
 									</tr>

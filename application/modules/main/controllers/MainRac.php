@@ -2857,6 +2857,7 @@ class MainRac extends APP_Controller {
 	
 	public function changeRequestSaveDraft()
 	{
+		 
 		$resp['success'] = false;
 		$resp['msg'] = '';
 		
@@ -2867,6 +2868,17 @@ class MainRac extends APP_Controller {
 			$this->load->model('risk/risk');
 
 			$changes = $this->risk->getChangeByIdNoRef($_POST['id']);
+			
+			// update t_risk ke t_risk change 
+				
+			//echo "<pre>";print_r($this->input->post());exit;
+			
+			$data_t_cr_risk = $this->risk->get_t_cr_risk($_POST['id']);
+			$data_t_cr_action_plan = $this->risk->get_t_cr_action_plan($_POST['id']);
+			$data_t_cr_control  = $this->risk->get_t_cr_control($_POST['id']);
+			//echo "<pre>";print_r($data_t_cr_action_plan);exit;
+			
+			// end update t_risk ke t_risk change
 			
 			// build data
 			if ($changes['cr_type'] == 'Risk Form') {
@@ -2925,6 +2937,13 @@ class MainRac extends APP_Controller {
 				$resp['success'] = false;
 				$resp['msg'] = $this->db->error();
 			}
+			
+			//echo update t_risk_change;
+				
+			$this->risk->update_t_cr_risk($data_t_cr_risk,$_POST['id']);
+			$this->risk->update_t_cr_action_plan($data_t_cr_action_plan,$_POST['id']);
+			$this->risk->update_t_cr_control($data_t_cr_control,$_POST['id']);
+			// endupdate t_risk_change
 			
 			echo json_encode($resp);
 		}
@@ -3504,5 +3523,17 @@ class MainRac extends APP_Controller {
 			}
 			echo json_encode($data);
 		}
+	}
+	
+	function submit_note(){
+		
+		$this->load->model('admin/mperiode');
+		$data['periode'] = $this->mperiode->getCurrentPeriode();
+		$data['param'] = $this->input->post();
+		 
+		$this->load->model('risk/risk');
+		 
+		$data['datatable'] = $this->risk->submit_note($data);
+		 
 	}
 }

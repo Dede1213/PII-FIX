@@ -662,9 +662,10 @@
 		<h4 class="modal-title">Edit Note</h4>
 	</div>
 	<div class="modal-body">
-		<form id="input-form" role="form" class="form-horizontal">
-						blum biar wawan
-		</form>
-
+		<form id="noteform" role="form" class="form-horizontal" action ="<?=base_url('index.php/main/mainrac/submit_note');?>" method="POST">			 
+			<textarea name = "note" id = "modal_pic_note" class="form-control"></textarea>
+			<input type = "hidden" id = "modal_pic_risk_input_by" name = "risk_input_by">
+			<button type="button" class="btn blue btn-sm" onclick = "submit_note()">Save</button>			 
+		</form> 
 	</div>
 </div>

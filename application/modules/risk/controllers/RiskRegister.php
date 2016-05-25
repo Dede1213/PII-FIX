@@ -680,7 +680,28 @@ class RiskRegister extends APP_Controller {
 	{
 		if (!empty($rid) && is_numeric($rid)) {
 			$this->load->model('risk/risk');
-			$data = $this->risk->getRiskById($rid);
+			
+			$datax = $this->risk->getRiskById($rid);
+			 
+			$session_data = $this->session->credential;
+			
+			if(!$datax){
+				if ($datax['risk_input_by'] != $session_data['username']) {				
+				//echo "<pre>";print_r($datax);exit;				
+				$datax = $this->risk->getRiskById_change($rid,$session_data['username']);
+				 
+				} 
+			}			
+			 
+			echo json_encode($datax);
+		}
+	}
+	
+	public function loadRiskLibrary_change($rid) 
+	{
+		if (!empty($rid) && is_numeric($rid)) {
+			$this->load->model('risk/risk');
+			$data = $this->risk->getRiskById_change($rid);
 			echo json_encode($data);
 		}
 	}
@@ -778,6 +799,7 @@ class RiskRegister extends APP_Controller {
 	
 	public function getControlLibrary() 
 	{
+		 
 		$order_by = $order = $filter_by = $filter_value = null;
 				
 		if (isset($_POST['order'][0]['column'])) {
@@ -1478,7 +1500,12 @@ class RiskRegister extends APP_Controller {
 		
 			$res = $this->risk->getRiskValidate('viewMyRisk', $risk_id, $session_data);
 			
+			//echo "<pre>";
+			//print_r($res);
+			//exit;
+			 
 			if ($res) {
+				 
 				$data = $this->loadDefaultAppConfig();
 				
 				$res_valid = $this->risk->getRiskValidate('valEntryRiskChange', $risk_id, $session_data);

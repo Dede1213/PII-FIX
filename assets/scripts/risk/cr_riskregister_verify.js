@@ -578,7 +578,11 @@ var ChangeRequest = function() {
         		var mod = MainApp.viewGlobalModal('confirm', 'Are You sure you want to Verify Change Request with Primary Data ?');
         		mod.find('button.btn-primary').off('click');
         		mod.find('button.btn-primary').one('click', function(){
-        			me.submitRiskData('verifyPrimary');
+        			 
+					var mod_det = MainApp.viewGlobalModal('confirm', 'Approve will create all risk status to draft?');
+					 
+					//me.submitRiskData('verifyPrimary');
+					 
         		});
         	});
 
@@ -607,6 +611,9 @@ var ChangeRequest = function() {
         	});
         	
         	$('#changes-risk-button-save').on('click', function() {
+				
+				//alert("asdasd");
+				
         		var mod = MainApp.viewGlobalModal('confirm', 'Are You sure you want to Save your Change Request Changes ?');
         		mod.find('button.btn-primary').off('click');
         		mod.find('button.btn-primary').one('click', function(){

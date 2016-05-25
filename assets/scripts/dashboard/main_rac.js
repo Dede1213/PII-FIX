@@ -123,11 +123,10 @@ gridRegister.init({
                 var ret = full.risk_treatment_owner_v;
                 if (data == '' || data == null) {
                     ret = '<span></span> &nbsp; '+
-                          '<button onclick="javascript: Dashboard.viewOwnedAssignForm('+full.username+', \'treatment\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"></i></button>';
+                          '<button onclick="javascript: Dashboard.viewOwnedAssignForm(\''+full.username+'\', \'treatment\',\''+full.note+'\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"></i></button>';
                 }else{
                     ret = '<span></span> &nbsp; '+
-                          '<button onclick="javascript: Dashboard.viewOwnedAssignForm('+full.username+', \'treatment\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"></i></button>';
-                    
+                          '<button onclick="javascript: Dashboard.viewOwnedAssignForm(\''+full.username+'\', \'treatment\',\''+full.note+'\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"></i></button>';
                 }
                 return ret;
             }
@@ -719,15 +718,19 @@ var Dashboard = function() {
             });
             
         },
-        viewOwnedAssignForm: function(username, mode) {
+        viewOwnedAssignForm: function(username, mode,note) {
+			 
             var me = this;
             me.tmpRiskId = username;
             me.tmpRiskMode = mode;
-
+			if(note == "null"){
+				note = "";
+			}
+			 
+			$("#modal_pic_note").val(note);
+			$("#modal_pic_risk_input_by").val(username);
             $('#modal-pic').modal('show');
-               
-            
-            
+                
         },
 		  
 		//fake
@@ -1127,3 +1130,15 @@ $('#changereq_list_pdf').on('click', function() {
 			}					 
 	 
 });
+
+function submit_note(){				
+	$.ajax({ 
+		type: 'POST',
+		url: site_url+"/main/mainrac/submit_note",
+		data: $("#noteform").serialize(),
+		success: function(data){
+			$('#modal-pic').modal('hide');
+			gridRegister.getDataTable().ajax.reload();
+		}				
+	})
+}

@@ -1253,7 +1253,7 @@ class Risk extends APP_Model {
 				$sql = "select
 						a.*,
 						concat('AP.', LPAD(a.id, 6, '0')) as act_code,
-						b.risk_code,
+						b.risk_code,b.periode_id,
 						c.display_name as assigned_to_v,
 						d.division_name as division_name,
 						date_format(a.due_date, '%d-%m-%Y') as due_date_v,
@@ -1274,9 +1274,9 @@ class Risk extends APP_Model {
 						where 
 						a.action_plan_status > 3
 						and a.division = ?
-						AND b.periode_id is null
-						  
 						".$ext;
+						//AND b.periode_id is null
+
 				if ($par) {
 					$rpar['p1'] = $par['p1'];
 				}
@@ -1373,7 +1373,7 @@ class Risk extends APP_Model {
 			$sql = "select
 					a.*,
 					concat('AP.', LPAD(a.id, 6, '0')) as act_code,
-					b.risk_code,
+					b.risk_code,b.periode_id,
 					c.display_name as assigned_to_v,
 					d.division_name as division_name,
 					date_format(a.due_date, '%d-%m-%Y') as due_date_v
@@ -1384,8 +1384,9 @@ class Risk extends APP_Model {
 					left join m_division d on a.division = d.division_id					
 					where 
 					a.action_plan_status > 3
-						AND b.periode_id is null
+						
 					";
+					//AND b.periode_id is null
 		}
 		
 			if ($mode == 'racActionPlanExec_adt') {
@@ -1912,6 +1913,16 @@ select
 		
 		$periode = $data['periode_id'];
 		$sql = "update t_risk set existing_control_id = null where risk_id='$risk_id'";
+		$res = $this->db->query($sql);
+		
+		return $res;
+	}
+
+	public function riskSetConfirm_recover_rac($risk_id, $data, $uid, $update_point = 'U') {
+		//$this->_logHistory($risk_id, $uid, $update_point);
+		
+		$periode = $data['periode_id'];
+		$sql = "update t_risk set existing_control_id = null, risk_existing_control = 3 where risk_id='$risk_id'";
 		$res = $this->db->query($sql);
 		
 		return $res;
@@ -4238,7 +4249,7 @@ select
 	
 	public function assignPicAction($risk_id, $pic) {
 		$sql = "update t_risk_action_plan set 
-				assigned_to = ?
+				assigned_to = ?,action_plan_status = 5
 				where
 				id = ?
 				";

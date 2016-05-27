@@ -113,7 +113,7 @@
 			</div>
 		</div>
 		</div>
-<!--		
+		
 		<div class="col-md-12">
 			<div class="portlet box grey-silver">
 			<div class="portlet-title">
@@ -193,7 +193,7 @@
 			</div>
 		</div>
 		</div>
--->
+
 		<div class="row">
 		<div class="col-md-6" style="padding-left: 40px;">
 			<h4>Legend</h4>

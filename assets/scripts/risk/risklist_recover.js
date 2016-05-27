@@ -382,7 +382,7 @@ var RiskList = function() {
 	        		var eparam = {
 	        			'risk_id' : data.risk_id
 	        		};
-	        		var url = site_url+'/risk/RiskRegister/confirmRisk_recover';
+	        		var url = site_url+'/risk/RiskRegister/confirmRisk_recover_rac';
 	        		
 	        		Metronic.blockUI({ boxed: true });
 	        		$.post(

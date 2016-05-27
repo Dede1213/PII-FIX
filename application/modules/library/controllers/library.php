@@ -27,11 +27,134 @@ class Library extends APP_Controller {
 		 
 		';
 		 
-		 
 		$this->load->view('main/header', $data);
 		$this->load->view('library', $data);
 		$this->load->view('main/footer', $data);
 		 
+	}
+
+	public function list_risk_properties($risk_code)
+	{
+		$data = $this->loadDefaultAppConfig();
+		$data['indonya'] = base_url('index.php/libraryin/library/list_risk');
+		$data['engnya'] = base_url('index.php/library/list_risk');			
+		$data['sidebarMenu'] = $this->getSidebarMenuStructure('library/list_risk');
+		$data['pageLevelStyles'] = '
+		<link rel="stylesheet" type="text/css" href="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
+		<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css"/>
+		<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
+		<link rel="stylesheet" type="text/css" href="assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css"/>
+		
+		';
+		
+		$data['pageLevelScripts'] = '
+		<script type="text/javascript" src="assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+		<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
+		<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
+		<script type="text/javascript" src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+		<script src="assets/scripts/dashboard/library.js"></script>
+
+		';
+		
+		$data['pageLevelScriptsInit'] = 'Dashboard.init();
+		 
+		';
+
+		$this->load->model('Mlibrary');	
+		$all_username = $this->Mlibrary->get_all_username();
+		$data_properties = $this->Mlibrary->get_properties($risk_code);
+
+		$data['all_username'] = $all_username;
+		$data['properties'] = $data_properties;
+		$data['risk_code'] = $risk_code;
+		$data['edit_form'] = false;
+
+		$data['risk_code'] = $risk_code;
+		$this->load->view('main/header', $data);
+		$this->load->view('library_properties', $data);
+		$this->load->view('main/footer', $data);
+		 
+	}
+
+	public function edit_risk_properties($risk_id,$username,$date_change)
+	{
+		$data = $this->loadDefaultAppConfig();
+		$data['indonya'] = base_url('index.php/libraryin/library/list_risk');
+		$data['engnya'] = base_url('index.php/library/list_risk');			
+		$data['sidebarMenu'] = $this->getSidebarMenuStructure('library/list_risk');
+		$data['pageLevelStyles'] = '
+		<link rel="stylesheet" type="text/css" href="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
+		<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css"/>
+		<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
+		<link rel="stylesheet" type="text/css" href="assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css"/>
+		
+		';
+		
+		$data['pageLevelScripts'] = '
+		<script type="text/javascript" src="assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+		<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
+		<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
+		<script type="text/javascript" src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+		<script src="assets/scripts/dashboard/library.js"></script>
+
+		';
+		
+		$data['pageLevelScriptsInit'] = 'Dashboard.init();
+		 
+		';
+
+		$this->load->model('Mlibrary');	
+		$all_username = $this->Mlibrary->get_all_username_edit($username);
+		//$data_properties = $this->Mlibrary->get_properties($risk_code);
+
+		$data['risk_id'] = $risk_id;
+		$data['username'] = $username;
+		$data['date_change'] = $date_change;
+		$data['edit_form'] = true;
+		$data['all_username'] = $all_username;
+
+		//$data['risk_code'] = $risk_code;
+		$this->load->view('main/header', $data);
+		$this->load->view('library_properties', $data);
+		$this->load->view('main/footer', $data);
+		 
+	}
+
+	public function edit_properties(){
+		$data['username'] = $this->input->post('username');
+		$data['date_change'] = $this->input->post('date_change');
+		$data['username_asli'] = $this->input->post('username_asli');
+		$data['date_asli'] = $this->input->post('date_asli');
+
+		$this->load->model('Mlibrary');	
+		$all_username = $this->Mlibrary->update_properties($data);
+
+		if($all_username = true){
+
+		redirect('library/list_risk');
+			//echo "<script type='text/javascript'>alert('Update Success');</script>";
+			//redirect('library/list_risk');
+		}
+
+
+	}
+
+	public function delete_properties($risk_id,$username){
+		
+
+		$this->load->model('Mlibrary');	
+		$all_username = $this->Mlibrary->delete_properties($risk_id,$username);
+
+		if($all_username = true){
+
+			redirect('library/list_risk');
+			//echo "<script type='text/javascript'>alert('Update Success');</script>";
+			//redirect('library/list_risk');
+		}
+
+
 	}
 	
 	public function list_risk_pdf() {

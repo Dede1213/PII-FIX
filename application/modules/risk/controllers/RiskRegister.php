@@ -266,7 +266,7 @@ class RiskRegister extends APP_Controller {
 	public function recover()
 	{
 		$data = $this->loadDefaultAppConfig();
-		$data['sidebarMenu'] = $this->getSidebarMenuStructure('risk/RiskRegister');
+		$data['sidebarMenu'] = $this->getSidebarMenuStructure('risk/RiskRegister/recover');
 		$data['indonya'] = base_url('index.php/riski/RiskRegister/recover');
 		$data['engnya'] = base_url('index.php/risk/RiskRegister/recover');
 		$data['pageLevelStyles'] = '
@@ -296,6 +296,42 @@ class RiskRegister extends APP_Controller {
 		
 		$this->load->view('main/header', $data);
 		$this->load->view('risk_register_list_recover', $data);
+		$this->load->view('main/footer', $data);
+	}
+
+	public function recover_user()
+	{
+		$data = $this->loadDefaultAppConfig();
+		$data['sidebarMenu'] = $this->getSidebarMenuStructure('risk/RiskRegister/recover_user');
+		$data['indonya'] = base_url('index.php/riski/RiskRegister/recover');
+		$data['engnya'] = base_url('index.php/risk/RiskRegister/recover');
+		$data['pageLevelStyles'] = '
+		<link rel="stylesheet" type="text/css" href="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
+		<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css"/>
+		<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
+		';
+		
+		$data['pageLevelScripts'] = '
+		<script type="text/javascript" src="assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+		<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
+		<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
+		
+		<script src="assets/scripts/risk/risklist_recover_user.js"></script>
+		';
+		
+		$data['pageLevelScriptsInit'] = 'RiskList.init();';
+		
+		$data['valid_mode'] = $this->validatePeriodeMode('periodic');
+		
+		$data['periode'] = null;
+		if ($data['valid_mode']) {
+			$data['periode'] = $this->mperiode->getCurrentPeriode();
+		}
+		
+		
+		$this->load->view('main/header', $data);
+		$this->load->view('risk_register_list_recover_user', $data);
 		$this->load->view('main/footer', $data);
 	}
 
@@ -333,6 +369,44 @@ class RiskRegister extends APP_Controller {
 			'periodid' => $periode_id
 		);
 		$data = $this->mriskregister->getDataMode('userRollover_recover', $defFilter, $page, $row, $order_by, $order, $filter_by, $filter_value);
+		
+		$data['draw'] = $_POST['draw']*1;
+		$data['page'] = $page;
+		echo json_encode($data);
+	}
+
+	public function riskGetRollOver_recover_user()
+	{
+		$sess = $this->loadDefaultAppConfig();
+		$order_by = $order = $filter_by = $filter_value = null;
+				
+		if (isset($_POST['order'][0]['column'])) {
+			$order_idx = $_POST['order'][0]['column'];
+			$order_by = $_POST['columns'][$order_idx]['data'];
+			$order = $_POST['order'][0]['dir'];
+		}
+		
+		if (isset($_POST['filter_by']) && isset($_POST['filter_value']) && $_POST['filter_value'] != '' ) {
+			$filter_by = $_POST['filter_by'];
+			$filter_value = $_POST['filter_value'];
+		}
+		
+		$page = ceil($_POST['start'] / $_POST['length'])+1;
+
+		$row = $_POST['length'];
+		
+		$periode = $this->mperiode->getCurrentPeriode();
+		$periode_id = null;
+		if ($periode) {
+			$periode_id = $periode['periode_id'];
+		} 
+		
+		
+		$defFilter = array(
+			'userid' => $sess['session']['username'],
+			'periodid' => $periode_id
+		);
+		$data = $this->mriskregister->getDataMode('userRollover_recover_user', $defFilter, $page, $row, $order_by, $order, $filter_by, $filter_value);
 		
 		$data['draw'] = $_POST['draw']*1;
 		$data['page'] = $page;
@@ -393,6 +467,31 @@ class RiskRegister extends APP_Controller {
 			$data['periode_id'] = $periode_id;
 			
 			$res = $this->risk->riskSetConfirm_recover($_POST['risk_id'], $data, $session_data['username'], 'RISK_REGISTER-CONFIRM');
+			if ($res) {
+				$resp['success'] = true;
+				$resp['msg'] = 'SUCCESS';
+			}
+		}
+		
+		echo json_encode($resp);
+	}
+
+	public function confirmRisk_recover_rac() {
+		$session_data = $this->session->credential;
+		
+		$resp = array('success' => false, 'msg' => 'Error');
+
+		if (isset($_POST['risk_id']) && is_numeric($_POST['risk_id'])) {
+			
+			$periode = $this->mperiode->getCurrentPeriode();
+			$periode_id = null;
+			if ($periode) {
+				$periode_id = $periode['periode_id'];
+			}
+			
+			$data['periode_id'] = $periode_id;
+			
+			$res = $this->risk->riskSetConfirm_recover_rac($_POST['risk_id'], $data, $session_data['username'], 'RISK_REGISTER-CONFIRM');
 			if ($res) {
 				$resp['success'] = true;
 				$resp['msg'] = 'SUCCESS';
@@ -468,6 +567,62 @@ class RiskRegister extends APP_Controller {
 		$data['impact_list'] = $this->mriskregister->getRiskImpactForList();
 		$data['treatment_list'] = $this->mriskregister->getReference('treatment.status');
 		$data['division_list'] = $this->mriskregister->getDivisionList();
+		
+		$this->load->view('main/header', $data);
+		$this->load->view('risk_register_input', $data);
+		$this->load->view('main/footer', $data);	
+	}
+
+	public function RiskRegisterInputRac($mode = false, $username)
+	{
+		$data = $this->loadDefaultAppConfig();
+		$menu = '';
+		
+		if ($mode == 'adhoc') {
+			$data['submit_mode'] = 'adhoc';
+			$menu = 'main';
+		} else if ($mode == 'periodic') {
+			$data['submit_mode'] = 'periodic';
+			$menu = 'risk/RiskRegister';
+		} else {
+			exit;
+		}
+		$data['indonya'] = base_url('index.php/riski/RiskRegister/');
+		$data['engnya'] = base_url('index.php/risk/RiskRegister/');				
+		$data['valid_mode'] = $this->validatePeriodeMode($data['submit_mode']);
+		
+		$data['sidebarMenu'] = $this->getSidebarMenuStructure($menu);
+		$data['pageLevelStyles'] = '
+		<link rel="stylesheet" type="text/css" href="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
+		<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css"/>
+		<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
+		<link rel="stylesheet" type="text/css" href="assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css"/>
+		
+		';
+		
+		$data['pageLevelScripts'] = '
+		<script type="text/javascript" src="assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+		<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
+		<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
+		<script type="text/javascript" src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+		<script type="text/javascript" src="assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
+		
+		<script src="assets/scripts/risk/riskinputrac.js"></script>
+		';
+		
+		$data['pageLevelScriptsInit'] = "RiskInput.init('".$mode."');
+		RiskInput.initLoadCategory();
+		";
+		
+		
+		$data['category'] = $this->mriskregister->getRiskCategory();
+		$data['likelihood'] = $this->mriskregister->getRiskLikelihood();
+		$data['impact_list'] = $this->mriskregister->getRiskImpactForList();
+		$data['treatment_list'] = $this->mriskregister->getReference('treatment.status');
+		$data['division_list'] = $this->mriskregister->getDivisionList();
+
+		$data['username_user'] = $username; //username karena yg input rac
 		
 		$this->load->view('main/header', $data);
 		$this->load->view('risk_register_input', $data);
@@ -1156,6 +1311,120 @@ class RiskRegister extends APP_Controller {
 			'risk_likelihood_key' => $_POST['risk_likelihood_id'],
 			'suggested_risk_treatment' => $_POST['suggested_risk_treatment'],
 			'created_by' => $data['session']['username']
+		);
+		
+		$impact_level = array();
+		foreach($_POST['impact'] as $v) {
+			$impact_level[] = $v;
+		}
+		
+		$actplan = array();
+		foreach($_POST['actplan'] as $v) {
+			$actplan[] = $v;
+		}
+		
+		$control = array();
+		foreach($_POST['control'] as $v) {
+			$control[] = $v;
+		}
+
+		$objective = array();
+		foreach($_POST['objective'] as $v) {
+			$objective[] = $v;
+		}
+		
+		if ($_POST['risk_library_id'] != null) {
+			$res = $this->mriskregister->insertRiskRegisterLibrary($risk2, $code, $impact_level, $actplan, $control, $objective);
+		} else {
+			$res = $this->mriskregister->insertRiskRegister($risk, $code, $impact_level, $actplan, $control, $objective);
+		}
+		
+		$resp = array();
+		if ($res) {
+			$resp['success'] = true;
+			$resp['msg'] = 'SUCCESS';
+		} else {
+			$resp['success'] = false;
+			$resp['msg'] = $this->db->error();
+		}
+		echo json_encode($resp);
+	}
+
+	public function insertRiskDataRac($username_user)
+	{
+		$data = $this->loadDefaultAppConfig();
+
+		// periode
+		$periode = $this->mperiode->getCurrentPeriode();
+		$periode_id = 0;
+		if ($periode) {
+			$periode_id = $periode['periode_id'];
+			$rstatus = 0;
+		} else {
+			$rstatus = 2;
+		}
+		
+		// category
+		$this->load->model('admin/mcategory');
+		$cats = $this->mcategory->getDataById($_POST['risk_2nd_sub_category']);
+		$seq_id = $this->mcategory->getSequence($_POST['risk_2nd_sub_category']);
+		$code = $cats['cat_code'].'-'.$seq_id;
+		
+		if ($_POST['risk_library_id'] == '') $_POST['risk_library_id'] = null;
+		
+		// build data
+		$risk = array(
+			'risk_code' => $code,
+			'risk_status' => 2,
+			'periode_id' => $periode_id,
+			'risk_input_by' => $username_user,
+			'risk_input_division' =>  $_POST['risk_division'],
+			'risk_owner' => $_POST['risk_division'],
+			'risk_division' => $_POST['risk_division'],
+			'risk_library_id' => $_POST['risk_library_id'],
+			'risk_event' => $_POST['risk_event'],
+			'risk_description' => $_POST['risk_description'],
+			'risk_category' => $_POST['risk_category'],
+			'risk_sub_category' => $_POST['risk_sub_category'],
+			'risk_2nd_sub_category' => $_POST['risk_2nd_sub_category'],
+			'risk_cause' => $_POST['risk_cause'],
+			'risk_impact' => $_POST['risk_impact'],
+			//'existing_control_id' => $_POST['existing_control_id'],
+			//'risk_existing_control' => $_POST['risk_existing_control'],
+			//'risk_evaluation_control' => $_POST['risk_evaluation_control'],
+			//'risk_control_owner' => $_POST['risk_control_owner'],
+			'risk_level' => $_POST['risk_level_id'],
+			'risk_impact_level' => $_POST['risk_impact_level_id'],
+			'risk_likelihood_key' => $_POST['risk_likelihood_id'],
+			'suggested_risk_treatment' => $_POST['suggested_risk_treatment'],
+			'created_by' => $username_user
+		);
+		// array untuk dari library nih ubah
+		$risk2 = array(
+			'risk_code' => $_POST['risk_library_code'],
+			'risk_status' => 2,
+			'periode_id' => $periode_id,
+			'risk_input_by' => $username_user,
+			'risk_input_division' => $_POST['risk_division'],
+			'risk_owner' => $_POST['risk_division'],
+			'risk_division' => $_POST['risk_division'],
+			'risk_library_id' => $_POST['risk_library_id'],
+			'risk_event' => $_POST['risk_event'],
+			'risk_description' => $_POST['risk_description'],
+			'risk_category' => $_POST['risk_category'],
+			'risk_sub_category' => $_POST['risk_sub_category'],
+			'risk_2nd_sub_category' => $_POST['risk_2nd_sub_category'],
+			'risk_cause' => $_POST['risk_cause'],
+			'risk_impact' => $_POST['risk_impact'],
+			//'existing_control_id' => $_POST['existing_control_id'],
+			//'risk_existing_control' => $_POST['risk_existing_control'],
+			//'risk_evaluation_control' => $_POST['risk_evaluation_control'],
+			//'risk_control_owner' => $_POST['risk_control_owner'],
+			'risk_level' => $_POST['risk_level_id'],
+			'risk_impact_level' => $_POST['risk_impact_level_id'],
+			'risk_likelihood_key' => $_POST['risk_likelihood_id'],
+			'suggested_risk_treatment' => $_POST['suggested_risk_treatment'],
+			'created_by' => $username_user
 		);
 		
 		$impact_level = array();

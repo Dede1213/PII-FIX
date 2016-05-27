@@ -42,6 +42,17 @@
 		</div>
 	</div>
 
+	<div id="global-app-modal-confirmation-change" class="modal fade alert-block alert-warning" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+		<div class="modal-body">
+		<h4 class="alert-heading">Warning!</h4>
+		<p class="alert_container"></p>
+		<p>
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Reject</button>
+	        <button type="button" class="btn btn-primary btn-ok-success">Approve</button>
+		</p>
+		</div>
+	</div>
+	
 	<div id="global-app-modal-warning-maintenance" class="modal fade alert-block alert-warning" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
 		<div class="modal-body">
 		<h4 class="alert-heading">Warning!</h4>

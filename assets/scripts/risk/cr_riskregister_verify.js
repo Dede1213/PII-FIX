@@ -579,7 +579,7 @@ var ChangeRequest = function() {
         		mod.find('button.btn-primary').off('click');
         		mod.find('button.btn-primary').one('click', function(){
         			 
-					var mod_det = MainApp.viewGlobalModal('confirm', 'Approve will create all risk status to draft?');
+					var mod_det = MainApp.viewGlobalModal('confirm-change', 'Approve will create all risk status to draft?');
 					 
 					//me.submitRiskData('verifyPrimary');
 					 

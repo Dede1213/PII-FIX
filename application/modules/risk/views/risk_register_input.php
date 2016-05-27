@@ -907,6 +907,17 @@
 			>Save</button>
 	</div>
 </div>
+<?php
+
+if ($submit_mode == 'periodic'){
+?>
+<script type="text/javascript">
+	var g_username_user = '<?php echo "$username_user";?>';
+</script>
+<?php
+}
+?>
+
 <?php if(isset($modifyRisk)) { ?>
 <script type="text/javascript">
 	var g_risk_id = <?=$risk_id?>;
@@ -922,4 +933,7 @@ if ($submit_mode == 'adhoc'){
 <?php
 }
 ?>
-<?php } ?>
+
+<?php 
+}
+?>

@@ -123,10 +123,10 @@ gridRegister.init({
                 var ret = full.risk_treatment_owner_v;
                 if (data == '' || data == null) {
                     ret = '<span></span> &nbsp; '+
-                          '<button onclick="javascript: Dashboard.viewOwnedAssignForm(\''+full.username+'\', \'treatment\',\''+full.note+'\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"></i></button>';
+                          '<button onclick="javascript: Dashboard.viewOwnedAssignForm(\''+full.username+'\', \'treatment\',\''+full.note+'\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-plus"></i><span class="hidden-480"> Note </span></button>';
                 }else{
                     ret = '<span></span> &nbsp; '+
-                          '<button onclick="javascript: Dashboard.viewOwnedAssignForm(\''+full.username+'\', \'treatment\',\''+full.note+'\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"></i></button>';
+                          '<button onclick="javascript: Dashboard.viewOwnedAssignForm(\''+full.username+'\', \'treatment\',\''+full.note+'\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-plus"></i><span class="hidden-480"> Note </span></button>';
                 }
                 return ret;
             }
@@ -340,8 +340,13 @@ gridActionExec.init({
         	"render": function ( data, type, full, meta ) {
 				if(data == null){
 					return '';
-				}else{					 
-					return '<a target="_self" href="'+site_url+'/main/mainrac/actionPlanExecForm/'+full.id+'">'+data+'</a>';
+				}else{			
+
+                    if(full.periode_id == null){
+                    return '<a target="_self" href="'+site_url+'/main/mainrac/actionPlanExecForm/'+full.id+'">'+data+'</a>';
+                    }else{		 
+					return '';
+                    }
 				}
         		
         	}

@@ -731,6 +731,46 @@ from m_risk_category
 			}		
 	
 	}
+
+	function get_properties($risk_code){
+		$sql = "select risk_id from t_risk where risk_code = '".$risk_code."' ";
+		$run_sql = $this->db->query($sql)->row();
+		$risk_id = $run_sql->risk_id;
+
+		$sql2 = "select * from t_risk_add_user where risk_id = '".$risk_id."' ";
+		$run_sql2 = $this->db->query($sql2)->result_array(); 
+		return $run_sql2;
+	}
 	
+	function get_all_username(){
+		$sql2 = "select * from m_user order by username ";
+		$run_sql2 = $this->db->query($sql2)->result_array(); 
+		return $run_sql2;
+	}
+
+	function get_all_username_edit($username){
+		$sql2 = "select * from m_user  where username != '$username' order by username ";
+		$run_sql2 = $this->db->query($sql2)->result_array(); 
+		return $run_sql2;
+	}
+
+	function update_properties($data){
+		$username_asli = $data['username_asli'];
+		$date_asli = $data['date_asli'];
+		$username = $data['username'];
+		$date_change = date("Y-m-d", strtotime($data['date_change']));
+
+
+
+		$sql2 = "update t_risk_add_user set username = '$username', date_changed = '$date_change' where username = '$username_asli' and date_changed = '$date_asli' ";
+		$run_sql2 = $this->db->query($sql2); 
+		return true;
+	}
+
+	function delete_properties($risk_id,$username){
+		$sql2 = "delete from t_risk_add_user where risk_id = '$risk_id' and username = '$username' ";
+		$run_sql2 = $this->db->query($sql2); 
+		return true;
+	}
 	 
 }

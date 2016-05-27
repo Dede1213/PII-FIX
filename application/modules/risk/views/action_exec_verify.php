@@ -158,15 +158,32 @@
 <div id="modal-category" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Risk Level </h4>
+		<h4 class="modal-title">Risk Level  </h4>
 	</div>
+
+	<?php
+	$this->load->database();
+	$sql2 = "select * from t_risk where risk_id = (select risk_id from t_risk_action_plan where id = '$ap_id')";
+	$sql2_run = $this->db->query($sql2)->row();
+	?>
+	<div style="margin-left:50px;">
+	Based on validation performed <br> Do you consider any changes on current risk level ? <br>
+	</div>
+	<div style="margin-left:70px;">
+	current impact level = <?php echo $sql2_run->risk_impact_level; ?> <br>
+	current likelihood = <?php echo $sql2_run->risk_likelihood_key; ?> <br>
+	current risk level = <?php echo $sql2_run->risk_level; ?>
+		</div>
+	<hr>
 	<div class="modal-body">
 			<form id="modal-risk-form" role="form" class="form-horizontal">
 				<input type="hidden" name="mode" value="add" />
 				<input type="hidden" name="cat_id" value="" />
 				<input type="hidden" name="cat_parent" value="0" />
 				<div class="form-body">
-				
+					<div class="form-group">
+						
+					</div>
 					<div class="form-group">
 						<label class="col-md-2 control-label smaller cl-compact" >Impact Level </label>
 						<div class="col-md-9">

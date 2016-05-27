@@ -2186,7 +2186,7 @@ class MainRac extends APP_Controller {
 			$data['impact_list'] = $this->mriskregister->getRiskImpactForList();
 			
 			$data['valid_mode'] = false;
-			
+			$data['ap_id'] = $rid;
 			$this->load->model('risk/risk');
 			$cred = $this->session->credential;
 			
@@ -2396,6 +2396,7 @@ class MainRac extends APP_Controller {
 					<script src="assets/scripts/risk/kriverify.js"></script>
 					';
 					
+					$data['kri_id'] = $rid;
 					$data['pageLevelScriptsInit'] = "KriForm.init();";
 					$data['verifyRac'] = true;
 					$view = 'risk/kri_form';

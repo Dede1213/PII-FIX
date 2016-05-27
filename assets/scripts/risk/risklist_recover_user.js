@@ -141,21 +141,25 @@ grid.init({
 		//"scrollX": true,
         "pageLength": 25, // default record count per page
         "ajax": {
-            "url": site_url+"/risk/RiskRegister/riskGetRollOver" // ajax source
+            "url": site_url+"/risk/RiskRegister/riskGetRollOver_recover_user" // ajax source
         },
         "columnDefs": [ {
         	"targets": 0,
-        	"data": "risk_status",
+        	"data": "risk_status_v",
         	"render": function ( data, type, full, meta ) {
         		var img = '';
-        		if (full.risk_existing_control == '3') {
+        		if (data == '0' || data == '1') {
+        			img = 'draft.png';
+        		} else if (data == '2') {
         			img = 'submit.png';
-        		}else if (data == '0') {
-        			img = 'draft.png';
-        		} else if (data == '1') {
-        			img = 'confirm.png';
-        		} else {
-        			img = 'draft.png';
+        		} else if (data == '3' || data == '4') {
+        			img = 'verified.png';
+        		}else if (data == '5' || data == '6') {
+        			img = 'treatment.png';
+        		}else if (data == '10') {
+        			img = 'actplan.png';
+        		}else if (data == '20') {
+        			img = 'executed.png';
         		}
         		return '<center><img src="'+base_url+'assets/images/legend/'+img+'"/></center>';
         	}
@@ -171,35 +175,21 @@ grid.init({
         	"targets": 7,
         	"data": "risk_status",
         	"render": function ( data, type, full, meta ) {
-        		var val = '';
-        		if (data == '0') {
-        			val = 'Draft';
-        		} else if (data == '1') {
-        			val = 'Confirm';
-        		} else {
-        			val = 'Draft';
-        		}
-        		return val;
-        	}
-        }, {
-        	"targets": 8,
-        	"data": "risk_status",
-        	"render": function ( data, type, full, meta ) {
         		var img = '';
         		if (data == '0') {
         			img = '<div class="btn-group">'+
         					'<button type="button" class="btn btn-default btn-xs button-grid-confirm"><i class="fa fa-thumbs-up font-green"></i></button>'+
-        					'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"></i></button>'+
+        					
         				'</div>';
         		} else if (data == '1') {
         			img = '<div class="btn-group">'+
-        					'<button type="button" class="btn btn-default btn-xs button-grid-cancel"><i class="fa fa-times font-yellow"></i></button>'+
-        					'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"></i></button>'+
+        					'<button type="button" class="btn btn-default btn-xs button-grid-confirm"><i class="fa fa-thumbs-up font-green"></i></button>'+
+        					
         				'</div>';
-        		} else {
+        		} else{
         			img = '<div class="btn-group">'+
         					'<button type="button" class="btn btn-default btn-xs button-grid-confirm"><i class="fa fa-thumbs-up font-green"></i></button>'+
-        					'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"></i></button>'+
+        					
         				'</div>';
         		}
         		return img;
@@ -213,8 +203,7 @@ grid.init({
 			{ "data": "impact_level_v" },
 			{ "data": "likelihood_v" },
 			{ "data": "risk_owner_v" },
-			{ "data": "risk_status", "orderable": false },
-			{ "data": "risk_status", "orderable": false }
+			
        ],
         "order": [
             [1, "asc"]
@@ -224,13 +213,13 @@ grid.init({
 
 grid2.init({
     src: $("#datatable_ajax2"),
-    onSuccess: function (grid) {
+    onSuccess: function (grid2) {
         // execute some code after table records loaded
     },
-    onError: function (grid) {
+    onError: function (grid2) {
         // execute some code on network or other general error  
     },
-    onDataLoad: function(grid) {
+    onDataLoad: function(grid2) {
         // execute some code on ajax data load
     },
     loadingMessage: 'Loading...',
@@ -244,19 +233,25 @@ grid2.init({
 		//"scrollX": true,
         "pageLength": 25, // default record count per page
         "ajax": {
-            "url": site_url+"/risk/RiskRegister/riskGetDataUser" // ajax source
-        },    
+            "url": site_url+"/risk/RiskRegister/riskGetRollOver_recover_modify" // ajax source
+        },
         "columnDefs": [ {
         	"targets": 0,
-        	"data": "risk_status",
+        	"data": "risk_status_v",
         	"render": function ( data, type, full, meta ) {
         		var img = '';
-        		if (data == '0') {
+        		if (data == '0' || data == '1') {
         			img = 'draft.png';
-        		} else if (data == '1') {
-        			img = 'confirm.png';
-        		} else {
+        		} else if (data == '2') {
         			img = 'submit.png';
+        		} else if (data == '3' || data == '4') {
+        			img = 'verified.png';
+        		}else if (data == '5' || data == '6') {
+        			img = 'treatment.png';
+        		}else if (data == '10') {
+        			img = 'actplan.png';
+        		}else if (data == '20') {
+        			img = 'executed.png';
         		}
         		return '<center><img src="'+base_url+'assets/images/legend/'+img+'"/></center>';
         	}
@@ -265,27 +260,52 @@ grid2.init({
         	"data": "risk_code",
         	"render": function ( data, type, full, meta ) {
         		var cls = 'font-green';
-        		if (full.risk_status == '0' || full.risk_status == '1'){ cls = '';
-        		return '<a target="_self" class="'+cls+'" href="'+site_url+'/risk/RiskRegister/modifyRisk/'+full.risk_id+'">'+data+'</a>';
-        		}else if (full.risk_status > '1'){ cls = '';
+        		if (full.risk_status == '0' || full.risk_status == '1') cls = '';
         		return '<a target="_self" class="'+cls+'" href="'+site_url+'/main/viewRisk/'+full.risk_id+'">'+data+'</a>';
-        		}
         	}
-        } ],    
+        }, {
+        	"targets": 7,
+        	"data": "risk_status",
+        	"render": function ( data, type, full, meta ) {
+        		var img = '';
+        		if (data == '0') {
+        			img = '<div class="btn-group">'+
+        					'<button type="button" class="btn btn-default btn-xs button-grid-confirm"><i class="fa fa-thumbs-up font-green"></i></button>'+
+        					'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"></i></button>'+
+        				'</div>';
+        		} else if (data == '1') {
+        			img = '<div class="btn-group">'+
+        					'<button type="button" class="btn btn-default btn-xs button-grid-confirm"><i class="fa fa-thumbs-up font-green"></i></button>'+
+        					'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"></i></button>'+
+        					
+        				'</div>';
+        		} else{
+        			img = '<div class="btn-group">'+
+        					'<button type="button" class="btn btn-default btn-xs button-grid-confirm"><i class="fa fa-thumbs-up font-green"></i></button>'+
+        					'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"></i></button>'+
+        					
+        				'</div>';
+        		}
+        		return img;
+        	}
+        } ],
         "columns": [
-           { "data": "risk_status" },
-           { "data": "risk_code" },
-           { "data": "risk_event" },
-           { "data": "risk_level_v" },
-           { "data": "impact_level_v" },
-           { "data": "likelihood_v" },
-           { "data": "risk_owner_v" }
+			{ "data": "risk_status", "orderable": false },
+			{ "data": "risk_code" },
+			{ "data": "risk_event" },
+			{ "data": "risk_level_v" },
+			{ "data": "impact_level_v" },
+			{ "data": "likelihood_v" },
+			{ "data": "risk_owner_v" },
+			
        ],
         "order": [
             [1, "asc"]
         ]// set first column as a default sort by asc
     }
 });
+
+
 
 var RiskList = function() {
 	return {
@@ -302,6 +322,15 @@ var RiskList = function() {
     	        	
     	        	me.confirmRisk(data);
     	        });
+
+    	        $("#datatable_ajax2").on('click', 'button.button-grid-confirm', function(e) {
+    	        	e.preventDefault();
+    	        	
+    	        	var r = this.parentNode.parentNode.parentNode;
+    	        	var data = grid2.getDataTable().row(r).data();
+    	        	
+    	        	me.confirmRisk(data);
+    	        });
     	        
     	        $("#datatable_ajax").on('click', 'button.button-grid-cancel', function(e) {
     	        	e.preventDefault();
@@ -312,11 +341,11 @@ var RiskList = function() {
     	        	me.draftRisk(data);
     	        });
     	        
-    	        $("#datatable_ajax").on('click', 'button.button-grid-delete', function(e) {
+    	        $("#datatable_ajax2").on('click', 'button.button-grid-delete', function(e) {
     	        	e.preventDefault();
     	        	
     	        	var r = this.parentNode.parentNode.parentNode;
-    	        	var data = grid.getDataTable().row(r).data();
+    	        	var data = grid2.getDataTable().row(r).data();
     	        	
     	        	me.deleteRisk(data);
     	        });
@@ -338,11 +367,6 @@ var RiskList = function() {
 				$('#filterFormSubmit2').on('click', function() {
 					me.filterDataGridRiskList2(); 
 				});
-
-				$('#button-change-request').click(function(e) {
-    	        	e.preventDefault();
-    	        	me.submitRiskPeriode2();
-    	        });
 	        },
 	        filterDataGrid: function(fby, fval) {
 	        	grid.clearAjaxParams();
@@ -350,14 +374,15 @@ var RiskList = function() {
 	        	grid.setAjaxParam("filter_value", fval);
 	        	grid.getDataTable().ajax.reload();
 	        },
+	        
 	        confirmRisk: function(data) {
-	        	var mod = MainApp.viewGlobalModal('confirm', 'Update Risk Status to <b>Confirm</b> for risk : <b>'+data.risk_event+'</b> ? ');
+	        	var mod = MainApp.viewGlobalModal('confirm', 'recover Risk Status to <b>Confirm</b> for risk : <b>'+data.risk_event+'</b> ? ');
 	        	mod.find('button.btn-ok-success').one('click', function(){
 	        		mod.modal('hide');
 	        		var eparam = {
 	        			'risk_id' : data.risk_id
 	        		};
-	        		var url = site_url+'/risk/RiskRegister/confirmRisk';
+	        		var url = site_url+'/risk/RiskRegister/confirmRisk_recover';
 	        		
 	        		Metronic.blockUI({ boxed: true });
 	        		$.post(
@@ -369,7 +394,7 @@ var RiskList = function() {
 	        					//grid.getDataTable().ajax.reload();
 	        					//grid2.getDataTable().ajax.reload();
 	        					//MainApp.viewGlobalModal('success', 'Success Update Risk Status');
-	        					window.location.href = site_url+'/risk/RiskRegister';
+	        					window.location.href = site_url+'/risk/RiskRegister/recover_user';
 
 	        				} else {
 	        					MainApp.viewGlobalModal('error', data.msg);
@@ -383,6 +408,8 @@ var RiskList = function() {
 	        		 });
 	        	});
 	        },
+
+
 	        draftRisk: function(data) {
 	        	var mod = MainApp.viewGlobalModal('confirm', 'Update Risk Status to <b>Draft</b> for risk : <b>'+data.risk_event+'</b> ? ');
 	        	mod.find('button.btn-ok-success').one('click', function(){
@@ -422,7 +449,7 @@ var RiskList = function() {
 	        		var eparam = {
 	        			'risk_id' : data.risk_id
 	        		};
-	        		var url = site_url+'/risk/RiskRegister/deleteRisk';
+	        		var url = site_url+'/risk/RiskRegister/deleteRiskgrid2';
 	        		
 	        		Metronic.blockUI({ boxed: true });
 	        		$.post(
@@ -505,42 +532,10 @@ var RiskList = function() {
 	        			function( data ) {
 	        				Metronic.unblockUI();
 	        				if(data.success) {
-	        					//grid.getDataTable().ajax.reload();
-	        					//grid2.getDataTable().ajax.reload();
+	        					grid.getDataTable().ajax.reload();
+	        					grid2.getDataTable().ajax.reload();
 	        					
-	        					//MainApp.viewGlobalModal('success', 'Success Update Risk Status');
-	        					window.location.href = site_url+'/risk/RiskRegister';
-	        				} else {
-	        					MainApp.viewGlobalModal('error', data.msg);
-	        				}
-	        				
-	        			},
-	        			"json"
-	        		).fail(function() {
-	        			Metronic.unblockUI();
-	        			MainApp.viewGlobalModal('error', 'Error Submitting Data');
-	        		 });
-	        	});
-	        },
-	        
-	        submitRiskPeriode2: function() {
-	        	var mod = MainApp.viewGlobalModal('confirm', 'change request to RAC All Risk in Periode : <b>'+g_p_name+'</b>');
-	        	mod.find('button.btn-ok-success').one('click', function(){
-	        		mod.modal('hide');
-	        		var url = site_url+'/risk/RiskRegister/submitRiskByPeriode2';
-	        		
-	        		Metronic.blockUI({ boxed: true });
-	        		$.post(
-	        			url,
-	        			{},
-	        			function( data ) {
-	        				Metronic.unblockUI();
-	        				if(data.success) {
-	        					//grid.getDataTable().ajax.reload();
-	        					//grid2.getDataTable().ajax.reload();
-	        					
-	        					//MainApp.viewGlobalModal('success', 'Success Change Request');
-	        					window.location.href = site_url+'/main/#tab_change_request_list';
+	        					MainApp.viewGlobalModal('success', 'Success Update Risk Status');
 	        				} else {
 	        					MainApp.viewGlobalModal('error', data.msg);
 	        				}
@@ -553,8 +548,5 @@ var RiskList = function() {
 	        		 });
 	        	});
 	        }
-
-
-
 	 }
 }();

@@ -23,7 +23,7 @@ gridRiskList.init({
         "ajax": {
             "url": site_url+"/library/getAllRisk" // ajax source
         },
-        
+       
         "columns": [
 			 
 			{ "data": "risk_code" },
@@ -41,6 +41,8 @@ gridRiskList.init({
                     '<button type="button" class="btn blue btn-xs button-grid-edit" > <i class="fa fa-pencil"></i></button>'+
 					 
 					'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"></i></button>'+
+
+                    '<button type="button" class="btn blue btn-xs button-grid-info" > <i class="fa fa-info" aria-hidden="true"></i></button>'+
                 '</div>'
                
            }
@@ -423,6 +425,16 @@ var Dashboard = function() {
                     me.showriskform(data);
 				
 			});
+
+            $('#datatable_ajax').on('click', 'button.button-grid-info', function(e) {
+            
+                e.preventDefault();
+                    
+                    var r = this.parentNode.parentNode.parentNode; 
+                    var data = gridRiskList.getDataTable().row(r).data(); 
+                    me.showriskforminfo(data);
+                
+            });
 			
 			$('#datatableap_ajax').on('click', 'button.button-grid-edit', function(e) {
 		   
@@ -536,7 +548,7 @@ var Dashboard = function() {
 	            		 });
 	            	 
 	            });
-			
+
 			$('#library-modal-listrisk-update').click(function(e) {
 	            	  
 	            		e.preventDefault();
@@ -780,6 +792,17 @@ var Dashboard = function() {
 	            		 });
 	            	 
 	            });
+
+            $('#button-grid-edit').on('click' , function(e) {
+                
+                    e.preventDefault();
+                    var r = this.parentNode.parentNode.parentNode; 
+                    var data =  $('#provinsi').getDataTable().row(r).data(); 
+                    me.showriskform(data);
+
+
+                
+            });
         },
 		
 		deleteData_kri: function(data) {
@@ -1038,6 +1061,26 @@ var Dashboard = function() {
 				$('#modal_listrisk').modal('show');
 	        	this.dataMode = 'view';
 	        },
+
+
+ showriskforminfo: function(data) {
+    $.ajax({
+        url: 'index.php/library/list_risk/',
+        type: 'POST',
+        data: { risk_code: data.risk_code, field2 : "inimah"} ,
+        contentType: 'application/json; charset=utf-8',
+        success: function (response) {
+            location.href=site_url+'/library/list_risk_properties/'+data.risk_code;
+           //$('#modal_listrisk_info').modal('show');
+        },
+        error: function () {
+            alert("error");
+        }
+    }); 
+                  
+                //$('#modal_listrisk_info').modal('show');
+                this.dataMode = 'view';
+            },
 			
 			showriskform_ap: function(data) {
 				var htmlopt = "";

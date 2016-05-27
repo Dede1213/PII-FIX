@@ -233,4 +233,26 @@
 	</div>
 </div>
 
+<!-- LIBRARY -->
+<div id="modal_listrisk_info" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+		<h4 class="modal-title">Properties</h4>		 
+	</div>
+	<div class="modal-body">
+				<?php
+				
+				echo $_POST['risk_code'];
+				?>
+		<br>			
+	</div>
+	<div class="modal-footer">
+		<button id="library-modal-listrisk-update" type="button" 
+			class="btn blue ladda-button"
+			 data-style="expand-right"
+			>Save</button>
+		<button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+	</div>
+</div>
+
 

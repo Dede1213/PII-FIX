@@ -20,6 +20,10 @@ var MainApp = function() {
 	    		$('#global-app-modal-confirmation .alert_container').html(msg);
 	    		$('#global-app-modal-confirmation').modal('show');
 	    		return $('#global-app-modal-confirmation');
+	    	}else if (mode == 'confirm-change') {
+	    		$('#global-app-modal-confirmation-change .alert_container').html(msg);
+	    		$('#global-app-modal-confirmation-change').modal('show');
+	    		return $('#global-app-modal-confirmation');
 	    	} else {
 	    		$('#global-app-modal-error .alert_container').html(msg);
 	    		$('#global-app-modal-error').modal('show');

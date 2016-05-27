@@ -235,6 +235,21 @@ var t_treshold_list = <?=json_encode($kri['treshold_list'])?>;
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 		<h4 class="modal-title">Risk Level </h4>
 	</div>
+
+	<?php
+	$this->load->database();
+	$sql2 = "select * from t_risk where risk_id = (select risk_id from t_kri where id = '$kri_id')";
+	$sql2_run = $this->db->query($sql2)->row();
+	?>
+	<div style="margin-left:50px;">
+	Based on validation performed <br> Do you consider any changes on current risk level ? <br>
+	</div>
+	<div style="margin-left:70px;">
+	current impact level = <?php echo $sql2_run->risk_impact_level; ?> <br>
+	current likelihood = <?php echo $sql2_run->risk_likelihood_key; ?> <br>
+	current risk level = <?php echo $sql2_run->risk_level; ?>
+	</div>
+	<hr>
 	<div class="modal-body">
 			<form id="modal-category-form" role="form" class="form-horizontal">
 				<input type="hidden" name="mode" value="add" />

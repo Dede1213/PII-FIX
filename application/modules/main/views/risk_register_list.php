@@ -77,7 +77,15 @@
 				<div class="caption">
 					Risk List From Library 
 				</div>
+				 <div class="actions">
+					<a target="_self" href="<?=$site_url?>/risk/RiskRegister/RiskRegisterInputRac/periodic/<?=$filled_by_id?>" class="btn default green">
+					<i class="fa fa-plus"></i>
+					<span class="hidden-480">
+					Add New Risk </span>
+					</a>
+				</div>
 			</div>
+
 			
 			<div class="portlet-body">
 				<form class="form-inline" role="form" id="filterForm2" style="margin-bottom: 10px;">

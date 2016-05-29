@@ -368,10 +368,10 @@ grid_exec.init({
         		var search = false;
         		var submit = false;
 
-        		if(full.periode_id == null){
+        		if(full.status_periode == 0){
         		var search_text = '<button type="button" class="btn blue btn-xs button-grid-search"><i class="fa fa-search"></i></button>';
         		var submit_text = '<button type="button" class="btn blue btn-xs button-grid-submit"><i class="fa fa-check-circle"></i> Submit</button>';
-        		}else{
+        		}else if(full.status_periode == 1){
                 var search_text = '';
                 var submit_text = '';
                 }
@@ -1100,6 +1100,20 @@ grid_exec_adt.init({
         		}
         		return dat;
         	}
+        },{
+            "targets": 4,
+            "data": "assigned_to_v",
+            "render": function ( data, type, full, meta ) {
+                var ret = data;
+                if (data == '' || data == null) {
+                    ret = '<span>Unasigned</span> &nbsp; '+
+                          '<button onclick="javascript: Dashboard.viewOwnedAssignForm('+full.id+', \'actionplan\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"></i></button>';
+                }else{
+                    ret = '<span>'+data+'</span> &nbsp; '+
+                          '<button onclick="javascript: Dashboard.viewOwnedAssignForm('+full.id+', \'actionplan\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"></i></button>';
+                }
+                return ret;
+            }
         }, {
         	"targets": 5,
         	"data": "execution_status",

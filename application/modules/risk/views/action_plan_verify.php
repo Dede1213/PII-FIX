@@ -278,7 +278,10 @@ if($status == 'under'){ ?>
 							<div class="form-group">
 								<label class="col-md-2 control-label smaller cl-compact" title="fill this field with description of risk treatment action to be done in addressing the risk">Action Plan</label>
 								<div class="col-md-9">
+								<textarea class="form-control input-readview" readonly="true" rows="3" placeholder=""><?=$action_plan['action_plan']?></textarea>
+								<!--
 								<input type="text" class="form-control input-sm input-readview" readonly="true" value="<?=$action_plan['action_plan']?>" placeholder="">
+								-->
 								</div>
 							</div>
 							<div class="form-group">
@@ -349,7 +352,10 @@ if($status == 'under'){ ?>
 							<div class="form-group">
 								<label class="col-md-2 control-label smaller cl-compact" title="fill this field with description of risk treatment action to be done in addressing the risk">Action Plan</label>
 								<div class="col-md-9">
+									<textarea class="form-control input-readview" readonly="true" rows="3" placeholder="" name="action_plan"><?=$action_plan['change_data']['action_plan']?></textarea>
+								<!--
 									<input type="text" class="form-control input-sm input-readview" value="<?=$action_plan['change_data']['action_plan']?>" name="action_plan" placeholder="">
+								-->
 								</div>
 							</div>
 							<div class="form-group">

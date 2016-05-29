@@ -352,7 +352,7 @@ var RiskVerify = function() {
                     var ecid = '';
                     if (val.objective_id == null) ecid = '';
                     var nnode = {
-                        'objective_id' : "OB."+val.id,
+                        'objective_id' : val.ecid,
                         'objective' : val.objective
                     };
                     

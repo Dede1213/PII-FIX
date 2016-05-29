@@ -935,38 +935,40 @@ class Risk extends APP_Model {
 			$date = date("Y-m-d");
 			
 			$sql = "select 
-					a.*,
-					b.ref_value as risk_status_v,
-					c.ref_value as risk_level_v,
-					d.ref_value as impact_level_v,
-					e.l_title as likelihood_v,
-					f.division_name as risk_owner_v
-					from t_risk a
-					left join m_reference b on a.risk_status = b.ref_key and b.ref_context = 'risk.status.user'
-					left join m_reference c on a.risk_level = c.ref_key and c.ref_context = 'risklevel.display'
-					left join m_reference d on a.risk_impact_level = d.ref_key and d.ref_context = 'impact.display'
-					left join m_likelihood e on a.risk_likelihood_key = e.l_key
-					left join m_division f on a.risk_owner = f.division_id
-					where 	
-					a.risk_input_by = ? and a.existing_control_id is null
-					UNION
-					select 
-					a.*,
-					b.ref_value as risk_status_v,
-					c.ref_value as risk_level_v,
-					d.ref_value as impact_level_v,
-					e.l_title as likelihood_v,
-					f.division_name as risk_owner_v
-					from t_risk_change a
-					left join m_reference b on a.risk_status = b.ref_key and b.ref_context = 'risk.status.user'
-					left join m_reference c on a.risk_level = c.ref_key and c.ref_context = 'risklevel.display'
-					left join m_reference d on a.risk_impact_level = d.ref_key and d.ref_context = 'impact.display'
-					left join m_likelihood e on a.risk_likelihood_key = e.l_key
-					left join m_division f on a.risk_owner = f.division_id
-					where 	
-					a.risk_input_by = '".$defFilter['userid']."' and a.existing_control_id is null
-					UNION
-					select 
+                                                                                a.*,
+                                                                                b.ref_value as risk_status_v,
+                                                                                c.ref_value as risk_level_v,
+                                                                                d.ref_value as impact_level_v,
+                                                                                e.l_title as likelihood_v,
+                                                                                f.division_name as risk_owner_v
+                                                                                from t_risk a
+                                                                                left join m_reference b on a.risk_status = b.ref_key and b.ref_context = 'risk.status.user'
+                                                                                left join m_reference c on a.risk_level = c.ref_key and c.ref_context = 'risklevel.display'
+                                                                                left join m_reference d on a.risk_impact_level = d.ref_key and d.ref_context = 'impact.display'
+                                                                                left join m_likelihood e on a.risk_likelihood_key = e.l_key
+                                                                                left join m_division f on a.risk_owner = f.division_id
+                                                                                where   
+                                                                                a.risk_input_by = ? and a.existing_control_id is null
+                                                                                group by a.risk_code
+                                                                                UNION
+                                                                                select 
+                                                                                a.*,
+                                                                                b.ref_value as risk_status_v,
+                                                                                c.ref_value as risk_level_v,
+                                                                                d.ref_value as impact_level_v,
+                                                                                e.l_title as likelihood_v,
+                                                                                f.division_name as risk_owner_v
+                                                                                from t_risk_change a
+                                                                                left join m_reference b on a.risk_status = b.ref_key and b.ref_context = 'risk.status.user'
+                                                                                left join m_reference c on a.risk_level = c.ref_key and c.ref_context = 'risklevel.display'
+                                                                                left join m_reference d on a.risk_impact_level = d.ref_key and d.ref_context = 'impact.display'
+                                                                                left join m_likelihood e on a.risk_likelihood_key = e.l_key
+                                                                                left join m_division f on a.risk_owner = f.division_id
+                                                                                where   
+                                                                                a.risk_input_by = '".$defFilter['userid']."' and a.existing_control_id is null
+                                                                                group by a.risk_code
+                                                                                UNION
+                                                                                select 
                                                                                 a.*,
                                                                                 b.ref_value as risk_status_v,
                                                                                 c.ref_value as risk_level_v,
@@ -982,6 +984,7 @@ class Risk extends APP_Model {
                                                                                 join t_risk_add_user t on a.risk_id = t.risk_id
                                                                                 where   
                                                                                 t.username = '".$defFilter['userid']."' and a.existing_control_id is null
+                                                                                group by a.risk_code
 
 					";
 			$rpar = array('user_id' => $defFilter['userid']);
@@ -997,44 +1000,65 @@ class Risk extends APP_Model {
 		}
 		
 		if ($mode == 'racPeriode') {
-			$sql = "select 
-					a.*,
-					b.ref_value as risk_status_v,
-					c.ref_value as risk_level_v,
-					d.ref_value as impact_level_v,
-					e.l_title as likelihood_v,
-					f.division_name as risk_owner_v
-					from t_risk_change a
-					left join m_reference b on a.risk_status = b.ref_key and b.ref_context = 'risk.status.user'
-					left join m_reference c on a.risk_level = c.ref_key and c.ref_context = 'risklevel.display'
-					left join m_reference d on a.risk_impact_level = d.ref_key and d.ref_context = 'impact.display'
-					left join m_likelihood e on a.risk_likelihood_key = e.l_key
-					left join m_division f on a.risk_owner = f.division_id
-					where 
-					a.periode_id = '".$defFilter['periodid']."'
-					and a.risk_input_by = '".$defFilter['userid']."'
-					and a.risk_id NOT IN (select r.risk_id from t_risk r where a.risk_id = r.risk_id and r.periode_id = '".$defFilter['periodid']."' and r.risk_input_by = '".$defFilter['userid']."' and r.risk_status > 1)
-					UNION
+			$sql = "
 					select 
-					a.*,
-					b.ref_value as risk_status_v,
-					c.ref_value as risk_level_v,
-					d.ref_value as impact_level_v,
-					e.l_title as likelihood_v,
-					f.division_name as risk_owner_v
-					from t_risk a
-					left join m_reference b on a.risk_status = b.ref_key and b.ref_context = 'risk.status.user'
-					left join m_reference c on a.risk_level = c.ref_key and c.ref_context = 'risklevel.display'
-					left join m_reference d on a.risk_impact_level = d.ref_key and d.ref_context = 'impact.display'
-					left join m_likelihood e on a.risk_likelihood_key = e.l_key
-					left join m_division f on a.risk_owner = f.division_id
-					where 
-					risk_library_id is not null
-					and
-					a.periode_id = '".$defFilter['periodid']."'
-					and a.risk_input_by = '".$defFilter['userid']."'
-					
-					";
+                                                                                a.*,
+                                                                                b.ref_value as risk_status_v,
+                                                                                c.ref_value as risk_level_v,
+                                                                                d.ref_value as impact_level_v,
+                                                                                e.l_title as likelihood_v,
+                                                                                f.division_name as risk_owner_v
+                                                                                from t_risk_change a
+                                                                                left join m_reference b on a.risk_status = b.ref_key and b.ref_context = 'risk.status.user'
+                                                                                left join m_reference c on a.risk_level = c.ref_key and c.ref_context = 'risklevel.display'
+                                                                                left join m_reference d on a.risk_impact_level = d.ref_key and d.ref_context = 'impact.display'
+                                                                                left join m_likelihood e on a.risk_likelihood_key = e.l_key
+                                                                                left join m_division f on a.risk_owner = f.division_id
+                                                                                where 
+                                                                                a.periode_id = '".$defFilter['periodid']."'
+                                                                                and a.risk_input_by = '".$defFilter['userid']."'
+                                                                                and a.risk_id NOT IN (select r.risk_id from t_risk r where a.risk_id = r.risk_id and r.periode_id = '".$defFilter['periodid']."' and r.risk_input_by = '".$defFilter['userid']."' and r.risk_status > 1)
+                                                                                UNION
+                                                                                select 
+                                                                                a.*,
+                                                                                b.ref_value as risk_status_v,
+                                                                                c.ref_value as risk_level_v,
+                                                                                d.ref_value as impact_level_v,
+                                                                                e.l_title as likelihood_v,
+                                                                                f.division_name as risk_owner_v
+                                                                                from t_risk a
+                                                                                left join m_reference b on a.risk_status = b.ref_key and b.ref_context = 'risk.status.user'
+                                                                                left join m_reference c on a.risk_level = c.ref_key and c.ref_context = 'risklevel.display'
+                                                                                left join m_reference d on a.risk_impact_level = d.ref_key and d.ref_context = 'impact.display'
+                                                                                left join m_likelihood e on a.risk_likelihood_key = e.l_key
+                                                                                left join m_division f on a.risk_owner = f.division_id
+                                                                                where 
+                                                                                risk_library_id is not null
+                                                                                and
+                                                                                a.periode_id = '".$defFilter['periodid']."'
+                                                                                and a.risk_input_by = '".$defFilter['userid']."'
+UNION
+select 
+                                                                                a.*,
+                                                                                b.ref_value as risk_status_v,
+                                                                                c.ref_value as risk_level_v,
+                                                                                d.ref_value as impact_level_v,
+                                                                                e.l_title as likelihood_v,
+                                                                                f.division_name as risk_owner_v
+                                                                                from t_risk a
+                                                                                left join m_reference b on a.risk_status = b.ref_key and b.ref_context = 'risk.status.user'
+                                                                                left join m_reference c on a.risk_level = c.ref_key and c.ref_context = 'risklevel.display'
+                                                                                left join m_reference d on a.risk_impact_level = d.ref_key and d.ref_context = 'impact.display'
+                                                                                left join m_likelihood e on a.risk_likelihood_key = e.l_key
+                                                                                left join m_division f on a.risk_owner = f.division_id
+        																		join t_risk_add_user t on a.risk_id = t.risk_id
+                                                                                where 
+                                                                                t.risk_library_id is not null
+                                                                                and
+                                                                                a.periode_id = '".$defFilter['periodid']."'
+                                                                                and t.username = '".$defFilter['userid']."'
+
+			";
 		}
 		
 		if ($mode == 'racRollover') {
@@ -1052,36 +1076,35 @@ class Risk extends APP_Model {
                                                                                 left join m_likelihood e on a.risk_likelihood_key = e.l_key
                                                                                 left join m_division f on a.risk_owner = f.division_id
                                                                                 join m_periode on m_periode.periode_id = a.periode_id
-                                                                                join t_risk_add_user t on a.risk_id = t.risk_id
                                                                                 where 
                                                                                 a.periode_id is not null
                                                                                 and a.risk_status >= 0
-                                                                                and t.username = '".$defFilter['userid']."'
+                                                                                and a.risk_input_by = '".$defFilter['userid']."'
                                                                                 and a.existing_control_id is null
                                                                                 and a.risk_library_id is null
                                                                                 and a.periode_id = (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end)
                     UNION
                     select 
-					a.*,
-					b.ref_value as risk_status_v,
-					c.ref_value as risk_level_v,
-					d.ref_value as impact_level_v,
-					e.l_title as likelihood_v,
-					f.division_name as risk_owner_v
-					from t_risk a
-					left join m_reference b on a.risk_status = b.ref_key and b.ref_context = 'risk.status.user'
-					left join m_reference c on a.risk_level = c.ref_key and c.ref_context = 'risklevel.display'
-					left join m_reference d on a.risk_impact_level = d.ref_key and d.ref_context = 'impact.display'
-					left join m_likelihood e on a.risk_likelihood_key = e.l_key
-					left join m_division f on a.risk_owner = f.division_id
-					join m_periode on m_periode.periode_id = a.periode_id
-					where 
-					a.periode_id is not null
-					and a.risk_status >= 0
-					and a.risk_input_by = '".$defFilter['userid']."'
-					and a.existing_control_id is null
-					and a.risk_library_id is null
-					and a.periode_id = (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end)
+                                                                                a.*,
+                                                                                b.ref_value as risk_status_v,
+                                                                                c.ref_value as risk_level_v,
+                                                                                d.ref_value as impact_level_v,
+                                                                                e.l_title as likelihood_v,
+                                                                                f.division_name as risk_owner_v
+                                                                                from t_risk a
+                                                                                left join m_reference b on a.risk_status = b.ref_key and b.ref_context = 'risk.status.user'
+                                                                                left join m_reference c on a.risk_level = c.ref_key and c.ref_context = 'risklevel.display'
+                                                                                left join m_reference d on a.risk_impact_level = d.ref_key and d.ref_context = 'impact.display'
+                                                                                left join m_likelihood e on a.risk_likelihood_key = e.l_key
+                                                                                left join m_division f on a.risk_owner = f.division_id
+                                                                                join m_periode on m_periode.periode_id = a.periode_id
+                                                                                where 
+                                                                                a.periode_id is not null
+                                                                                and a.risk_status >= 0
+                                                                                and a.risk_input_by = '".$defFilter['userid']."'
+                                                                                and a.existing_control_id is null
+                                                                                and a.risk_library_id is null
+                                                                                and a.periode_id = (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end)
 
 					";
 		}
@@ -1251,30 +1274,36 @@ class Risk extends APP_Model {
 				$date = date("Y-m-d");
 				
 				$sql = "select
-						a.*,
-						concat('AP.', LPAD(a.id, 6, '0')) as act_code,
-						b.risk_code,b.periode_id,
-						c.display_name as assigned_to_v,
-						d.division_name as division_name,
-						date_format(a.due_date, '%d-%m-%Y') as due_date_v,
-						case 
-							when a.assigned_to = '".$defFilter['userid']."' then 1
-							else 0
-						end as is_owner,
-						case 
-							when '4' = '".$defFilter['role_id']."' then 1
-							else 0
-						end as is_head,
-						date_format(a.revised_date, '%d-%m-%Y') as revised_date_v
-						from 
-						t_risk_action_plan a
-						left join t_risk b on a.risk_id = b.risk_id
-						left join m_user c on a.assigned_to = c.username
-						left join m_division d on a.division = d.division_id						 
-						where 
-						a.action_plan_status > 3
-						and a.division = ?
-						".$ext;
+                                                                                                a.*,
+                                                                                                concat('AP.', LPAD(a.id, 6, '0')) as act_code,
+                                                                                                b.risk_code,b.periode_id,
+                                                                                                c.display_name as assigned_to_v,
+                                                                                                d.division_name as division_name,
+                                                                                                date_format(a.due_date, '%d-%m-%Y') as due_date_v,
+                                                                                                case 
+                                                                                                when a.assigned_to = '".$defFilter['userid']."' then 1
+                                                                                                else 0
+                                                                                                end as is_owner,
+                                                                                                case 
+                                                                                                when '4' = '".$defFilter['role_id']."' then 1
+                                                                                                else 0
+                                                                                                end as is_head,
+                                                                                                date_format(a.revised_date, '%d-%m-%Y') as revised_date_v,
+                                                                                                case
+                                                                                                when DATE(NOW()) = (select DATE(NOW()) from m_periode_plan where DATE(NOW()) between periode_start and periode_end) then 1
+                                                                                                else 0
+                                                                                                end as status_periode                                                                                                                                                                                                                                                                                                                                                                                                
+                                                                                                from 
+                                                                                                t_risk_action_plan a
+                                                                                                left join t_risk b on a.risk_id = b.risk_id
+                                                                                                left join m_user c on a.assigned_to = c.username
+                                                                                                left join m_division d on a.division = d.division_id                                                                                             
+                                                                                                where 
+                                                                                                a.action_plan_status > 3
+                                                                                                and a.division = ?
+                                                                                                ".$ext;
+
+
 						//AND b.periode_id is null
 
 				if ($par) {
@@ -1812,7 +1841,7 @@ select
 		
 		$periode = $data['periode_id'];
 		$sql = "insert into t_risk(risk_code,risk_date,risk_status,periode_id,risk_input_by,risk_input_division,risk_owner,risk_division,risk_library_id,risk_event,risk_description,risk_category,risk_sub_category,risk_2nd_sub_category,risk_cause,risk_impact,existing_control_id,risk_existing_control,risk_evaluation_control,risk_control_owner,risk_level,risk_impact_level,risk_likelihood_key,suggested_risk_treatment,risk_treatment_owner,created_by,created_date,switch_flag)
-				select risk_code,NOW(),1,'$periode',risk_input_by,risk_input_division,risk_owner,risk_division,risk_id,risk_event,risk_description,risk_category,risk_sub_category,risk_2nd_sub_category,risk_cause,risk_impact,existing_control_id,risk_existing_control,risk_evaluation_control,risk_control_owner,risk_level,risk_impact_level,risk_likelihood_key,suggested_risk_treatment,risk_treatment_owner,created_by,created_date,'$uid' from t_risk where risk_id='$risk_id'";
+				select risk_code,NOW(),1,'$periode','$uid',risk_input_division,risk_owner,risk_division,risk_id,risk_event,risk_description,risk_category,risk_sub_category,risk_2nd_sub_category,risk_cause,risk_impact,existing_control_id,risk_existing_control,risk_evaluation_control,risk_control_owner,risk_level,risk_impact_level,risk_likelihood_key,suggested_risk_treatment,risk_treatment_owner,created_by,created_date,'$uid' from t_risk where risk_id='$risk_id'";
 		$res = $this->db->query($sql);
 		
 		$sql = "insert into t_risk_control(risk_id,existing_control_id,risk_existing_control,risk_evaluation_control,risk_control_owner,switch_flag)
@@ -1841,7 +1870,7 @@ select
 
 		//insert T_RISK CHANGE NYA JUGA!
 		$sql = "insert into t_risk_change(risk_id,risk_code,risk_date,risk_status,periode_id,risk_input_by,risk_input_division,risk_owner,risk_division,risk_library_id,risk_event,risk_description,risk_category,risk_sub_category,risk_2nd_sub_category,risk_cause,risk_impact,existing_control_id,risk_existing_control,risk_evaluation_control,risk_control_owner,risk_level,risk_impact_level,risk_likelihood_key,suggested_risk_treatment,risk_treatment_owner,created_by,created_date,switch_flag)
-				select risk_id,risk_code,NOW(),1,'$periode',risk_input_by,risk_input_division,risk_owner,risk_division,risk_id,risk_event,risk_description,risk_category,risk_sub_category,risk_2nd_sub_category,risk_cause,risk_impact,existing_control_id,risk_existing_control,risk_evaluation_control,risk_control_owner,risk_level,risk_impact_level,risk_likelihood_key,suggested_risk_treatment,risk_treatment_owner,created_by,created_date,switch_flag from t_risk where risk_id='$hasil' and risk_input_by='$uid' and periode_id='$periode' ";
+				select risk_id,risk_code,NOW(),1,'$periode','$uid',risk_input_division,risk_owner,risk_division,risk_id,risk_event,risk_description,risk_category,risk_sub_category,risk_2nd_sub_category,risk_cause,risk_impact,existing_control_id,risk_existing_control,risk_evaluation_control,risk_control_owner,risk_level,risk_impact_level,risk_likelihood_key,suggested_risk_treatment,risk_treatment_owner,created_by,created_date,switch_flag from t_risk where risk_id='$hasil' and risk_input_by='$uid' and periode_id='$periode' ";
 		$res = $this->db->query($sql);
 		
 
@@ -4249,6 +4278,21 @@ select
 	
 	public function assignPicAction($risk_id, $pic) {
 		$sql = "update t_risk_action_plan set 
+				assigned_to = ?
+				where
+				id = ?
+				";
+		$par = array(
+			'pic' => $pic,
+			'rid' => $risk_id
+		);
+		
+		$res = $this->db->query($sql, $par);
+		return $res;
+	}
+	/*
+	public function assignPicAction($risk_id, $pic) {
+		$sql = "update t_risk_action_plan set 
 				assigned_to = ?,action_plan_status = 5
 				where
 				id = ?
@@ -4261,7 +4305,7 @@ select
 		$res = $this->db->query($sql, $par);
 		return $res;
 	}
-	
+	*/
 	public function getActionPlanById($risk_id) 
 	{
 		$sql = "select a.*,
@@ -4922,6 +4966,23 @@ select
 			'rid' => $risk_id,
 			'un' => $username,
 			'dc' => $date_changed
+		);
+		$res = $this->db->query($sql, $par);
+		return $res;
+	}
+
+	public function riskAddUser1form($risk_id, $username, $date_changed)
+	{
+		//delete dulu yang ada add user nya
+		$sql = "delete from t_risk_add_user where risk_id ='".$risk_id."' and username ='".$username."' ";
+		$res = $this->db->query($sql);
+
+		$sql = "insert into t_risk_add_user (risk_id,username,date_changed,risk_library_id) values(?, ? ,? ,?)";
+		$par = array(
+			'rid' => $risk_id,
+			'un' => $username,
+			'dc' => $date_changed,
+			'lb' => $risk_id
 		);
 		$res = $this->db->query($sql, $par);
 		return $res;

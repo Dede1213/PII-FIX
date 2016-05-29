@@ -1269,6 +1269,8 @@ var RiskInput = function() {
 	        					//location.href=site_url+'/risk/RiskRegister/RiskRegisterInput/'+me.dataMode;
                                 if(g_submit_mode = 'adhoc'){
                                 location.href=site_url+'/main';
+                                }if(g_submit_mode = 'periodic'){
+                                location.href=site_url+'/risk/RiskRegister';
                                 }else{
                                 location.href=site_url+'/risk/RiskRegister';
                                  }

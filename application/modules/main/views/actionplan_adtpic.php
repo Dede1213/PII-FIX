@@ -90,7 +90,37 @@
 		<?php endif;?>
 	</div>
 </div>
-
+<!-- PIC -->
+<div id="modal-pic" class="modal fade" tabindex="-1" data-width="760" data-keyboard="false">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+		<h4 class="modal-title">Select Assignee</h4>
+	</div>
+	<div class="modal-body">
+		<table id="pic_list_table" class="table table-condensed table-bordered table-hover">
+			<thead>
+			<tr role="row" class="heading">
+				<th width="30px">&nbsp;</th>
+				<th>Name</th>
+				<th>Division</th>
+			</tr>
+			</thead>
+			<tbody>
+			<?php foreach($pic_list as $k=>$row) { ?>
+			<tr id="modal-pic-tr-<?=$k?>">
+				<td>
+				<div class="btn-group">
+					<button value_idx="<?=$k?>" value="<?=$row['username']?>" type="button" class="btn btn-default btn-xs button-assign-pic"><i class="fa fa-check-circle font-blue"></i></button>
+				</div>
+				</td>
+				<td class="col_display_name"><?=$row['display_name']?></td>
+				<td><?=$row['division_name']?></td>
+			</tr>
+			<?php } ?>
+			</tbody>
+		</table>
+	</div>
+</div>
 <!-- Execution Form -->
 <div id="modal-exec" class="modal fade" tabindex="-1" data-width="760" data-keyboard="false" role="dialog" aria-hidden="true">
 	<div class="modal-header">

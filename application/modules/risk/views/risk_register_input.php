@@ -913,6 +913,7 @@ if ($submit_mode == 'periodic'){
 ?>
 <script type="text/javascript">
 	var g_username_user = '<?php echo "$username_user";?>';
+	var g_submit_mode = <?php echo "$submit_mode";?>
 </script>
 <?php
 }

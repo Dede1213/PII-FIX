@@ -103,6 +103,7 @@
 	</div>
 </div>
 
+
 <!-- LIBRARY -->
 <div id="modal-library" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
 	<div class="modal-header">

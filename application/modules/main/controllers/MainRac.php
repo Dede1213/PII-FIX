@@ -866,10 +866,10 @@ class MainRac extends APP_Controller {
 				//tadinya library aja yg di masukin add user
 				if (isset($_POST['add_user_flag']) && $_POST['add_user_flag'] == 'yes') {
 					$dd = implode('-', array_reverse( explode('-', $_POST['add_user_date_changed']) ));
-					$res = $this->risk->riskAddUser($_POST['risk_id'], $_POST['add_user_username'], $dd);
+					$res = $this->risk->riskAddUser1form($_POST['risk_id'], $_POST['add_user_username'], $dd);
 				}else{
 					$dd = date("Y-m-d");
-					$res = $this->risk->riskAddUser($_POST['risk_id'], $_POST['risk_input_by'], $dd);
+					$res = $this->risk->riskAddUser1form($_POST['risk_id'], $_POST['risk_input_by'], $dd);
 				}
 
 				$resp = array();

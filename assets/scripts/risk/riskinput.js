@@ -1267,12 +1267,12 @@ var RiskInput = function() {
 	        				var mod = MainApp.viewGlobalModal('success', 'Success Inserting your Risk');
 	        				mod.find('button.btn-ok-success').one('click', function(){
 	        					//location.href=site_url+'/risk/RiskRegister/RiskRegisterInput/'+me.dataMode;
-                                if(g_submit_mode = 'adhoc'){
+                                if(g_submit_mode == 'adhoc'){
                                 location.href=site_url+'/main';
-                                }if(g_submit_mode = 'periodic'){
+                                }else if(g_submit_mode == 'periodic'){
                                 location.href=site_url+'/risk/RiskRegister';
                                 }else{
-                                location.href=site_url+'/risk/RiskRegister';
+                                location.href=site_url+'/risk/RiskRegister/blblbl';
                                  }
 	        				});
 	        				

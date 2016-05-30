@@ -907,13 +907,17 @@
 			>Save</button>
 	</div>
 </div>
-<?php
+<script type="text/javascript">
+	var g_submit_mode = '<?php echo "$submit_mode";?>';
+</script>
 
+
+<?php
 if ($submit_mode == 'periodic'){
 ?>
 <script type="text/javascript">
 	var g_username_user = '<?php echo "$username_user";?>';
-	var g_submit_mode = <?php echo "$submit_mode";?>
+	//var g_submit_mode = <?php echo "$submit_mode";?>
 </script>
 <?php
 }
@@ -929,7 +933,7 @@ if ($submit_mode == 'periodic'){
 if ($submit_mode == 'adhoc'){
 ?>
 <script type="text/javascript">
-	var g_submit_mode = <?php echo "$submit_mode";?>;
+	//var g_submit_mode = <?php echo "$submit_mode";?>;
 </script>
 <?php
 }

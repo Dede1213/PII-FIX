@@ -451,6 +451,44 @@ class RiskRegister extends APP_Controller {
 		echo json_encode($data);
 	}
 
+	public function riskGetRollOver_recover_modify_rac()
+	{
+		$sess = $this->loadDefaultAppConfig();
+		$order_by = $order = $filter_by = $filter_value = null;
+				
+		if (isset($_POST['order'][0]['column'])) {
+			$order_idx = $_POST['order'][0]['column'];
+			$order_by = $_POST['columns'][$order_idx]['data'];
+			$order = $_POST['order'][0]['dir'];
+		}
+		
+		if (isset($_POST['filter_by']) && isset($_POST['filter_value']) && $_POST['filter_value'] != '' ) {
+			$filter_by = $_POST['filter_by'];
+			$filter_value = $_POST['filter_value'];
+		}
+		
+		$page = ceil($_POST['start'] / $_POST['length'])+1;
+
+		$row = $_POST['length'];
+		
+		$periode = $this->mperiode->getCurrentPeriode();
+		$periode_id = null;
+		if ($periode) {
+			$periode_id = $periode['periode_id'];
+		} 
+		
+		
+		$defFilter = array(
+			'userid' => $sess['session']['username'],
+			'periodid' => $periode_id
+		);
+		$data = $this->mriskregister->getDataMode('userRollover_recover_modify_rac', $defFilter, $page, $row, $order_by, $order, $filter_by, $filter_value);
+		
+		$data['draw'] = $_POST['draw']*1;
+		$data['page'] = $page;
+		echo json_encode($data);
+	}
+
 	public function confirmRisk_recover() {
 		$session_data = $this->session->credential;
 		
@@ -459,17 +497,17 @@ class RiskRegister extends APP_Controller {
 		if (isset($_POST['risk_id']) && is_numeric($_POST['risk_id'])) {
 			
 			$periode = $this->mperiode->getCurrentPeriode();
-			$periode_id = null;
-			if ($periode) {
-				$periode_id = $periode['periode_id'];
-			}
-			
+	
+			$periode_id = $periode['periode_id'];
 			$data['periode_id'] = $periode_id;
 			
 			$res = $this->risk->riskSetConfirm_recover($_POST['risk_id'], $data, $session_data['username'], 'RISK_REGISTER-CONFIRM');
 			if ($res) {
 				$resp['success'] = true;
 				$resp['msg'] = 'SUCCESS';
+			}else {
+				$resp['success'] = false;
+				$resp['msg'] = 'your risk register exercise has been submitted please contact RAC team to recover deleted risk.';
 			}
 		}
 		
@@ -477,6 +515,7 @@ class RiskRegister extends APP_Controller {
 	}
 
 	public function confirmRisk_recover_rac() {
+
 		$session_data = $this->session->credential;
 		
 		$resp = array('success' => false, 'msg' => 'Error');
@@ -490,8 +529,11 @@ class RiskRegister extends APP_Controller {
 			}
 			
 			$data['periode_id'] = $periode_id;
-			
+			//fungsi jempol normal
+			$res = $this->risk->riskSetConfirm($_POST['risk_id'], $data, $session_data['username'], 'RISK_REGISTER-CONFIRM');
+			//end
 			$res = $this->risk->riskSetConfirm_recover_rac($_POST['risk_id'], $data, $session_data['username'], 'RISK_REGISTER-CONFIRM');
+
 			if ($res) {
 				$resp['success'] = true;
 				$resp['msg'] = 'SUCCESS';
@@ -679,6 +721,7 @@ class RiskRegister extends APP_Controller {
 				
 				$data['modifyRisk'] = true;
 				$data['risk_id'] = $risk_id;
+				$data['username_user'] = '';
 				
 				$data['category'] = $this->mriskregister->getRiskCategory();
 				$data['likelihood'] = $this->mriskregister->getRiskLikelihood();
@@ -1880,8 +1923,13 @@ class RiskRegister extends APP_Controller {
 					$data['impact_list'] = $this->mriskregister->getRiskImpactForList();
 					$data['treatment_list'] = $this->mriskregister->getReference('treatment.status');
 					$data['division_list'] = $this->mriskregister->getDivisionList();
+					//compare change request user
+					$time_compare = $this->mriskregister->time_compare($risk_id);
+					$data['time_compare'] = $time_compare->created_date;
 				}
 				
+				
+
 				$this->load->view('main/header', $data);
 				$this->load->view('change_request_input', $data);
 				$this->load->view('main/footer', $data);
@@ -2227,6 +2275,8 @@ class RiskRegister extends APP_Controller {
 					$data['division_list'] = $this->mriskregister->getDivisionList();
 					
 				}
+
+				$data['time_compare'] = '';
 				
 				$this->load->view('main/header', $data);
 				$this->load->view('change_request_input', $data);

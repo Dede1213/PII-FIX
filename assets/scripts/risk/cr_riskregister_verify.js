@@ -579,9 +579,9 @@ var ChangeRequest = function() {
         		mod.find('button.btn-primary').off('click');
         		mod.find('button.btn-primary').one('click', function(){
         			 
-					var mod_det = MainApp.viewGlobalModal('confirm-change', 'Approve will create all risk status to draft?');
+					//var mod_det = MainApp.viewGlobalModal('confirm-change', 'Approve will create all risk status to draft?');
 					 
-					//me.submitRiskData('verifyPrimary');
+					me.submitRiskData('verifyPrimary');
 					 
         		});
         	});
@@ -1295,7 +1295,7 @@ var ChangeRequest = function() {
             				var mod = MainApp.viewGlobalModal('success', 'Success Submitting Change Request');
             				mod.find('button.btn-ok-success').one('click', function(){
             					if (mode == 'verifyPrimary' || mode == 'verify' || mode == 'delete') {
-            						location.href=site_url+'/main#tab_change_request_list';
+            						location.href=site_url+'/main/mainrac#tab_change_request_list';
             					} else {
             						location.href=site_url+'/main/mainrac/ChangeRequestVerify/'+xid;
             					}

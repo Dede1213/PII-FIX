@@ -148,9 +148,9 @@ grid.init({
         	"data": "risk_status_v",
         	"render": function ( data, type, full, meta ) {
         		var img = '';
-        		if (data == '0' || data == '1') {
+        		if (full.ex == '0' || full.ex == '1') {
         			img = 'draft.png';
-        		} else if (data == '2') {
+        		} else if (full.ex == '2') {
         			img = 'submit.png';
         		} else if (data == '3' || data == '4') {
         			img = 'verified.png';
@@ -160,6 +160,8 @@ grid.init({
         			img = 'actplan.png';
         		}else if (data == '20') {
         			img = 'executed.png';
+        		}else {
+        			img = 'submit.png';
         		}
         		return '<center><img src="'+base_url+'assets/images/legend/'+img+'"/></center>';
         	}
@@ -233,16 +235,16 @@ grid2.init({
 		//"scrollX": true,
         "pageLength": 25, // default record count per page
         "ajax": {
-            "url": site_url+"/risk/RiskRegister/riskGetRollOver_recover_modify" // ajax source
+            "url": site_url+"/risk/RiskRegister/riskGetRollOver_recover_modify_rac" // ajax source
         },
         "columnDefs": [ {
         	"targets": 0,
         	"data": "risk_status_v",
         	"render": function ( data, type, full, meta ) {
         		var img = '';
-        		if (data == '0' || data == '1') {
+        		if (full.ex == '0' || full.ex == '1') {
         			img = 'draft.png';
-        		} else if (data == '2') {
+        		} else if (full.ex == '2') {
         			img = 'submit.png';
         		} else if (data == '3' || data == '4') {
         			img = 'verified.png';
@@ -252,6 +254,8 @@ grid2.init({
         			img = 'actplan.png';
         		}else if (data == '20') {
         			img = 'executed.png';
+        		}else{
+        			img = 'submit.png';
         		}
         		return '<center><img src="'+base_url+'assets/images/legend/'+img+'"/></center>';
         	}

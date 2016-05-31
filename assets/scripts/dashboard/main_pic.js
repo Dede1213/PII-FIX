@@ -347,10 +347,10 @@ grid_exec.init({
                 var ret = data;
                 if (data == '' || data == null) {
                     ret = '<span>Unasigned</span> &nbsp; '+
-                          '<button onclick="javascript: Dashboard.viewOwnedAssignForm('+full.id+', \'actionplan\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"></i></button>';
+                          '<button onclick="javascript: Dashboard.viewOwnedAssignForm('+full.id+', \'actionplanexec\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"></i></button>';
                 }else{
                     ret = '<span>'+data+'</span> &nbsp; '+
-                          '<button onclick="javascript: Dashboard.viewOwnedAssignForm('+full.id+', \'actionplan\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"></i></button>';
+                          '<button onclick="javascript: Dashboard.viewOwnedAssignForm('+full.id+', \'actionplanexec\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"></i></button>';
                 }
                 return ret;
             }
@@ -928,7 +928,11 @@ var Dashboard = function() {
         					grid_owned.getDataTable().ajax.reload();
         				} else if (mode == 'kri') {
         					grid_kri.getDataTable().ajax.reload();
-        				} else {
+        				} else if (mode == 'actionplanexec') {
+                            grid_exec.getDataTable().ajax.reload();
+                        } else if (mode == 'actionplanexecadt') {
+                            grid_exec_adt.getDataTable().ajax.reload();
+                        } else {
         					grid_action.getDataTable().ajax.reload();
         				}
         				MainApp.viewGlobalModal('success', 'Success Assign PIC');
@@ -1107,10 +1111,10 @@ grid_exec_adt.init({
                 var ret = data;
                 if (data == '' || data == null) {
                     ret = '<span>Unasigned</span> &nbsp; '+
-                          '<button onclick="javascript: Dashboard.viewOwnedAssignForm('+full.id+', \'actionplan\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"></i></button>';
+                          '<button onclick="javascript: Actionplan_adt.viewOwnedAssignForm('+full.id+', \'actionplanexecadt\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"></i></button>';
                 }else{
                     ret = '<span>'+data+'</span> &nbsp; '+
-                          '<button onclick="javascript: Dashboard.viewOwnedAssignForm('+full.id+', \'actionplan\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"></i></button>';
+                          '<button onclick="javascript: Actionplan_adt.viewOwnedAssignForm('+full.id+', \'actionplanexecadt\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"></i></button>';
                 }
                 return ret;
             }
@@ -1222,6 +1226,30 @@ var Actionplan_adt = function() {
         		}
         	});
         	
+            $('#pic_list_table button.button-assign-pic').on('click', function() {
+                var xx = $(this).attr("value");
+                var idx = $(this).attr("value_idx");
+                var mode = me.tmpRiskMode;
+                
+                var vv = $('#modal-pic-tr-'+idx+' > td.col_display_name').html();
+                
+                var text = 'Are You sure you want to Assign <b>'+vv+'</b> for this risk ?';
+                if (mode == 'actionplan') {
+                    var text = 'Are You sure you want to Assign <b>'+vv+'</b> for this Action Plan ?';
+                }
+                
+                if (mode == 'kri') {
+                    var text = 'Are You sure you want to Assign <b>'+vv+'</b> for this KRI ?';
+                }
+                
+                var mod = MainApp.viewGlobalModal('confirm', text);
+                mod.find('button.btn-primary').one('click', function(){
+                    mod.modal('hide');
+                    $('#modal-pic').modal('hide');
+                    me.ownedAssignPic(me.tmpRiskId, xx, mode);
+                });
+            });
+
         	$("#datatable_action_exec_adt").on('click', 'button.button-grid-search', function(e) {
         		e.preventDefault();
 				 
@@ -1333,7 +1361,46 @@ var Actionplan_adt = function() {
         		opacity: 0.80
         	}).appendTo("body");
         },
-         
+        viewOwnedAssignForm: function(risk_id, mode) {
+            var me = this;
+            me.tmpRiskId = risk_id;
+            me.tmpRiskMode = mode;
+            
+            $('#modal-pic').modal('show');
+        },
+        ownedAssignPic: function(risk_id, pic, mode) {
+            Metronic.blockUI({ boxed: true });
+            var url = site_url+'/main/mainpic/assignPic';
+            $.post(
+                url,
+                { 'risk_id':  risk_id, 'pic':  pic, 'mode': mode },
+                function( data ) {
+                    Metronic.unblockUI();
+                    if(data.success) {
+                        if (mode == 'treatment') {
+                            grid_owned.getDataTable().ajax.reload();
+                        } else if (mode == 'kri') {
+                            grid_kri.getDataTable().ajax.reload();
+                        } else if (mode == 'actionplanexec') {
+                            grid_exec.getDataTable().ajax.reload();
+                        } else if (mode == 'actionplanexecadt') {
+                            grid_exec_adt.getDataTable().ajax.reload();
+                        } else {
+                            grid_action.getDataTable().ajax.reload();
+                        }
+                        MainApp.viewGlobalModal('success', 'Success Assign PIC');
+                    } else {
+                        MainApp.viewGlobalModal('error', data.msg);
+                    }
+                    
+                },
+                "json"
+            ).fail(function() {
+                Metronic.unblockUI();
+                MainApp.viewGlobalModal('error', 'Error Submitting Data');
+             });
+            
+        },
         viewExecutionForm_adt: function(data) {
         	var me = this;
         	var act_id = data.id;

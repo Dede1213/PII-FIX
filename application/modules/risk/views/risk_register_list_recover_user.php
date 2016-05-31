@@ -37,7 +37,7 @@
 			<div class="portlet box grey-silver">
 			<div class="portlet-title">
 				<div class="caption">
-					Recover Risk
+					Recover Roll Forward Risk 
 				</div>
 			</div>
 			
@@ -118,7 +118,7 @@
 			<div class="portlet box grey-silver">
 			<div class="portlet-title">
 				<div class="caption">
-					Recover Risk Delete from Modify
+					Recover Risk
 				</div>
 			</div>
 			

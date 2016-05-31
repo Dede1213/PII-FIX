@@ -1072,9 +1072,6 @@ var Dashboard = function() {
         success: function (response) {
             location.href=site_url+'/library/list_risk_properties/'+data.risk_code;
            //$('#modal_listrisk_info').modal('show');
-        },
-        error: function () {
-            alert("error");
         }
     }); 
                   

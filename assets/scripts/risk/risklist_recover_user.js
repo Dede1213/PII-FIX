@@ -160,6 +160,8 @@ grid.init({
         			img = 'actplan.png';
         		}else if (data == '20') {
         			img = 'executed.png';
+        		}else{
+        			img = 'submit.png';
         		}
         		return '<center><img src="'+base_url+'assets/images/legend/'+img+'"/></center>';
         	}
@@ -187,22 +189,20 @@ grid.init({
         					
         				'</div>';
         		} else{
-        			img = '<div class="btn-group">'+
-        					'<button type="button" class="btn btn-default btn-xs button-grid-confirm"><i class="fa fa-thumbs-up font-green"></i></button>'+
-        					
-        				'</div>';
+        			img = '';
         		}
         		return img;
         	}
         } ],
         "columns": [
-			{ "data": "risk_status", "orderable": false },
+			{ "data": "risk_status_v", "orderable": false },
 			{ "data": "risk_code" },
 			{ "data": "risk_event" },
 			{ "data": "risk_level_v" },
 			{ "data": "impact_level_v" },
 			{ "data": "likelihood_v" },
 			{ "data": "risk_owner_v" },
+			{ "data": "risk_status" },
 			
        ],
         "order": [
@@ -252,6 +252,8 @@ grid2.init({
         			img = 'actplan.png';
         		}else if (data == '20') {
         			img = 'executed.png';
+        		}else{
+        			img = 'submit.png';
         		}
         		return '<center><img src="'+base_url+'assets/images/legend/'+img+'"/></center>';
         	}
@@ -280,11 +282,7 @@ grid2.init({
         					
         				'</div>';
         		} else{
-        			img = '<div class="btn-group">'+
-        					'<button type="button" class="btn btn-default btn-xs button-grid-confirm"><i class="fa fa-thumbs-up font-green"></i></button>'+
-        					'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"></i></button>'+
-        					
-        				'</div>';
+        			img = '';
         		}
         		return img;
         	}

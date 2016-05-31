@@ -1052,11 +1052,14 @@ select
                                                                                 left join m_likelihood e on a.risk_likelihood_key = e.l_key
                                                                                 left join m_division f on a.risk_owner = f.division_id
         																		join t_risk_add_user t on a.risk_id = t.risk_id
-                                                                                where 
+                                                                                where
+                                                                                a.risk_library_id is null 
+                                                                                and 
                                                                                 t.risk_library_id is not null
                                                                                 and
                                                                                 a.periode_id = '".$defFilter['periodid']."'
-                                                                                and t.username = '".$defFilter['userid']."'
+                                                                                and 
+                                                                                t.username = '".$defFilter['userid']."'
 
 			";
 		}
@@ -1941,10 +1944,19 @@ select
 		//$this->_logHistory($risk_id, $uid, $update_point);
 		
 		$periode = $data['periode_id'];
+
+		$sql_cek_status = "select * from t_risk where periode_id ='$periode' and risk_status > 1 
+						   UNION
+						   select * from t_risk_change where periode_id ='$periode' and risk_status > 1 and risk_input_by = '$uid' ";
+		$res_cek = $this->db->query($sql_cek_status);
+
+		if($res_cek->num_rows() > 0){
+		return false;
+		}else{
 		$sql = "update t_risk set existing_control_id = null where risk_id='$risk_id'";
 		$res = $this->db->query($sql);
-		
 		return $res;
+		}
 	}
 
 	public function riskSetConfirm_recover_rac($risk_id, $data, $uid, $update_point = 'U') {
@@ -1953,8 +1965,8 @@ select
 		$periode = $data['periode_id'];
 		$sql = "update t_risk set existing_control_id = null, risk_existing_control = 3 where risk_id='$risk_id'";
 		$res = $this->db->query($sql);
-		
 		return $res;
+		
 	}
 
 //ubah maintenance
@@ -2117,13 +2129,15 @@ select
 		$sql2 = "update t_risk set risk_status = 0 where periode_id='$periode_id' and risk_input_by='$uid' ";
 
 		$sql3 = "update t_risk_change set risk_status = 0 where periode_id='$periode_id' and risk_input_by='$uid' ";
+
+		$sql4 = "delete from t_risk_add_informasi where periode_id='$periode_id' and risk_input_by='$uid' ";
 		
 		$res = $this->db->query($sql);
-		$res2 = $this->db->query($sql2);
-		$res3 = $this->db->query($sql3);
+		$res = $this->db->query($sql2);
+		$res = $this->db->query($sql3);
+		$res = $this->db->query($sql4);
 		
-		//return $res3;
-		return $res2;
+		
 		return $res;
 	}
 	public function riskSetSubmitByPeriode2_ignore($periode_id, $uid) {
@@ -2457,6 +2471,14 @@ select
 		//$res = $this->db->query($sql, $par);
 
 		$par['risk_id'] = $risk_id;
+		$sql = "update t_risk set existing_control_id = 2 where risk_id = '$risk_id'";
+		$res = $this->db->query($sql, $par);
+
+		$sql = "update t_risk_change set existing_control_id = 2 where risk_id = '$risk_id'";
+		$res = $this->db->query($sql, $par);
+
+
+		/* Di ganti karena ada recycle bin
 		$sql = "delete from t_risk where risk_id = '$risk_id'";
 		$res = $this->db->query($sql, $par);
 		
@@ -2498,7 +2520,9 @@ select
 			return true;
 		} else {
 			return false;
-		}
+		} */
+		
+		return true;
 		
 	}
 
@@ -3374,6 +3398,13 @@ select
 			  ."created_date = now()
 			  	where risk_id = ?  ";
 		$res = $this->db->query($sql, $par);
+
+		
+		$sql = "update t_risk set risk_library_id = null
+			  	where risk_id = '$risk_id' ";
+		$res = $this->db->query($sql, $par);
+
+
 		
 		if ($res) {
 			 
@@ -3547,6 +3578,8 @@ select
 		if ($mode == 'viewMyRisk') {
 			 
 			$res = $this->getRiskById($risk_id);
+
+			$res_change = $this->getRiskByIdchanges($risk_id);
 			
 			/*echo "<pre>";
 			print_r($res);
@@ -3559,9 +3592,12 @@ select
 				if ($res['risk_input_by'] == $credential['username']) {
 					$risk = $res;
 					return $risk;
-				} else {
+				}else if ($res_change['risk_input_by'] == $credential['username']) {
 					$res_ = $this->getRiskById_change($risk_id,$credential['username']);
 					return $res_;
+				} else {
+					$risk = $res;
+					return $risk;
 				}
 			}
 		}
@@ -3648,6 +3684,17 @@ select
 	
 	public function assignPic($risk_id, $pic) {
 		$sql = "update t_risk set 
+				risk_treatment_owner = ?
+				where
+				risk_id = ?
+				";
+		$par = array(
+			'pic' => $pic,
+			'rid' => $risk_id
+		);
+		$res = $this->db->query($sql, $par);
+
+		$sql = "update t_risk_change set 
 				risk_treatment_owner = ?
 				where
 				risk_id = ?
@@ -4278,6 +4325,18 @@ select
 	
 	public function assignPicAction($risk_id, $pic) {
 		$sql = "update t_risk_action_plan set 
+				assigned_to = ?
+				where
+				id = ?
+				";
+		$par = array(
+			'pic' => $pic,
+			'rid' => $risk_id
+		);
+		
+		$res = $this->db->query($sql, $par);
+
+		$sql = "update t_risk_action_plan_change set 
 				assigned_to = ?
 				where
 				id = ?
@@ -4961,11 +5020,12 @@ select
 		$sql = "delete from t_risk_add_user where risk_id ='".$risk_id."' and username ='".$username."' ";
 		$res = $this->db->query($sql);
 
-		$sql = "insert into t_risk_add_user (risk_id,username,date_changed) values(?, ? ,?)";
+		$sql = "insert into t_risk_add_user (risk_id,username,date_changed,risk_library_id) values(?, ? ,? ,?)";
 		$par = array(
 			'rid' => $risk_id,
 			'un' => $username,
-			'dc' => $date_changed
+			'dc' => $date_changed,
+			'lib' => $risk_id
 		);
 		$res = $this->db->query($sql, $par);
 		return $res;
@@ -4977,12 +5037,12 @@ select
 		$sql = "delete from t_risk_add_user where risk_id ='".$risk_id."' and username ='".$username."' ";
 		$res = $this->db->query($sql);
 
-		$sql = "insert into t_risk_add_user (risk_id,username,date_changed,risk_library_id) values(?, ? ,? ,?)";
+		$sql = "insert into t_risk_add_user (risk_id,username,date_changed) values(?, ? ,?)";
 		$par = array(
 			'rid' => $risk_id,
 			'un' => $username,
 			'dc' => $date_changed,
-			'lb' => $risk_id
+			
 		);
 		$res = $this->db->query($sql, $par);
 		return $res;
@@ -6720,7 +6780,13 @@ WHERE t_risk.risk_id = '".$risk_id."' ";
 		}
 		
 		$query = $this->db->update('t_risk_change',$data[0]);
+
+		$par['risk_id'] = $risk_id;
+		$sql = "update t_risk_change set risk_library_id = '$risk_id'
+			  	where risk_id = ?  and risk_input_by = '$risk_input_by' ";
+		$res = $this->db->query($sql, $par);
 	  
+
 	}
 	
 	function get_t_risk_actionplan($id){

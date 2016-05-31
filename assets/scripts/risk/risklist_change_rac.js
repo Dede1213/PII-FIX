@@ -344,8 +344,8 @@ var RiskList = function() {
                     me.submitRiskPeriode222();
                 });
 
-                $('#button-change-verify').click(function(e) {
-                    e.preventDefault();
+                $('#button-change-verify').click(function(e) { 
+                	e.preventDefault();
                     me.submitRiskPeriode22();
                 });
 
@@ -561,7 +561,7 @@ var RiskList = function() {
 	        },
 
 	         submitRiskPeriode22: function() {
-                var mod = MainApp.viewGlobalModal('confirm', 'change request to RAC All Risk in Periode : <b>'+g_p_name+'</b>');
+                var mod = MainApp.viewGlobalModal('confirm', 'Approve the change request will make the Status of all risk in this risk register revert back to draft?');
                 mod.find('button.btn-ok-success').one('click', function(){
                     mod.modal('hide');
                     var url = site_url+'/risk/RiskRegister/submitRiskByPeriode2_change/'+username;

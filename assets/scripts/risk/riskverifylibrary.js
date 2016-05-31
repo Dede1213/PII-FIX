@@ -352,7 +352,7 @@ var RiskVerify = function() {
                     var ecid = '';
                     if (val.objective_id == null) ecid = '';
                     var nnode = {
-                        'objective_id' : val.ecid,
+                        'objective_id' : " ",
                         'objective' : val.objective
                     };
                     
@@ -375,7 +375,7 @@ var RiskVerify = function() {
         			var ecid = '';
         			if (val.existing_control_id == null) ecid = '';
         			var nnode = {
-        				'existing_control_id' : "EC."+val.id,
+        				'existing_control_id' : " ",
         				'risk_existing_control' : val.risk_existing_control,
         				'risk_evaluation_control' : val.risk_evaluation_control,
         				'risk_control_owner' : val.risk_control_owner

@@ -199,7 +199,7 @@
 			error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
 			$status = $_GET['status'];
 			$this->load->database();
-			$sql = "select cr_status from t_cr_risk where created_by = '$username' order by id desc limit 1 ";
+			$sql = "select cr_status from t_cr_risk where created_by = '$username' and cr_status = 0 order by id desc limit 1 ";
 			$query = $this->db->query($sql);
 			$hasil = $query->row();
 			$user = $hasil->cr_status;
@@ -211,13 +211,13 @@
 		<a href="javascript: ;" id="button-change-ignore" class="btn default red pull-right" style="margin-right: 10px;">
 					<i class="fa  fa-circle-o"></i>
 					<span class="hidden-480">
-					Ignore </span>
+					Reject </span>
 					</a>
 
 		<a href="javascript: ;" id="button-change-verify" class="btn default green pull-right" style="margin-right: 10px;">
 					<i class="fa  fa-circle-o"></i>
 					<span class="hidden-480">
-					Verify </span>
+					Aprrove </span>
 					</a>
 		<?php }
 				}

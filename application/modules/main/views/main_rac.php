@@ -18,7 +18,7 @@
 			</ul>
 			<div class="page-toolbar">
 				<div class="btn-group pull-right">
-					<button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
+					<button type="button" class="btn btn-fit-height blue dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
 					Export <i class="fa fa-angle-down"></i>
 					</button>
 					<ul class="dropdown-menu pull-right" role="menu">

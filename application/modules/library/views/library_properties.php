@@ -122,12 +122,11 @@ $(document).ready(function(){
 <?php
 if($edit_form == true){
 ?>
-<div class="">
+
 				<form method="post" action="index.php/library/edit_properties"  class="form-horizontal">
 					<div class="form-body">
-				
 						<div class="form-group">
-						<label class="col-md-2 control-label smaller cl-compact">Username</label>
+						<label class="col-md-1 control-label smaller cl-compact">Username</label>
 							<div class="col-md-5">
 							<input type="hidden" class="form-control input-sm" name="username_asli" value="<?=$username?>">
 							<input type="hidden" class="form-control input-sm" name="date_asli" value="<?=$date_change?>">
@@ -147,7 +146,7 @@ if($edit_form == true){
 						</div>
 						 
 						<div class="form-group">
-						<label class="col-md-2 control-label smaller cl-compact">Date Change</label>
+						<label class="col-md-1 control-label smaller cl-compact">Date Change</label>
 							<div class="col-md-9">
 							<div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
 							<input type="text" class="form-control input-sm" name="date_change"  readonly  value="<?=$date_change?>">
@@ -155,19 +154,15 @@ if($edit_form == true){
 							<button class="btn default btn-sm" type="button"><i class="fa fa-calendar"></i></button>
 							</span>
 						</div>
-							</div>
-						</div>
-						<div class="form-group">
-
-						<div class="col-md-12">
-						<button id="#" type="submit" class="btn blue ladda-button" data-style="">Save</button>
 						</div>
 						</div>
-					</div>
-				
+						</div>
+						<br>
+						<div style="margin-left:94px;"><button id="#" type="submit" class="btn blue" >Save</button>
+						<button id="#" type="submit" class="btn btn-default" >Cancel</button></div>
 				</form>			
-		<br>			
-	</div>
+			
+	
 <?php
 }
 ?>

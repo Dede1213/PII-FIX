@@ -104,7 +104,7 @@
 									 	<a href="#form-control-objective" id="button-form-control-open-objective" data-toggle="modal" class="btn default green pull-right btn-sm">
 									 	<i class="fa fa-plus"></i>
 									 	<span class="hidden-480">
-									 	Add </span>
+									 	Add Objective </span>
 									 	</a>
 									 </div>
 									 

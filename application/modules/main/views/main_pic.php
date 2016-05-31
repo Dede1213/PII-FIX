@@ -61,11 +61,13 @@
 				<li>
 					<a href="#tab_owned" data-toggle="tab">
 					Risk Owned By Me 
+					<font style="color:red;">
 					<?php 
 					if($cekowned > 0){
 					echo "($cekowned)";
 					}
 					?>
+					</font>
 					</a>
 				</li>
 				<li>

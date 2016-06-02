@@ -161,7 +161,7 @@ class Policy extends APP_Controller {
 	public function newsView($nid=false) {
 		if ($nid && is_numeric($nid)) {
 			$data = $this->loadDefaultAppConfig();
-			$data['sidebarMenu'] = $this->getSidebarMenuStructure('admin/news');
+			$data['sidebarMenu'] = $this->getSidebarMenuStructure('admin/policy');
 			$data['indonya'] = base_url('index.php/admini/news');
 			$data['engnya'] = base_url('index.php/admin/news');				
 			$this->load->model('admin/mpolicy');

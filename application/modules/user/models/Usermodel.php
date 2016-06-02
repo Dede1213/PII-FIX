@@ -179,9 +179,9 @@ class Usermodel extends APP_Model {
 		
 		$pass = '';
 		if (isset($data['password']) && $data['password'] != '') {
-			$pass = ' password = ?, ';
+			$pass = ' username <> ?, ';
+			//$pass = ' password = ?, ';
 		}
-		
 		$sql = "update m_user
 				set display_name = ?,
 					role_id = ?,

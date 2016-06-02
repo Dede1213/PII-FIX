@@ -239,17 +239,7 @@
 									<input type="text" class="form-control input-sm" readonly="true" name="risk_level" placeholder="">
 									</div>
 								</div>
-								<div class="form-group">
-									<label class="col-md-3 control-label smaller cl-compact" title="fill this field with treatment category as described in “Risk Treatment Guideline” based on its risk level - accept :risk treatment is not define, mitigate : rik treatment is defined to reduce risk level, transfer : risk treatment is defined by transferring to other party">Suggested Risk Treatment <span class="required">* </span></label>
-									<div class="col-md-9">
-									<select class="form-control input-sm" name="suggested_risk_treatment">
-										<option value="">Choose One...</option>
-										<?php foreach($treatment_list as $row) { ?>
-										<option value="<?=$row['ref_key']?>"><?=$row['ref_value']?></option>
-										<?php } ?>
-									</select>
-									</div>
-								</div>
+								
 							</div>
 							</div>
 							<div class="clearfix">
@@ -315,6 +305,18 @@
 									 </div>
 								</div>
 							</div>
+
+							<div class="form-group">
+									<label class="col-md-2 control-label smaller cl-compact" title="fill this field with treatment category as described in “Risk Treatment Guideline” based on its risk level - accept :risk treatment is not define, mitigate : rik treatment is defined to reduce risk level, transfer : risk treatment is defined by transferring to other party">Suggested Risk Treatment <span class="required">* </span></label>
+									<div class="col-md-3">
+									<select class="form-control input-sm" name="suggested_risk_treatment">
+										<option value="">Choose One...</option>
+										<?php foreach($treatment_list as $row) { ?>
+										<option value="<?=$row['ref_key']?>"><?=$row['ref_value']?></option>
+										<?php } ?>
+									</select>
+									</div>
+								</div>
 
 							<div class="panel panel-default">
 								<div class="panel-heading">

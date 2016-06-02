@@ -1317,10 +1317,11 @@ function modal_ap_edit(a){
 //$('#form-data-revid').val(a);
 $('#action_plan').val($('#action_plan'+a).val());
 $('#due_date').val($('#due_date'+a).val());
+$('#division').val($('#due_date'+a).val());
 $('#form-data-revid').val(a);
 
 var b = $('#division_v'+a).val();
- 
+
 if(b == "Information Technology & Network Support"){
 	var b = "IT";
 }

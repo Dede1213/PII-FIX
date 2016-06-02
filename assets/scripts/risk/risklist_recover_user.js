@@ -189,7 +189,10 @@ grid.init({
         					
         				'</div>';
         		} else{
-        			img = '';
+        			img = '<div class="btn-group">'+
+        					'<button type="button" class="btn btn-default btn-xs button-grid-confirm"><i class="fa fa-thumbs-up font-green"></i></button>'+
+        					
+        				'</div>';
         		}
         		return img;
         	}
@@ -293,7 +296,10 @@ grid2.init({
         				'</div>';	
         			};
         		} else{
-        			img = '';
+        			img = '<div class="btn-group">'+
+        					'<button type="button" class="btn btn-default btn-xs button-grid-confirm"><i class="fa fa-thumbs-up font-green"></i></button>'+
+        					'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"></i></button>'+
+        				'</div>';
         		}
         		return img;
         	}

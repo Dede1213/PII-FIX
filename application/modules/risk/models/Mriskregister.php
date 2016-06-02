@@ -322,7 +322,7 @@ select
                                                                                 from t_risk a
                                                                                 left join m_reference b on a.risk_status = b.ref_key and b.ref_context = 'risk.status.user'
                                                                                 left join m_reference c on a.risk_level = c.ref_key and c.ref_context = 'risklevel.display'
-                                                                                left join m_reference d on a.risk_impact_level = d.ref_key and d.ref_context = 'impact.display'
+                                                                               left join m_reference d on a.risk_impact_level = d.ref_key and d.ref_context = 'impact.display'
                                                                                 left join m_likelihood e on a.risk_likelihood_key = e.l_key
                                                                                 left join m_division f on a.risk_owner = f.division_id
                                                                                 where 
@@ -330,7 +330,7 @@ select
                                                                                 and a.risk_date <> (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end)
                                                                                 and a.risk_id NOT IN(select t2.risk_library_id from t_risk t2 where t2.periode_id = (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end) and t2.risk_input_by = '".$defFilter['userid']."' and t2.risk_library_id is not null)
                                                                                 and a.existing_control_id is null
-                                                                                and a.risk_input_by = '".$defFilter['userid']."'
+                                                                               and a.risk_input_by = '".$defFilter['userid']."'
 UNION
 select 
                                                                                 a.created_by,
@@ -375,16 +375,13 @@ select
                                                                                 left join m_likelihood e on a.risk_likelihood_key = e.l_key
                                                                                 left join m_division f on a.risk_owner = f.division_id
                                                                                 join m_periode on m_periode.periode_id = a.periode_id
-                                                                                join t_risk_add_user t on a.risk_id = t.risk_id
+                                                                               join t_risk_add_user t on a.risk_id = t.risk_id
                                                                                 where 
                                                                                 a.periode_id NOT IN (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end)
                                                                                 and a.risk_id NOT IN(select t2.risk_library_id from t_risk t2 where t2.periode_id = (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end) and t2.risk_input_by = '".$defFilter['userid']."' and t2.risk_library_id is not null)
                                                                                 and a.existing_control_id is null
                                                                                 and t.username = '".$defFilter['userid']."'
-
-
-
-					 
+ 
 					";
 					
 		}
@@ -435,9 +432,13 @@ select
 					left join m_likelihood e on a.risk_likelihood_key = e.l_key
 					left join m_division f on a.risk_owner = f.division_id
 					join m_periode on m_periode.periode_id = a.periode_id
+					join t_risk_add_informasi z on a.risk_input_by = z.risk_input_by
 					where 
-					a.existing_control_id = 1 and a.risk_status > 1 
-					
+					a.existing_control_id = 1  
+					and
+					a.periode_id < (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end)
+                    and z.periode_id = (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end)
+                    and z.tanggal_submit is not null
 					 
 					";
 					
@@ -544,7 +545,7 @@ select
 					left join m_division f on a.risk_owner = f.division_id
 					join m_periode on m_periode.periode_id = a.periode_id
 					where 
-					a.existing_control_id = 2
+					a.existing_control_id = 2 and a.risk_status < 2
 					
 					 
 					";
@@ -598,9 +599,13 @@ select
 					left join m_likelihood e on a.risk_likelihood_key = e.l_key
 					left join m_division f on a.risk_owner = f.division_id
 					join m_periode on m_periode.periode_id = a.periode_id
+					join t_risk_add_informasi z on a.risk_input_by = z.risk_input_by
 					where 
 					a.existing_control_id = 2 and a.risk_status > 1
-					
+					and 
+					a.periode_id < (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end)
+                    and z.periode_id = (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end)
+                    and z.tanggal_submit is not null
 					 
 					";
 					

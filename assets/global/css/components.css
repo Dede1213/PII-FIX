@@ -4870,7 +4870,7 @@ Portlets
   border-bottom: 0;
   padding: 0 10px;
   margin-bottom: 0;
-  color: #fff;
+  color: #333333; /*Untuk merubah warana text DRAFT*/
 }
 .portlet.box > .portlet-title > .caption {
   padding: 11px 0 9px 0;
@@ -6198,12 +6198,12 @@ Custom tabs
   -o-border-radius: 0;
   border-radius: 0;
 }
-.tabbable-custom > .nav-tabs > li > a:hover {
-  background: none;
+.tabbable-custom > .nav-tabs > li > a:hover { /*UNTUK TAB YANG TIDAK AKTIF*/
+  background: #c8cbcc; /*untuk warna tab saat cursor diarahkan*/
   border-color: transparent;
 }
 .tabbable-custom > .nav-tabs > li.active {
-  border-top: 3px solid #F3565D;
+  border-top: 3px solid #b1e6ff; /*untuk warna tab yang sedang aktif*/
   margin-top: 0;
   position: relative;
 }
@@ -6214,6 +6214,7 @@ Custom tabs
   -moz-border-radius: 0;
   -ms-border-radius: 0;
   -o-border-radius: 0;
+  background: #b1e6ff; /*Untuk warna tabnya saat aktif*/
   border-radius: 0;
 }
 .tabbable-custom > .nav-tabs > li.active > a:hover {
@@ -6222,12 +6223,12 @@ Custom tabs
   -ms-border-radius: 0;
   -o-border-radius: 0;
   border-radius: 0;
-  border-top: none;
-  background: #fff;
+  border-top: #b1e6ff;
+  
   border-color: #d4d4d4 #d4d4d4 transparent;
 }
 .tabbable-custom > .tab-content {
-  background-color: #fff;
+  background-color: #b1e6ff; /*ini untuk warna keseluruhan isi tab yang aktif*/
   border: 1px solid #ddd;
   padding: 10px;
   -webkit-border-radius: 0 0 4px 4px;
@@ -9921,7 +9922,7 @@ Grey Silver
   background-color: #BFBFBF;
 }
 .grey-silver.btn .badge {
-  color: #BFBFBF;
+  color: #b1e6ff;
   background-color: #FAFCFB;
 }
 
@@ -9971,10 +9972,10 @@ Grey Silver
   border-top: 0;
 }
 .portlet.box.grey-silver > .portlet-title {
-  background-color: #BFBFBF;
+  background-color: #b1e6ff; /*Ganti warna kotaknya yg sebelumnya #BFBFBF*/
 }
 .portlet.box.grey-silver > .portlet-title > .caption {
-  color: #FAFCFB;
+  color: #333333; /*Rubah warna Tulisan Roll Forward Risk*/
 }
 .portlet.box.grey-silver > .portlet-title > .caption > i {
   color: #FAFCFB;

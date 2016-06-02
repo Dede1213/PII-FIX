@@ -161,7 +161,7 @@ grid.init({
         		}else if (data == '20') {
         			img = 'executed.png';
         		}else{
-        			img = 'submit.png';
+        			img = 'draft.png';
         		}
         		return '<center><img src="'+base_url+'assets/images/legend/'+img+'"/></center>';
         	}
@@ -253,7 +253,7 @@ grid2.init({
         		}else if (data == '20') {
         			img = 'executed.png';
         		}else{
-        			img = 'submit.png';
+        			img = 'draft.png';
         		}
         		return '<center><img src="'+base_url+'assets/images/legend/'+img+'"/></center>';
         	}
@@ -271,16 +271,27 @@ grid2.init({
         	"render": function ( data, type, full, meta ) {
         		var img = '';
         		if (data == '0') {
+        			if(g_status_submit == '1'){
+        			img = '<div class="btn-group">'+
+        					'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"></i></button>'+
+        				'</div>';
+        			}else{
         			img = '<div class="btn-group">'+
         					'<button type="button" class="btn btn-default btn-xs button-grid-confirm"><i class="fa fa-thumbs-up font-green"></i></button>'+
         					'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"></i></button>'+
-        				'</div>';
+        				'</div>';	
+        			}
         		} else if (data == '1') {
+        			if(g_status_submit == '1'){
+        			img = '<div class="btn-group">'+
+        					'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"></i></button>'+
+        				'</div>';
+        			}else{
         			img = '<div class="btn-group">'+
         					'<button type="button" class="btn btn-default btn-xs button-grid-confirm"><i class="fa fa-thumbs-up font-green"></i></button>'+
         					'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"></i></button>'+
-        					
-        				'</div>';
+        				'</div>';	
+        			};
         		} else{
         			img = '';
         		}

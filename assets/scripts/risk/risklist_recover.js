@@ -148,9 +148,9 @@ grid.init({
         	"data": "risk_status_v",
         	"render": function ( data, type, full, meta ) {
         		var img = '';
-        		if (full.ex == '0' || full.ex == '1') {
+        		if (data == '0' || data == '1') {
         			img = 'draft.png';
-        		} else if (full.ex == '2') {
+        		} else if (data == '2') {
         			img = 'submit.png';
         		} else if (data == '3' || data == '4') {
         			img = 'verified.png';
@@ -242,9 +242,9 @@ grid2.init({
         	"data": "risk_status_v",
         	"render": function ( data, type, full, meta ) {
         		var img = '';
-        		if (full.ex == '0' || full.ex == '1') {
+        		if (data == '0' || data == '1') {
         			img = 'draft.png';
-        		} else if (full.ex == '2') {
+        		} else if (data == '2') {
         			img = 'submit.png';
         		} else if (data == '3' || data == '4') {
         			img = 'verified.png';
@@ -333,7 +333,7 @@ var RiskList = function() {
     	        	var r = this.parentNode.parentNode.parentNode;
     	        	var data = grid2.getDataTable().row(r).data();
     	        	
-    	        	me.confirmRisk(data);
+    	        	me.confirmRiskBawah(data);
     	        });
     	        
     	        $("#datatable_ajax").on('click', 'button.button-grid-cancel', function(e) {
@@ -387,6 +387,40 @@ var RiskList = function() {
 	        			'risk_id' : data.risk_id
 	        		};
 	        		var url = site_url+'/risk/RiskRegister/confirmRisk_recover_rac';
+	        		
+	        		Metronic.blockUI({ boxed: true });
+	        		$.post(
+	        			url,
+	        			$.param(eparam),
+	        			function( data ) {
+	        				Metronic.unblockUI();
+	        				if(data.success) {
+	        					//grid.getDataTable().ajax.reload();
+	        					//grid2.getDataTable().ajax.reload();
+	        					//MainApp.viewGlobalModal('success', 'Success Update Risk Status');
+	        					window.location.href = site_url+'/risk/RiskRegister/recover';
+
+	        				} else {
+	        					MainApp.viewGlobalModal('error', data.msg);
+	        				}
+	        				
+	        			},
+	        			"json"
+	        		).fail(function() {
+	        			Metronic.unblockUI();
+	        			MainApp.viewGlobalModal('error', 'Error Submitting Data');
+	        		 });
+	        	});
+	        },
+
+	        confirmRiskBawah: function(data) {
+	        	var mod = MainApp.viewGlobalModal('confirm', 'recover Risk Status to <b>Confirm</b> for risk : <b>'+data.risk_event+'</b> ? ');
+	        	mod.find('button.btn-ok-success').one('click', function(){
+	        		mod.modal('hide');
+	        		var eparam = {
+	        			'risk_id' : data.risk_id
+	        		};
+	        		var url = site_url+'/risk/RiskRegister/confirmRisk_recover_rac_bawah';
 	        		
 	        		Metronic.blockUI({ boxed: true });
 	        		$.post(

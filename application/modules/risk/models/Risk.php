@@ -1123,7 +1123,7 @@ select
 					from t_risk a
 					left join m_division b on a.risk_owner = b.division_id
 					left join m_reference c on a.suggested_risk_treatment = c.ref_key and c.ref_context = 'treatment.status'
-					join m_periode on m_periode.periode_id = a.periode_id
+					left join m_periode on m_periode.periode_id = a.periode_id
 					where 
 					a.periode_id is not null
 					and a.risk_status > 2
@@ -1161,7 +1161,7 @@ select
 						left join m_division f on a.risk_owner = f.division_id
 						left join m_user g on a.risk_treatment_owner = g.username
 						left join m_reference h on a.suggested_risk_treatment = h.ref_key and h.ref_context = 'treatment.status'
-						join m_periode on m_periode.periode_id = a.periode_id
+						left join m_periode on m_periode.periode_id = a.periode_id
 						where 
 						a.periode_id is not null
 						and a.risk_status > 2
@@ -1201,7 +1201,7 @@ select
 						left join t_risk b on a.risk_id = b.risk_id
 						left join m_user c on a.assigned_to = c.username
 						left join m_division d on a.division = d.division_id
-						join m_periode on m_periode.periode_id = b.periode_id
+						left join m_periode on m_periode.periode_id = b.periode_id
 						where 
 						a.action_plan_status > 0
 						and a.division = ?
@@ -1244,7 +1244,7 @@ select
 						left join t_risk b on a.risk_id = b.risk_id
 						left join m_user c on a.assigned_to = c.username
 						left join m_division d on a.division = d.division_id
-						join m_periode on m_periode.periode_id = b.periode_id
+						left join m_periode on m_periode.periode_id = b.periode_id
 						where 
 						a.action_plan_status > 0
 						and a.division = ?
@@ -1392,7 +1392,7 @@ select
 					left join t_risk b on a.risk_id = b.risk_id
 					left join m_user c on a.assigned_to = c.username
 					left join m_division d on a.division = d.division_id
-					join m_periode on m_periode.periode_id = b.periode_id
+					left join m_periode on m_periode.periode_id = b.periode_id
 					where 
 					a.action_plan_status > 0 
 					
@@ -1408,7 +1408,11 @@ select
 					b.risk_code,b.periode_id,
 					c.display_name as assigned_to_v,
 					d.division_name as division_name,
-					date_format(a.due_date, '%d-%m-%Y') as due_date_v
+					date_format(a.due_date, '%d-%m-%Y') as due_date_v,
+					case
+					when DATE(NOW()) = (select DATE(NOW()) from m_periode_plan where DATE(NOW()) between periode_start and periode_end) then 1
+					else 0
+					end as status_periode  
 					from 
 					t_risk_action_plan a
 					left join t_risk b on a.risk_id = b.risk_id
@@ -1938,6 +1942,66 @@ select
 			//'rid' => $risk_id
 		//);
 		//$res = $this->db->query($sql, $par);
+	}
+
+
+	public function riskSetConfirm_recover_1($risk_id, $data, $uid, $update_point = 'U') {
+	
+		$periode = $data['periode_id'];
+		$sql = "insert into t_risk(risk_code,risk_date,risk_status,periode_id,risk_input_by,risk_input_division,risk_owner,risk_division,risk_library_id,risk_event,risk_description,risk_category,risk_sub_category,risk_2nd_sub_category,risk_cause,risk_impact,existing_control_id,risk_existing_control,risk_evaluation_control,risk_control_owner,risk_level,risk_impact_level,risk_likelihood_key,suggested_risk_treatment,risk_treatment_owner,created_by,created_date,switch_flag)
+				select risk_code,NOW(),2,'$periode','$uid',risk_input_division,risk_owner,risk_division,risk_id,risk_event,risk_description,risk_category,risk_sub_category,risk_2nd_sub_category,risk_cause,risk_impact,existing_control_id,risk_existing_control,risk_evaluation_control,risk_control_owner,risk_level,risk_impact_level,risk_likelihood_key,suggested_risk_treatment,risk_treatment_owner,created_by,created_date,'$uid' from t_risk where risk_id='$risk_id'";
+		$res = $this->db->query($sql);
+		
+		$sql = "insert into t_risk_control(risk_id,existing_control_id,risk_existing_control,risk_evaluation_control,risk_control_owner,switch_flag)
+				select a.risk_id,b.existing_control_id,b.risk_existing_control,b.risk_evaluation_control,b.risk_control_owner,'$uid' from t_risk a,t_risk_control b where a.risk_input_by='$uid' and a.periode_id='$periode' and a.risk_library_id='$risk_id' and b.risk_id='$risk_id' ";
+		$res = $this->db->query($sql);
+		
+
+		$sql = "insert into t_risk_action_plan(risk_id,action_plan_status,action_plan,due_date,division,switch_flag)
+				select a.risk_id,b.action_plan_status,b.action_plan,b.due_date,b.division,'$uid' from t_risk a,t_risk_action_plan b where a.risk_input_by='$uid' and a.periode_id='$periode' and a.risk_library_id='$risk_id' and b.risk_id='$risk_id' ";
+		$res = $this->db->query($sql);
+
+		$sql = "insert into t_risk_impact(risk_id,impact_id,impact_level,switch_flag)
+				select a.risk_id,b.impact_id,b.impact_level,b.switch_flag from t_risk a,t_risk_impact b where a.risk_input_by='$uid' and a.periode_id='$periode' and a.risk_library_id='$risk_id' and b.risk_id='$risk_id' ";
+		$res = $this->db->query($sql);
+
+		$sql = "insert into t_risk_objective(risk_id,objective,switch_flag)
+				select a.risk_id,b.objective,b.switch_flag from t_risk a,t_risk_objective b where a.risk_input_by='$uid' and a.periode_id='$periode' and a.risk_library_id='$risk_id' and b.risk_id='$risk_id' ";
+		$res = $this->db->query($sql);
+		
+
+		//ngambil risk id terakhir
+		$sql_id = "select risk_id from t_risk where risk_input_by='$uid' and periode_id='$periode' order by risk_id desc LIMIT 1 ";
+		$res_id = $this->db->query($sql_id);
+		$row = $res_id->row();
+		$hasil = $row->risk_id;
+
+		//insert T_RISK CHANGE NYA JUGA!
+		$sql = "insert into t_risk_change(risk_id,risk_code,risk_date,risk_status,periode_id,risk_input_by,risk_input_division,risk_owner,risk_division,risk_library_id,risk_event,risk_description,risk_category,risk_sub_category,risk_2nd_sub_category,risk_cause,risk_impact,existing_control_id,risk_existing_control,risk_evaluation_control,risk_control_owner,risk_level,risk_impact_level,risk_likelihood_key,suggested_risk_treatment,risk_treatment_owner,created_by,created_date,switch_flag)
+				select risk_id,risk_code,NOW(),2,'$periode','$uid',risk_input_division,risk_owner,risk_division,risk_id,risk_event,risk_description,risk_category,risk_sub_category,risk_2nd_sub_category,risk_cause,risk_impact,existing_control_id,risk_existing_control,risk_evaluation_control,risk_control_owner,risk_level,risk_impact_level,risk_likelihood_key,suggested_risk_treatment,risk_treatment_owner,created_by,created_date,switch_flag from t_risk where risk_id='$hasil' and risk_input_by='$uid' and periode_id='$periode' ";
+		$res = $this->db->query($sql);
+		
+
+		$sql = "insert into t_risk_control_change(risk_id,existing_control_id,risk_existing_control,risk_evaluation_control,risk_control_owner,switch_flag)
+				select a.risk_id,b.existing_control_id,b.risk_existing_control,b.risk_evaluation_control,b.risk_control_owner,'$uid' from t_risk a,t_risk_control b where a.risk_input_by='$uid' and a.periode_id='$periode' and a.risk_library_id='$risk_id' and b.risk_id='$risk_id' ";
+		$res = $this->db->query($sql);
+		
+
+		$sql = "insert into t_risk_action_plan_change(id,risk_id,action_plan_status,action_plan,due_date,division,switch_flag)
+				select b.id,a.risk_id,b.action_plan_status,b.action_plan,b.due_date,b.division,'$uid' from t_risk a,t_risk_action_plan b where a.risk_input_by='$uid' and a.periode_id='$periode' and a.risk_library_id='$risk_id' and b.risk_id='$risk_id' ";
+		$res = $this->db->query($sql);
+		
+		$sql = "insert into t_risk_impact_change(risk_id,impact_id,impact_level,switch_flag)
+				select a.risk_id,b.impact_id,b.impact_level,'$uid' from t_risk a,t_risk_impact b where a.risk_input_by='$uid' and a.periode_id='$periode' and a.risk_library_id='$risk_id' and b.risk_id='$risk_id' ";
+		$res = $this->db->query($sql);
+
+		$sql = "insert into t_risk_objective_change(risk_id,objective,switch_flag)
+				select a.risk_id,b.objective,'$uid' from t_risk a,t_risk_objective b where a.risk_input_by='$uid' and a.periode_id='$periode' and a.risk_library_id='$risk_id' and b.risk_id='$risk_id' ";
+		$res = $this->db->query($sql);
+
+
+		return $res;
+		
 	}
 
 	public function riskSetConfirm_recover($risk_id, $data, $uid, $update_point = 'U') {
@@ -6729,8 +6793,9 @@ WHERE t_risk.risk_id = '".$risk_id."' ";
 			}	
 	}
 
-	function cekOwned($username){
-	$sql = "select id from t_risk_action_plan where assigned_to = '".$username."' and action_plan_status = 0";
+	function cekOwned($username,$division_nya){
+	$sql = "select id from t_risk_action_plan where division = '".$division_nya."' and action_plan_status is null";
+	//$sql = "select risk_id from t_risk where risk_input_by = '".$username."' and risk_status < 5";
 	$query = $this->db->query($sql);
 	return $query->num_rows();
 	}

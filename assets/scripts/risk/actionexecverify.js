@@ -77,7 +77,7 @@ var ActionVerify = function() {
 			
 			$('#exec-button-submit').on('click', function () {
 				if($('#exec-select-status').val() == "COMPLETE"){					
-					$('#modal-category').modal('show');	
+					$('#modal-category-validation').modal('show');	
 				}else{
 					me.submitRiskData('verify')
 				}
@@ -97,9 +97,17 @@ var ActionVerify = function() {
         		me.showImpactList();
         	});
         	 
+            $('#modal-impactlevel-form-submit-no').on('click', function() {
+                me.submitRiskDataNo('verify')          
+            });
+             
 			$('#modal-impactlevel-form-submit').on('click', function() {
         		me.submitRiskData('verify')			 
         	});
+
+            $('#modal-impactlevel-form-submit-validation').on('click', function() {
+                $('#modal-category').modal('show');        
+            });
         	
         	$('#exec-select-status').change(function() {
         		if ($( this ).val() == 'EXTEND') {
@@ -165,6 +173,46 @@ var ActionVerify = function() {
             			MainApp.viewGlobalModal('error', 'Error Submitting Data');
             		 });
             	});
+            }
+        },
+        submitRiskDataNo: function(submitMode) {
+            var form1 = $('#input-form').validate();
+            var fvalid = form1.form();
+            if (fvalid) {
+                var me = this;
+                var param = $('#input-form').serializeArray();
+                
+                var url = site_url+'/main/mainrac/actionExecVerify';
+                
+                var mod = MainApp.viewGlobalModal('confirm', 'Are You sure you want to Verify this Action Plan ?');
+                mod.find('button.btn-primary').off('click');
+                mod.find('button.btn-primary').one('click', function(){
+                    mod.modal('hide');
+                    var g_risk_id = $('#action-plan-id').val();
+                    Metronic.blockUI({ boxed: true });
+                    $.post(
+                        url,
+                        $( "#input-form" ).serialize() + "&risk_impact_level_after_mitigation="+$('#risk_impact_level_after_mitigation_validation').val()+"&risk_likelihood_key_after_mitigation="+$('#risk_likelihood_key_after_mitigation_validation').val()+"&risk_level_after_mitigation="+$('#risk_level_after_mitigation_validation').val(),
+                          
+                        function( data ) {
+                            Metronic.unblockUI();
+                            if(data.success) {
+                                var mod = MainApp.viewGlobalModal('success', 'Success Updating your Action Plan');
+                                mod.find('button.btn-ok-success').one('click', function(){
+                                    location.href=site_url+'/main/mainrac#tab_action_plan_exec';
+                                });
+                                
+                            } else {
+                                MainApp.viewGlobalModal('error', data.msg);
+                            }
+                            
+                        },
+                        "json"
+                    ).fail(function() {
+                        Metronic.unblockUI();
+                        MainApp.viewGlobalModal('error', 'Error Submitting Data');
+                     });
+                });
             }
         },
         submitRiskData2: function(submitMode) {

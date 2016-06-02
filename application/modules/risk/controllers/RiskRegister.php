@@ -529,9 +529,38 @@ class RiskRegister extends APP_Controller {
 			}
 			
 			$data['periode_id'] = $periode_id;
-			//fungsi jempol normal
-			$res = $this->risk->riskSetConfirm($_POST['risk_id'], $data, $session_data['username'], 'RISK_REGISTER-CONFIRM');
+
+
 			//end
+			$res = $this->risk->riskSetConfirm_recover_rac($_POST['risk_id'], $data, $session_data['username'], 'RISK_REGISTER-CONFIRM');
+			//fungsi jempol normal
+			$res = $this->risk->riskSetConfirm_recover_1($_POST['risk_id'], $data, $session_data['username'], 'RISK_REGISTER-CONFIRM');
+
+			if ($res) {
+				$resp['success'] = true;
+				$resp['msg'] = 'SUCCESS';
+			}
+		}
+		
+		echo json_encode($resp);
+	}
+
+	public function confirmRisk_recover_rac_bawah() {
+
+		$session_data = $this->session->credential;
+		
+		$resp = array('success' => false, 'msg' => 'Error');
+
+		if (isset($_POST['risk_id']) && is_numeric($_POST['risk_id'])) {
+			
+			$periode = $this->mperiode->getCurrentPeriode();
+			$periode_id = null;
+			if ($periode) {
+				$periode_id = $periode['periode_id'];
+			}
+			
+			$data['periode_id'] = $periode_id;
+
 			$res = $this->risk->riskSetConfirm_recover_rac($_POST['risk_id'], $data, $session_data['username'], 'RISK_REGISTER-CONFIRM');
 
 			if ($res) {

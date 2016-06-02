@@ -234,3 +234,17 @@
 	</div>
 	
 </div>
+<?php
+$periode_id = $periode['periode_id'];
+$sql_cek_status = "select * from t_risk where periode_id ='$periode_id' and risk_status > 1 ";
+$res_cek = $this->db->query($sql_cek_status);
+
+if($res_cek->num_rows() > 0){
+	$status_submit = 1 ;
+}else{
+	$status_submit = 0 ;
+}
+?>
+		<script type="text/javascript">
+			var g_status_submit = <?=$status_submit?>;
+		</script>

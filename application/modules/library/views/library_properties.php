@@ -50,7 +50,7 @@ if($edit_form == false){
 							<th>No</th>
 							<th>Name</th>
 							<th>Status</th>
-							<th>Date Change</th> 
+							<th>Changed Date</th> 
 							
 							<th> Action</th>
 							
@@ -146,7 +146,7 @@ if($edit_form == true){
 						</div>
 						 
 						<div class="form-group">
-						<label class="col-md-1 control-label smaller cl-compact">Date Change</label>
+						<label class="col-md-1 control-label smaller cl-compact">Changed Date</label>
 							<div class="col-md-9">
 							<div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
 							<input type="text" class="form-control input-sm" name="date_change"  readonly  value="<?=$date_change?>">
@@ -204,7 +204,7 @@ if($edit_form == true){
 						</div>
 						 
 						<div class="form-group">
-						<label class="col-md-2 control-label smaller cl-compact">Date Change</label>
+						<label class="col-md-2 control-label smaller cl-compact">Changed Date</label>
 							<div class="col-md-9">
 							<div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
 							<input type="text" class="form-control input-sm" name="date_change"  readonly>

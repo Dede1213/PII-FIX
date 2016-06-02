@@ -153,9 +153,13 @@
 		<?php } ?>
 	</div>
 </div>
- 
-<!-- CATEGORY -->
-<div id="modal-category" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
+
+
+
+
+
+<!-- CATEGORY VALIDATION-->
+<div id="modal-category-validation" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 		<h4 class="modal-title">Risk Level  </h4>
@@ -170,11 +174,54 @@
 	Based on validation performed <br> Do you consider any changes on current risk level ? <br>
 	</div>
 	<div style="margin-left:70px;">
-	current impact level = <?php echo $sql2_run->risk_impact_level; ?> <br>
-	current likelihood = <?php echo $sql2_run->risk_likelihood_key; ?> <br>
-	current risk level = <?php echo $sql2_run->risk_level; ?>
-		</div>
-	<hr>
+	<table width="40%">
+	<tr><td width="23%">current impact level</td><td width="5%">=</td><td width="12%"><?php echo $sql2_run->risk_impact_level; ?></td></tr>
+	<tr><td>current likelihood</td><td>=</td><td><?php echo $sql2_run->risk_likelihood_key; ?></td></tr>
+	<tr><td>current risk level</td><td>=</td><td><?php echo $sql2_run->risk_level; ?></td></tr>
+	</table>
+	</div>
+	
+	<div class="">
+			<form id="modal-risk-form-validation" role="form" class="form-horizontal">
+				<input type="hidden" name="mode" value="add" />
+				<input type="hidden" name="cat_id" value="" />
+				<input type="hidden" name="cat_parent" value="0" />
+			 
+					
+								 <input type="hidden" name="risk_impact_level_id" value=""/> 
+								<input type="hidden" class="form-control input-sm" value="<?=$sql2_run->risk_impact_level;?>" readonly="true" name="risk_impact_level_after_mitigation" id = "risk_impact_level_after_mitigation_validation" placeholder="">
+							
+								 <input type="hidden" name="risk_likelihood_id" id = "risk_likelihood_id" value=""/> 
+								<input type="hidden" class="form-control input-sm" value="<?=$sql2_run->risk_likelihood_key;?>" readonly="true" name="risk_likelihood_key_after_mitigation" id = "risk_likelihood_key_after_mitigation_validation" placeholder="">
+							
+					    <input type="hidden" name="risk_level_id" id = "risk_level_id" value=""/> 
+						<input type="hidden" class="form-control input-sm" value="<?=$sql2_run->risk_level;?>" readonly="true" name="risk_level_after_mitigation" id = "risk_level_after_mitigation_validation" placeholder="">
+						
+				
+			</form>
+	</div>
+	<div class="modal-footer">
+		<!--
+		<button type="button" data-dismiss="modal" class="btn btn-default">No</button>
+		-->
+		<button id="modal-impactlevel-form-submit-no" type="button" 
+			class="btn blue ladda-button"
+			 data-style="expand-right"
+			>NO</button>
+		<button id="modal-impactlevel-form-submit-validation" type="button" 
+			class="btn blue ladda-button"
+			 data-style="expand-right"
+			>YES</button>
+	</div>
+</div>
+
+ 
+<!-- CATEGORY -->
+<div id="modal-category" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+		<h4 class="modal-title">Risk Level  </h4>
+	</div>
 	<div class="modal-body">
 			<form id="modal-risk-form" role="form" class="form-horizontal">
 				<input type="hidden" name="mode" value="add" />

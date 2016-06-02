@@ -44,29 +44,33 @@ class Mlibrary extends APP_Model {
 		}
 		$date = date("Y-m-d");
 		$sql = "
-		SELECT
-		  t_risk.risk_id,
-		  t_risk.risk_code,
-		  t_risk.risk_event,
-		  t_risk.risk_description,
-		  t_risk.risk_cause,
-		  t_risk.risk_impact,
-		  m3.cat_name AS cat_name1,
-		  m2.cat_name AS cat_name2,
-		  m1.cat_name AS cat_name3,
-		  m3.cat_id AS cat_id1,
-		  m2.cat_id AS cat_id2,
-		  m1.cat_id AS cat_id3
-		  
-		FROM
-		  t_risk 
-		  JOIN m_risk_category m1 
-			ON t_risk.risk_2nd_sub_category = m1.cat_id 
-		  JOIN m_risk_category m2 
-			ON t_risk.risk_sub_category = m2.cat_id 
-		  JOIN m_risk_category m3 
-			ON t_risk.risk_category = m3.cat_id 
-		WHERE t_risk.risk_library_id IS NULL 
+		SELECT * FROM ( SELECT
+                                  t_risk.risk_id,
+                                  t_risk.risk_code,
+                                  t_risk.risk_event,
+                                  t_risk.risk_description,
+                                  t_risk.risk_cause,
+                                  t_risk.risk_impact,
+                                  m3.cat_name AS cat_name1,
+                                  m2.cat_name AS cat_name2,
+                                  m1.cat_name AS cat_name3,
+                                  m3.cat_id AS cat_id1,
+                                  m2.cat_id AS cat_id2,
+                                  m1.cat_id AS cat_id3
+                                  
+                                FROM
+                                  t_risk 
+                                  JOIN m_risk_category m1 
+                                                ON t_risk.risk_2nd_sub_category = m1.cat_id 
+                                  JOIN m_risk_category m2 
+                                                ON t_risk.risk_sub_category = m2.cat_id 
+                                  JOIN m_risk_category m3 
+                                                ON t_risk.risk_category = m3.cat_id 
+                                  WHERE t_risk.risk_library_id IS NULL
+                                and t_risk.risk_status >= 3
+                                and t_risk.existing_control_id IS NULL ORDER BY t_risk.risk_id desc) as another
+                                GROUP BY another.risk_code
+
 				"
 				
 				.$ex_filter
@@ -737,7 +741,9 @@ from m_risk_category
 		$run_sql = $this->db->query($sql)->row();
 		$risk_id = $run_sql->risk_id;
 
-		$sql2 = "select * from t_risk_add_user where risk_id = '".$risk_id."' ";
+
+		$sql2 = "select * from t_risk_add_user 
+				where risk_id IN (select risk_id from t_risk where risk_code = (select risk_code from t_risk where risk_id = '".$risk_id."'))";
 		$run_sql2 = $this->db->query($sql2)->result_array(); 
 		return $run_sql2;
 	}

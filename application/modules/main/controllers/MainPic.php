@@ -47,8 +47,9 @@ class MainPic extends APP_Controller {
 		
 		//cek owned
 		$username = $this->session->credential['username'];
+		$division_nya = $this->session->credential['division_id'];
 		$this->load->model('risk/risk');
-		$data['cekowned'] = $this->risk->cekOwned($username);
+		$data['cekowned'] = $this->risk->cekOwned($username,$division_nya);
 
 
 		$this->load->view('header', $data);

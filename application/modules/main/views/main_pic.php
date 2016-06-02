@@ -169,6 +169,10 @@
 								 on Action Plan Process
 							</li>
 							<li class="list-group-item">
+								<img src="<?=$base_url?>assets/images/legend/executed_2.png"/> &nbsp; 
+								 On Action Plan Execution Process
+							</li>
+							<li class="list-group-item">
 								<img src="<?=$base_url?>assets/images/legend/executed.png"/> &nbsp; 
 								 Action Plan Has Been Executed and Verified
 							</li>

@@ -117,11 +117,15 @@
 	and b.risk_status >= 0 
 	and b.risk_id NOT IN (select z.risk_id from t_risk z where z.risk_id = b.risk_id and z.risk_input_by = '$username' and z.risk_status >= 0)";
 
-	
+	$sql4="select a.risk_id from t_risk a where  a.periode_id NOT IN (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end) and a.risk_input_by = '$username'
+					and a.risk_id NOT IN(select t2.risk_library_id from t_risk t2 where t2.periode_id = (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end) and t2.risk_input_by = '$username')
+					and a.risk_status >= 0 and existing_control_id = 1 ";
+
 
 	$query = $this->db->query($sql);
 	$query1 = $this->db->query($sql1);
 	$query2 = $this->db->query($sql2);
+	$query3 = $this->db->query($sql4);
 
 	$query_baru = $this->db->query($sql_baru);
 	
@@ -134,6 +138,9 @@
  	$status_spesial = "DRAFSUB1";
  }else if ($query1->num_rows() == 0 && $query->num_rows() >= 1 ){
  	$status_submit = "SUBMIT";
+ }else if ($query3->num_rows() >= 1 && $query2->num_rows() == 0 ){
+ 	$status_submit = "DRAFT"; 
+ 	$status_spesial = "DRAFSUB";
  }else if ($query1->num_rows() >= 1 && $query2->num_rows() == 0 ){
  	$status_submit = "DRAFT"; 
  	$status_spesial = "DRAFSUB1";

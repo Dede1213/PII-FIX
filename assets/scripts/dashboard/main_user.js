@@ -37,9 +37,11 @@ grid.init({
                     img = 'treatment.png';
         		}else if (data == '5' ) {
         			img = 'treatment.png';
-        		}else if (data == '10' || data == '6') {
-        			img = 'actplan.png';
-        		}else if (data == '20') {
+        		}else if (data == '6') {
+                    img = 'actplan.png';
+                }else if (data == '10') {
+                    img = 'executed_2.png';
+                }else if (data == '20') {
         			img = 'executed.png';
         		}
         		return '<center><img src="'+base_url+'assets/images/legend/'+img+'"/></center>';

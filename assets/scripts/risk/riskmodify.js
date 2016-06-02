@@ -222,7 +222,8 @@ var RiskModify = function() {
             			if(data.success) {
             				var mod = MainApp.viewGlobalModal('success', 'Success Updating your Risk');
             				mod.find('button.btn-ok-success').one('click', function(){
-            					location.href=site_url+'/risk/RiskRegister/modifyRisk/'+g_risk_id;
+            					//location.href=site_url+'/risk/RiskRegister/modifyRisk/'+g_risk_id;
+                                location.href=site_url+'/main';
             				});
             				
             			} else {

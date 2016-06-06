@@ -18,7 +18,7 @@ Page Header
   /* Dark version */
 }
 .page-header.navbar .top-menu .navbar-nav > li.dropdown .dropdown-toggle > i {
-  color: #9fa7b1;
+  color: #008000; /*Warna logo log out*/
 }
 .page-header.navbar .top-menu .navbar-nav > li.dropdown .dropdown-toggle .badge.badge-default {
   background-color: #31c7b2;
@@ -82,7 +82,7 @@ Page Header
   background-color: #dfe2e9;
 }
 .page-header.navbar .top-menu .navbar-nav > li.dropdown-user > .dropdown-toggle > .username {
-  color: #d6dae0;
+  color: #ffffff;font-weight: bold; /*Membuat Bold Text Selamat Datang*/
 }
 .page-header.navbar .top-menu .navbar-nav > li.dropdown-user > .dropdown-toggle > i {
   color: #d6dae0;
@@ -91,7 +91,7 @@ Page Header
   width: 195px;
 }
 .page-header.navbar .top-menu .navbar-nav > li.dropdown-language > .dropdown-toggle > .langname {
-  color: #d6dae0;
+  color: #ffffff;font-weight: bold; /*Membuat Bold Pilihan Bahasa*/
 }
 .page-header.navbar .top-menu .navbar-nav > li.dropdown-dark .dropdown-menu {
   background: #779328;
@@ -378,7 +378,7 @@ Page Header
 .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li.active > a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li.active.open > a,
 .page-sidebar .page-sidebar-menu > li.active > a,
 .page-sidebar .page-sidebar-menu > li.active.open > a {
-  background: #a5cb39; //ini menu yang dipilih
+  background: #a5cb39; /*ini menu yang dipilih*/
   border-top-color: transparent;
   color: #124b8e;
 }
@@ -900,7 +900,7 @@ Page Footer
 Boby
 ****/
 body {
-  background-color: #007dc6; //ini footer
+  background-color: #007dc6; /*ini footer*/
 }
 
 /****
@@ -914,11 +914,11 @@ body {
 /* Page sidebar */
 .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu,
 .page-sidebar .page-sidebar-menu {
-  /* Change sidebar link font weight */
+  font-weight: bold;/* Change sidebar link font weight */
 }
 .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu li > a,
 .page-sidebar .page-sidebar-menu li > a {
-  font-weight: 300;
+  font-weight: bold; /*Membuat Bold Text Pada submenu*/
 }
 .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu li > a > i,
 .page-sidebar .page-sidebar-menu li > a > i {
@@ -926,7 +926,7 @@ body {
 }
 .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu li .sub-menu li > a,
 .page-sidebar .page-sidebar-menu li .sub-menu li > a {
-  font-weight: 300;
+  font-weight: bold;
 }
 .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu li .sub-menu li > a > i,
 .page-sidebar .page-sidebar-menu li .sub-menu li > a > i {

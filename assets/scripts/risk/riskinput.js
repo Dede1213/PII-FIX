@@ -1317,13 +1317,62 @@ function modal_ap_edit(a){
 //$('#form-data-revid').val(a);
 $('#action_plan').val($('#action_plan'+a).val());
 $('#due_date').val($('#due_date'+a).val());
-$('#division').val($('#due_date'+a).val());
 $('#form-data-revid').val(a);
 
 var b = $('#division_v'+a).val();
 
-if(b == "Information Technology & Network Support"){
-	var b = "IT";
+if(b == "Business Development and Communication (BDC)"){
+	var b = "BDC";
+}else if(b == "CEO Office "){
+    var b = "CEO Office";
+}else if(b == "CFO Office"){
+    var b = "CFO Office";
+}else if(b == "COO Office"){
+    var b = "COO Office";
+}else if(b == "Corporate Service (COS)"){
+    var b = "COS";
+}else if(b == "Corporate Strategy and Finance (CSF)"){
+    var b = "CSF";
+}else if(b == "Corporate Secretary (CSR)"){
+    var b = "CSR";
+}else if(b == "Environment and Social (ENS)"){
+    var b = "ENS";
+}else if(b == "Internal Audit (IA)"){
+    var b = "IA";
+}else if(b == "IIGF Institute "){
+    var b = "IIGFI";
+}else if(b == "Legal Counsel (LEC)"){
+    var b = "LEC";
+}else if(b == "Project Appraisal and Structuring  (PAS)"){
+    var b = "PAS";
+}else if(b == "Project and Guarantee Consultation 1 (PGC1)"){
+    var b = "PGC1";
+}else if(b == "Project and Guarantee Consultation 2 (PGC2)"){
+    var b = "PGC2";
+}else if(b == "Project and Guarantee Consultation 3 (PGC3)"){
+    var b = "PGC3";
+}else if(b == "Project and Guarantee Consultation 4 (PGC4)"){
+    var b = "PGC4";
+}else if(b == "Project Monitoring and Claim (PMC)"){
+    var b = "PMC";
+}else if(b == "Procurement (PRC)"){
+    var b = "PRC";
+}else if(b == "Project Legal (PRL)"){
+    var b = "PRL";
+}else if(b == "Risk and Compliance (RAC)"){
+    var b = "RAC";
+}else if(b == "Treasury and Investment (TRI)"){
+    var b = "TRI";
+}else if(b == "Underwriting (UNT)"){
+    var b = "UNT";
+}else if(b == "Corporate Service - General Affair (COS-GA)"){
+    var b = "COS-GA";
+}else if(b == "Corporate Service - Human Resources (COS-HR)"){
+    var b = "COS-HR";
+}else if(b == "Corporate Service - Information Technology (COS-IT)"){
+    var b = "COS-IT";
+}else if(b == "Corporate Service - Organization Development (COS-OD)"){
+    var b = "COS-OD";
 }
 
 $('#division').val(b);

@@ -512,6 +512,14 @@
 						</div>
 					</div>
 
+					
+					<div class="form-group">
+						<label class="col-md-3 control-label smaller cl-compact" >Existing Control <span class="required">* </span></label>
+						<div class="col-md-9">
+						<input type="text" class="form-control input-sm" value="" name="risk_evaluation_control" id = "risk_evaluation_control" placeholder="">
+						</div>
+					</div>
+
 					<div class="form-group">
 					<input type = "hidden" id = "form-control-revid">
 						<label class="col-md-3 control-label smaller cl-compact" title="fill this field with the effectiveness level of existing control (refers to control assessment criteria)">Evaluation on Existing Control <span class="required">* </span></label>
@@ -523,12 +531,6 @@
 								</span>
 								
 							</div>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-md-3 control-label smaller cl-compact" >Existing Control <span class="required">* </span></label>
-						<div class="col-md-9">
-						<input type="text" class="form-control input-sm" value="" name="risk_evaluation_control" id = "risk_evaluation_control" placeholder="">
 						</div>
 					</div>
 					
@@ -773,6 +775,8 @@
 				<thead>
 				<tr role="row" class="heading">
 					<th width="66px">&nbsp;</th>
+					
+					
 					
 					<th>Evaluation on Existing Control</th>
 					<th>Existing Control</th>

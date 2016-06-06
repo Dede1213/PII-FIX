@@ -50,6 +50,7 @@ body {
   padding: 0px !important;
   margin: 0px !important;
   font-size: 13px;
+  font-weight: bold;/*Bold text status*/
   direction: ltr;
 }
 
@@ -2432,6 +2433,7 @@ Charts and statistics
   width: 100%;
   font-family: "Open Sans", sans-serif !important;
   font-size: 14px;
+  font-weight: bold;
 }
 
 /***
@@ -3458,6 +3460,7 @@ Forms
   height: 28px;
   padding: 5px 10px;
   font-size: 13px;
+  font-weight: bold;/*bold text*/
 }
 
 select.input-sm {
@@ -3511,7 +3514,7 @@ input[type="color"].spinner {
 
 /* Form labels */
 label {
-  font-weight: 400;
+  font-weight: bold; /*bold text filter by*/
   font-size: 14px;
 }
 
@@ -4417,6 +4420,7 @@ Customized Bootstrap Panels
 }
 .panel .panel-body {
   font-size: 13px;
+  font-weight: bold; //Bold Text pada chart
 }
 .panel .panel-title > a:hover {
   text-decoration: none;
@@ -6028,6 +6032,7 @@ Customized Bootstrap Tabs
   -ms-border-radius: 4px 4px 0 0;
   -o-border-radius: 4px 4px 0 0;
   border-radius: 4px 4px 0 0;
+  font-weight: bold;//Bold pada submenu
 }
 .nav-tabs > li > a > .badge,
 .nav-pills > li > a > .badge {
@@ -6042,12 +6047,14 @@ Customized Bootstrap Tabs
 .nav-pills.nav-tabs-sm > li > a,
 .nav-pills.nav-pills-sm > li > a {
   font-size: 13px;
+
 }
 .nav-tabs .dropdown.open > .dropdown-toggle,
 .nav-pills .dropdown.open > .dropdown-toggle {
   background: #eee;
   color: #0d638f;
   border-color: transparent;
+
 }
 
 /* Left and right tabs */
@@ -6080,6 +6087,7 @@ Customized Bootstrap Tabs
   -o-border-radius: 4px 0 0 4px;
   border-radius: 4px 0 0 4px;
   border-color: #eeeeee #dddddd #eeeeee #eeeeee;
+
 }
 .tabs-left.nav-tabs > li.active > a,
 .tabs-left.nav-tabs > li.active > a:hover
@@ -6091,6 +6099,7 @@ Customized Bootstrap Tabs
   border-radius: 4px 0 0 4px;
   border-color: #ddd transparent #ddd #ddd;
   *border-right-color: #ffffff;
+
 }
 
 /* Right tabs */
@@ -6100,6 +6109,7 @@ Customized Bootstrap Tabs
 .tabs-right.nav-tabs > li > a {
   display: block;
   margin-left: -1px;
+
 }
 .tabs-right.nav-tabs > li > a:hover, .tabs-right.nav-tabs > li > a:focus {
   -webkit-border-radius: 0 4px 4px 0;
@@ -6206,6 +6216,7 @@ Custom tabs
   border-top: 3px solid #b1e6ff; /*untuk warna tab yang sedang aktif*/
   margin-top: 0;
   position: relative;
+
 }
 .tabbable-custom > .nav-tabs > li.active > a {
   border-top: none !important;
@@ -6216,6 +6227,7 @@ Custom tabs
   -o-border-radius: 0;
   background: #b1e6ff; /*Untuk warna tabnya saat aktif*/
   border-radius: 0;
+  font-weight: bold; /*font bold pada tab yang aktif*/
 }
 .tabbable-custom > .nav-tabs > li.active > a:hover {
   -webkit-border-radius: 0;

@@ -181,10 +181,11 @@ class Mriskregister extends APP_Model {
 					left join m_likelihood e on a.risk_likelihood_key = e.l_key
 					left join m_division f on a.risk_owner = f.division_id
 					where 
-					a.periode_id = ".$defFilter['periodid']."
+					a.existing_control_id is null
+					and a.periode_id = ".$defFilter['periodid']."
 					and a.risk_input_by = '".$defFilter['userid']."'
 					and a.risk_id NOT IN (select r.risk_id from t_risk r where r.risk_id = a.risk_id and r.periode_id = '".$defFilter['periodid']."' and r.risk_input_by = '".$defFilter['userid']."' and r.risk_status >= 0)
-					and a.existing_control_id is null
+					
 					UNION
 					select 
                                                                                 a.*,
@@ -223,10 +224,11 @@ class Mriskregister extends APP_Model {
                                                                                 left join m_likelihood e on a.risk_likelihood_key = e.l_key
                                                                                 left join m_division f on a.risk_owner = f.division_id
                                                                                 where 
-                                                                                a.periode_id = ".$defFilter['periodid']."
+                                                                                a.existing_control_id is null
+                                                                                and a.periode_id = ".$defFilter['periodid']."
                                                                                 and a.risk_input_by = '".$defFilter['userid']."'
                                                                                 and a.risk_id NOT IN (select r.risk_id from t_risk r where r.risk_id = a.risk_id 
-                                                                                and a.existing_control_id is null
+                                                                                
                                                                                 and r.periode_id = '".$defFilter['periodid']."' and r.risk_input_by = '".$defFilter['userid']."' and r.risk_status >= 0)
 
 					";

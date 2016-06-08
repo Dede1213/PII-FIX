@@ -91,9 +91,7 @@
 					and a.existing_control_id is null
 					and a.risk_input_by = '$username' ";
 
-	$sql1="select a.risk_id from t_risk a where  a.periode_id NOT IN (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end) and a.risk_input_by = '$username'
-					and a.risk_id NOT IN(select t2.risk_library_id from t_risk t2 where t2.periode_id = (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end) and t2.risk_input_by = '$username')
-					and a.risk_status >= 0 and existing_control_id != 1 ";
+	
 	
 	$sql="select a.risk_id from t_risk a 
 	where  a.periode_id IN(select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end) 
@@ -105,6 +103,10 @@
 	and b.risk_input_by = '$username'
 	and b.risk_status >= 2 
 	and b.risk_id NOT IN (select z.risk_id from t_risk z where z.risk_id = b.risk_id and z.risk_input_by = '$username' and z.risk_status >= 2)";
+
+	$sql1="select a.risk_id from t_risk a where  a.periode_id NOT IN (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end) and a.risk_input_by = '$username'
+					and a.risk_id NOT IN(select t2.risk_library_id from t_risk t2 where t2.periode_id = (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end) and t2.risk_input_by = '$username')
+					and a.risk_status >= 0 and a.existing_control_id is null ";
 
 	$sql2="select a.risk_id from t_risk a 
 	where  a.periode_id IN(select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end) 
@@ -457,9 +459,13 @@
 			
 			<h4 class="block">Warning</h4>
 			<p>
+			<!--
+				Warning ! Cannot submit the Risk Register Exercise because there is another risk which have not been review yet.
+				Please check and review all of your risk and submit again.
+			-->
+
 				Warning !
-Cannot submit the Risk Register Exercise because there is another risk which have not been review yet.
-Please check and review all of your risk and submit again.
+Cannot submit risk register because you have already submitted this risk register once.
 
 				 <p>
 					<a class="btn red" target="_self" href="<?=$site_url?>/main">

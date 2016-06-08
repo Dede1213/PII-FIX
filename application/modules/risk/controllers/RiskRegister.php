@@ -1608,13 +1608,32 @@ class RiskRegister extends APP_Controller {
 		$periode_id = null;
 		if ($periode) {
 			$periode_id = $periode['periode_id'];
-			
 			$data = array();
 			
+			$cek_control_submit = $this->risk->cek_control_submit($session_data['username'],$periode_id);
+			$cek_ap_submit = $this->risk->cek_ap_submit($session_data['username'],$periode_id);
+
+
+			if($cek_control_submit == true & $cek_ap_submit == true){
+				$res = false ;
+				$msg = 'You have a Control and Due Date on Action Plan that has not been filled !';
+			}else if($cek_control_submit == true & $cek_ap_submit == false){
+				$res = false ;
+				$msg = 'You have a Control that has not been filled !';
+			}else if($cek_control_submit == false & $cek_ap_submit == true){
+				$res = false ;
+				$msg = 'You have a Due Date on Action Plan that has not been filled !';
+			}else{
 			$res = $this->risk->riskSetSubmitByPeriode($periode_id, $session_data['username']);
+			$msg = 'SUCCESS';
+			}
+
 			if ($res) {
 				$resp['success'] = true;
-				$resp['msg'] = 'SUCCESS';
+				$resp['msg'] = $msg;
+			}else{
+				$resp['success'] = false;
+				$resp['msg'] = $msg;
 			}
 		}
 
@@ -1816,15 +1835,26 @@ class RiskRegister extends APP_Controller {
 					$objective[] = $v;
 				}
 				
-				$res = $this->risk->updateRiskModify($_POST['risk_id'], $code, $risk, $impact_level, $actplan, $control, $objective, $data['session']['username'], 'RISK_REGISTER-MODIFY');
+
+				$res_tmp = $this->risk->updateRiskModify_tmp($_POST['risk_id'], $code, $risk, $impact_level, $actplan, $control, $objective, $data['session']['username'], 'RISK_REGISTER-MODIFY');
 				
+				$cek_plan_duedate = $this->risk->cek_plan_duedate($_POST['risk_id']);
+				if($cek_plan_duedate == true){
+					$res = false;
+					$msg ='You have a Due Date on Action Plan that has not been filled';
+				}else{
+					$res = $this->risk->updateRiskModify($_POST['risk_id'], $code, $risk, $impact_level, $actplan, $control, $objective, $data['session']['username'], 'RISK_REGISTER-MODIFY');	
+					$msg = $this->db->error();
+				}
+				
+
 				$resp = array();
 				if ($res) {
 					$resp['success'] = true;
 					$resp['msg'] = 'SUCCESS';
 				} else {
 					$resp['success'] = false;
-					$resp['msg'] = $this->db->error();
+					$resp['msg'] = $msg;
 				}
 			} else {
 				$resp['msg'] = 'You Are Not Allowed to Modify this Risk';

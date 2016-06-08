@@ -1689,7 +1689,9 @@ select
                                                                                 group by risk_input_by
                                                                 ) b on a.username = b.risk_input_by
                                                                 join t_risk_add_informasi z on a.username = z.risk_input_by
-                                                                WHERE a.username NOT IN (select username from m_user join t_risk on m_user.username = t_risk.risk_input_by) and z.periode_id = b.periode_id
+                                                                WHERE a.username NOT IN (select username from m_user 
+                                                                join t_risk on m_user.username = t_risk.risk_input_by) 
+
 UNION
 select
                                                                 b.risk_status,
@@ -1708,7 +1710,7 @@ select
                                                                                 group by risk_input_by
                                                                ) b on a.username = b.risk_input_by
                                                                 join t_risk_add_informasi z on a.username = z.risk_input_by
-                                                                where a.username is not null and z.periode_id = b.periode_id
+                                                                where a.username is not null 
 UNION
 select
                                                                 b.risk_status,
@@ -1729,7 +1731,9 @@ select
                                                                 ) b on a.username = b.username
                                                                 join t_risk_add_informasi z on a.username = z.risk_input_by 
                                                                 where a.username is not null and z.periode_id = b.periode_id
-                                                                and a.username NOT IN (select username from m_user join t_risk on m_user.username = t_risk.risk_input_by) and z.periode_id = b.periode_id"
+                                                                and a.username NOT IN (select username from m_user 
+                                                                join t_risk on m_user.username = t_risk.risk_input_by) 
+																"
 				.$ex_filter
 				.$ex_or;
 		$res = $this->getPagingData($sql, $par, $page, $row, 'username', true);
@@ -2025,6 +2029,9 @@ select
 		if($res_cek->num_rows() > 0){
 		return false;
 		}else{
+		$sql = "update t_risk_change set existing_control_id = null where risk_id='$risk_id'";
+		$res = $this->db->query($sql);
+
 		$sql = "update t_risk set existing_control_id = null where risk_id='$risk_id'";
 		$res = $this->db->query($sql);
 		return $res;
@@ -2290,6 +2297,9 @@ select
 		
 		$par['risk_id'] = $risk_id;
 		
+		$sql = "update t_risk_change set existing_control_id = 2 where risk_id = ?";
+		$res = $this->db->query($sql, $par);
+
 		$sql = "update t_risk set existing_control_id = 2 where risk_id = ?";
 		$res = $this->db->query($sql, $par);
 
@@ -2443,6 +2453,40 @@ select
 		} else {
 			return false;
 		}
+		
+	}
+
+	public function updateRiskModify_tmp($risk_id, $code, $risk, $impact, $actplan, $control, $objective, $uid, $update_point = 'U') {
+		$this->_logHistory($risk_id, $uid, $update_point);
+		$par = array();
+		$keyupdate = '';
+		foreach($risk as $k=>$v) {
+			$keyupdate .= $k.' = ?, ';
+			$par[$k] = $v;
+		}
+
+			// insert action plan
+			if ($actplan !== false) {
+				$sql = "delete from t_risk_action_plan_tmp where risk_id = ?";
+				$this->db->query($sql, array('rid' => $risk_id));
+				
+				$sql = "insert into t_risk_action_plan_tmp(risk_id, action_plan, due_date, division) 
+						values(?, ?, ?, ?)";
+				foreach ($actplan as $key => $value) {
+					$dd = implode('-', array_reverse( explode('-', $value['due_date']) ));
+					$par = array(
+						'rid' => $risk_id,
+						'ap' => $value['action_plan'],
+						'dd' => $dd,
+						'div' => $value['division']
+					);
+					$res4 = $this->db->query($sql, $par);
+				}
+				return true;
+			}else{
+				return false;
+			}
+			
 		
 	}
 
@@ -6987,5 +7031,53 @@ WHERE t_risk.risk_id = '".$risk_id."' ";
 		$this->db->update("t_risk_add_informasi");
 		
 	}
+
+	function cek_control_submit($username,$periode_id){
+		$sql = "select * from t_risk a 
+				where a.risk_input_by = '$username' and a.periode_id='$periode_id' and a.risk_id not in (select risk_id from t_risk_control) ";
+		$query = $this->db->query($sql);
+		if ($query->num_rows() > 0)
+			{
+				return true;
+			}
+			else
+			{
+				return FALSE;
+			}	
+
+	}
+
+	function cek_ap_submit($username,$periode_id){
+		$sql = "select * from t_risk a 
+				join t_risk_action_plan ap on a.risk_id = ap.risk_id
+				where a.risk_input_by = '$username' and a.periode_id='$periode_id'
+				and ap.due_date is null  ";
+		$query = $this->db->query($sql);
+		if ($query->num_rows() > 0)
+			{
+				return true;
+			}
+			else
+			{
+				return FALSE;
+			}	
+
+	}
+
+	function cek_plan_duedate($risk_id){
+		$sql = "select * from t_risk_action_plan_tmp 
+				where risk_id = '$risk_id' and due_date = '0000-00-00' ";
+		$query = $this->db->query($sql);
+		if ($query->num_rows() > 0)
+			{
+				return true;
+			}
+			else
+			{
+				return FALSE;
+			}	
+
+	}
+
 	
 }

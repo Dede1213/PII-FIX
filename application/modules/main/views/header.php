@@ -76,8 +76,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						</a>
 						<ul class="dropdown-menu dropdown-menu-default">
 							<li>
+                            <!--
+                                Ditunda tunggu selesai semuanya baru phase bahasa
 								<a href="<?=$indonya?>">
 								<img alt="" src="assets/global/img/flags/id.png"> Indonesian </a>
+                            -->
+                                <a><img alt="" src="assets/global/img/flags/id.png"> Indonesian </a>
 							</li>
 						</ul>
 					</li>

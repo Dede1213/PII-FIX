@@ -7,7 +7,7 @@
 			<div class="table-header">
 					<center>
 						<div class="table-caption">
-							<font = "3"><b>IIGF Corporate Risk Register </b></font> 
+							<font = "3"><b>IIGF Corporate Risk Registerz </b></font> 
 						</div>
 						<div class="table-caption">
 							<font = "3"><b>List of All Risk </b></font> 

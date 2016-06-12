@@ -25,6 +25,20 @@
 					<a target="_self" href="<?=$site_url?>/risk/RiskRegister">Risk Register Exercise</a>
 				</li>
 			</ul>
+
+			<div class="page-toolbar">
+				<div class="btn-group pull-right">
+					<button type="button" class="btn btn-fit-height blue dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
+					Export <i class="fa fa-angle-down"></i>
+					</button>
+					<ul class="dropdown-menu pull-right" role="menu">
+						<li>
+							<a href="<?=$site_url?>/report/risk/listofrisk_user/<?=$username?>" id="">Export</a>
+						</li>					 
+					</ul>
+				</div>
+			</div>
+
 		</div>
 		<?php 
 		error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));

@@ -41,6 +41,7 @@ class RiskRegister extends APP_Controller {
 			$data['periode'] = $this->mperiode->getCurrentPeriode();
 		}
 		
+		$data['username'] = $this->session->credential['username'];
 		
 		$this->load->view('main/header', $data);
 		$this->load->view('risk_register_list', $data);

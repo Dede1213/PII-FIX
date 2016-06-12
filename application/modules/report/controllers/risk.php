@@ -1889,6 +1889,93 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$this->dompdf->stream("Periode_risk_map.pdf");
 			
 		}
+
+
+		public function listofrisk_user($username){
+			$this->load->model('report/risk_model','risk',true);
+
+			$data = $this->loadDefaultAppConfig();
+			$data['indonya'] = base_url('index.php/reporti/risk/gettreatment');
+			$data['engnya'] = base_url('index.php/report/risk/gettreatment');		
+			$data['sidebarMenu'] = $this->getSidebarMenuStructure('report/risk/listofrisk');
+			$data['periode'] = $this->risk->getAllPeriode();
+			$data['pageLevelStyles'] = '
+			<link rel="stylesheet" type="text/css" href="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
+			';
+			
+			$data['pageLevelScripts'] = '
+			<script src="assets/scripts/dashboard/getallrisk.js"></script>';
+
+			$data['username'] = $username;
+			
+			$this->load->view('main/header', $data);
+			$this->load->view('report_listofrisk_user', $data);
+			$this->load->view('footer', $data);
+		}	
+
+		function listofrisk_excel_user($username){
+			
+			$this->load->model('report/risk_model','risk',true);
+			$this->load->model('admin/mperiode');
+			$this->load->library('parser');
+
+			//periode saat ini
+			$periode = $this->mperiode->getCurrentPeriode();
+			  
+			$data['datanya'] = $this->risk->listofrisk_user($username, $periode['periode_id']);
+			 
+			$data['cekperiode'] = $this->risk->cekperiode($this->input->post('periode'));
+
+			
+			 
+			$data['total_data'] = count($data['datanya']);
+			 
+			$stringData = $this->parser->parse('listofrisk_table_user', $data, true);
+			 
+			header("Pragma: public");
+			header("Expires: 0");
+			header("Cache-Control: must-revalidate, post-check=0, pre-check=0");			
+			header('Content-type: application/ms-excel');
+			header("Expires: 0");
+			header('Content-Disposition: attachment; filename=listofrisk.xls');
+			header("Content-Description: File Transfer");
+	  
+			echo $stringData;
+			exit;
+			
+		}
+
+		function listofrisk_pdf_user($username){
+			
+			$this->load->model('report/risk_model','risk',true);
+			$this->load->library('parser');
+			$this->load->library('dompdf_gen');
+			$this->load->model('admin/mperiode');
+			
+			$orientation = "landscape";
+			$paper_size='a4';
+			 
+
+			//periode saat ini
+			$periode = $this->mperiode->getCurrentPeriode();
+
+			$data['datanya'] = $this->risk->listofrisk_user($username, $periode['periode_id']);
+			
+			$data['cekperiode'] = $this->risk->cekperiode($this->input->post('periode'));
+			 
+			$data['total_data'] = count($data['datanya']); 
+			 
+			$this->load->view('listofrisk_table_user',$data);
+			// Get output html
+			$html = $this->output->get_output();
+			  
+			// Convert to PDF
+			$this->dompdf->load_html($html);
+			$this->dompdf->set_paper($paper_size, $orientation);
+			$this->dompdf->render();			
+			$this->dompdf->stream("listofrisk.pdf");
+			
+		}
 		 
 		
 	}

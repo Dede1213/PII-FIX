@@ -552,7 +552,7 @@
 (SELECT GROUP_CONCAT(t_risk_action_plan.`due_date` SEPARATOR '\n') FROM t_risk_action_plan WHERE t_risk.risk_id = t_risk_action_plan.risk_id) AS 'Due Date'
 FROM t_risk 
 JOIN m_risk_category ON t_risk.`risk_2nd_sub_category` = m_risk_category.`cat_id` 
-WHERE t_risk.`risk_input_by`='$username' and t_risk.`periode_id`='$periode'
+WHERE t_risk.`risk_input_by`='h.harlina' and t_risk.`periode_id`='1' and t_risk.`risk_code` not in (select risk_code from t_risk_change where periode_id = '1' and risk_input_by = 'h.harlina')
 
 UNION 
 
@@ -566,7 +566,7 @@ SELECT DISTINCT m_risk_category.`cat_name`, t_risk_change.`risk_status`, t_risk_
 (SELECT GROUP_CONCAT(t_risk_action_plan_change.`due_date` SEPARATOR '\n') FROM t_risk_action_plan_change WHERE t_risk_change.risk_id = t_risk_action_plan_change.risk_id) AS 'Due Date'
 FROM t_risk_change 
 JOIN m_risk_category ON t_risk_change.`risk_2nd_sub_category` = m_risk_category.`cat_id` 
-WHERE t_risk_change.`risk_input_by`='$username' and t_risk_change.`periode_id`='$periode' and t_risk_change.`risk_code` not in (select risk_code from t_risk where periode_id = '$periode' and risk_input_by = '$username')
+WHERE t_risk_change.`risk_input_by`='h.harlina' and t_risk_change.`periode_id`='1' 
 
 
  ";

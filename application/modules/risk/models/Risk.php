@@ -2456,6 +2456,106 @@ select
 		
 	}
 
+	public function updateRiskModifyLibrary($risk_id, $code, $risk, $impact, $actplan, $control, $objective, $uid, $update_point = 'U') {
+		$this->_logHistory($risk_id, $uid, $update_point);
+		$par = array();
+		$keyupdate = '';
+		foreach($risk as $k=>$v) {
+			$keyupdate .= $k.' = ?, ';
+			$par[$k] = $v;
+		}
+
+		$par['risk_id'] = $risk_id;
+		$sql = "update t_risk_change set ".$keyupdate
+			  ."created_date = now()
+			  	where risk_id = ?";
+		$res = $this->db->query($sql, $par);
+		
+		if ($res) {
+			// insert impact
+			if ($impact !== false) {
+				$sql = "delete from t_risk_impact_change where risk_id = ?";
+				$this->db->query($sql, array('rid' => $risk_id));
+				
+				$sql = "insert into t_risk_impact_change(risk_id, impact_id, impact_level, switch_flag) values(?, ?, ?, '$uid')";
+				foreach ($impact as $key => $value) {
+					$par = array(
+						'rid' => $risk_id,
+						'iid' => $value['impact_id'],
+						'il' => $value['impact_level']
+					);
+					$res3 = $this->db->query($sql, $par);
+				}
+			}
+			
+			// insert action plan
+			if ($actplan !== false) {
+				$sql = "delete from t_risk_action_plan_change where risk_id = ?";
+				$this->db->query($sql, array('rid' => $risk_id));
+				
+				$sql = "insert into t_risk_action_plan_change(risk_id, action_plan, due_date, division, switch_flag) 
+						values(?, ?, ?, ?, '$uid')";
+				foreach ($actplan as $key => $value) {
+					$dd = implode('-', array_reverse( explode('-', $value['due_date']) ));
+					$par = array(
+						'rid' => $risk_id,
+						'ap' => $value['action_plan'],
+						'dd' => $dd,
+						'div' => $value['division']
+					);
+					$res4 = $this->db->query($sql, $par);
+				}
+			}
+			
+			// insert control
+			if ($control !== false) {
+				$sql = "delete from t_risk_control_change where risk_id = ? ";
+				$this->db->query($sql, array('rid' => $risk_id));
+				
+				$sql = "insert into t_risk_control_change(
+							risk_id, existing_control_id, risk_existing_control, 
+							risk_evaluation_control, risk_control_owner, switch_flag) 
+						values(?, ?, ?, ?, ?, '$uid')";
+				foreach ($control as $key => $value) {
+					$value['existing_control_id'] = $value['existing_control_id'] == '' || $value['existing_control_id'] == '0' ? null : $value['existing_control_id'];
+					
+					$par = array(
+						'rid' => $risk_id,
+						'ap' => $value['existing_control_id'],
+						'dd' => $value['risk_existing_control'],
+						'da' => $value['risk_evaluation_control'],
+						'div' => $value['risk_control_owner']
+					);
+					$res5 = $this->db->query($sql, $par);
+				}
+			}
+
+			// insert objective
+			if ($objective !== false) {
+				$sql = "delete from t_risk_objective_change where risk_id = ? ";
+				$this->db->query($sql, array('rid' => $risk_id));
+				
+				$sql = "insert into t_risk_objective_change(
+							risk_id, objective, switch_flag) 
+						values(?, ?, '$uid')";
+				foreach ($objective as $key => $value) {
+					$value['objective_id'] = $value['objective_id'] == '' || $value['objective_id'] == '0' ? null : $value['objective_id'];
+					
+					$par = array(
+						'rid' => $risk_id,
+						'div' => $value['objective']
+					);
+					$res5 = $this->db->query($sql, $par);
+				}
+			}
+			
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+
 	public function updateRiskModify_tmp($risk_id, $code, $risk, $impact, $actplan, $control, $objective, $uid, $update_point = 'U') {
 		$this->_logHistory($risk_id, $uid, $update_point);
 		$par = array();
@@ -7033,8 +7133,8 @@ WHERE t_risk.risk_id = '".$risk_id."' ";
 	}
 
 	function cek_control_submit($username,$periode_id){
-		$sql = "select * from t_risk a 
-				where a.risk_input_by = '$username' and a.periode_id='$periode_id' and a.risk_id not in (select risk_id from t_risk_control) ";
+		$sql = "select * from t_risk_change a 
+				where a.risk_input_by = '$username' and a.periode_id='$periode_id' and a.risk_id not in (select risk_id from t_risk_control_change) ";
 		$query = $this->db->query($sql);
 		if ($query->num_rows() > 0)
 			{
@@ -7048,8 +7148,8 @@ WHERE t_risk.risk_id = '".$risk_id."' ";
 	}
 
 	function cek_ap_submit($username,$periode_id){
-		$sql = "select * from t_risk a 
-				join t_risk_action_plan ap on a.risk_id = ap.risk_id
+		$sql = "select * from t_risk_change a 
+				join t_risk_action_plan_change ap on a.risk_id = ap.risk_id
 				where a.risk_input_by = '$username' and a.periode_id='$periode_id'
 				and ap.due_date is null  ";
 		$query = $this->db->query($sql);
@@ -7067,6 +7167,21 @@ WHERE t_risk.risk_id = '".$risk_id."' ";
 	function cek_plan_duedate($risk_id){
 		$sql = "select * from t_risk_action_plan_tmp 
 				where risk_id = '$risk_id' and due_date = '0000-00-00' ";
+		$query = $this->db->query($sql);
+		if ($query->num_rows() > 0)
+			{
+				return true;
+			}
+			else
+			{
+				return FALSE;
+			}	
+
+	}
+
+	function cek_from_library($risk_id){
+		$sql = "select risk_library_id from t_risk 
+				where risk_id = '$risk_id' and risk_library_id is not null ";
 		$query = $this->db->query($sql);
 		if ($query->num_rows() > 0)
 			{

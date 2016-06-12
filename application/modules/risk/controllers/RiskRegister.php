@@ -908,10 +908,18 @@ class RiskRegister extends APP_Controller {
 	{
 		if (!empty($rid) && is_numeric($rid)) {
 			$this->load->model('risk/risk');
-			
-			$datax = $this->risk->getRiskById($rid);
-			 
 			$session_data = $this->session->credential;
+			
+			//cek dulu dari library apa nggak
+			$cek_from_library = $this->risk->cek_from_library($rid);
+
+			if($cek_from_library == true){
+				$datax = $this->risk->getRiskById_change($rid, $session_data['username']);
+			}else{
+				$datax = $this->risk->getRiskById($rid);
+			}
+			 
+			
 			
 			if(!$datax){
 				if ($datax['risk_input_by'] != $session_data['username']) {				
@@ -1844,7 +1852,11 @@ class RiskRegister extends APP_Controller {
 					$res = false;
 					$msg ='You have a Due Date on Action Plan that has not been filled';
 				}else{
+					if ($_POST['risk_library_id'] == null){
 					$res = $this->risk->updateRiskModify($_POST['risk_id'], $code, $risk, $impact_level, $actplan, $control, $objective, $data['session']['username'], 'RISK_REGISTER-MODIFY');	
+					}else{
+					$res = $this->risk->updateRiskModifyLibrary($_POST['risk_id'], $code, $risk, $impact_level, $actplan, $control, $objective, $data['session']['username'], 'RISK_REGISTER-MODIFY');		
+					}
 					$msg = $this->db->error();
 				}
 				

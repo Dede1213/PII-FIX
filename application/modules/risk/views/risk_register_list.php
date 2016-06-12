@@ -119,8 +119,8 @@
 	and b.risk_id NOT IN (select z.risk_id from t_risk z where z.risk_id = b.risk_id and z.risk_input_by = '$username' and z.risk_status >= 2)";
 
 	$sql1="select a.risk_id from t_risk a where  a.periode_id NOT IN (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end) and a.risk_input_by = '$username'
-					and a.risk_id NOT IN(select t2.risk_library_id from t_risk t2 where t2.periode_id = (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end) and t2.risk_input_by = '$username')
-					and a.risk_status >= 0 and a.existing_control_id is null ";
+			and a.risk_id NOT IN(select t2.risk_library_id from t_risk t2 where t2.periode_id = (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end) and t2.risk_input_by = '$username' and t2.risk_library_id is not null)
+			and a.risk_status >= 0 and a.existing_control_id is null ";
 
 	$sql2="select a.risk_id from t_risk a 
 	where  a.periode_id IN(select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end) 
@@ -134,8 +134,8 @@
 	and b.risk_id NOT IN (select z.risk_id from t_risk z where z.risk_id = b.risk_id and z.risk_input_by = '$username' and z.risk_status >= 0)";
 
 	$sql4="select a.risk_id from t_risk a where  a.periode_id NOT IN (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end) and a.risk_input_by = '$username'
-					and a.risk_id NOT IN(select t2.risk_library_id from t_risk t2 where t2.periode_id = (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end) and t2.risk_input_by = '$username')
-					and a.risk_status >= 0 and existing_control_id = 1 ";
+					and a.risk_id NOT IN(select t2.risk_library_id from t_risk t2 where t2.periode_id = (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end) and t2.risk_input_by = '$username' and t2.risk_library_id is not null)
+					and a.risk_status >= 0 and existing_control_id is not null ";
 
 
 	$query = $this->db->query($sql);

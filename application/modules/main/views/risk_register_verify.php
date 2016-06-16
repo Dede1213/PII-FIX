@@ -319,7 +319,7 @@
 	if ($status == 'under'){
 		?>
 
-			<button id="risk-button-draft" type="button" class="btn blue"><i class="fa fa-circle-o"></i> Save</button>
+			<button id="risk-button-draft-under" type="button" class="btn blue"><i class="fa fa-circle-o"></i> Save</button>
 	<?php
 	}else{
 	?>

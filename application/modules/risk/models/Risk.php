@@ -2021,7 +2021,7 @@ select
 		
 		$periode = $data['periode_id'];
 
-		$sql_cek_status = "select * from t_risk where periode_id ='$periode' and risk_status > 1 
+		$sql_cek_status = "select * from t_risk where periode_id ='$periode' and risk_status > 1 and risk_input_by = '$uid'
 						   UNION
 						   select * from t_risk_change where periode_id ='$periode' and risk_status > 1 and risk_input_by = '$uid' ";
 		$res_cek = $this->db->query($sql_cek_status);
@@ -2029,10 +2029,10 @@ select
 		if($res_cek->num_rows() > 0){
 		return false;
 		}else{
-		$sql = "update t_risk_change set existing_control_id = null where risk_id='$risk_id'";
+		$sql = "update t_risk_change set existing_control_id = null where risk_id='$risk_id' and risk_input_by = '$uid' ";
 		$res = $this->db->query($sql);
 
-		$sql = "update t_risk set existing_control_id = null where risk_id='$risk_id'";
+		$sql = "update t_risk set existing_control_id = null where risk_id='$risk_id' and risk_input_by = '$uid' ";
 		$res = $this->db->query($sql);
 		return $res;
 		}
@@ -2233,7 +2233,7 @@ select
 		
 		$par['risk_id'] = $risk_id;
 		
-		$sql = "update t_risk set existing_control_id = 1 where risk_id = ?";
+		$sql = "update t_risk set existing_control_id = 1 where risk_id = ? and risk_input_by = '$uid' ";
 		$res = $this->db->query($sql, $par);
 
 		return $res;
@@ -2243,34 +2243,34 @@ select
 		
 		$par['risk_id'] = $risk_id;
 		
-		$sql = "delete from t_risk where risk_id = ?";
+		$sql = "delete from t_risk where risk_id = ? and risk_input_by = '$uid' ";
 		$res = $this->db->query($sql, $par);
 
-		$sql = "delete from t_risk_action_plan where risk_id = ?";
+		$sql = "delete from t_risk_action_plan where risk_id = ? and risk_input_by = '$uid' ";
 		$res = $this->db->query($sql, $par);
 
-		$sql = "delete from t_risk_control where risk_id = ?";
+		$sql = "delete from t_risk_control where risk_id = ? and risk_input_by = '$uid' ";
 		$res = $this->db->query($sql, $par);
 
-		$sql = "delete from t_risk_impact where risk_id = ?";
+		$sql = "delete from t_risk_impact where risk_id = ? and risk_input_by = '$uid' ";
 		$res = $this->db->query($sql, $par);
 
-		$sql = "delete from t_risk_objective where risk_id = ?";
+		$sql = "delete from t_risk_objective where risk_id = ? and risk_input_by = '$uid' ";
 		$res = $this->db->query($sql, $par);
 
-		$sql = "delete from t_risk_change where risk_id = ?";
+		$sql = "delete from t_risk_change where risk_id = ? and risk_input_by = '$uid' ";
 		$res = $this->db->query($sql, $par);
 
-		$sql = "delete from t_risk_impact_change where risk_id = ?";
+		$sql = "delete from t_risk_impact_change where risk_id = ? and risk_input_by = '$uid' ";
 		$res = $this->db->query($sql, $par);
 
-		$sql = "delete from t_risk_action_plan_change where risk_id = ?";
+		$sql = "delete from t_risk_action_plan_change where risk_id = ? and risk_input_by = '$uid' ";
 		$res = $this->db->query($sql, $par);
 
-		$sql = "delete from t_risk_control_change where risk_id = ?";
+		$sql = "delete from t_risk_control_change where risk_id = ? and risk_input_by = '$uid' ";
 		$res = $this->db->query($sql, $par);
 
-		$sql = "delete from t_risk_objective_change where risk_id = ?";
+		$sql = "delete from t_risk_objective_change where risk_id = ? and risk_input_by = '$uid' ";
 		$res = $this->db->query($sql, $par);
 
 
@@ -2297,10 +2297,10 @@ select
 		
 		$par['risk_id'] = $risk_id;
 		
-		$sql = "update t_risk_change set existing_control_id = 2 where risk_id = ?";
+		$sql = "update t_risk_change set existing_control_id = 2 where risk_id = ? and risk_input_by ='$uid' ";
 		$res = $this->db->query($sql, $par);
 
-		$sql = "update t_risk set existing_control_id = 2 where risk_id = ?";
+		$sql = "update t_risk set existing_control_id = 2 where risk_id = ? and risk_input_by ='$uid' ";
 		$res = $this->db->query($sql, $par);
 
 		return $res;

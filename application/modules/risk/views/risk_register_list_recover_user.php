@@ -236,7 +236,7 @@
 </div>
 <?php
 $periode_id = $periode['periode_id'];
-$sql_cek_status = "select * from t_risk where periode_id ='$periode_id' and risk_status > 1 ";
+$sql_cek_status = "select * from t_risk where periode_id ='$periode_id' and risk_status > 1 and risk_input_by = '$uid' UNION select * from t_risk_change where periode_id ='$periode_id' and risk_status > 1 and risk_input_by = '$uid' ";
 $res_cek = $this->db->query($sql_cek_status);
 
 if($res_cek->num_rows() > 0){

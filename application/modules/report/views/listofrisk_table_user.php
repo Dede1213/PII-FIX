@@ -1,5 +1,5 @@
    <style>
-  @page { margin: 0px; size: 1000pt 595pt;}
+  @page { margin: 0px; size: 2000pt 595pt;}
             img {margin:0px;padding:0px}
 		 
 </style>
@@ -17,13 +17,13 @@
 			 </div>
 				
 				 
-			<table class="responsive table table-striped table-bordered table-hover"  border = "1">
+			<table class="responsive table table-striped table-bordered table-hover" border = "1">
 			
 				<thead>
 					  <tr>
 							<th >  No </th> 
 							<th>  Risk Status </th>
-							<th> 2nd Sub Category </th>  
+							<th> 2nd Sub <br>Category </th>  
 							<th>  Risk ID </th>   
 							<th>  Risk Event </th>
 							<th>  Risk Description</th>
@@ -31,15 +31,15 @@
 							<th>  Risk Cause </th>
 							<th>  Risk Impact </th>
 							<th>  Objective </th>
-							<th>  Existing Control </th>
-							<th>  Control Evaluation</th>
-							<th>  Control Owner</th>
-							<th>  Risk Impact Level </th>
-							<th>  Risk Likelihood Level </th>
+							<th>  Existing <br> Control </th>
+							<th>  Control <br> Evaluation</th>
+							<th>  Control <br> Owner</th>
+							<th>  Risk Impact <br> Level </th>
+							<th>  Risk Likelihood <br> Level </th>
 							<th> Risk Level </th>
 							<th> Implementation</th>
 							<th> Action Plan </th>
-							<th> Action Plan Owner</th>
+							<th> Action Plan <br> Owner</th>
 							<th> Due Date</th>
 					  </tr>
 				</thead> 
@@ -55,8 +55,10 @@
 										echo "Draft";
 									}else if($key['risk_status'] == 1){
 										echo "Confirmed";
-									}else{
+									}else if($key['risk_status'] == 2){
 										echo "Submitted to RAC";
+									}else{
+										echo "Draft";
 									}
 								?> 
 								</td> 

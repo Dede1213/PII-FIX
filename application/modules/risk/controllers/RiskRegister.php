@@ -329,6 +329,9 @@ class RiskRegister extends APP_Controller {
 		if ($data['valid_mode']) {
 			$data['periode'] = $this->mperiode->getCurrentPeriode();
 		}
+
+		$session_data = $this->session->credential;
+		$data['uid'] = $session_data['username'];
 		
 		
 		$this->load->view('main/header', $data);
@@ -904,7 +907,35 @@ class RiskRegister extends APP_Controller {
 		echo json_encode($data);
 	}
 	
+	//ini di pake dimana mana loadrisklibrary
 	public function loadRiskLibrary($rid) 
+	{
+		if (!empty($rid) && is_numeric($rid)) {
+			$this->load->model('risk/risk');
+			$session_data = $this->session->credential;
+			
+			//cek dulu dari library apa nggak
+			$cek_from_library = $this->risk->cek_from_library($rid);
+
+			
+				$datax = $this->risk->getRiskById($rid);
+			
+			 
+			
+			
+			if(!$datax){
+				if ($datax['risk_input_by'] != $session_data['username']) {				
+				//echo "<pre>";print_r($datax);exit;				
+				$datax = $this->risk->getRiskById_change($rid,$session_data['username']);
+				 
+				} 
+			}			
+			 
+			echo json_encode($datax);
+		}
+	}
+
+	public function loadRiskLibraryModify($rid) 
 	{
 		if (!empty($rid) && is_numeric($rid)) {
 			$this->load->model('risk/risk');

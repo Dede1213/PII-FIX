@@ -46,7 +46,7 @@ var RiskModify = function() {
         	
         	$('#modal-library').modal('hide');
         	Metronic.blockUI({ boxed: true });
-        	$.getJSON( site_url+"/risk/RiskRegister/loadRiskLibrary/"+rid, function( data_risk ) {
+        	$.getJSON( site_url+"/risk/RiskRegister/loadRiskLibraryModify/"+rid, function( data_risk ) {
         		Metronic.unblockUI();
         		
         		data_risk['risk_library_id'] = data_risk['risk_library_id'];

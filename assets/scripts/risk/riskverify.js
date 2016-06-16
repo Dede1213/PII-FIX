@@ -21,6 +21,13 @@ var RiskVerify = function() {
         			me.submitRiskData('save');
         		});
         	});
+
+            $('#risk-button-draft-under').on('click', function() {
+                var mod = MainApp.viewGlobalModal('confirm', 'Are You sure you want to Save this risk ?');
+                mod.find('button.btn-primary').one('click', function(){
+                    me.submitRiskData('save-under');
+                });
+            });
         	
         	$('#risk-button-delete').on('click', function() {
         		var mod = MainApp.viewGlobalModal('warning', 'Are You sure you want to delete this Risk ?');
@@ -232,7 +239,9 @@ var RiskVerify = function() {
             	Metronic.blockUI({ boxed: true });
             	if (submitMode == 'verify') {
             		var url = site_url+'/main/mainrac/verifyRiskDatarac';
-            	} else {
+            	}else if (submitMode == 'save-under') {
+                    var url = site_url+'/main/mainrac/saveRiskDatarac';
+                } else {
             		var url = site_url+'/main/mainrac/saveRiskDatarac';
             	}
             	
@@ -247,7 +256,9 @@ var RiskVerify = function() {
             					//location.href=site_url+'/risk/RiskRegister/modifyRisk/'+g_risk_id;
             					if (submitMode == 'verify') {
             						location.href=site_url+'/main/mainrac/riskRegister/'+g_username;
-            					} else {
+            					}else if (submitMode == 'save-under') {
+                                    location.href=site_url+'/risk/RiskRegister/undermaintenance/';
+                                } else {
             						location.href=site_url+'/main/mainrac/riskRegisterForm/'+g_risk_id;
             					}
             				});

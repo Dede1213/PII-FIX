@@ -543,31 +543,44 @@
 
 		function listofrisk_user($username, $periode){
 			$querynya = "SELECT DISTINCT m_risk_category.`cat_name`, t_risk.`risk_status`, t_risk.`risk_code`, t_risk.`risk_event`, t_risk.`risk_description`, t_risk.`risk_owner`, t_risk.`risk_cause`, t_risk.`risk_impact`,
-(SELECT GROUP_CONCAT(t_risk_objective.`objective` SEPARATOR '\n') FROM t_risk_objective WHERE t_risk.risk_id = t_risk_objective.risk_id) AS 'Objective', 
-(SELECT GROUP_CONCAT(t_risk_control.`risk_existing_control` SEPARATOR '\n') FROM t_risk_control WHERE t_risk.risk_id = t_risk_control.risk_id) AS 'Existing Control', 
-(SELECT GROUP_CONCAT(t_risk_control.`risk_evaluation_control` SEPARATOR '\n') FROM t_risk_control WHERE t_risk.risk_id = t_risk_control.risk_id) AS 'Control Evaluation', 
-(SELECT GROUP_CONCAT(t_risk_control.`risk_control_owner` SEPARATOR '\n') FROM t_risk_control WHERE t_risk.risk_id = t_risk_control.risk_id) AS 'Control Owner', t_risk.`risk_impact_level`, t_risk.`risk_likelihood_key`,t_risk.`risk_level`, t_risk.`suggested_risk_treatment`,
-(SELECT GROUP_CONCAT(t_risk_action_plan.`action_plan` SEPARATOR '\n') FROM t_risk_action_plan WHERE t_risk.risk_id = t_risk_action_plan.risk_id) AS 'Action Plan',
-(SELECT GROUP_CONCAT(t_risk_action_plan.`division` SEPARATOR '\n') FROM t_risk_action_plan WHERE t_risk.risk_id = t_risk_action_plan.risk_id) AS 'Action Plan Owner',
-(SELECT GROUP_CONCAT(t_risk_action_plan.`due_date` SEPARATOR '\n') FROM t_risk_action_plan WHERE t_risk.risk_id = t_risk_action_plan.risk_id) AS 'Due Date'
+(SELECT GROUP_CONCAT(t_risk_objective.`objective` SEPARATOR ',') FROM t_risk_objective WHERE t_risk.risk_id = t_risk_objective.risk_id) AS 'Objective', 
+(SELECT GROUP_CONCAT(t_risk_control.`risk_existing_control` SEPARATOR ',') FROM t_risk_control WHERE t_risk.risk_id = t_risk_control.risk_id) AS 'Existing Control', 
+(SELECT GROUP_CONCAT(t_risk_control.`risk_evaluation_control` SEPARATOR ',') FROM t_risk_control WHERE t_risk.risk_id = t_risk_control.risk_id) AS 'Control Evaluation', 
+(SELECT GROUP_CONCAT(t_risk_control.`risk_control_owner` SEPARATOR ',') FROM t_risk_control WHERE t_risk.risk_id = t_risk_control.risk_id) AS 'Control Owner', t_risk.`risk_impact_level`, t_risk.`risk_likelihood_key`,t_risk.`risk_level`, t_risk.`suggested_risk_treatment`,
+(SELECT GROUP_CONCAT(t_risk_action_plan.`action_plan` SEPARATOR ',') FROM t_risk_action_plan WHERE t_risk.risk_id = t_risk_action_plan.risk_id) AS 'Action Plan',
+(SELECT GROUP_CONCAT(t_risk_action_plan.`division` SEPARATOR ',') FROM t_risk_action_plan WHERE t_risk.risk_id = t_risk_action_plan.risk_id) AS 'Action Plan Owner',
+(SELECT GROUP_CONCAT(t_risk_action_plan.`due_date` SEPARATOR ',') FROM t_risk_action_plan WHERE t_risk.risk_id = t_risk_action_plan.risk_id) AS 'Due Date'
 FROM t_risk 
 JOIN m_risk_category ON t_risk.`risk_2nd_sub_category` = m_risk_category.`cat_id` 
-WHERE t_risk.`risk_input_by`='h.harlina' and t_risk.`periode_id`='1' and t_risk.`risk_code` not in (select risk_code from t_risk_change where periode_id = '1' and risk_input_by = 'h.harlina')
+WHERE t_risk.`risk_input_by`='$username' and t_risk.`periode_id`='$periode' and t_risk.`risk_code` not in (select risk_code from t_risk_change where periode_id = '$periode' and risk_input_by = '$username') and existing_control_id is null
 
 UNION 
 
 SELECT DISTINCT m_risk_category.`cat_name`, t_risk_change.`risk_status`, t_risk_change.`risk_code`, t_risk_change.`risk_event`, t_risk_change.`risk_description`, t_risk_change.`risk_owner`, t_risk_change.`risk_cause`, t_risk_change.`risk_impact`,
-(SELECT GROUP_CONCAT(t_risk_objective_change.`objective` SEPARATOR '\n') FROM t_risk_objective_change WHERE t_risk_change.risk_id = t_risk_objective_change.risk_id) AS 'Objective', 
-(SELECT GROUP_CONCAT(t_risk_control_change.`risk_existing_control` SEPARATOR '\n') FROM t_risk_control_change WHERE t_risk_change.risk_id = t_risk_control_change.risk_id) AS 'Existing Control', 
-(SELECT GROUP_CONCAT(t_risk_control_change.`risk_evaluation_control` SEPARATOR '\n') FROM t_risk_control_change WHERE t_risk_change.risk_id = t_risk_control_change.risk_id) AS 'Control Evaluation', 
-(SELECT GROUP_CONCAT(t_risk_control_change.`risk_control_owner` SEPARATOR '\n') FROM t_risk_control_change WHERE t_risk_change.risk_id = t_risk_control_change.risk_id) AS 'Control Owner', t_risk_change.`risk_impact_level`, t_risk_change.`risk_likelihood_key`,t_risk_change.`risk_level`, t_risk_change.`suggested_risk_treatment`,
-(SELECT GROUP_CONCAT(t_risk_action_plan_change.`action_plan` SEPARATOR '\n') FROM t_risk_action_plan_change WHERE t_risk_change.risk_id = t_risk_action_plan_change.risk_id) AS 'Action Plan',
-(SELECT GROUP_CONCAT(t_risk_action_plan_change.`division` SEPARATOR '\n') FROM t_risk_action_plan_change WHERE t_risk_change.risk_id = t_risk_action_plan_change.risk_id) AS 'Action Plan Owner',
-(SELECT GROUP_CONCAT(t_risk_action_plan_change.`due_date` SEPARATOR '\n') FROM t_risk_action_plan_change WHERE t_risk_change.risk_id = t_risk_action_plan_change.risk_id) AS 'Due Date'
+(SELECT GROUP_CONCAT(t_risk_objective_change.`objective` SEPARATOR ',') FROM t_risk_objective_change WHERE t_risk_change.risk_id = t_risk_objective_change.risk_id) AS 'Objective', 
+(SELECT GROUP_CONCAT(t_risk_control_change.`risk_existing_control` SEPARATOR ',') FROM t_risk_control_change WHERE t_risk_change.risk_id = t_risk_control_change.risk_id) AS 'Existing Control', 
+(SELECT GROUP_CONCAT(t_risk_control_change.`risk_evaluation_control` SEPARATOR ',') FROM t_risk_control_change WHERE t_risk_change.risk_id = t_risk_control_change.risk_id) AS 'Control Evaluation', 
+(SELECT GROUP_CONCAT(t_risk_control_change.`risk_control_owner` SEPARATOR ',') FROM t_risk_control_change WHERE t_risk_change.risk_id = t_risk_control_change.risk_id) AS 'Control Owner', t_risk_change.`risk_impact_level`, t_risk_change.`risk_likelihood_key`,t_risk_change.`risk_level`, t_risk_change.`suggested_risk_treatment`,
+(SELECT GROUP_CONCAT(t_risk_action_plan_change.`action_plan` SEPARATOR ',') FROM t_risk_action_plan_change WHERE t_risk_change.risk_id = t_risk_action_plan_change.risk_id) AS 'Action Plan',
+(SELECT GROUP_CONCAT(t_risk_action_plan_change.`division` SEPARATOR ',') FROM t_risk_action_plan_change WHERE t_risk_change.risk_id = t_risk_action_plan_change.risk_id) AS 'Action Plan Owner',
+(SELECT GROUP_CONCAT(t_risk_action_plan_change.`due_date` SEPARATOR ',') FROM t_risk_action_plan_change WHERE t_risk_change.risk_id = t_risk_action_plan_change.risk_id) AS 'Due Date'
 FROM t_risk_change 
 JOIN m_risk_category ON t_risk_change.`risk_2nd_sub_category` = m_risk_category.`cat_id` 
-WHERE t_risk_change.`risk_input_by`='h.harlina' and t_risk_change.`periode_id`='1' 
+WHERE t_risk_change.`risk_input_by`='$username' and t_risk_change.`periode_id`='$periode' and existing_control_id is null
 
+UNION
+
+SELECT DISTINCT m_risk_category.`cat_name`, t_risk.`risk_status`, t_risk.`risk_code`, t_risk.`risk_event`, t_risk.`risk_description`, t_risk.`risk_owner`, t_risk.`risk_cause`, t_risk.`risk_impact`,
+(SELECT GROUP_CONCAT(t_risk_objective.`objective` SEPARATOR ',') FROM t_risk_objective WHERE t_risk.risk_id = t_risk_objective.risk_id) AS 'Objective', 
+(SELECT GROUP_CONCAT(t_risk_control.`risk_existing_control` SEPARATOR ',') FROM t_risk_control WHERE t_risk.risk_id = t_risk_control.risk_id) AS 'Existing Control', 
+(SELECT GROUP_CONCAT(t_risk_control.`risk_evaluation_control` SEPARATOR ',') FROM t_risk_control WHERE t_risk.risk_id = t_risk_control.risk_id) AS 'Control Evaluation', 
+(SELECT GROUP_CONCAT(t_risk_control.`risk_control_owner` SEPARATOR ',') FROM t_risk_control WHERE t_risk.risk_id = t_risk_control.risk_id) AS 'Control Owner', t_risk.`risk_impact_level`, t_risk.`risk_likelihood_key`,t_risk.`risk_level`, t_risk.`suggested_risk_treatment`,
+(SELECT GROUP_CONCAT(t_risk_action_plan.`action_plan` SEPARATOR ',') FROM t_risk_action_plan WHERE t_risk.risk_id = t_risk_action_plan.risk_id) AS 'Action Plan',
+(SELECT GROUP_CONCAT(t_risk_action_plan.`division` SEPARATOR ',') FROM t_risk_action_plan WHERE t_risk.risk_id = t_risk_action_plan.risk_id) AS 'Action Plan Owner',
+(SELECT GROUP_CONCAT(t_risk_action_plan.`due_date` SEPARATOR ',') FROM t_risk_action_plan WHERE t_risk.risk_id = t_risk_action_plan.risk_id) AS 'Due Date'
+FROM t_risk 
+JOIN m_risk_category ON t_risk.`risk_2nd_sub_category` = m_risk_category.`cat_id` 
+WHERE t_risk.`risk_input_by`='$username' and t_risk.`risk_code` not in (select risk_code from t_risk_change where periode_id = '$periode' and risk_input_by = '$username') and existing_control_id is null
 
  ";
 

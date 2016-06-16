@@ -296,10 +296,16 @@ grid2.init({
         				'</div>';	
         			};
         		} else{
+        			if(g_status_submit == '1'){
+        			img = '<div class="btn-group">'+
+        					'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"></i></button>'+
+        				'</div>';
+        			}else{
         			img = '<div class="btn-group">'+
         					'<button type="button" class="btn btn-default btn-xs button-grid-confirm"><i class="fa fa-thumbs-up font-green"></i></button>'+
         					'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"></i></button>'+
-        				'</div>';
+        				'</div>';	
+        			}
         		}
         		return img;
         	}

@@ -25,6 +25,11 @@
 					<label for="filterFormBy">Filter By</label>
 					<select class="form-control input-medium input-sm" id="filterFormBy">
 						<option value="title">News Title</option>
+						<option value="filename">File Name</option>
+						<option value="a.created_date">Created Date</option>
+						<option value="a.created_by">Created By</option>
+						<option value="a.date_publish">Publish Date</option>
+						
 					</select>
 				</div>
 				<div class="form-group">

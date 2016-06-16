@@ -22,9 +22,24 @@
 		<div class="row">
 			<div class="col-md-12">
 				<ul class="list-group">
-					<?php foreach($news as $row) { ?>
-					<li class="list-group-item"><font style="font-size:19px;"><a target="_self" href="<?=$site_url?>/main/news/view/<?=$row['id']?>"><?=$row['title']?></a></font> <br> <font style="color:gray; font-size:11px;"> --- Publish On <?=$row['date_publish_v']?> </font></li>
-					<?php } ?>
+					<?php 
+					$no = 1;
+					foreach($news as $row) { 
+
+					$modulus = $no%2;
+					if($modulus == 0){
+						$warna = 'white';
+					}else{
+						$warna = '#99FFCC';
+					}
+
+					?>
+					<li class="list-group-item" style="background-color:<?=$warna?>;"><font style="font-size:19px;"><a target="_self" href="<?=$site_url?>/main/news/view/<?=$row['id']?>"><?=$row['title']?></a></font> <br> <font style="color:gray; font-size:11px;"> --- Publish On <?=$row['date_publish_v']?> </font></li>
+					
+					<?php
+					$no++;
+					 } 
+					 ?>
 				</ul>
 			</div>
 		</div>

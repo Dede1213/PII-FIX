@@ -125,10 +125,10 @@ gridRegister.init({
                 var ret = full.risk_treatment_owner_v;
                 if (data == '' || data == null) {
                     ret = '<span></span> &nbsp; '+
-                          '<button onclick="javascript: Dashboard.viewOwnedAssignForm(\''+full.username+'\', \'treatment\',\''+full.note+'\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-plus"></i><span class="hidden-480"> Note </span></button>';
+                          '<button onclick="javascript: Dashboard.viewOwnedAssignForm(\''+full.username+'\', \'treatment\',\''+full.note+'\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-plus"> Add </i><span class="hidden-480"> Note </span></button>';
                 }else{
                     ret = '<span></span> &nbsp; '+
-                          '<button onclick="javascript: Dashboard.viewOwnedAssignForm(\''+full.username+'\', \'treatment\',\''+full.note+'\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-plus"></i><span class="hidden-480"> Note </span></button>';
+                          '<button onclick="javascript: Dashboard.viewOwnedAssignForm(\''+full.username+'\', \'treatment\',\''+full.note+'\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-plus"> Add </i><span class="hidden-480"> Note </span></button>';
                 }
                 return ret;
             }

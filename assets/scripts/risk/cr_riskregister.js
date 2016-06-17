@@ -29,7 +29,7 @@ gridControl.init({
         	"data": "risk_code",
         	"render": function ( data, type, full, meta ) {
         		var ret = '<div class="btn-group">'+
-        		'<button type="button" class="btn btn-default btn-xs" onclick="javascript: ChangeRequest.selectControlLibrary('+full.id+')"><i class="fa fa-check-circle font-blue"></i></button>'+
+        		'<button type="button" class="btn btn-default btn-xs" onclick="javascript: ChangeRequest.selectControlLibrary('+full.id+')"><i class="fa fa-check-circle font-blue"> Select </i></button>'+
         		'</div>';
         		return ret;
         	}
@@ -77,7 +77,7 @@ gridControlobjective.init({
             "data": "id",
             "render": function ( data, type, full, meta ) {
                 var ret = '<div class="btn-group">'+
-                '<button type="button" class="btn btn-default btn-xs" onclick="javascript: ChangeRequest.selectControlLibraryobjective('+full.id+')"><i class="fa fa-check-circle font-blue"></i></button>'+
+                '<button type="button" class="btn btn-default btn-xs" onclick="javascript: ChangeRequest.selectControlLibraryobjective('+full.id+')"><i class="fa fa-check-circle font-blue"> Select </i></button>'+
                 '</div>';
                 return ret;
             }
@@ -125,7 +125,7 @@ gridLibraryaction.init({
         	"data": "action_plan",
         	"render": function ( data, type, full, meta ) {
         		var ret = '<div class="btn-group">'+
-        		'<button type="button" class="btn btn-default btn-xs" onclick="javascript: ChangeRequest.selectLibraryaction('+full.id+')"><i class="fa fa-check-circle font-blue"></i></button>'+
+        		'<button type="button" class="btn btn-default btn-xs" onclick="javascript: ChangeRequest.selectLibraryaction('+full.id+')"><i class="fa fa-check-circle font-blue"> Select </i></button>'+
         		'</div>';
         		return ret;
         	}
@@ -289,7 +289,7 @@ gridControlExisting.init({
             "data": "id",
             "render": function ( data, type, full, meta ) {
                 var ret = '<div class="btn-group">'+
-                '<button type="button" class="btn btn-default btn-xs" onclick="javascript: ChangeRequest.selectControlLibraryexisting('+full.id +')"><i class="fa fa-check-circle font-blue"></i></button>'+
+                '<button type="button" class="btn btn-default btn-xs" onclick="javascript: ChangeRequest.selectControlLibraryexisting('+full.id +')"><i class="fa fa-check-circle font-blue"> Select </i></button>'+
                 '</div>';
                 return ret;
             }
@@ -1079,7 +1079,7 @@ var ChangeRequest = function() {
                 '<td><input type = "hidden" value = "'+nnode.division_v+'" id = "division_v'+me.dataActionPlanCounter+'">'+nnode.division_v+'</td>'+
                 '<td>'+
                 '<div class="btn-group">'+
-                    '<button type="button" class="btn btn-default btn-xs" onclick="modal_ap_edit('+me.dataActionPlanCounter+')" ><i class="fa fa-pencil font-blue"></i></button>'+
+                    '<button type="button" class="btn btn-default btn-xs" onclick="modal_ap_edit('+me.dataActionPlanCounter+')" ><i class="fa fa-pencil font-blue"> Edit </i></button>'+
                     '<button type="button" class="btn btn-default btn-xs" onclick="ChangeRequest.actionPlanTableDelete(this, '+me.dataActionPlanCounter+')"><i class="fa fa-trash-o font-red"></i></button>'+
                 '</div>'+
                 '</td>'+
@@ -1092,13 +1092,13 @@ var ChangeRequest = function() {
         	var me = this;
         	var xid = tdata.rowid;
         	
-        	var del_btn = '<button type="button" class="btn btn-default btn-xs button-grid-delete" data-id="'+xid+'"><i class="fa fa-trash-o font-red"></i></button>';
+        	var del_btn = '<button type="button" class="btn btn-default btn-xs button-grid-delete" data-id="'+xid+'"><i class="fa fa-trash-o font-red"> Delete </i></button>';
         	if (g_change_type == "Action Plan Form") {
         		del_btn = '';
         	}
         	
         	var act_str = '<div class="btn-group">'+
-        		'<button type="button" class="btn btn-default btn-xs button-grid-edit" data-id="'+xid+'"><i class="fa fa-pencil font-blue"></i></button>'+
+        		'<button type="button" class="btn btn-default btn-xs button-grid-edit" data-id="'+xid+'"><i class="fa fa-pencil font-blue"> Edit </i></button>'+
         		del_btn+
         	'</div>';
         	

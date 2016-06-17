@@ -110,7 +110,7 @@
 			<tr id="modal-pic-tr-<?=$k?>">
 				<td>
 				<div class="btn-group">
-					<button value_idx="<?=$k?>" value="<?=$row['username']?>" type="button" class="btn btn-default btn-xs button-assign-pic"><i class="fa fa-check-circle font-blue"></i></button>
+					<button value_idx="<?=$k?>" value="<?=$row['username']?>" type="button" class="btn btn-default btn-xs button-assign-pic"><i class="fa fa-check-circle font-blue"> Select </i></button>
 				</div>
 				</td>
 				<td class="col_display_name"><?=$row['display_name']?></td>

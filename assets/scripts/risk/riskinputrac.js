@@ -29,7 +29,7 @@ gridLibraryaction.init({
         	"data": "action_plan",
         	"render": function ( data, type, full, meta ) {
         		var ret = '<div class="btn-group">'+
-        		'<button type="button" class="btn btn-default btn-xs" onclick="javascript: RiskInput.selectLibraryaction('+full.id+')"><i class="fa fa-check-circle font-blue"></i></button>'+
+        		'<button type="button" class="btn btn-default btn-xs" onclick="javascript: RiskInput.selectLibraryaction('+full.id+')"><i class="fa fa-check-circle font-blue"> Select </i></button>'+
         		'</div>';
         		return ret;
         	}
@@ -75,7 +75,7 @@ gridLibrary.init({
         	"data": "risk_code",
         	"render": function ( data, type, full, meta ) {
         		var ret = '<div class="btn-group">'+
-        		'<button type="button" class="btn btn-default btn-xs" onclick="javascript: RiskInput.selectLibrary('+full.risk_id+')"><i class="fa fa-check-circle font-blue"></i></button>'+
+        		'<button type="button" class="btn btn-default btn-xs" onclick="javascript: RiskInput.selectLibrary('+full.risk_id+')"><i class="fa fa-check-circle font-blue"> Select </i></button>'+
         		'</div>';
         		return ret;
         	}
@@ -123,7 +123,7 @@ gridControl.init({
         	"data": "risk_code",
         	"render": function ( data, type, full, meta ) {
         		var ret = '<div class="btn-group">'+
-        		'<button type="button" class="btn btn-default btn-xs" onclick="javascript: RiskInput.selectControlLibrary('+full.id+')"><i class="fa fa-check-circle font-blue"></i></button>'+
+        		'<button type="button" class="btn btn-default btn-xs" onclick="javascript: RiskInput.selectControlLibrary('+full.id+')"><i class="fa fa-check-circle font-blue"> Select </i></button>'+
         		'</div>';
         		return ret;
         	}
@@ -171,7 +171,7 @@ gridControlobjective.init({
             "data": "id",
             "render": function ( data, type, full, meta ) {
                 var ret = '<div class="btn-group">'+
-                '<button type="button" class="btn btn-default btn-xs" onclick="javascript: RiskInput.selectControlLibraryobjective('+full.id+')"><i class="fa fa-check-circle font-blue"></i></button>'+
+                '<button type="button" class="btn btn-default btn-xs" onclick="javascript: RiskInput.selectControlLibraryobjective('+full.id+')"><i class="fa fa-check-circle font-blue"> Select </i></button>'+
                 '</div>';
                 return ret;
             }
@@ -217,7 +217,7 @@ gridControlExisting.init({
             "data": "risk_id",
             "render": function ( data, type, full, meta ) {
                 var ret = '<div class="btn-group">'+
-                '<button type="button" class="btn btn-default btn-xs" onclick="javascript: RiskInput.selectControlLibraryexisting('+full.id +')"><i class="fa fa-check-circle font-blue"></i></button>'+
+                '<button type="button" class="btn btn-default btn-xs" onclick="javascript: RiskInput.selectControlLibraryexisting('+full.id +')"><i class="fa fa-check-circle font-blue"> Select </i></button>'+
                 '</div>';
                 return ret;
             }
@@ -888,8 +888,8 @@ var RiskInput = function() {
         		'<td><input type = "hidden" id = "risk_control_owner'+me.dataControlCounter+'" value = "'+nnode.risk_control_owner+'">'+nnode.risk_control_owner+'</td>'+
         		'<td>'+
         		'<div class="btn-group">'+
-					'<button type="button" class="btn btn-default btn-xs" onclick = "modal_control_edit('+me.dataControlCounter+')" ><i class="fa fa-pencil font-blue"></i></button>'+
-        			'<button type="button" class="btn btn-default btn-xs" onclick="RiskInput.controlTableDelete(this, '+me.dataControlCounter+')"><i class="fa fa-trash-o font-red"></i></button>'+
+					'<button type="button" class="btn btn-default btn-xs" onclick = "modal_control_edit('+me.dataControlCounter+')" ><i class="fa fa-pencil font-blue"> Edit </i></button>'+
+        			'<button type="button" class="btn btn-default btn-xs" onclick="RiskInput.controlTableDelete(this, '+me.dataControlCounter+')"><i class="fa fa-trash-o font-red"> Delete </i></button>'+
         		'</div>'+
         		'</td>'+
         	'</tr>');
@@ -916,8 +916,8 @@ var RiskInput = function() {
                 '<td><textarea style="display:none;" id = "objective'+me.dataControlCounterobjective+'">'+nnode.objective+'</textarea>'+nnode.objective+'</td>'+
                 '<td>'+
                 '<div class="btn-group">'+
-                    '<button type="button" class="btn btn-default btn-xs" onclick = "modal_control_edit_objective('+me.dataControlCounterobjective+')" ><i class="fa fa-pencil font-blue"></i></button>'+
-                    '<button type="button" class="btn btn-default btn-xs" onclick="RiskInput.controlTableDeleteobjective(this, '+me.dataControlCounterobjective+')"><i class="fa fa-trash-o font-red"></i></button>'+
+                    '<button type="button" class="btn btn-default btn-xs" onclick = "modal_control_edit_objective('+me.dataControlCounterobjective+')" ><i class="fa fa-pencil font-blue"> Edit </i></button>'+
+                    '<button type="button" class="btn btn-default btn-xs" onclick="RiskInput.controlTableDeleteobjective(this, '+me.dataControlCounterobjective+')"><i class="fa fa-trash-o font-red"> Delete </i></button>'+
                 '</div>'+
                 '</td>'+
             '</tr>');
@@ -964,8 +964,8 @@ var RiskInput = function() {
                 
         		'<td>'+
         		'<div class="btn-group">'+
-					'<button type="button" class="btn btn-default btn-xs" onclick="modal_ap_edit('+me.dataActionPlanCounter+')" ><i class="fa fa-pencil font-blue"></i></button>'+
-        			'<button type="button" class="btn btn-default btn-xs" onclick="RiskInput.actionPlanTableDelete(this, '+me.dataActionPlanCounter+')"><i class="fa fa-trash-o font-red"></i></button>'+
+					'<button type="button" class="btn btn-default btn-xs" onclick="modal_ap_edit('+me.dataActionPlanCounter+')" ><i class="fa fa-pencil font-blue"> Edit </i></button>'+
+        			'<button type="button" class="btn btn-default btn-xs" onclick="RiskInput.actionPlanTableDelete(this, '+me.dataActionPlanCounter+')"><i class="fa fa-trash-o font-red"> Delete </i></button>'+
         		'</div>'+
         		'</td>'+
         	'</tr>');

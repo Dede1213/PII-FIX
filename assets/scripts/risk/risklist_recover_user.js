@@ -179,20 +179,32 @@ grid.init({
         	"render": function ( data, type, full, meta ) {
         		var img = '';
         		if (data == '0') {
+        			if(g_status_submit == '1'){
+        			img = '';
+        			}else{
         			img = '<div class="btn-group">'+
         					'<button type="button" class="btn btn-default btn-xs button-grid-confirm"><i class="fa fa-thumbs-up font-green"></i></button>'+
         					
-        				'</div>';
+        				'</div>';	
+        			}
         		} else if (data == '1') {
+        			if(g_status_submit == '1'){
+        			img = '';
+        			}else{
         			img = '<div class="btn-group">'+
         					'<button type="button" class="btn btn-default btn-xs button-grid-confirm"><i class="fa fa-thumbs-up font-green"></i></button>'+
         					
-        				'</div>';
+        				'</div>';	
+        			}
         		} else{
+        			if(g_status_submit == '1'){
+        			img = '';
+        			}else{
         			img = '<div class="btn-group">'+
         					'<button type="button" class="btn btn-default btn-xs button-grid-confirm"><i class="fa fa-thumbs-up font-green"></i></button>'+
         					
-        				'</div>';
+        				'</div>';	
+        			}
         		}
         		return img;
         	}

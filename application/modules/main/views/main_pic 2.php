@@ -164,7 +164,7 @@
 								<td>John Doe</td>
 								<td>
 									<div class="btn-group">
-										<button type="button" class="btn blue btn-xs button-grid-edit" onclick="location.href='<?=$site_url?>/risk/RiskRegister/ChangeRequestInput'"><i class="fa fa-pencil"></i></button>
+										<button type="button" class="btn blue btn-xs button-grid-edit" onclick="location.href='<?=$site_url?>/risk/RiskRegister/ChangeRequestInput'"><i class="fa fa-pencil"> Edit </i></button>
 									</div>
 								</td>
 							</tr>
@@ -180,7 +180,7 @@
 								<td>John Doe</td>
 								<td>
 									<div class="btn-group">
-										<button type="button" class="btn blue btn-xs button-grid-edit" onclick="location.href='<?=$site_url?>/risk/RiskRegister/ChangeRequestInput'"><i class="fa fa-pencil"></i></button>
+										<button type="button" class="btn blue btn-xs button-grid-edit" onclick="location.href='<?=$site_url?>/risk/RiskRegister/ChangeRequestInput'"><i class="fa fa-pencil"> Edit </i></button>
 									</div>
 								</td>
 							</tr>
@@ -196,7 +196,7 @@
 								<td>John Doe</td>
 								<td>
 									<div class="btn-group">
-										<button type="button" class="btn blue btn-xs button-grid-edit" onclick="location.href='<?=$site_url?>/risk/RiskRegister/ChangeRequestInput'"><i class="fa fa-pencil"></i></button>
+										<button type="button" class="btn blue btn-xs button-grid-edit" onclick="location.href='<?=$site_url?>/risk/RiskRegister/ChangeRequestInput'"><i class="fa fa-pencil"> Edit </i></button>
 									</div>
 								</td>
 							</tr>
@@ -262,7 +262,7 @@
 										<td>Moderate</td>
 										<td>
 											Unasigned
-											<button href="#modal-pic" data-toggle="modal" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"></i></button>
+											<button href="#modal-pic" data-toggle="modal" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"> Edit </i></button>
 										</td>
 										<td>Treatment</td>
 										<td>&nbsp;
@@ -279,7 +279,7 @@
 										<td>Treatment</td>
 										<td>
 											<div class="btn-group">
-												<button type="button" class="btn blue btn-xs button-grid-edit" onclick="location.href='<?=$site_url?>/risk/RiskRegister/ChangeRequestInput'"><i class="fa fa-pencil"></i></button>
+												<button type="button" class="btn blue btn-xs button-grid-edit" onclick="location.href='<?=$site_url?>/risk/RiskRegister/ChangeRequestInput'"><i class="fa fa-pencil"> Edit </i></button>
 											</div>
 										</td>
 									</tr>
@@ -294,7 +294,7 @@
 										<td>Treatment</td>
 										<td>
 											<div class="btn-group">
-												<button type="button" class="btn blue btn-xs button-grid-edit" onclick="location.href='<?=$site_url?>/risk/RiskRegister/ChangeRequestInput'"><i class="fa fa-pencil"></i></button>
+												<button type="button" class="btn blue btn-xs button-grid-edit" onclick="location.href='<?=$site_url?>/risk/RiskRegister/ChangeRequestInput'"><i class="fa fa-pencil"> Edit </i></button>
 											</div>
 										</td>
 									</tr>
@@ -357,7 +357,7 @@
 										<td>12-10-2015</td>
 										<td>
 											Unasigned
-											<button href="#modal-pic" data-toggle="modal" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"></i></button>
+											<button href="#modal-pic" data-toggle="modal" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"> Edit </i></button>
 										</td>
 										<td>A.1.1-01</td>
 										<td>&nbsp;
@@ -374,7 +374,7 @@
 										<td>A.1.1-01</td>
 										<td>
 											<div class="btn-group">
-												<button type="button" class="btn blue btn-xs button-grid-edit" onclick="location.href='<?=$site_url?>/risk/RiskRegister/ChangeRequestInput'"><i class="fa fa-pencil"></i></button>
+												<button type="button" class="btn blue btn-xs button-grid-edit" onclick="location.href='<?=$site_url?>/risk/RiskRegister/ChangeRequestInput'"><i class="fa fa-pencil"> Edit </i></button>
 											</div>
 										</td>
 									</tr>
@@ -389,7 +389,7 @@
 										<td>A.1.1-01</td>
 										<td>
 											<div class="btn-group">
-												<button type="button" class="btn blue btn-xs button-grid-edit" onclick="location.href='<?=$site_url?>/risk/RiskRegister/ChangeRequestInput'"><i class="fa fa-pencil"></i></button>
+												<button type="button" class="btn blue btn-xs button-grid-edit" onclick="location.href='<?=$site_url?>/risk/RiskRegister/ChangeRequestInput'"><i class="fa fa-pencil"> Edit </i></button>
 											</div>
 										</td>
 									</tr>
@@ -473,7 +473,7 @@
 										</td>
 										<td>
 											<div class="btn-group">
-												<button type="button" class="btn blue btn-xs button-grid-edit" onclick="location.href='<?=$site_url?>/risk/RiskRegister/ChangeRequestInput'"><i class="fa fa-pencil"></i></button>
+												<button type="button" class="btn blue btn-xs button-grid-edit" onclick="location.href='<?=$site_url?>/risk/RiskRegister/ChangeRequestInput'"><i class="fa fa-pencil"> Edit </i></button>
 											</div>
 										</td>
 									</tr>
@@ -490,7 +490,7 @@
 										</td>
 										<td>
 											<div class="btn-group">
-												<button type="button" class="btn blue btn-xs button-grid-edit" onclick="location.href='<?=$site_url?>/risk/RiskRegister/ChangeRequestInput'"><i class="fa fa-pencil"></i></button>
+												<button type="button" class="btn blue btn-xs button-grid-edit" onclick="location.href='<?=$site_url?>/risk/RiskRegister/ChangeRequestInput'"><i class="fa fa-pencil"> Edit </i></button>
 											</div>
 										</td>
 									</tr>
@@ -555,7 +555,7 @@
 										<td>Timing</td>
 										<td>
 											Unasigned
-											<button href="#modal-pic" data-toggle="modal" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"></i></button>
+											<button href="#modal-pic" data-toggle="modal" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"> Edit </i></button>
 										</td>
 										<td>A.1.1-01</td>
 										<td>&nbsp;</td>
@@ -572,7 +572,7 @@
 										<td>A.1.1-01</td>
 										<td>
 											<div class="btn-group">
-												<button type="button" class="btn blue btn-xs button-grid-edit" onclick="location.href='<?=$site_url?>/risk/RiskRegister/ChangeRequestInput'"><i class="fa fa-pencil"></i></button>
+												<button type="button" class="btn blue btn-xs button-grid-edit" onclick="location.href='<?=$site_url?>/risk/RiskRegister/ChangeRequestInput'"><i class="fa fa-pencil"> Edit </i></button>
 											</div>
 										</td>
 									</tr>
@@ -588,7 +588,7 @@
 										<td>A.1.1-01</td>
 										<td>
 											<div class="btn-group">
-												<button type="button" class="btn blue btn-xs button-grid-edit" onclick="location.href='<?=$site_url?>/risk/RiskRegister/ChangeRequestInput'"><i class="fa fa-pencil"></i></button>
+												<button type="button" class="btn blue btn-xs button-grid-edit" onclick="location.href='<?=$site_url?>/risk/RiskRegister/ChangeRequestInput'"><i class="fa fa-pencil"> Edit </i></button>
 											</div>
 										</td>
 									</tr>
@@ -687,7 +687,7 @@
 			<tr>
 				<td>
 				<div class="btn-group">
-					<button type="button" class="btn btn-default btn-xs"><i class="fa fa-check-circle font-blue"></i></button>
+					<button type="button" class="btn btn-default btn-xs"><i class="fa fa-check-circle font-blue"> Select </i></button>
 				</div>
 				</td>
 				<td>John Doe</td>

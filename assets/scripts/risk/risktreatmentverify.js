@@ -29,7 +29,7 @@ gridControl.init({
         	"data": "risk_code",
         	"render": function ( data, type, full, meta ) {
         		var ret = '<div class="btn-group">'+
-        		'<button type="button" class="btn btn-default btn-xs" onclick="javascript: RiskVerify.selectControlLibrary('+full.id+')"><i class="fa fa-check-circle font-blue"></i></button>'+
+        		'<button type="button" class="btn btn-default btn-xs" onclick="javascript: RiskVerify.selectControlLibrary('+full.id+')"><i class="fa fa-check-circle font-blue"> Select </i></button>'+
         		'</div>';
         		return ret;
         	}
@@ -76,7 +76,7 @@ gridLibraryaction.init({
             "data": "action_plan",
             "render": function ( data, type, full, meta ) {
                 var ret = '<div class="btn-group">'+
-                '<button type="button" class="btn btn-default btn-xs" onclick="javascript: RiskVerify.selectLibraryaction('+full.id+')"><i class="fa fa-check-circle font-blue"></i></button>'+
+                '<button type="button" class="btn btn-default btn-xs" onclick="javascript: RiskVerify.selectLibraryaction('+full.id+')"><i class="fa fa-check-circle font-blue"> Select </i></button>'+
                 '</div>';
                 return ret;
             }
@@ -121,7 +121,7 @@ gridControlExisting.init({
             "data": "id",
             "render": function ( data, type, full, meta ) {
                 var ret = '<div class="btn-group">'+
-                '<button type="button" class="btn btn-default btn-xs" onclick="javascript: RiskVerify.selectControlLibraryexisting('+full.id +')"><i class="fa fa-check-circle font-blue"></i></button>'+
+                '<button type="button" class="btn btn-default btn-xs" onclick="javascript: RiskVerify.selectControlLibraryexisting('+full.id +')"><i class="fa fa-check-circle font-blue"> Select </i></button>'+
                 '</div>';
                 return ret;
             }

@@ -372,7 +372,7 @@
 			<tr>
 				<td>
 				<div class="btn-group">
-					<button type="button" class="btn btn-default btn-xs"><i class="fa fa-check-circle font-blue"></i></button>
+					<button type="button" class="btn btn-default btn-xs"><i class="fa fa-check-circle font-blue"> Select </i></button>
 				</div>
 				</td>
 				<td>A.1.1-01</td>

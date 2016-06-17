@@ -65,8 +65,8 @@ grid.init({
         		var tt = '';
         		if (data >= 2) {
         			tt = '<div class="btn-group">'+
-        					'<button type="button" class="btn blue btn-xs button-grid-edit" onclick="location.href=\''+site_url+'/risk/RiskRegister/ChangeRequestInput/'+full.risk_id+'\'"><i class="fa fa-pencil"></i></button>'+
-                            '<button type="button" class="btn blue btn-xs button-grid-edit" onclick="location.href=\''+site_url+'/risk/RiskRegister/ChangeRequestDelete/'+full.risk_id+'\'"><i class="fa fa-trash-o"></i></button>'+
+        					'<button type="button" class="btn blue btn-xs button-grid-edit" onclick="location.href=\''+site_url+'/risk/RiskRegister/ChangeRequestInput/'+full.risk_id+'\'"><i class="fa fa-pencil"> Edit </i></button>'+
+                            '<button type="button" class="btn blue btn-xs button-grid-edit" onclick="location.href=\''+site_url+'/risk/RiskRegister/ChangeRequestDelete/'+full.risk_id+'\'"><i class="fa fa-trash-o"> Delete </i></button>'+
         				'</div>';
         		}
         		return tt;

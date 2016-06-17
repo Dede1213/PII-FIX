@@ -38,11 +38,11 @@ gridRiskList.init({
             "data": null,
             "orderable": false,
             "defaultContent": '<div class="btn-group">'+
-                    '<button type="button" class="btn blue btn-xs button-grid-edit" > <i class="fa fa-pencil"></i></button>'+
+                    '<button type="button" class="btn blue btn-xs button-grid-edit" > <i class="fa fa-pencil"> Edit </i></button>'+
 					 
-					'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"></i></button>'+
+					'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"> Delete </i></button>'+
 
-                    '<button type="button" class="btn blue btn-xs button-grid-info" > <i class="fa fa-info" aria-hidden="true"></i></button>'+
+                    '<button type="button" class="btn blue btn-xs button-grid-info" > <i class="fa fa-info" aria-hidden="true"> Info </i></button>'+
                 '</div>'
                
            }
@@ -94,9 +94,9 @@ gridRiskList_ap.init({
             "data": null,
             "orderable": false,
             "defaultContent": '<div class="btn-group">'+
-                    '<button type="button" class="btn blue btn-xs button-grid-edit" > <i class="fa fa-pencil"></i></button>'+
+                    '<button type="button" class="btn blue btn-xs button-grid-edit" > <i class="fa fa-pencil"> Edit </i></button>'+
 					 
-					'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"></i></button>'+
+					'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"> Delete </i></button>'+
                 '</div>'
                
            }
@@ -142,9 +142,9 @@ gridRiskList_kri.init({
             "data": null,
             "orderable": false,
             "defaultContent": '<div class="btn-group">'+
-                    '<button type="button" class="btn blue btn-xs button-grid-edit" > <i class="fa fa-pencil"></i></button>'+
+                    '<button type="button" class="btn blue btn-xs button-grid-edit" > <i class="fa fa-pencil"> Edit </i></button>'+
 					 
-					'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"></i></button>'+
+					'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"> Delete </i></button>'+
                 '</div>'
                
            }
@@ -197,9 +197,9 @@ gridRiskList_ec.init({
             "data": null,
             "orderable": false,
             "defaultContent": '<div class="btn-group">'+
-                    '<button type="button" class="btn blue btn-xs button-grid-edit" > <i class="fa fa-pencil"></i></button>'+
+                    '<button type="button" class="btn blue btn-xs button-grid-edit" > <i class="fa fa-pencil"> Edit </i></button>'+
 					 
-					'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"></i></button>'+
+					'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"> Delete </i></button>'+
                 '</div>'
                
            }
@@ -250,9 +250,9 @@ gridRiskList_objective.init({
             "data": null,
             "orderable": false,
             "defaultContent": '<div class="btn-group">'+
-                    '<button type="button" class="btn blue btn-xs button-grid-edit" > <i class="fa fa-pencil"></i></button>'+
+                    '<button type="button" class="btn blue btn-xs button-grid-edit" > <i class="fa fa-pencil"> Edit </i></button>'+
                      
-                    '<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"></i></button>'+
+                    '<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"> Delete </i></button>'+
                 '</div>'
                
            }
@@ -300,8 +300,8 @@ gridTaxonomi.init({
             "data": null,
             "orderable": false,
             "defaultContent": '<div class="btn-group">'+
-                    '<button type="button" class="btn blue btn-xs button-grid-edit" > <i class="fa fa-pencil"></i></button>'+					 
-					'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"></i></button>'+
+                    '<button type="button" class="btn blue btn-xs button-grid-edit" > <i class="fa fa-pencil"> Edit </i></button>'+					 
+					'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"> Delete </i></button>'+
                 '</div>'
                
            }

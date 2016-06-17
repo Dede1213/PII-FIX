@@ -65,7 +65,7 @@ grid.init({
         		var tt = '';
         		if (data >= 2) {
         			tt = '<div class="btn-group">'+
-        					'<button type="button" class="btn blue btn-xs button-grid-edit" onclick="location.href=\''+site_url+'/risk/RiskRegister/ChangeRequestInput/'+full.risk_id+'\'"><i class="fa fa-pencil"></i></button>'+
+        					'<button type="button" class="btn blue btn-xs button-grid-edit" onclick="location.href=\''+site_url+'/risk/RiskRegister/ChangeRequestInput/'+full.risk_id+'\'"><i class="fa fa-pencil"> Edit </i></button>'+
         				'</div>';
         		}
         		return tt;
@@ -149,10 +149,10 @@ grid_owned.init({
         		var ret = full.risk_treatment_owner_v;
         		if (data == '' || data == null) {
         			ret = '<span>Unasigned</span> &nbsp; '+
-        				  '<button onclick="javascript: Dashboard.viewOwnedAssignForm('+full.risk_id+', \'treatment\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"></i></button>';
+        				  '<button onclick="javascript: Dashboard.viewOwnedAssignForm('+full.risk_id+', \'treatment\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"> Search </i></button>';
         		}else{
 					ret = '<span>'+full.risk_treatment_owner_v+'</span> &nbsp; '+
-        				  '<button onclick="javascript: Dashboard.viewOwnedAssignForm('+full.risk_id+', \'treatment\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"></i></button>';
+        				  '<button onclick="javascript: Dashboard.viewOwnedAssignForm('+full.risk_id+', \'treatment\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"> Search </i></button>';
 					
 				}
         		return ret;
@@ -164,7 +164,7 @@ grid_owned.init({
         		var tt = '';
         		if (data >= 5) {
         			tt = '<div class="btn-group">'+
-        					'<button type="button" class="btn blue btn-xs button-grid-edit" onclick="location.href=\''+site_url+'/risk/RiskRegister/ChangeRequestOwned/'+full.risk_id+'\'"><i class="fa fa-pencil"></i></button>'+
+        					'<button type="button" class="btn blue btn-xs button-grid-edit" onclick="location.href=\''+site_url+'/risk/RiskRegister/ChangeRequestOwned/'+full.risk_id+'\'"><i class="fa fa-pencil"> Edit </i></button>'+
         				'</div>';
         		}
         		return tt;
@@ -246,10 +246,10 @@ grid_action.init({
         		var ret = data;
         		if (data == '' || data == null) {
         			ret = '<span>Unasigned</span> &nbsp; '+
-        				  '<button onclick="javascript: Dashboard.viewOwnedAssignForm('+full.id+', \'actionplan\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"></i></button>';
+        				  '<button onclick="javascript: Dashboard.viewOwnedAssignForm('+full.id+', \'actionplan\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"> Search </i></button>';
         		}else{
 					ret = '<span>'+data+'</span> &nbsp; '+
-        				  '<button onclick="javascript: Dashboard.viewOwnedAssignForm('+full.id+', \'actionplan\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"></i></button>';
+        				  '<button onclick="javascript: Dashboard.viewOwnedAssignForm('+full.id+', \'actionplan\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"> Search </i></button>';
 				}
         		return ret;
         	}
@@ -266,7 +266,7 @@ grid_action.init({
         		var tt = '';
         		if (data >= 3) {
         			tt = '<div class="btn-group">'+
-        					'<button type="button" class="btn blue btn-xs button-grid-edit" onclick="location.href=\''+site_url+'/risk/RiskRegister/ChangeRequestAction/'+full.id+'\'"><i class="fa fa-pencil"></i></button>'+
+        					'<button type="button" class="btn blue btn-xs button-grid-edit" onclick="location.href=\''+site_url+'/risk/RiskRegister/ChangeRequestAction/'+full.id+'\'"><i class="fa fa-pencil"> Edit </i></button>'+
         				'</div>';
         		}
         		return tt;
@@ -349,10 +349,10 @@ grid_exec.init({
                 var ret = data;
                 if (data == '' || data == null) {
                     ret = '<span>Unasigned</span> &nbsp; '+
-                          '<button onclick="javascript: Dashboard.viewOwnedAssignForm('+full.id+', \'actionplanexec\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"></i></button>';
+                          '<button onclick="javascript: Dashboard.viewOwnedAssignForm('+full.id+', \'actionplanexec\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"> Search </i></button>';
                 }else{
                     ret = '<span>'+data+'</span> &nbsp; '+
-                          '<button onclick="javascript: Dashboard.viewOwnedAssignForm('+full.id+', \'actionplanexec\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"></i></button>';
+                          '<button onclick="javascript: Dashboard.viewOwnedAssignForm('+full.id+', \'actionplanexec\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"> Search </i></button>';
                 }
                 return ret;
             }
@@ -371,7 +371,7 @@ grid_exec.init({
         		var submit = false;
 
         		if(full.status_periode == 0){
-        		var search_text = '<button type="button" class="btn blue btn-xs button-grid-search"><i class="fa fa-search"></i></button>';
+        		var search_text = '<button type="button" class="btn blue btn-xs button-grid-search"><i class="fa fa-search"> Search </i></button>';
         		var submit_text = '<button type="button" class="btn blue btn-xs button-grid-submit"><i class="fa fa-check-circle"></i> Submit</button>';
         		}else if(full.status_periode == 1){
                 var search_text = '';
@@ -496,10 +496,10 @@ grid_kri.init({
 				
         		if (data == '' || data == null) {
         			ret = '<span>Unasigned</span> &nbsp; '+
-        				  '<button onclick="javascript: Dashboard.viewOwnedAssignForm('+full.id+', \'kri\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"></i></button>';
+        				  '<button onclick="javascript: Dashboard.viewOwnedAssignForm('+full.id+', \'kri\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"> Search </i></button>';
         		}else{
 					ret = '<span>'+data+'</span> &nbsp; '+
-        				  '<button onclick="javascript: Dashboard.viewOwnedAssignForm('+full.id+', \'kri\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"></i></button>';
+        				  '<button onclick="javascript: Dashboard.viewOwnedAssignForm('+full.id+', \'kri\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"> Search </i></button>';
 				}
 				
 				
@@ -518,7 +518,7 @@ grid_kri.init({
         		var tt = '';
         		if (data >= 2) {
         			tt = '<div class="btn-group">'+
-        					'<button type="button" class="btn blue btn-xs button-grid-edit" onclick="location.href=\''+site_url+'/risk/RiskRegister/ChangeRequestKri/'+full.id+'\'"><i class="fa fa-pencil"></i></button>'+
+        					'<button type="button" class="btn blue btn-xs button-grid-edit" onclick="location.href=\''+site_url+'/risk/RiskRegister/ChangeRequestKri/'+full.id+'\'"><i class="fa fa-pencil"> Edit </i></button>'+
         				'</div>';
         		}
         		return tt;
@@ -1113,10 +1113,10 @@ grid_exec_adt.init({
                 var ret = data;
                 if (data == '' || data == null) {
                     ret = '<span>Unasigned</span> &nbsp; '+
-                          '<button onclick="javascript: Actionplan_adt.viewOwnedAssignForm('+full.id+', \'actionplanexecadt\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"></i></button>';
+                          '<button onclick="javascript: Actionplan_adt.viewOwnedAssignForm('+full.id+', \'actionplanexecadt\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"> Search </i></button>';
                 }else{
                     ret = '<span>'+data+'</span> &nbsp; '+
-                          '<button onclick="javascript: Actionplan_adt.viewOwnedAssignForm('+full.id+', \'actionplanexecadt\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"></i></button>';
+                          '<button onclick="javascript: Actionplan_adt.viewOwnedAssignForm('+full.id+', \'actionplanexecadt\')" type="button" class="btn blue btn-xs button-grid-edit"><i class="fa fa-search"> Search </i></button>';
                 }
                 return ret;
             }
@@ -1129,7 +1129,7 @@ grid_exec_adt.init({
         		var submit = false;
         		
         		var search_text = '<button type="button" class="btn blue btn-xs button-grid-search"><i class="fa fa-search"></i></button>';
-        		var submit_text = '<button type="button" class="btn blue btn-xs button-grid-submit"><i class="fa fa-check-circle"></i> Submit</button>';
+        		var submit_text = '<button type="button" class="btn blue btn-xs button-grid-submit"><i class="fa fa-check-circle"> Select </i> Submit</button>';
         		
         		data_v = '';
         		if (data == 'EXTEND') data_v = 'Extend';

@@ -96,7 +96,7 @@ gridLibrary.init({
         	"data": "risk_code",
         	"render": function ( data, type, full, meta ) {
         		var ret = '<div class="btn-group">'+
-        		'<button type="button" class="btn btn-default btn-xs" onclick="javascript: Kri.selectLibrary('+full.risk_id+')"><i class="fa fa-check-circle font-blue"></i></button>'+
+        		'<button type="button" class="btn btn-default btn-xs" onclick="javascript: Kri.selectLibrary('+full.risk_id+')"><i class="fa fa-check-circle font-blue"> Select </i></button>'+
         		'</div>';
         		return ret;
         	}
@@ -144,7 +144,7 @@ gridKri.init({
         	"data": "risk_code",
         	"render": function ( data, type, full, meta ) {
         		var ret = '<div class="btn-group">'+
-        		'<button type="button" class="btn btn-default btn-xs" onclick="javascript: Kri.selectKriLibrary('+full.id+')"><i class="fa fa-check-circle font-blue"></i></button>'+
+        		'<button type="button" class="btn btn-default btn-xs" onclick="javascript: Kri.selectKriLibrary('+full.id+')"><i class="fa fa-check-circle font-blue"> Select </i></button>'+
         		'</div>';
         		return ret;
         	}

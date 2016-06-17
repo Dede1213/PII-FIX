@@ -37,9 +37,9 @@ grid.init({
            	"orderable": false,
            	"defaultContent": '<div class="btn-group">'+
 
-           			'<button type="button" class="btn btn-default btn-xs button-grid-edit"><i class="fa fa-pencil font-blue"></i></button>'+
-           			'<button type="button" class="btn btn-default btn-xs button-grid-confirm"><i class="fa fa-exchange"></i></button>'+
-           			'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"></i></button>'+
+           			'<button type="button" class="btn btn-default btn-xs button-grid-edit"><i class="fa fa-pencil font-blue"> Edit </i></button>'+
+           			'<button type="button" class="btn btn-default btn-xs button-grid-confirm"><i class="fa fa-exchange"> Change </i></button>'+
+           			'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"> Delete </i></button>'+
            		'</div>'
            }
        ],

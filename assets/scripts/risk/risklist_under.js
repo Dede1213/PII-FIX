@@ -178,17 +178,17 @@ grid.init({
         		var img = '';
         		if (data == '0') {
         			img = '<div class="btn-group">'+
-        					'<button type="button" class="btn btn-default btn-xs button-grid-confirm"><i class="fa fa-thumbs-up font-green"></i></button>'+
+        					'<button type="button" class="btn btn-default btn-xs button-grid-confirm"><i class="fa fa-thumbs-up font-green"> Confirm </i></button>'+
         					
         				'</div>';
         		} else if (data == '1') {
         			img = '<div class="btn-group">'+
-        					'<button type="button" class="btn btn-default btn-xs button-grid-confirm"><i class="fa fa-thumbs-up font-green"></i></button>'+
+        					'<button type="button" class="btn btn-default btn-xs button-grid-confirm"><i class="fa fa-thumbs-up font-green"> Confirm </i></button>'+
         					
         				'</div>';
         		} else {
         			img = '<div class="btn-group">'+
-        					'<button type="button" class="btn btn-default btn-xs button-grid-confirm"><i class="fa fa-thumbs-up font-green"></i></button>'+
+        					'<button type="button" class="btn btn-default btn-xs button-grid-confirm"><i class="fa fa-thumbs-up font-green"> Confirm </i></button>'+
         					
         				'</div>';
         		}
@@ -279,17 +279,17 @@ grid2.init({
         		if (data == '0') {
         			img = '<div class="btn-group">'+
         					
-        					'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"></i></button>'+
+        					'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"> Delete </i></button>'+
         				'</div>';
         		} else if (data == '1') {
         			img = '<div class="btn-group">'+
         					
-        					'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"></i></button>'+
+        					'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"> Delete </i></button>'+
         				'</div>';
         		} else {
         			img = '<div class="btn-group">'+
         					
-        					'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"></i></button>'+
+        					'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"> Delete </i></button>'+
         				'</div>';
         		}
         		return img;

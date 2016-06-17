@@ -18,7 +18,7 @@
 							<th>  Action Plan </th>   
 							<th> Action Plan Owner </th>
 							<th>  Due Date</th>
-							<th>  Risk Code </th>
+							<th>  Risk ID </th>
 							<th>  Risk Event </th>
 							<th>  Risk Owner </th> 
 							<th> Risk Level </th> 

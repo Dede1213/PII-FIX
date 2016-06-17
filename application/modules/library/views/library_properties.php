@@ -80,8 +80,8 @@ if($edit_form == false){
                     <button type="button" class="btn btn-default btn-xs button-grid-delete" ><i class="fa fa-trash-o font-red"></i></button>
                     -->
 
-					<a href="index.php/library/edit_risk_properties/<?=$row['risk_id']?>/<?=$row['username']?>/<?=$row['date_changed']?>" class="btn blue btn-xs button-grid-edit"  ><i class="fa fa-pencil"></i></a>
-					<a href="index.php/library/delete_properties/<?=$row['risk_id']?>/<?=$row['username']?>" onclick="return confirm('Are You sure you want to delete this data?')" class="btn btn-default btn-xs button-grid-delete"  ><i class="fa fa-trash-o font-red"></i></a>
+					<a href="index.php/library/edit_risk_properties/<?=$row['risk_id']?>/<?=$row['username']?>/<?=$row['date_changed']?>" class="btn blue btn-xs button-grid-edit"  ><i class="fa fa-pencil"> Edit </i></a>
+					<a href="index.php/library/delete_properties/<?=$row['risk_id']?>/<?=$row['username']?>" onclick="return confirm('Are You sure you want to delete this data?')" class="btn btn-default btn-xs button-grid-delete"  ><i class="fa fa-trash-o font-red"> Delete </i></a>
 					
 					
                     </div>

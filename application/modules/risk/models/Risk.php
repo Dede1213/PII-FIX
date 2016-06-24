@@ -987,12 +987,12 @@ class Risk extends APP_Model {
                                                                                 left join m_division f on a.risk_owner = f.division_id
                                                                                 join t_risk_add_user t on a.risk_id = t.risk_id
                                                                                 where   
-                                                                                t.username = '".$defFilter['userid']."' and a.existing_control_id is null
+                                                                                t.username = '".$defFilter['userid']."' and t.delete_status is null and a.existing_control_id is null
                                                                                 
-) as orderin
-order by orderin.risk_id desc
-) as groupin
-group by groupin.risk_code
+																				) as orderin
+																				order by orderin.risk_id desc
+																				) as groupin
+																				group by groupin.risk_code
 
 					";
 			$rpar = array('user_id' => $defFilter['userid']);
@@ -1044,7 +1044,9 @@ group by groupin.risk_code
                                                                                 risk_library_id is not null
                                                                                 and
                                                                                 a.periode_id = '".$defFilter['periodid']."'
-                                                                                and a.risk_input_by = '".$defFilter['userid']."'
+                                                                                and a.risk_input_by = '".$defFilter['userid']."' 
+                                                                                and a.existing_control_id is null
+                                                                                and a.risk_id IN (select risk_id from t_risk_change z where z.risk_input_by = '".$defFilter['userid']."' and z.periode_id = '".$defFilter['periodid']."' )
 UNION
 select 
                                                                                 a.*,
@@ -1674,7 +1676,7 @@ select
 		
 		$sql = "select
                                                                 b.risk_status,
-                                                                a.username,
+                                                               a.username,
                                                                 a.display_name,
                                                                 a.division_id, 
                                                                 b.division_name,
@@ -1685,12 +1687,12 @@ select
                                                                 join (
                                                                                 select min(risk_status) as risk_status, risk_input_by, periode_id from t_risk_change
                                                                                 where
-                                                                                risk_status > 1
+                                                                                risk_status > 1 and existing_control_id is null
                                                                                 group by risk_input_by
                                                                 ) b on a.username = b.risk_input_by
                                                                 join t_risk_add_informasi z on a.username = z.risk_input_by
                                                                 WHERE a.username NOT IN (select username from m_user 
-                                                                join t_risk on m_user.username = t_risk.risk_input_by) 
+                                                                join t_risk on m_user.username = t_risk.risk_input_by where t_risk.existing_control_id is null) 
 
 UNION
 select
@@ -1706,7 +1708,7 @@ select
                                                                 join (
                                                                                 select min(risk_status) as risk_status, risk_input_by, periode_id from t_risk
                                                                                 where
-                                                                                risk_status > 1
+                                                                                risk_status > 1 and existing_control_id is null
                                                                                 group by risk_input_by
                                                                ) b on a.username = b.risk_input_by
                                                                 join t_risk_add_informasi z on a.username = z.risk_input_by
@@ -1726,13 +1728,14 @@ select
                                                                                 select min(s.risk_status) as risk_status, periode_id, t.username from t_risk s
                                                                                 join t_risk_add_user t on s.risk_id = t.risk_id
                                                                                 where
-                                                                                risk_status > 1
+                                                                                risk_status > 1 and existing_control_id is null
                                                                                 group by t.username
                                                                 ) b on a.username = b.username
                                                                 join t_risk_add_informasi z on a.username = z.risk_input_by 
                                                                 where a.username is not null and z.periode_id = b.periode_id
                                                                 and a.username NOT IN (select username from m_user 
-                                                                join t_risk on m_user.username = t_risk.risk_input_by) 
+                                                                join t_risk on m_user.username = t_risk.risk_input_by where t_risk.existing_control_id is null)
+
 																"
 				.$ex_filter
 				.$ex_or;
@@ -1888,8 +1891,8 @@ select
 		$hasil = $row->risk_id;
 
 		//insert T_RISK CHANGE NYA JUGA!
-		$sql = "insert into t_risk_change(risk_id,risk_code,risk_date,risk_status,periode_id,risk_input_by,risk_input_division,risk_owner,risk_division,risk_library_id,risk_event,risk_description,risk_category,risk_sub_category,risk_2nd_sub_category,risk_cause,risk_impact,existing_control_id,risk_existing_control,risk_evaluation_control,risk_control_owner,risk_level,risk_impact_level,risk_likelihood_key,suggested_risk_treatment,risk_treatment_owner,created_by,created_date,switch_flag)
-				select risk_id,risk_code,NOW(),1,'$periode','$uid',risk_input_division,risk_owner,risk_division,risk_id,risk_event,risk_description,risk_category,risk_sub_category,risk_2nd_sub_category,risk_cause,risk_impact,existing_control_id,risk_existing_control,risk_evaluation_control,risk_control_owner,risk_level,risk_impact_level,risk_likelihood_key,suggested_risk_treatment,risk_treatment_owner,created_by,created_date,switch_flag from t_risk where risk_id='$hasil' and risk_input_by='$uid' and periode_id='$periode' ";
+		$sql = "insert into t_risk_change(risk_id,risk_code,risk_date,risk_status,periode_id,risk_input_by,risk_input_division,risk_owner,risk_division,risk_library_id,risk_event,risk_description,risk_category,risk_sub_category,risk_2nd_sub_category,risk_cause,risk_impact,risk_existing_control,risk_evaluation_control,risk_control_owner,risk_level,risk_impact_level,risk_likelihood_key,suggested_risk_treatment,risk_treatment_owner,created_by,created_date,switch_flag)
+				select risk_id,risk_code,NOW(),1,'$periode','$uid',risk_input_division,risk_owner,risk_division,risk_id,risk_event,risk_description,risk_category,risk_sub_category,risk_2nd_sub_category,risk_cause,risk_impact,risk_existing_control,risk_evaluation_control,risk_control_owner,risk_level,risk_impact_level,risk_likelihood_key,suggested_risk_treatment,risk_treatment_owner,created_by,created_date,switch_flag from t_risk where risk_id='$hasil' and risk_input_by='$uid' and periode_id='$periode' ";
 		$res = $this->db->query($sql);
 		
 
@@ -2029,10 +2032,57 @@ select
 		if($res_cek->num_rows() > 0){
 		return false;
 		}else{
+		$sql = "update t_risk set existing_control_id = null where risk_id='$risk_id' and risk_input_by = '$uid' ";
+		$res = $this->db->query($sql);
+
+		$sql = "update t_risk_add_user set delete_status = null where risk_id='$risk_id' and username = '$uid' ";
+		$res = $this->db->query($sql);
+
+		return $res;
+		}
+	}
+
+	public function riskSetConfirm_recover_library($risk_id, $data, $uid, $update_point = 'U') {
+		//$this->_logHistory($risk_id, $uid, $update_point);
+		
+		$periode = $data['periode_id'];
+
+		$sql_cek_status = "select * from t_risk where periode_id ='$periode' and risk_status > 1 and risk_input_by = '$uid'
+						   UNION
+						   select * from t_risk_change where periode_id ='$periode' and risk_status > 1 and risk_input_by = '$uid' ";
+		$res_cek = $this->db->query($sql_cek_status);
+
+		if($res_cek->num_rows() > 0){
+		return false;
+		}else{
 		$sql = "update t_risk_change set existing_control_id = null where risk_id='$risk_id' and risk_input_by = '$uid' ";
 		$res = $this->db->query($sql);
 
-		$sql = "update t_risk set existing_control_id = null where risk_id='$risk_id' and risk_input_by = '$uid' ";
+		$sql = "update t_risk_add_user set delete_status = null where risk_id='$risk_id' and username = '$uid' ";
+		$res = $this->db->query($sql);
+		return $res;
+
+		//kaya nya ga perlu update soal nya 1 t_risk punya banya orang di t_risk_change
+		//$sql = "update t_risk set existing_control_id = null where risk_id='$risk_id' and risk_input_by = '$uid' ";
+		//$res = $this->db->query($sql);
+		return $res;
+		}
+	}
+
+	public function riskSetConfirm_recover_from_add($risk_id, $data, $uid, $update_point = 'U') {
+		//$this->_logHistory($risk_id, $uid, $update_point);
+		
+		$periode = $data['periode_id'];
+
+		$sql_cek_status = "select * from t_risk where periode_id ='$periode' and risk_status > 1 and risk_input_by = '$uid'
+						   UNION
+						   select * from t_risk_change where periode_id ='$periode' and risk_status > 1 and risk_input_by = '$uid' ";
+		$res_cek = $this->db->query($sql_cek_status);
+
+		if($res_cek->num_rows() > 0){
+		return false;
+		}else{
+		$sql = "update t_risk_add_user set delete_status = null where risk_id='$risk_id' and username = '$uid' ";
 		$res = $this->db->query($sql);
 		return $res;
 		}
@@ -2233,11 +2283,17 @@ select
 		
 		$par['risk_id'] = $risk_id;
 		
+		
+
+		$sql = "update t_risk_add_user set delete_status = 1 where risk_id = '$risk_id' and username = '$uid' ";
+		$res = $this->db->query($sql);
+
 		$sql = "update t_risk set existing_control_id = 1 where risk_id = ? and risk_input_by = '$uid' ";
 		$res = $this->db->query($sql, $par);
 
 		return $res;
 	}
+
 
 	public function deleteRiskgrid2($risk_id, $uid, $update_point = 'D') {
 		
@@ -2246,33 +2302,50 @@ select
 		$sql = "delete from t_risk where risk_id = ? and risk_input_by = '$uid' ";
 		$res = $this->db->query($sql, $par);
 
-		$sql = "delete from t_risk_action_plan where risk_id = ? and risk_input_by = '$uid' ";
+		$sql = "delete from t_risk_action_plan where risk_id = ? and switch_flag = '$uid' ";
 		$res = $this->db->query($sql, $par);
 
-		$sql = "delete from t_risk_control where risk_id = ? and risk_input_by = '$uid' ";
+		$sql = "delete from t_risk_control where risk_id = ? and switch_flag = '$uid' ";
 		$res = $this->db->query($sql, $par);
 
-		$sql = "delete from t_risk_impact where risk_id = ? and risk_input_by = '$uid' ";
+		$sql = "delete from t_risk_impact where risk_id = ? and switch_flag = '$uid' ";
 		$res = $this->db->query($sql, $par);
 
-		$sql = "delete from t_risk_objective where risk_id = ? and risk_input_by = '$uid' ";
+		$sql = "delete from t_risk_objective where risk_id = ? and switch_flag = '$uid' ";
 		$res = $this->db->query($sql, $par);
 
+		return $res;
+	}
+
+	public function deleteRiskgrid2Bentrok($risk_id, $uid, $update_point = 'D') {
+		
+		$par['risk_id'] = $risk_id;
+		
+		$sql = "update t_risk set risk_evaluation_control = 'delete_roll_from_modify' where risk_id = ? and risk_input_by = '$uid' ";
+		$res = $this->db->query($sql, $par);
+
+		return $res;
+	}
+
+	public function deleteRiskgrid2fromlibrary($risk_id, $uid, $update_point = 'D') {
+		
+		$par['risk_id'] = $risk_id;
+		
+		
 		$sql = "delete from t_risk_change where risk_id = ? and risk_input_by = '$uid' ";
 		$res = $this->db->query($sql, $par);
 
-		$sql = "delete from t_risk_impact_change where risk_id = ? and risk_input_by = '$uid' ";
+		$sql = "delete from t_risk_impact_change where risk_id = ? and switch_flag = '$uid' ";
 		$res = $this->db->query($sql, $par);
 
-		$sql = "delete from t_risk_action_plan_change where risk_id = ? and risk_input_by = '$uid' ";
+		$sql = "delete from t_risk_action_plan_change where risk_id = ? and switch_flag = '$uid' ";
 		$res = $this->db->query($sql, $par);
 
-		$sql = "delete from t_risk_control_change where risk_id = ? and risk_input_by = '$uid' ";
+		$sql = "delete from t_risk_control_change where risk_id = ? and switch_flag = '$uid' ";
 		$res = $this->db->query($sql, $par);
 
-		$sql = "delete from t_risk_objective_change where risk_id = ? and risk_input_by = '$uid' ";
+		$sql = "delete from t_risk_objective_change where risk_id = ? and switch_flag = '$uid' ";
 		$res = $this->db->query($sql, $par);
-
 
 		return $res;
 	}
@@ -2468,7 +2541,7 @@ select
 		$par['risk_id'] = $risk_id;
 		$sql = "update t_risk_change set ".$keyupdate
 			  ."created_date = now()
-			  	where risk_id = ?";
+			  	where risk_id = ? and risk_input_by = '$uid'";
 		$res = $this->db->query($sql, $par);
 		
 		if ($res) {
@@ -6688,7 +6761,7 @@ select
 						$filtaradd = "where ".$ordernya." like '%".$filter['search']."%'";
 					}
 			}	
-		 
+		 /*
 		$sql = "select 
 				b.risk_status,
 				a.username,
@@ -6703,6 +6776,71 @@ select
 					risk_status > 1
 					group by risk_input_by
 				) b on a.username = b.risk_input_by ".$filtaradd;
+		*/
+
+		$sql = " select
+                                                                b.risk_status,
+                                                               a.username,
+                                                                a.display_name,
+                                                                a.division_id, 
+                                                                b.division_name,
+                                                                z.tanggal_submit,
+                                                                z.note  
+                                                                from m_user a 
+                                                                join m_division b on a.division_id = b.division_id
+                                                                join (
+                                                                                select min(risk_status) as risk_status, risk_input_by, periode_id from t_risk_change
+                                                                                where
+                                                                                risk_status > 1 and existing_control_id is null
+                                                                                group by risk_input_by
+                                                                ) b on a.username = b.risk_input_by
+                                                                join t_risk_add_informasi z on a.username = z.risk_input_by
+                                                                WHERE a.username NOT IN (select username from m_user 
+                                                                join t_risk on m_user.username = t_risk.risk_input_by where t_risk.existing_control_id is null) 
+
+UNION
+select
+                                                                b.risk_status,
+                                                                a.username,
+                                                                a.display_name,
+                                                                a.division_id, 
+                                                                b.division_name,
+                                                                z.tanggal_submit,
+                                                                z.note 
+                                                                from m_user a 
+                                                                join m_division b on a.division_id = b.division_id
+                                                                join (
+                                                                                select min(risk_status) as risk_status, risk_input_by, periode_id from t_risk
+                                                                                where
+                                                                                risk_status > 1 and existing_control_id is null
+                                                                                group by risk_input_by
+                                                               ) b on a.username = b.risk_input_by
+                                                                join t_risk_add_informasi z on a.username = z.risk_input_by
+                                                                where a.username is not null 
+UNION
+select
+                                                                b.risk_status,
+                                                                a.username,
+                                                                a.display_name,
+                                                                a.division_id, 
+                                                                b.division_name,
+                                                                z.tanggal_submit,
+                                                                z.note  
+                                                                from m_user a 
+                                                                join m_division b on a.division_id = b.division_id
+                                                                join (
+                                                                                select min(s.risk_status) as risk_status, periode_id, t.username from t_risk s
+                                                                                join t_risk_add_user t on s.risk_id = t.risk_id
+                                                                                where
+                                                                                risk_status > 1 and existing_control_id is null
+                                                                                group by t.username
+                                                                ) b on a.username = b.username
+                                                                join t_risk_add_informasi z on a.username = z.risk_input_by 
+                                                                where a.username is not null and z.periode_id = b.periode_id
+                                                                and a.username NOT IN (select username from m_user 
+                                                                join t_risk on m_user.username = t_risk.risk_input_by where t_risk.existing_control_id is null)
+
+				".$filtaradd;
 		
 			$query = $this->db->query($sql);
 	 
@@ -7134,7 +7272,8 @@ WHERE t_risk.risk_id = '".$risk_id."' ";
 
 	function cek_control_submit($username,$periode_id){
 		$sql = "select * from t_risk_change a 
-				where a.risk_input_by = '$username' and a.periode_id='$periode_id' and a.risk_id not in (select risk_id from t_risk_control_change) ";
+				where a.risk_input_by = '$username' and a.periode_id='$periode_id' 
+				and a.risk_id not in (select risk_id from t_risk_control_change) and a.existing_control_id is null ";
 		$query = $this->db->query($sql);
 		if ($query->num_rows() > 0)
 			{
@@ -7151,7 +7290,7 @@ WHERE t_risk.risk_id = '".$risk_id."' ";
 		$sql = "select * from t_risk_change a 
 				join t_risk_action_plan_change ap on a.risk_id = ap.risk_id
 				where a.risk_input_by = '$username' and a.periode_id='$periode_id'
-				and ap.due_date is null  ";
+				and ap.due_date is null and a.existing_control_id is null ";
 		$query = $this->db->query($sql);
 		if ($query->num_rows() > 0)
 			{
@@ -7182,6 +7321,36 @@ WHERE t_risk.risk_id = '".$risk_id."' ";
 	function cek_from_library($risk_id){
 		$sql = "select risk_library_id from t_risk 
 				where risk_id = '$risk_id' and risk_library_id is not null ";
+		$query = $this->db->query($sql);
+		if ($query->num_rows() > 0)
+			{
+				return true;
+			}
+			else
+			{
+				return FALSE;
+			}	
+
+	}
+
+	function cek_from_add($risk_id, $uid){
+		$sql = "select risk_id from t_risk 
+				where risk_id = '$risk_id' and risk_input_by = '$uid' ";
+		$query = $this->db->query($sql);
+		if ($query->num_rows() > 0)
+			{
+				return true;
+			}
+			else
+			{
+				return FALSE;
+			}	
+
+	}
+
+	function cek_from_roll_forward($risk_id,$periode_id,$uid){
+		$sql = "select * from t_risk_change 
+				where risk_id = '$risk_id' and periode_id = '$periode_id' and risk_input_by <> '$uid' ";
 		$query = $this->db->query($sql);
 		if ($query->num_rows() > 0)
 			{

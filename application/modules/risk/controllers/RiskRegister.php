@@ -504,8 +504,27 @@ class RiskRegister extends APP_Controller {
 	
 			$periode_id = $periode['periode_id'];
 			$data['periode_id'] = $periode_id;
-			
+
+
+			//cek dulu dari library apa nggak
+			$cek_from_library = $this->risk->cek_from_library($_POST['risk_id']);
+
+			//cek dulu dari t_risk_add user bukan
+			$cek_from_add = $this->risk->cek_from_add($_POST['risk_id'],$session_data['username']);
+
+
+		if($cek_from_add == true){
+
+			if($cek_from_library == true){
+			$res = $this->risk->riskSetConfirm_recover_library($_POST['risk_id'], $data, $session_data['username'], 'RISK_REGISTER-CONFIRM');
+			}else{
 			$res = $this->risk->riskSetConfirm_recover($_POST['risk_id'], $data, $session_data['username'], 'RISK_REGISTER-CONFIRM');
+			}
+
+		}else{
+			$res = $this->risk->riskSetConfirm_recover_from_add($_POST['risk_id'], $data, $session_data['username'], 'RISK_REGISTER-CONFIRM');
+		}
+
 			if ($res) {
 				$resp['success'] = true;
 				$resp['msg'] = 'SUCCESS';
@@ -1776,8 +1795,31 @@ class RiskRegister extends APP_Controller {
 			
 			$res = $this->risk->getRiskValidate('viewMyRisk', $_POST['risk_id'], $session_data);
 			
+			$periode = $this->mperiode->getCurrentPeriode();
+			$periode_id = $periode['periode_id'];
+
+			//cek dulu dari library apa nggak
+			$cek_from_library = $this->risk->cek_from_library($_POST['risk_id']);
+
+			$cek_from_roll_forward = $this->risk->cek_from_roll_forward($_POST['risk_id'],$periode_id,$session_data['username']);
+
+
 			if ($res && $res['risk_status'] >= '0') {
+				
+
+				if($cek_from_library == true){
+					if($cek_from_roll_forward == true){
+						$res = $this->risk->deleteRiskgrid2Bentrok($_POST['risk_id'], $session_data['username'], 'RISK_EXERCISE-DELETE');
+						$res = $this->risk->deleteRiskgrid2fromlibrary($_POST['risk_id'], $session_data['username'], 'RISK_EXERCISE-DELETE');
+					}else{
+						$res = $this->risk->deleteRiskgrid2fromlibrary($_POST['risk_id'], $session_data['username'], 'RISK_EXERCISE-DELETE');
+						$res = $this->risk->deleteRiskgrid2($_POST['risk_id'], $session_data['username'], 'RISK_EXERCISE-DELETE');
+					}
+				}else{
+
 				$res = $this->risk->deleteRiskgrid2($_POST['risk_id'], $session_data['username'], 'RISK_EXERCISE-DELETE');
+					
+				}
 				
 				$resp['success'] = true;
 				$resp['msg'] = 'SUCCESS';

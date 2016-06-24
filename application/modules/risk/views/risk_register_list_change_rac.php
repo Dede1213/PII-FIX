@@ -205,7 +205,7 @@
 			$user = $hasil->cr_status;
 			if ($status=='change'){
 				
-		if ($user != 1){
+		if ($user == '0'){
 		?>
 
 		<a href="javascript: ;" id="button-change-ignore" class="btn default red pull-right" style="margin-right: 10px;">
@@ -217,7 +217,7 @@
 		<a href="javascript: ;" id="button-change-verify" class="btn default green pull-right" style="margin-right: 10px;">
 					<i class="fa  fa-circle-o"></i>
 					<span class="hidden-480">
-					Aprrove </span>
+					Approve </span>
 					</a>
 		<?php }
 				}

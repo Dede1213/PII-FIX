@@ -7,8 +7,7 @@
 					t_risk.`risk_likelihood_key`,t_risk.`risk_level` 
 					FROM t_risk
 					LEFT JOIN m_risk_category ON t_risk.`risk_2nd_sub_category` = m_risk_category.`cat_id`
-					LEFT JOIN t_risk_control ON t_risk.`risk_id`=t_risk_control.`risk_id`
-					where t_risk.risk_evaluation_control is null or t_risk.risk_evaluation_control = '' ";
+					LEFT JOIN t_risk_control ON t_risk.`risk_id`=t_risk_control.`risk_id`";
 			$res = $this->db->query($sql);
 			return $res;
 		}
@@ -20,9 +19,7 @@
 					FROM t_risk
 					LEFT JOIN m_risk_category ON t_risk.`risk_2nd_sub_category` = m_risk_category.`cat_id`
 					LEFT JOIN t_risk_control ON t_risk.`risk_id`=t_risk_control.`risk_id`
-					WHERE t_risk.`periode_id`='".$periode."' 
-					and t_risk.risk_evaluation_control is null or t_risk.risk_evaluation_control = '' "
-					;
+					WHERE t_risk.`periode_id`='".$periode."'";
 			$res = $this->db->query($sql);
 			return $res;
 		}
@@ -36,8 +33,7 @@
 					LEFT JOIN t_risk_action_plan ON t_risk.`risk_id` = t_risk_action_plan.`risk_id`
 					WHERE t_risk_action_plan.`execution_evidence` IS NULL AND t_risk_action_plan.`execution_explain` IS NULL
 					AND t_risk_action_plan.`execution_reason` IS NULL AND t_risk_action_plan.`revised_date` IS NULL AND
-					t_risk_action_plan.`action_plan_status` = 4 AND t_risk.`periode_id` = '".$periode."' 
-					and t_risk.risk_evaluation_control is null or t_risk.risk_evaluation_control = '' ";
+					t_risk_action_plan.`action_plan_status` = 4 AND t_risk.`periode_id` = '".$periode."'";
 			$res = $this->db->query($sql);
 			return $res;					
 		}
@@ -49,8 +45,7 @@
 					t_risk.`risk_likelihood_key`,t_risk.`risk_level`,t_risk.`suggested_risk_treatment` 
 					FROM t_risk
 					LEFT JOIN t_risk_action_plan ON t_risk.`risk_id` = t_risk_action_plan.`risk_id`
-					WHERE t_risk.`risk_status` = 6 AND t_risk.`periode_id` = '".$periode."' 
-					and t_risk.risk_evaluation_control is null or t_risk.risk_evaluation_control = '' ";
+					WHERE t_risk.`risk_status` = 6 AND t_risk.`periode_id` = '".$periode."'";
 			$res = $this->db->query($sql);
 			return $res;
 		}	
@@ -59,7 +54,7 @@
 			$sql = "SELECT risk_code, risk_event, risk_description, risk_owner, risk_impact_level, risk_likelihood_key, risk_level,
 					COUNT(risk_event)AS jumlah 
 					FROM t_risk 
-					WHERE risk_level = 'HIGH' 
+					WHERE risk_level = 'HIGH'
 					GROUP BY risk_event ORDER BY jumlah DESC
 					LIMIT 10";
 			$res = $this->db->query($sql);
@@ -151,9 +146,7 @@
 		}	
 
 		function listofrisk($data){
-			$querynya = "SELECT DISTINCT m_risk_category.`cat_name`,t_risk.`risk_status`, t_risk.`risk_code`, t_risk.`risk_event`, t_risk.`risk_description`, t_risk.`risk_owner`, t_risk.`risk_cause`, t_risk.`risk_impact`, t_risk.`risk_input_by`,t_risk.`risk_date`,
-			(SELECT GROUP_CONCAT(t_risk_add_user.`username` SEPARATOR '|') FROM t_risk_add_user WHERE t_risk.risk_id = t_risk_add_user.risk_id) AS 'username',
-     		(SELECT GROUP_CONCAT(t_risk_add_user.`date_changed` SEPARATOR '|') FROM t_risk_add_user WHERE t_risk.risk_id = t_risk_add_user.risk_id) AS 'date_changed',  
+			$querynya = "SELECT DISTINCT m_risk_category.`cat_name`, t_risk.`risk_code`, t_risk.`risk_event`, t_risk.`risk_description`, t_risk.`risk_owner`, t_risk.`risk_cause`, t_risk.`risk_impact`,
 			(SELECT GROUP_CONCAT(t_risk_objective.`objective` SEPARATOR '\n') FROM t_risk_objective WHERE t_risk.risk_id = t_risk_objective.risk_id) AS 'Objective', 
 			(SELECT GROUP_CONCAT(t_risk_control.`risk_existing_control` SEPARATOR '\n') FROM t_risk_control WHERE t_risk.risk_id = t_risk_control.risk_id) AS 'Existing Control', 
 			(SELECT GROUP_CONCAT(t_risk_control.`risk_evaluation_control` SEPARATOR '\n') FROM t_risk_control WHERE t_risk.risk_id = t_risk_control.risk_id) AS 'Control Evaluation', 
@@ -161,8 +154,7 @@
 			(SELECT GROUP_CONCAT(t_risk_action_plan.`action_plan` SEPARATOR '\n') FROM t_risk_action_plan WHERE t_risk.risk_id = t_risk_action_plan.risk_id) AS 'Action Plan',
 			(SELECT GROUP_CONCAT(t_risk_action_plan.`division` SEPARATOR '\n') FROM t_risk_action_plan WHERE t_risk.risk_id = t_risk_action_plan.risk_id) AS 'Action Plan Owner',
 			(SELECT GROUP_CONCAT(t_risk_action_plan.`due_date` SEPARATOR '\n') FROM t_risk_action_plan WHERE t_risk.risk_id = t_risk_action_plan.risk_id) AS 'Due Date'
-			FROM t_risk JOIN m_risk_category ON t_risk.`risk_2nd_sub_category` = m_risk_category.`cat_id` JOIN t_report_risk ON t_report_risk.risk_id=t_risk.risk_id WHERE t_report_risk.`periode_id`='".$data['periode']."' 
-			and t_risk.risk_evaluation_control is null or t_risk.risk_evaluation_control = '' ";
+			FROM t_risk JOIN m_risk_category ON t_risk.`risk_2nd_sub_category` = m_risk_category.`cat_id` JOIN t_report_risk ON t_report_risk.risk_id=t_risk.risk_id WHERE t_report_risk.`periode_id`='".$data['periode']."'";
 
 			$query = $this->db->query($querynya);
 			
@@ -179,7 +171,7 @@
 		
 		function listofrisketc($data){
 			$querynya = 
-			"SELECT DISTINCT m_risk_category.`cat_name`,t_risk.`risk_status`, t_risk.`risk_code`, t_risk.`risk_event`, t_risk.`risk_description`, t_risk.`risk_owner`, t_risk.`risk_cause`, t_risk.`risk_impact`,
+			"SELECT DISTINCT m_risk_category.`cat_name`, t_risk.`risk_code`, t_risk.`risk_event`, t_risk.`risk_description`, t_risk.`risk_owner`, t_risk.`risk_cause`, t_risk.`risk_impact`,
 			(SELECT GROUP_CONCAT(t_risk_objective.`objective` SEPARATOR '\n') FROM t_risk_objective WHERE t_risk.risk_id = t_risk_objective.risk_id) AS 'Objective', 
 			(SELECT GROUP_CONCAT(t_risk_control.`risk_existing_control` SEPARATOR '\n') FROM t_risk_control WHERE t_risk.risk_id = t_risk_control.risk_id) AS 'Existing Control', 
 			(SELECT GROUP_CONCAT(t_risk_control.`risk_evaluation_control` SEPARATOR '\n') FROM t_risk_control WHERE t_risk.risk_id = t_risk_control.risk_id) AS 'Control Evaluation', 
@@ -188,7 +180,7 @@
 			(SELECT GROUP_CONCAT(t_risk_action_plan.`division` SEPARATOR '\n') FROM t_risk_action_plan WHERE t_risk.risk_id = t_risk_action_plan.risk_id) AS 'Action Plan Owner',
 			(SELECT GROUP_CONCAT(t_risk_action_plan.`due_date` SEPARATOR '\n') FROM t_risk_action_plan WHERE t_risk.risk_id = t_risk_action_plan.risk_id) AS 'Due Date'
 			FROM t_risk JOIN m_risk_category ON t_risk.`risk_2nd_sub_category` = m_risk_category.`cat_id` JOIN t_report_risk ON t_report_risk.risk_id=t_risk.risk_id  WHERE t_report_risk.`periode_id`='".$data['periode']."' AND t_risk.risk_library_id IS NULL
-			and t_risk.risk_evaluation_control is null or t_risk.risk_evaluation_control = ''";
+			";
  
 			$query = $this->db->query($querynya);
 			
@@ -205,13 +197,13 @@
 		
 		function risktreatmentreport($data=null){
 			$querynya = "
-			SELECT DISTINCT t_risk.risk_code,t_risk.`risk_status`, t_risk.risk_event, t_risk.risk_owner, t_risk.risk_impact_level, t_risk.`risk_likelihood_key`,t_risk.`risk_level`, t_risk.`suggested_risk_treatment`,
+			SELECT DISTINCT t_risk.risk_code, t_risk.risk_event, t_risk.risk_owner, t_risk.risk_impact_level, t_risk.`risk_likelihood_key`,t_risk.`risk_level`, t_risk.`suggested_risk_treatment`,
 			(SELECT GROUP_CONCAT(t_risk_action_plan.`action_plan`SEPARATOR '\n') FROM t_risk_action_plan WHERE t_risk.risk_id = t_risk_action_plan.risk_id) AS 'Action Plan',
 			(SELECT GROUP_CONCAT(t_risk_action_plan.`division`SEPARATOR '\n') FROM t_risk_action_plan WHERE t_risk.risk_id = t_risk_action_plan.risk_id) AS 'Action Plan Owner',
 			(SELECT GROUP_CONCAT(t_risk_action_plan.`due_date`SEPARATOR '\n') FROM t_risk_action_plan WHERE t_risk.risk_id = t_risk_action_plan.risk_id) AS 'Due Date'
 			FROM t_risk JOIN t_risk_action_plan ON t_risk.risk_id = t_risk_action_plan.risk_id JOIN t_report_risk ON t_risk.risk_id = t_report_risk.risk_id
 			WHERE t_report_risk.periode_id='".$data['periode']."'
-			and t_risk.risk_evaluation_control is null or t_risk.risk_evaluation_control = '' ";
+			";
 			 
 			$query = $this->db->query($querynya);
 			
@@ -227,25 +219,15 @@
 		}
 		
 		function listofall($data=null){
-			if($data['status'] == 'ALL'){
-				$querynya = "
-					SELECT t_risk_action_plan.`id`,t_risk_action_plan.`action_plan`,t_risk_action_plan.`division`,t_risk_action_plan.`due_date`,
-					t_risk.`risk_code`, t_risk.`risk_event`, t_risk.`risk_owner`, t_risk.`risk_status`,
-					t_risk.`risk_level`, (select ifnull(t_risk_action_plan.`execution_status`, 'Have Not been Updated')) as 'execution_status', t_risk.risk_level_after_mitigation
-					FROM t_risk_action_plan
-					JOIN t_risk ON t_risk_action_plan.risk_id=t_risk.risk_id JOIN t_report_risk ON t_risk_action_plan.risk_id = t_report_risk.risk_id
-                    			WHERE t_report_risk.periode_id='".$data['periode']."'
-					and t_risk.risk_evaluation_control is null or t_risk.risk_evaluation_control = '' ";
-			}else{
 			$querynya = "
 			SELECT t_risk_action_plan.id,t_risk_action_plan.action_plan,t_risk_action_plan.division,t_risk_action_plan.due_date,
-					t_risk.risk_code,t_risk.`risk_status`, t_risk.risk_event, t_risk.risk_owner, t_risk.risk_level, t_risk_action_plan.execution_status,t_risk.risk_level_after_mitigation 
+					t_risk.risk_code, t_risk.risk_event, t_risk.risk_owner, t_risk.risk_level, t_risk_action_plan.execution_status,t_risk.risk_level_after_mitigation 
 					FROM t_risk_action_plan
 					JOIN t_risk ON t_risk_action_plan.risk_id=t_risk.risk_id JOIN t_report_risk ON t_risk_action_plan.risk_id = t_report_risk.risk_id
 					WHERE t_report_risk.periode_id='".$data['periode']."' AND t_risk_action_plan.execution_status = '".$data['status']."'
-					and t_risk.risk_evaluation_control is null or t_risk.risk_evaluation_control = '' ";
+			";
 			 
-			 }
+			 
 			$query = $this->db->query($querynya);
 			
 			if ($query->num_rows())
@@ -267,7 +249,7 @@
 					FROM t_risk_action_plan
 					JOIN t_risk ON t_risk_action_plan.risk_id=t_risk.risk_id JOIN t_report_risk ON t_risk_action_plan.risk_id = t_report_risk.risk_id
                     			WHERE t_report_risk.periode_id='".$data['periode']."'
-			and t_risk.risk_evaluation_control is null or t_risk.risk_evaluation_control = '' ";
+			";
 			 
 			$query = $this->db->query($querynya);
 			
@@ -286,7 +268,6 @@
 			$querynya = "
 					SELECT 
 					risk_code,
-					risk_status,
 					risk_event,
 					risk_description,
 					risk_owner,
@@ -353,8 +334,8 @@
 		function KRI_monitoring($data=null){
 			$querynya ="			
 			
-			SELECT r1.risk_code,r1.risk_status, r1.risk_event, r1.risk_level, r1.suggested_risk_treatment,r1.risk_level,r1.risk_impact_level,r1.risk_likelihood_key,r1.risk_impact_level_after_kri,r1.risk_likelihood_key_after_kri,
-					t1.kri_code, t1.key_risk_indicator, t1.kri_owner, t1.treshold,t1.validation,t1.supporting_evidence,
+			SELECT r1.risk_code, r1.risk_event, r1.risk_level, r1.suggested_risk_treatment,r1.risk_level,r1.risk_impact_level,r1.risk_likelihood_key,r1.risk_impact_level_after_kri,r1.risk_likelihood_key_after_kri,
+					t1.kri_code, t1.key_risk_indicator, t1.kri_owner, t1.treshold,
           (SELECT GROUP_CONCAT(t2.operator,' ', t2.value_1, ' = ', t2.result) FROM t_kri_treshold t2 WHERE t2.kri_id=t1.id) AS 'threshold value',
           t1.timing_pelaporan, t1.owner_report, t1.kri_warning, r1.risk_level_after_kri, t1.kri_status
 					FROM t_kri  t1 JOIN t_risk r1 ON t1.risk_id=r1.risk_id JOIN t_report_risk r2 ON t1.risk_id = r2.risk_id

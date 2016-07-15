@@ -57,6 +57,7 @@
 							<th>Key Risk Indicator</th> 
 							<th>Threshold</th> 
 							<th>Threshold Type</th> 
+							<th>Risk ID</th> 
 							<th> Action</th>
 						</tr>
 						</thead>

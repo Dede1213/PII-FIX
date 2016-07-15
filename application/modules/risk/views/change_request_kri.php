@@ -125,7 +125,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-2 control-label">Timing of Reporting</label>
+					<label class="col-md-2 control-label">Deadline For Report</label>
 					<div class="col-md-6">
 					<input type="text" class="form-control input-sm input-readview" readonly="true" name="timing_pelaporan" placeholder="" value="<?=$kri['timing_pelaporan_v']?>">
 					</div>

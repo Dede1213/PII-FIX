@@ -588,6 +588,7 @@
 							<th>Changes In</th>
 							<th>Requestor</th>
 							<th>Status Change Request</th>
+							<th>Date</th>
 							<th>Action</th>
 						</tr>
 						</thead>
@@ -671,5 +672,64 @@
 			<input type = "hidden" id = "modal_pic_risk_input_by" name = "risk_input_by">
 			<button type="button" class="btn blue btn-sm" onclick = "submit_note()">Save</button>			 
 		</form> 
+	</div>
+</div>
+
+<!-- Execution Form -->
+<div id="modal-exec" class="modal fade" tabindex="-1" data-width="760" data-keyboard="false" role="dialog" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+		<h4 class="modal-title">Action Plan Execution</h4>
+	</div>
+	<div class="modal-body form">
+		<form id="exec-form" role="form" class="form-horizontal">
+		<input type="hidden" id="form-action-id" name="action_id" value="" />
+			<div class="form-body">
+				<div class="form-group">
+					<label class="col-md-3 smaller control-label">Status </label>
+					<div class="col-md-9">
+					<select class="form-control input-sm" name="execution_status" id="exec-select-status">
+						<option value="COMPLETE" selected>Complete</option>
+						<option value="EXTEND">Extend</option>
+						<option value="ONGOING">On Going</option>
+					</select>
+					</div>
+				</div>
+				<div class="form-group" id="fgroup-explain">
+					<label class="col-md-3 control-label smaller cl-compact">Explanation<span class="required">* </span></label>
+					<div class="col-md-9">
+					<textarea class="form-control" rows="3" name="execution_explain" placeholder=""></textarea>
+					</div>
+				</div>
+				<div class="form-group" id="fgroup-evidence">
+					<label class="col-md-3 control-label smaller cl-compact">Evidence</label>
+					<div class="col-md-9">
+					<textarea class="form-control" rows="3" name="execution_evidence" placeholder=""></textarea>
+					</div>
+				</div>				 
+				<div class="form-group" id="fgroup-reason">
+					<label class="col-md-3 control-label smaller cl-compact">Reason<span class="required">* </span></label>
+					<div class="col-md-9">
+					<textarea class="form-control" rows="3" name="execution_reason" placeholder=""></textarea>
+					</div>
+				</div>
+				<div class="form-group" id="fgroup-date">
+					<label class="col-md-3 smaller control-label">Revised Date<span class="required">* </span></label>
+					<div class="col-md-9">
+					<div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
+						<input type="text" class="form-control input-sm" name="revised_date" readonly value="<?=date('d-m-Y')?>">
+						<span class="input-group-btn">
+						<button class="btn default btn-sm" type="button"><i class="fa fa-calendar"></i></button>
+						</span>
+					</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="form-actions right">
+				<button id="exec-button-save" type="button" class="btn blue"><i class="fa fa-circle-o"></i> Save </button>
+				<button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+			</div>
+		</form>
 	</div>
 </div>

@@ -57,8 +57,8 @@
 							 
 							<th>AP ID</th>
 							<th>Action Plan</th>
-							 
-							<th>Action Plan Owner</th> 
+							<th>Action Plan Owner</th>
+							<th>Risk ID</th>
 							<th> Action</th>
 						</tr>
 						</thead>

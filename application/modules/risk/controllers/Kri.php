@@ -70,8 +70,13 @@ class Kri extends APP_Controller {
 			$tres[] = $v;
 		}
 		
-		$res = $this->risk->insertNewKri($kri, $tres);
+		$type = $_POST['treshold_type'];
+		if ($type == 'SELECTION')
+		{
+		$cek_color = $this->risk->insertNewKriTmp($kri, $tres);
 		
+		if($cek_color == true){
+		$res = $this->risk->insertNewKri($kri, $tres);
 		$resp = array();
 		if ($res) {
 			$resp['success'] = true;
@@ -80,6 +85,26 @@ class Kri extends APP_Controller {
 			$resp['success'] = false;
 			$resp['msg'] = $this->db->error();
 		}
+		}else{
+			$resp['success'] = false;
+			$resp['msg'] = 'Color threshold Not to be Duplicates!';
+		}
+		
+		}else{
+
+		$res = $this->risk->insertNewKri($kri, $tres);
+		$resp = array();
+		if ($res) {
+			$resp['success'] = true;
+			$resp['msg'] = 'SUCCESS';
+		} else {
+			$resp['success'] = false;
+			$resp['msg'] = $this->db->error();
+		}
+
+		}
+
+		
 		echo json_encode($resp);
 	}
 	
@@ -87,9 +112,11 @@ class Kri extends APP_Controller {
 	{
 		if (isset($_POST['id']) && is_numeric($_POST['id'])) {
 			$rid = $_POST['id'];
+			
 			$kri = $this->risk->getKriById($rid);
 			$kri_warning = null;
 			$report = $_POST['owner_report'];
+			$support = $_POST['support'];
 			
 			if ($kri['treshold_type'] == 'SELECTION') {
 				
@@ -130,7 +157,10 @@ class Kri extends APP_Controller {
 			}
 			
 			// if is div head then submit for verification, if pic for div head verify
+			//tambah role 2 karena rac pengen bisa submit juga
 			if ($this->session->credential['role_id'] == 4) {
+				$stat = 2;
+			}else if ($this->session->credential['role_id'] == 2) {
 				$stat = 2;
 			} else {
 				$stat = 1;
@@ -139,7 +169,8 @@ class Kri extends APP_Controller {
 			$par = array(
 				'kri_status' => $stat,
 				'owner_report' => $report,
-				'kri_warning' => $kri_warning
+				'kri_warning' => $kri_warning,
+				'supporting_evidence' => $support
 			);
 			
 			$res = $this->risk->updateKri($rid, $par, $this->session->credential['username']);
@@ -162,6 +193,9 @@ class Kri extends APP_Controller {
 			$kri = $this->risk->getKriById($rid);
 			$kri_warning = null;
 			$report = $_POST['owner_report'];
+			$support = $_POST['support'];
+			$validation = $_POST['validation'];
+			$description = $_POST['description'];
 			
 			if ($kri['treshold_type'] == 'SELECTION') {
 				
@@ -204,8 +238,13 @@ class Kri extends APP_Controller {
 			$par = array(
 				'kri_status' => $stat,
 				'owner_report' => $report,
-				'kri_warning' => $kri_warning
+				'kri_warning' => $kri_warning,
+				'supporting_evidence' => $support,
+				'validation' => $validation,
+				'description' => $description
 			);
+
+			
 			
 			//--------update level
 			$this->risk->updateRisk_level($kri['risk_id'], $this->input->post());

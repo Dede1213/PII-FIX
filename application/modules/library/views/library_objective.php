@@ -57,6 +57,7 @@
 							 
 							<th width="15%">Risk Objective ID</th>
 							<th>Risk Objective</th>
+							<th>Risk ID</th>
 							<th width="15%"> Action</th>
 						</tr>
 						</thead>

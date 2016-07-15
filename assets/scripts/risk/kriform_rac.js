@@ -44,7 +44,7 @@ var KriForm = function() {
         				if(data.success) {
         					var mod = MainApp.viewGlobalModal('success', 'Success Updating your KRI');
         					mod.find('button.btn-ok-success').one('click', function(){
-        						location.href=site_url+'/main/mainpic#tab_kri';
+        						location.href=site_url+'/main/mainrac';
         					});
         					
         				} else {

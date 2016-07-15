@@ -244,19 +244,21 @@
 		<h4 class="modal-title">Add Treshold</h4>
 	</div>
 	<div class="modal-body">
+		<input type = "hidden" id = "form-control-revid-objective">
 		<form id="kri-form-selection" role="form" class="form-horizontal">
 			<input type="hidden" name="operator" value="EQUAL" />
 			<div class="form-body">
 				<div class="form-group">
+					
 					<label class="col-md-2 control-label">Value</label>
 					<div class="col-md-6">
-					<input type="text" class="form-control input-sm input-readview" name="value-equal" placeholder="">
+					<input type="text" class="form-control input-sm input-readview" name="value-equal" id="value-equal" placeholder="">
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-md-2 control-label">Result</label>
 					<div class="col-md-6">
-					<select class="form-control input-sm" name="result">
+					<select class="form-control input-sm" name="result" id="result" >
 						<option value="GREEN">Green</option>
 						<option value="YELLOW">Yellow</option>
 						<option value="RED">Red</option>

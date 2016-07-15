@@ -112,9 +112,14 @@ var KriForm = function() {
         			{
         				'id' : $('#kri-id').val(), 
         				'owner_report' : $('#owner_report').val(),
+                                        'support' : $('#support').val(),
+                                        'validation' : $('#validation').val(),
+                                        'description' : $('#threshold_description').val(),
+
 						'risk_impact_level_after_kri' : $('#risk_impact_level_after_mitigation').val(),
 						'risk_likelihood_key_after_kri' : $('#risk_likelihood_key_after_mitigation').val(),
 						'risk_level_after_kri' : $('#risk_level_after_mitigation').val()
+                                                
         			},
         			function( data ) {
 						 

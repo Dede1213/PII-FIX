@@ -89,6 +89,10 @@ class Main extends APP_Controller {
 		$periode = $this->mperiode->getCurrentPeriode();
 		$data['adhoc_button'] = true;
 		if ($periode) $data['adhoc_button'] = false;
+
+		//cek change request
+		$this->load->model('risk/risk');
+		$data['cekChangeRequest'] = $this->risk->cekChangeRequestComplete($user);
 		
 		
 		

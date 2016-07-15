@@ -66,7 +66,8 @@
 		<div class="inputs">
 			<div class="portlet-input input-inline">
 				<div class="col-md-6 input-group">
-					<select class="form-control input-sm" name="filter_search">
+					<select class="form-control input-medium input-sm" name="filter_search">
+						<option value="ALL">ALL</option>
 						<option value="HIGH">Tinggi</option>
 						<option value="MODERATE">Sedang</option>
 						<option value="LOW">Rendah</option>

@@ -233,6 +233,12 @@ var Kri = function() {
         		var type = $('#select-treshold-type').val();
         		if (type == 'SELECTION') {
         			$('#modal-treshold-selection').modal('show');
+
+                    $('#form-control-revid-objective').val("");
+                    $('#kri-form-selection input[name=value-equal]').attr('readonly', false);
+                    $('#kri-form-selection select[name=result] option:selected').val();
+                    
+
         			me.initAddTresholdSelection();
         		} else {
         			$('#modal-treshold-value').modal('show');
@@ -242,23 +248,34 @@ var Kri = function() {
         	
         	$('#button-treshold-selection-add').on('click', function() {
 				
-				var val1 = $('#kri-form-selection').find('input[name=value-equal]').val();
-				var result = $('#kri-form-selection').find('select[name=result]').val();
-				var result_v = $('#kri-form-selection').find('select[name=result] option:selected').text();
-				        		
-        		var nnode = {
-        			'operator_v': 'Equal to',
-        			'operator': 'EQUAL',
-        			'value_1': val1,
-        			'value_2': '-',
-        			'value_type': '-',
-        			'result_v': result_v,
-        			'result': result
-        		};
+                var form1 = $('#kri-form-selection').validate();
+                var fvalid = form1.form();
+                
+                if (fvalid) {
+                    //var tr_idnya2 = $('#tr_idnya2').val();
+                          
+                var tr_idob = $('#form-control-revid-objective').val();
+
+                var val1 = $('#kri-form-selection').find('input[name=value-equal]').val();
+                var result = $('#kri-form-selection').find('select[name=result]').val();
+                var result_v = $('#kri-form-selection').find('select[name=result] option:selected').text();
+                    
+                   var nnode = {
+                    'tr_idob' : tr_idob,
+                    'operator_v': 'Equal to',
+                    'operator': 'EQUAL',
+                    'value_1': val1,
+                    'value_2': '-',
+                    'value_type': '-',
+                    'result_v': result_v,
+                    'result': result
+                };
+        		
         		//console.log(nnode);
         		me.tresholdAddRow(nnode);
         		
         		$('#modal-treshold-selection').modal('hide');
+                 }
         	})
         	
         	$('#button-treshold-value-add').on('click', function() {
@@ -344,21 +361,42 @@ var Kri = function() {
         tresholdAddRow: function(nnode) {
         	var me = this;
 
-        	me.dataTresholdCounter++;
+            me.dataTresholdCounter++;
+
+
+            var lastidrand = $('#form-control-revid-objective').val();
+            
+            //alert(lastidrand);
+            
+           // $('#'+lastidrand).html('');
+           // $('#'+lastidrand).remove();
+
+            var tr_id2 = $('#form-control-revid-objective').val();
+             
+            //$("#tr_z"+tr_id2).html("");
+            $("#tr_z"+tr_id2).remove(); 
+            
+            $('#tr_z'+lastidrand).html('');
+
         	
-        	$('#treshold_table > tbody:last-child').append('<tr>'+
+            var idrand = Math.floor((Math.random() * 1000000) + 1); 
+        	
+        	$('#treshold_table > tbody:last-child').append('<tr id = "tr_z'+me.dataTresholdCounter+'">'+
         		'<td>'+nnode.operator_v+'</td>'+
-        		'<td>'+nnode.value_1+'</td>'+
+                '<td><input type = "hidden" id = "value-equal'+me.dataTresholdCounter+' " value = '+nnode.value_1+'>'+nnode.value_1+'</td>'+
+        		
         		'<td>'+nnode.value_2+'</td>'+
         		'<td>'+nnode.value_type+'</td>'+
         		'<td>'+nnode.result_v+'</td>'+
         		
                 '<td>'+'<div class="btn-group">'+
-                    '<button type="button" class="btn btn-default btn-xs" onclick="Kri.tresholdTableDelete(this, '+me.dataTresholdCounter+')"><i class="fa fa-trash-o font-red"></i></button>'+
+                    '<button type="button" class="btn btn-default btn-xs" onclick = "modal_control_edit_objective('+me.dataTresholdCounter+')" ><i class="fa fa-pencil font-blue"> Edit </i></button>'+
+                    '<button type="button" class="btn btn-default btn-xs" onclick="Kri.tresholdTableDelete(this, '+me.dataTresholdCounter+')"><i class="fa fa-trash-o font-red"> Delete </i></button>'+
                 '</div>'+
                 '</td>'+
         	'</tr>');
         	
+            this.tresholdDelete(nnode.tr_idob); 
         	me.tresholdAdd(nnode, me.dataTresholdCounter);
         },
         
@@ -542,3 +580,14 @@ var Kri = function() {
         }
 	 }
 }();
+
+function modal_control_edit_objective(a){
+$('#tr_idnyaob').val(a); 
+$('#form-control-revid-objective').val(a);
+$('#kri-form-selection').val($('#value-equal'+a).val());
+$('#kri-form-selection').val($('#result'+a).val());
+
+
+$('#modal-treshold-selection').modal('show'); 
+}
+

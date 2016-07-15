@@ -35,7 +35,7 @@
 				<div class="form-group">
 					<input type="text" class="form-control input-sm" id="filterFormValue" placeholder="Insert Filter Value">
 				</div>
-				<button type="button" id="filterFormSubmit" class="btn green btn-sm">Submit</button>
+				<button type="button" id="filterFormSubmit" class="btn green btn-sm">Search</button>
 			</form>	
 			</div>
 			

@@ -51,6 +51,10 @@ class MainPic extends APP_Controller {
 		$this->load->model('risk/risk');
 		$data['cekowned'] = $this->risk->cekOwned($username,$division_nya);
 
+		//cek change request
+		$this->load->model('risk/risk');
+		$data['cekChangeRequest'] = $this->risk->cekChangeRequestComplete($username);
+
 
 		$this->load->view('header', $data);
 		$this->load->view('main_pic', $data);
@@ -101,6 +105,7 @@ class MainPic extends APP_Controller {
 			
 			$this->load->model('risk/risk');
 			$cred = $this->session->credential;
+			$data['role'] = $cred['role_id'];
 			$risk = $this->risk->getRiskValidate('viewRiskByDivision', $rid, $cred);
 			$view = 'risk/risk_register_view';
 			$data['risk_user']['nama'] = '';
@@ -361,6 +366,8 @@ class MainPic extends APP_Controller {
 			// if is div head then submit for verification, if pic for div head verify
 			if ($this->session->credential['role_id'] == 4) {
 				$stat = 5;
+			}else if ($this->session->credential['role_id'] == 2) {
+				$stat = 5;
 			} else {
 				$stat = 4;
 			}
@@ -527,7 +534,7 @@ class MainPic extends APP_Controller {
 			
 			$this->load->model('risk/risk');
 			$cred = $this->session->credential;
-			
+			$data['role'] = $cred['role_id'];
 			$risk = $this->risk->getActionPlanById($rid);
 
 			if ($risk && $risk['division'] == $cred['division_id']) {
@@ -638,7 +645,10 @@ class MainPic extends APP_Controller {
 			$data = $this->loadDefaultAppConfig();
 			
 			// if is div head then submit for verification, if pic for div head verify
+			// tambah role 2 karena rac mau submit juga
 			if ($this->session->credential['role_id'] == 4) {
+				$stat = 3;
+			}else if ($this->session->credential['role_id'] == 2) {
 				$stat = 3;
 			} else {
 				$stat = 2;
@@ -788,11 +798,14 @@ class MainPic extends APP_Controller {
 		}
 	}
 	
+	//rac mau submit juga mangkanya tambah role 2
 	public function execSubmit() {
 		if (isset($_POST['action_id']) && is_numeric($_POST['action_id'])) {
 			$data = $this->loadDefaultAppConfig();
 			
 			if ($this->session->credential['role_id'] == 4) {
+				$stat = 6;
+			}else if ($this->session->credential['role_id'] == 2) {
 				$stat = 6;
 			} else {
 				$stat = 5;
@@ -862,6 +875,7 @@ class MainPic extends APP_Controller {
 			
 			$this->load->model('risk/risk');
 			$cred = $this->session->credential;
+			$data['role'] = $cred['role_id'];
 			
 			$kri = $this->risk->getKriById($rid);
 

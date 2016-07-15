@@ -84,7 +84,15 @@
 				</li>
 				<li>
 					<a href="#tab_change_request_list" data-toggle="tab">
-					Change Request List </a>
+					Change Request List 
+					<font style="color:red;">
+					<?php 
+					if($cekChangeRequest > 0){
+					echo "($cekChangeRequest)";
+					}
+					?>
+					</font>
+					</a>
 				</li>
 			</ul>
 			<div class="tab-content">
@@ -367,6 +375,7 @@
 							<th>Risk ID</th>
 							<th>Risk Event</th>
 							<th>Status Change Request</th>
+							<th>Date</th>
 						</tr>
 						</thead>
 						<tbody>
@@ -472,3 +481,7 @@
 		</form>
 	</div>
 </div>
+
+<script type="text/javascript">
+						var g_submit_mode = '<?php echo "$adhoc_button";?>';
+						</script>

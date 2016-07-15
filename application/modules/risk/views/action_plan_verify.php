@@ -58,6 +58,7 @@ if($status == 'under'){ ?>
 					</div>
 				</div>
 				
+
 				<div class="portlet-body form">
 					<form role="form" id="input-form" class="form-horizontal">
 					<input type="hidden" id="action-plan-id" value="<?=$action_plan['id']?>" name="id" placeholder="">
@@ -221,6 +222,24 @@ if($status == 'under'){ ?>
 								</select>
 								</div>
 							</div>
+
+							<?php 
+							if($status_berkala == true){
+							?>
+							<div class="form-group">
+								<label class="col-md-2 control-label smaller cl-compact" title="">Status</label>
+								<div class="col-md-9">
+								<select class="form-control input-sm" name="status">
+									
+									<option value="berkala" >Berkala</option>
+									<option value="tidak_berkala" >Tidak Berkala</option>
+									
+								</select>
+								</div>
+							</div>
+							<?php
+							}
+							?>
 						</div>
 						<div class="form-actions right">
 							<button id="primary-risk-button-submit-1" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Verify</button>

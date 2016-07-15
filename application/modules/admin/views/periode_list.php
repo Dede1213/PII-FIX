@@ -3,7 +3,7 @@
 	<div class="page-content">
 		<!-- BEGIN PAGE HEADER-->
 		<h3 class="page-title">
-		Regular Period for Report
+		Regular Period List
 		</h3>
 		<!-- END PAGE HEADER-->
 		<div class="row">
@@ -19,19 +19,7 @@
 			</div>
 		</div>
 		
-		<form class="form-inline" role="form" id="filterForm">
-			<div class="form-group">
-				<label for="filterFormBy">Filter By</label>
-				<select class="form-control input-medium input-sm" id="filterFormBy">
-					<option value="periode_name">Periode</option>
-					<option value="periode_year">Year</option>
-				</select>
-			</div>
-			<div class="form-group">
-				<input type="text" class="form-control input-sm" id="filterFormValue" placeholder="Insert Filter Value">
-			</div>
-			<button type="button" id="filterFormSubmit" class="btn green btn-sm">Submit</button>
-		</form>	
+		
 		</div>
 		
 		<div class="portlet-body">
@@ -41,16 +29,13 @@
 				<table class="table table-striped table-bordered " id="datatable_ajax">
 				<thead>
 				<tr role="row" class="heading">
-					<th width="5%">
-						 No
-					</th>
-					<th width="25%">Periode</th>
-					<th width="20%">Periode Start</th>
-					<th width="20%">Periode End</th>
+					<th width="20%">Risk ID</th>
+					<th width="25%">Risk Event</th>
+					<th width="20%">Risk Description</th>
+					<th width="20%">Date</th>
 					<th width="10%">
 						 Action
 					</th>
-					<th width="20%">List</th>
 				</tr>
 				</thead>
 				<tbody>
@@ -105,3 +90,7 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+	var g_id = <?=$id?>;
+</script>

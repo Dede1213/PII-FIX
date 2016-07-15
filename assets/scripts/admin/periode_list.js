@@ -22,31 +22,23 @@ grid.init({
 		//"scrollX": true,
         "pageLength": 25, // default record count per page
         "ajax": {
-            "url": site_url+"/admin/periode/periodeReportGetData" // ajax source
-        },"columnDefs": [{
-        	"targets": 5,
-        	"data": "periode_name",
-        	"render": function ( data, type, full, meta ) {
-               
-                    return '<a target="_self" href="'+site_url+'/admin/periode/periode_list/'+full.periode_id+'">View List</a>';
-  
-        		
-           	}
-        } ],
+            "url": site_url+"/admin/periode/periodeReportGetDataList/"+g_id // ajax source
+        },
         "columns": [
-           { "data": "GenRowNum", "orderable": false },
-           { "data": "periode_name" },
-           { "data": "periode_start_v" },
-           { "data": "periode_end_v" },
+ 
+           { "data": "risk_code" },
+           { "data": "risk_event" },
+           { "data": "risk_description" },
+            { "data": "risk_date" },
            { 
            	"data": null,
            	"orderable": false,
            	"defaultContent": '<div class="btn-group">'+
-           			'<button type="button" class="btn btn-default btn-xs button-grid-edit"><i class="fa fa-pencil font-blue">  Edit </i></button>'+
+           			
            			'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"> Delete </i></button>'+
            		'</div>'
-           },
-           { "data": "periode_name" }
+           }
+          
        ],
         "order": [
             [1, "asc"]
@@ -171,7 +163,7 @@ var Periode = function() {
 	        		mod.modal('hide');
 	        		
 	        		Metronic.blockUI({ boxed: true });
-	        		var url = site_url+'/admin/periode/periodeReportDeleteData';
+	        		var url = site_url+'/admin/periode/periodeReportDeleteDataList/'+data.risk_id;
 	        		$.post(
 	        			url,
 	        			{ 'id':  data.DT_RowId},

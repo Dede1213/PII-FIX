@@ -84,12 +84,21 @@ gridRiskList_ap.init({
         	"render": function ( data, type, full, meta ) {
         		return 'AP.'+data+'';
         	}
+        },{
+            "targets": 3,
+            "data": "risk_code",
+            "render": function ( data, type, full, meta ) {
+                var cls = 'font-green';
+                if (full.risk_status == '0' || full.risk_status == '1') cls = '';
+                return '<a target="_self" class="'+cls+'" href="'+site_url+'/main/viewRisk/'+full.risk_id+'">'+data+'</a>';
+            }
         } ],
         
         "columns": [
 			{ "data": "id" },
 			{ "data": "action_plan" }, 
 			{ "data": "division" }, 
+            { "data": "risk_code" }, 
 			{ 
             "data": null,
             "orderable": false,
@@ -133,11 +142,21 @@ gridRiskList_kri.init({
         "ajax": {
             "url": site_url+"/library/getAllRisk_kri" // ajax source
         },
+        "columnDefs": [ {
+            "targets": 4,
+            "data": "risk_code",
+            "render": function ( data, type, full, meta ) {
+                var cls = 'font-green';
+                if (full.risk_status == '0' || full.risk_status == '1') cls = '';
+                return '<a target="_self" class="'+cls+'" href="'+site_url+'/main/viewRisk/'+full.risk_id+'">'+data+'</a>';
+            }
+        } ],
         "columns": [
 			{ "data": "kri_code" },
 			{ "data": "key_risk_indicator" },
 			{ "data": "treshold" }, 
 			{ "data": "threshold value" }, 
+            { "data": "risk_code" }, 
 			{ 
             "data": null,
             "orderable": false,
@@ -186,13 +205,22 @@ gridRiskList_ec.init({
         	"render": function ( data, type, full, meta ) {
         		return 'EC.'+data+'';
         	}
+        },{
+            "targets": 4,
+            "data": "risk_code",
+            "render": function ( data, type, full, meta ) {
+                var cls = 'font-green';
+                if (full.risk_status == '0' || full.risk_status == '1') cls = '';
+                return '<a target="_self" class="'+cls+'" href="'+site_url+'/main/viewRisk/'+full.risk_id+'">'+data+'</a>';
+            }
         } ],
         
         "columns": [
 			{ "data": "id" },
 			{ "data": "risk_existing_control" },
 			{ "data": "risk_evaluation_control" },
-			{ "data": "risk_control_owner" }, 
+			{ "data": "risk_control_owner" },
+            { "data": "risk_code" }, 
 			{ 
             "data": null,
             "orderable": false,
@@ -241,11 +269,20 @@ gridRiskList_objective.init({
             "render": function ( data, type, full, meta ) {
                 return 'OB.'+data+'';
             }
+        },{
+            "targets": 2,
+            "data": "risk_code",
+            "render": function ( data, type, full, meta ) {
+                var cls = 'font-green';
+                if (full.risk_status == '0' || full.risk_status == '1') cls = '';
+                return '<a target="_self" class="'+cls+'" href="'+site_url+'/main/viewRisk/'+full.risk_id+'">'+data+'</a>';
+            }
         } ],
         
         "columns": [
             { "data": "id" },
-            { "data": "objective" }, 
+            { "data": "objective" },
+            { "data": "risk_code" }, 
             { 
             "data": null,
             "orderable": false,

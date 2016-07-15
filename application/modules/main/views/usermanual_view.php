@@ -37,7 +37,39 @@
 					This option will not work correctly. Unfortunately, your browser does not support
 					inline frames.</iframe>
 					-->
-
+					<?php
+					$next = $nid+1;
+					$back = $nid-1;
+					
+					$role = $this->session->credential['role_id'];
+					
+				if($role == 3){
+					if($next > 7){
+						$next = 3;
+					}else if($back < 3){
+						$back = 3;
+					}
+				}else if($role == 4){
+					if($next > 20){
+						$next = 10;
+					}else if($back < 10){
+						$back = 10;
+					}
+				}else if($role == 5){
+					if($next > 31){
+						$next = 21;
+					}else if($back < 21){
+						$back = 21;
+					}
+				}else if($role == 2){
+					if($next > 33){
+						$next = 32;
+					}else if($back < 32){
+						$back = 32;
+					}
+				}
+					?>
+					<center><a href="<?=$base_url?>index.php/main/usermanual/view/<?=$back?>">Back</a> | <a href="<?=$base_url?>index.php/main/usermanual/view/<?=$next?>">Next</a></center>
 				</div>
 			</div>
 		</div>

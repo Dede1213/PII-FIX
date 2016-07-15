@@ -25,6 +25,16 @@ class Risk extends APP_Model {
 						->num_rows();
 	}
 
+	//cek change request blum Complete
+
+	public function cekChangeRequestComplete($username)
+	{
+		return $this->db->where('cr_status','1')
+						->where('created_by',$username)
+						->get('t_cr_risk')
+						->num_rows();
+	}
+
 	//cek libarary dari changes
 	public function getRiskByIdNoRefChanges($risk_id, $user_by) 
 	{
@@ -1025,6 +1035,7 @@ class Risk extends APP_Model {
                                                                                 where 
                                                                                 a.periode_id = '".$defFilter['periodid']."'
                                                                                 and a.risk_input_by = '".$defFilter['userid']."'
+                                                                                and a.existing_control_id is null
                                                                                 and a.risk_id NOT IN (select r.risk_id from t_risk r where a.risk_id = r.risk_id and r.periode_id = '".$defFilter['periodid']."' and r.risk_input_by = '".$defFilter['userid']."' and r.risk_status > 1)
                                                                                 UNION
                                                                                 select 
@@ -1066,6 +1077,7 @@ select
                                                                                 a.risk_library_id is null 
                                                                                 and 
                                                                                 t.risk_library_id is not null
+                                                                                and a.existing_control_id is null
                                                                                 and
                                                                                 a.periode_id = '".$defFilter['periodid']."'
                                                                                 and 
@@ -1412,13 +1424,23 @@ select
 		if ($mode == 'racActionPlanExec') {
 			
 			$date = date("Y-m-d");
-			$sql = "select
+			$sql = "
+
+					select
 					a.*,
 					concat('AP.', LPAD(a.id, 6, '0')) as act_code,
 					b.risk_code,b.periode_id,
 					c.display_name as assigned_to_v,
 					d.division_name as division_name,
 					date_format(a.due_date, '%d-%m-%Y') as due_date_v,
+					case 
+                    when a.assigned_to = '".$defFilter['userid']."' then 0
+                    else 1
+                    end as is_owner,
+                    case 
+                    when '4' = '".$defFilter['role_id']."' then 0
+                    else 1
+                    end as is_head,
 					case
 					when DATE(NOW()) = (select DATE(NOW()) from m_periode_plan where DATE(NOW()) between periode_start and periode_end) then 1
 					else 0
@@ -1544,7 +1566,12 @@ select
 		if ($mode == 'kriNotRisk') {
 			$ext = '';
 			if (isset($defFilter['filter_library'])) {
-				$ext = ' and a.risk_level = ? ';
+				if($defFilter['filter_library'] == 'ALL'){
+					$ext = ' and a.risk_level is not null ';
+				}else{
+					$ext = ' and a.risk_level = ? ';
+				}
+				
 				$rpar = array(
 					'x1' => $defFilter['filter_library']
 				);
@@ -1871,8 +1898,8 @@ select
 		$res = $this->db->query($sql);
 		
 
-		$sql = "insert into t_risk_action_plan(risk_id,action_plan_status,action_plan,due_date,division,switch_flag)
-				select a.risk_id,b.action_plan_status,b.action_plan,b.due_date,b.division,'$uid' from t_risk a,t_risk_action_plan b where a.risk_input_by='$uid' and a.periode_id='$periode' and a.risk_library_id='$risk_id' and b.risk_id='$risk_id' ";
+		$sql = "insert into t_risk_action_plan(risk_id,action_plan_status,action_plan,due_date,division,execution_status,execution_explain,execution_evidence,execution_reason, switch_flag)
+				select a.risk_id,b.action_plan_status,b.action_plan,b.due_date,b.division,b.execution_status,b.execution_explain,b.execution_evidence,b.execution_reason,'$uid' from t_risk a,t_risk_action_plan b where a.risk_input_by='$uid' and a.periode_id='$periode' and a.risk_library_id='$risk_id' and b.risk_id='$risk_id' ";
 		$res = $this->db->query($sql);
 
 		$sql = "insert into t_risk_impact(risk_id,impact_id,impact_level,switch_flag)
@@ -1901,8 +1928,8 @@ select
 		$res = $this->db->query($sql);
 		
 
-		$sql = "insert into t_risk_action_plan_change(id,risk_id,action_plan_status,action_plan,due_date,division,switch_flag)
-				select b.id,a.risk_id,b.action_plan_status,b.action_plan,b.due_date,b.division,'$uid' from t_risk a,t_risk_action_plan b where a.risk_input_by='$uid' and a.periode_id='$periode' and a.risk_library_id='$risk_id' and b.risk_id='$risk_id' ";
+		$sql = "insert into t_risk_action_plan_change(id,risk_id,action_plan_status,action_plan,due_date,division,execution_status,execution_explain,execution_evidence,execution_reason,switch_flag)
+				select b.id,a.risk_id,b.action_plan_status,b.action_plan,b.due_date,b.division,b.execution_status,b.execution_explain,b.execution_evidence,b.execution_reason,'$uid' from t_risk a,t_risk_action_plan b where a.risk_input_by='$uid' and a.periode_id='$periode' and a.risk_library_id='$risk_id' and b.risk_id='$risk_id' ";
 		$res = $this->db->query($sql);
 		
 		$sql = "insert into t_risk_impact_change(risk_id,impact_id,impact_level,switch_flag)
@@ -2245,7 +2272,7 @@ select
 		$cr_type = "Risk Register";
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		$sql = "insert into t_cr_risk (cr_code,cr_type,cr_status,created_by) values ('$hasil','$cr_type',0,'$uid')";
+		$sql = "insert into t_cr_risk (cr_code,cr_type,cr_status,created_by,created_date) values ('$hasil','$cr_type',0,'$uid',NOW())";
 		
 		$res = $this->db->query($sql);
 		return $res;
@@ -2846,6 +2873,12 @@ select
 		
 		// insert action plan
 			if ($actplan !== false) {
+
+				$sql = "select * from t_risk_action_plan where risk_id = ?  ";
+				$data_ap = $this->db->query($sql, array('rid' => $risk_id))->row_array();
+
+				
+
 				$sql = "delete from t_risk_action_plan where risk_id = ?  ";
 				$this->db->query($sql, array('rid' => $risk_id));
 				
@@ -3924,6 +3957,20 @@ select
 				}
 			}
 		}
+
+		if ($mode == 'viewRiskByDivisionRac') {
+			$res = $this->getRiskById($risk_id);
+
+			if ($res) {
+				// check if id is same
+				if ($res['risk_division'] != $credential['division_id']) {
+					$risk = $res;
+					return $risk;
+				} else {
+					return $ret;
+				}
+			}
+		}
 		
 		if ($mode == 'viewActionByRac') {
 			$res = $this->getActionPlanById($risk_id);
@@ -4925,6 +4972,18 @@ select
 	
 	public function actionPlanVerify1form($action_id, $risk_id, $risk, $uid) 
 	{	
+
+		//ambil data lama untuk status berkala buat ngakalin execution yg ke delete
+		$par = array(
+			'id' => $action_id, 'risk_id' => $risk_id
+		);
+		$sql = "select * from t_risk_action_plan where id = ? and risk_id = ?";
+		$data_aman = $this->db->query($sql, $par)->row_array();
+		$action_plan_x = $data_aman['action_plan'];
+		$due_date_x = $data_aman['due_date'];
+		$division_x = $data_aman['division'];
+		//batas data aman
+
 		$division = $risk['division'];
 		$par = array(
 			'ap' => $risk['action_plan_status'],
@@ -4938,14 +4997,47 @@ select
 		$sql = "update t_risk_action_plan 
 				set action_plan_status = ?,action_plan = ?,due_date = ?,division = ?,assigned_to = (select username from m_user where division_id = '$division' and role_id = 4)
 				where id = ? and risk_id = ?";
-
 		$query = $this->db->query($sql, $par);
+
+//kalo berkala
 		
+		$par = array(
+			'a' => $action_plan_x, 'b' => $due_date_x, 'c' => $division_x
+		);
+		$sql = "select * from t_risk_action_plan where action_plan_status > '4' and action_plan = ? and due_date = ? and division = ? order by id desc limit 1";
+		$datanya = $this->db->query($sql, $par)->row_array();
+		
+		$execution_status_x = $datanya['execution_status'];
+		$execution_explain_x = $datanya['execution_explain'];
+		$execution_evidence_x = $datanya['execution_evidence'];
+		$execution_reason_x = $datanya['execution_reason'];
+
+		if($risk['status'] == 'berkala'){
 		$par = array(
 			'id' => $action_id, 'risk_id' => $risk_id
 		);
-		
-		
+		$sql = "update t_risk_action_plan 
+				set action_plan_status = '7', due_date ='0000-00-00' , execution_status = 'COMPLETE', execution_explain = '$execution_explain_x', execution_evidence = '$execution_evidence_x', execution_reason='$execution_reason_x' where id = ? and risk_id = ?";
+		$query = $this->db->query($sql, $par);
+
+		$sql = "update t_risk 
+				set risk_status = '20' where risk_id = '$risk_id' ";
+		$query = $this->db->query($sql);
+
+		}else if($risk['status'] == 'tidak_berkala'){
+		$par = array(
+			'id' => $action_id, 'risk_id' => $risk_id
+		);
+		$sql = "update t_risk_action_plan 
+				set execution_status = '$execution_status_x', execution_explain = '$execution_explain_x', execution_evidence = '$execution_evidence_x', execution_reason='$execution_reason_x' where id = ? and risk_id = ?";
+		$query = $this->db->query($sql, $par);
+		}
+//end berkala
+
+		$par = array(
+			'id' => $action_id, 'risk_id' => $risk_id
+		);
+
 		$sql = "delete from t_risk_action_plan_change 
 				where id = ? and risk_id = ?";
 		$query = $this->db->query($sql, $par);
@@ -5216,6 +5308,112 @@ select
 			}
 		}
 			return $res;
+		}
+	}
+
+	/*MAsukin TMP dulu buat cek double color*/
+	public function insertNewKriTmp($kri, $treshold) {
+		$sql = "insert into t_kri_tmp (
+			risk_id, kri_library_id, key_risk_indicator,
+			kri_status, kri_pic,treshold, treshold_type,
+			timing_pelaporan, kri_owner, created_by
+		) values (
+			?, ?, ?,?,
+			?, ?, ?,
+			?, ?, ?
+		)";
+		$res = $this->db->query($sql, $kri);	
+		if ($res) {
+			$rid = $this->db->insert_id();
+			$sql = "update t_kri_tmp set 
+					kri_code = concat('KRI.', LPAD(id, 6, '0'))
+					where id = ?";
+			$res2 = $this->db->query($sql, array('a'=>$rid));	
+			
+			// insert treshold
+			$sql = "insert into t_kri_treshold_tmp(kri_id, operator, value_1, value_2, value_type, result) values(?, ?, ?, ?, ?, ?)";
+			
+			foreach ($treshold as $key => $value) {
+				if ($value['value_2'] == '-') {
+					$value['value_2'] = null;
+				}
+				if ($value['value_type'] == '-') {
+					$value['value_type'] = null;
+				}
+				
+				$par = array(
+					'rid' => $rid,
+					'op' => $value['operator'],
+					'v1' => $value['value_1'],
+					'v2' => $value['value_2'],
+					'r' => $value['value_type'],
+					'r2' => $value['result']
+				);
+				$res3 = $this->db->query($sql, $par);
+			}
+
+		if ($kri['treshold_type'] == 'VALUE'){
+			$sql = "select value_1 from t_kri_treshold_tmp where kri_id='".$rid."' and operator ='BELOW' ";
+			$query = $this->db->query($sql);
+			$row = $query->row();
+			$below = $row->value_1;
+
+
+			$sql = "select value_1, value_2 from t_kri_treshold_tmp where kri_id='".$rid."' and operator ='BETWEEN' ";
+			$query = $this->db->query($sql);
+			$row = $query->row();
+			$between = $row->value_1;
+			$between2 = $row->value_2;
+			
+
+			$sql = "select value_1 from t_kri_treshold_tmp where kri_id='".$rid."' and operator ='ABOVE' ";
+			$query = $this->db->query($sql);
+			$row = $query->row();
+			$above = $row->value_1;
+
+			if($below == $between){
+			$tambah = $between+1;
+			$sql = "update t_kri_treshold_tmp set value_1='".$tambah."'  where kri_id='".$rid."' and operator ='BETWEEN' ";
+			$res7 = $this->db->query($sql);
+			}
+			if($between2 == $above){
+			$tambah2 = $above+1;
+			$sql = "update t_kri_treshold_tmp set value_1='".$tambah2."'  where kri_id='".$rid."' and operator ='ABOVE' ";
+			$res8 = $this->db->query($sql);
+			}
+		}
+			$sql = "select result from t_kri_treshold_tmp where result = 'GREEN' and kri_id='".$rid."' ";
+			$res_cek1 = $this->db->query($sql);
+			$sql = "select result from t_kri_treshold_tmp where result = 'RED' and kri_id='".$rid."' ";
+			$res_cek2 = $this->db->query($sql);
+			$sql = "select result from t_kri_treshold_tmp where result = 'YELLOW' and kri_id='".$rid."' ";
+			$res_cek3 = $this->db->query($sql);
+
+			if ($res_cek1->num_rows() > 1){
+				$sql = "delete from t_kri_tmp where id='".$rid."' ";
+				$this->db->query($sql);
+				$sql = "delete from t_kri_treshold_tmp where kri_id='".$rid."' ";
+				$this->db->query($sql);
+				return false;
+			}else if($res_cek2->num_rows() > 1){
+				$sql = "delete from t_kri_tmp where id='".$rid."' ";
+				$this->db->query($sql);
+				$sql = "delete from t_kri_treshold_tmp where kri_id='".$rid."' ";
+				$this->db->query($sql);
+				return false;
+			}else if($res_cek3->num_rows() > 1){
+				$sql = "delete from t_kri_tmp where id='".$rid."' ";
+				$this->db->query($sql);
+				$sql = "delete from t_kri_treshold_tmp where kri_id='".$rid."' ";
+				$this->db->query($sql);
+				return false;
+			}else{
+				$sql = "delete from t_kri_tmp where id='".$rid."' ";
+				$this->db->query($sql);
+				$sql = "delete from t_kri_treshold_tmp where kri_id='".$rid."' ";
+				$this->db->query($sql);
+				return true;
+			}
 		}
 	}
 	
@@ -7010,6 +7208,10 @@ select
 		
 		unset($data['id']);
 		unset($data['owner_report']);
+		unset($data['validation']);
+		unset($data['support']);
+		unset($data['description']);
+		
 		 
 		$this->db->where("risk_id" , $risk_id);
 		
@@ -7361,6 +7563,33 @@ WHERE t_risk.risk_id = '".$risk_id."' ";
 				return FALSE;
 			}	
 
+	}
+
+
+	function cari_tanggal_submit($uid, $periode_id){
+		$sql = "select tanggal_submit from t_risk_add_informasi 
+				where risk_input_by = '$uid' and periode_id = '$periode_id' ";
+		$query = $this->db->query($sql);
+		$row = $query->row_array();
+
+		return $row;
+
+	}
+
+	function cekLibraryId($rid){
+
+		$res = $this->getActionPlanById($rid);
+
+			if ($res) {
+				$resRisk = $this->getRiskById($res['risk_id']);
+				return $resRisk;
+			}
+
+	}
+
+	function cekLibraryBefore($rid){
+				$resRisk = $this->getRiskById($rid);
+				return $resRisk;
 	}
 
 	

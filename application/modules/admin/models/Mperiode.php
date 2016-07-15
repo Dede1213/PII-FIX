@@ -691,6 +691,28 @@ if ($query3->num_rows() > 0)
 		return $res;
 	}
 
+	// ACTION PLAN PERIODE
+	public function getDataReportList($page, $row, $order_by = null, $order = null, $filter_by = null, $filter_value = null, $id)
+	{
+		$ex_or = $ex_filter = '';
+		$par = false;
+		
+		if ($order_by != null) {
+			$order_by = $order_by;
+			$ex_or = ' order by '.$order_by.' '.$order;
+		}
+		
+		if ($filter_by != null && $filter_value != null) {
+			$ex_filter = ' where '.$filter_by.' like ? ';
+			$par['p1'] = '%'.$filter_value.'%';
+		}
+		
+		$sql = "select * from t_risk  where risk_id IN (select risk_id from t_report_risk where periode_id = '$id') and risk_evaluation_control is null or risk_evaluation_control = '' ";
+		$res = $this->getPagingData($sql, $par, $page, $row, 'periode_id', true);
+		return $res;
+		
+	}
+
 	public function updateDataReport($data_id, $data, $uid)
 	{
 		// if year month start is >= next month
@@ -708,6 +730,357 @@ if ($query3->num_rows() > 0)
 		$par['data_id'] = $data_id;
 		
 		$res = $this->db->query($sql, $par);
+
+
+		//batas tambahan untuk refresh
+
+$query2 = $this->db->query("select periode_id from m_periode_report where periode_name = '".$data['periode_name']."' ");
+$row2 = $query2->row(); 
+
+$query = $this->db->query("select risk_id from t_risk where created_date between '".$data['periode_start']."' and '".$data['periode_end']."' ");
+if ($query->num_rows() > 0)
+{
+	$sql = "delete from t_report_risk where periode_id = '".$data_id."' ";
+	$res = $this->db->query($sql);
+   
+   foreach ($query->result() as $row)
+   {
+   	$sql = "insert into t_report_risk(periode_id, risk_id)
+			values('".$row2->periode_id."' ,'".$row->risk_id."' )";
+		$res = $this->db->query($sql);
+   }
+} 
+
+$query3 = $this->db->query("select distinct t1.risk_2nd_sub_category, t2.cat_code, t2.cat_name,
+			(
+CASE WHEN
+((CASE WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Insignificant' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) <= 12 
+THEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Insignificant' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*1
+WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Insignificant' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) > 12
+THEN (((select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Insignificant' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)-12)*2+12)END)
++
+(CASE WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Minor' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) <= 10 
+THEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Minor' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*2
+WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Minor' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) > 10
+THEN (((select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Minor' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)-10)*3+20)END)
++
+(CASE WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Moderate' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) <= 8 
+THEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Moderate' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*3
+WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Moderate' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) > 8
+THEN (((select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Moderate' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)-8)*4+24)END)
++
+(CASE WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Major' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) <= 5 
+THEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Major' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*4
+WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Major' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) > 5
+THEN (((select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Major' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)-5)*5+20)END)
++
+((select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Catastrophic' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*5))
+/
+((select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Insignificant' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) +
+(select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Minor' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) +
+(select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Moderate' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) +
+(select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Major' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) +
+(select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Catastrophic' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)
+) is null THEN null
+
+WHEN
+((CASE WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Insignificant' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) <= 12 
+THEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Insignificant' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*1
+WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Insignificant' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) > 12
+THEN (((select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Insignificant' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)-12)*2+12)END)
++
+(CASE WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Minor' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) <= 10 
+THEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Minor' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*2
+WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Minor' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) > 10
+THEN (((select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Minor' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)-10)*3+20)END)
++
+(CASE WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Moderate' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) <= 8 
+THEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Moderate' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*3
+WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Moderate' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) > 8
+THEN (((select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Moderate' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)-8)*4+24)END)
++
+(CASE WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Major' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) <= 5 
+THEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Major' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*4
+WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Major' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) > 5
+THEN (((select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Major' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)-5)*5+20)END)
++
+((select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Catastrophic' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*5))
+/
+((select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Insignificant' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) +
+(select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Minor' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) +
+(select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Moderate' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) +
+(select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Major' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) +
+(select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Catastrophic' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)
+) BETWEEN '0,2500' AND '1,2400' THEN 'Insignificant' 
+
+WHEN
+((CASE WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Insignificant' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) <= 12 
+THEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Insignificant' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*1
+WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Insignificant' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) > 12
+THEN (((select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Insignificant' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)-12)*2+12)END)
++
+(CASE WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Minor' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) <= 10 
+THEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Minor' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*2
+WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Minor' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) > 10
+THEN (((select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Minor' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)-10)*3+20)END)
++
+(CASE WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Moderate' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) <= 8 
+THEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Moderate' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*3
+WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Moderate' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) > 8
+THEN (((select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Moderate' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)-8)*4+24)END)
++
+(CASE WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Major' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) <= 5 
+THEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Major' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*4
+WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Major' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) > 5
+THEN (((select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Major' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)-5)*5+20)END)
++
+((select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Catastrophic' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*5))
+/
+((select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Insignificant' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) +
+(select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Minor' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) +
+(select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Moderate' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) +
+(select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Major' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) +
+(select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Catastrophic' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)
+) BETWEEN '1,2500' AND '2,2400' THEN 'Minor' 
+
+WHEN
+((CASE WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Insignificant' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) <= 12 
+THEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Insignificant' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*1
+WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Insignificant' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) > 12
+THEN (((select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Insignificant' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)-12)*2+12)END)
++
+(CASE WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Minor' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) <= 10 
+THEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Minor' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*2
+WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Minor' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) > 10
+THEN (((select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Minor' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)-10)*3+20)END)
++
+(CASE WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Moderate' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) <= 8 
+THEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Moderate' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*3
+WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Moderate' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) > 8
+THEN (((select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Moderate' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)-8)*4+24)END)
++
+(CASE WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Major' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) <= 5 
+THEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Major' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*4
+WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Major' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) > 5
+THEN (((select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Major' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)-5)*5+20)END)
++
+((select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Catastrophic' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*5))
+/
+((select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Insignificant' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) +
+(select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Minor' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) +
+(select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Moderate' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) +
+(select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Major' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) +
+(select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Catastrophic' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)
+) BETWEEN '2,2500' AND '3,2400' THEN 'Moderate' 
+
+WHEN
+((CASE WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Insignificant' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) <= 12 
+THEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Insignificant' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*1
+WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Insignificant' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) > 12
+THEN (((select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Insignificant' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)-12)*2+12)END)
++
+(CASE WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Minor' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) <= 10 
+THEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Minor' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*2
+WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Minor' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) > 10
+THEN (((select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Minor' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)-10)*3+20)END)
++
+(CASE WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Moderate' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) <= 8 
+THEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Moderate' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*3
+WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Moderate' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) > 8
+THEN (((select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Moderate' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)-8)*4+24)END)
++
+(CASE WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Major' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) <= 5 
+THEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Major' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*4
+WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Major' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) > 5
+THEN (((select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Major' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)-5)*5+20)END)
++
+((select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Catastrophic' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*5))
+/
+((select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Insignificant' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) +
+(select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Minor' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) +
+(select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Moderate' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) +
+(select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Major' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) +
+(select count(t3.risk_id) from t_risk t3 where t3.risk_impact_level ='Catastrophic' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)
+) BETWEEN '3,2500' AND '4,2400' THEN 'Moderate'
+ELSE  'Catastrophic'
+END) as impact_level,
+
+
+
+
+(CASE WHEN
+((CASE WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Very Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) <= 12 
+THEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Very Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*1
+WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Very Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) > 12
+THEN (((select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Very Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)-12)*2+12)END)
++
+(CASE WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) <= 10 
+THEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*2
+WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) > 10
+THEN (((select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)-10)*3+20)END)
++
+(CASE WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='medium' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) <= 8 
+THEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='medium' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*3
+WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='medium' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) > 8
+THEN (((select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='medium' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)-8)*4+24)END)
++
+(CASE WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='High' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) <= 5 
+THEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='High' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*4
+WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='High' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) > 5
+THEN (((select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='High' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)-5)*5+20)END)
++
+((select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Very High' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*5))
+/
+((select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Very Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) +
+(select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) +
+(select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='medium' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) +
+(select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='High' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) +
+(select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Very High' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)
+)is null THEN null
+
+WHEN
+((CASE WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Very Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) <= 12 
+THEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Very Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*1
+WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Very Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) > 12
+THEN (((select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Very Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)-12)*2+12)END)
++
+(CASE WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) <= 10 
+THEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*2
+WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) > 10
+THEN (((select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)-10)*3+20)END)
++
+(CASE WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='medium' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) <= 8 
+THEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='medium' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*3
+WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='medium' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) > 8
+THEN (((select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='medium' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)-8)*4+24)END)
++
+(CASE WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='High' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) <= 5 
+THEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='High' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*4
+WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='High' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) > 5
+THEN (((select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='High' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)-5)*5+20)END)
++
+((select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Very High' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*5))
+/
+((select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Very Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) +
+(select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) +
+(select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='medium' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) +
+(select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='High' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) +
+(select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Very High' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)
+) BETWEEN '0,2500' AND '1,2400' THEN 'Very Low'
+
+WHEN
+((CASE WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Very Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) <= 12 
+THEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Very Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*1
+WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Very Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) > 12
+THEN (((select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Very Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)-12)*2+12)END)
++
+(CASE WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) <= 10 
+THEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*2
+WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) > 10
+THEN (((select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)-10)*3+20)END)
++
+(CASE WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='medium' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) <= 8 
+THEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='medium' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*3
+WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='medium' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) > 8
+THEN (((select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='medium' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)-8)*4+24)END)
++
+(CASE WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='High' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) <= 5 
+THEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='High' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*4
+WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='High' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) > 5
+THEN (((select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='High' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)-5)*5+20)END)
++
+((select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Very High' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*5))
+/
+((select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Very Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) +
+(select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) +
+(select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='medium' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) +
+(select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='High' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) +
+(select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Very High' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)
+) BETWEEN '1,2500' AND '2,2400' THEN 'Low'
+
+WHEN
+((CASE WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Very Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) <= 12 
+THEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Very Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*1
+WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Very Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) > 12
+THEN (((select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Very Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)-12)*2+12)END)
++
+(CASE WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) <= 10 
+THEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*2
+WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) > 10
+THEN (((select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)-10)*3+20)END)
++
+(CASE WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='medium' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) <= 8 
+THEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='medium' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*3
+WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='medium' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) > 8
+THEN (((select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='medium' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)-8)*4+24)END)
++
+(CASE WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='High' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) <= 5 
+THEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='High' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*4
+WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='High' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) > 5
+THEN (((select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='High' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)-5)*5+20)END)
++
+((select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Very High' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*5))
+/
+((select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Very Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) +
+(select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) +
+(select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='medium' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) +
+(select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='High' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) +
+(select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Very High' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)
+) BETWEEN '2,2500' AND '3,2400' THEN 'Medium'
+
+WHEN
+((CASE WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Very Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) <= 12 
+THEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Very Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*1
+WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Very Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) > 12
+THEN (((select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Very Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)-12)*2+12)END)
++
+(CASE WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) <= 10 
+THEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*2
+WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) > 10
+THEN (((select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)-10)*3+20)END)
++
+(CASE WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='medium' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) <= 8 
+THEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='medium' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*3
+WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='medium' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) > 8
+THEN (((select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='medium' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)-8)*4+24)END)
++
+(CASE WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='High' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) <= 5 
+THEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='High' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*4
+WHEN (select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='High' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) > 5
+THEN (((select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='High' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)-5)*5+20)END)
++
+((select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Very High' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)*5))
+/
+((select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Very Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) +
+(select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Low' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) +
+(select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='medium' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) +
+(select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='High' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category) +
+(select count(t3.risk_id) from t_risk t3 where t3.risk_likelihood_key ='Very High' and t3.periode_id='".$row2->periode_id."' and t3.risk_2nd_sub_category = t1.risk_2nd_sub_category)
+) BETWEEN '3,2500' AND '4,2400' THEN 'High'
+ELSE 'Very High'
+END) as likelihood_level
+			from t_risk t1 join t_report_risk z1 on t1.risk_id = z1.risk_id
+			join m_risk_category t2 on t1.risk_2nd_sub_category = t2.cat_id");
+
+
+if ($query3->num_rows() > 0)
+{
+	$sql = "delete from t_report_2ndsub where periode_id = '".$data_id."' ";
+	$res = $this->db->query($sql);
+
+   foreach ($query3->result() as $row3)
+   {
+   	
+   	$sql3 = "insert into t_report_2ndsub(periode_id, cat_id, cat_code, cat_name, impact_level, likelihood_level, risk_level)
+			values('".$row2->periode_id."', '".$row3->risk_2nd_sub_category."', '".$row3->cat_code."', '".$row3->cat_name."', '".$row3->impact_level."' , '".$row3->likelihood_level."',
+			(select m1.risk_level from m_risklevel_matrix m1 where m1.impact_value = '".$row3->impact_level."' and m1.likelihood_key = '".$row3->likelihood_level."') 
+			)";
+		$res = $this->db->query($sql3);
+
+   }
+} 
+//ending refresh
+
 		return $res;
 	}
 
@@ -727,6 +1100,21 @@ if ($query3->num_rows() > 0)
 				where periode_id = ?
 				";
 		$par['data_id'] = $data_id;
+		
+		$res = $this->db->query($sql, $par);
+		return $res;
+	}
+
+	public function deleteDataReportList($data_id, $uid, $risk_id)
+	{
+		// if year month start is <= current month
+		
+		$this->_logHistoryPlan($data_id, $uid, 'D');
+		
+		$sql = "update t_risk set risk_evaluation_control = 'delete_from_report'
+				where risk_id = ?
+				";
+		$par['data_id'] = $risk_id;
 		
 		$res = $this->db->query($sql, $par);
 		return $res;

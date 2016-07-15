@@ -158,8 +158,10 @@ class Mlibrary extends APP_Model {
 			$par['p1'] = '%'.$filter_value.'%';
 		}
 		$date = date("Y-m-d");
-		$sql = "select t_risk_action_plan.id, t_risk_action_plan.action_plan, t_risk_action_plan.due_date, t_risk_action_plan.division
+		$sql = "select t_risk_action_plan.id, t_risk_action_plan.action_plan, t_risk_action_plan.due_date, t_risk_action_plan.division,
+				t_risk_action_plan.risk_id,t_risk.risk_code
 					from t_risk_action_plan
+					JOIN t_risk ON t_risk.risk_id = t_risk_action_plan.risk_id 
 					group by t_risk_action_plan.division, t_risk_action_plan.action_plan
 				"
 				
@@ -205,8 +207,9 @@ class Mlibrary extends APP_Model {
 			$par['p1'] = '%'.$filter_value.'%';
 		}
 		$date = date("Y-m-d");
-		$sql = "select t1.id, t1.kri_code, t1.key_risk_indicator, t1.treshold, (select GROUP_CONCAT(t2.operator,' ', t2.value_1, ' = ', t2.result) from t_kri_treshold t2 where t2.kri_id=t1.id) as 'threshold value' 
-from t_kri t1 where kri_library_id is null
+		$sql = "select t1.id, t1.kri_code, t1.key_risk_indicator, t1.treshold, (select GROUP_CONCAT(t2.operator,' ', t2.value_1, ' = ', t2.result) from t_kri_treshold t2 where t2.kri_id=t1.id) as 'threshold value',t1.risk_id,t_risk.risk_code 
+from t_kri t1 
+join t_risk on t_risk.risk_id = t1.risk_id where kri_library_id is null
 				"
 				
 				.$ex_filter
@@ -301,10 +304,12 @@ from m_risk_category
 			  t_risk_control.id,
 			  t_risk_control.risk_existing_control,
 			  t_risk_control.risk_evaluation_control,
-			  t_risk_control.risk_control_owner
+			  t_risk_control.risk_control_owner,
+			  t_risk_control.risk_id,
+			  t_risk.risk_code
 			FROM t_risk_control
-			WHERE existing_control_id IS NULL
-			 AND risk_existing_control <> 'NONE'
+			JOIN t_risk ON t_risk.risk_id = t_risk_control.risk_id 
+			
 				"
 				
 				.$ex_filter
@@ -353,8 +358,10 @@ from m_risk_category
 			$par['p1'] = '%'.$filter_value.'%';
 		}
 		$date = date("Y-m-d");
-		$sql = "select t_risk_objective.id, t_risk_objective.objective
+		$sql = "select t_risk_objective.id, t_risk_objective.objective, t_risk_objective.risk_id,
+				t_risk.risk_code
 				from t_risk_objective
+				JOIN t_risk ON t_risk.risk_id = t_risk_objective.risk_id
 				group by t_risk_objective.objective
 				"
 				

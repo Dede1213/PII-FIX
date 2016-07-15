@@ -25,9 +25,19 @@
 						<th> Treshold </th>
 						<th> Treshold Value</th>
 						<th> Timing  Pelaporan</th>
-						<th> Owner Report </th>
+						
 						<th> KRI Warning</th>
 						<th> Risk Level After KRI</th>
+						<th> Risk Impact Level After KRI</th>
+						<th> Risk Likelihood After KRI</th>
+						<th> Current Risk Level</th>
+						<th> Current Risk Impact Level</th>
+						<th> Current Risk Likelihood</th>
+						<th> KRI Status</th>
+						<th> Status</th>
+						<th> Risk Status</th>
+						<th> Validation</th>
+						<th> Supporting Evidence</th>
 					  </tr>
 				</thead> 
 				<tbody>
@@ -46,9 +56,59 @@
 								<td> <?=$key['treshold'];?> </td>
 								<td> <?=$key['threshold value'];?> </td>
 								<td> <?=$key['timing_pelaporan'];?> </td>
-								<td> <?=$key['owner_report'];?> </td>
+								
 								<td> <?=$key['kri_warning'];?> </td>
 								<td> <?=$key['risk_level_after_kri'];?> </td>
+								<td> <?=$key['risk_impact_level_after_kri'];?> </td>
+								<td> <?=$key['risk_likelihood_key_after_kri'];?> </td>
+								<td> <?=$key['risk_level'];?> </td>
+								<td> <?=$key['risk_impact_level'];?> </td>
+								<td> <?=$key['risk_likelihood_key'];?> </td>
+								<td> <?=$key['kri_status'];?> </td>
+								<td> <?php
+									if ($key['risk_status'] == 1){
+										echo "Draft";
+									}else if ($key['risk_status'] == 2){
+										echo "Submitted to rac";
+									}else if ($key['risk_status'] == 3){
+										echo "On Risk Treatment Process";
+									}else if ($key['risk_status'] == 4){
+										echo "on Risk Treatment Process";
+									}else if ($key['risk_status'] == 5){
+										echo "On Risk Treatment Process";
+									}else if ($key['risk_status'] == 6){
+										echo "on Action Plan Process";
+									}else if ($key['risk_status'] == 10){
+										echo "On Action Plan Execution Process";
+									}else if ($key['risk_status'] == 20){
+										echo "Action Plan Has Been Executed and Verified";
+									}else{
+										echo "Draft";
+									}
+									?> </td>
+								<td> <?php
+									if ($key['risk_status'] == 1){
+										echo "Draft";
+									}else if ($key['risk_status'] == 2){
+										echo "Submitted to rac";
+									}else if ($key['risk_status'] == 3){
+										echo "Draft";
+									}else if ($key['risk_status'] == 4){
+										echo "Draft";
+									}else if ($key['risk_status'] == 5){
+										echo "Submitted to RAC";
+									}else if ($key['risk_status'] == 6){
+										echo "Draft";
+									}else if ($key['risk_status'] == 10){
+										echo "Submitted to RAC";
+									}else if ($key['risk_status'] == 20){
+										echo "Verified By RAC";
+									}else{
+										echo "Draft";
+									}
+									?> </td>
+									<td> <?=$key['validation'];?> </td>
+								<td> <?=$key['supporting_evidence'];?> </td>
 							</tr>
 							 <?php $i++;?>
 					 <?php endforeach;?> 

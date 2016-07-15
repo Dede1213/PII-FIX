@@ -185,7 +185,7 @@ var User = function() {
 	        	$('#input-form-move')[0].reset();
 	        	$('#input-form-move').find("input[name='username_id']").val(data.username).prop("readonly", true);
 	        	$('#input-form-move').find("input[name='username_old']").val(data.display_name).prop("readonly", true);
-	        	$('#form-data-move').find('h4.modal-title').html('Hide And Move');
+	        	$('#form-data-move').find('h4.modal-title').html('move the role and related tasks to:');
 	        	$('#form-data-move').modal('show');
 	        	this.dataMode = 'edit';
 	        },

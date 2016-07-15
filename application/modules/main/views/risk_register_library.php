@@ -1220,7 +1220,7 @@ WHERE t_risk.risk_id ='$id'";
 				<div class="form-group">
 					<label class="col-md-3 control-label">Date Changed</label>
 					<div class="col-md-9">
-					<input type="text" class="form-control input-sm" readonly="true" name="date_changed" placeholder="" value="<?=date('d-m-Y')?>">
+					<input type="text" class="form-control input-sm" readonly="true" name="date_changed" placeholder="" value="<?=$tanggal_submit['tanggal_submit']?>">
 					</div>
 				</div>
 				

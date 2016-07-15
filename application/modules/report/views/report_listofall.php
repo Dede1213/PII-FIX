@@ -61,6 +61,7 @@
 										<label class="col-md-3 control-label">Status</label>
 											<div class="col-md-6">
 												<select class="form-control input-sm" name="status">
+													 <option>ALL</option>
 													 <option>COMPLETE</option>
 													 <option>ONGOING</option>
 													 <option>EXTEND</option>
@@ -101,6 +102,7 @@
 										<label class="col-md-3 control-label">Status</label>
 											<div class="col-md-6">
 												<select class="form-control input-sm" name="status">
+													<option>ALL</option>
 													 <option>COMPLETE</option>
 													 <option>ONGOING</option>
 													 <option>EXTEND</option>

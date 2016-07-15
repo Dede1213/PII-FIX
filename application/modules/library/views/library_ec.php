@@ -60,7 +60,8 @@
 							<th>Existing Control ID</th>
 							<th>Existing Control</th>
 							<th>Evaluation Control</th>
-							<th>Control Owner</th> 
+							<th>Control Owner</th>
+							<th>Risk ID</th>  
 							<th> Action</th>
 						</tr>
 						</thead>

@@ -1,5 +1,5 @@
    <style>
-  @page { margin: 0px; size: 1000pt 595pt;}
+  @page { margin: 0px; size: 2000pt 595pt;}
             img {margin:0px;padding:0px}
 		 
 </style>
@@ -42,6 +42,13 @@
 							<th> Action Plan </th>
 							<th> Action Plan Owner</th>
 							<th> Due Date</th>
+							<th> User Pengisi</th>
+							<th> Date User Pengisi</th>
+							<th> User Pengedit</th>
+							<th> Date User Pengedit</th>
+							<th> Status</th>
+							<th> Risk Status</th>
+
 					  </tr>
 				</thead> 
 				<tbody>
@@ -67,7 +74,53 @@
 								<td> <?=$key['suggested_risk_treatment'];?> </td>
 								<td> <?=$key['Action Plan'];?> </td> 
 								<td> <?=$key['Action Plan Owner'];?> </td>			
-								<td> <?=$key['Due Date'];?> </td>								
+								<td> <?=$key['Due Date'];?> </td>
+								<td> <?=$key['risk_input_by'];?> </td>
+								<td> <?=$key['risk_date'];?> </td> 
+								<td> <?=$key['username'];?> </td>			
+								<td> <?=$key['date_changed'];?> </td>
+								<td> <?php
+									if ($key['risk_status'] == 1){
+										echo "Draft";
+									}else if ($key['risk_status'] == 2){
+										echo "Submitted to rac";
+									}else if ($key['risk_status'] == 3){
+										echo "On Risk Treatment Process";
+									}else if ($key['risk_status'] == 4){
+										echo "on Risk Treatment Process";
+									}else if ($key['risk_status'] == 5){
+										echo "On Risk Treatment Process";
+									}else if ($key['risk_status'] == 6){
+										echo "on Action Plan Process";
+									}else if ($key['risk_status'] == 10){
+										echo "On Action Plan Execution Process";
+									}else if ($key['risk_status'] == 20){
+										echo "Action Plan Has Been Executed and Verified";
+									}else{
+										echo "Draft";
+									}
+									?> </td>
+								<td> <?php
+									if ($key['risk_status'] == 1){
+										echo "Draft";
+									}else if ($key['risk_status'] == 2){
+										echo "Submitted to rac";
+									}else if ($key['risk_status'] == 3){
+										echo "Draft";
+									}else if ($key['risk_status'] == 4){
+										echo "Draft";
+									}else if ($key['risk_status'] == 5){
+										echo "Submitted to RAC";
+									}else if ($key['risk_status'] == 6){
+										echo "Draft";
+									}else if ($key['risk_status'] == 10){
+										echo "Submitted to RAC";
+									}else if ($key['risk_status'] == 20){
+										echo "Verified By RAC";
+									}else{
+										echo "Draft";
+									}
+									?> </td>								
 							</tr>
 							<?php $i++;?>
 					 <?php endforeach;?> 

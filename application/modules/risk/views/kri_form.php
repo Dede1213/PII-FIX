@@ -99,12 +99,13 @@
 				</div>
 				-->
 				<div class="form-group">
-					<label class="col-md-2 control-label">Timing of Reporting</label>
+					<label class="col-md-2 control-label">Deadline For Report</label>
 					<div class="col-md-6">
 					<input type="text" class="form-control input-sm input-readview" readonly="true" name="timing_pelaporan" placeholder="" value="<?=$kri['timing_pelaporan_v']?>">
 					</div>
 				</div>
 
+				
 				<!--
 				<div class="form-group">
 					<label class="col-md-2 control-label">KRI Owner</label>
@@ -113,10 +114,18 @@
 					</div>
 				</div>
 				-->
+				<?php if (isset($verifyRac) && $verifyRac) { ?>
+				<div class="form-group">
+					<label class="col-md-2 control-label">Threshold Description</label>
+					<div class="col-md-6">
+					<input type="text" class="form-control input-sm input-readview"  name="threshold_description" id="threshold_description" placeholder="" value="">
+					</div>
+				</div>
+				<?php } ?>
 
 				<?php if (isset($verifyRac) && $verifyRac) { ?>
 				<div class="form-group">
-					<label class="col-md-2 control-label" >Action Plan</label>
+					<label class="col-md-2 control-label" > Threshold </label>
 					<div class="col-md-8">
 						<table id="action_plan_table" class="table table-condensed table-bordered table-hover">
 							<thead>
@@ -146,7 +155,7 @@
 				
 				<?php if ($kri['treshold_type'] == 'SELECTION') { ?>
 					<div class="form-group">
-						<label class="col-md-2 control-label">Input Data</label>
+						<label class="col-md-2 control-label">Response</label>
 						<div class="col-md-6">
 						<select class="form-control input-sm" id="owner_report" name="owner_report">
 							<?php foreach ($kri['treshold_list'] as $key => $value) { ?>
@@ -158,7 +167,7 @@
 				<?php } else { ?> 
 
 				<div class="form-group">
-						<label class="col-md-2 control-label">Input Data</label>
+						<label class="col-md-2 control-label">Response</label>
 						<div class="col-md-6">
 						<select class="form-control input-sm" id="owner_report" name="owner_report">
 							
@@ -195,8 +204,23 @@
 					</div>
 					-->
 				<?php } ?> 
+
+				<div class="form-group">
+				<label class="col-md-2 control-label" title="">Supporting Evidence</label>
+				<div class="col-md-6">		
+				<textarea class="form-control input-sm popovers"  data-container="body" data-placement="bottom" rows="3" name="support" id="support" > <?=$kri['supporting_evidence']?> </textarea>
+				</div>
+				</div>
+
 				
 				<?php if (isset($verifyRac) && $verifyRac) { ?>
+				<div class="form-group">
+				<label class="col-md-2 control-label" title="">Validation</label>
+				<div class="col-md-6">		
+				<textarea class="form-control input-sm popovers"  data-container="body" data-placement="bottom" rows="3" name="validation" id="validation" ></textarea>
+				</div>
+				</div>
+
 				<div class="form-group">
 					<label class="col-md-2 control-label">KRI Warning</label>
 					<div class="col-md-6">
@@ -210,8 +234,17 @@
 				<button id="kri-button-verify" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Verify</button>
 				<button type="button" class="btn yellow" id="kri-button-cancel"><i class="fa fa-times"></i> Cancel</button>
 				<?php } else { ?>
+						<?php
+							if ($role == 2){
+						?>
+			<button id="kri-button-verify" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Submit</button>
+						<?php	
+							}else{
+						?>
 				<button id="kri-button-verify" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Submit</button>
 				<button type="button" class="btn yellow" id="kri-button-cancel"><i class="fa fa-times"></i> Cancel</button>
+						<?php } ?>
+				
 				<?php } ?>
 			</div>
 			</form>

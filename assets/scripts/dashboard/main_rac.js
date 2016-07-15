@@ -196,7 +196,9 @@ gridTreatment.init({
         		if (full.risk_status == 5) {
         			return '<a target="_self" href="'+site_url+'/main/mainrac/riskTreatmentForm/'+full.risk_id+'/'+full.risk_input_by+'">'+data+'</a>';
         		}
-        		return '<a target="_self" href="'+site_url+'/main/mainrac/viewRisk/'+full.risk_id+'">'+data+'</a>';
+                
+        		//return '<a target="_self" href="'+site_url+'/main/mainrac/viewRisk/'+full.risk_id+'">'+data+'</a>';
+                return '<a target="_self" href="'+site_url+'/main/mainrac/viewOwnedRisk/'+full.risk_id+'">'+data+'</a>';
         	}
         } ],
         "columns": [
@@ -260,7 +262,9 @@ gridActionPlan.init({
         		if (full.action_plan_status == 3) {
         			return '<a target="_self" href="'+site_url+'/main/mainrac/actionPlanForm/'+full.id+'">'+data+'</a>';
         		}
-        		return '<a target="_self" href="'+site_url+'/main/mainrac/actionPlanView/'+full.id+'">'+data+'</a>';
+                
+        		//return '<a target="_self" href="'+site_url+'/main/mainrac/actionPlanView/'+full.id+'">'+data+'</a>';
+                return '<a target="_self" href="'+site_url+'/main/mainrac/viewOwnedActionPlan/'+full.id+'">'+data+'</a>';
         	}
         }, {
         	"targets": 5,
@@ -341,7 +345,45 @@ gridActionExec.init({
         	"data": "execution_status",
         	"render": function ( data, type, full, meta ) {
 				if(data == null){
-					return '';
+					
+
+                var ext = '';
+                var search = false;
+                var submit = false;
+
+                if(full.status_periode == 0){
+                var search_text = '<button type="button" class="btn blue btn-xs button-grid-search"><i class="fa fa-search"> Search </i></button>';
+                var submit_text = '<button type="button" class="btn blue btn-xs button-grid-submit"><i class="fa fa-check-circle"></i> Submit</button>';
+                }else if(full.status_periode == 1){
+                var search_text = '';
+                var submit_text = '';
+                }
+
+                data_v = '';
+                if (data == 'EXTEND') data_v = 'Extend';
+                if (data == 'COMPLETE') data_v = 'Complete';
+                if (data == 'ONGOING') data_v = 'On Going';
+                
+                if (full.is_owner == 1) {
+                    search = true;
+                    if (data_v != '' && full.action_plan_status == 4) submit = true;
+                    if (data_v != '' && full.action_plan_status == 5 && full.is_head == 1) submit = true;
+                } else {
+                    if (data_v != '') search = true;
+                    if (data_v != '' && full.action_plan_status == 5) submit = true;
+                }
+                 
+                
+                if (!search) search_text = '';
+                if (!submit) submit_text = '';
+                
+                var ret = data_v+' &nbsp; <div class="btn-group">'+
+                        search_text+
+                        submit_text+
+                    '</div>'
+                return ret;
+
+
 				}else{			
 
                     if(full.status_periode == 0){
@@ -352,7 +394,16 @@ gridActionExec.init({
 				}
         		
         	}
-        } ],
+        }
+        /*{
+            "targets": 5,
+            "data": "execution_status",
+            "render": function ( data, type, full, meta ) {
+
+                
+                
+            }
+        } */],
         "columns": [
 			{ "data": "action_plan_status" },
 			{ "data": "act_code" },
@@ -499,9 +550,18 @@ grid_kri.init({
         		var ret = full.kri_pic_v;
         		var dat = '';
         		if (ret == '' || ret == null) {
-        			return '<a target="_self" href="'+site_url+'/main/mainrac/viewKri/'+full.id+'">'+data+'</a>';
+                    if(full.kri_status == 0){
+                         return '<a target="_self" href="'+site_url+'/main/mainrac/viewOwnedKri/'+full.id+'">'+data+'</a>';
+                    }else{
+                        return '<a target="_self" href="'+site_url+'/main/mainrac/viewKri/'+full.id+'">'+data+'</a>';
+                    }
+        			    
         		} else {
-        			return '<a target="_self" href="'+site_url+'/main/mainrac/viewKri/'+full.id+'">'+data+'</a>';
+        			if(full.kri_status == 0){
+                         return '<a target="_self" href="'+site_url+'/main/mainrac/viewOwnedKri/'+full.id+'">'+data+'</a>';
+                    }else{
+                        return '<a target="_self" href="'+site_url+'/main/mainrac/viewKri/'+full.id+'">'+data+'</a>';
+                    }
         		}
         		return dat;
         	}
@@ -527,7 +587,7 @@ grid_kri.init({
 			{ "data": "kri_status" },
 			{ "data": "kri_code" },
 			{ "data": "key_risk_indicator" },
-			{ "data": "treshold" },
+			{ "data": "kri_owner" },
 			{ "data": "timing_pelaporan_v" },
 			{ "data": "risk_code" },
 			{ "data": "kri_warning" }
@@ -579,7 +639,7 @@ grid_cr.init({
          		return '<a target="_self" class="'+cls+'" href="'+site_url+'/'+vm+'/'+full.id+'">'+data+'</a>';
          	}
          },{
-            "targets": 5,
+            "targets": 6,
             "data": null,
             "render": function ( data, type, full, meta ) {
                 
@@ -608,6 +668,7 @@ grid_cr.init({
         		{ "data": "cr_type" },
         		{ "data": "created_by_v" },
         		{ "data": "cr_status" },
+                { "data": "created_date" },
                 { 
             "data": null,
            // "orderable": false,
@@ -625,6 +686,7 @@ grid_cr.init({
 
 var Dashboard = function() {
     return {
+        tmpRiskId: null,
         init: function() {
         	var me = this;
         	
@@ -639,6 +701,8 @@ var Dashboard = function() {
         	$('#tab_risk_list-filterButton').on('click', function() {
         		me.filterDataGridRiskList();
         	});
+
+            
         	
              $('#datatable_cr').on('click', 'button.button-grid-delete', function(e) {
                     e.preventDefault();
@@ -666,6 +730,113 @@ var Dashboard = function() {
         	$('#tab_action_plan_exec-filterButton').on('click', function() {
         		me.filterDataGridActionplanexec();
         	});
+
+            $("#datatable_action_plan_exec").on('click', 'button.button-grid-search', function(e) {
+                e.preventDefault();
+                
+                var r = this.parentNode.parentNode.parentNode;
+                var data = gridActionExec.getDataTable().row(r).data();
+                me.viewExecutionForm(data);
+            });
+
+            $('#exec-button-save').on('click', function() {
+                var me = this;
+                var url = site_url+'/main/mainpic/execSaveDraft';
+                var valid = false;
+                
+                if ($('#exec-select-status').val() == 'COMPLETE') {
+                    if (
+                        $( "#exec-form" ).find('textarea[name=execution_explain]').val() != ''
+                        //&& $( "#exec-form" ).find('textarea[name=execution_evidence]').val() != ''
+                    ) valid = true
+                }
+                
+                if ($('#exec-select-status').val() == 'EXTEND') {
+                    if (
+                        $( "#exec-form" ).find('textarea[name=execution_reason]').val() != ''
+                        && $( "#exec-form" ).find('input[name=revised_date]').val() != ''
+                    ) valid = true
+                }
+                
+                if ($('#exec-select-status').val() == 'ONGOING') {
+                    if (
+                        $( "#exec-form" ).find('textarea[name=execution_explain]').val() != ''
+                         
+                    ) valid = true
+                }
+                
+                if (valid) {
+                    var mod = MainApp.viewGlobalModal('confirm', 'Are You sure you want to save this Action Plan Execution ?');
+                    mod.find('button.btn-primary').off('click');
+                    mod.find('button.btn-primary').one('click', function(){
+                        mod.modal('hide');
+                        $('#modal-exec').modal('hide');
+                        
+                        Metronic.blockUI({ boxed: true });
+                        $.post(
+                            url,
+                            $( "#exec-form" ).serialize(),
+                            function( data ) {
+                                Metronic.unblockUI();
+                                if(data.success) {
+                                    gridActionExec.getDataTable().ajax.reload();
+                                    
+                                    MainApp.viewGlobalModal('success', 'Success Updating Action Plan Execution');
+                                } else {
+                                     
+                            //ubah
+                            var mod = MainApp.viewGlobalModal('warning-maintenance', 'This Risk Is Under Maintenance by RAC you cannot modify this risk until the process done');
+                            mod.find('button.btn-ok-success').one('click', function(){
+                                location.href=site_url+'/main/mainrac';
+                            });
+                                }
+                            },
+                            "json"
+                        ).fail(function() {
+                            Metronic.unblockUI();
+                            MainApp.viewGlobalModal('error', 'Error Submitting Data');
+                         });
+                    });
+                } else {
+                    MainApp.viewGlobalModal('error', 'Please Fill All Action Plan Execution data');
+                }
+            });
+
+            $("#datatable_action_plan_exec").on('click', 'button.button-grid-submit', function(e) {
+                e.preventDefault();
+                
+                var r = this.parentNode.parentNode.parentNode;
+                var data = gridActionExec.getDataTable().row(r).data();
+                
+                var url = site_url+'/main/mainpic/execSubmit';
+                
+                var mod = MainApp.viewGlobalModal('confirm', 'Are You sure you want to Submit this Action Plan Execution?');
+                mod.find('button.btn-primary').off('click');
+                mod.find('button.btn-primary').one('click', function(){
+                    mod.modal('hide');
+                    
+                    Metronic.blockUI({ boxed: true });
+                    $.post(
+                        url,
+                        {action_id: data.id},
+                        function( data ) {
+                            Metronic.unblockUI();
+                            if(data.success) {
+                                gridActionExec.getDataTable().ajax.reload();
+                                
+                                MainApp.viewGlobalModal('success', 'Success Updating Action Plan Execution');
+                            } else {
+                                MainApp.viewGlobalModal('error', data.msg);
+                            }
+                        },
+                        "json"
+                    ).fail(function() {
+                        Metronic.unblockUI();
+                        MainApp.viewGlobalModal('error', 'Error Submitting Data');
+                     });
+                });
+            });
+
 
         },
         initUserChart: function() {
@@ -806,6 +977,104 @@ var Dashboard = function() {
         	gridActionPlan.setAjaxParam("filter_value", fval);
         	gridActionPlan.getDataTable().ajax.reload();
         },
+        viewExecutionForm: function(data) {
+            var me = this;
+            var act_id = data.id;
+            
+            $('#exec-form')[0].reset();
+            
+            $('#form-action-id').val(act_id);
+            
+            $('#fgroup-explain').hide();
+            $('#fgroup-evidence').hide();
+            $('#fgroup-reason').hide();
+            $('#fgroup-date').hide();
+            
+            $( '#exec-select-status' ).prop('disabled', true);
+            $( "#exec-form" ).find('textarea[name=execution_explain]').prop('readonly', true);
+            $( "#exec-form" ).find('textarea[name=execution_evidence]').prop('readonly', true);
+            $( "#exec-form" ).find('textarea[name=execution_reason]').prop('readonly', true);
+            
+            $('#exec-button-save').hide();
+            
+            if (data.execution_status == 'COMPLETE') {
+                $( '#exec-select-status' ).val(data.execution_status);
+                $( "#exec-form" ).find('textarea[name=execution_explain]').val(data.execution_explain);
+                $( "#exec-form" ).find('textarea[name=execution_evidence]').val(data.execution_evidence);
+                
+                $('#fgroup-explain').show();
+                $('#fgroup-evidence').show();
+                if (data.is_owner == 1) {
+                    if (data.action_plan_status == 4) {
+                        $( '#exec-select-status' ).prop('disabled', false);
+                        $( "#exec-form" ).find('textarea[name=execution_explain]').prop('readonly', false);
+                        $( "#exec-form" ).find('textarea[name=execution_evidence]').prop('readonly', false);
+                        
+                        $('#exec-button-save').show();
+                    }
+                    if (data.is_head == '1' && data.action_plan_status == 5) {
+                        $( '#exec-select-status' ).prop('disabled', false);
+                        $( "#exec-form" ).find('textarea[name=execution_explain]').prop('readonly', false);
+                        $( "#exec-form" ).find('textarea[name=execution_evidence]').prop('readonly', false);
+                        
+                        $('#exec-button-save').show();
+                    }
+                } else {
+                    if (data.action_plan_status == 5) {
+                        $( '#exec-select-status' ).prop('disabled', false);
+                        $( "#exec-form" ).find('textarea[name=execution_explain]').prop('readonly', false);
+                        $( "#exec-form" ).find('textarea[name=execution_evidence]').prop('readonly', false);
+                        
+                        $('#exec-button-save').show();
+                    }
+                }
+            } else if (data.execution_status == 'EXTEND') {
+                $( '#exec-select-status' ).val(data.execution_status);
+                $( "#exec-form" ).find('textarea[name=execution_reason]').val(data.execution_reason);
+                $( "#exec-form" ).find('input[name=revised_date]').val(data.revised_date_v);
+                
+                $('#fgroup-reason').show();
+                $('#fgroup-date').show();
+                
+                if (data.is_owner == 1) {
+                    if (data.action_plan_status == 4) {
+                        $( '#exec-select-status' ).prop('disabled', false);
+                        $( "#exec-form" ).find('textarea[name=execution_reason]').prop('readonly', false);
+                        
+                        $('#exec-button-save').show();
+                    }
+                    if (data.is_head == '1' && data.action_plan_status == 5) {
+                        $( '#exec-select-status' ).prop('disabled', false);
+                        $( "#exec-form" ).find('textarea[name=execution_reason]').prop('readonly', false);
+                        
+                        $('#exec-button-save').show();
+                    }
+                } else {
+                    if (data.action_plan_status == 5) {
+                        $( '#exec-select-status' ).prop('disabled', false);
+                        $( "#exec-form" ).find('textarea[name=execution_reason]').prop('readonly', false);
+                        
+                        $('#exec-button-save').show();
+                    }
+                }
+            } else {
+                $( '#exec-select-status' ).val('COMPLETE');
+                $('#fgroup-explain').show();
+                $('#fgroup-evidence').show();
+                $( '#exec-select-status' ).prop('disabled', false);
+                $( "#exec-form" ).find('textarea[name=execution_explain]').prop('readonly', false);
+                $( "#exec-form" ).find('textarea[name=execution_evidence]').prop('readonly', false);
+                $('#exec-button-save').show();
+            }
+            
+            //
+            //if (data.is_owner == 1 && (data.action_plan_status == 4 || data.action_plan_status == 5)) {
+            //  $('#exec-button-save').show();
+            //}
+            
+            $('#modal-exec').modal('show');
+            
+        },
 		 filterDataGridActionplanexec: function() {
         	var fby = $('#tab_action_plan_exec-filterBy').val();
         	var fval = $('#tab_action_plan_exec-filterValue').val();
@@ -815,6 +1084,7 @@ var Dashboard = function() {
         	gridActionExec.setAjaxParam("filter_value", fval);
         	gridActionExec.getDataTable().ajax.reload();
         },
+        
        
 	};	
 }();
@@ -1137,6 +1407,7 @@ $('#changereq_list_pdf').on('click', function() {
 			}					 
 	 
 });
+
 
 function submit_note(){				
 	$.ajax({ 

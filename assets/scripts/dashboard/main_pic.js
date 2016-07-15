@@ -64,9 +64,13 @@ grid.init({
         	"render": function ( data, type, full, meta ) {
         		var tt = '';
         		if (data >= 2) {
+                    if (g_submit_mode == true){
         			tt = '<div class="btn-group">'+
         					'<button type="button" class="btn blue btn-xs button-grid-edit" onclick="location.href=\''+site_url+'/risk/RiskRegister/ChangeRequestInput/'+full.risk_id+'\'"><i class="fa fa-pencil"> Edit </i></button>'+
         				'</div>';
+                    }else{
+                    tt = '';
+                    }
         		}
         		return tt;
         	}
@@ -596,7 +600,8 @@ grid_change.init({
 			{ "data": "cr_code" },
 			{ "data": "risk_code" },
 			{ "data": "risk_event" },
-			{ "data": "cr_status" }
+			{ "data": "cr_status" },
+            { "data": "created_date" }
        ],
         "order": [
             [1, "asc"]

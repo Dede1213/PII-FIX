@@ -29,6 +29,8 @@ class Usermanual extends APP_Controller {
 			$data['engnya'] = base_url('index.php/main/usermanual');				
 			$this->load->model('admin/musermanual');
 			$data['news'] = $this->musermanual->getDataById($nid);
+
+			$data['nid'] = $nid;
 			
 			$this->load->view('header', $data);
 			$this->load->view('usermanual_view', $data);

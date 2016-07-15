@@ -352,6 +352,7 @@ class MainRac extends APP_Controller {
 		$data = $this->loadDefaultAppConfig();
 		$this->load->model('risk/mriskregister');
 		$this->load->model('risk/risk');
+		$this->load->model('admin/mperiode');
 		
 		$menu = '';
 		
@@ -389,6 +390,12 @@ class MainRac extends APP_Controller {
 				$data['library_risk'] = $lib_risk;
 				$data['library_risk_id'] = $res['risk_library_id'];
 				$page_view = 'risk_register_library';
+
+				//cari tanggal submit
+				$periode = $this->mperiode->getCurrentPeriode();
+				$data['tanggal_submit'] = $this->risk->cari_tanggal_submit($user_by,$periode['periode_id']);
+
+
 			}
 			
 			$data['pageLevelStyles'] = '
@@ -1840,6 +1847,18 @@ class MainRac extends APP_Controller {
 			
 			$this->load->model('risk/mriskregister');
 			$data['division_list'] = $this->mriskregister->getDivisionList();
+
+
+			//cek ini dari rollforward bukan
+			$cek_library_id = $this->risk->cekLibraryId($rid);
+
+			$cek_risk_sebelumnya = $this->risk->cekLibraryBefore($cek_library_id['risk_library_id']);
+
+			if($cek_library_id['risk_input_by'] == $cek_risk_sebelumnya['risk_input_by']){
+				$data['status_berkala'] = true;
+			}else{
+				$data['status_berkala'] = false;
+			}
 			
 			$this->load->view('main/header', $data);
 			$this->load->view('risk/action_plan_verify', $data);
@@ -1968,6 +1987,12 @@ class MainRac extends APP_Controller {
 		
 		$data = $this->loadDefaultAppConfig();
 		$cred = $this->session->credential;
+
+		if(empty($_POST['status'])){
+			$status = false;
+		}else{
+			$status = $_POST['status'];
+		}
 		
 		if (isset($_POST['id']) && is_numeric($_POST['id'])) {
 			$dd = implode('-', array_reverse( explode('-', $_POST['due_date']) ));
@@ -1975,7 +2000,8 @@ class MainRac extends APP_Controller {
 				'action_plan_status' => 4,
 				'action_plan' => $_POST['action_plan'],
 				'due_date' => $dd,
-				'division' => $_POST['division']
+				'division' => $_POST['division'],
+				'status' => $status
 			);
 			
 			$this->load->model('risk/risk');
@@ -3537,4 +3563,278 @@ class MainRac extends APP_Controller {
 		$data['datatable'] = $this->risk->submit_note($data);
 		 
 	}
+
+	public function viewOwnedRisk($rid = false) {
+		if ($rid && is_numeric($rid)) {
+			// check mode
+			$data = $this->loadDefaultAppConfig();
+			$data['indonya'] = base_url('index.php/maini/mainpic');
+			$data['engnya'] = base_url('index.php/main/mainpic');			
+			$data['sidebarMenu'] = $this->getSidebarMenuStructure('main');
+			$data['pageLevelStyles'] = '';
+			$data['pageLevelScripts'] = '';
+			$data['pageLevelScriptsInit'] = '';
+			
+			$data['valid_mode'] = false;
+			
+			$this->load->model('risk/risk');
+			$cred = $this->session->credential;
+			$data['role'] = $cred['role_id'];
+			$risk = $this->risk->getRiskValidate('viewRiskByDivisionRac', $rid, $cred);
+			$view = 'risk/risk_register_view';
+			$data['risk_user']['nama'] = '';
+			if ($risk) {
+				if ($risk['risk_status']*1 > 2) {
+					$data['valid_mode'] = true;
+					$data['risk'] = $risk;
+					
+					if ($risk['risk_status']*1 == 3 && $risk['risk_treatment_owner'] != $cred['username']) {
+						$data['approval'] = false;
+						
+						$data['pageLevelStyles'] = '
+						<link rel="stylesheet" type="text/css" href="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
+						<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css"/>
+						<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
+						<link rel="stylesheet" type="text/css" href="assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css"/>
+						
+						';
+						
+						$data['pageLevelScripts'] = '
+						<script type="text/javascript" src="assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+						<script type="text/javascript" src="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+						<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
+						<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
+						<script type="text/javascript" src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+						<script type="text/javascript" src="assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
+						<script src="assets/scripts/risk/riskowned_rac.js"></script>
+						';
+						
+						$data['pageLevelScriptsInit'] = "RiskOwned.init();";
+						
+						$this->load->model('risk/mriskregister');
+						$data['likelihood'] = $this->mriskregister->getRiskLikelihood();
+						$data['impact_list'] = $this->mriskregister->getRiskImpactForList();
+						$data['treatment_list'] = $this->mriskregister->getReference('treatment.status');
+						$data['division_list'] = $this->mriskregister->getDivisionList();
+						
+						$view = 'risk/risk_owner_form';
+					} else if  ($risk['risk_status']*1 == 4 && $cred['role_id'] == 2) { // on approval and is div head
+						$data['approval'] = true;
+						
+						$data['pageLevelStyles'] = '
+						<link rel="stylesheet" type="text/css" href="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
+						<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css"/>
+						<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
+						<link rel="stylesheet" type="text/css" href="assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css"/>
+						
+						';
+						
+						$data['pageLevelScripts'] = '
+						<script type="text/javascript" src="assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+						<script type="text/javascript" src="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+						<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
+						<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
+						<script type="text/javascript" src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+						<script type="text/javascript" src="assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
+						<script src="assets/scripts/risk/riskowned_rac.js"></script>
+						';
+						
+						$data['pageLevelScriptsInit'] = "RiskOwned.init();";
+						
+						$this->load->model('risk/mriskregister');
+						$data['likelihood'] = $this->mriskregister->getRiskLikelihood();
+						$data['impact_list'] = $this->mriskregister->getRiskImpactForList();
+						$data['treatment_list'] = $this->mriskregister->getReference('treatment.status');
+						$data['division_list'] = $this->mriskregister->getDivisionList();
+						
+						$view = 'risk/risk_owner_form';
+					} else {
+						$view = 'risk/risk_register_view';
+					}
+				}
+			}
+			
+			
+			$this->load->view('main/header', $data);
+			$this->load->view($view, $data);
+			$this->load->view('main/footer', $data);
+		}
+	}
+
+	public function viewOwnedActionPlan($rid = false) {
+		if ($rid && is_numeric($rid)) {
+			// check mode
+			$data = $this->loadDefaultAppConfig();
+			$data['indonya'] = base_url('index.php/maini/mainpic');
+			$data['engnya'] = base_url('index.php/main/mainpic');			
+			$data['sidebarMenu'] = $this->getSidebarMenuStructure('main');
+			$data['pageLevelStyles'] = '';
+			$data['pageLevelScripts'] = '';
+			$data['pageLevelScriptsInit'] = '';
+			
+			$data['valid_mode'] = false;
+			
+			$this->load->model('risk/risk');
+			$cred = $this->session->credential;
+			$data['role'] = $cred['role_id'];
+			
+			$risk = $this->risk->getActionPlanById($rid);
+
+			if ($risk && $risk['division'] != $cred['division_id']) {
+				
+				$this->load->model('risk/mriskregister');
+				$data['division_list'] = $this->mriskregister->getDivisionList();
+				
+				if ($risk['action_plan_status']*1 > 0) {
+					$data['valid_mode'] = true;
+					$data['action_plan'] = $risk;
+					$risk_data = $this->risk->getRiskById($risk['risk_id']);
+					$data['risk'] = $risk_data;
+					$data['action_plan_change'] = $this->risk->getActionPlanForChange($rid);
+					
+					if ($risk['action_plan_status']*1 == 1 && $risk['assigned_to'] != $cred['username']) {
+						$data['approval'] = false;
+						
+						$data['pageLevelStyles'] = '
+						<link rel="stylesheet" type="text/css" href="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
+						<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css"/>
+						<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
+						<link rel="stylesheet" type="text/css" href="assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css"/>
+						';
+						
+						$data['pageLevelScripts'] = '
+						<script type="text/javascript" src="assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+						<script type="text/javascript" src="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+						<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
+						<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
+						<script type="text/javascript" src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+						<script type="text/javascript" src="assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
+						
+						<script src="assets/scripts/risk/actionplanform_rac.js"></script>
+						';
+						
+						$data['pageLevelScriptsInit'] = "apForm.init();";
+						
+						$view = 'risk/action_plan_form';
+					} else if ($risk['action_plan_status']*1 == 2 && $cred['role_id'] == 2) { // on approval and is div head
+						$data['approval'] = true;
+						
+						$data['pageLevelStyles'] = '
+						<link rel="stylesheet" type="text/css" href="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
+						<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css"/>
+						<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
+						<link rel="stylesheet" type="text/css" href="assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css"/>
+						';
+						
+						$data['pageLevelScripts'] = '
+						<script type="text/javascript" src="assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+						<script type="text/javascript" src="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+						<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
+						<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
+						<script type="text/javascript" src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+						<script type="text/javascript" src="assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
+						
+						<script src="assets/scripts/risk/actionplanform_rac.js"></script>
+						';
+						
+						$data['pageLevelScriptsInit'] = "apForm.init();";
+						
+						$view = 'risk/action_plan_form';
+					} else {
+						$view = 'risk/action_plan_view';
+					}
+					
+					$this->load->view('main/header', $data);
+					$this->load->view($view, $data);
+					$this->load->view('main/footer', $data);
+				}
+			}
+		}
+	}
+
+	public function viewOwnedKri($rid = false) {
+		if ($rid && is_numeric($rid)) {
+			// check mode
+			$data = $this->loadDefaultAppConfig();
+				$data['indonya'] = base_url('index.php/maini/mainpic');
+				$data['engnya'] = base_url('index.php/main/mainpic');				
+			$data['sidebarMenu'] = $this->getSidebarMenuStructure('main');
+			$data['pageLevelStyles'] = '';
+			$data['pageLevelScripts'] = '';
+			$data['pageLevelScriptsInit'] = '';
+			
+			$data['valid_mode'] = false;
+			
+			$this->load->model('risk/risk');
+			$cred = $this->session->credential;
+			$data['role'] = $cred['role_id'];
+
+			$kri = $this->risk->getKriById($rid);
+
+			if ($kri && $kri['kri_owner'] != $cred['division_id']) {
+				
+				$data['kri'] = $kri;
+				$risk = $this->risk->getRiskById($kri['risk_id']);
+				$data['risk'] = $risk;
+				
+				if ($kri['kri_status']*1 == 0 && $kri['kri_pic'] != $cred['username']) {
+					$data['approval'] = false;
+					
+					$data['pageLevelStyles'] = '
+					<link rel="stylesheet" type="text/css" href="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
+					<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css"/>
+					<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
+					<link rel="stylesheet" type="text/css" href="assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css"/>
+					';
+					
+					$data['pageLevelScripts'] = '
+					<script type="text/javascript" src="assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+					<script type="text/javascript" src="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+					<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
+					<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
+					<script type="text/javascript" src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+					<script type="text/javascript" src="assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
+					
+					<script src="assets/scripts/risk/kriform_rac.js"></script>
+					';
+					
+					$data['pageLevelScriptsInit'] = "KriForm.init();";
+					
+					$view = 'risk/kri_form';
+				} else if ($kri['kri_status']*1 == 1 && $cred['role_id'] == 2) { // on approval and is div head
+					$data['approval'] = true;
+					
+					$data['pageLevelStyles'] = '
+					<link rel="stylesheet" type="text/css" href="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
+					<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css"/>
+					<link href="assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
+					<link rel="stylesheet" type="text/css" href="assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css"/>
+					';
+					
+					$data['pageLevelScripts'] = '
+					<script type="text/javascript" src="assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+					<script type="text/javascript" src="assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+					<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
+					<script src="assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
+					<script type="text/javascript" src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+					<script type="text/javascript" src="assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
+					
+					<script src="assets/scripts/risk/kriform_rac.js"></script>
+					';
+					
+					$data['pageLevelScriptsInit'] = "KriForm.init();";
+					
+					$view = 'risk/kri_form';
+				} else {
+					$view = 'risk/kri_view';
+				}
+				
+				$this->load->view('main/header', $data);
+				$this->load->view($view, $data);
+				$this->load->view('main/footer', $data);
+			}
+		}
+	}
+
+
 }

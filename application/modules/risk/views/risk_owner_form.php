@@ -305,9 +305,18 @@
 						</div>
 						<div class="form-actions right">
 							<input type="hidden" name="submit_mode" value="setOwnedRisk" />
+						<?php
+							if ($role == 2){
+						?>
+							<button id="risk-button-verify" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Submit</button>
+						<?php	
+							}else{
+						?>
 							<button id="risk-button-save" type="button" class="btn blue"><i class="fa fa-circle-o"></i> Save as Draft</button>
 							<button id="risk-button-verify" type="button" class="btn blue"><i class="fa fa-check-circle"></i> Submit</button>
 							<button type="button" class="btn yellow" id="risk-button-cancel"><i class="fa fa-times"></i> Cancel</button>
+						
+						<?php } ?>
 						</div>
 					</form>
 				</div>

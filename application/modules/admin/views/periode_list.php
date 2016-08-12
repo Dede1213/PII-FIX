@@ -10,13 +10,7 @@
 		<div class="col-md-12">
 		<div class="portlet">
 		<div class="portlet-title">
-			<div class="actions">
-				<a href="javascript: Periode.showInputForm()" class="btn default green-stripe">
-				<i class="fa fa-plus font-green"></i>
-				<span class="hidden-480">
-				New Record </span>
-				</a>
-			</div>
+			
 		</div>
 		
 		

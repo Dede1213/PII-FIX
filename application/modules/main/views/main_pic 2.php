@@ -537,7 +537,7 @@
 										<th width="30px">Status</th>
 										<th>KRI ID</th>
 										<th>KRI</th>
-										<th>Treshold</th>
+										<th>Threshold</th>
 										<th>Timing Pelaporan</th>
 										<th>Assigned To</th>
 										<th>Risk ID</th>
@@ -551,7 +551,7 @@
 										</td>
 										<td>KRI.00001</td>
 										<td>KRI Description</td>
-										<td>Treshold</td>
+										<td>Threshold</td>
 										<td>Timing</td>
 										<td>
 											Unasigned
@@ -566,7 +566,7 @@
 										</td>
 										<td>KRI.00002</td>
 										<td>KRI Description</td>
-										<td>Treshold</td>
+										<td>Threshold</td>
 										<td>Timing</td>
 										<td>Division Head</td>
 										<td>A.1.1-01</td>
@@ -582,7 +582,7 @@
 										</td>
 										<td>KRI.00002</td>
 										<td>KRI Description</td>
-										<td>Treshold</td>
+										<td>Threshold</td>
 										<td>Timing</td>
 										<td>PIC</td>
 										<td>A.1.1-01</td>

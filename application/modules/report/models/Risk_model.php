@@ -523,11 +523,11 @@
 			where t3.periode_id = "'.$data['periode'].'"
 			ORDER BY
 			(CASE 
-			WHEN t1.risk_impact_level = "INSIGNIFICANT" THEN 1
-			WHEN t1.risk_impact_level = "MINOR" THEN 2
+			WHEN t1.risk_impact_level = "INSIGNIFICANT" THEN 5
+			WHEN t1.risk_impact_level = "MINOR" THEN 4
 			WHEN t1.risk_impact_level = "MODERATE" THEN 3
-			WHEN t1.risk_impact_level = "MAJOR" THEN 4
-			WHEN t1.risk_impact_level = "CATASTROPHIC" THEN 5 END) ASC
+			WHEN t1.risk_impact_level = "MAJOR" THEN 2
+			WHEN t1.risk_impact_level = "CATASTROPHIC" THEN 1 END) ASC
 			';
 			 
 			$query = $this->db->query($sql);

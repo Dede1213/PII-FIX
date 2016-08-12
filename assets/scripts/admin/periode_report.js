@@ -28,7 +28,8 @@ grid.init({
         	"data": "periode_name",
         	"render": function ( data, type, full, meta ) {
                
-                    return '<a target="_self" href="'+site_url+'/admin/periode/periode_list/'+full.periode_id+'">View List</a>';
+                    return '<a target="_self" href="'+site_url+'/admin/periode/periode_list/'+full.periode_id+'">View List Include</a>'+' | '+
+                  			  '<a target="_self" href="'+site_url+'/admin/periode/periode_list_exclude/'+full.periode_id+'">View List Exclude</a>';
   
         		
            	}
@@ -122,6 +123,14 @@ var Periode = function() {
 	            	me.filterDataGrid(fby, fval);
 	            });
 	            
+	             $("#filterForm").submit(function (e) {
+               	 	e.preventDefault();
+                	var fby = $("#filterFormBy").val();
+	            	var fval = $("#filterFormValue").val();
+	            	
+	            	me.filterDataGrid(fby, fval);
+           		 });
+           		 
 	            // datatables edit delete handler
 	            $("#datatable_ajax").on('click', 'button.button-grid-edit', function(e) {
 	            	e.preventDefault();

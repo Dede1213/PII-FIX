@@ -52,7 +52,17 @@ $('#filterFormBy').change(function(){
 		$('.hish').attr('id','fi');
 		$('.hesh').attr('id','fl');		
 		$('.hosh').attr('id','filterFormValue');
-	}	
+	}
+    else if(frmval === 'risk_owner'){
+        $('#re').show();
+        $('#rl').hide();
+        $('#il').hide();
+        $('#li').hide();
+        $('.hash').attr('id','filterFormValue');
+        $('.hesh').attr('id','fl');
+        $('.hish').attr('id','fi');
+        $('.hosh').attr('id','fk');     
+    }	
 	else{
 		$('#re').hide();
 		$('#rl').hide();
@@ -106,7 +116,17 @@ $('#filterFormBy2').change(function(){
 		$('.pish').attr('id','pi');
 		$('.pesh').attr('id','pl');		
 		$('.posh').attr('id','filterFormValue2');
-	}	
+	}
+    else if(frmval === 'risk_owner'){
+        $('#tr').show();
+        $('#tl').hide();
+        $('#ti').hide();
+        $('#tk').hide();
+        $('.pash').attr('id','filterFormValue2');
+        $('.pesh').attr('id','pl');
+        $('.pish').attr('id','pi');
+        $('.posh').attr('id','pk');     
+    }
 	else{
 		$('#tr').hide();
 		$('#tl').hide();
@@ -400,6 +420,17 @@ var RiskList = function() {
 				$('#filterFormSubmit2').on('click', function() {
 					me.filterDataGridRiskList2(); 
 				});
+
+                $("#filterForm").submit(function (e) {
+                    e.preventDefault();
+                    me.filterDataGridRiskList(); 
+                 });
+            
+                $("#filterForm2").submit(function (e) {
+                    e.preventDefault();
+                    me.filterDataGridRiskList2(); 
+                 });
+
 	        },
 	        filterDataGrid: function(fby, fval) {
 	        	grid.clearAjaxParams();

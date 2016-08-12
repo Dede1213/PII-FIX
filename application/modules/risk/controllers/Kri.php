@@ -87,7 +87,7 @@ class Kri extends APP_Controller {
 		}
 		}else{
 			$resp['success'] = false;
-			$resp['msg'] = 'Color threshold Not to be Duplicates!';
+			$resp['msg'] = 'Duplicate Warning Color is Found!';
 		}
 		
 		}else{

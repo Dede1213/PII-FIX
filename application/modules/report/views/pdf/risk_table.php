@@ -17,7 +17,7 @@
 			<th>Risk Description</th>
 			<th>Impact Level</th>
 			<th>Likelihood Level</th>
-			<th>Current Periode</th>
+			<th>Before Periode</th>
 			<th>Previous Periode</th>
 		</tr>
 	</thead>

@@ -119,7 +119,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-2 control-label">Treshold</label>
+					<label class="col-md-2 control-label">Threshold</label>
 					<div class="col-md-6">
 					<input type="text" class="form-control input-sm input-readview" readonly="true" name="treshold" placeholder="" value="<?=$kri['treshold']?>">
 					</div>

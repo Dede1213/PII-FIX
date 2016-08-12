@@ -256,8 +256,8 @@
 									 		<thead>
 									 		<tr role="row" class="heading">
 									 			<th>Existing Control ID</th>
-									 			<th>Existing Control</th>
 									 			<th>Evaluation on Existing Control</th>
+									 			<th>Existing Control</th>
 									 			<th>Control Owner</th>
 									 			<th width="30px">&nbsp;</th>
 									 		</tr>

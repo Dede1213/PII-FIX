@@ -7,15 +7,15 @@
 			</div>
 			<table class="responsive table table-striped table-bordered table-hover"  border = "1"> 
   <tr>
-    <th rowspan="2">Kemungkinan Resiko<br></th>
-    <th colspan="5">Dampak Risiko dalam hal Materialisasi Risiko</th>
+    <th rowspan="2">Dampak Risiko dalam hal Materialisasi Risiko<br></th>
+    <th colspan="5">Kemungkinan Resiko</th>
   </tr>
   <tr>
-    <td>Tidak Signifikan<br></td>
-    <td>Minor</td>
+    <td>Sangat Rendah<br></td>
+    <td>Rendah</td>
     <td>Sedang</td>
-    <td>Mayor</td>
-    <td>Berbahaya</td>
+    <td>Tinggi</td>
+    <td>Sangat Tinggi</td>
   </tr>
   
   <?php if($datanya):?>
@@ -24,27 +24,28 @@
    
   <?php if($i ==1):?>
   <tr>
-    <td>Sangat Rendah<br></td>
-    <td bgcolor = "green"><?php echo $key['Very Low'];?></td>
-    <td bgcolor = "green"><?php echo $key['Low'];?></td>
-    <td bgcolor = "green"><?php echo $key['Medium'];?></td>
-    <td bgcolor = "green"><?php echo $key['High'];?></td>
-    <td bgcolor = "yellow"><?php echo $key['Very High'];?></td>
+    <td>Catastrophic<br></td>
+    <td bgcolor = "yellow"><?php echo $key['Very Low'];?></td>
+    <td bgcolor = "yellow"><?php echo $key['Low'];?></td>
+    <td bgcolor = "red"><?php echo $key['Medium'];?></td>
+    <td bgcolor = "red"><?php echo $key['High'];?></td>
+    <td bgcolor = "red"><?php echo $key['Very High'];?></td>
+
   </tr>
   <?php endif;?>
   <?php if($i ==2):?>
   <tr>
-    <td>Rendah<br></td>
+    <td>Mayor<br></td>
     <td bgcolor = "green"><?php echo $key['Very Low'];?></td>
-    <td bgcolor = "green"><?php echo $key['Low'];?></td>
-    <td bgcolor = "yellow"><?php echo $key['Medium'];?></td>
-    <td bgcolor = "yellow"><?php echo $key['High'];?></td>
-    <td bgcolor = "yellow"><?php echo $key['Very High'];?></td>
+    <td bgcolor = "yellow"><?php echo $key['Low'];?></td>
+    <td bgcolor = "red"><?php echo $key['Medium'];?></td>
+    <td bgcolor = "red"><?php echo $key['High'];?></td>
+    <td bgcolor = "red"><?php echo $key['Very High'];?></td>
   </tr>
   <?php endif;?>
   <?php if($i ==3):?>
   <tr>
-    <td>Rendah<br></td>
+    <td>Sedang<br></td>
     <td bgcolor = "green"><?php echo $key['Very Low'];?></td>
     <td bgcolor = "yellow"><?php echo $key['Low'];?></td>
     <td bgcolor = "yellow"><?php echo $key['Medium'];?></td>
@@ -55,11 +56,22 @@
   
   <?php if($i ==4):?>
   <tr>
-    <td>Rendah<br></td>
-    <td bgcolor = "yellow"><?php echo $key['Very Low'];?></td>
-    <td bgcolor = "red"><?php echo $key['Low'];?></td>
-    <td bgcolor = "red"><?php echo $key['Medium'];?></td>
-    <td bgcolor = "red"><?php echo $key['High'];?></td>
+    <td>Minor<br></td>
+    <td bgcolor = "green"><?php echo $key['Very Low'];?></td>
+    <td bgcolor = "green"><?php echo $key['Low'];?></td>
+    <td bgcolor = "yellow"><?php echo $key['Medium'];?></td>
+    <td bgcolor = "yellow"><?php echo $key['High'];?></td>
+    <td bgcolor = "red"><?php echo $key['Very High'];?></td>
+  </tr>
+  <?php endif;?>
+
+  <?php if($i ==5):?>
+  <tr>
+    <td>Tidak Signifikan<br></td>
+    <td bgcolor = "green"><?php echo $key['Very Low'];?></td>
+    <td bgcolor = "green"><?php echo $key['Low'];?></td>
+    <td bgcolor = "green"><?php echo $key['Medium'];?></td>
+    <td bgcolor = "yellow"><?php echo $key['High'];?></td>
     <td bgcolor = "red"><?php echo $key['Very High'];?></td>
   </tr>
   <?php endif;?>

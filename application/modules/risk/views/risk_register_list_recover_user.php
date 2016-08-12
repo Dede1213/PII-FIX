@@ -51,6 +51,7 @@
 							<option value="risk_level">Risk Level</option>
 							<option value="risk_impact_level">Impact Level</option>
 							<option value="risk_likelihood_key">Likelihood</option>
+							<option value="risk_owner">Risk Owner</option>
 						</select>
 					</div>
 					<div class="form-group" id="re">
@@ -59,6 +60,7 @@
 
 					<div class="form-group" id="rl">
 						<select class="hesh form-control input-sm" id="fl">
+							<option value="ALL">ALL</option>
 							<option value="low">Low</option>	
 							<option value="moderate">Moderate</option>
 							<option value="high">High</option>
@@ -88,7 +90,7 @@
 						
 					</div>											
 
-					<button type="button" id="filterFormSubmit" class="btn blue btn-sm">Search</button>
+					<button type="submit" id="filterFormSubmit" class="btn blue btn-sm">Search</button>
 				</form>
 				
 				<div class="table-container">
@@ -132,6 +134,7 @@
 							<option value="risk_level">Risk Level</option>
 							<option value="risk_impact_level">Impact Level</option>
 							<option value="risk_likelihood_key">Likelihood</option>
+							<option value="risk_owner">Risk Owner</option>
 						</select>
 					</div>
 
@@ -141,6 +144,7 @@
 
 					<div class="form-group" id="tl">
 						<select class="pesh form-control input-sm" id="pl">
+							<option value="ALL">ALL</option>
 							<option value="low">Low</option>	
 							<option value="moderate">Moderate</option>
 							<option value="high">High</option>
@@ -169,7 +173,7 @@
 						</select>
 						
 					</div>						
-					<button type="button" id="filterFormSubmit2" class="btn blue btn-sm">Search</button>
+					<button type="submit" id="filterFormSubmit2" class="btn blue btn-sm">Search</button>
 				</form>	
 				<div class="table-container">
 					<table class="table table-striped table-bordered " id="datatable_ajax2">

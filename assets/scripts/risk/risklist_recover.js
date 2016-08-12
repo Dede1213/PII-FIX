@@ -11,9 +11,13 @@ $('#tl').hide();
 $('#ti').hide();
 $('#tk').hide();
 
+$('#re2').hide();
+$('#tr2').hide();
+
 $('#filterFormBy').change(function(){
 	var frmval = $('#filterFormBy').val(); 
 	if(frmval === 'risk_event'){
+		$('#re2').hide();
 		$('#re').show();
 		$('#rl').hide();
 		$('#il').hide();
@@ -24,6 +28,7 @@ $('#filterFormBy').change(function(){
 		$('.hosh').attr('id','fk');		
 	}
 	else if(frmval === 'risk_level'){
+		$('#re2').hide();
 		$('#re').hide();
 		$('#rl').show();
 		$('#il').hide();
@@ -34,6 +39,7 @@ $('#filterFormBy').change(function(){
 		$('.hosh').attr('id','fk');
 	}
 	else if(frmval === 'risk_impact_level'){
+		$('#re2').hide();
 		$('#re').hide();
 		$('#rl').hide();
 		$('#il').show();
@@ -45,6 +51,7 @@ $('#filterFormBy').change(function(){
 	}
 	else if(frmval === 'risk_likelihood_key'){
 		$('#re').hide();
+		$('#re2').hide();
 		$('#rl').hide();
 		$('#il').hide();
 		$('#li').show();
@@ -52,9 +59,21 @@ $('#filterFormBy').change(function(){
 		$('.hish').attr('id','fi');
 		$('.hesh').attr('id','fl');		
 		$('.hosh').attr('id','filterFormValue');
+	}
+	else if(frmval === 'risk_owner'){
+		$('#re').hide();
+		$('#re2').show();
+		$('#rl').hide();
+		$('#il').hide();
+		$('#li').hide();
+		$('.hash').attr('id','fe');
+		$('.hesh').attr('id','filterFormValue');
+		$('.hish').attr('id','fi');
+		$('.hosh').attr('id','fk');
 	}	
 	else{
 		$('#re').hide();
+		$('#re2').hide();
 		$('#rl').hide();
 		$('#il').hide();
 		$('#li').hide();
@@ -68,6 +87,7 @@ $('#filterFormBy').change(function(){
 $('#filterFormBy2').change(function(){
 	var frmval = $('#filterFormBy2').val(); 
 	if(frmval === 'risk_event'){
+		$('#tr2').hide();
 		$('#tr').show();
 		$('#tl').hide();
 		$('#ti').hide();
@@ -78,6 +98,7 @@ $('#filterFormBy2').change(function(){
 		$('.posh').attr('id','pk');		
 	}
 	else if(frmval === 'risk_level'){
+		$('#tr2').hide();
 		$('#tr').hide();
 		$('#tl').show();
 		$('#ti').hide();
@@ -88,6 +109,7 @@ $('#filterFormBy2').change(function(){
 		$('.posh').attr('id','pk');
 	}
 	else if(frmval === 'risk_impact_level'){
+		$('#tr2').hide();
 		$('#tr').hide();
 		$('#tl').hide();
 		$('#ti').show();
@@ -98,6 +120,7 @@ $('#filterFormBy2').change(function(){
 		$('.posh').attr('id','pk');		
 	}
 	else if(frmval === 'risk_likelihood_key'){
+		$('#tr2').hide();
 		$('#tr').hide();
 		$('#tl').hide();
 		$('#ti').hide();
@@ -106,8 +129,20 @@ $('#filterFormBy2').change(function(){
 		$('.pish').attr('id','pi');
 		$('.pesh').attr('id','pl');		
 		$('.posh').attr('id','filterFormValue2');
-	}	
+	}
+	else if(frmval === 'risk_owner'){
+		$('#tr2').show();
+		$('#tr').hide();
+		$('#tl').hide();
+		$('#ti').hide();
+		$('#tk').hide();
+		$('.pash').attr('id','pe');
+		$('.pish').attr('id','pi');
+		$('.pesh').attr('id','pl');		
+		$('.posh').attr('id','filterFormValue2');
+	}		
 	else{
+		$('#tr2').hide();
 		$('#tr').hide();
 		$('#tl').hide();
 		$('#ti').hide();
@@ -371,6 +406,16 @@ var RiskList = function() {
 				$('#filterFormSubmit2').on('click', function() {
 					me.filterDataGridRiskList2(); 
 				});
+
+				 $("#filterForm").submit(function (e) {
+               	 	e.preventDefault();
+                	me.filterDataGridRiskList(); 
+           		 });
+				
+				$("#filterForm2").submit(function (e) {
+               	 	e.preventDefault();
+                	me.filterDataGridRiskList2(); 
+           		 });
 	        },
 	        filterDataGrid: function(fby, fval) {
 	        	grid.clearAjaxParams();

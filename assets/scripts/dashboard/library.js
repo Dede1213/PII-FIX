@@ -217,8 +217,8 @@ gridRiskList_ec.init({
         
         "columns": [
 			{ "data": "id" },
-			{ "data": "risk_existing_control" },
 			{ "data": "risk_evaluation_control" },
+            { "data": "risk_existing_control" },
 			{ "data": "risk_control_owner" },
             { "data": "risk_code" }, 
 			{ 

@@ -28,7 +28,7 @@
 			<div class="col-md-12">
 				<div class="news-item-page">
 					<iframe id="blockrandom" name="iframe" src="<?=$base_url?>/uploadedFile/news/<?=$news['filename']?>" 
-					width="100%" height="500" scrolling="auto" align="top" frameborder="0" class="wrapper">
+					width="100%" height="1225" scrolling="auto" align="top" frameborder="0" class="wrapper">
 					This option will not work correctly. Unfortunately, your browser does not support
 					inline frames.</iframe>
 

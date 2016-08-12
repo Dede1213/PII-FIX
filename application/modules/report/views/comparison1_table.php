@@ -11,9 +11,9 @@
 							<th>  Risk Event </th>
 							<th>  Risk Description</th>
 							<th>  Risk Owner </th>  
-							<th>  Current Impact Level</th>
-							<th>  Current Likelihood Level</th>
-							<th> Current Risk Level </th>
+							<th>  Before Impact Level</th>
+							<th>  Before Likelihood Level</th>
+							<th> Before Risk Level </th>
 							 <th> Previous Impact Level</th>
 							  <th> Previous Likelihood Level</th>
 							   <th> Previous Risk Level</th>

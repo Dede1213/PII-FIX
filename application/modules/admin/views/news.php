@@ -29,13 +29,14 @@
 						<option value="a.created_date">Created Date</option>
 						<option value="a.created_by">Created By</option>
 						<option value="a.date_publish">Publish Date</option>
+						<option value="a.status">Status</option>
 						
 					</select>
 				</div>
 				<div class="form-group">
 					<input type="text" class="form-control input-sm" id="filterFormValue" placeholder="Insert Filter Value">
 				</div>
-				<button type="button" id="filterFormSubmit" class="btn green btn-sm">Search</button>
+				<button type="submit"  class="btn green btn-sm" id="filterFormSubmit">Search</button>
 			</form>	
 			</div>
 			

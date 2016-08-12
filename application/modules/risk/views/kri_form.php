@@ -224,7 +224,21 @@
 				<div class="form-group">
 					<label class="col-md-2 control-label">KRI Warning</label>
 					<div class="col-md-6">
+					<?php 
+					if ($kri['kri_warning'] == 'RED'){
+					?>
+						<div style="margin-top:7px">
+						<img id="warning_img" src="<?=$base_url?>assets/images/legend/kri_<?=strtolower($kri['kri_warning'])?>.gif"/>
+						</div>
+					<?php
+					}else{
+					?>
+						<div style="margin-top:7px">
 						<img id="warning_img" src="<?=$base_url?>assets/images/legend/kri_<?=strtolower($kri['kri_warning'])?>.png"/>
+						</div>
+					<?php
+					}
+					?>
 					</div>
 				</div>
 				<?php } ?>

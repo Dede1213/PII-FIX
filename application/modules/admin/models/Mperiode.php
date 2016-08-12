@@ -713,6 +713,28 @@ if ($query3->num_rows() > 0)
 		
 	}
 
+	// ACTION PLAN PERIODE
+	public function getDataReportListExclude($page, $row, $order_by = null, $order = null, $filter_by = null, $filter_value = null, $id)
+	{
+		$ex_or = $ex_filter = '';
+		$par = false;
+		
+		if ($order_by != null) {
+			$order_by = $order_by;
+			$ex_or = ' order by '.$order_by.' '.$order;
+		}
+		
+		if ($filter_by != null && $filter_value != null) {
+			$ex_filter = ' where '.$filter_by.' like ? ';
+			$par['p1'] = '%'.$filter_value.'%';
+		}
+		
+		$sql = "select * from t_risk  where risk_id IN (select risk_id from t_report_risk where periode_id = '$id') and risk_evaluation_control is not null or risk_evaluation_control != '' ";
+		$res = $this->getPagingData($sql, $par, $page, $row, 'periode_id', true);
+		return $res;
+		
+	}
+
 	public function updateDataReport($data_id, $data, $uid)
 	{
 		// if year month start is >= next month
@@ -1112,6 +1134,21 @@ if ($query3->num_rows() > 0)
 		$this->_logHistoryPlan($data_id, $uid, 'D');
 		
 		$sql = "update t_risk set risk_evaluation_control = 'delete_from_report'
+				where risk_id = ?
+				";
+		$par['data_id'] = $risk_id;
+		
+		$res = $this->db->query($sql, $par);
+		return $res;
+	}
+
+	public function deleteDataReportListExclude($data_id, $uid, $risk_id)
+	{
+		// if year month start is <= current month
+		
+		$this->_logHistoryPlan($data_id, $uid, 'D');
+		
+		$sql = "update t_risk set risk_evaluation_control = NULL
 				where risk_id = ?
 				";
 		$par['data_id'] = $risk_id;

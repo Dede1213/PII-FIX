@@ -702,6 +702,10 @@ var Dashboard = function() {
         		me.filterDataGridRiskList();
         	});
 
+            $("#form_tab_risk_list").submit(function (e) {
+                e.preventDefault();
+                me.filterDataGridRiskList();
+            });
             
         	
              $('#datatable_cr').on('click', 'button.button-grid-delete', function(e) {
@@ -718,18 +722,39 @@ var Dashboard = function() {
 				
         		me.filterDataGridRegister();
         	});
+
+            $("#form_tab_risk_register_list").submit(function (e) {
+                e.preventDefault();
+                me.filterDataGridRegister();
+            });
         	
         	$('#tab_treatment_list-filterButton').on('click', function() {
         		me.filterDataGridTreatment();
         	});
 			
+            $("#form_tab_treatment_list").submit(function (e) {
+                e.preventDefault();
+                me.filterDataGridTreatment();
+            });
+
 			$('#tab_action_plan_list-filterButton').on('click', function() {
         		me.filterDataGridActionplan();
         	});
+
+            $("#form_tab_action_plan_list").submit(function (e) {
+                e.preventDefault();
+                me.filterDataGridActionplan();
+            });
 			
+            
         	$('#tab_action_plan_exec-filterButton').on('click', function() {
         		me.filterDataGridActionplanexec();
         	});
+
+             $("#tab_action_plan_exec").submit(function (e) {
+                e.preventDefault();
+                me.filterDataGridActionplanexec();
+            });
 
             $("#datatable_action_plan_exec").on('click', 'button.button-grid-search', function(e) {
                 e.preventDefault();

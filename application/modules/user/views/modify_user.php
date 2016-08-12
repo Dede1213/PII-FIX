@@ -21,8 +21,10 @@
 					<select class="form-control input-medium input-sm" id="filterFormBy">
 						<option value="username">Username</option>
 						<option value="display_name">Full Name</option>
-						<option value="role_name">Role</option>
-						<option value="division_name">Division</option>
+						<option value="mtable.role_name">Role</option>
+						<option value="mtable.role_status">Role Status</option>
+						<option value="mtable.division_name">Division</option>
+						<option value="mtable.email">Email</option>
 					</select>
 				</div>
 				<div class="form-group">

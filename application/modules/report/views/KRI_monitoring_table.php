@@ -22,17 +22,17 @@
 						<th>  KRI ID </th>  
 						<th>  Key Risk Indicator </th>
 						<th>  KRI  Owner </th>
-						<th> Treshold </th>
-						<th> Treshold Value</th>
+						<th> Threshold </th>
+						<th> Threshold Value</th>
 						<th> Timing  Pelaporan</th>
 						
 						<th> KRI Warning</th>
 						<th> Risk Level After KRI</th>
 						<th> Risk Impact Level After KRI</th>
 						<th> Risk Likelihood After KRI</th>
-						<th> Current Risk Level</th>
-						<th> Current Risk Impact Level</th>
-						<th> Current Risk Likelihood</th>
+						<th> Before Risk Level</th>
+						<th> Before Risk Impact Level</th>
+						<th> Before Risk Likelihood</th>
 						<th> KRI Status</th>
 						<th> Status</th>
 						<th> Risk Status</th>

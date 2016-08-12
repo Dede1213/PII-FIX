@@ -38,7 +38,9 @@
 					<div class="form-group">
 						<label for="filterFormBy">Filter By</label>
 						<select class="form-control input-medium input-sm" id="filterFormBy">
-							<option value="subject">Subject</option>
+							<option value="a.subject">Subject</option>
+							<option value="a.created_date">date</option>
+							<option value="a.answer">Answer</option>
 						</select>
 					</div>
 					<div class="form-group">

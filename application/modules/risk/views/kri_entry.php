@@ -109,7 +109,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-2 control-label">Treshold Type</label>
+					<label class="col-md-2 control-label">Threshold Type</label>
 					<div class="col-md-6">
 					<select class="form-control input-sm" id="select-treshold-type" name="treshold_type">
 						<option value="SELECTION">Selection</option>
@@ -120,7 +120,7 @@
 				<div class="form-group">
 					<label class="col-md-2 control-label">&nbsp;</label>
 					<div class="col-md-8">
-						<button class="btn green btn-sm" style="margin-bottom: 10px;" type="button" id="button-kri-open-treshold">Add Treshold</button>
+						<button class="btn green btn-sm" style="margin-bottom: 10px;" type="button" id="button-kri-open-treshold">Add Threshold</button>
 						<table id="treshold_table" class="table table-condensed table-bordered table-hover">
 							<thead>
 							<tr role="row" class="heading">
@@ -241,7 +241,7 @@
 <div id="modal-treshold-selection" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Add Treshold</h4>
+		<h4 class="modal-title">Add Threshold</h4>
 	</div>
 	<div class="modal-body">
 		<input type = "hidden" id = "form-control-revid-objective">
@@ -280,7 +280,7 @@
 <div id="modal-treshold-value" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h4 class="modal-title">Add Treshold</h4>
+		<h4 class="modal-title">Add Threshold</h4>
 	</div>
 	<div class="modal-body">
 		<form id="kri-form-value" role="form" class="form-horizontal">
@@ -346,7 +346,7 @@
 					</div>
 				</div>
 				<div class="col-md-6" id="t-col-right-treshold">
-					<h4 style="margin-top: 0;"><input type="checkbox" id="is_percentage_treshold" value="1" /> Percentage Treshold</h4>
+					<h4 style="margin-top: 0;"><input type="checkbox" id="is_percentage_treshold" value="1" /> Percentage Threshold</h4>
 					<div class="form-group">
 						<input type="hidden" name="perc-below-2" value='-'>
 						<input type="hidden" name="perc-below-oper_v" value='Below'>

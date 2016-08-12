@@ -354,7 +354,7 @@ class RiskRegister extends APP_Controller {
 		
 		if (isset($_POST['filter_by']) && isset($_POST['filter_value']) && $_POST['filter_value'] != '' ) {
 			$filter_by = $_POST['filter_by'];
-			$filter_value = $_POST['filter_value'];
+			$filter_value = $_POST['filter_value'];	
 		}
 		
 		$page = ceil($_POST['start'] / $_POST['length'])+1;

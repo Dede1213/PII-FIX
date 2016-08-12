@@ -136,11 +136,20 @@ class Mriskregister extends APP_Model {
 			$order_by = $order_by;
 			$ex_or = ' order by '.$order_by.' '.$order;
 		}
+
+		if ($filter_by == null || $filter_by == '' ) {
+			//dibuat risk event aja biar ga error
+			$filter_by = 'risk_event';
+		}
 		
 		if ($filter_by != null && $filter_value != null) {
-			$ex_filter = ' and '.$filter_by.' like ? ';
-			$par['p1'] = '%'.$filter_value.'%';
+			if($filter_value == 'ALL'){
+					$filter_value = '';
+				}
+			
 		}
+
+		
 				
 		if ($mode == 'user') {
 			$date = date("Y-m-d");
@@ -167,6 +176,9 @@ class Mriskregister extends APP_Model {
 					and m_periode.periode_end >= '".$date."')
 					and a.existing_control_id is null
 					and a.risk_library_id is null
+
+					and a.".$filter_by." like '%".$filter_value."%'
+
 					UNION
 					select 
 					a.*,
@@ -189,6 +201,9 @@ class Mriskregister extends APP_Model {
 					and (m_periode.periode_start <= '".$date."'
 					and m_periode.periode_end >= '".$date."')
 					and a.existing_control_id is null
+
+					and a.".$filter_by." like '%".$filter_value."%'
+
 					UNION
 					select 
 					a.*,
@@ -209,6 +224,8 @@ class Mriskregister extends APP_Model {
 					and a.risk_input_by = '".$defFilter['userid']."'
 					and a.risk_id NOT IN (select r.risk_id from t_risk r where r.risk_id = a.risk_id and r.periode_id = '".$defFilter['periodid']."' and r.risk_input_by = '".$defFilter['userid']."' and r.risk_status >= 0)
 					
+					and ".$filter_by." like '%".$filter_value."%'
+
 					UNION
 					select 
                                                                                 a.*,
@@ -232,6 +249,8 @@ class Mriskregister extends APP_Model {
                                                                                 and (m_periode.periode_start <= '".$date."'
                                                                                 and m_periode.periode_end >= '".$date."')
 																				and a.existing_control_id is null
+
+					and ".$filter_by." like '%".$filter_value."%' 
                                                                                 UNION
                                                                                 select 
                                                                                 a.*,
@@ -253,6 +272,7 @@ class Mriskregister extends APP_Model {
                                                                                 and a.risk_id NOT IN (select r.risk_id from t_risk r where r.risk_id = a.risk_id 
                                                                                 
                                                                                 and r.periode_id = '".$defFilter['periodid']."' and r.risk_input_by = '".$defFilter['userid']."' and r.risk_status >= 0)
+				and ".$filter_by." like '%".$filter_value."%' 
 
 					";
 		}
@@ -307,6 +327,9 @@ class Mriskregister extends APP_Model {
                                                                                 and a.risk_id NOT IN(select t2.risk_library_id from t_risk t2 where t2.periode_id = (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end) and t2.risk_input_by = '".$defFilter['userid']."' and t2.risk_library_id is not null)
                                                                                 and a.existing_control_id is null
                                                                                 and a.risk_input_by = '".$defFilter['userid']."'
+                                                                                
+                                                                                and ".$filter_by." like '%".$filter_value."%'
+
 UNION
 select 
                                                                                 a.created_by,
@@ -347,7 +370,7 @@ select
                                                                                 from t_risk a
                                                                                 left join m_reference b on a.risk_status = b.ref_key and b.ref_context = 'risk.status.user'
                                                                                 left join m_reference c on a.risk_level = c.ref_key and c.ref_context = 'risklevel.display'
-                                                                               left join m_reference d on a.risk_impact_level = d.ref_key and d.ref_context = 'impact.display'
+                                                                                left join m_reference d on a.risk_impact_level = d.ref_key and d.ref_context = 'impact.display'
                                                                                 left join m_likelihood e on a.risk_likelihood_key = e.l_key
                                                                                 left join m_division f on a.risk_owner = f.division_id
                                                                                 where 
@@ -355,7 +378,9 @@ select
                                                                                 and a.risk_date <> (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end)
                                                                                 and a.risk_id NOT IN(select t2.risk_library_id from t_risk t2 where t2.periode_id = (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end) and t2.risk_input_by = '".$defFilter['userid']."' and t2.risk_library_id is not null)
                                                                                 and a.existing_control_id is null
-                                                                               and a.risk_input_by = '".$defFilter['userid']."'
+                                                                                and a.risk_input_by = '".$defFilter['userid']."'
+
+                                                                                and ".$filter_by." like '%".$filter_value."%'
 UNION
 select 
                                                                                 a.created_by,
@@ -404,8 +429,9 @@ select
                                                                                 where 
                                                                                 a.periode_id NOT IN (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end)
                                                                                 and a.risk_id NOT IN(select t2.risk_library_id from t_risk t2 where t2.periode_id = (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end) and t2.risk_input_by = '".$defFilter['userid']."' and t2.risk_library_id is not null and t2.risk_evaluation_control is null)
-                                                                                
                                                                                 and t.username = '".$defFilter['userid']."' and t.delete_status is null
+
+                                                                                and ".$filter_by." like '%".$filter_value."%'
  
 					";
 					
@@ -517,6 +543,9 @@ select
 					left join m_periode on m_periode.periode_id = a.periode_id
 					where 
 					a.existing_control_id = 1 and a.risk_input_by = '".$defFilter['userid']."'
+
+					and a.".$filter_by." like '%".$filter_value."%'
+
 					UNION
 select 
                                                                                 a.created_by,
@@ -568,6 +597,7 @@ select
                                                                                 and a.risk_id NOT IN(select t2.risk_library_id from t_risk t2 where t2.periode_id = (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end) and t2.risk_input_by = '".$defFilter['userid']."' and t2.risk_library_id is not null)
                                                                                 
                                                                                 and t.username = '".$defFilter['userid']."' and t.delete_status is not null
+                                                                                and a.".$filter_by." like '%".$filter_value."%'
  
 					
 					 
@@ -624,6 +654,9 @@ select
 					where 
 					a.existing_control_id = 2 and a.risk_status <= 2 and a.risk_input_by = '".$defFilter['userid']."'
 					and a.risk_library_id is null
+
+					 and a.".$filter_by." like '%".$filter_value."%'
+
 					UNION
 					
 					select 
@@ -672,6 +705,7 @@ select
 					left join m_periode on m_periode.periode_id = a.periode_id
 					where 
 					a.existing_control_id = 2 and a.risk_status <= 2 and a.risk_input_by = '".$defFilter['userid']."'
+					 and a.".$filter_by." like '%".$filter_value."%'
 					
 					 
 					";
@@ -787,6 +821,7 @@ select
                                                                                 where 
                                                                                 a.existing_control_id is null
                                                                                 and a.risk_existing_control is null
+                                                                                and a.".$filter_by." like '%".$filter_value."%'
                                                                                 order by a.periode_id desc
 ) as libraryrisk
 group by libraryrisk.risk_code
@@ -844,6 +879,7 @@ group by libraryrisk.risk_code
 					where 
 					a.existing_control_id is null 
 					and a.risk_existing_control = 'under'
+					and a.".$filter_by." like '%".$filter_value."%'
 					
 					 
 					";

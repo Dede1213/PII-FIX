@@ -23,6 +23,11 @@ class Main extends APP_Controller {
 		if ($this->session->credential['role_id'] != '3' && $this->session->credential['role_id'] != '1') {
 			$this->dashboardRoute($this->session->credential['role_id']);
 		}
+
+		if ($this->session->credential['role_id'] == '1') {
+			$user = '';
+		}
+
 		if ($this->session->credential['role_id'] == '3'){
 			$user= $this->session->credential['username'];
 			$sql = "select display_name from m_user where username='$user' and display_name='new' ";

@@ -25,13 +25,15 @@
 					<label for="filterFormBy">Filter By</label>
 					<select class="form-control input-medium input-sm" id="filterFormBy">
 						<option value="periode_name">Periode</option>
-						<option value="periode_year">Year</option>
+						<option value="periode_start">Periode Start</option>
+						<option value="periode_end">Periode End</option>
+						
 					</select>
 				</div>
 				<div class="form-group">
 					<input type="text" class="form-control input-sm" id="filterFormValue" placeholder="Insert Filter Value">
 				</div>
-				<button type="button" id="filterFormSubmit" class="btn green btn-sm">Submit</button>
+				<button type="submit" id="filterFormSubmit" class="btn green btn-sm">Search</button>
 			</form>	
 			</div>
 			

@@ -328,7 +328,7 @@
 							<th width="30px">Status</th>
 							<th>KRI ID</th>
 							<th>KRI</th>
-							<th>Treshold</th>
+							<th>Threshold</th>
 							<th>Timing Pelaporan</th>
 							<th>Assigned To</th>
 							<th>Risk ID</th>

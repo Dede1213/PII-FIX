@@ -106,7 +106,8 @@
 					<tr role="row" class="heading">
 						<th width="30px">Status <input type = "checkbox" checked="true"  name = "risk_status" ></th>
 						<th>User <input type = "checkbox" checked="true"  name = "display_name"  > </th>
-						<th>Divisi<input type = "checkbox" checked="true"  name = "division_name"  > </th> 
+						<th>Divisi<input type = "checkbox" checked="true"  name = "division_name"  > </th>
+						<th>Submited<input type = "checkbox" checked="true"  name = "tanggal_submit"  > </th> 
 					</tr>
 				</form>							 
 			  </div>
@@ -306,7 +307,7 @@
 			</ul>
 			<div class="tab-content">
 				<div class="tab-pane active" id="tab_risk_list">
-					<form class="form-inline" role="form" style="margin-bottom: 10px;">
+					<form class="form-inline" role="form" style="margin-bottom: 10px;" id="form_tab_risk_list" >
 						<div class="form-group">
 							<label for="filterFormBy" class="smaller">Filter By : </label>
 							<select class="form-control input-medium input-sm" id="tab_risk_list-filterBy">
@@ -320,7 +321,7 @@
 						<div class="form-group">
 							<input type="text" class="form-control input-sm" placeholder="Insert Filter Value" id="tab_risk_list-filterValue">
 						</div>
-						<button type="button" class="btn blue btn-sm" id="tab_risk_list-filterButton">Search</button>
+						<button type="submit" class="btn blue btn-sm" id="tab_risk_list-filterButton">Search</button>
 					</form>
 					
 					<div ><!--class="table-scrollable"-->
@@ -379,7 +380,7 @@
 					</div>
 				</div>
 				<div class="tab-pane" id="tab_risk_register_list">	
-					<form class="form-inline" role="form" style="margin-bottom: 10px;">
+					<form class="form-inline" role="form" style="margin-bottom: 10px;" id="form_tab_risk_register_list">
 						<div class="form-group">
 							<label for="filterFormBy" class="smaller">Filter By : </label>
 							<select class="form-control input-medium input-sm" id="tab_risk_register_list-filterBy">
@@ -400,7 +401,7 @@
 							<th width="30px">Status</th>
 							<th>User</th>
 							<th>Divisi</th>
-							<th>Submited</th>
+							<th>Submission Date</th>
 							<th width="30%">Note</th>
 							<th></th>
 						</tr>
@@ -432,7 +433,7 @@
 					</div>
 				</div>
 				<div class="tab-pane" id="tab_treatment_list">
-					<form class="form-inline" role="form" style="margin-bottom: 10px;">
+					<form class="form-inline" role="form" style="margin-bottom: 10px;" id="form_tab_treatment_list">
 						<div class="form-group">
 							<label for="filterFormBy" class="smaller">Filter By : </label>
 							<select class="form-control input-medium input-sm" id="tab_treatment_list-filterBy">
@@ -485,7 +486,7 @@
 					</div>
 				</div>
 				<div class="tab-pane" id="tab_action_plan_list">
-					<form class="form-inline" role="form" style="margin-bottom: 10px;">
+					<form class="form-inline" role="form" style="margin-bottom: 10px;" id="form_tab_action_plan_list">
 						<div class="form-group">
 							<label for="filterFormBy" class="smaller">Filter By : </label>
 							<select class="form-control input-medium input-sm" id="tab_action_plan_list-filterBy">
@@ -598,7 +599,7 @@
 					</div>
 				</div>
 				<div class="tab-pane" id="tab_action_plan_exec">
-					<form class="form-inline" role="form" style="margin-bottom: 10px;">
+					<form class="form-inline" role="form" style="margin-bottom: 10px;" id="form_tab_action_plan_exec">
 						<div class="form-group">
 							<label for="filterFormBy" class="smaller">Filter By : </label>
 							<select class="form-control input-medium input-sm" id="tab_action_plan_exec-filterBy">

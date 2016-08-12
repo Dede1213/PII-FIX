@@ -63,12 +63,20 @@ var News = function() {
 	        	var me = this;
 	        		            
 	            // datatables filter button
-	            $("#filterFormSubmit").click(function(e) {
+	            $("#filterFormSubmit").click(function() {
 	            	var fby = $("#filterFormBy").val();
 	            	var fval = $("#filterFormValue").val();
 	            	
 	            	me.filterDataGrid(fby, fval);
 	            });
+
+	             $("#filterForm").submit(function (e) {
+               	 	e.preventDefault();
+                	var fby = $("#filterFormBy").val();
+	            	var fval = $("#filterFormValue").val();
+	            	
+	            	me.filterDataGrid(fby, fval); 
+           		 });
 	            
 	            // datatables edit delete handler
 	            $("#datatable_ajax").on('click', 'button.button-grid-edit', function(e) {

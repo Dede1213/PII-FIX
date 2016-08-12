@@ -58,7 +58,7 @@
 											</div>
 									</div>
 									<div class="form-group">
-										<label class="col-md-3 control-label">Current Periode</label>
+										<label class="col-md-3 control-label">Before Periode</label>
 											<div class="col-md-6">
 												<select class="form-control input-sm" name="periode_cur">
 													<?php 
@@ -101,7 +101,7 @@
 											</div>
 									</div>
 									<div class="form-group">
-										<label class="col-md-3 control-label">Current Periode</label>
+										<label class="col-md-3 control-label">Before Periode</label>
 											<div class="col-md-6">
 												<select class="form-control input-sm" name="periode_cur">
 													<?php 
@@ -144,7 +144,7 @@
 											</div>
 									</div>
 									<div class="form-group">
-										<label class="col-md-3 control-label">Current Periode</label>
+										<label class="col-md-3 control-label">Before Periode</label>
 											<div class="col-md-6">
 												<select class="form-control input-sm" name="periode_cur">
 													<?php 

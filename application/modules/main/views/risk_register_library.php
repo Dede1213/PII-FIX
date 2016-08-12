@@ -443,8 +443,8 @@ WHERE t_risk.risk_id ='$id'";
 									<thead>
 									<tr role="row" class="heading">
 										<th><span class="small">Existing Control ID</span></th>
-										<th><span class="small">Existing Control</span></th>
 										<th><span class="small">Evaluation on Existing Control</span></th>
+										<th><span class="small">Existing Control</span></th>
 										<th><span class="small">Control Owner</span></th>
 									</tr>
 									</thead>
@@ -659,8 +659,8 @@ WHERE t_risk.risk_id ='$id'";
 									<thead>
 									<tr role="row" class="heading">
 										<th><span class="small">Existing Control ID</span></th>
-										<th><span class="small">Existing Control</span></th>
 										<th><span class="small">Evaluation on Existing Control</span></th>
+										<th><span class="small">Existing Control</span></th>
 										<th><span class="small">Control Owner</span></th>
 										<th width="30px">&nbsp;</th>
 									</tr>

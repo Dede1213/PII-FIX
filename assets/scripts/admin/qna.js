@@ -170,6 +170,14 @@ var Qna = function() {
 	            	
 	            	me.filterDataGrid(fby, fval);
 	            });
+
+	             $("#filterForm").submit(function (e) {
+               		 e.preventDefault();
+                	var fby = $("#filterFormBy").val();
+	            	var fval = $("#filterFormValue").val();
+	            	
+	            	me.filterDataGrid(fby, fval);
+           		 });
 	            
 	            $("#datatable_ajax").on('click', 'a.btn-open-question', function(e) {
 	            	e.preventDefault();

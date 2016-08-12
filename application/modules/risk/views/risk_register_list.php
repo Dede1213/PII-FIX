@@ -245,6 +245,8 @@
 							<option value="risk_level">Risk Level</option>
 							<option value="risk_impact_level">Impact Level</option>
 							<option value="risk_likelihood_key">Likelihood</option>
+							<option value="risk_owner">Risk Owner</option>
+							<!-- <option value="risk_status">Status</option> -->
 						</select>
 					</div>
 					<div class="form-group" id="re">
@@ -253,16 +255,17 @@
 
 					<div class="form-group" id="rl">
 						<select class="hesh form-control input-sm" id="fl">
-							<option value="low">Rendah</option>	
-							<option value="moderate">Sedang</option>
-							<option value="high">Tinggi</option>
+							<option value="ALL">ALL</option>	
+							<option value="low">Low</option>	
+							<option value="moderate">Moderate</option>
+							<option value="high">High</option>
 						</select>
 						
 					</div>
 
 					<div class="form-group" id="il">
 						<select class="hish form-control input-sm" id="fi">
-							<option value="insignificant">Tidak significant</option>	
+							<option value="insignificant">Insignificant</option>	
 							<option value="minor">Minor</option>
 							<option value="major">Major</option>
 							<option value="moderate">Moderate</option>
@@ -273,16 +276,18 @@
 
 					<div class="form-group" id="li">
 						<select class="hosh form-control input-sm" id="fk">
-							<option value="very low">Sangat Rendah</option>	
-							<option value="low">Rendah</option>
-							<option value="medium">Sedang</option>
-							<option value="high">Tinggi</option>
-							<option value="very high">Sangat Tinggi</option>
+							<option value="very low">Very Low</option>	
+							<option value="low">Low</option>
+							<option value="medium">Medium</option>
+							<option value="high">High</option>
+							<option value="very high">Very High</option>
 						</select>
 						
-					</div>											
+					</div>
 
-					<button type="button" id="filterFormSubmit" class="btn blue btn-sm">Search</button>
+
+
+					<button type="submit" id="filterFormSubmit" class="btn blue btn-sm">Search</button>
 				</form>
 				
 				<div class="table-container">
@@ -344,6 +349,7 @@
 							<option value="risk_level">Risk Level</option>
 							<option value="risk_impact_level">Impact Level</option>
 							<option value="risk_likelihood_key">Likelihood</option>
+							<option value="risk_owner">Risk Owner</option>
 						</select>
 					</div>
 
@@ -353,16 +359,17 @@
 
 					<div class="form-group" id="tl">
 						<select class="pesh form-control input-sm" id="pl">
-							<option value="low">Rendah</option>	
-							<option value="moderate">Sedang</option>
-							<option value="high">Tinggi</option>
+							<option value="ALL">ALL</option>
+							<option value="low">Low</option>	
+							<option value="moderate">Moderate</option>
+							<option value="high">High</option>
 						</select>
 						
 					</div>
 
 					<div class="form-group" id="ti">
 						<select class="pish form-control input-sm" id="pi">
-							<option value="insignificant">Tidak significant</option>	
+							<option value="insignificant">Insignificant</option>	
 							<option value="minor">Minor</option>
 							<option value="major">Major</option>
 							<option value="moderate">Moderate</option>
@@ -373,15 +380,15 @@
 
 					<div class="form-group" id="tk">
 						<select class="posh form-control input-sm" id="pk">
-							<option value="very low">Sangat Rendah</option>	
-							<option value="low">Rendah</option>
-							<option value="medium">Sedang</option>
-							<option value="high">Tinggi</option>
-							<option value="very high">Sangat Tinggi</option>
+							<option value="very low">Very Low</option>	
+							<option value="low">Low</option>
+							<option value="medium">Medium</option>
+							<option value="high">High</option>
+							<option value="very high">Very High</option>
 						</select>
 						
 					</div>						
-					<button type="button" id="filterFormSubmit2" class="btn blue btn-sm">Search</button>
+					<button type="submit" id="filterFormSubmit2" class="btn blue btn-sm">Search</button>
 				</form>	
 				
 				<div class="table-container">

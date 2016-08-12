@@ -784,12 +784,19 @@ class Risk extends APP_Model {
 			$order_by = $order_by;
 			$ex_or = ' order by '.$order_by.' '.$order;
 		}
+
+		if ($filter_by == null || $filter_by == '' ) {
+			//dibuat risk event aja biar ga error
+			$filter_by = 'risk_event';
+		}
 		
 		if ($filter_by != null && $filter_value != null) {
-			//tadinya WHERE cuman bentrok
-			$ex_filter = ' and '.$filter_by.' like ? ';
-			$par['p1'] = '%'.$filter_value.'%';
+			if($filter_value == 'ALL'){
+					$filter_value = '';
+				}
+			
 		}
+
 		$date = date("Y-m-d");
 		$sql = "select * from (select 
                                                                 a.*,
@@ -806,6 +813,7 @@ class Risk extends APP_Model {
                                                                 left join m_division f on a.risk_owner = f.division_id
                                                                 left join m_periode on m_periode.periode_id = a.periode_id
                                                                 where a.risk_status != 0 and a.risk_status != 1 and a.existing_control_id is null
+                                                                and a.".$filter_by." like '%".$filter_value."%'
                                                                 order by a.risk_id desc ) as another
                                                                 group by another.risk_code
 
@@ -828,9 +836,16 @@ class Risk extends APP_Model {
 			$ex_or = ' order by '.$order_by.' '.$order;
 		}
 		
+		if ($filter_by == null || $filter_by == '' ) {
+			//dibuat risk event aja biar ga error
+			$filter_by = 'risk_id';
+		}
+		
 		if ($filter_by != null && $filter_value != null) {
-			$ex_filter = ' and '.$filter_by.' like ? ';
-			$par['p1'] = '%'.$filter_value.'%';
+			if($filter_value == 'ALL'){
+					$filter_value = '';
+				}
+			
 		}
 		
 		if ($mode == 'allRiskLibrary') {
@@ -945,6 +960,16 @@ class Risk extends APP_Model {
 		
 		if ($mode == 'allRiskByOwner') {
 			
+			if (isset($defFilter['risk_cat'])) {
+				//$sql .= " and a.risk_2nd_sub_category = ?";
+				//$rpar['cat'] = $defFilter['risk_cat'];
+				$operator = '=';
+				$cat = $defFilter['risk_cat'];
+			}else{
+				$cat = 'is not null';
+				$operator = '';
+			}
+
 			$date = date("Y-m-d");
 			
 			$sql = "
@@ -963,7 +988,7 @@ class Risk extends APP_Model {
                                                                                 left join m_division f on a.risk_owner = f.division_id
                                                                                 where   
                                                                                 a.risk_input_by = ? and a.existing_control_id is null
-                                                                                
+                                                                                and a.risk_2nd_sub_category ".$operator.$cat."
                                                                                 UNION
                                                                                 select 
                                                                                 a.*,
@@ -980,7 +1005,7 @@ class Risk extends APP_Model {
                                                                                 left join m_division f on a.risk_owner = f.division_id
                                                                                 where   
                                                                                 a.risk_input_by = '".$defFilter['userid']."' and a.existing_control_id is null
-                                                                                
+                                                                                and a.risk_2nd_sub_category ".$operator.$cat."
                                                                                 UNION
                                                                                 select 
                                                                                 a.*,
@@ -998,7 +1023,7 @@ class Risk extends APP_Model {
                                                                                 join t_risk_add_user t on a.risk_id = t.risk_id
                                                                                 where   
                                                                                 t.username = '".$defFilter['userid']."' and t.delete_status is null and a.existing_control_id is null
-                                                                                
+                                                                                and a.risk_2nd_sub_category ".$operator.$cat."
 																				) as orderin
 																				order by orderin.risk_id desc
 																				) as groupin
@@ -1006,10 +1031,7 @@ class Risk extends APP_Model {
 
 					";
 			$rpar = array('user_id' => $defFilter['userid']);
-			if (isset($defFilter['risk_cat'])) {
-				$sql .= " and a.risk_2nd_sub_category = ?";
-				$rpar['cat'] = $defFilter['risk_cat'];
-			}
+			
 
 			if ($par)	{ 
 				$rpar['p1'] = $par['p1'];
@@ -1037,6 +1059,7 @@ class Risk extends APP_Model {
                                                                                 and a.risk_input_by = '".$defFilter['userid']."'
                                                                                 and a.existing_control_id is null
                                                                                 and a.risk_id NOT IN (select r.risk_id from t_risk r where a.risk_id = r.risk_id and r.periode_id = '".$defFilter['periodid']."' and r.risk_input_by = '".$defFilter['userid']."' and r.risk_status > 1)
+                                                                                and a.".$filter_by." like '%".$filter_value."%'
                                                                                 UNION
                                                                                 select 
                                                                                 a.*,
@@ -1058,6 +1081,7 @@ class Risk extends APP_Model {
                                                                                 and a.risk_input_by = '".$defFilter['userid']."' 
                                                                                 and a.existing_control_id is null
                                                                                 and a.risk_id IN (select risk_id from t_risk_change z where z.risk_input_by = '".$defFilter['userid']."' and z.periode_id = '".$defFilter['periodid']."' )
+                                                                                and a.".$filter_by." like '%".$filter_value."%'
 UNION
 select 
                                                                                 a.*,
@@ -1082,6 +1106,7 @@ select
                                                                                 a.periode_id = '".$defFilter['periodid']."'
                                                                                 and 
                                                                                 t.username = '".$defFilter['userid']."'
+                                                                                and a.".$filter_by." like '%".$filter_value."%'
 
 			";
 		}
@@ -1108,6 +1133,7 @@ select
                                                                                 and a.existing_control_id is null
                                                                                 and a.risk_library_id is null
                                                                                 and a.periode_id = (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end)
+                                                                                and a.".$filter_by." like '%".$filter_value."%'
                     UNION
                     select 
                                                                                 a.*,
@@ -1130,6 +1156,7 @@ select
                                                                                 and a.existing_control_id is null
                                                                                 and a.risk_library_id is null
                                                                                 and a.periode_id = (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end)
+                                                                                and a.".$filter_by." like '%".$filter_value."%'
 
 					";
 		}
@@ -1149,6 +1176,7 @@ select
 					where 
 					a.periode_id is not null
 					and a.risk_status > 2
+					and a.".$filter_by." like '%".$filter_value."%'
 					
 					";
 		}
@@ -1417,6 +1445,7 @@ select
 					left join m_periode on m_periode.periode_id = b.periode_id
 					where 
 					a.action_plan_status > 0 
+					and a.".$filter_by." like '%".$filter_value."%'
 					
 					";
 		}
@@ -1452,6 +1481,7 @@ select
 					left join m_division d on a.division = d.division_id					
 					where 
 					a.action_plan_status > 3
+					and a.".$filter_by." like '%".$filter_value."%'
 						
 					";
 					//AND b.periode_id is null
@@ -1503,7 +1533,7 @@ select
 						left join t_risk b on a.risk_id = b.risk_id
 						left join m_division c on a.kri_owner = c.division_id
 						left join m_user d on a.kri_pic = d.username
-						join m_periode on m_periode.periode_id = b.periode_id
+						left join m_periode on m_periode.periode_id = b.periode_id
 						where 
 						a.kri_owner = ?
 						
@@ -1531,7 +1561,7 @@ select
 					left join t_risk b on a.risk_id = b.risk_id
 					left join m_division c on a.kri_owner = c.division_id
 					left join m_user d on a.kri_pic = d.username
-					join m_periode on m_periode.periode_id = b.periode_id
+					left join m_periode on m_periode.periode_id = b.periode_id
 					where 
 					a.kri_status >= 0
 					
@@ -1600,7 +1630,9 @@ select
 					left join m_user g on a.risk_treatment_owner = g.username
 					left join m_reference h on a.suggested_risk_treatment = h.ref_key and h.ref_context = 'treatment.status'
 					where 
-					a.risk_status > 2
+					a.periode_id NOT IN (select periode_id from m_periode where DATE(NOW()) between periode_start and periode_end)
+
+					and a.risk_status > 2
 					and a.risk_id not in (
 						select risk_id from t_kri_risk
 					) ".$ext;
@@ -1696,9 +1728,22 @@ select
 			$ex_or = ' order by '.$order_by.' '.$order;
 		}
 		
+		if ($filter_by == 'division_name') {
+			$var = 'b.';
+		}else{
+			$var = 'a.';
+		}
+
+		if ($filter_by == null || $filter_by == '' ) {
+			//dibuat risk event aja biar ga error
+			$filter_by = 'display_name';
+		}
+		
 		if ($filter_by != null && $filter_value != null) {
-			$ex_filter = ' and '.$filter_by.' like ? ';
-			$par['p1'] = '%'.$filter_value.'%';
+			if($filter_value == 'ALL'){
+					$filter_value = '';
+				}
+			
 		}
 		
 		$sql = "select
@@ -1720,6 +1765,7 @@ select
                                                                 join t_risk_add_informasi z on a.username = z.risk_input_by
                                                                 WHERE a.username NOT IN (select username from m_user 
                                                                 join t_risk on m_user.username = t_risk.risk_input_by where t_risk.existing_control_id is null) 
+																and ".$var.$filter_by." like '%".$filter_value."%'
 
 UNION
 select
@@ -1740,6 +1786,7 @@ select
                                                                ) b on a.username = b.risk_input_by
                                                                 join t_risk_add_informasi z on a.username = z.risk_input_by
                                                                 where a.username is not null 
+                                                                and ".$var.$filter_by." like '%".$filter_value."%'
 UNION
 select
                                                                 b.risk_status,
@@ -1762,6 +1809,7 @@ select
                                                                 where a.username is not null and z.periode_id = b.periode_id
                                                                 and a.username NOT IN (select username from m_user 
                                                                 join t_risk on m_user.username = t_risk.risk_input_by where t_risk.existing_control_id is null)
+																and ".$var.$filter_by." like '%".$filter_value."%'
 
 																"
 				.$ex_filter

@@ -42,13 +42,54 @@
 					<div class="form-group">
 						<label for="filterFormBy">Filter By</label>
 						<select class="form-control input-medium input-sm" id="filterFormBy">
-							<option value="risk_event">Resiko</option>
+							<option value="-">Choose</option>
+							<option value="risk_event">Risk</option>
+							<option value="risk_level">Risk Level</option>
+							<option value="risk_impact_level">Impact Level</option>
+							<option value="risk_likelihood_key">Likelihood</option>
+							<option value="risk_owner">Risk Owner</option>
+							<option value="risk_status">Status</option>
 						</select>
 					</div>
-					<div class="form-group">
-						<input type="text" class="form-control input-sm" id="filterFormValue" placeholder="Insert Filter Value">
+					<div class="form-group" id="re">
+						<input type="text" class="hash form-control input-sm" id="fe" placeholder="Insert Filter Value">
 					</div>
-					<button type="button" id="filterFormSubmit" class="btn blue btn-sm">Search</button>
+
+					<div class="form-group" id="rl">
+						<select class="hesh form-control input-sm" id="fl">
+							<option value="ALL">ALL</option>	
+							<option value="low">Rendah</option>	
+							<option value="moderate">Sedang</option>
+							<option value="high">Tinggi</option>
+						</select>
+						
+					</div>
+
+					<div class="form-group" id="il">
+						<select class="hish form-control input-sm" id="fi">
+							<option value="insignificant">Tidak significant</option>	
+							<option value="minor">Minor</option>
+							<option value="major">Major</option>
+							<option value="moderate">Moderate</option>
+							<option value="catasthropic">Catasthropic</option>
+						</select>
+						
+					</div>
+
+					<div class="form-group" id="li">
+						<select class="hosh form-control input-sm" id="fk">
+							<option value="very low">Sangat Rendah</option>	
+							<option value="low">Rendah</option>
+							<option value="medium">Sedang</option>
+							<option value="high">Tinggi</option>
+							<option value="very high">Sangat Tinggi</option>
+						</select>
+						
+					</div>
+
+
+
+					<button type="submit" id="filterFormSubmit" class="btn blue btn-sm">Search</button>
 				</form>
 				
 				<div class="table-container">
@@ -90,15 +131,53 @@
 			<div class="portlet-body">
 				<form class="form-inline" role="form" id="filterForm2" style="margin-bottom: 10px;">
 					<div class="form-group">
-						<label for="filterFormBy">Filter By</label>
+						<label for="filterFormBy2">Filter By</label>
 						<select class="form-control input-medium input-sm" id="filterFormBy2">
-							<option value="risk_event">Resiko</option>
+							<option value="-">Choose</option>
+							<option value="risk_event">Risk</option>
+							<option value="risk_level">Risk Level</option>
+							<option value="risk_impact_level">Impact Level</option>
+							<option value="risk_likelihood_key">Likelihood</option>
+							<option value="risk_owner">Risk Owner</option>
 						</select>
 					</div>
-					<div class="form-group">
-						<input type="text" class="form-control input-sm" id="filterFormValue2" placeholder="Insert Filter Value">
+
+					<div class="form-group" id="tr">
+						<input type="text" class="pash form-control input-sm" id="pe" placeholder="Insert Filter Value">
 					</div>
-					<button type="button" id="filterFormSubmit2" class="btn blue btn-sm">Search</button>
+
+					<div class="form-group" id="tl">
+						<select class="pesh form-control input-sm" id="pl">
+							<option value="ALL">ALL</option>
+							<option value="low">Rendah</option>	
+							<option value="moderate">Sedang</option>
+							<option value="high">Tinggi</option>
+						</select>
+						
+					</div>
+
+					<div class="form-group" id="ti">
+						<select class="pish form-control input-sm" id="pi">
+							<option value="insignificant">Tidak significant</option>	
+							<option value="minor">Minor</option>
+							<option value="major">Major</option>
+							<option value="moderate">Moderate</option>
+							<option value="catasthropic">Catasthropic</option>
+						</select>
+						
+					</div>
+
+					<div class="form-group" id="tk">
+						<select class="posh form-control input-sm" id="pk">
+							<option value="very low">Sangat Rendah</option>	
+							<option value="low">Rendah</option>
+							<option value="medium">Sedang</option>
+							<option value="high">Tinggi</option>
+							<option value="very high">Sangat Tinggi</option>
+						</select>
+						
+					</div>						
+					<button type="submit" id="filterFormSubmit2" class="btn blue btn-sm">Search</button>
 				</form>	
 				
 				<div class="table-container">

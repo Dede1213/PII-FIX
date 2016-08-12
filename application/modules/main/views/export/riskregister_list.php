@@ -5,6 +5,7 @@
 			<?php if(isset($dataget['risk_status'])):?><th width="30px">Status</th><?php endif;?> 
 			<?php if(isset($dataget['display_name'])):?><th>User  </th><?php endif;?> 
 			<?php if(isset($dataget['division_name'])):?><th>Divisi  </th><?php endif;?>  
+			<?php if(isset($dataget['tanggal_submit'])):?><th>Submited  </th><?php endif;?>  
 		</tr>
 	</thead>
 	<tbody>
@@ -26,6 +27,7 @@
 			<?php if(isset($dataget['risk_status'])):?><td><?=$stat;?></td><?php endif;?> 
 			<?php if(isset($dataget['display_name'])):?><td><?=$key['display_name'] ;?></td><?php endif;?> 
 			<?php if(isset($dataget['division_name'])):?><td><?=$key['division_name'] ;?></td><?php endif;?>  
+			<?php if(isset($dataget['tanggal_submit'])):?><td><?=$key['tanggal_submit'] ;?></td><?php endif;?>  
 		</tr>
 		<?php endforeach;?>
 	</tbody>

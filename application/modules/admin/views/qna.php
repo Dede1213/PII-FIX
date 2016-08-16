@@ -17,7 +17,7 @@
 						<option value="a.subject">Subject</option>
 						<option value="b.display_name">Submitted By</option>
 						<option value="a.created_date">Date</option>
-						<option value="a.answer">Answer</option>
+						
 					</select>
 				</div>
 				<div class="form-group">

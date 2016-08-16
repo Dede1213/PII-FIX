@@ -14,6 +14,8 @@
 				<thead>
 					  <tr>
 							<th> No</th>  
+							<th> Status</th>
+							<th> Risk Status</th>
 							<th> AP.ID</th>  
 							<th>  Action Plan </th>   
 							<th> Action Plan Owner </th>
@@ -24,8 +26,7 @@
 							<th> Risk Level </th> 
 							<th> Execution Status</th> 
 							<th> Risk Level After Mitigation</th> 
-							<th> Status</th>
-							<th> Risk Status</th>
+							
 					  </tr>
 				</thead> 
 				<tbody>
@@ -33,17 +34,7 @@
 						<?php $i = 1;?>
 						 <?php foreach($datanya as $key):?>
 							<tr>	
-								<td> <?=$i;?> </td> 							
-								<td> AP.<?=$key['id'];?> </td> 
-								<td> <?=$key['action_plan'];?> </td>
-								<td> <?=$key['division'];?> </td> 
-								<td> <?=$key['due_date'];?> </td>
-								<td> <?=$key['risk_code'];?> </td> 
-								<td> <?=$key['risk_event'];?> </td>
-								<td> <?=$key['risk_owner'];?> </td> 
-								<td> <?=$key['risk_level'];?> </td>
-								<td> <?=$key['execution_status'];?> </td> 		
-								<td> <?=$key['risk_level_after_mitigation'];?> </td> 
+								<td> <?=$i;?> </td> 
 								<td> <?php
 									if ($key['risk_status'] == 1){
 										echo "Draft";
@@ -85,7 +76,18 @@
 									}else{
 										echo "Draft";
 									}
-									?> </td>									
+									?> </td>								
+								<td> AP.<?=$key['id'];?> </td> 
+								<td> <?=$key['action_plan'];?> </td>
+								<td> <?=$key['division'];?> </td> 
+								<td> <?=$key['due_date'];?> </td>
+								<td> <?=$key['risk_code'];?> </td> 
+								<td> <?=$key['risk_event'];?> </td>
+								<td> <?=$key['risk_owner'];?> </td> 
+								<td> <?=$key['risk_level'];?> </td>
+								<td> <?=$key['execution_status'];?> </td> 		
+								<td> <?=$key['risk_level_after_mitigation'];?> </td> 
+																
 							</tr>
 							<?php $i ++;?>
 					 <?php endforeach;?> 

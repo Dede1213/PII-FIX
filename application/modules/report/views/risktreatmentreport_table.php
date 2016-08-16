@@ -15,7 +15,9 @@
 			<table class="responsive table table-striped table-bordered table-hover"  border = "1">
 				<thead>
 					  <tr>
-							 <th> No </th>   
+							 <th> No </th> 
+							 <th> Status</th>
+							<th> Risk Status</th>  
 							<th>  Risk ID </th>   
 							<th>  Risk Event </th> 
 							<th>  Risk Owner </th> 
@@ -26,8 +28,7 @@
 							<th> Action Plan </th>
 							<th> Action Plan Owner</th>
 							<th> Due Date</th>
-							<th> Status</th>
-							<th> Risk Status</th>
+							
 					  </tr>
 				</thead> 
 				<tbody>
@@ -36,18 +37,7 @@
 						 <?php foreach($datanya as $key):?>
 							<tr>												  
 								<td> <?=$i;?> </td> 										  
-								 
-								<td> <?=$key['risk_code'];?> </td>
-								<td> <?=$key['risk_event'];?> </td>  
-								<td> <?=$key['risk_owner'];?> </td>  
-								<td> <?=$key['risk_impact_level'];?> </td> 
-								<td> <?=$key['risk_likelihood_key'];?> </td>
-								<td> <?=$key['risk_level'];?> </td> 
-								<td> <?=$key['suggested_risk_treatment'];?> </td>
-								<td> <?=$key['Action Plan'];?> </td> 
-								<td> <?=$key['Action Plan Owner'];?> </td>			
-								<td> <?=$key['Due Date'];?> </td>
-								<td> <?php
+								 <td> <?php
 									if ($key['risk_status'] == 1){
 										echo "Draft";
 									}else if ($key['risk_status'] == 2){
@@ -89,6 +79,17 @@
 										echo "Draft";
 									}
 									?> </td>	
+								<td> <?=$key['risk_code'];?> </td>
+								<td> <?=$key['risk_event'];?> </td>  
+								<td> <?=$key['risk_owner'];?> </td>  
+								<td> <?=$key['risk_impact_level'];?> </td> 
+								<td> <?=$key['risk_likelihood_key'];?> </td>
+								<td> <?=$key['risk_level'];?> </td> 
+								<td> <?=$key['suggested_risk_treatment'];?> </td>
+								<td> <?=$key['Action Plan'];?> </td> 
+								<td> <?=$key['Action Plan Owner'];?> </td>			
+								<td> <?=$key['Due Date'];?> </td>
+								
 								<?php $i++;?>								
 							</tr>
 					 <?php endforeach;?> 

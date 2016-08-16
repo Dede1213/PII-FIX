@@ -50,10 +50,14 @@ class MainPic extends APP_Controller {
 		$division_nya = $this->session->credential['division_id'];
 		$this->load->model('risk/risk');
 		$data['cekowned'] = $this->risk->cekOwned($username,$division_nya);
+		$data['cekplan'] = $this->risk->cekPlan($username,$division_nya);
+		$data['cekplanexec'] = $this->risk->cekPlanExec($username,$division_nya);
+		$data['cekkri'] = $this->risk->cekKri($username,$division_nya);
 
 		//cek change request
 		$this->load->model('risk/risk');
 		$data['cekChangeRequest'] = $this->risk->cekChangeRequestComplete($username);
+
 
 
 		$this->load->view('header', $data);

@@ -536,7 +536,7 @@ from m_risk_category
 	 
 		$idnya = explode("EC.",$data['id']);
 		  
-		if($data['id'] !=""){
+		if($data['id'] =="akal"){
 			$sql = " 			 
 				UPDATE t_risk_control
 				SET risk_existing_control='".$data['risk_existing_control']."', risk_evaluation_control='".$data['risk_evaluation_control']."', risk_control_owner= '".$data['risk_control_owner']."'

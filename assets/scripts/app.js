@@ -8,6 +8,10 @@ var MainApp = function() {
 	    		$('#global-app-modal-success .alert_container').html(msg);
 	    		$('#global-app-modal-success').modal('show');
 	    		return $('#global-app-modal-success');
+	    	}else if (mode == 'warning-error') {
+	    		$('#global-app-modal-error-warning .alert_container').html(msg);
+	    		$('#global-app-modal-error-warning').modal('show');
+	    		return $('#global-app-modal-error');
 	    	} else if (mode == 'warning') {
 	    		$('#global-app-modal-warning .alert_container').html(msg);
 	    		$('#global-app-modal-warning').modal('show');

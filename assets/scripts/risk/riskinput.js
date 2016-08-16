@@ -544,7 +544,7 @@ var RiskInput = function() {
         		if (fvalid) {
         			var xcid = $('#input-form-control input[name=existing_control_id]').val();
 	        		var xexis = $('#input-form-control input[name=risk_existing_control]').val();
-	        		var xeval = $('#input-form-control input[name=risk_evaluation_control]').val();
+	        		var xeval = $('#input-form-control textarea[name=risk_evaluation_control]').val();
 	        		var xowner = $('#input-form-control select[name=risk_control_owner]').val();
 					
 					var tr_id = $('#form-control-revid').val();
@@ -561,6 +561,7 @@ var RiskInput = function() {
 					
 	        		me.controlAddRow(nnode);
 	        		
+                    
 	        		$('#form-control').modal('hide');
                     $('#form-control-2').modal('hide');
         		}
@@ -658,6 +659,14 @@ var RiskInput = function() {
         		}
         	});
         	
+            $('#button-form-control-open').on('click', function () {
+                
+                //$('#input-form-action-plan').reset();
+                document.getElementById("input-form-control2").reset();
+                
+            });
+
+            /*
         	$('#button-form-control-open').on('click', function () {
         		//$('#input-form-control')[0].reset();
 				 
@@ -666,6 +675,7 @@ var RiskInput = function() {
                 $('#form-control-revid').val("");
         		$('#input-form-control textarea[name=risk_existing_control]').attr('readonly', false);
         	});
+            */
 
             $('#button-form-control-open-objective').on('click', function () {
 				document.getElementById("input-form-control-objective").reset();
@@ -724,6 +734,7 @@ var RiskInput = function() {
                     };
                     
                     me.controlAddRow(nnode);
+                    
                     
                     $('#form-control-2').modal('hide');
                     $('#form-control-3').modal('hide');

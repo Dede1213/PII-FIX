@@ -8,6 +8,17 @@
 		</p>
 		</div>
 	</div>
+
+	<div id="global-app-modal-error-warning" class="modal fade alert-block alert-warning" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+		<div class="modal-body">
+		<button type="button" class="close" data-dismiss="modal"></button>
+		<h4 class="alert-heading">Warning!</h4>
+		<p class="alert_container"></p>
+		<p>
+		    <button type="button" class="btn red" data-dismiss="modal">OK</button>
+		</p>
+		</div>
+	</div>
 	
 	<div id="global-app-modal-success" class="modal fade alert-block alert-success" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
 		<div class="modal-body">

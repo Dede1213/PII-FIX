@@ -136,7 +136,7 @@ gridRegister.init({
         "columns": [
 			{ "data": "risk_status" },
 			{ "data": "display_name" },
-			{ "data": "division_name" },
+			{ "data": "division_id" },
             { "data": "tanggal_submit" },
             { "data": "note" },
             { "data": "note_v" }

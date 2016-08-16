@@ -191,7 +191,7 @@ var RiskVerify = function() {
                 if (fvalid) {
                     var xcid = $('#input-form-control input[name=existing_control_id]').val();
                     var xexis = $('#input-form-control input[name=risk_existing_control]').val();
-                    var xeval = $('#input-form-control input[name=risk_evaluation_control]').val();
+                    var xeval = $('#input-form-control textarea[name=risk_evaluation_control]').val();
                     var xowner = $('#input-form-control select[name=risk_control_owner]').val();
                     
                     var tr_id = $('#form-control-revid').val();
@@ -275,12 +275,22 @@ var RiskVerify = function() {
 	    		}
 	    	});
 	    	
+            $('#button-form-control-open').on('click', function () {
+                
+                //$('#input-form-action-plan').reset();
+                document.getElementById("input-form-control2").reset();
+                
+            });
+
+            /*
+
 	    	$('#button-form-control-open').on('click', function () {
 	    		//$('#input-form-control')[0].reset();
 				document.getElementById("input-form-control").reset();
 				$('#form-control-revid').val("");
 	    		$('#input-form-control textarea[name=risk_existing_control]').attr('readonly', false);
 	    	});
+*/
 	    	
 	    	$('#button-form-data-open').on('click', function () {
                 
@@ -391,7 +401,7 @@ var RiskVerify = function() {
                 if (fvalid) {
                     var xcid = $('#input-form-control-3 input[name=existing_control_id]').val();
                     var xexis = $('#input-form-control-3 input[name=risk_existing_control]').val();
-                    var xeval = $('#input-form-control-3 input[name=risk_evaluation_control]').val();
+                    var xeval = $('#input-form-control-3 textarea[name=risk_evaluation_control]').val();
                     var xowner = $('#input-form-control-3 select[name=risk_control_owner]').val();
                     
                     var tr_id = $('#form-control-revid-3').val();

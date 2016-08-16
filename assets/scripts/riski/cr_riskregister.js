@@ -584,6 +584,14 @@ var ChangeRequest = function() {
                 }
             });
             
+            $('#button-form-control-open').on('click', function () {
+                
+                //$('#input-form-action-plan').reset();
+                document.getElementById("input-form-control2").reset();
+                
+            });
+
+            /*
            $('#button-form-control-open').on('click', function () {
                 //$('#input-form-control')[0].reset();
                  
@@ -591,6 +599,7 @@ var ChangeRequest = function() {
                  $('#form-control-revid').val("");
                 $('#input-form-control textarea[name=risk_existing_control]').attr('readonly', false);
             });
+*/
 
             $('#button-form-control-open-objective').on('click', function () {
                 document.getElementById("input-form-control-objective").reset();

@@ -7,6 +7,8 @@
 				<thead>
 					  <tr>
 							 <th> No </th>
+							 <th> Status</th>
+							<th> Risk Status</th>
 							<th>  Risk ID </th>   
 							<th>  Risk Event </th>
 							<th>  Risk Description</th>
@@ -14,8 +16,7 @@
 							<th>  Risk Impact Level </th>
 							<th>  Risk Likelihood Level </th>
 							<th> Risk Level </th>
-							<th> Status</th>
-							<th> Risk Status</th>
+							
 							 
 					  </tr>
 				</thead> 
@@ -25,13 +26,6 @@
 						 <?php foreach($datanya as $key):?>
 							<tr>												  
 								<td> <?=$i;?> </td>
-								<td> <?=$key['risk_code'];?> </td>
-								<td> <?=$key['risk_event'];?> </td> 
-								<td> <?=$key['risk_description'];?> </td>
-								<td> <?=$key['risk_owner'];?> </td>   
-								<td> <?=$key['risk_impact_level'];?> </td> 
-								<td> <?=$key['risk_likelihood_key'];?> </td>
-								<td> <?=$key['risk_level'];?> </td> 
 								<td> <?php
 									if ($key['risk_status'] == 1){
 										echo "Draft";
@@ -73,7 +67,15 @@
 									}else{
 										echo "Draft";
 									}
-									?> </td>	
+									?> </td>
+								<td> <?=$key['risk_code'];?> </td>
+								<td> <?=$key['risk_event'];?> </td> 
+								<td> <?=$key['risk_description'];?> </td>
+								<td> <?=$key['risk_owner'];?> </td>   
+								<td> <?=$key['risk_impact_level'];?> </td> 
+								<td> <?=$key['risk_likelihood_key'];?> </td>
+								<td> <?=$key['risk_level'];?> </td> 
+									
 													
 							</tr>
 							 <?php $i++;?>

@@ -15,6 +15,8 @@
 				<thead>
 					  <tr>
 						<th> No </th>
+						<th> Status</th>
+						<th> Risk Status</th>
 						<th>  Risk ID </th>   
 						<th>  Risk Event </th>
 						<th> Risk Level </th>
@@ -34,8 +36,7 @@
 						<th> Before Risk Impact Level</th>
 						<th> Before Risk Likelihood</th>
 						<th> KRI Status</th>
-						<th> Status</th>
-						<th> Risk Status</th>
+						
 						<th> Validation</th>
 						<th> Supporting Evidence</th>
 					  </tr>
@@ -46,25 +47,6 @@
 						 <?php foreach($datanya as $key):?>
 							<tr>												  
 								<td> <?=$i;?> </td>
-								<td> <?=$key['risk_code'];?> </td>
-								<td> <?=$key['risk_event'];?> </td>
-								<td> <?=$key['risk_level'];?> </td> 								
-								<td> <?=$key['suggested_risk_treatment'];?> </td>
-								<td> <?=$key['kri_code'];?> </td>   
-								<td> <?=$key['key_risk_indicator'];?> </td> 
-								<td> <?=$key['kri_owner'];?> </td>
-								<td> <?=$key['treshold'];?> </td>
-								<td> <?=$key['threshold value'];?> </td>
-								<td> <?=$key['timing_pelaporan'];?> </td>
-								
-								<td> <?=$key['kri_warning'];?> </td>
-								<td> <?=$key['risk_level_after_kri'];?> </td>
-								<td> <?=$key['risk_impact_level_after_kri'];?> </td>
-								<td> <?=$key['risk_likelihood_key_after_kri'];?> </td>
-								<td> <?=$key['risk_level'];?> </td>
-								<td> <?=$key['risk_impact_level'];?> </td>
-								<td> <?=$key['risk_likelihood_key'];?> </td>
-								<td> <?=$key['kri_status'];?> </td>
 								<td> <?php
 									if ($key['risk_status'] == 1){
 										echo "Draft";
@@ -107,6 +89,26 @@
 										echo "Draft";
 									}
 									?> </td>
+								<td> <?=$key['risk_code'];?> </td>
+								<td> <?=$key['risk_event'];?> </td>
+								<td> <?=$key['risk_level'];?> </td> 								
+								<td> <?=$key['suggested_risk_treatment'];?> </td>
+								<td> <?=$key['kri_code'];?> </td>   
+								<td> <?=$key['key_risk_indicator'];?> </td> 
+								<td> <?=$key['kri_owner'];?> </td>
+								<td> <?=$key['treshold'];?> </td>
+								<td> <?=$key['threshold value'];?> </td>
+								<td> <?=$key['timing_pelaporan'];?> </td>
+								
+								<td> <?=$key['kri_warning'];?> </td>
+								<td> <?=$key['risk_level_after_kri'];?> </td>
+								<td> <?=$key['risk_impact_level_after_kri'];?> </td>
+								<td> <?=$key['risk_likelihood_key_after_kri'];?> </td>
+								<td> <?=$key['risk_level'];?> </td>
+								<td> <?=$key['risk_impact_level'];?> </td>
+								<td> <?=$key['risk_likelihood_key'];?> </td>
+								<td> <?=$key['kri_status'];?> </td>
+								
 									<td> <?=$key['validation'];?> </td>
 								<td> <?=$key['supporting_evidence'];?> </td>
 							</tr>

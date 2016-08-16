@@ -348,8 +348,103 @@ gridTaxonomi.init({
         ]// set first column as a default sort by asc
     }
 });
- 
-      
+
+var gridControlExisting = new Datatable();
+gridControlExisting.init({
+    src: $("#library_control_table_existing"),
+    onSuccess: function (grid) {
+        // execute some code after table records loaded
+    },
+    onError: function (grid) {
+        // execute some code on network or other general error  
+    },
+    onDataLoad: function(grid) {
+        // execute some code on ajax data load
+    },
+    loadingMessage: 'Loading...',
+    dataTable: { // here you can define a typical datatable settings from http://datatables.net/usage/options 
+
+        // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
+        // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/scripts/datatable.js). 
+        // So when dropdowns used the scrollable div should be removed. 
+        //"dom": "<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r>t<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'>>",
+        
+        //"scrollX": true,
+        "pageLength": 10, // default record count per page
+        "lengthMenu": [[10], [10]],
+        "ajax": {
+            "url": site_url+"/risk/RiskRegister/getControlLibraryexisting" // ajax source
+        },
+        "columnDefs": [ {
+            "targets": 0,
+            "data": "risk_id",
+            "render": function ( data, type, full, meta ) {
+                var ret = '<div class="btn-group">'+
+                '<button type="button" class="btn btn-default btn-xs" onclick="javascript: Dashboard.selectControlLibraryexisting('+full.id +')"><i class="fa fa-check-circle font-blue"> Select </i></button>'+
+                '</div>';
+                return ret;
+            }
+        } ],
+        "columns": [
+            { "data": "risk_id", "orderable": false },
+            { "data": "existing_control"},
+            { "data": "description" }
+          
+       ],
+        "order": [
+            [0, "asc"]
+        ]// set first column as a default sort by asc
+    }
+}); 
+
+var gridControl = new Datatable();
+gridControl.init({
+    src: $("#library_control_table"),
+    onSuccess: function (grid) {
+        // execute some code after table records loaded
+    },
+    onError: function (grid) {
+        // execute some code on network or other general error  
+    },
+    onDataLoad: function(grid) {
+        // execute some code on ajax data load
+    },
+    loadingMessage: 'Loading...',
+    dataTable: { // here you can define a typical datatable settings from http://datatables.net/usage/options 
+
+        // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
+        // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/scripts/datatable.js). 
+        // So when dropdowns used the scrollable div should be removed. 
+        //"dom": "<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r>t<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'>>",
+        
+        //"scrollX": true,
+        "pageLength": 10, // default record count per page
+        "lengthMenu": [[10], [10]],
+        "ajax": {
+            "url": site_url+"/risk/RiskRegister/getControlLibrary" // ajax source
+        },
+        "columnDefs": [ {
+            "targets": 0,
+            "data": "risk_code",
+            "render": function ( data, type, full, meta ) {
+                var ret = '<div class="btn-group">'+
+                '<button type="button" class="btn btn-default btn-xs" onclick="javascript: Dashboard.selectControlLibrary('+full.id+')"><i class="fa fa-check-circle font-blue"> Select </i></button>'+
+                '</div>';
+                return ret;
+            }
+        } ],
+        "columns": [
+            { "data": "id", "orderable": false },
+            { "data": "risk_existing_control"},
+            { "data": "risk_evaluation_control" },
+            { "data": "risk_control_owner" }
+       ],
+        "order": [
+            [2, "asc"]
+        ]// set first column as a default sort by asc
+    }
+});
+
 var Dashboard = function() {
     return {
         init: function() {
@@ -841,7 +936,55 @@ var Dashboard = function() {
                 
             });
         },
-		
+        selectControlLibrary: function(rid) {
+            var me = this;
+            $('#modal-listrisk-form input[name=risk_existing_control]').attr('readonly', true);
+            
+            $('#modal-control').modal('hide');
+            Metronic.blockUI({ boxed: true });
+            $.getJSON( site_url+"/risk/RiskRegister/loadControlLibrary/"+rid, function( data_risk ) {
+                Metronic.unblockUI();
+                
+                data_risk['id'] = data_risk['id'];
+                
+                me.populateRisk($('#modal-listrisk-form'), data_risk);
+            });
+        },
+		 selectControlLibraryexisting: function(rid) {
+            var me = this;
+            $('#modal-listrisk-form input[name=risk_existing_control]').attr('readonly', true);
+            
+            $('#modal-control-existing').modal('hide');
+            Metronic.blockUI({ boxed: true });
+            $.getJSON( site_url+"/risk/RiskRegister/loadControlLibraryexisting/"+rid, function( data_risk ) {
+                Metronic.unblockUI();
+                
+                data_risk['risk_existing_control'] = data_risk['existing_control'];
+                
+                me.populateRisk($('#modal-listrisk-form'), data_risk);
+            });
+        },
+        populateRisk: function(frm, data) {
+                
+            $.each(data, function(key, value){  
+                
+                var $ctrl = $('[name='+key+']', frm);  
+                switch($ctrl.attr("type"))  
+                {  
+                    case "text" :   
+                    case "hidden":  
+                    case "textarea":
+                        $ctrl.val(value);   
+                        break;   
+                    case "radio" : case "checkbox":   
+                    $ctrl.each(function(){
+                       if($(this).attr('value') == value) {  $(this).prop("checked",true); } });   
+                    break;  
+                    default:
+                    $ctrl.val(value); 
+                }  
+            });  
+        },
 		deleteData_kri: function(data) {
             
                 var mod = MainApp.viewGlobalModal('warning', 'Are You sure you want to delete this data?');

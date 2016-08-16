@@ -270,7 +270,15 @@
 			<ul class="nav nav-tabs ">
 				<li class="active">
 					<a href="#tab_risk_list" data-toggle="tab">
-					Risk List </a>
+					Risk List 
+					<font style="color:red;">
+					<?php 
+					if($cekrisklist > 0){
+					echo "($cekrisklist)";
+					}
+					?>
+					</font>
+					</a>
 				</li>
 				<li>
 					<a href="#tab_risk_register_list" data-toggle="tab">
@@ -278,19 +286,51 @@
 				</li>
 				<li>
 					<a href="#tab_treatment_list" data-toggle="tab">
-					Treatment List </a>
+					Treatment List 
+					<font style="color:red;">
+					<?php 
+					if($treatmentlist > 0){
+					echo "($treatmentlist)";
+					}
+					?>
+					</font>
+					</a>
 				</li>
 				<li>
 					<a href="#tab_action_plan_list" data-toggle="tab">
-					Action Plan List </a>
+					Action Plan List 
+					<font style="color:red;">
+					<?php 
+					if($cekplan > 0){
+					echo "($cekplan)";
+					}
+					?>
+					</font>
+					</a>
 				</li>
 				<li>
 					<a href="#tab_action_plan_exec" data-toggle="tab">
-					Action Plan Execution </a>
+					Action Plan Execution
+					<font style="color:red;">
+					<?php 
+					if($cekplanExec > 0){
+					echo "($cekplanExec)";
+					}
+					?>
+					</font>
+					 </a>
 				</li>
 				<li>
 					<a href="#tab_kri_list" data-toggle="tab">
-					KRI List </a>
+					KRI List 
+					<font style="color:red;">
+					<?php 
+					if($cekkrirac > 0){
+					echo "($cekkrirac)";
+					}
+					?>
+					</font>
+					</a>
 				</li>
 				<li>
 					<a href="#tab_change_request_list" data-toggle="tab">

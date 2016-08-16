@@ -22,18 +22,8 @@ grid.init({
 		//"scrollX": true,
         "pageLength": 25, // default record count per page
         "ajax": {
-            "url": site_url+"/admin/periode/periodeReportGetData" // ajax source
-        },"columnDefs": [{
-        	"targets": 5,
-        	"data": "periode_name",
-        	"render": function ( data, type, full, meta ) {
-               
-                    return '<a target="_self" href="'+site_url+'/admin/periode/periode_list/'+full.periode_id+'">View List Include</a>'+' | '+
-                  			  '<a target="_self" href="'+site_url+'/admin/periode/periode_list_exclude/'+full.periode_id+'">View List Exclude</a>';
-  
-        		
-           	}
-        } ],
+            "url": site_url+"/admin/periode/periodeGetDataKri" // ajax source
+        },
         "columns": [
            { "data": "GenRowNum", "orderable": false },
            { "data": "periode_name" },
@@ -43,11 +33,10 @@ grid.init({
            	"data": null,
            	"orderable": false,
            	"defaultContent": '<div class="btn-group">'+
-           			'<button type="button" class="btn btn-default btn-xs button-grid-edit"><i class="fa fa-pencil font-blue">  Edit </i></button>'+
+           			'<button type="button" class="btn btn-default btn-xs button-grid-edit"><i class="fa fa-pencil font-blue"> Edit </i></button>'+
            			'<button type="button" class="btn btn-default btn-xs button-grid-delete"><i class="fa fa-trash-o font-red"> Delete </i></button>'+
            		'</div>'
-           },
-           { "data": "periode_name" }
+           }
        ],
         "order": [
             [1, "asc"]
@@ -86,10 +75,10 @@ var Periode = function() {
 	                l.start();
 	                
 	                if (me.dataMode == 'add') {
-	                	var url = site_url+'/admin/periode/periodeReportInsertData';
+	                	var url = site_url+'/admin/periode/periodeInsertDataKri';
 	                	var tx = 'Insert';
 	                } else {
-	                	var url = site_url+'/admin/periode/periodeReportEditData';
+	                	var url = site_url+'/admin/periode/periodeEditDataKri';
 	                	var tx = 'Update';
 	                }
 	                $.post(
@@ -102,7 +91,6 @@ var Periode = function() {
 	            				
 	            				$('#form-data').modal('hide');
 	            				
-	            				MainApp.viewGlobalModal('warning-error', 'please check your risk to be included or exclude in report');
 	            				MainApp.viewGlobalModal('success', 'Success '+tx+' Data');
 	            			} else {
 	            				MainApp.viewGlobalModal('error', data.msg);
@@ -123,7 +111,8 @@ var Periode = function() {
 	            	
 	            	me.filterDataGrid(fby, fval);
 	            });
-	            
+
+	            //
 	             $("#filterForm").submit(function (e) {
                	 	e.preventDefault();
                 	var fby = $("#filterFormBy").val();
@@ -131,7 +120,7 @@ var Periode = function() {
 	            	
 	            	me.filterDataGrid(fby, fval);
            		 });
-           		 
+	            
 	            // datatables edit delete handler
 	            $("#datatable_ajax").on('click', 'button.button-grid-edit', function(e) {
 	            	e.preventDefault();
@@ -176,12 +165,12 @@ var Periode = function() {
 	        	
 	        },
 	        deleteData: function(data) {
-	        	var mod = MainApp.viewGlobalModal('warning', 'Are You sure you want to delete this data ?');
+	        	var mod = MainApp.viewGlobalModal('warning', 'Are You sure you want to delete this data?');
 	        	mod.find('button.btn-danger').one('click', function(){
 	        		mod.modal('hide');
 	        		
 	        		Metronic.blockUI({ boxed: true });
-	        		var url = site_url+'/admin/periode/periodeReportDeleteData';
+	        		var url = site_url+'/admin/periode/periodeDeleteDataKri';
 	        		$.post(
 	        			url,
 	        			{ 'id':  data.DT_RowId},

@@ -51,6 +51,10 @@ class Kri extends APP_Controller {
 		$dd = implode('-', array_reverse( explode('-', $_POST['timing_pelaporan']) ));
 		
 		$kri_pic = $this->risk->kri_pic($_POST['kri_owner']);
+
+		$this->load->model('admin/mperiode');
+		$periode = $this->mperiode->getCurrentPeriodeKri();
+		$periode_id = $periode['periode_id'];
 		
 		$kri = array(
 			'risk_id' => $_POST['risk_id'],
@@ -62,7 +66,8 @@ class Kri extends APP_Controller {
 			'treshold_type' => $_POST['treshold_type'],
 			'timing_pelaporan' => $dd,
 			'kri_owner' => $_POST['kri_owner'],
-			'created_by' => $data['session']['username']
+			'created_by' => $data['session']['username'],
+			'periode' => $periode_id
 		);
 		
 		$tres = array();
@@ -71,10 +76,13 @@ class Kri extends APP_Controller {
 		}
 		
 		$type = $_POST['treshold_type'];
+
+		if ($periode_id != null){
+
 		if ($type == 'SELECTION')
 		{
 		$cek_color = $this->risk->insertNewKriTmp($kri, $tres);
-		
+
 		if($cek_color == true){
 		$res = $this->risk->insertNewKri($kri, $tres);
 		$resp = array();
@@ -102,6 +110,11 @@ class Kri extends APP_Controller {
 			$resp['msg'] = $this->db->error();
 		}
 
+		}
+
+	}else{
+			$resp['success'] = false;
+			$resp['msg'] = 'Please Entry Periode KRI!';
 		}
 
 		

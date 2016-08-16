@@ -72,15 +72,40 @@
 				</li>
 				<li>
 					<a href="#tab_action_plan" data-toggle="tab">
-					My Action Plan </a>
+					My Action Plan 
+					<font style="color:red;">
+					<?php 
+					if($cekplan > 0){
+					echo "($cekplan)";
+					}
+					?>
+					</font>
+					</a>
 				</li>
 				<li>
 					<a href="#tab_action_exec" data-toggle="tab">
-					My Action Plan Execution </a>
+					My Action Plan Execution 
+					<font style="color:red;">
+					<?php 
+					if($cekplanexec > 0){
+					echo "($cekplanexec)";
+					}
+					?>
+					</font>
+					</a>
+
 				</li>
 				<li>
 					<a href="#tab_kri" data-toggle="tab">
-					My KRI </a>
+					My KRI 
+					<font style="color:red;">
+					<?php 
+					if($cekkri > 0){
+					echo "($cekkri)";
+					}
+					?>
+					</font>
+					</a>
 				</li>
 				<li>
 					<a href="#tab_change_request_list" data-toggle="tab">

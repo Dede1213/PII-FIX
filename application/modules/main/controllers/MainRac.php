@@ -33,6 +33,11 @@ class MainRac extends APP_Controller {
 		//cek change request
 		$this->load->model('risk/risk');
 		$data['cekChangeRequest'] = $this->risk->cekChangeRequest();
+		$data['cekrisklist'] = $this->risk->cekRiskList();
+		$data['treatmentlist'] = $this->risk->treatmentlist();
+		$data['cekplan'] = $this->risk->cekPlanRac();
+		$data['cekplanExec'] = $this->risk->cekPlanExecRac();
+		$data['cekkrirac'] = $this->risk->cekKriRac();
 
 		$this->load->view('header', $data);
 		$this->load->view('main_rac', $data);

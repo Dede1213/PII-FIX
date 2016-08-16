@@ -22,7 +22,9 @@
 				<thead>
 					  <tr>
 					  
-							<th>  No </th>  
+							<th>  No </th> 
+							<th> Status</th>
+							<th> Risk Status</th> 
 							<th>  2nd Sub Category </th>  
 							<th>  Risk ID </th>   
 							<th>  Risk Event </th>
@@ -41,8 +43,7 @@
 							<th> Action Plan </th>
 							<th> Action Plan Owner</th>
 							<th> Due Date</th>
-							<th> Status</th>
-							<th> Risk Status</th>
+							
 					  </tr>
 				</thead> 
 				<tbody>
@@ -50,25 +51,7 @@
 						<?php $i = 1;?>
 						 <?php foreach($datanya as $key):?>
 							<tr>												  
-								<td> <?=$i;?> </td> 		  
-								<td> <?=$key['cat_name'];?> </td> 
-								<td> <?=$key['risk_code'];?> </td>
-								<td> <?=$key['risk_event'];?> </td> 
-								<td> <?=$key['risk_description'];?> </td>
-								<td> <?=$key['risk_owner'];?> </td> 
-								<td> <?=$key['risk_cause'];?> </td>
-								<td> <?=$key['risk_impact'];?> </td> 
-								<td> <?=$key['Objective'];?> </td>
-								<td> <?=$key['Existing Control'];?> </td>
-								<td> <?=$key['Control Evaluation'];?> </td> 
-								<td> <?=$key['Control Owner'];?> </td>
-								<td> <?=$key['risk_impact_level'];?> </td> 
-								<td> <?=$key['risk_likelihood_key'];?> </td>
-								<td> <?=$key['risk_level'];?> </td> 
-								<td> <?=$key['suggested_risk_treatment'];?> </td>
-								<td> <?=$key['Action Plan'];?> </td> 
-								<td> <?=$key['Action Plan Owner'];?> </td>			
-								<td> <?=$key['Due Date'];?> </td>
+								<td> <?=$i;?> </td> 
 								<td> <?php
 									if ($key['risk_status'] == 1){
 										echo "Draft";
@@ -110,7 +93,26 @@
 									}else{
 										echo "Draft";
 									}
-									?> </td>									
+									?> </td>		  
+								<td> <?=$key['cat_name'];?> </td> 
+								<td> <?=$key['risk_code'];?> </td>
+								<td> <?=$key['risk_event'];?> </td> 
+								<td> <?=$key['risk_description'];?> </td>
+								<td> <?=$key['risk_owner'];?> </td> 
+								<td> <?=$key['risk_cause'];?> </td>
+								<td> <?=$key['risk_impact'];?> </td> 
+								<td> <?=$key['Objective'];?> </td>
+								<td> <?=$key['Existing Control'];?> </td>
+								<td> <?=$key['Control Evaluation'];?> </td> 
+								<td> <?=$key['Control Owner'];?> </td>
+								<td> <?=$key['risk_impact_level'];?> </td> 
+								<td> <?=$key['risk_likelihood_key'];?> </td>
+								<td> <?=$key['risk_level'];?> </td> 
+								<td> <?=$key['suggested_risk_treatment'];?> </td>
+								<td> <?=$key['Action Plan'];?> </td> 
+								<td> <?=$key['Action Plan Owner'];?> </td>			
+								<td> <?=$key['Due Date'];?> </td>
+																	
 							</tr>
 							<?php $i++;?>
 					 <?php endforeach;?> 

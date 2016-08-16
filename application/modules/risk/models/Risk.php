@@ -49,6 +49,23 @@ class Risk extends APP_Model {
 		
 		return $row;
 	}
+
+	public function cekRiskList()
+	{
+		return $this->db->where('risk_status','2')
+						->get('t_risk')
+						->num_rows();
+	}
+
+	public function treatmentlist()
+	{
+		return $this->db->where('risk_status','5')
+						->get('t_risk')
+						->num_rows();
+	}
+
+	
+
 	
 	public function getRiskById($risk_id) 
 	{
@@ -798,13 +815,14 @@ class Risk extends APP_Model {
 		}
 
 		$date = date("Y-m-d");
+
 		$sql = "select * from (select 
                                                                 a.*,
                                                                 b.ref_value as risk_status_v,
                                                                 c.ref_value as risk_level_v,
                                                                 d.ref_value as impact_level_v,
                                                                 e.l_title as likelihood_v,
-                                                                f.division_name as risk_owner_v
+                                                                f.division_id as risk_owner_v
                                                                 from t_risk a 
                                                                 left join m_reference b on a.risk_status = b.ref_key and b.ref_context = 'risk.status.user'
                                                                 left join m_reference c on a.risk_level = c.ref_key and c.ref_context = 'risklevel.display'
@@ -1167,7 +1185,7 @@ select
 			
 			$sql = "select 
 					a.*,
-					b.division_name as risk_owner_v,
+					b.division_id as risk_owner_v,
 					c.ref_value as suggested_risk_treatment_v
 					from t_risk a
 					left join m_division b on a.risk_owner = b.division_id
@@ -1435,7 +1453,7 @@ select
 					concat('AP.', LPAD(a.id, 6, '0')) as act_code,
 					b.risk_code,
 					c.display_name as assigned_to_v,
-					d.division_name as division_name,
+					d.division_id as division_name,
 					date_format(a.due_date, '%d-%m-%Y') as due_date_v
 					from 
 					t_risk_action_plan a
@@ -1460,7 +1478,7 @@ select
 					concat('AP.', LPAD(a.id, 6, '0')) as act_code,
 					b.risk_code,b.periode_id,
 					c.display_name as assigned_to_v,
-					d.division_name as division_name,
+					d.division_id as division_name,
 					date_format(a.due_date, '%d-%m-%Y') as due_date_v,
 					case 
                     when a.assigned_to = '".$defFilter['userid']."' then 0
@@ -1535,6 +1553,8 @@ select
 						left join m_user d on a.kri_pic = d.username
 						left join m_periode on m_periode.periode_id = b.periode_id
 						where 
+						a.periode_id IN (select periode_id from m_periode_kri where DATE(NOW()) between periode_start and periode_end)
+						and
 						a.kri_owner = ?
 						
 						".$ext;
@@ -4011,7 +4031,7 @@ select
 
 			if ($res) {
 				// check if id is same
-				if ($res['risk_division'] != $credential['division_id']) {
+				if ($res['risk_division'] != null) {
 					$risk = $res;
 					return $risk;
 				} else {
@@ -5289,11 +5309,11 @@ select
 		$sql = "insert into t_kri (
 			risk_id, kri_library_id, key_risk_indicator,
 			kri_status, kri_pic,treshold, treshold_type,
-			timing_pelaporan, kri_owner, created_by
+			timing_pelaporan, kri_owner, created_by, created_date, periode_id
 		) values (
 			?, ?, ?,?,
 			?, ?, ?,
-			?, ?, ?
+			?, ?, ?, NOW(), ?
 		)";
 		$res = $this->db->query($sql, $kri);	
 		if ($res) {
@@ -5364,11 +5384,11 @@ select
 		$sql = "insert into t_kri_tmp (
 			risk_id, kri_library_id, key_risk_indicator,
 			kri_status, kri_pic,treshold, treshold_type,
-			timing_pelaporan, kri_owner, created_by
+			timing_pelaporan, kri_owner, created_by, periode_id
 		) values (
 			?, ?, ?,?,
 			?, ?, ?,
-			?, ?, ?
+			?, ?, ?, ?
 		)";
 		$res = $this->db->query($sql, $kri);	
 		if ($res) {
@@ -7339,7 +7359,49 @@ WHERE t_risk.risk_id = '".$risk_id."' ";
 	$query = $this->db->query($sql);
 	return $query->num_rows();
 	}
+
+	function cekPlan($username,$division_nya){
+	$sql = "select id from t_risk_action_plan where division = '".$division_nya."' and action_plan_status = 1";
+	//$sql = "select risk_id from t_risk where risk_input_by = '".$username."' and risk_status < 5";
+	$query = $this->db->query($sql);
+	return $query->num_rows();
+	}
+
+	function cekPlanRac(){
+	$sql = "select id from t_risk_action_plan where action_plan_status = 3";
+	//$sql = "select risk_id from t_risk where risk_input_by = '".$username."' and risk_status < 5";
+	$query = $this->db->query($sql);
+	return $query->num_rows();
+	}
+
+	function cekPlanExec($username,$division_nya){
+	$sql = "select id from t_risk_action_plan where division = '".$division_nya."' and action_plan_status = 4";
+	//$sql = "select risk_id from t_risk where risk_input_by = '".$username."' and risk_status < 5";
+	$query = $this->db->query($sql);
+	return $query->num_rows();
+	}
+
+	function cekPlanExecRac(){
+	$sql = "select id from t_risk_action_plan where action_plan_status = 6";
+	//$sql = "select risk_id from t_risk where risk_input_by = '".$username."' and risk_status < 5";
+	$query = $this->db->query($sql);
+	return $query->num_rows();
+	}
 	
+	function cekKri($username,$division_nya){
+	$sql = "select id from t_kri where kri_owner = '".$division_nya."' and kri_status = 0";
+	//$sql = "select risk_id from t_risk where risk_input_by = '".$username."' and risk_status < 5";
+	$query = $this->db->query($sql);
+	return $query->num_rows();
+	}
+
+	function cekKriRac(){
+	$sql = "select id from t_kri where kri_status = 2";
+	//$sql = "select risk_id from t_risk where risk_input_by = '".$username."' and risk_status < 5";
+	$query = $this->db->query($sql);
+	return $query->num_rows();
+	}
+
 	function get_t_risk($risk_id){
 		
 		$this->db->where("risk_id",$risk_id);
@@ -7356,6 +7418,8 @@ WHERE t_risk.risk_id = '".$risk_id."' ";
 			}	
 		
 	}
+
+
 	
 	function get_t_risk_change($risk_id,$risk_input_by ){
 		

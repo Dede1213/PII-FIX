@@ -377,12 +377,21 @@ var RiskOwned = function() {
         		}
         	});
         	
+            $('#button-form-control-open').on('click', function () {
+                
+                //$('#input-form-action-plan').reset();
+                document.getElementById("input-form-control2").reset();
+                
+            });
+
+            /*
         	$('#button-form-control-open').on('click', function () {
         		$('#input-form-control')[0].reset();
                 $('#form-control-revid').val("");
         		$('#input-form-control textarea[name=risk_existing_control]').attr('readonly', false);
         	});
-        	
+        	*/
+            
         	$('#button-form-control-open-ap').on('click', function () {
         		//$('#input-form-action-plan')[0].reset();
 				$('#form-data-revid').val('');

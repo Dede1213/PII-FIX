@@ -92,25 +92,47 @@
 	<div class="modal-body">
 				<form id="modal-listrisk-form" role="form" class="form-horizontal">
 					<div class="form-body">
-				
+				<!--
 						<div class="form-group">
-						 
 						<label class="col-md-3 control-label smaller cl-compact">Existing Control ID  :</label>
 							<div class="col-md-9">
 							<input class="form-control input-sm input-readview" type="text" placeholder="" name="id" id = "id" readonly="true"  >
 							</div>
 						</div>
-						
+				-->
 						<div class="form-group">
-						 
-						<label class="col-md-3 control-label smaller cl-compact">Existing Control   :</label>
-							<div class="col-md-9">
-							<input type = "text" name = "risk_existing_control" id = "risk_existing_control" class = "form-control">  
+					<input type = "hidden" id = "form-control-revid">
+						<label class="col-md-3 control-label smaller cl-compact">Existing Control ID</label>
+						<div class="col-md-9">
+							<div class="input-group">
+								<input class="form-control input-sm input-readview" type="text" placeholder="" name="id" id = "id" readonly="true"  >
+								<span class="input-group-btn">
+								<!--
+								<button class="btn btn-primary btn-sm" type="button" data-toggle="modal" href="#modal-control"><i class="fa fa-search fa-fw"/></i></button>
+								-->
+								</span>
+								
 							</div>
 						</div>
+					</div>
+
 						
 						<div class="form-group">
-								<label class="col-md-3 control-label">Evaluation Control :</label>
+					<input type = "hidden" id = "form-control-revid">
+						<label class="col-md-3 control-label smaller cl-compact" title="fill this field with the effectiveness level of existing control (refers to control assessment criteria)">Evaluation on Existing Control <span class="required">* </span></label>
+						<div class="col-md-9">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" readonly="true" name="risk_existing_control" id = "risk_existing_control" placeholder="" value="">
+								<span class="input-group-btn">
+								<button class="btn btn-primary btn-sm" type="button" data-toggle="modal" href="#modal-control-existing"><i class="fa fa-search fa-fw"/></i></button>
+								</span>
+								
+							</div>
+						</div>
+					</div>
+						
+						<div class="form-group">
+								<label class="col-md-3 control-label">Existing Control</label>
 							 
 									<div class="col-md-9">
 										<textarea class="form-control" name="risk_evaluation_control" id = "risk_evaluation_control"></textarea>										 
@@ -142,3 +164,61 @@
 </div>
 
 
+<!-- Existing CONTROL -->
+<div id="modal-control-existing" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+		<h4 class="modal-title">Evaluation on Existing Control</h4>
+		<p style="color:red;">*Choose One</p>
+	</div>
+	<div class="modal-body">
+		<div>
+			<table id="library_control_table_existing" class="table table-condensed table-bordered table-hover">
+				<thead>
+				<tr role="row" class="heading">
+					<th width="66px">&nbsp;</th>
+					<th>Evaluation on Existing Control</th>
+					<th>Description</th>
+				</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<!-- CONTROL -->
+<div id="modal-control" class="modal fade" tabindex="-1" data-width="860" data-keyboard="false">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+		<h4 class="modal-title">Existing Control</h4>
+		<div class="inputs">
+			<div class="portlet-input input-inline">
+				<div class="input-group">
+					<input type="text" class="form-control" name="filter_search" placeholder="search...">
+					<span class="input-group-btn">
+					<button class="btn btn-default" type="button" id="modal-control-filter-submit">Search</button>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-body">
+		<div>
+			<table id="library_control_table" class="table table-condensed table-bordered table-hover">
+				<thead>
+				<tr role="row" class="heading">
+					<th width="66px">&nbsp;</th>
+					
+					
+					
+					<th>Evaluation on Existing Control</th>
+					<th>Existing Control</th>
+					<th>Control Owner</th>
+				</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+	</div>
+</div>

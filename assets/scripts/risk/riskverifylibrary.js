@@ -62,12 +62,21 @@ var RiskVerify = function() {
         		}
         	});
         	
+            $('#button-form-control-open').on('click', function () {
+                
+                //$('#input-form-action-plan').reset();
+                document.getElementById("input-form-control2").reset();
+                
+            });
+
+            /*
             $('#button-form-control-open-objective').on('click', function () {
                 document.getElementById("input-form-control-objective").reset();
                // $('#input-form-control-objective')[0].reset();
                $('#form-control-revid-objective').val("");
                 $('#input-form-control-objective textarea[name=objective]').attr('readonly', false);
             });
+*/
 
             $('#button-form-control-open').on('click', function () {
                 //$('#input-form-control')[0].reset();

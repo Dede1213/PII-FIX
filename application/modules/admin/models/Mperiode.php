@@ -25,6 +25,32 @@ class Mperiode extends APP_Model {
 		$res = $this->getPagingData($sql, $par, $page, $row, 'periode_id', true);
 		return $res;
 	}
+
+	public function getDataKri($page, $row, $order_by = null, $order = null, $filter_by = null, $filter_value = null)
+	{
+		$ex_or = $ex_filter = '';
+		$par = false;
+		
+		if ($order_by != null) {
+			$order_by = $order_by;
+			$ex_or = ' order by '.$order_by.' '.$order;
+		}
+		
+		if ($filter_by != null && $filter_value != null) {
+			$ex_filter = ' where '.$filter_by.' like ? ';
+			$par['p1'] = '%'.$filter_value.'%';
+		}
+		
+		$sql = "select 
+				a.*,
+				date_format(a.periode_start, '%d-%m-%Y') as periode_start_v,
+				date_format(a.periode_end, '%d-%m-%Y') as periode_end_v
+				from m_periode_kri a "
+				.$ex_filter
+				.$ex_or;
+		$res = $this->getPagingData($sql, $par, $page, $row, 'periode_id', true);
+		return $res;
+	}
 	
 	public function getAll()
 	{
@@ -87,6 +113,20 @@ class Mperiode extends APP_Model {
 		$res = $this->db->query($sql, $par);
 		return $res;
 	}
+
+	public function insertDataKri($data)
+	{
+		// if year month start is >= next month
+		// if year month periode is overlapping with existing data
+		
+		$sql = "insert into m_periode_kri
+				(periode_name, periode_start, periode_end, created_by, created_date)
+				values(?, ?, ?, ?, NOW())
+				";
+		$par = $data;
+		$res = $this->db->query($sql, $par);
+		return $res;
+	}
 	
 	public function updateData($data_id, $data, $uid)
 	{
@@ -96,6 +136,27 @@ class Mperiode extends APP_Model {
 		$this->_logHistory($data_id, $uid, 'U');
 		
 		$sql = "update m_periode
+				set periode_name = ?, periode_start = ?, periode_end = ?,
+					created_by = ?, 
+					created_date = NOW()
+				where periode_id = ?
+				";
+		$par = $data;
+		$par['user_id'] = $uid;
+		$par['data_id'] = $data_id;
+		
+		$res = $this->db->query($sql, $par);
+		return $res;
+	}
+
+	public function updateDataKri($data_id, $data, $uid)
+	{
+		// if year month start is >= next month
+		// if year month periode is overlapping with existing data
+		
+		$this->_logHistory($data_id, $uid, 'U');
+		
+		$sql = "update m_periode_kri
 				set periode_name = ?, periode_start = ?, periode_end = ?,
 					created_by = ?, 
 					created_date = NOW()
@@ -123,6 +184,21 @@ class Mperiode extends APP_Model {
 		$res = $this->db->query($sql, $par);
 		return $res;
 	}
+
+	public function deleteDataKri($data_id, $uid)
+	{
+		// if year month start is <= current month
+		
+		$this->_logHistory($data_id, $uid, 'D');
+		
+		$sql = "delete from m_periode_kri
+				where periode_id = ?
+				";
+		$par['data_id'] = $data_id;
+		
+		$res = $this->db->query($sql, $par);
+		return $res;
+	}
 	
 	private function _logHistory($data_id, $uid, $mode) {
 		$sql = "insert into m_periode_hist
@@ -137,6 +213,14 @@ class Mperiode extends APP_Model {
 	public function getCurrentPeriode() 
 	{
 		$sql = "select * from m_periode where DATE(NOW()) between periode_start and periode_end";
+		$query = $this->db->query($sql);
+		$row = $query->row_array();
+		return $row;
+	}
+
+	public function getCurrentPeriodeKri() 
+	{
+		$sql = "select * from m_periode_kri where DATE(NOW()) between periode_start and periode_end";
 		$query = $this->db->query($sql);
 		$row = $query->row_array();
 		return $row;

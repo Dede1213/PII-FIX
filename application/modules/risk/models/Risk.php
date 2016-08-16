@@ -796,12 +796,11 @@ class Risk extends APP_Model {
 	{
 		$ex_or = $ex_filter = '';
 		$par = false;
-		
 		if ($order_by != null) {
 			$order_by = $order_by;
 			$ex_or = ' order by '.$order_by.' '.$order;
 		}
-
+		
 		if ($filter_by == null || $filter_by == '' ) {
 			//dibuat risk event aja biar ga error
 			$filter_by = 'risk_event';
@@ -815,31 +814,29 @@ class Risk extends APP_Model {
 		}
 
 		$date = date("Y-m-d");
-
+		//editdoni 1
 		$sql = "select * from (select 
-                                                                a.*,
-                                                                b.ref_value as risk_status_v,
-                                                                c.ref_value as risk_level_v,
-                                                                d.ref_value as impact_level_v,
-                                                                e.l_title as likelihood_v,
-                                                                f.division_id as risk_owner_v
-                                                                from t_risk a 
-                                                                left join m_reference b on a.risk_status = b.ref_key and b.ref_context = 'risk.status.user'
-                                                                left join m_reference c on a.risk_level = c.ref_key and c.ref_context = 'risklevel.display'
-                                                                left join m_reference d on a.risk_impact_level = d.ref_key and d.ref_context = 'impact.display'
-                                                                left join m_likelihood e on a.risk_likelihood_key = e.l_key
-                                                                left join m_division f on a.risk_owner = f.division_id
-                                                                left join m_periode on m_periode.periode_id = a.periode_id
-                                                                where a.risk_status != 0 and a.risk_status != 1 and a.existing_control_id is null
-                                                                and a.".$filter_by." like '%".$filter_value."%'
-                                                                order by a.risk_id desc ) as another
-                                                                group by another.risk_code
-
+				a.*,
+				b.ref_value as risk_status_v,
+				c.ref_value as risk_level_v,
+				d.ref_value as impact_level_v,
+				e.l_title as likelihood_v,
+				f.division_id as risk_owner_v
+				from t_risk a 
+				left join m_reference b on a.risk_status = b.ref_key and b.ref_context = 'risk.status.user'
+				left join m_reference c on a.risk_level = c.ref_key and c.ref_context = 'risklevel.display'
+				left join m_reference d on a.risk_impact_level = d.ref_key and d.ref_context = 'impact.display'
+				left join m_likelihood e on a.risk_likelihood_key = e.l_key
+				left join m_division f on a.risk_owner = f.division_id
+				left join m_periode on m_periode.periode_id = a.periode_id
+				where a.risk_status != 0 and a.risk_status != 1 and a.existing_control_id is null
+				and a.".$filter_by." like '%".$filter_value."%'
+				order by a.risk_id desc ) as another
+				group by another.risk_code
+				order by SUBSTRING_INDEX(another.risk_code,'.',1),SUBSTRING_INDEX(SUBSTRING_INDEX(another.risk_code,'.',2),'.',-1)+0,SUBSTRING_INDEX(SUBSTRING_INDEX(another.risk_code,'.',-1),'-',1)+0,SUBSTRING_INDEX(another.risk_code,'-',-1) +0,".$order_by.' '.$order."
 				"
-				
-				.$ex_filter
-				
-				.$ex_or;
+				.$ex_filter;
+				//.$ex_or;
 		$res = $this->getPagingData($sql, $par, $page, $row, 'risk_id', true);
 		return $res;
 	}
@@ -851,7 +848,7 @@ class Risk extends APP_Model {
 		
 		if ($order_by != null) {
 			$order_by = $order_by;
-			$ex_or = ' order by '.$order_by.' '.$order;
+			$ex_or = $order_by.' '.$order;
 		}
 		
 		if ($filter_by == null || $filter_by == '' ) {
@@ -1178,7 +1175,7 @@ select
 
 					";
 		}
-		
+		//editdoni 2
 		if ($mode == 'racTreatmentList') {
 			
 			$date = date("Y-m-d");
@@ -1195,8 +1192,10 @@ select
 					a.periode_id is not null
 					and a.risk_status > 2
 					and a.".$filter_by." like '%".$filter_value."%'
-					
+					group by a.risk_code
+					order by SUBSTRING_INDEX(a.risk_code,'.',1),SUBSTRING_INDEX(SUBSTRING_INDEX(a.risk_code,'.',2),'.',-1)+0,SUBSTRING_INDEX(SUBSTRING_INDEX(a.risk_code,'.',-1),'-',1)+0,SUBSTRING_INDEX(a.risk_code,'-',-1) +0
 					";
+					
 		}
 		
 		if ($mode == 'ownedRisk') {
@@ -1323,7 +1322,7 @@ select
 				}
 				$par = $rpar;
 				
-				$sql = $sql.$ex_filter.$ex_or;
+				$sql = $sql;//.$ex_filter.$ex_or;
 				$res = $this->getPagingData($sql, $par, $page, $row, 'id', true);
 				return $res;
 			} else {
@@ -1444,6 +1443,7 @@ select
 			}
 		}
 		
+		//editdoni3
 		if ($mode == 'racActionPlan') {
 			
 			$date = date("Y-m-d");
@@ -1451,7 +1451,7 @@ select
 			$sql = "select 
 					a.*,
 					concat('AP.', LPAD(a.id, 6, '0')) as act_code,
-					b.risk_code,
+					b.risk_code as risk_code,
 					c.display_name as assigned_to_v,
 					d.division_id as division_name,
 					date_format(a.due_date, '%d-%m-%Y') as due_date_v
@@ -1464,10 +1464,11 @@ select
 					where 
 					a.action_plan_status > 0 
 					and a.".$filter_by." like '%".$filter_value."%'
-					
+					group by a.action_plan,a.division
+					ORDER BY SUBSTRING_INDEX(b.risk_code,'.',1),SUBSTRING_INDEX(SUBSTRING_INDEX(b.risk_code,'.',2),'.',-1)+0,SUBSTRING_INDEX(SUBSTRING_INDEX(b.risk_code,'.',-1),'-',1)+0,SUBSTRING_INDEX(b.risk_code,'-',-1) +0
 					";
 		}
-		
+		//editdoni 4
 		if ($mode == 'racActionPlanExec') {
 			
 			$date = date("Y-m-d");
@@ -1500,7 +1501,8 @@ select
 					where 
 					a.action_plan_status > 3
 					and a.".$filter_by." like '%".$filter_value."%'
-						
+					group by a.action_plan,a.division	
+					ORDER BY SUBSTRING_INDEX(b.risk_code,'.',1),SUBSTRING_INDEX(SUBSTRING_INDEX(b.risk_code,'.',2),'.',-1)+0,SUBSTRING_INDEX(SUBSTRING_INDEX(b.risk_code,'.',-1),'-',1)+0,SUBSTRING_INDEX(b.risk_code,'-',-1) +0
 					";
 					//AND b.periode_id is null
 		}
@@ -1566,7 +1568,7 @@ select
 				return false;
 			}
 		}
-		
+		//editdoni 5
 		if ($mode == 'racKri') {
 			
 			$date = date("Y-m-d");
@@ -1584,7 +1586,7 @@ select
 					left join m_periode on m_periode.periode_id = b.periode_id
 					where 
 					a.kri_status >= 0
-					
+					ORDER BY a.id,SUBSTRING_INDEX(b.risk_code,'.',1),SUBSTRING_INDEX(SUBSTRING_INDEX(b.risk_code,'.',2),'.',-1)+0,SUBSTRING_INDEX(SUBSTRING_INDEX(b.risk_code,'.',-1),'-',1)+0,SUBSTRING_INDEX(b.risk_code,'-',-1) +0
 					";
 					
 		}
@@ -1733,7 +1735,7 @@ select
 					";
 		}
 		
-		$sql = $sql.$ex_filter.$ex_or;
+		$sql = $sql;//.$ex_filter.$ex_or;
 		$res = $this->getPagingData($sql, $par, $page, $row, 'risk_id', true);
 		return $res;
 	}

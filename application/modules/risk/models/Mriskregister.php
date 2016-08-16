@@ -276,7 +276,7 @@ class Mriskregister extends APP_Model {
 
 					";
 		}
-		
+		//editdoni Switch PIC Home-Transaction-Regular Exercise-Risk Register Exercise 
 		if ($mode == 'userRollover') {
 			$date = date("Y-m-d");
 			$sql = "select 
@@ -329,6 +329,8 @@ class Mriskregister extends APP_Model {
                                                                                 and a.risk_input_by = '".$defFilter['userid']."'
                                                                                 
                                                                                 and ".$filter_by." like '%".$filter_value."%'
+																				
+																				
 
 UNION
 select 
@@ -381,6 +383,7 @@ select
                                                                                 and a.risk_input_by = '".$defFilter['userid']."'
 
                                                                                 and ".$filter_by." like '%".$filter_value."%'
+																				
 UNION
 select 
                                                                                 a.created_by,
@@ -432,6 +435,7 @@ select
                                                                                 and t.username = '".$defFilter['userid']."' and t.delete_status is null
 
                                                                                 and ".$filter_by." like '%".$filter_value."%'
+																				ORDER BY SUBSTRING_INDEX(risk_code,'.',1),SUBSTRING_INDEX(SUBSTRING_INDEX(risk_code,'.',2),'.',-1)+0,SUBSTRING_INDEX(SUBSTRING_INDEX(risk_code,'.',-1),'-',1)+0,SUBSTRING_INDEX(risk_code,'-',-1) +0
  
 					";
 					
@@ -771,6 +775,7 @@ select
 					
 		}
 //ubah maintenance
+//editdoni Home Transaction Undermaintenance 
 		if ($mode == 'userRollover_under') {
 			$date = date("Y-m-d");
 			$sql = "select * from(
@@ -825,6 +830,7 @@ select
                                                                                 order by a.periode_id desc
 ) as libraryrisk
 group by libraryrisk.risk_code
+order by SUBSTRING_INDEX(libraryrisk.risk_code,'.',1),SUBSTRING_INDEX(SUBSTRING_INDEX(libraryrisk.risk_code,'.',2),'.',-1)+0,SUBSTRING_INDEX(SUBSTRING_INDEX(libraryrisk.risk_code,'.',-1),'-',1)+0,SUBSTRING_INDEX(libraryrisk.risk_code,'-',-1) +0
 ";
 					
 		}
@@ -886,7 +892,7 @@ group by libraryrisk.risk_code
 					
 		}
 		
-		$sql = $sql.$ex_filter.$ex_or;
+		$sql = $sql;//.$ex_filter.$ex_or;
 		$res = $this->getPagingData($sql, $par, $page, $row, 'risk_id', true);
 		return $res;
 	}

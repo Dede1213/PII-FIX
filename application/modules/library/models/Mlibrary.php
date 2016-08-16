@@ -70,12 +70,12 @@ class Mlibrary extends APP_Model {
                                 and t_risk.risk_status >= 3
                                 and t_risk.existing_control_id IS NULL ORDER BY t_risk.risk_id desc) as another
                                 GROUP BY another.risk_code
+								order by SUBSTRING_INDEX(another.risk_code,'.',1),SUBSTRING_INDEX(SUBSTRING_INDEX(another.risk_code,'.',2),'.',-1)+0,SUBSTRING_INDEX(SUBSTRING_INDEX(another.risk_code,'.',-1),'-',1)+0,SUBSTRING_INDEX(another.risk_code,'-',-1) +0
 
 				"
 				
-				.$ex_filter
-				
-				.$ex_or;
+				.$ex_filter;
+				//.$ex_or;
 		$res = $this->getPagingData($sql, $par, $page, $row, 'risk_id', true);
 		return $res;
 	}
@@ -255,12 +255,14 @@ from t_kri t1 where kri_library_id is null
 		}
 		 
 		$sql = "select cat_id as id,cat_code, cat_name, cat_desc
-from m_risk_category
+			from m_risk_category
+			order by cat_id
 				"
+				//GROUP BY another.risk_code
+				//order by SUBSTRING_INDEX(another.risk_code,'.',1),SUBSTRING_INDEX(SUBSTRING_INDEX(another.risk_code,'.',2),'.',-1)+0,SUBSTRING_INDEX(SUBSTRING_INDEX(another.risk_code,'.',-1),'-',1)+0,SUBSTRING_INDEX(another.risk_code,'-',-1) +0
+				.$ex_filter;
 				
-				.$ex_filter
-				
-				.$ex_or;
+				//.$ex_or;
 		$res = $this->getPagingData($sql, $par, $page, $row, 'id', true);
 		return $res;
 	}

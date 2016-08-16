@@ -146,6 +146,14 @@ class Login extends CI_Controller {
 	$ldappass = $_POST['password']; // associated password
 	$host = '172.16.1.3';
 
+	/* validasi password kosong */
+	if ($ldappass == ''){
+				$this->load->helper('url');
+				redirect('login?status=false','refresh');
+	}
+	/* End Validasi Password Kosong*/
+
+
     // connect to ldap server
     $ldapconn = ldap_connect($host)
             or die("Could not connect to LDAP server.");

@@ -157,17 +157,53 @@ class Mlibrary extends APP_Model {
 			$ex_filter = ' where '.$filter_by.' like ? ';
 			$par['p1'] = '%'.$filter_value.'%';
 		}
+		//editdoni 	Home-Library Management-Risk-List of Action Plan 
 		$date = date("Y-m-d");
-		$sql = "select t_risk_action_plan.id, t_risk_action_plan.action_plan, t_risk_action_plan.due_date, t_risk_action_plan.division,
-				t_risk_action_plan.risk_id,t_risk.risk_code
-					from t_risk_action_plan
-					JOIN t_risk ON t_risk.risk_id = t_risk_action_plan.risk_id 
-					group by t_risk_action_plan.division, t_risk_action_plan.action_plan
+		$sql = "
+				
+				SELECT @nourut:=IFNULL(@nourut,-1)+1 AS id,
+				another.action_plan AS action_plan,
+				another.due_date AS due_date,
+				another.division AS division,
+				another.risk_id,
+				another.risk_code,
+				another.id AS id1
+				FROM (SELECT t_risk_action_plan.*,
+				t_risk.risk_code
+				FROM t_risk_action_plan
+				JOIN t_risk ON t_risk.risk_id = t_risk_action_plan.risk_id
+				GROUP BY division, action_plan) AS another 
+				ORDER BY another.id
+				
 				"
+				/*
+				select t_risk_action_plan.id, t_risk_action_plan.action_plan, t_risk_action_plan.due_date, t_risk_action_plan.division,
+				t_risk_action_plan.risk_id,t_risk.risk_code
+				from t_risk_action_plan
+				JOIN t_risk ON t_risk.risk_id = t_risk_action_plan.risk_id 
+				group by t_risk_action_plan.division, t_risk_action_plan.action_plan
 				
-				.$ex_filter
 				
-				.$ex_or;
+				SET @noo=0;
+				SELECT @noo:=@noo+1 AS id1,
+				another.action_plan AS action_plan,
+				another.due_date as due_date,
+				another.division AS division,
+				another.risk_id,
+				another.risk_code,
+				another.id AS id
+				FROM (SELECT t_risk_action_plan.*,
+				t_risk.risk_code
+				FROM t_risk_action_plan
+				JOIN t_risk ON t_risk.risk_id = t_risk_action_plan.risk_id
+				GROUP BY division, action_plan) AS another 
+				ORDER BY another.id
+				*/
+				
+				
+				.$ex_filter;
+				
+				//.$ex_or;
 		$res = $this->getPagingData($sql, $par, $page, $row, 'id', true);
 		return $res;
 	}
@@ -360,16 +396,46 @@ from t_kri t1 where kri_library_id is null
 			$par['p1'] = '%'.$filter_value.'%';
 		}
 		$date = date("Y-m-d");
-		$sql = "select t_risk_objective.id, t_risk_objective.objective, t_risk_objective.risk_id,
-				t_risk.risk_code
+		//editdoni 	Home Library Management Risk List of Objective 
+		$sql = 	"
+					SELECT @nourut:=IFNULL(@nourut,-1)+1 AS id,
+					another.objective,
+					another.risk_id,
+					another.risk_code,
+					another.id AS id1
+					FROM (SELECT t_risk_objective.*,
+					t_risk.risk_code
+					FROM t_risk_objective
+					JOIN t_risk ON t_risk.risk_id = t_risk_objective.risk_id
+					GROUP BY objective) AS another 
+					ORDER BY another.id
+				"
+				/*
+					
+				select @nourut:=IFNULL(@nourut,-1)+1 AS id, t_risk_objective.objective, t_risk_objective.risk_id,
+				t_risk.risk_code,t_risk_objective.id AS id1
 				from t_risk_objective
 				JOIN t_risk ON t_risk.risk_id = t_risk_objective.risk_id
 				group by t_risk_objective.objective
-				"
 				
-				.$ex_filter
 				
-				.$ex_or;
+				SELECT @nourut:=IFNULL(@nourut,-1)+1 AS id,
+				another.action_plan AS action_plan,
+				another.due_date AS due_date,
+				another.division AS division,
+				another.risk_id,
+				another.risk_code,
+				another.id AS id1
+				FROM (SELECT t_risk_action_plan.*,
+				t_risk.risk_code
+				FROM t_risk_action_plan
+				JOIN t_risk ON t_risk.risk_id = t_risk_action_plan.risk_id
+				GROUP BY division, action_plan) AS another 
+				ORDER BY another.id
+				*/
+				.$ex_filter;
+				
+				//.$ex_or
 		$res = $this->getPagingData($sql, $par, $page, $row, 'id', true);
 		return $res;
 	}
